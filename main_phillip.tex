@@ -1,0 +1,175 @@
+%\documentclass[7x9]{book}%{newmath}
+%\documentclass[8x9,twoside]{book}
+\documentclass[twoside,8x9,noinfo]{NewMath_MIT_cvbook}
+
+\include{setup} 
+\begin{document}
+\cleardoublepage
+% Preface page format:
+\newgeometry{papersize={8in,9in},bottom=3pc,top=5pc,left=6pc,right=6pc}
+
+\include{frontmatter} 
+\cleardoublepage
+% Main book page format:
+% \newgeometry{papersize={8in,9in},bottom=3pc,top=5pc,left=6pc,right=12pc,headsep=2pc,marginparwidth=8pc, marginparsep=1pc, textwidth=30pc, textheight=45pc}
+\newgeometry{papersize={8in,9in},bottom=3pc,top=5pc,left=6pc,right=6pc,headsep=2pc}
+
+%\include{chapters/antonio/preface} 
+%\include{notation}
+\mainmatter
+\cleardoublepage
+%\maketitle
+%\tableofcontents
+
+%\listoffigures
+%\listoftables
+
+%\include{notation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CHAPTERS:
+
+%\setcounter{chapter}{0}
+
+%\include{notation}
+
+% \include{parts/part_foundations}
+% \include{parts/part_image_formation}
+% \include{parts/part_foundation_learning}
+% \include{parts/part_foundation_image_processing}
+% \include{parts/part_linear_filters}
+% \include{parts/part_sampling_and_multiscale}
+% \include{parts/part_neural_architectures}
+% \include{parts/part_statistical_image_models}
+% \include{parts/generative_models_and_representation_learning}
+% \include{parts/part_challenges_in_learning_based_vision}
+% \include{parts/part_understanding_geometry}
+% \include{parts/part_understanding_motion}
+% \include{parts/part_scene_understanding}
+% \include{parts/part_on_research}
+% \include{parts/part_closing_remarks}
+
+%\include{chapters/antonio/preface}
+%\include{chapters/antonio/taxonomy} % PHILLIP & ANTONIO
+%\include{chapters/antonio/simplesystem} % ANTONIO
+
+%\include{chapters/bill/fairness} 
+
+%\setcounter{chapter}{22}
+%\include{chapters/antonio/temporal_filters} % ANTONIO
+%\include{chapters/antonio/sampling_and_aliasing} % ANTONIO
+
+%% \include{chapters/bill/color} % BILL
+%\include{chapters/bill/imaging} % Bill
+%\include{chapters/bill/graphical_models} % Bill
+%\include{chapters/bill/inference_in_graphical_models} % Bill
+%\include{chapters/antonio/pyramids}
+%\include{chapters/antonio/pyramids_new_notation}
+
+%\include{chapters/visionscience} % ANTONIO, BILL, PHILLIP
+
+%\include{parts/part_foundation_image_processing}
+
+%\part{Learning}
+%\setcounter{chapter}{13}
+% \include{parts/part_foundation_learning}
+% \include{chapters/phillip/intro_to_learning} % PHILLIP
+% \include{chapters/phillip/gradient_descent} % PHILLIP
+% \include{chapters/phillip/problem_of_generalization} % PHILLIP
+% \include{chapters/phillip/neural_nets} % PHILLIP
+% \include{chapters/phillip/neural_nets_as_distribution_transformers} % PHILLIP
+ \include{chapters/phillip/backpropagation} % PHILLIP & ANTONIO
+
+%\include{chapters/antonio/homogeneous_coordinates}
+
+%\setcounter{chapter}{12}
+%\include{chapters/antonio/linear_image_filtering} % ANTONIO
+%\include{chapters/antonio/image_processing_fourier} % ANTONIO
+
+%\part{Image modeling}
+%\include{parts/part_neural_architectures}
+%\setcounter{chapter}{20}
+%\include{chapters/phillip/convolutional_neural_nets} % PHILLIP & ANTONIO
+%\setcounter{chapter}{23}
+%\include{chapters/phillip/recurrent_neural_nets} % PHILLIP
+%\setcounter{chapter}{22}
+%\include{chapters/phillip/transformers} % PHILLIP
+%\include{chapters/antonio/statistical_image_models}
+
+%\include{chapters/bill/stat_image_models_revised}  % bill's edits to antonio's chapter
+%\include{chapters/antonio/textures} 
+
+%\include{parts/part_generative_models_and_representation}
+%\setcounter{chapter}{28}
+%\include{chapters/phillip/representation_learning} % PHILLIP
+%\include{chapters/phillip/perceptual_organization}
+%\setcounter{chapter}{29}
+%\include{chapters/phillip/generative_models} % PHILLIP
+%\setcounter{chapter}{30}
+%\include{chapters/phillip/generative_modeling_and_rep_learning} % PHILLIP
+%\include{chapters/phillip/conditional_generative_models} % PHILLIP
+%\include{chapters/phillip/optional/intelligent_agents} % PHILLIP
+%\include{chapters/bill/stereo}
+
+%\part{Sequence modeling}
+%\include{chapters/phillip/temporal_neural_nets} % PHILLIP
+
+%\part{Unsupervised learning}
+%\include{chapters/phillip/representation_learning} % PHILLIP
+%\include{chapters/phillip/optional/clustering} % PHILLIP
+
+%\include{parts/part_challenges_in_learning_based_vision}
+%\setcounter{chapter}{31}
+%\include{chapters/phillip/bias_and_shift} % PHILLIP
+%\setcounter{chapter}{32}
+%\include{chapters/phillip/data_augmentation} % PHILLIP
+%\setcounter{chapter}{33}
+%\include{chapters/phillip/transfer_learning} % PHILLIP
+
+% \include{parts/part_scene_understanding}
+% \include{chapters/phillip/perceptual_organization}
+%\include{chapters/antonio/objects} % ANTONIO, PHILLIP
+%\setcounter{chapter}{39}
+%\include{chapters/antonio/object_recognition_v3} % ANTONIO, PHILLIP
+%\include{chapters/antonio/3d_scene_understanding_stereo} % Bill/Antonio
+%\include{chapters/antonio/3d_scene_understanding_single_view} % Antonio
+
+%\include{chapters/bill/imaging} % Bill
+
+%\include{chapters/antonio/homogeneous_coordinates} % Antonio/Bill
+%\include{chapters/bill/imaging_geometry} % Bill/Antonio
+%\include{chapters/antonio/3d_scene_understanding_single_view} % Antonio
+
+%\include{chapters/phillip/optional/intelligent_agents} % PHILLIP
+
+%\include{chapters/antonio/nerf} % Antonio, Phillip
+
+%\include{chapters/phillip/VLMs} % PHILLIP, ANTONIO
+
+%\include{chapters/bill/imaging}
+
+%\include{chapters/appendix}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Remove the margins for the bibliography at the end:
+\newgeometry{twocolumn,papersize={8in,9in},top=0.83in, bottom=0.83in, left=0.83in, right=0.83in, columnsep=40pt}
+%\makeindex[columns=3]
+%\setlength\columnsep{40pt} % for bib
+%\bibliographystyle{mit-chicago}
+%\bibliography{visionbib,all}
+
+
+%% \nocite{*} is a way to get all the entries in the .bib file to print in the bibliography:
+%\nocite{*}
+\addcontentsline{toc}{fmbm}{\refname}
+\let\bibname\refname
+\printbibliography
+
+%\printindex
+\newgeometry{onecolumn,papersize={8in,9in},top=0.83in, bottom=0.83in, left=0.83in, right=0.83in, columnsep=40pt}
+\printindex
+
+\end{document}
+

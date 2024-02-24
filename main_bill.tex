@@ -1,0 +1,67 @@
+\documentclass[twoside,8x9,noinfo]{NewMath_MIT_cvbook}
+
+
+%% ********************************
+
+\include{setup} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\include{frontmatter} 
+\mainmatter  % This line needs to be included. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%% CHAPTERS:
+
+%% \include{chapters/visionscience}
+%% \include{chapters/antonio/motion_estimation}  % antonio 
+\include{chapters/bill/color} % BILL
+% \include{chapters/bill/imaging} % Bill
+%% \include{chapters/antonio/simplesystem}
+% \include{chapters/antonio/multiview}  % antonio
+% \include{chapters/antonio/preface}  % antonio
+% \include{chapters/antonio/homogeneous_coordinates}
+% \include{chapters/bill/fairness}  % bill
+% \include{chapters/bill/imaging} % Bill
+% \include{chapters/bill/imaging_geometry} % Bill
+%% \include{chapters/bill/stereoPreSummer2022} % Bill
+%% \include{chapters/antonio/3d_scene_understanding_stereo}  % antonio and bill
+% \setcounter{chapter}{40}
+% \include{chapters/phillip/neural_nets} % PHILLIP
+%  \include{chapters/antonio/simplesystem} 
+%%\include{chapters/antonio/image_processing_fourier}
+% \include{chapters/antonio/taxonomy}  %intro chapter
+% \include{chapters/antonio/statistical_image_models}  %antonio's chapter
+
+% \include{chapters/bill/stat_image_models_revised}  
+% bill's edits to antonio's chapter
+% \include{chapters/bill/applics_stat_image_models}
+% \include{chapters/bill/graphical_models} % Bill
+% \include{chapters/bill/inference_in_graphical_models} % Bill
+% \include{chapters/bill/how_to_do_research}
+ % \include{chapters/bill/how_to_write_papers}
+% \include{chapters/bill/how_to_give_talks}
+%% add the temporal aliasing figure and demo
+% \include{chapters/antonio/temporal_filters}
+% \include{chapters/bill/fairness} 
+% \include{chapters/antonio/simplesystem_final} 
+%% \include{chapters/phillip/transformers}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\printindex
+\addcontentsline{toc}{fmbm}{\refname}
+\let\bibname\refname
+\printbibliography
+
+\printindex
+
+\end{document}

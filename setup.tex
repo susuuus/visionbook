@@ -1,0 +1,555 @@
+
+%%%%%%%% PAGE FORMAT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We need to reworkd the margins, because the geometry package does not work well with the MIT style file. 
+
+\usepackage[vcentering,dvips]{geometry}
+\usepackage{layout}
+\usepackage{emptypage}
+\usepackage{float}
+
+% Antonio proposals:
+%\renewcommand{\baselinestretch}{1}
+% 7x9
+%\geometry{papersize={7in,9in},top=0.83in, bottom=0.83in, left=0.83in, right=1.83in, heightrounded,  marginparwidth=1.0in, marginparsep=0.25in}
+% 8x9
+% ANTONIO proposal:
+%\geometry{papersize={8in,9in},top=5pc, bottom=5pc, left=5pc, right=2.3in, heightrounded,  marginparwidth=1.25in, marginparsep=0.25in}
+%\geometry{papersize={8in,9in},top=0.83in, bottom=0.83in, left=0.83in, right=0.83in}
+
+% MIT proposal:
+\geometry{papersize={8in,9in},bottom=3pc,top=5pc,left=6pc,right=12pc,headsep=2pc,marginparwidth=8pc, marginparsep=1pc, textwidth=30pc, textheight=45pc}
+%\geometry{papersize={8in,9in},bottom=3pc,top=5pc,left=6pc,right=12pc,headsep=2pc,marginparwidth=8pc, marginparsep=1pc, textwidth=30pc, textheight=45pc}
+
+%\geometry{papersize={8in,9in},bottom=3pc,top=5pc,left=6pc,right=14pc,headsep=2pc,marginparwidth=10pc, marginparsep=1pc, textwidth=28pc, textheight=45pc}
+
+% DEEP LEARNING BOOK FORMAT:
+%%https://github.com/goodfeli/dlbook_notation
+%\geometry{papersize={7in,9in},bottom=3pc,top=5pc,left=5pc,right=5pc,bmargin=4.5pc,footskip=18pt,headsep=25pt}
+% 5pc = 0.83 inches
+
+%\setcounter{secnumdepth}{3} % Number subsubsections, because we reference them,
+
+%%%% MARGIN NOTES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{marginnote}
+%\usepackage{showframe}
+% make the font smaller for margin notes:
+\renewcommand\marginfont{%
+        \normalfont\small
+}
+
+% Adjusting fontsize for the captions:
+
+\usepackage{caption}
+%%\usepackage{scrextend}
+%\DeclareCaptionJustification{raggedauto}{\Ifthispageodd{\raggedright}{\raggedleft}}% <- changed
+\captionsetup{font=small,labelfont={bf}}
+
+% Captions in the margin
+%\newcommand{\margincaption}[1]{\marginnote{\caption{#1}}}
+%\newcommand{\margincaption}[1]{\caption{#1}}
+
+% issue is that it seems to move all figures to the top. Ok, bug corrected: you need to call it as [][!h]:
+\usepackage{float}
+\usepackage[margincaption,outercaption,ragged,wide]{sidecap}
+%\sidecaptionvpos{figure}{h} % the 't' puts the caption aligned with the top of the figure.
+\sidecaptionvpos{figure}{t} % the 't' puts the caption aligned with the top of the figure.
+\sidecaptionvpos{table}{t}
+
+%\usepackage{floatrow}
+%\floatsetup[figure]{capposition=beside,capbesideposition={top,right}}
+
+%\usepackage{floatrow}
+%\floatsetup{margins=hangoutside,facing=yes,capposition=beside,capbesideposition={top},floatwidth=\textwidth}
+%\floatsetup{facing=yes,capposition=beside,capbesideposition={top},floatwidth=\textwidth}
+
+%\usepackage{mwe}
+
+% Here is how to redefine the figure environment. 
+% I asked how to do this to chatGPT and, after few days of searching in Google without success, chatGPT resolved it in 20 seconds. here is its answer:
+% how can I replace {figure} by {SCfigure} in latex?
+% can I do this automatically by redefining the {figure} environment instead than using find and replace?
+% Yes, you can redefine the figure environment in your LaTeX document to automatically use the \SCfigure command instead of the \figure command. To do this, you can use the \renewenvironment command in the preamble of your LaTeX document, like this:
+%\usepackage{sidecap}
+%\renewenvironment{figure}[1][h]
+%{\begin{SCfigure}[#1]}
+%{\end{SCfigure}}
+% This will redefine the figure environment to automatically use the \SCfigure command instead of the \figure command. Any time you use the figure environment in your document, it will be replaced with the \SCfigure command.
+
+%%% COMMENTED FOR E-BOOK
+%%%\renewenvironment{figure}[1][h]
+%%%{\begin{SCfigure}[][#1]}
+%%%{\end{SCfigure}}
+% and it works :| 
+
+% For tables (also from chatGPT):
+%\usepackage{floatrow} % provides sidecap environment for tables
+%\usepackage{booktabs} % for better-looking tables
+
+%\makeatletter
+%\renewenvironment{table}[1][htbp]{%
+%  \@float{table}[#1]%
+%  \floatsetup{capbesideposition=left}%
+%  \begin{floatrow}%
+%}{%
+%  \end{floatrow}\end@float%
+%}
+%\makeatother
+
+%\makeatletter
+%\newcommand{\fnum@algorithm}{\textbf{\large Algorithm} \arabic{algorithm}\marginnote{\small\sf\raggedright Algorithm \arabic{algorithm}}}
+%\makeatother
+
+%\captionsetup[algorithm]{singlelinecheck=off, justification=raggedright, font=footnotesize, labelfont=bf}
+
+
+
+%%%% MATH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{xfrac}
+\usepackage{bbm}
+\usepackage{bm}
+
+%%%% GRAPHICS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{epsfig}
+\usepackage{pgfplots,pgfplotstable}
+\usepgfplotslibrary{patchplots}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+%%%% ALGORITHM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{algorithm,algorithmic}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+%\SetAlgoCaptionLayout{centerline} % centers the caption
+%\SetAlCapNameFnt{\normalfont} % changes the font of the algorithm name
+%\SetAlgoCaptionSeparator{} % removes the separator (":") after the algorithm name
+%\renewcommand{\thealgocf}{{\color{white}\arabic{algocf}}}
+%\usepackage{chngcntr}
+%\counterwithin{algorithm}{chapter}  % Reset algorithm counter every section. Replace 'section' with 'chapter' for books or reports.
+\SetAlgoCaptionSeparator{} % Remove separator between algorithm name and number
+\makeatletter
+\renewcommand{\fnum@algocf}{} % Remove number from caption
+\makeatother
+
+\usepackage{minted}
+\usepackage{booktabs}
+\usepackage{mathtools}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\usetikzlibrary{patterns} % Use the patterns library
+
+\pgfplotsset{compat=1.16}
+
+
+
+%\makeatletter
+%\renewenvironment{algorithm}[1][htbp]{\@float{algorithm}[#1]\marginnote{\small\sf\raggedright Algorithm \arabic{algorithm}}}{\end@float}
+%\makeatother
+%\captionsetup[algorithm]{singlelinecheck=off, justification=raggedright, font=footnotesize, labelfont=bf}
+
+
+%\SetAlCapFnt{\footnotesize}
+%\SetAlCapNameFnt{\footnotesize}
+%\SetAlCapHSkip{0pt}
+
+
+\usepackage{xpatch}
+\usepackage{blindtext}
+\makeatletter
+\xpatchcmd{\@endpart}{\vfil\newpage}{}{}{}
+\xpatchcmd{\@endpart}{\newpage}{}{}{}
+\makeatother
+
+
+% LIST OF VARIABLES
+% image
+%% $\boldsymbol\ell~\ell[n,m]~\ell(x,y)$
+\newcommand{\img}{\ell}
+\newcommand{\imgin}{\ell_{\texttt{in}}}
+\newcommand{\imgout}{\ell_{\texttt{out}}}
+\newcommand{\boldimg}{\boldsymbol\ell}
+\newcommand{\boldimgin}{\boldsymbol\ell_{\texttt{in}}}
+\newcommand{\boldimgout}{\boldsymbol\ell_{\texttt{out}}}
+%\newcommand{\capitalimg}{\mathcal{L}}
+%\newcommand{\capitalimgin}{\mathcal{L}_{\texttt{in}}}
+%\newcommand{\capitalimgout}{\mathcal{L}_{\texttt{out}}}
+\newcommand{\capitalimg}{\mathscr{L}}
+\newcommand{\boldcapitalimg}{\mathscr{L}}
+%\newcommand{\boldcapitalimg}{\mathbfscr{L}}
+\newcommand{\capitalimgin}{\mathscr{L}_{\texttt{in}}}
+\newcommand{\capitalimgout}{\mathscr{L}_{\texttt{out}}}
+\newcommand{\lightfield}{L}
+
+% Location vector
+%\newcommand{\xx}{{\bf x}}
+%%% Macro for vertically aligning a subfigure and its label.
+%%% Example usage: \sublabel{a}{\psfig{ ... }}
+\def\sublabel#1#2{ \begin{tabular}{c} #2 \\  (#1) \end{tabular}}
+  %%{\vbox{#2 \hbox{\hfil (#1) \hfil}}}
+%% same as sublabel, except parens not automatically added.
+\def\sublabelnp#1#2{ \begin{tabular}{c} #2 \\  #1 \end{tabular}}
+  %%{\vbox{#2 \hbox{\hfil #1 \hfil}}}
+\newcommand{\ff}{\mathbf{f}}  % IMAGE FEATURES  \ff
+%\newenvironment{comment}{\begingroup\sffamily\color{red}}{\endgroup}
+\newcommand{\billf}[1]{{\tt\bf  [Billf::~#1~]}}
+
+%\newcommand{\reviewcomment}[1]{{\bf\color{red}Note: #1}}
+\newcommand{\reviewcomment}[1]{}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+%\DeclareMathSymbol{|}{\mathrel}{symbols}{"38}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\DeclarePairedDelimiterX{\KLdivx}[2]{(}{)}{%
+  #1\;\delimsize\|\;#2%
+}
+\newcommand{\KLdiv}{\texttt{KL}\KLdivx}
+
+
+%% MACROS
+\usepackage{xparse}
+\NewDocumentCommand{\fig}{mG{}}
+{%
+    figure~#1%
+    %\IfStrEq{#2}{}{}{.(#2)}%
+    \IfStrEq{#2}{}{}{(#2)}%
+}
+\NewDocumentCommand{\figs}{mG{}}
+{%
+    figures~#1%
+    %\IfStrEq{#2}{}{}{.(#2)}%
+    \IfStrEq{#2}{}{}{(#2)}%
+}
+\NewDocumentCommand{\Fig}{mG{}}
+{%
+    Figure~#1%
+    %\IfStrEq{#2}{}{}{.(#2)}%
+    \IfStrEq{#2}{}{}{(#2)}%
+}
+\NewDocumentCommand{\Figs}{mG{}}
+{%
+    Figures~#1%
+    %\IfStrEq{#2}{}{}{.(#2)}%
+    \IfStrEq{#2}{}{}{(#2)}%
+}
+
+\newcommand{\chap}[1]{chapter #1}
+\newcommand{\chaps}[1]{chapters #1}
+\newcommand{\Chap}[1]{Chapter #1}
+\newcommand{\eqn}[1]{equation (#1)}
+\newcommand{\Eqn}[1]{Equation (#1)}
+\newcommand{\Eqns}[1]{Equations (#1)}
+\newcommand{\eqns}{equations }
+\newcommand{\tab}[1]{table #1}
+\newcommand{\Tab}[1]{Table #1}
+\newcommand{\sect}[1]{section #1}
+\newcommand{\Sect}[1]{Section #1}
+%\newcommand{\sec}[1]{section #1} % this is a common bug, so I define this one too.
+%\newcommand{\Sec}[1]{Section #1} % this is a common bug,
+\newcommand{\partref}[1]{part #1}
+\newcommand{\partsref}{parts }
+\newcommand{\Partref}[1]{Part #1}
+\newcommand{\algref}[1]{algorithm #1}
+\newcommand{\Algref}[1]{Algorithm #1}
+
+\newcommand{\transpose}{\mathsf{T}}
+\newcommand{\hadamard}{\odot}
+
+\newcommand{\booktitle}[1]{\textit{#1}}
+
+
+% make eqn numbers reset between chapters
+\numberwithin{equation}{chapter}
+%\numberwithin{tabular}{chapter}
+
+\newcommand{\faketablecaption}{%
+  \vskip0.5\baselineskip
+  \refstepcounter{table}%
+  %\tablename\ \thetable%
+}
+
+\newcommand{\fakealgorithmcaption}{%
+  \vskip0.5\baselineskip
+  \refstepcounter{algorithm}%
+  % Optional: Uncomment the next line to print "Algorithm x" without an actual caption
+  % \textbf{Algorithm \thealgorithm}%
+}
+
+%%%% Commands ported over from individual chapter definitions %%%%
+
+\newcommand{\GD}{\texttt{GD}}
+\newcommand{\SGD}{\texttt{SGD}}
+\newcommand{\ES}{\texttt{ES}}
+
+\usetikzlibrary{arrows,arrows.spaced,arrows.meta,decorations.markings,calc,plotmarks}
+\pgfplotsset{colormap/viridis}
+
+\newcommand{\xin}{\mathbf{x}_{\texttt{in}}}
+\newcommand{\xout}{\mathbf{x}_{\texttt{out}}}
+\newcommand{\xinnonbold}{x_{\texttt{in}}}
+\newcommand{\xoutnonbold}{x_{\texttt{out}}}
+\newcommand{\xini}{x_{\texttt{in}}[i]}
+\newcommand{\xinj}{x_{\texttt{in}}[j]}
+\newcommand{\xouti}{x_{\texttt{out}}[i]}
+\newcommand{\xink}{x_{\texttt{in}}[k]}
+\newcommand{\xoutk}{x_{\texttt{out}}[k]}
+\newcommand{\xinindexed}{x_{\texttt{in}}}
+\newcommand{\xoutindexed}{x_{\texttt{out}}}
+\newcommand{\xint}{\mathbf{x}_{\texttt{in}}[t]}
+\newcommand{\xoutt}{\mathbf{x}_{\texttt{out}}[t]}
+\newcommand{\localgrad}{\mathbf{L}}
+\newcommand{\localgradx}{\mathbf{L}^{\mathbf{x}}}
+\newcommand{\localgradtheta}{\mathbf{L}^{\theta}}
+\newcommand{\costgrad}{\mathbf{g}}
+\newcommand{\costgradxin}{\mathbf{g}^{\xin}}
+\newcommand{\costgradxout}{\mathbf{g}^{\xout}}
+\newcommand{\costgradin}{\mathbf{g}_{\texttt{in}}}
+\newcommand{\costgradout}{\mathbf{g}_{\texttt{out}}}
+\newcommand{\costgradtheta}{\mathbf{g}^{\theta}}
+\newcommand{\costgradl}{\mathbf{g}_l}
+
+\newcommand{\pdata}{p_{\texttt{data}}}
+\newcommand{\pin}{p_{\texttt{in}}}
+\newcommand{\pout}{p_{\texttt{out}}}
+
+\newcommand{\xinpatch}{\tilde{x}_{\texttt{in}}}
+\newcommand{\xoutpatch}{\tilde{x}_{\texttt{out}}}
+
+\newcommand{\Cin}{C_{\texttt{in}}}
+\newcommand{\cin}{c_{\texttt{1}}}
+\newcommand{\Cout}{C_{\texttt{out}}}
+\newcommand{\cout}{c_{\texttt{2}}}
+
+\newcommand{\xoutj}{x_{\texttt{out}}[j]}
+\newcommand{\xinOne}{x_{\texttt{in}}[0]}
+\newcommand{\xinN}{x_{\texttt{in}}[N-1]}
+\newcommand{\Xin}{\mathbf{X}_{\texttt{in}}}
+\newcommand{\Xini}{\mathbf{X}_{\texttt{in}}[i]}
+\newcommand{\Xout}{\mathbf{X}_{\texttt{out}}}
+\newcommand{\Xoutj}{\mathbf{X}_{\texttt{out}}[j]}
+\newcommand{\XinOne}{\mathbf{X}_{\texttt{in}}[0]}
+\newcommand{\XinN}{\mathbf{X}_{\texttt{in}}[N-1]}
+\newcommand{\Xoutjk}{X_{\texttt{out}}[j,k]}
+\newcommand{\Xinik}{X_{\texttt{out}}[i,k]}
+
+\newcommand{\tin}{\mathbf{T}_{\texttt{in}}}
+\newcommand{\tini}{\mathbf{T}_{\texttt{in}}[i,:]}
+\newcommand{\tinj}{\mathbf{T}_{\texttt{in}}[j,:]}
+\newcommand{\tout}{\mathbf{T}_{\texttt{out}}}
+\newcommand{\touti}{\mathbf{T}_{\texttt{out}}[i,:]}
+\newcommand{\tinOne}{\mathbf{T}_{\texttt{in}}[0,:]}
+\newcommand{\tinN}{\mathbf{T}_{\texttt{in}}[N-1,:]}
+\newcommand{\toutOne}{\mathbf{T}_{\texttt{out}}[0,:]}
+\newcommand{\toutN}{\mathbf{T}_{\texttt{out}}[N-1,:]}
+
+\newcommand{\qin}{\mathbf{q}_{\texttt{in}}}
+\newcommand{\qni}{q_{\texttt{in}}[i,:]}
+\newcommand{\qinOne}{q_{\texttt{in}}[1]}
+\newcommand{\qinN}{q_{\texttt{in}}[N]}
+\newcommand{\kin}{\mathbf{k}_{\texttt{in}}}
+\newcommand{\kni}{k_{\texttt{in}}[i,:]}
+\newcommand{\kinOne}{k_{\texttt{in}}[0]}
+\newcommand{\kinN}{k_{\texttt{in}}[N-1]}
+\newcommand{\vin}{\mathbf{v}_{\texttt{in}}}
+\newcommand{\vni}{v_{\texttt{in}}[i,:]}
+\newcommand{\vinOne}{v_{\texttt{in}}[0]}
+\newcommand{\vinN}{v_{\texttt{in}}[N-1]}
+
+\newcommand{\Zin}{\mathbf{Z}_{\texttt{in}}}
+\newcommand{\Zout}{\mathbf{Z}_{\texttt{out}}}
+
+\newcommand{\Qin}{\mathbf{Q}_{\texttt{in}}}
+\newcommand{\Kin}{\mathbf{K}_{\texttt{in}}}
+\newcommand{\Vin}{\mathbf{V}_{\texttt{in}}}
+
+\newcommand{\xmark}{\ding{55}}%
+
+
+\definecolor{scratch_color}{rgb}{1.0, 1.0, 1.0}
+\definecolor{pretrained_color}{rgb}{0.0, 0.8, 0.2}
+\definecolor{adapted_color}{rgb}{0.8, 0.0, 0.2}
+\definecolor{both_color}{rgb}{0.1, 0.1, 0.8}
+\definecolor{pretrained_color_bright}{rgb}{0.95,0.84,0.62}%{0.0, 0.8, 0.2}
+\definecolor{adapted_color_bright}{rgb}{0.95, 0.635, 0.659}%{0.8, 0.0, 0.2}
+
+\newcommand\crule[3][black]{%
+  {%
+    \setlength{\fboxsep}{0.8pt}%
+    \setlength{\fboxrule}{0.5pt}%
+    \fcolorbox{black}{#1}{\phantom{\rule{#2}{#3}}}%
+  }%
+}
+
+
+\definecolor{gray_neuron}{rgb}{0.7,0.7,0.7}
+
+% \definecolor{param_color}{rgb}{0.2, 0.6, 1.0} % <-- neural nets
+% \definecolor{data_color}{rgb}{1.0, 0.4, 0.38} % <-- neural nets
+% \definecolor{param_color}{rgb}{0.2, 0.6, 1.0} % <-- neural nets as distribution transformers
+% \definecolor{data_color}{rgb}{1.0, 0.4, 0.38} % <-- neural nets as distribution transformers
+% \definecolor{param_color}{rgb}{0.3, 0.7, 1.0} % <-- backprop
+\definecolor{param_color}{rgb}{0.82352941, 0.91764706, 0.96862745} % <-- transformers
+\definecolor{data_color}{rgb}{0.96078431, 0.8627451 , 0.85490196} % <-- transformers
+\definecolor{param_color_dark}{rgb}{0.2, 0.6, 1.0}
+\definecolor{data_color_dark}{rgb}{1.0, 0.4, 0.38}
+\definecolor{param_color_light}{rgb}{0.7, 0.9, 1.0}
+% \definecolor{param_color_dark}{rgb}{0.3, 0.7, 1.0} % <-- CNNs
+\definecolor{zero_color}{rgb}{0.3,0.3,0.3}
+
+\definecolor{comp_graph_param_bcolor}{rgb}{0.3, 0.7, 1.0}
+
+\definecolor{comp_graph_node_bcolor}{rgb}{0.95,0.84,0.62}
+\definecolor{comp_graph_loss_node_bcolor}{rgb}{0.93,0.43,0.34}
+\definecolor{comp_graph_data_bcolor}{rgb}{1,1,1}
+\definecolor{comp_graph_param_grad_bcolor}{rgb}{0.97,0.88,0.35}
+\definecolor{gray_neuron}{rgb}{0.7,0.7,0.7}
+%\definecolor{shared_term_color}{rgb}{0.85,0.8,1.0}
+%\definecolor{shared_term_color}{rgb}{1.0,0.73,0.73}
+\definecolor{shared_term_color}{rgb}{0.9,0.9,0.9}
+\definecolor{forwardpropcolor}{rgb}{0.2,0.9,0.2}
+\definecolor{backwardpropcolor}{rgb}{0.9,0.2,0.2}
+\definecolor{backwardpropcolor_params}{rgb}{0.97,0.88,0.35}
+
+\definecolor{query_color}{rgb}{0.94, 0.73, 0.247}
+\definecolor{key_color}{rgb}{0.73, 0.23, 0.474}
+\definecolor{value_color}{rgb}{0.29, 0.647, 0.615}
+
+\definecolor{query_color_bright}{rgb}{0.1, 0.93, 0.447}
+\definecolor{key_color_bright}{rgb}{0.93, 0.43, 0.674}
+\definecolor{value_color_bright}{rgb}{0.49, 0.847, 0.815}
+
+\definecolor{cross_attn_color}{rgb}{0.66,0.66,0.66}
+
+\newcommand{\highlight}[2][yellow]{\mathchoice%
+  {\colorbox{#1}{$\displaystyle#2$}}%
+  {\colorbox{#1}{$\textstyle#2$}}%
+  {\colorbox{#1}{$\scriptstyle#2$}}%
+  {\colorbox{#1}{$\scriptscriptstyle#2$}}}%
+
+\tikzset{
+  comp_graph_edge/.style={
+        -Triangle
+    }
+}
+
+\tikzset{
+  comp_graph_edge_forward/.style={
+        -Triangle,
+        color=forwardpropcolor
+    }
+}
+\tikzset{
+  comp_graph_edge_backward/.style={
+        -Triangle,
+        color=backwardpropcolor
+    }
+}
+\tikzset{
+  comp_graph_edge_backward_params/.style={
+        -Triangle,
+        color=backwardpropcolor_params
+    }
+}
+
+% https://tex.stackexchange.com/questions/27279/how-to-make-an-arrow-bigger-and-change-its-color-in-tikz/27287#27287
+\tikzset{
+  nn_edge/.style={
+    decoration={markings,mark=at position 1 with {\arrow[scale=0.9]{spaced latex}}},
+    postaction={decorate},
+    shorten >=3.0pt
+    },
+  times_arrow/.style={
+    decoration={markings,mark=at position 1 with {\arrow[scale=0.9]{>}}},
+    postaction={decorate}
+    },
+  flow_arrow/.style={
+    decoration={markings,mark=at position 1 with {\arrow[scale=0.9]{>}}},
+    postaction={decorate}
+    }
+}
+
+
+
+%%%\renewenvironment{marginnote}[1][h]
+%%%{\begin{SCfigure}[][#1]}
+%%%{\end{SCfigure}}
+
+%%%% REDIFINITION OF THE MARGIN NOTE FOR THE E-BOOK:
+\usepackage{tcolorbox}
+%\let\oldmarginnote\marginnote
+%\renewcommand{\marginnote}[1]{%
+%  \oldmarginnote{\begin{tcolorbox}[colback=yellow!10!white,colframe=yellow!75!black]#1\end{tcolorbox}}%
+%}
+\RenewDocumentCommand{\marginnote}{mO{0pt}}{%
+%\renewcommand{\marginnote}[1]{%
+  \begin{center}
+  \begin{tcolorbox}%[width=0.8\textwidth,colframe=black!20,colback=black!10,fontupper=\footnotesize, fontlower=\Large]#1
+  [width=0.8\textwidth,colframe=black!20,colback=black!5,fontupper=\footnotesize, fontlower=\Large]#1
+  %\begin{tcolorbox}[width=0.8\textwidth,colback=black!100,colback=black!2]#1
+  \end{tcolorbox}%
+  \end{center}
+}
+%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% MAKE FIGURES NON-FLOAT
+\let\originalfigure\figure
+\let\endoriginalfigure\endfigure
+
+\renewenvironment{figure}[1][] { % The empty default parameter ensures any placement specifier is ignored
+  \originalfigure[H]
+} {
+  \endoriginalfigure
+}
+
+% Same for TABLES
+\let\originaltable\table
+\let\endoriginaltable\endtable
+
+\renewenvironment{table}[1][] { % The empty default parameter ensures any placement specifier is ignored
+  \originaltable[H]
+} {
+  \endoriginaltable
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\numberwithin{algorithm}{chapter}
+
+%\makeatletter
+%\renewcommand{\thealgorithm}{\thechapter.\arabic{algorithm}}
+%\@addtoreset{algorithm}{chapter}
+%\makeatother
+
+
+% BIBLIOGRAPHY:
+% Bibliography format:
+%\addbibresource{visionbib.bib,all.bib}
+%\addbibresource{visionbib.bib}
+
+\bibliography{all,visionbib}
+%\addbibresource{visionbib,all}
+
+%\usepackage{natbib}
+%\usepackage[numbers]{natbib}
+%\bibliographystyle{unsrtnat}
+
+%\bibpunct{(}{)}{,}{a}{}{;}
+%\bibliographystyle{plain}
+%\renewcommand{\cite}[1]{[\citep{#1}]}
+
+% Leave all the white space at the bottom of the page:
+\raggedbottom
+
+
