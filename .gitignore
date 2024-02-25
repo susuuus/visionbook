@@ -11,7 +11,7 @@
 *.cb
 *.cb2
 .*.lb
-
+_book
 ## Intermediate documents:
 *.dvi
 *.xdv
@@ -591,3 +591,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+/.quarto/
