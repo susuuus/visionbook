@@ -12,24 +12,24 @@ The authors derive a heuristic for the number of samples, $S$, required to be as
 \end{equation}
 Taking the logarithm of both sides lets us solve for $k$, the number of RANSAC iterations required to find a good fit, with probability $p$:
 \begin{equation}
-        k = \frac{\log(1-p)}{\log(1-w^n)}
-        \label{eq:k}
+    k = \frac{\log(1-p)}{\log(1-w^n)}
+    \label{eq:k}
 \end{equation}
 For the example of Fig.~\ref{fig:ransac}, for 95\% accuracy, $k = \frac{\log(-05)}{\log(1-0.18^2)} = \frac{-1.3}{-0.0143} = 91$
-So with 91 trials, we would have 95\% confidence of finding the correct model through RANSAC. 
+So with 91 trials, we would have 95\% confidence of finding the correct model through RANSAC.
 
 
 \begin{figure}
-\centerline{
-\sublabel{a}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac1.jpg}}
-\sublabel{b}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac2.jpg}}}
-\centerline{
-\sublabel{c}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac3.jpg}}
-\sublabel{d}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac4.jpg}}}
-\centerline{
-\sublabel{e}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac5.jpg}}
-\sublabel{f}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac6.jpg}}}
-\caption{RANSAC applied to robust estimation of line parameters. (a) datapoints for which robust line estimation is sought. (b) two points (in blue) are selected at random, sufficient to estimate line model parameters. The number of inliers is computed for this model. (c) - (e) repeat k times. (f) select the model with the maximum number of inliers.}
-\label{fig:ransac}
+    \centerline{
+        \sublabel{a}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac1.jpg}}
+        \sublabel{b}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac2.jpg}}}
+    \centerline{
+        \sublabel{c}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac3.jpg}}
+        \sublabel{d}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac4.jpg}}}
+    \centerline{
+        \sublabel{e}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac5.jpg}}
+        \sublabel{f}{\includegraphics[width=0.4\linewidth]{figures/stereo/ransac6.jpg}}}
+    \caption{RANSAC applied to robust estimation of line parameters. (a) datapoints for which robust line estimation is sought. (b) two points (in blue) are selected at random, sufficient to estimate line model parameters. The number of inliers is computed for this model. (c) - (e) repeat k times. (f) select the model with the maximum number of inliers.}
+    \label{fig:ransac}
 \end{figure}
 

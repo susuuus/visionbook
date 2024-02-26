@@ -3,21 +3,21 @@
 
 Building priors for images is an active area of research in which there has been remarkable progress. Understanding the world of images and finding rules that describe what is likely and what is not to find within an image seems like a very challenging task. What we will see in this chapter is that some of the filters that we have seen in the previous chapters have remarkable properties when applied to images.
 
-First we need to understand what we mean by a {\em natural image}. An image is a very high dimensional array of pixels $\img \left[n,m\right]$ and therefore, the space of all possible images is very large. Even if you consider very small thumbnails of $32\times32$ pixels and 3 color channels, with 8 bits per channel, there are more than $10^{7000}$ possible images. Of course, most of them will just be random noise. 
+First we need to understand what we mean by a {\em natural image}. An image is a very high dimensional array of pixels $\img \left[n,m\right]$ and therefore, the space of all possible images is very large. Even if you consider very small thumbnails of $32\times32$ pixels and 3 color channels, with 8 bits per channel, there are more than $10^{7000}$ possible images. Of course, most of them will just be random noise.
 
 As natural images are quite complex, research started considering simple visual worlds that retained some of the important properties of natural images while allowing developing analytic tools to characterize them.
 
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/worlds.eps}
-} 
-\caption{Different visual worlds, some real, some synthetic. a) white noise, b) stars, c) gabor patches, d) mondrian, e) clouds, f) line drawings, g) CGI, e) a real street. All these worlds have different visual properties. Even there is something that makes CGI images distinct from pictures of true scenes.} 
-\label{fig:worlds}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/worlds.eps}
+  }
+  \caption{Different visual worlds, some real, some synthetic. a) white noise, b) stars, c) gabor patches, d) mondrian, e) clouds, f) line drawings, g) CGI, e) a real street. All these worlds have different visual properties. Even there is something that makes CGI images distinct from pictures of true scenes.}
+  \label{fig:worlds}
 \end{figure}
 
 
-Figure \ref{fig:worlds} shows images that belong to different visual worlds. 
+Figure \ref{fig:worlds} shows images that belong to different visual worlds.
 %
 %The first world (fig.~\ref{fig:worlds}.a) is the world of white noise. It is the world that you get to see when you watch an old TV. Images in this world can be easily described by specifying the algorithm used to generate them: create and array of $n \times m$ color pixels and assign to each color component of each pixel a random number drawn from a uniform distribution between 0 and 255. In this world, all the images that belong to this world are very different in terms of the exact RGB values that make every pixel. But all the images look the same to the human visual system. 
 %
@@ -43,11 +43,11 @@ In this chapter we will talk, in some way or another, about all these visual wor
 
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/noiseInTheWorld.eps}
-} 
-\caption{Telling noise from texture. Which one is which?} 
-\label{fig:noiseInTheWorld}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/noiseInTheWorld.eps}
+  }
+  \caption{Telling noise from texture. Which one is which?}
+  \label{fig:noiseInTheWorld}
 \end{figure}
 
 
@@ -404,27 +404,27 @@ In this chapter we will talk, in some way or another, about all these visual wor
 
 \section{A sequence of statistical models of images}
 
-There is a significant interest in building image models that can represent whatever makes special real photographs relative to, let's say, images that just contain noise. One way of building an image model is by having some procedural description, for instance a list of objects with locations, poses and styles and a rendering engine, just like one would do when writing a program to generate CGI. One issue with this way of modeling images is that it will be hard to use it, and will require having an exhaustive list of all the things that we can find in the world. We will see later in the class that the apparent explosion in complexity should not stop us. 
+There is a significant interest in building image models that can represent whatever makes special real photographs relative to, let's say, images that just contain noise. One way of building an image model is by having some procedural description, for instance a list of objects with locations, poses and styles and a rendering engine, just like one would do when writing a program to generate CGI. One issue with this way of modeling images is that it will be hard to use it, and will require having an exhaustive list of all the things that we can find in the world. We will see later in the class that the apparent explosion in complexity should not stop us.
 
 
 % Drawing the blocks of first level:
 \centerline{
-\tikzset{
-  block/.style    = {draw, thin, rectangle, minimum height = 2.5em,  minimum width = 2.5em},
-  sum/.style      = {draw, circle, minimum size=.4cm}, % Adder
-  input/.style    = {coordinate}, % Input
-  output/.style   = {coordinate}, % Output
-  x/.style   = {coordinate} % Output
-}
-\begin{tikzpicture}[auto, thin, node distance=1.2cm, >=triangle 45]
-\draw
-	node [] (x0p) {$x$}
-	node [block, right of=x0p] (f) {$f$}
-	node [right of=f, node distance=2.6cm] (out) {$p(x \in World)$};
-       % Joining blocks. 
-	\draw[->](x0p) -- node {} (f);
-	\draw[->](f) -- node {} (out);
-\end{tikzpicture}
+  \tikzset{
+    block/.style    = {draw, thin, rectangle, minimum height = 2.5em,  minimum width = 2.5em},
+    sum/.style      = {draw, circle, minimum size=.4cm}, % Adder
+    input/.style    = {coordinate}, % Input
+    output/.style   = {coordinate}, % Output
+    x/.style   = {coordinate} % Output
+  }
+  \begin{tikzpicture}[auto, thin, node distance=1.2cm, >=triangle 45]
+    \draw
+    node [] (x0p) {$x$}
+    node [block, right of=x0p] (f) {$f$}
+    node [right of=f, node distance=2.6cm] (out) {$p(x \in World)$};
+    % Joining blocks. 
+    \draw[->](x0p) -- node {} (f);
+    \draw[->](f) -- node {} (out);
+  \end{tikzpicture}
 }
 However there is another way of building image models. In the rest of this lecture we will study a very different approach that consists in building statistical models of images that try to capture the properties of small image neighborhoods. Statistical models are very successful in other disciplines such as natural language modeling.
 
@@ -435,21 +435,21 @@ Here we will review models of images of increasing complexity starting with the 
 
 The simplest image model will consist in assuming that all pixels are independent and their intensity value is drawn from some distribution. We can write this as:
 \begin{equation}
-p(\img) = \prod_{x,y} p(\img(x,y))
-\label{eq:histmodel}
+  p(\img) = \prod_{x,y} p(\img(x,y))
+  \label{eq:histmodel}
 \end{equation}
-We will see the interest of writing models in this form. One way of getting a sense of how accurate is a statistical image model is to sample from this model and check the types of images that it produces. This will require knowing the distribution $p(\img(x,y))$ (we will assume this function is the same in all image locations). What we can do is to take one image from one of the visual worlds that we described in the introduction, we can then estimate the function $p(\img(x,y))$ as the histogram of the image. We can then sample new images from eq.~\ref{eq:histmodel}.  Figure~\ref{fig:histMatch} shows two pairs of images with matched intensity histograms. We can see that this simplistic model is somewhat appropriate for pictures of stars (although star images can have a lot more structure), but it miserably fails in reproducing anything with any similarity to a street picture. 
+We will see the interest of writing models in this form. One way of getting a sense of how accurate is a statistical image model is to sample from this model and check the types of images that it produces. This will require knowing the distribution $p(\img(x,y))$ (we will assume this function is the same in all image locations). What we can do is to take one image from one of the visual worlds that we described in the introduction, we can then estimate the function $p(\img(x,y))$ as the histogram of the image. We can then sample new images from eq.~\ref{eq:histmodel}.  Figure~\ref{fig:histMatch} shows two pairs of images with matched intensity histograms. We can see that this simplistic model is somewhat appropriate for pictures of stars (although star images can have a lot more structure), but it miserably fails in reproducing anything with any similarity to a street picture.
 
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/spaceHist.eps}
-} 
-\caption{Examples of images and white noise with matched histograms. Only the image with stars has some visual similarity with pictures of stars.} 
-\label{fig:histMatch}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/spaceHist.eps}
+  }
+  \caption{Examples of images and white noise with matched histograms. Only the image with stars has some visual similarity with pictures of stars.}
+  \label{fig:histMatch}
 \end{figure}
 
-Let's be honest, as a generative model of images, this model is very poor. However, this does not mean that image histograms are not important. Manipulating image histograms is a very useful operation.  Given two images $\img_1$ and $\img_2$ with histograms $h_1$ and $h_2$, we look for a pixelwise transformation $f(x)$ so that the histogram of the transformed image, $f(\img_1)$, matches the histogram of $\img_2$. There are many ways in which histograms can be transformed. One natural choice is a transformation that preserves the ordering of pixels intensities. 
+Let's be honest, as a generative model of images, this model is very poor. However, this does not mean that image histograms are not important. Manipulating image histograms is a very useful operation.  Given two images $\img_1$ and $\img_2$ with histograms $h_1$ and $h_2$, we look for a pixelwise transformation $f(x)$ so that the histogram of the transformed image, $f(\img_1)$, matches the histogram of $\img_2$. There are many ways in which histograms can be transformed. One natural choice is a transformation that preserves the ordering of pixels intensities.
 %
 %Figure~\ref{fig:illumination} shows examples of spheres that are reflecting some complex ambient illumination. The two spheres on the left are the two original images. The ones on the left are generated by modifying the image histograms to match the histogram of the opposite image.  The figure shows that by simply changing the image histogram we can transform how we perceive the material of each sphere: from shiny to mate.
 %
@@ -469,39 +469,39 @@ Let's be honest, as a generative model of images, this model is very poor. Howev
 \subsection{Dead leaves model}
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/correlation.eps}
-} 
-\caption{Scatter plots of pairs of pixels intensities as a function of distance, and cross-correlation function for vertical and horizontal displacements.} 
-\label{fig:correlation}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/correlation.eps}
+  }
+  \caption{Scatter plots of pairs of pixels intensities as a function of distance, and cross-correlation function for vertical and horizontal displacements.}
+  \label{fig:correlation}
 \end{figure}
 
 In the quest to find what makes photographs of everyday scenes special, the next simplest image structure is a set of two pixels. Things get a lot more interesting now. One interesting observation is that if one plots the value of the intensity of one pixel as a function of the intensity value of the pixel nearby, The scatterplot produced by many pixel pairs (fig.~\ref{fig:correlation}) is concentrated on the identity line. As we look at the correlation between pixels that are farther away, the correlation value slowly decays. The correlation between two pixels is:
 \begin{equation}
-C(\Delta x, \Delta y) = \rho \left[ \img(x+\Delta x,y+ \Delta y), \img(x, y) \right]
+  C(\Delta x, \Delta y) = \rho \left[ \img(x+\Delta x,y+ \Delta y), \img(x, y) \right]
 \end{equation}
 
-The behavior of this correlation function when computed on natural images is very different from the one we would observe if the correlation was computed over noise images. 
+The behavior of this correlation function when computed on natural images is very different from the one we would observe if the correlation was computed over noise images.
 
-There has been a large number of efforts trying to model what is the minimal set of assumptions that one needs to make in order to reproduce the observed behavior. The {\em dead leaves model } is a simplified image formation model that tries to approximate some of the properties observed for natural images. This model was introduced in the 60's by Matheron (67) and popularized by Ruderman (97). This model consist in assuming that an image can be modeled as a set of disks (dead leaves) that fall on a flat surface generating a random superposition (e.g., fig.~\ref{fig:worlds}.c). 
+There has been a large number of efforts trying to model what is the minimal set of assumptions that one needs to make in order to reproduce the observed behavior. The {\em dead leaves model } is a simplified image formation model that tries to approximate some of the properties observed for natural images. This model was introduced in the 60's by Matheron (67) and popularized by Ruderman (97). This model consist in assuming that an image can be modeled as a set of disks (dead leaves) that fall on a flat surface generating a random superposition (e.g., fig.~\ref{fig:worlds}.c).
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/deadleaves.eps}
-} 
-\caption{Images resulting from the dead leaves model.
-%BUILD SOME CUSTOM MADE IMAGES THAT CORRESPOND TO SOME INTERESTING VARIANTS.  For example: additive, occlusions, scale invariant and plot the measured correlation functions.
-} 
-\label{fig:deadleaves}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/deadleaves.eps}
+  }
+  \caption{Images resulting from the dead leaves model.
+    %BUILD SOME CUSTOM MADE IMAGES THAT CORRESPOND TO SOME INTERESTING VARIANTS.  For example: additive, occlusions, scale invariant and plot the measured correlation functions.
+  }
+  \label{fig:deadleaves}
 \end{figure}
 
 This model is very simple and does not produce realistic images, but it is similar to the image model assumed to explain the distribution of albedos in natural images. This model is used by the Retinex algorithm to separate and image into two components: illumination and albedo variations. %We will see this later.
 
 The particular form of the correlation function for natural images is made more explicit when studied on the Fourier domain. One remarkable property of most natural images is that if you take the 2D Fourier transform of an image, and look at the form of the magnitude seems to follow a form:
 \begin{equation}
-| \imgfft(v) | \simeq \frac{1}{| v | ^ \alpha}
+  | \imgfft(v) | \simeq \frac{1}{| v | ^ \alpha}
 \end{equation}
-where $v$ denotes spatial frequency, $\imgfft$ is the Fourier transform of the image $\img$, and $\alpha \simeq 1$. And this is true for all orientations (you can think of this as taking the fourier transform and looking at the profile of a slice that passes by the origin). 
+where $v$ denotes spatial frequency, $\imgfft$ is the Fourier transform of the image $\img$, and $\alpha \simeq 1$. And this is true for all orientations (you can think of this as taking the fourier transform and looking at the profile of a slice that passes by the origin).
 
 %FIGURE: the average fourier transform of natural images and sections.
 
@@ -509,10 +509,10 @@ where $v$ denotes spatial frequency, $\imgfft$ is the Fourier transform of the i
 
 \subsection{The gaussian model}
 
-We want to write a statistical image model that takes into account the correlation statistics of natural images (see Simoncelli 2005 for a review). If the only constraint we have is the correlation function among image pixels, then, among all the possible distributions the one that has the maximum entropy (maximum entropy principle) is the Gaussian distribution: 
+We want to write a statistical image model that takes into account the correlation statistics of natural images (see Simoncelli 2005 for a review). If the only constraint we have is the correlation function among image pixels, then, among all the possible distributions the one that has the maximum entropy (maximum entropy principle) is the Gaussian distribution:
 \begin{equation}
-p(\img) \propto \exp \left(-\frac{1}{2} \img^T {\bf C}^{-1} \img \right)
-\label{eq:gaussianmodel}
+  p(\img) \propto \exp \left(-\frac{1}{2} \img^T {\bf C}^{-1} \img \right)
+  \label{eq:gaussianmodel}
 \end{equation}
 where ${\bf C}$ is the covariance matrix of all the image pixels. Note that now this model does not assume independency across pixels any more. This model takes into account that intensity values for different pixels are correlated as discussed in the previous sections. This model is related also to studies that use principal component analysis to study what are the typical components of natural images. For stationary signals, the matrix ${\bf C}$ has a circulant structure (assuming a tiling of the image) and can be diagonalized using the Fourier transform. The eigenvalues of the diagonal matrix correspond to the power (squared magnitude) of the frequency components of the Fourier transform. This is, the matrix ${\bf C}$ can be written as ${\bf C} = ${\bf E}{\bf D}${\bf E}^T$, where ${\bf E}$ is the matrix that contains the Fourier basis (as seen in the previous lecture) and the diagonal matrix ${\bf D}$ is composed by the values $\frac{1}{| v | ^ \alpha}$ for all the frequencies $v$.
 % http://ee.stanford.edu/~gray/toeplitz.eps
@@ -528,24 +528,24 @@ where ${\bf C}$ is the covariance matrix of all the image pixels. Note that now 
 
 \subsubsection{Sampling images}
 
-Once a distribution is defined, we can use it to sample new images. First we need to specify the parameters of the distribution. In this case, we need to specify the matrix ${\bf C}$. We can estimate this as the average covariance matrix of a set of images. Figure \ref{fig:synthClouds} shows an example of an image of clouds and the magnitude of its Fourier transform. A sample of the distribution can be obtained by filtering white gaussian noise using the image magnitude as a filter. 
+Once a distribution is defined, we can use it to sample new images. First we need to specify the parameters of the distribution. In this case, we need to specify the matrix ${\bf C}$. We can estimate this as the average covariance matrix of a set of images. Figure \ref{fig:synthClouds} shows an example of an image of clouds and the magnitude of its Fourier transform. A sample of the distribution can be obtained by filtering white gaussian noise using the image magnitude as a filter.
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/synthClouds.eps}
-} 
-\caption{Randomizing the phase of picture of clouds. Left) clouds, Center) magnitude of its Fourier transform, Right) image obtained by randomizing the phase.} 
-\label{fig:synthClouds}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/synthClouds.eps}
+  }
+  \caption{Randomizing the phase of picture of clouds. Left) clouds, Center) magnitude of its Fourier transform, Right) image obtained by randomizing the phase.}
+  \label{fig:synthClouds}
 \end{figure}
 
 
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/examplefailurehair.eps}
-} 
-\caption{BUILD database of hair images and estimate average spectrum.} 
-\label{fig:hair}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/examplefailurehair.eps}
+  }
+  \caption{BUILD database of hair images and estimate average spectrum.}
+  \label{fig:hair}
 \end{figure}
 
 
@@ -563,46 +563,46 @@ Once a distribution is defined, we can use it to sample new images. First we nee
 \subsubsection{Image denoising and Wiener filter}
 ~\\
 
-As an example of how to use image priors for vision tasks, we will study how to do image denoising using the prior on the structure of the correlation of natural images. In this problem, we observe a noisy image $\img_n$ corrupted with white gaussian noise: 
+As an example of how to use image priors for vision tasks, we will study how to do image denoising using the prior on the structure of the correlation of natural images. In this problem, we observe a noisy image $\img_n$ corrupted with white gaussian noise:
 \begin{equation}
-\img_n(x,y) = \img(x,y) + n(x,y)
+  \img_n(x,y) = \img(x,y) + n(x,y)
 \end{equation}
 and the goal is to recover the uncorrupted image $\img(x,y)$. The noise $n(x,y)$ is white gaussian noise with variance $\sigma_n^2$.
 
 The denoising problem can be formulated as finding $\img$ that maximizes the maximum a posteriory (MAP estimate):
 \begin{equation}
-\max_\img p(\img | \img_n) 
+  \max_\img p(\img | \img_n)
 \end{equation}
 
 In these equations we write the image as a column vector $\img$. This posterior density can be written as:
 \begin{equation}
-\max_\img p(\img | \img_n) = \max_\img p(\img_n | \img) p(\img)
+  \max_\img p(\img | \img_n) = \max_\img p(\img_n | \img) p(\img)
 \end{equation}
 where the likelihood function is:
 \begin{equation}
-p(\img_n | \img) \propto \exp( - \left| \img_n - \img \right| ^2 / \sigma_n^2)
+  p(\img_n | \img) \propto \exp( - \left| \img_n - \img \right| ^2 / \sigma_n^2)
 \end{equation}
 and the prior:
 \begin{equation}
-p(\img) \propto \exp \left(-\frac{1}{2} \img^T {\bf C}^{-1} \img \right)
+  p(\img) \propto \exp \left(-\frac{1}{2} \img^T {\bf C}^{-1} \img \right)
 \end{equation}
 
 The solution to this problem can be obtained in closed form:
 \begin{equation}
-\img = {\bf C} \left( {\bf C} + \sigma_n^2   \mathbb{I} \right)^{-1} \img_n
+  \img = {\bf C} \left( {\bf C} + \sigma_n^2   \mathbb{I} \right)^{-1} \img_n
 \end{equation}
 This is just a linear operation. It can also be written in the Fourier domain as:
 \begin{equation}
-\imgfft(v) = \frac{A/|v|^{2\alpha}}{A/|v|^{2\alpha} + \sigma_n^2} \imgfft_n(v) 
+  \imgfft(v) = \frac{A/|v|^{2\alpha}}{A/|v|^{2\alpha} + \sigma_n^2} \imgfft_n(v)
 \end{equation}
 
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/denoisingGaussianModel.eps}
-} 
-\caption{In the estimated noise we can see still structure from the original image.} 
-\label{fig:denoisingGaussianModel}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/denoisingGaussianModel.eps}
+  }
+  \caption{In the estimated noise we can see still structure from the original image.}
+  \label{fig:denoisingGaussianModel}
 \end{figure}
 
 
@@ -653,7 +653,7 @@ This is just a linear operation. It can also be written in the Fourier domain as
 %
 \subsection{The wavelet marginal model}
 
-Despite the popularity of the gaussian model it fails in capturing the structure of natural images. As we showed before, sampling from a Gaussian prior model generates images of clouds. Although the gaussian prior does not make any image to have zero probability (i.e., by sampling for a very long time it is not impossible to get a picture of the Mona Lisa), the most typical images under this prior are clouds. 
+Despite the popularity of the gaussian model it fails in capturing the structure of natural images. As we showed before, sampling from a Gaussian prior model generates images of clouds. Although the gaussian prior does not make any image to have zero probability (i.e., by sampling for a very long time it is not impossible to get a picture of the Mona Lisa), the most typical images under this prior are clouds.
 
 The gaussian model captures the fact that pixel values are correlated and that such correlation decreases with distance. However, it fails in capturing other very important properties of image such that images contain flat regions, edges and lines.
 
@@ -661,11 +661,11 @@ In the 80s, a number of papers noticed a remarkable property of images: when fil
 
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/derivativedistribution.eps}
-} 
-\caption{Comparison of histograms.} 
-\label{fig:derivativeshist}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/derivativedistribution.eps}
+  }
+  \caption{Comparison of histograms.}
+  \label{fig:derivativeshist}
 \end{figure}
 
 First, the histogram of the image pixels is already non-gaussian (which already goes against the gaussian model). However, the image histogram does not has any interesting structure and different images have different histograms. Something very different happens to the outputs of the filters  $\left[-1,1\right]$ and $\left[-1,1\right]^T$. The histograms of the filter outputs are very clean (note that they are computed over the same number of pixels), have a unique maximum around zero, seem to be symmetric.
@@ -673,11 +673,11 @@ First, the histogram of the image pixels is already non-gaussian (which already 
 Note that this distribution of he filter outputs goes against the hypothesis of the gaussian model. If the gaussian model was correct, then any filtered image should also be gaussian as a filtering is just a linear operation over the image.
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/examplesderivativedistributions.eps}
-} 
-\caption{Comparison of histograms of images from different visual worlds (replace hair with clouds). Add image of leaves on the ground.} 
-\label{fig:derivativesdistributions}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/examplesderivativedistributions.eps}
+  }
+  \caption{Comparison of histograms of images from different visual worlds (replace hair with clouds). Add image of leaves on the ground.}
+  \label{fig:derivativesdistributions}
 \end{figure}
 
 
@@ -687,34 +687,34 @@ Note that this distribution of he filter outputs goes against the hypothesis of 
 
 What what make the non-gaussianity of image derivatives really important is that the output distribution could be parametrized by a simple function:
 \begin{equation}
-p(x) = \frac{\exp \left(- \left| x/s  \right|^r \right)}{2s/r \Gamma(1/r)}
-\label{eq:derdist}
+  p(x) = \frac{\exp \left(- \left| x/s  \right|^r \right)}{2s/r \Gamma(1/r)}
+  \label{eq:derdist}
 \end{equation}
 
-This function is called the Generalized exponential distribution. It has two parameters: the exponent $r$ which changes the shape of the distribution and $s$ which affects the variance. This distribution fits remarkably well the outputs of bandpass filters of natural images. 
+This function is called the Generalized exponential distribution. It has two parameters: the exponent $r$ which changes the shape of the distribution and $s$ which affects the variance. This distribution fits remarkably well the outputs of bandpass filters of natural images.
 
 Fig.~\ref{fig:generalizedgaussian} shows the shape of the distribution when changing the parameter $r$. $r=2$ gives the gaussian distribution. $r=1$ is called the laplacian distribution. When $r \to \infty$ the distribution converges to a uniform distribution in the range $\left[-s, s\right]$. And when $r \to 0$, the distribution converges to a delta function.
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/statistical_image_models/generalizedgaussian.eps}
-} 
-\caption{Changing the exponent $r$ changes the shape of the distribution generating some special cases (gaussian, uniform, laplacian).} 
-\label{fig:generalizedgaussian}
+  \centerline{
+    \includegraphics[width=1\linewidth]{figures/statistical_image_models/generalizedgaussian.eps}
+  }
+  \caption{Changing the exponent $r$ changes the shape of the distribution generating some special cases (gaussian, uniform, laplacian).}
+  \label{fig:generalizedgaussian}
 \end{figure}
 
 
 Some properties of this distribution:
 \begin{eqnarray}
-mean = 0\\
-var = \\
-kurtosis = \\
+  mean = 0\\
+  var = \\
+  kurtosis = \\
 \end{eqnarray}
 
 Sometimes, vertical derivatives could be skewed due to illumination effects. Find one example.
 
 %FIGURE: Compare the distribution obtained with different visual worlds (clouds, images, gaussian noise). Change the fit so that it uses the generalized gaussian.
 
-In natural images, typical values of $r$ and in the range $\left[0.4, 0.8\right]$. 
+In natural images, typical values of $r$ and in the range $\left[0.4, 0.8\right]$.
 
 
 
@@ -728,8 +728,8 @@ There are other prior distributions that also fit well the data.
 Now that we have seen that image derivatives have a special distribution for natural images, let's define a prior model that captures the distribution of image derivatives. Maximum entropy principle when only the marginals are specified:
 
 \begin{equation}
-p(\img) = \prod_{k} \prod_{x,y} p(h_k(\img, x,y))
-\label{eq:waveletmodel}
+  p(\img) = \prod_{k} \prod_{x,y} p(h_k(\img, x,y))
+  \label{eq:waveletmodel}
 \end{equation}
 This model assumes that all the output values of all the filters are independent.
 
@@ -742,38 +742,38 @@ Observations: if $r = 2$, then this model becomes the gaussian model.
 %Example of a 1D step edge and sharpening. See the effect of p in what is the best solution.
 %
 
-First, what is the most likely image under the model eq.~\ref{eq:waveletmodel}. It is a constant image. 
+First, what is the most likely image under the model eq.~\ref{eq:waveletmodel}. It is a constant image.
 
 %\begin{examples} {\bf step edge}
 
 To build an intuition on what types of image structures are more likely under the wavelet marginal model, let's consider a simple 1D image:
 \begin{equation}
-\img = \left[1,~ 1,~ 1,~ a,~ 0,~ 0,~ 0\right]
+  \img = \left[1,~ 1,~ 1,~ a,~ 0,~ 0,~ 0\right]
 \end{equation}
-Different values of $a$ will produce different types of steps. For instance, setting $a=1$ or $a=0$ will produce a sharp step edge. Setting $a=0.5$ will produce a smooth step signal. What is the value of $a$ that maximizes the probability of this 1D image under the wavelet marginal model? 
+Different values of $a$ will produce different types of steps. For instance, setting $a=1$ or $a=0$ will produce a sharp step edge. Setting $a=0.5$ will produce a smooth step signal. What is the value of $a$ that maximizes the probability of this 1D image under the wavelet marginal model?
 
 First we need to specify the prior distribution. For this example we will use a model specified by a single filter with the form $[-1, 1]$, and we will use the distribution given by eq.~\ref{eq:derdist}. In this case, we can write the wavelet marginal model in close form. Applying the filter $\left[-1, 1\right]$ to the 1D signal and using mirror boundary conditions, results in:
 \begin{equation}
-h(\img) = \left[0,~0,~ 0,~ 1-a,~ a,~ 0,~ 0\right]
+  h(\img) = \left[0,~0,~ 0,~ 1-a,~ a,~ 0,~ 0\right]
 \end{equation}
 
 Now, we can use Eq.~\ref{eq:waveletmodel} and obtain the probability of $\img$ as a function of $a$:
 \begin{eqnarray}
-p(\img) = \prod_{x} p(h(\img, x)) = \\
-\frac {\exp \left(- \left| (1-a)/s  \right|^r \right) \exp \left(- \left| a/s  \right|^r \right)}{(2s/r \Gamma(1/r))^7} = \\
-\frac{1}{(2s/r \Gamma(1/r))^7} \exp - \frac{\left| 1-a \right|^r+\left| a \right|^r} {s^r}  
+  p(\img) = \prod_{x} p(h(\img, x)) = \\
+  \frac {\exp \left(- \left| (1-a)/s  \right|^r \right) \exp \left(- \left| a/s  \right|^r \right)}{(2s/r \Gamma(1/r))^7} = \\
+  \frac{1}{(2s/r \Gamma(1/r))^7} \exp - \frac{\left| 1-a \right|^r+\left| a \right|^r} {s^r}
 \end{eqnarray}
 the first factor only depends on $r$. The second factor depends on $a$ and $r$. We are interested in seeing the values of $a$ that maximize $p(\img)$ for each value of $r$. Therefore, only the second factor is important for this analysis. The next figure plots the value of the second factor as we vary $a$ and $r$. The red line represent the places where the function reaches a maximum as a function of $a$ for each value of $r$.
 
 \begin{figure}[htpb]
-\centerline{
-\includegraphics[width=.6\linewidth]{figures/statistical_image_models/best_a_s1.eps}
-} 
-\caption{Best values of $a$ that maximize the probability of the 1D image $\left[1,~ 1,~ 1,~ a,~ 0,~ 0,~ 0\right]$ under the wavelet prior model.} 
-\label{fig:best_a}
+  \centerline{
+    \includegraphics[width=.6\linewidth]{figures/statistical_image_models/best_a_s1.eps}
+  }
+  \caption{Best values of $a$ that maximize the probability of the 1D image $\left[1,~ 1,~ 1,~ a,~ 0,~ 0,~ 0\right]$ under the wavelet prior model.}
+  \label{fig:best_a}
 \end{figure}
 
-For $r=2$ the best value of $a$ is $a=0.5$, and this solution is the best for any value of $r>1$. For $r=1$, any value $a \in \left[0,1\right]$ is equally good, and $p(\img)$ decreases for values of $a$ outside that range. And for $r<1$, the best solution is for $a=0$ or $a=1$. Therefore, values of $r<1$ prefer sharp step edges. Note that $a=0$ and $a=1$ are both the same step edge translated by one pixel. 
+For $r=2$ the best value of $a$ is $a=0.5$, and this solution is the best for any value of $r>1$. For $r=1$, any value $a \in \left[0,1\right]$ is equally good, and $p(\img)$ decreases for values of $a$ outside that range. And for $r<1$, the best solution is for $a=0$ or $a=1$. Therefore, values of $r<1$ prefer sharp step edges. Note that $a=0$ and $a=1$ are both the same step edge translated by one pixel.
 
 %\end{examples} 
 %
@@ -867,7 +867,7 @@ Talk about Field and Olshausen, and establish parallelism with CNN.
 
 Deduce Wavelet thresholding using the bayesian model.
 
-In the case of $\left[-1, 1\right]$ derivatives we can transform the image, then apply the prior to the derivatives, and then reverse the transformation. 
+In the case of $\left[-1, 1\right]$ derivatives we can transform the image, then apply the prior to the derivatives, and then reverse the transformation.
 
 %
 %\subsubsection{Retinex}

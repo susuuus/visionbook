@@ -1,4 +1,4 @@
- \chapter{Image Pyramids}\label{chapter:image_pyramids}
+\chapter{Image Pyramids}\label{chapter:image_pyramids}
 
 % List of references to add:
 %Burt83.  The laplacian pyramid as a compact image code
@@ -44,11 +44,11 @@ In chapter XX we motivated translation invariant linear filters as a way of acco
 \section{Image Pyramids and multi-scale image analysis}
 
 \begin{figure}
-\centerline{
-\includegraphics[width=.8\linewidth]{figures/pyramids/multiscale_birds_boxes.eps}
-}
-\caption{Multiscale image pyramid. Each image is 25$\%$ smaller than the previous one. The red box indicates the size of a template used for detecting flying birds. As the size of the template is fixed, it will only be able to detect the birds that tightly fit inside the box. Birds that are smaller or larger will not be detected within a single scale. By running the same template across many levels in this pyramid, different birds instances are detected at different scales.}
-\label{fig:birds_multiscale_processing}
+	\centerline{
+		\includegraphics[width=.8\linewidth]{figures/pyramids/multiscale_birds_boxes.eps}
+	}
+	\caption{Multiscale image pyramid. Each image is 25$\%$ smaller than the previous one. The red box indicates the size of a template used for detecting flying birds. As the size of the template is fixed, it will only be able to detect the birds that tightly fit inside the box. Birds that are smaller or larger will not be detected within a single scale. By running the same template across many levels in this pyramid, different birds instances are detected at different scales.}
+	\label{fig:birds_multiscale_processing}
 \end{figure}
 
 
@@ -61,7 +61,7 @@ image at multiple resolutions.  This is useful for analysis across
 different spatial scales, but doesn't separate the image into
 different frequency bands.  The Laplacian pyramid provides that extra
 level of analysis, breaking the image into different isotropic spatial
-frequency bands.  
+frequency bands.
 %The Wavelet or QMF (quadrature mirror filter)
 %pyramid provides some splitting of the spatial frequency bands
 %according to orientation (although in a somewhat limited way).  
@@ -71,24 +71,24 @@ different scales and orientations.  There are various other
 differences between these pyramids, which we'll describe below.
 
 
-As a motivating example, lets assume we want to detect the birds from figure~\ref{fig:birds_multiscale} using the normalized correlation approach described in section XX. If we have a template of a bird, the normalized correlation will be able to detect only the birds that have a similar image size than the template. To introduce scale invariance, one possible solution is to change the size of the template to cover a wide range of possible sizes and apply them to the image. Then, the ensemble of templates will be able to detect birds of different sizes. The disadvantage of this approach is that it will be computationally expensive as detecting large birds will require computing convolutions with big kernels which is very slow. Another alternative is to change the image size as shown in figure~\ref{fig:birds_multiscale_processing} resulting in a {\em multiscale image pyramid}. In this example, the original image has a resolution of 848$\times$643 pixels. Each image in the pyramid is obtained by scaling down the image from the previous level by reducing the number of pixels by factor of $25\%$. This operation is called downsampling and we will study it in detail in this chapter. Now we can use the pyramid to detect birds at different sizes using a single template. The red box in the figure denotes the size of the template used. The figure shows how birds of different sizes become detectable at, at least, one of the levels of the pyramid. This method will be more efficient as the template can be kept small and the convolutions will remain computationally efficient. 
+As a motivating example, lets assume we want to detect the birds from figure~\ref{fig:birds_multiscale} using the normalized correlation approach described in section XX. If we have a template of a bird, the normalized correlation will be able to detect only the birds that have a similar image size than the template. To introduce scale invariance, one possible solution is to change the size of the template to cover a wide range of possible sizes and apply them to the image. Then, the ensemble of templates will be able to detect birds of different sizes. The disadvantage of this approach is that it will be computationally expensive as detecting large birds will require computing convolutions with big kernels which is very slow. Another alternative is to change the image size as shown in figure~\ref{fig:birds_multiscale_processing} resulting in a {\em multiscale image pyramid}. In this example, the original image has a resolution of 848$\times$643 pixels. Each image in the pyramid is obtained by scaling down the image from the previous level by reducing the number of pixels by factor of $25\%$. This operation is called downsampling and we will study it in detail in this chapter. Now we can use the pyramid to detect birds at different sizes using a single template. The red box in the figure denotes the size of the template used. The figure shows how birds of different sizes become detectable at, at least, one of the levels of the pyramid. This method will be more efficient as the template can be kept small and the convolutions will remain computationally efficient.
 
-Mutiscale image processing and image pyramids have many applications beyond scale invariant object detection. In this chapter we will describe some important image pyramids and their applications. 
+Mutiscale image processing and image pyramids have many applications beyond scale invariant object detection. In this chapter we will describe some important image pyramids and their applications.
 
 
 \section{Linear image transforms}
 
 Let's first look at some general properties of linear image transforms.  For an input image $x$ of $N$ pixels, a linear transform is:
 \begin{equation}
-r = P^T x 
+	r = P^T x
 \end{equation}
-where $r$ is a vector of dimensionality $M$, and $P$ is  a matrix of size $N \times M$. The columns of $P = \left[P_0,  P_1, ...,P_{M-1}\right]$ are the projection vectors. The vector $r$ contains the transform coefficients: $r_i = P_i^T x$.  The vector $r$ corresponds to a different representation of the image $x$ than the original pixel space. 
+where $r$ is a vector of dimensionality $M$, and $P$ is  a matrix of size $N \times M$. The columns of $P = \left[P_0,  P_1, ...,P_{M-1}\right]$ are the projection vectors. The vector $r$ contains the transform coefficients: $r_i = P_i^T x$.  The vector $r$ corresponds to a different representation of the image $x$ than the original pixel space.
 
 The transform $P$ is said to be critically sampled when $M=N$.  The transform is over-sampled when $M > N$, and under-sampled when $M < N$. We are interested in transforms that are invertible, so that we can recover the input $x$ from the projection coefficients $r$:
 \begin{equation}
-x = B r = \sum_{i=0}^{M-1} r_i B_i 
+	x = B r = \sum_{i=0}^{M-1} r_i B_i
 \end{equation}
-The columns of $B= \left[B_0,  B_1, ...,B_{M-1}\right]$ are the basis vectors. The input signal $x$ can be reconstructed as a linear combination of the basis vectors $B_i$ weighted by the representation coefficients $r_i$.  
+The columns of $B= \left[B_0,  B_1, ...,B_{M-1}\right]$ are the basis vectors. The input signal $x$ can be reconstructed as a linear combination of the basis vectors $B_i$ weighted by the representation coefficients $r_i$.
 
 The transform $P$ is complete, encoding all image structure, if it is invertible. If critically sampled (i.e., $M=N$) and the transform is complete, then $B = (P^T)^{-1}$.  If it is over-complete (over-sampled and complete), then the inverse can be obtained using the pseudo inverse $B=(P P^T)^{-1}P$.
 
@@ -144,85 +144,85 @@ Here's an elegant, efficient algorithm for making a resolution reduced version o
 image with a low-pass filter (for example, using the 4-th binomial filter $b_4 = [1, 4, 6, 4, 1]$ / 16, normalized to sum to 1, separably in each dimension), and then subsampling by a factor of 2 the result. Each level is obtained by filtering the previous level with the 4-th binomial filter with a stride of 2 (on each dimension). Applied recursively, this algorithm generates a sequence of images,  subsequent ones being smaller, lower resolution versions of the earlier ones in the processing.
 % Drawing the blocks of first level:
 \marginnote{One {\bf block} of the Gaussian pyramid computation.
-\\~\\
-\tikzset{
-  block/.style    = {draw, thin, rectangle, minimum height = 1.5em,  minimum width = 1.5em},
-  sum/.style      = {draw, circle, minimum size=.4cm}, % Adder
-  input/.style    = {coordinate}, % Input
-  output/.style   = {coordinate}, % Output
-  x/.style   = {coordinate} % Output
-}
-\begin{tikzpicture}[auto, thin, node distance=1.2cm, >=triangle 45]
-\draw
-	node [input] (x0) {}
-	node [right of=x0, node distance=0cm] (x0p) {$g_k$}
-	%node [input] (x0p) {$x_0$}
-	node [block, right of=x0p] (g0) {$G_k$}
-	node [right of=g0] (x1) {$g_{k+1}$};
-       % Joining blocks. 
-	%\draw[-](x0) -- node {} (x0p);
-	\draw[->](x0p) -- node {} (g0);
-	\draw[->](g0) -- node {} (x1);
-	%\draw [->] (a3) -| node[pos=0.99, right] {{\tiny $-$}} (sum);
-\end{tikzpicture}
+	\\~\\
+	\tikzset{
+		block/.style    = {draw, thin, rectangle, minimum height = 1.5em,  minimum width = 1.5em},
+		sum/.style      = {draw, circle, minimum size=.4cm}, % Adder
+		input/.style    = {coordinate}, % Input
+		output/.style   = {coordinate}, % Output
+		x/.style   = {coordinate} % Output
+	}
+	\begin{tikzpicture}[auto, thin, node distance=1.2cm, >=triangle 45]
+		\draw
+		node [input] (x0) {}
+		node [right of=x0, node distance=0cm] (x0p) {$g_k$}
+		%node [input] (x0p) {$x_0$}
+		node [block, right of=x0p] (g0) {$G_k$}
+		node [right of=g0] (x1) {$g_{k+1}$};
+		% Joining blocks. 
+		%\draw[-](x0) -- node {} (x0p);
+		\draw[->](x0p) -- node {} (g0);
+		\draw[->](g0) -- node {} (x1);
+		%\draw [->] (a3) -| node[pos=0.99, right] {{\tiny $-$}} (sum);
+	\end{tikzpicture}
 }
 
 To make the filters more intuitive, it is useful to write the two steps in matrix form. The following matrix shows the recursive construction of  level $k+1$ of the Gaussian pyramid for a 1D image:
 \begin{equation}
-g_{k+1} = D_k B_k g_k = G_k g_k
+	g_{k+1} = D_k B_k g_k = G_k g_k
 \end{equation}
 where $D_k$ is the downsampling operator, $B_k$ is the convolution with the 4-th binomial filter, and $G_k = D_kB_k$ is the blur-and-downsample operator for level $k$. We call the  sequence of images  $g_0,  g_1, . . ., g_N$  as the Gaussian pyramid.  The first level of the Gaussian pyramid is the input image: $g_0=x$.
 
 
 It is useful to check a concrete example. If $x$ is a 1D signal of length 8, and if we assume zero boundary conditions, the matrices for computing $g_1$ are:
 \begin{equation}
-G_0 = D_0 B_0 =
-\begin{bmatrix}
-  1 ~& 0 ~& 0 ~& 0 ~& 0 ~& 0 ~& 0 ~& 0 \\
-  0 ~& 0 ~& 1 ~& 0 ~& 0 ~& 0 ~& 0 ~& 0 \\
-  0 ~& 0 ~& 0 ~& 0 ~& 1 ~& 0 ~& 0 ~& 0 \\
-  0 ~& 0 ~& 0 ~& 0 ~& 0 ~& 0 ~& 1 ~& 0
- \end{bmatrix}
- \frac{1}{16}
- \begin{bmatrix}
-  6 ~& 4 ~& 1 ~& 0 ~& 0 ~& 0 ~& 0 ~& 0 \\
-  4 ~& 6 ~& 4 ~& 1 ~& 0 ~& 0 ~& 0 ~& 0 \\
-  1 ~& 4 ~& 6 ~& 4 ~& 1 ~& 0 ~& 0 ~& 0 \\
-  0 ~& 1 ~& 4 ~& 6 ~& 4 ~& 1 ~& 0 ~& 0 \\
-  0 ~& 0 ~& 1 ~& 4 ~& 6 ~& 4 ~& 1 ~& 0 \\
-  0 ~& 0 ~& 0 ~& 1 ~& 4 ~& 6 ~& 4 ~& 1 \\
-  0 ~& 0 ~& 0 ~& 0 ~& 1 ~& 4 ~& 6 ~& 4 \\
-  0 ~& 0 ~& 0 ~& 0 ~& 0 ~& 1 ~& 4 ~& 6 
-\end{bmatrix}
+	G_0 = D_0 B_0 =
+	\begin{bmatrix}
+		1 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 \\
+		0 ~ & 0 ~ & 1 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 \\
+		0 ~ & 0 ~ & 0 ~ & 0 ~ & 1 ~ & 0 ~ & 0 ~ & 0 \\
+		0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 1 ~ & 0
+	\end{bmatrix}
+	\frac{1}{16}
+	\begin{bmatrix}
+		6 ~ & 4 ~ & 1 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 \\
+		4 ~ & 6 ~ & 4 ~ & 1 ~ & 0 ~ & 0 ~ & 0 ~ & 0 \\
+		1 ~ & 4 ~ & 6 ~ & 4 ~ & 1 ~ & 0 ~ & 0 ~ & 0 \\
+		0 ~ & 1 ~ & 4 ~ & 6 ~ & 4 ~ & 1 ~ & 0 ~ & 0 \\
+		0 ~ & 0 ~ & 1 ~ & 4 ~ & 6 ~ & 4 ~ & 1 ~ & 0 \\
+		0 ~ & 0 ~ & 0 ~ & 1 ~ & 4 ~ & 6 ~ & 4 ~ & 1 \\
+		0 ~ & 0 ~ & 0 ~ & 0 ~ & 1 ~ & 4 ~ & 6 ~ & 4 \\
+		0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 1 ~ & 4 ~ & 6
+	\end{bmatrix}
 \end{equation}
 Multiplying the two matrices:
 \begin{equation}
-g_{1} = G_0 x = 
- \frac{1}{16}
- \begin{bmatrix}
-  6 ~& 4 ~& 1 ~& 0 ~& 0 ~& 0 ~& 0 ~& 0 \\
-  1 ~& 4 ~& 6 ~& 4 ~& 1 ~& 0 ~& 0 ~& 0 \\
-  0 ~& 0 ~& 1 ~& 4 ~& 6 ~& 4 ~& 1 ~& 0 \\
-  0 ~& 0 ~& 0 ~& 0 ~& 1 ~& 4 ~& 6 ~& 4 
- \end{bmatrix}
- x
- \end{equation}
-the first level of the gaussian pyramid is a signal $g_1$ with length 4. Applying the recursion we can write the output of each level as a function of the input $x$:  $g_{2} = G_1 G_0 x$, $g_{3} = G_2 G_1 G_0 x$, and so on. 
- 
-For 2D images the operations are analogous. Figure~\ref{fig:gausspyr} shows the Gaussian pyramid of an image. 
+	g_{1} = G_0 x =
+	\frac{1}{16}
+	\begin{bmatrix}
+		6 ~ & 4 ~ & 1 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 \\
+		1 ~ & 4 ~ & 6 ~ & 4 ~ & 1 ~ & 0 ~ & 0 ~ & 0 \\
+		0 ~ & 0 ~ & 1 ~ & 4 ~ & 6 ~ & 4 ~ & 1 ~ & 0 \\
+		0 ~ & 0 ~ & 0 ~ & 0 ~ & 1 ~ & 4 ~ & 6 ~ & 4
+	\end{bmatrix}
+	x
+\end{equation}
+the first level of the gaussian pyramid is a signal $g_1$ with length 4. Applying the recursion we can write the output of each level as a function of the input $x$:  $g_{2} = G_1 G_0 x$, $g_{3} = G_2 G_1 G_0 x$, and so on.
+
+For 2D images the operations are analogous. Figure~\ref{fig:gausspyr} shows the Gaussian pyramid of an image.
 
 
 \begin{figure}[h!]
-\centerline{
-\includegraphics[width=0.5\linewidth]{figures/pyramids/gaussianPyr_1.jpg}
-\includegraphics[width=0.25\linewidth]{figures/pyramids/gaussianPyr_2.jpg}
-\includegraphics[width=0.125\linewidth]{figures/pyramids/gaussianPyr_3.jpg}
-\includegraphics[width=0.0625\linewidth]{figures/pyramids/gaussianPyr_4.jpg}
-\includegraphics[width=0.03125\linewidth]{figures/pyramids/gaussianPyr_5.jpg}
-\includegraphics[width=0.015625\linewidth]{figures/pyramids/gaussianPyr_6.jpg}
-}
-\caption{Gaussian pyramid. The Gaussian pyramid is built for each color channel independently.}
-\label{fig:gausspyr}
+	\centerline{
+		\includegraphics[width=0.5\linewidth]{figures/pyramids/gaussianPyr_1.jpg}
+		\includegraphics[width=0.25\linewidth]{figures/pyramids/gaussianPyr_2.jpg}
+		\includegraphics[width=0.125\linewidth]{figures/pyramids/gaussianPyr_3.jpg}
+		\includegraphics[width=0.0625\linewidth]{figures/pyramids/gaussianPyr_4.jpg}
+		\includegraphics[width=0.03125\linewidth]{figures/pyramids/gaussianPyr_5.jpg}
+		\includegraphics[width=0.015625\linewidth]{figures/pyramids/gaussianPyr_6.jpg}
+	}
+	\caption{Gaussian pyramid. The Gaussian pyramid is built for each color channel independently.}
+	\label{fig:gausspyr}
 \end{figure}
 
 
@@ -265,45 +265,45 @@ at the level below it.  We calculate that by expanding the
 lower-resolution Gaussian pyramid image to the same pixel resolution
 as the neighboring higher-resolution Gaussian pyramid image, then
 subtracting the two.  This calculation is made in a recursive,
-telescoping fashion. 
+telescoping fashion.
 
 
 
 
 % Drawing the blocks of first level:
 \marginnote{One {\bf block} of the Laplacian pyramid computation.
-\\~\\
-\tikzset{
-  block/.style    = {draw, thin, rectangle, minimum height = 1.5em,  minimum width = 1.5em},
-  sum/.style      = {draw, circle, minimum size=.4cm}, % Adder
-  input/.style    = {coordinate}, % Input
-  output/.style   = {coordinate}, % Output
-  x/.style   = {coordinate} % Output
-}
-\begin{tikzpicture}[auto, thin, node distance=1.2cm, >=triangle 45]
-\draw
-	node [input] (x0) {}
-	node [right of=x0, node distance=0cm] (x0p) {$g_k$}
-	%node [input] (x0p) {$x_0$}
-	node [block, right of=x0p] (g0) {$G_k$}
-        node [block, below of=g0] (f0) {$F_k$}
-	node [sum, left of=f0] (suma0) {}
-	node [right of=g0] (x1) {$g_{k+1}$}
-	node [below of=suma0] (l0) {$l_k$};
-       % Joining blocks. 
-	%\draw[-](x0) -- node {} (x0p);
-	\draw[->](x0p) -- node {} (g0);
-	\draw[->](x0p) -- node[pos=0.99, left] {{\tiny $+$}} (suma0);
-	\draw[->](f0) -- node[pos=0.99, below] {{\tiny $-$}} (suma0);
-	\draw[->](x1) |- node {} (f0);
-	\draw[->](g0) |- node {} (x1);
-	\draw[->](suma0) -- node {} (l0);
-	%\draw [->] (a3) -| node[pos=0.99, right] {{\tiny $-$}} (sum);
-\end{tikzpicture}
+	\\~\\
+	\tikzset{
+		block/.style    = {draw, thin, rectangle, minimum height = 1.5em,  minimum width = 1.5em},
+		sum/.style      = {draw, circle, minimum size=.4cm}, % Adder
+		input/.style    = {coordinate}, % Input
+		output/.style   = {coordinate}, % Output
+		x/.style   = {coordinate} % Output
+	}
+	\begin{tikzpicture}[auto, thin, node distance=1.2cm, >=triangle 45]
+		\draw
+		node [input] (x0) {}
+		node [right of=x0, node distance=0cm] (x0p) {$g_k$}
+		%node [input] (x0p) {$x_0$}
+		node [block, right of=x0p] (g0) {$G_k$}
+		node [block, below of=g0] (f0) {$F_k$}
+		node [sum, left of=f0] (suma0) {}
+		node [right of=g0] (x1) {$g_{k+1}$}
+		node [below of=suma0] (l0) {$l_k$};
+		% Joining blocks. 
+		%\draw[-](x0) -- node {} (x0p);
+		\draw[->](x0p) -- node {} (g0);
+		\draw[->](x0p) -- node[pos=0.99, left] {{\tiny $+$}} (suma0);
+		\draw[->](f0) -- node[pos=0.99, below] {{\tiny $-$}} (suma0);
+		\draw[->](x1) |- node {} (f0);
+		\draw[->](g0) |- node {} (x1);
+		\draw[->](suma0) -- node {} (l0);
+		%\draw [->] (a3) -| node[pos=0.99, right] {{\tiny $-$}} (sum);
+	\end{tikzpicture}
 }
 
 Let's look at the steps for calculating a Laplacian pyramid.
-What we want is to compute the difference between $g_k$ and  $g_{k+1}$. To do this first we need to upsample the image $g_{k+1}$ so that it has the same size as $g_k$. Let $F_k = B_k U_k$ be the upsample-and-blur operator for pyramid level $k$.  The operator $F_k$ applies first the upsampling operator $U_k$, that inserts zeros between samples, followed by blurring by the same filter $B_k$ than the one we used for the Gaussian pyramid. The Laplacian pyramid coefficients, $l_k$, at pyramid level $k$, are:  
+What we want is to compute the difference between $g_k$ and  $g_{k+1}$. To do this first we need to upsample the image $g_{k+1}$ so that it has the same size as $g_k$. Let $F_k = B_k U_k$ be the upsample-and-blur operator for pyramid level $k$.  The operator $F_k$ applies first the upsampling operator $U_k$, that inserts zeros between samples, followed by blurring by the same filter $B_k$ than the one we used for the Gaussian pyramid. The Laplacian pyramid coefficients, $l_k$, at pyramid level $k$, are:
 %% we must interpolate the image
 %% back up to full size before subtracting it from the original.  The
 %% upConv function does upsampling (padding with zeros between
@@ -314,80 +314,80 @@ What we want is to compute the difference between $g_k$ and  $g_{k+1}$. To do th
 %L_n = (I_n - F_n G_n) x_n,
 %\end{equation}
 \begin{equation}
-l_{k} =  g_k - F_k g_{k+1} =  (I_k - F_k G_k) g_{k} 
+	l_{k} =  g_k - F_k g_{k+1} =  (I_k - F_k G_k) g_{k}
 \end{equation}
 
 For instance, for a 1D input $x$ of length 8, and assuming zero boundary conditions, the operators to compute the first level of the Laplacian pyramid are:
 \begin{equation}
-F_0 =  2 B_0 U_0 =
- \frac{1}{8}
- \begin{bmatrix}
-  6 ~& 4 ~& 1 ~& 0 ~& 0 ~& 0 ~& 0 ~& 0 \\
-  4 ~& 6 ~& 4 ~& 1 ~& 0 ~& 0 ~& 0 ~& 0 \\
-  1 ~& 4 ~& 6 ~& 4 ~& 1 ~& 0 ~& 0 ~& 0 \\
-  0 ~& 1 ~& 4 ~& 6 ~& 4 ~& 1 ~& 0 ~& 0 \\
-  0 ~& 0 ~& 1 ~& 4 ~& 6 ~& 4 ~& 1 ~& 0 \\
-  0 ~& 0 ~& 0 ~& 1 ~& 4 ~& 6 ~& 4 ~& 1 \\
-  0 ~& 0 ~& 0 ~& 0 ~& 1 ~& 4 ~& 6 ~& 4 \\
-  0 ~& 0 ~& 0 ~& 0 ~& 0 ~& 1 ~& 4 ~& 6 
-\end{bmatrix}
- \begin{bmatrix}
-  1 ~& 0 ~& 0  ~& 0\\
-  0 ~& 0 ~& 0  ~& 0\\
-  0 ~& 1 ~& 0  ~& 0\\
-  0 ~& 0 ~& 0  ~& 0\\
-  0 ~& 0 ~& 1  ~& 0\\
-  0 ~& 0 ~& 0  ~& 0\\
-  0 ~& 0 ~& 0  ~& 1\\
-  0 ~& 0 ~& 0  ~& 0
-\end{bmatrix}
- \end{equation}
+	F_0 =  2 B_0 U_0 =
+	\frac{1}{8}
+	\begin{bmatrix}
+		6 ~ & 4 ~ & 1 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 \\
+		4 ~ & 6 ~ & 4 ~ & 1 ~ & 0 ~ & 0 ~ & 0 ~ & 0 \\
+		1 ~ & 4 ~ & 6 ~ & 4 ~ & 1 ~ & 0 ~ & 0 ~ & 0 \\
+		0 ~ & 1 ~ & 4 ~ & 6 ~ & 4 ~ & 1 ~ & 0 ~ & 0 \\
+		0 ~ & 0 ~ & 1 ~ & 4 ~ & 6 ~ & 4 ~ & 1 ~ & 0 \\
+		0 ~ & 0 ~ & 0 ~ & 1 ~ & 4 ~ & 6 ~ & 4 ~ & 1 \\
+		0 ~ & 0 ~ & 0 ~ & 0 ~ & 1 ~ & 4 ~ & 6 ~ & 4 \\
+		0 ~ & 0 ~ & 0 ~ & 0 ~ & 0 ~ & 1 ~ & 4 ~ & 6
+	\end{bmatrix}
+	\begin{bmatrix}
+		1 ~ & 0 ~ & 0  ~ & 0 \\
+		0 ~ & 0 ~ & 0  ~ & 0 \\
+		0 ~ & 1 ~ & 0  ~ & 0 \\
+		0 ~ & 0 ~ & 0  ~ & 0 \\
+		0 ~ & 0 ~ & 1  ~ & 0 \\
+		0 ~ & 0 ~ & 0  ~ & 0 \\
+		0 ~ & 0 ~ & 0  ~ & 1 \\
+		0 ~ & 0 ~ & 0  ~ & 0
+	\end{bmatrix}
+\end{equation}
 The factor 2 is necessary because inserting zeros decreases the average value of the signal $g_{k+1}$ by a factor of 2. Multiplying the two matrices:
 \begin{equation}
-l_{0} = g_0 - F_0 g_{1} = 
- g_0 - \frac{1}{8}
- \begin{bmatrix}
-  6 ~& 1 ~& 0  ~& 0\\
-  4 ~& 4 ~& 0  ~& 0\\
-  1 ~& 6 ~& 1  ~& 0\\
-  0 ~& 4 ~& 4  ~& 0\\
-  0 ~& 1 ~& 6  ~& 1\\
-  0 ~& 0 ~& 4  ~& 4\\
-  0 ~& 0 ~& 1  ~& 6\\
-  0 ~& 0 ~& 0  ~& 4
-\end{bmatrix}
- g_{1}
- \end{equation}
+	l_{0} = g_0 - F_0 g_{1} =
+	g_0 - \frac{1}{8}
+	\begin{bmatrix}
+		6 ~ & 1 ~ & 0  ~ & 0 \\
+		4 ~ & 4 ~ & 0  ~ & 0 \\
+		1 ~ & 6 ~ & 1  ~ & 0 \\
+		0 ~ & 4 ~ & 4  ~ & 0 \\
+		0 ~ & 1 ~ & 6  ~ & 1 \\
+		0 ~ & 0 ~ & 4  ~ & 4 \\
+		0 ~ & 0 ~ & 1  ~ & 6 \\
+		0 ~ & 0 ~ & 0  ~ & 4
+	\end{bmatrix}
+	g_{1}
+\end{equation}
 We can also calculate the matrix that should be applied to the input$x=g_0$.
 \begin{equation}
-l_{0} =  (I - F_0 G_0) g_0= 
-\frac{1}{256}
- \begin{bmatrix}
-   182 ~& -56  ~& -24 ~&   -8   ~& -2  ~&   0  ~&   0  ~&   0\\
-   -56  ~& 192  ~& -56 ~&  -32   ~& -8   ~&  0  ~&   0   ~&  0\\
-   -24  ~& -56  ~& 180  ~& -56 ~&  -24  ~&  -8  ~&  -2   ~&  0\\
-    -8   ~&-32  ~& -56  ~& 192  ~& -56  ~& -32  ~&  -8   ~&  0\\
-    -2   ~& -8 ~&  -24  ~& -56 ~&  180 ~&  -56  ~& -24 ~&   -8\\
-     0   ~&  0  ~&  -8  ~& -32 ~&  -56  ~& 192  ~& -56  ~& -32\\
-     0   ~&   0  ~&  -2  ~&  -8  ~& -24  ~& -56 ~&  182  ~& -48\\
-     0   ~&   0   ~&  0  ~&   0   ~& -8  ~& -32 ~&  -48 ~&  224
-\end{bmatrix}
-x
+	l_{0} =  (I - F_0 G_0) g_0=
+	\frac{1}{256}
+	\begin{bmatrix}
+		182 ~  & -56  ~ & -24 ~  & -8   ~  & -2  ~  & 0  ~   & 0  ~   & 0   \\
+		-56  ~ & 192  ~ & -56 ~  & -32   ~ & -8   ~ & 0  ~   & 0   ~  & 0   \\
+		-24  ~ & -56  ~ & 180  ~ & -56 ~   & -24  ~ & -8  ~  & -2   ~ & 0   \\
+		-8   ~ & -32  ~ & -56  ~ & 192  ~  & -56  ~ & -32  ~ & -8   ~ & 0   \\
+		-2   ~ & -8 ~   & -24  ~ & -56 ~   & 180 ~  & -56  ~ & -24 ~  & -8  \\
+		0   ~  & 0  ~   & -8  ~  & -32 ~   & -56  ~ & 192  ~ & -56  ~ & -32 \\
+		0   ~  & 0  ~   & -2  ~  & -8  ~   & -24  ~ & -56 ~  & 182  ~ & -48 \\
+		0   ~  & 0   ~  & 0  ~   & 0   ~   & -8  ~  & -32 ~  & -48 ~  & 224
+	\end{bmatrix}
+	x
 \end{equation}
 
 
 
 \begin{figure}
-\centerline{
-\includegraphics[width=0.5\linewidth]{figures/pyramids/laplacianPyr_1.jpg}
-\includegraphics[width=0.25\linewidth]{figures/pyramids/laplacianPyr_2.jpg}
-\includegraphics[width=0.125\linewidth]{figures/pyramids/laplacianPyr_3.jpg}
-\includegraphics[width=0.0625\linewidth]{figures/pyramids/laplacianPyr_4.jpg}
-\includegraphics[width=0.03125\linewidth]{figures/pyramids/laplacianPyr_5.jpg}
-\includegraphics[width=0.015625\linewidth]{figures/pyramids/gaussianPyr_6.jpg}
-}
-\caption{Laplacian pyramid, including the low-res residual as the last image.  The Laplacian pyramid is built for each color channel independently.  For visualization, we add 128 to all the images. Therefore, the average gray level corresponds to the zero intensity value.}
-\label{fig:gausspyr}
+	\centerline{
+		\includegraphics[width=0.5\linewidth]{figures/pyramids/laplacianPyr_1.jpg}
+		\includegraphics[width=0.25\linewidth]{figures/pyramids/laplacianPyr_2.jpg}
+		\includegraphics[width=0.125\linewidth]{figures/pyramids/laplacianPyr_3.jpg}
+		\includegraphics[width=0.0625\linewidth]{figures/pyramids/laplacianPyr_4.jpg}
+		\includegraphics[width=0.03125\linewidth]{figures/pyramids/laplacianPyr_5.jpg}
+		\includegraphics[width=0.015625\linewidth]{figures/pyramids/gaussianPyr_6.jpg}
+	}
+	\caption{Laplacian pyramid, including the low-res residual as the last image.  The Laplacian pyramid is built for each color channel independently.  For visualization, we add 128 to all the images. Therefore, the average gray level corresponds to the zero intensity value.}
+	\label{fig:gausspyr}
 \end{figure}
 
 
@@ -396,33 +396,33 @@ Interestingly, the Laplacian pyramid is an invertible transform.  We can reconst
 pyramid, we can recursively reconstruct the corresponding Gaussian pyramid.  Remember that Gaussian pyramid level 1 is just the original image itself, so we can use this to reconstruct the original image
 from the Laplacian pyramid, with its lowpass residual:
 \begin{equation}
-g_k = l_k + F_k g_{k+1}
-\label{eq:laplaceRecursion}
+	g_k = l_k + F_k g_{k+1}
+	\label{eq:laplaceRecursion}
 \end{equation}
 
 The following diagram contains the Gaussian pyramid, the Laplacian pyramid and the Laplacian inversion for a 3 level Laplacian pyramid. The reconstruction uses the Laplacian pyramid $l_0,l_1,...,l_2$ and the low pass residual $g_3$ to recover the input signal $x=g_0$.
 
 % Definition of blocks:
 \tikzset{
-  block/.style    = {draw, thin, rectangle, minimum height = 1.5em,  minimum width = 1.5em},
-  sum/.style      = {draw, circle, minimum size=.4cm}, % Adder
-  input/.style    = {coordinate}, % Input
-  output/.style   = {coordinate} % Output
-  %x/.style   = {coordinate} % Output
+	block/.style    = {draw, thin, rectangle, minimum height = 1.5em,  minimum width = 1.5em},
+	sum/.style      = {draw, circle, minimum size=.4cm}, % Adder
+	input/.style    = {coordinate}, % Input
+	output/.style   = {coordinate} % Output
+	%x/.style   = {coordinate} % Output
 }
 
 \begin{tikzpicture}[auto, thin, node distance=.9cm, >=triangle 45]
-% Drawing the blocks of first level:
-\draw
+	% Drawing the blocks of first level:
+	\draw
 	node [input] (x0) {}
 	node [right of=x0, node distance=0.5cm] (x0p) {$g_0$}
 	%node [input] (x0p) {$x_0$}
 	node [block, right of=x0p] (g0) {$G_0$}
-         node [block, red, below of=g0] (f0) {$F_0$}
+	node [block, red, below of=g0] (f0) {$F_0$}
 	node [sum, red, left of=f0] (suma0) {}
 	node [right of=g0] (x1) {$g_1$}
 	node [red, below of=suma0, node distance=2cm] (l0) {$l_0$};
-       % Joining blocks. 
+	% Joining blocks. 
 	\draw[-](x0) -- node {} (x0p);
 	\draw[->](x0p) -- node {} (g0);
 	\draw[->,red](x0p) -- node[pos=0.99, left] {{\tiny $+$}} (suma0);
@@ -431,15 +431,15 @@ The following diagram contains the Gaussian pyramid, the Laplacian pyramid and t
 	\draw[-](g0) |- node {} (x1);
 	\draw[->,red](suma0) -- node {} (l0);
 
-\draw
+	\draw
 	node [input,right of=x1, node distance=.8cm] (x1p) {}
 	%node [input] (x0p) {$x_0$}
 	node [block, right of=x1p] (g1) {$G_1$}
-        node [block, red, below of=g1] (f1) {$F_1$}
+	node [block, red, below of=g1] (f1) {$F_1$}
 	node [sum, red, left of=f1] (suma1) {}
 	node [right of=g1] (x2) {$g_2$}
 	node [red, below of=suma1, node distance=1.5cm] (l1) {$l_1$};
-       % Joining blocks. 
+	% Joining blocks. 
 	\draw[-](x1) -- node {} (x1p);
 	\draw[->](x1p) -- node {} (g1);
 	\draw[->,red](x1p) -- node[pos=0.99, left] {{\tiny $+$}} (suma1);
@@ -447,15 +447,15 @@ The following diagram contains the Gaussian pyramid, the Laplacian pyramid and t
 	\draw[->,red](x2) |- node {} (f1);
 	\draw[-](g1) |- node {} (x2);
 	\draw[->,red](suma1) -- node {} (l1);
-	
-\draw
+
+	\draw
 	node [input,right of=x2, node distance=.8cm] (x2p) {}
 	node [block, right of=x2p] (g2) {$G_2$}
-        node [block, red, below of=g2] (f2) {$F_2$}
+	node [block, red, below of=g2] (f2) {$F_2$}
 	node [sum, red, left of=f2] (suma2) {}
 	node [right of=g2] (x3) {$g_3$}
 	node [red, below of=suma2, node distance=1cm] (l2) {$l_2$};
-       % Joining blocks. 
+	% Joining blocks. 
 	\draw[-](x2) -- node {} (x2p);
 	\draw[->](x2p) -- node {} (g2);
 	\draw[->,red](x2p) -- node[pos=0.99, left] {{\tiny $+$}} (suma2);
@@ -464,7 +464,7 @@ The following diagram contains the Gaussian pyramid, the Laplacian pyramid and t
 	\draw[-](g2) |- node {} (x3);
 	\draw[->,red](suma2) -- node {} (l2);
 
-\draw
+	\draw
 	node [block, blue, right of=x3] (f4) {$F_2$}
 	node [sum, blue, right of=f4] (suma4) {{\tiny $+$}}
 	node [block, blue, right of=suma4] (f5) {$F_1$}
@@ -479,26 +479,26 @@ The following diagram contains the Gaussian pyramid, the Laplacian pyramid and t
 	\draw[->,blue](suma5) -- node {} (f6);
 	\draw[->,blue](f6) -- node {} (suma6);
 	\draw[->,blue](suma6) -- node {} (rx);
-	
-% reconstruction arrows
+
+	% reconstruction arrows
 	\draw[->,blue](l0) -| node {} (suma6);
 	\draw[->,blue](l1) -| node {} (suma5);
 	\draw[->,blue](l2) -| node {} (suma4);
 \end{tikzpicture}
 This architecture has two parts: 1) the analysis network (or encoder) that transforms the input image $x$ into a representation composed of $l_0, l_1, ...$ and the low pass residual $x_n$. And 2) the synthesis network (or decoder) that reconstructs the input from the representation.  The Laplacian pyramid is an overcomplete representation (more coefficients than pixels): the dimensionality of the representation is higher than the dimensionality of the input.
 
-Note that the reconstruction property of the Laplacian pyramid does not depend on the filters used for subsampling and upsampling. Even if we used random filters the reconstruction property would still hold. 
+Note that the reconstruction property of the Laplacian pyramid does not depend on the filters used for subsampling and upsampling. Even if we used random filters the reconstruction property would still hold.
 
 \subsection{Image blending}
 
 The Laplacian pyramid is used in many image processing or analysis applications.  Here we show one fun application:  image blending. The goal is to combine two images into one. A mask is used to define how the images will be combined. If we want to blend the following two images using the mask shown in the right:
 \begin{figure}[h!]
-\centerline{
-\includegraphics[width=0.20\linewidth]{figures/pyramids/orange.jpg}
-\includegraphics[width=0.20\linewidth]{figures/pyramids/apple.jpg}
-\includegraphics[width=0.20\linewidth]{figures/pyramids/mask10.jpg}
-\includegraphics[width=0.20\linewidth]{figures/pyramids/apple_orange_mask_8levels.jpg}
-}
+	\centerline{
+		\includegraphics[width=0.20\linewidth]{figures/pyramids/orange.jpg}
+		\includegraphics[width=0.20\linewidth]{figures/pyramids/apple.jpg}
+		\includegraphics[width=0.20\linewidth]{figures/pyramids/mask10.jpg}
+		\includegraphics[width=0.20\linewidth]{figures/pyramids/apple_orange_mask_8levels.jpg}
+	}
 \end{figure}
 %The Laplacian pyramid is used in many image processing or analysis
 %applications.  Here we show one fun application:  image blending
@@ -510,37 +510,37 @@ Making a sharp transition from one image to another gives an artifactually sharp
 
 Using the Laplacian pyramid, we can transition from one image to the next over many different spatial scales to make a gradual transition between the two images. First, we build the Laplacian pyramid for the two input images, in this example we use 7 levels and we also keep the last low-pass residual:
 \begin{figure}[h!]
-\centerline{
-\includegraphics[width=0.9\linewidth]{figures/pyramids/blending_pyrs.eps}
-}
+	\centerline{
+		\includegraphics[width=0.9\linewidth]{figures/pyramids/blending_pyrs.eps}
+	}
 \end{figure}
 
 and the Gaussian pyramid of the mask as shown below (note that we use 8 levels, one level more than for the Laplacian pyramid):
 \begin{figure}[h!]
-\centerline{
-\includegraphics[width=0.9\linewidth]{figures/pyramids/blending_pyrs_mask.eps}
-}
+	\centerline{
+		\includegraphics[width=0.9\linewidth]{figures/pyramids/blending_pyrs_mask.eps}
+	}
 \end{figure}
 
 %as shown in the apple/orange in the bottom right of Fig.~\ref{fig:appleorange}. 
 %To do this, both images are analyzed first by the Laplacian pyramid. The mask is analyzed by the Gaussian pyramid. 
-Now we combine the three pyramids to compute the Laplacian pyramid of the blended image. The Laplacian pyramid of the blended image is obtained as: $l_k = l_k^A * m_k + l_i^B * (1-m_k)$. The same is done for the low-pass residual. 
+Now we combine the three pyramids to compute the Laplacian pyramid of the blended image. The Laplacian pyramid of the blended image is obtained as: $l_k = l_k^A * m_k + l_i^B * (1-m_k)$. The same is done for the low-pass residual.
 
 \begin{figure}[h!]
-%\centerline{
-%\includegraphics[width=0.3\linewidth]{figures/pyramids/orange.jpg}
-%\includegraphics[width=0.3\linewidth]{figures/pyramids/apple.jpg}
-%\includegraphics[width=0.3\linewidth]{figures/pyramids/mask10.jpg}
-%}
-%\centerline{
-%\includegraphics[width=0.9\linewidth]{figures/pyramids/blending_pyrs.eps}
-%}
-\centerline{
-%\includegraphics[width=0.45\linewidth]{figures/pyramids/apple_orange_mask_8levels.jpg}
-\includegraphics[width=0.45\linewidth]{figures/pyramids/apple_orange_laplacian_8levels.jpg}
-}
-%\caption{image compositing example.}
-\label{fig:appleorange}
+	%\centerline{
+	%\includegraphics[width=0.3\linewidth]{figures/pyramids/orange.jpg}
+	%\includegraphics[width=0.3\linewidth]{figures/pyramids/apple.jpg}
+	%\includegraphics[width=0.3\linewidth]{figures/pyramids/mask10.jpg}
+	%}
+	%\centerline{
+	%\includegraphics[width=0.9\linewidth]{figures/pyramids/blending_pyrs.eps}
+	%}
+	\centerline{
+		%\includegraphics[width=0.45\linewidth]{figures/pyramids/apple_orange_mask_8levels.jpg}
+		\includegraphics[width=0.45\linewidth]{figures/pyramids/apple_orange_laplacian_8levels.jpg}
+	}
+	%\caption{image compositing example.}
+	\label{fig:appleorange}
 \end{figure}
 %
 %
@@ -765,39 +765,39 @@ and orientation using linear combinations of a set of basis
 coefficients.  The steerable pyramid goes part way there.
 
 \marginnote{One {\bf block} of the Steerable pyramid computation.
-\\~\\
-%\tikzset{
-%  block/.style    = {draw, thin, rectangle, minimum height = 1.5em,  minimum width = 1.5em},
-%  sum/.style      = {draw, circle, minimum size=.4cm}, % Adder
-%  input/.style    = {coordinate}, % Input
-%  output/.style   = {coordinate} % Output
-%}
-\begin{tikzpicture}[auto, thin, node distance=.8cm, >=triangle 45]
-%% Drawing the blocks of first level:
-\draw
-	node [] (x0) {$g_k$}
-	node [input,right of=x0, node distance=0.4cm] (x0p) {}
-	node [block, right of=x0p] (b0) {$B_0$}
-         node [block, below of=b0] (b1) {$B_1$}
-         node [block, below of=b1] (bk) {$B_n$}
-         node [block, below of=bk] (L1) {$L$}
-         node [block, right of=L1] (D2) {$D$}
-         node [right of=b0, node distance=1.1cm] (b0out) {$b_{k,0}$}
-         node [right of=b1, node distance=1.1cm] (b1out) {$b_{k,1}$}
-         node [right of=bk, node distance=1.1cm] (bkout) {$b_{k,n}$}
-         node [right of=D2, node distance=1.1cm] (out) {$g_{k+1}$};
-       % Joining blocks. 
-	\draw[-](x0) -- node {} (x0p);
-	\draw[->](x0p) -- node {} (b0);
-	\draw[->](x0p) |- node {} (b1);
-	\draw[->](x0p) |- node {} (bk);
-	\draw[->](x0p) |- node {} (L1);
-	\draw[->](L1) -- node {} (D2);
-	\draw[->](b0) -- node {} (b0out);
-	\draw[->](b1) -- node {} (b1out);
-	\draw[->](bk) -- node {} (bkout);
-	\draw[->](D2) -- node {} (out);
-\end{tikzpicture}
+	\\~\\
+	%\tikzset{
+	%  block/.style    = {draw, thin, rectangle, minimum height = 1.5em,  minimum width = 1.5em},
+	%  sum/.style      = {draw, circle, minimum size=.4cm}, % Adder
+	%  input/.style    = {coordinate}, % Input
+	%  output/.style   = {coordinate} % Output
+	%}
+	\begin{tikzpicture}[auto, thin, node distance=.8cm, >=triangle 45]
+		%% Drawing the blocks of first level:
+		\draw
+		node [] (x0) {$g_k$}
+		node [input,right of=x0, node distance=0.4cm] (x0p) {}
+		node [block, right of=x0p] (b0) {$B_0$}
+		node [block, below of=b0] (b1) {$B_1$}
+		node [block, below of=b1] (bk) {$B_n$}
+		node [block, below of=bk] (L1) {$L$}
+		node [block, right of=L1] (D2) {$D$}
+		node [right of=b0, node distance=1.1cm] (b0out) {$b_{k,0}$}
+		node [right of=b1, node distance=1.1cm] (b1out) {$b_{k,1}$}
+		node [right of=bk, node distance=1.1cm] (bkout) {$b_{k,n}$}
+		node [right of=D2, node distance=1.1cm] (out) {$g_{k+1}$};
+		% Joining blocks. 
+		\draw[-](x0) -- node {} (x0p);
+		\draw[->](x0p) -- node {} (b0);
+		\draw[->](x0p) |- node {} (b1);
+		\draw[->](x0p) |- node {} (bk);
+		\draw[->](x0p) |- node {} (L1);
+		\draw[->](L1) -- node {} (D2);
+		\draw[->](b0) -- node {} (b0out);
+		\draw[->](b1) -- node {} (b1out);
+		\draw[->](bk) -- node {} (bkout);
+		\draw[->](D2) -- node {} (out);
+	\end{tikzpicture}
 }
 
 We analyze in orientation using a steerable filter bank.  We form a
@@ -815,13 +815,13 @@ filter representation, and we want the final system frequency response
 to be flat, for perfect reconstruction.
 
 \begin{figure}[h!]
-\centerline{
-\includegraphics[width=0.80\linewidth]{figures/pyramids/steerable_pyr_sp3Filters.eps}
-}
+	\centerline{
+		\includegraphics[width=0.80\linewidth]{figures/pyramids/steerable_pyr_sp3Filters.eps}
+	}
 \end{figure}
 
 
-The following block diagram shows the steps to build a 2 level steerable pyramid and the reconstruction of the input. The architecture has two parts: 1) the analysis network (or encoder) that transforms the input image $x$ into a representation composed of $r=\left[ b_{0,0},...,b_{0,n}, b_{1,0},...b_{1,n},...,b_{k-1,0},...b_{k-1,n} \right]$ and the low pass residual $g_{k-1}$. And 2) the synthesis network (or decoder) that reconstructs the input from the representation $r$.  
+The following block diagram shows the steps to build a 2 level steerable pyramid and the reconstruction of the input. The architecture has two parts: 1) the analysis network (or encoder) that transforms the input image $x$ into a representation composed of $r=\left[ b_{0,0},...,b_{0,n}, b_{1,0},...b_{1,n},...,b_{k-1,0},...b_{k-1,n} \right]$ and the low pass residual $g_{k-1}$. And 2) the synthesis network (or decoder) that reconstructs the input from the representation $r$.
 
 % Definition of blocks:
 %\tikzset{
@@ -833,16 +833,16 @@ The following block diagram shows the steps to build a 2 level steerable pyramid
 %}
 %%. DRAWING THE STEERABLE PYRAMID
 \begin{tikzpicture}[auto, thin, node distance=.9cm, >=triangle 45]
-% Drawing the blocks of first level:
-\draw
+	% Drawing the blocks of first level:
+	\draw
 	node [] (x0) {$x$}
 	node [input,right of=x0, node distance=0.5cm] (x0p) {}
 	node [block, right of=x0p] (b0) {$B_0$}
-         node [block, below of=b0] (b1) {$B_1$}
-         node [block, below of=b1] (bk) {$B_n$}
-         node [block, below of=bk] (L1) {$L$}
-         node [block, right of=L1] (D2) {$D$};
-       % Joining blocks. 
+	node [block, below of=b0] (b1) {$B_1$}
+	node [block, below of=b1] (bk) {$B_n$}
+	node [block, below of=bk] (L1) {$L$}
+	node [block, right of=L1] (D2) {$D$};
+	% Joining blocks. 
 	\draw[-](x0) -- node {} (x0p);
 	\draw[->](x0p) -- node {} (b0);
 	\draw[->](x0p) |- node {} (b1);
@@ -850,16 +850,16 @@ The following block diagram shows the steps to build a 2 level steerable pyramid
 	\draw[->](x0p) |- node {} (L1);
 	\draw[->](L1) -- node {} (D2);
 
-% Drawing the blocks of second level:
-\draw
+	% Drawing the blocks of second level:
+	\draw
 	%node [input, right of=D2] (x1) {}
 	node [input, right of=D2, node distance=0.5cm] (x1p) {}
 	node [block, right of=x1p] (b10) {$B_0$}
-         node [block, below of=b10] (b11) {$B_1$}
-         node [block, below of=b11] (b1k) {$B_n$}
-         node [block, below of=b1k] (L11) {$L$}
-         node [block, right of=L11] (D12) {$D$};
-       % Joining blocks. 
+	node [block, below of=b10] (b11) {$B_1$}
+	node [block, below of=b11] (b1k) {$B_n$}
+	node [block, below of=b1k] (L11) {$L$}
+	node [block, right of=L11] (D12) {$D$};
+	% Joining blocks. 
 	\draw[-](D2) -- node {} (x1p);
 	\draw[->](x1p) -- node {} (b10);
 	\draw[->](x1p) |- node {} (b11);
@@ -867,8 +867,8 @@ The following block diagram shows the steps to build a 2 level steerable pyramid
 	\draw[->](x1p) |- node {} (L11);
 	\draw[->](L11) -- node {} (D12);
 
-% output nodes
-\draw 
+	% output nodes
+	\draw
 	node [right of=D12, node distance=1.5cm] (outl1) {$g_2$}
 	node [above of=outl1] (outb1k) {$b_{1,n}$}
 	node [above of=outb1k] (outb11) {$b_{1,1}$}
@@ -884,28 +884,28 @@ The following block diagram shows the steps to build a 2 level steerable pyramid
 	\draw[->](bk) -- node {} (outb0k);
 	\draw[->](b1) -- node {} (outb01);
 	\draw[->](b0) -- node {} (outb00);
-	
-% reconstruction blocks
-% first level
-\draw
-         node [block, right of=outl1, node distance=1.5cm] (rU12) {$U$}
-         node [block, right of=rU12] (rL11) {$L$}
-         node [block, above of=rL11] (rb1k) {$B_n$}
+
+	% reconstruction blocks
+	% first level
+	\draw
+	node [block, right of=outl1, node distance=1.5cm] (rU12) {$U$}
+	node [block, right of=rU12] (rL11) {$L$}
+	node [block, above of=rL11] (rb1k) {$B_n$}
 	node [sum, right of=rb1k] (suma1k) {\tiny +}
-         node [block, above of=rb1k] (rb11) {$B_1$}
+	node [block, above of=rb1k] (rb11) {$B_1$}
 	node [sum, right of=rb11] (suma11) {\tiny +}
-         node [block, above of=rb11] (rb10) {$B_0$}
+	node [block, above of=rb11] (rb10) {$B_0$}
 	node [sum, right of=rb10] (suma10) {\tiny +};
-	 %node [input, right of=D2, node distance=0.5cm] (x1p) {}
-	 %node [block, right of=x1p] (b10) {$B_0$}
-         %node [block, below of=b10] (b11) {$B_1$}
-       % Joining blocks. 
-       
+	%node [input, right of=D2, node distance=0.5cm] (x1p) {}
+	%node [block, right of=x1p] (b10) {$B_0$}
+	%node [block, below of=b10] (b11) {$B_1$}
+	% Joining blocks. 
+
 	\draw[->](outl1) -- node {} (rU12);
 	\draw[->](outb1k) -- node {} (rb1k);
 	\draw[->](outb11) -- node {} (rb11);
 	\draw[->](outb10) -- node {} (rb10);
-	
+
 	\draw[->](rU12) -- node {} (rL11);
 	\draw[->](rb1k) -- node {} (suma1k);
 	\draw[->](rL11) -| node {} (suma1k);
@@ -917,22 +917,22 @@ The following block diagram shows the steps to build a 2 level steerable pyramid
 	%\draw[->](x1p) |- node {} (b1k);
 	%\draw[->](x1p) |- node {} (L11);
 	%\draw[->](L11) -- node {} (D12);
-	
-% reconstruction second level
-\draw 
-         node [block, right of=suma10] (rU02) {$U$}
-         node [block, right of=rU02] (rL01) {$L$}
-         node [block, above of=rL01] (rb0k) {$B_n$}
+
+	% reconstruction second level
+	\draw
+	node [block, right of=suma10] (rU02) {$U$}
+	node [block, right of=rU02] (rL01) {$L$}
+	node [block, above of=rL01] (rb0k) {$B_n$}
 	node [sum, right of=rb0k] (suma0k) {\tiny +}
-         node [block, above of=rb0k] (rb01) {$B_1$}
+	node [block, above of=rb0k] (rb01) {$B_1$}
 	node [sum, right of=rb01] (suma01) {\tiny +}
-         node [block, above of=rb01] (rb00) {$B_0$}
+	node [block, above of=rb01] (rb00) {$B_0$}
 	node [sum, right of=rb00] (suma00) {\tiny +}
 	node [right of=suma00, node distance=1cm] (output) {$x$};
 
 	\draw[->](suma10) -- node {} (rU02);
 	\draw[->](rU02) -- node {} (rL01);
-	
+
 	\draw[->](rb0k) -- node {} (suma0k);
 	\draw[->](rL01) -| node {} (suma0k);
 	\draw[->](rb01) -- node {} (suma01);
@@ -940,7 +940,7 @@ The following block diagram shows the steps to build a 2 level steerable pyramid
 	\draw[->](rb00) -- node {} (suma00);
 	\draw[->](suma01) -- node {} (suma00);
 	\draw[->](suma00) -- node {} (output);
-	
+
 	\draw[->](outl1) -- node {} (rU12);
 	\draw[->](outb0k) -- node {} (rb0k);
 	\draw[->](outb01) -- node {} (rb01);
@@ -951,11 +951,11 @@ The Steerable pyramid is a self-inverting overcomplete representation (more coef
 
 
 \begin{figure}[h!]
-\centerline{
-\includegraphics[width=1\linewidth]{figures/pyramids/steerable_pyr_clock.eps}
-}
-\caption{Steerable pyramid representation (3 levels and 4 orientations). Why is that each orientation subband seems to indicate a different time?}
-\label{fig:steerpyr}
+	\centerline{
+		\includegraphics[width=1\linewidth]{figures/pyramids/steerable_pyr_clock.eps}
+	}
+	\caption{Steerable pyramid representation (3 levels and 4 orientations). Why is that each orientation subband seems to indicate a different time?}
+	\label{fig:steerpyr}
 \end{figure}
 
 
@@ -1053,36 +1053,36 @@ A steerable pyramid representation can be very overcomplete, depending on the nu
 
 
 \begin{figure}
-\centerline{
-\sublabelnp{1-d Fourier transform}{\includegraphics[width=0.2\linewidth]{figures/pyramids/ftmat.jpg}}
-\sublabelnp{1-d Gaussian pyramid}{\includegraphics[width=0.125\linewidth]{figures/pyramids/gmat.jpg}}
-\sublabelnp{1-d Laplacian pyramid}{\includegraphics[width=0.125\linewidth]{figures/pyramids/lappmat.jpg}}
-%\sublabelnp{1-d Haar pyramid}{\includegraphics[width=0.1\linewidth]{figures/pyramids/haarmat.jpg}}
-\sublabelnp{Steerable pyramid}{\includegraphics[width=0.19\linewidth]{figures/pyramids/steermat.jpg}}
-}
-\caption{Visual comparison of linear transform image representations
-  discussed in this chapter.  The Fourier transform gives a
-  complex-valued output (represented in color) and is global--each
-  output coefficient depends, in general, on every input pixel.  The
-  Gaussian pyramid is seen to be banded, showing that it is a
-  localized transform where the output values only depend on pixels in
-a neighborhood.  It is an over-complete representation, shown by the
-transform matrix being taller than it is wide.  
-The Laplacian pyramid
-is a bandpassed image representation, except for the low-pass residual
-layer, shown in the bottom rows. For this matrix, zero is plotted as
-grey.  The Haar pyramid is an example of a complete (not
-over-complete) representation, so its matrix is square.  The steerable
-pyramid is an over-complete, multi-orientation representation.  In 1-d, image orientation
-isn't defined, but we show schematically a rasterization of the 2-d
-steerable pyramid transform.  The multiple orientations, and
-non-aliased subbands cause the representation to be very overcomplete,
-much taller than it is wide.
-All the transforms,
-except for the Fourier transform, are convolutional, revealed by the
-diagonal banding in the matrices. 
-}
-\label{fig:steerpyr}
+	\centerline{
+		\sublabelnp{1-d Fourier transform}{\includegraphics[width=0.2\linewidth]{figures/pyramids/ftmat.jpg}}
+		\sublabelnp{1-d Gaussian pyramid}{\includegraphics[width=0.125\linewidth]{figures/pyramids/gmat.jpg}}
+		\sublabelnp{1-d Laplacian pyramid}{\includegraphics[width=0.125\linewidth]{figures/pyramids/lappmat.jpg}}
+		%\sublabelnp{1-d Haar pyramid}{\includegraphics[width=0.1\linewidth]{figures/pyramids/haarmat.jpg}}
+		\sublabelnp{Steerable pyramid}{\includegraphics[width=0.19\linewidth]{figures/pyramids/steermat.jpg}}
+	}
+	\caption{Visual comparison of linear transform image representations
+		discussed in this chapter.  The Fourier transform gives a
+		complex-valued output (represented in color) and is global--each
+		output coefficient depends, in general, on every input pixel.  The
+		Gaussian pyramid is seen to be banded, showing that it is a
+		localized transform where the output values only depend on pixels in
+		a neighborhood.  It is an over-complete representation, shown by the
+		transform matrix being taller than it is wide.
+		The Laplacian pyramid
+		is a bandpassed image representation, except for the low-pass residual
+		layer, shown in the bottom rows. For this matrix, zero is plotted as
+		grey.  The Haar pyramid is an example of a complete (not
+		over-complete) representation, so its matrix is square.  The steerable
+		pyramid is an over-complete, multi-orientation representation.  In 1-d, image orientation
+		isn't defined, but we show schematically a rasterization of the 2-d
+		steerable pyramid transform.  The multiple orientations, and
+		non-aliased subbands cause the representation to be very overcomplete,
+		much taller than it is wide.
+		All the transforms,
+		except for the Fourier transform, are convolutional, revealed by the
+		diagonal banding in the matrices.
+	}
+	\label{fig:steerpyr}
 \end{figure}
 
 

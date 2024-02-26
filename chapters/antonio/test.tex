@@ -17,25 +17,25 @@
 
 
 \begin{algorithm}[h]
-\label{gradient_descent}
-\SetAlgoVlined
-\DontPrintSemicolon
-\caption{Backpropagation (for chain computation graphs)}
-{\bf Input:} parameter vector $\theta = \{\theta_l\}_{l=1}^L$, training datapoint $\{\mathbf{x}_0,\mathbf{y}\}$, ``chain" computation graph $f_1 \circ \ldots \circ f_L$, Loss function $\mathcal{L}: \mathbb{R}^N \rightarrow \mathbb{R}$\;
-{\bf Output:} gradient direction $\frac{\partial J}{\partial \theta} = \{\frac{\partial J}{\partial \theta_l}\}_{l=1}^L$ \;
-\;
-\textbf{Forward pass:}\;
-\For{\upshape $l=1, \dots, L$} {
-    $\mathbf{x}_l = f_l(\mathbf{x}_{l-1}, \theta_l)$\;
-}
-%$J = \mathcal{L}(\mathbf{x}_L,y)$\;
-\;
-\textbf{Backward pass:}\;
-$\costgrad_L = \mathcal{L}^{\prime}(\mathbf{x}_L,y)$\;
-\For{\upshape $l=L, \dots, 1$} {
+    \label{gradient_descent}
+    \SetAlgoVlined
+    \DontPrintSemicolon
+    \caption{Backpropagation (for chain computation graphs)}
+    {\bf Input:} parameter vector $\theta = \{\theta_l\}_{l=1}^L$, training datapoint $\{\mathbf{x}_0,\mathbf{y}\}$, ``chain" computation graph $f_1 \circ \ldots \circ f_L$, Loss function $\mathcal{L}: \mathbb{R}^N \rightarrow \mathbb{R}$\;
+    {\bf Output:} gradient direction $\frac{\partial J}{\partial \theta} = \{\frac{\partial J}{\partial \theta_l}\}_{l=1}^L$ \;
+    \;
+    \textbf{Forward pass:}\;
+    \For{\upshape $l=1, \dots, L$} {
+        $\mathbf{x}_l = f_l(\mathbf{x}_{l-1}, \theta_l)$\;
+    }
+    %$J = \mathcal{L}(\mathbf{x}_L,y)$\;
+    \;
+    \textbf{Backward pass:}\;
+    $\costgrad_L = \mathcal{L}^{\prime}(\mathbf{x}_L,y)$\;
+    \For{\upshape $l=L, \dots, 1$} {
     $\localgrad_{l} = f_l^{\prime}(\mathbf{x}_{l-1},\theta_l)$\;
     $\costgrad_{l-1} = \costgrad_{l}\localgrad^{\mathbf{x}}_{l}$\;
     $\frac{\partial J}{\partial \theta_l} = \costgrad_{l}\localgrad^{\theta}_{l}$\;
-}
-\label{alg:backpropagation:backprop_for_chains}
+    }
+    \label{alg:backpropagation:backprop_for_chains}
 \end{algorithm}
