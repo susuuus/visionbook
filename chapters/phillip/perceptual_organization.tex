@@ -9,13 +9,13 @@ First, what is a perceptual group? Look at the photo in \fig{\ref{fig:perceptual
 %We humans see the world as organized into different levels of perceptual structure: contours and surfaces, objects and events (\fig{\ref{fig:perceptual_organization:perc_org_teaser}}).
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=1.0\linewidth]{./figures/perceptual_organization/perc_org_teaser.pdf}
+        \includegraphics[width=1.0\linewidth]{./figures/perceptual_organization/perc_org_teaser.pdf}
     }
     \caption{A few kinds of perceptual organization in the human visual system.}
     \label{fig:perceptual_organization:perc_org_teaser}
 \end{figure}
 
-What a camera sees is the raw RGB pixel values of the photo. But what your mind sees is rather different. You see contours and surfaces, objects and events. 
+What a camera sees is the raw RGB pixel values of the photo. But what your mind sees is rather different. You see contours and surfaces, objects and events.
 
 Many of these perceptual structures can be thought of as \textit{groups of primitive elements}: a contour is a group of points that form a line, an object is a group of parts that form a cohesive whole, and so on. Because of this, understanding how humans, and machines, can identify meaningful perceptual groups has been a longstanding area of interest in both human and computer vision~\cite{Palmer1999}. %The study of \textbf{perceptual organization} therefore largely revolves around the study of \textbf{perceptual grouping}.
 \marginnote{The content of this chapter can also go under the name \index{Perceptual organization}\textbf{perceptual organization}, which is the study of how our vision system organizes the pixels into more abstracted structures, such as perceptual groups. The Gestalt psychologists were some of the first to study this problem~\cite{Koffka1935}.}[-4.4cm]
@@ -34,7 +34,7 @@ Perceptual organization is all about trying to get similarly powerful representa
 Although the analogy to text makes clear why perceptual organization is important, perceptual groups can also go beyond the limits of language. Some structures we see are hard to name but still clearly represent a coherent group in our heads. Consider, for example, the image in \fig{\ref{fig:perceptual_organization:perc_org_nonsemantic_example}} below.
 \begin{figure}[h]
     \centerline{
-    \includegraphics[width=0.35\linewidth]{./figures/perceptual_organization/perc_org_nonsemantic_example.pdf}
+        \includegraphics[width=0.35\linewidth]{./figures/perceptual_organization/perc_org_nonsemantic_example.pdf}
     }
     \caption{How many objects do you see?}
     \label{fig:perceptual_organization:perc_org_nonsemantic_example}
@@ -70,7 +70,7 @@ Segmentation can be framed as a clustering problem: assign each pixel in an imag
 
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=1.0\linewidth]{./figures/perceptual_organization/ambiguous_segmentation_example.pdf}
+        \includegraphics[width=1.0\linewidth]{./figures/perceptual_organization/ambiguous_segmentation_example.pdf}
     }
     \caption{There are multiple ways you might segment any given image, and each way will highlight different world properties. This cactus branch could be viewed as (a) a single segment (the ``branch''), (b) two segments (the ``leaf" and the ``flower''), or (c) four segments (the main ``leaf,'' two ``buds,'' and the ``flower'').}
     \label{fig:perceptual_organization:ambiguous_segmentation_example}
@@ -85,7 +85,7 @@ $K$-means operates on a data matrix of $N$ datapoints by $M$ features per datapo
 \vspace{-0.4cm}
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=0.75\linewidth]{./figures/perceptual_organization/scatter_ab_fruits2.pdf}
+        \includegraphics[width=0.75\linewidth]{./figures/perceptual_organization/scatter_ab_fruits2.pdf}
     }
     \caption{Different regions of coherent color in the image correspond to clusters in the scatter plot of all the $ab$-values of the image's pixels. In general, segmentation can be reduced to the problem of \textit{clustering pixels} in some feature space ($ab$-color in this example, but it can be any pixel-wise feature).}
     \label{fig:perceptual_organization:scatter_ab_fruits2}
@@ -97,7 +97,7 @@ $K$-means tries to find clusters in this scatter plot (and, if you prefer a prob
 \vspace{-0.4cm}
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=1.0\linewidth]{./figures/perceptual_organization/kmeans_ab_fruits2.pdf}
+        \includegraphics[width=1.0\linewidth]{./figures/perceptual_organization/kmeans_ab_fruits2.pdf}
     }
     \caption{$K$-means segmentation on the fruits example.}
     \label{fig:perceptual_organization:kmeans_ab_fruits2}
@@ -106,7 +106,7 @@ $K$-means tries to find clusters in this scatter plot (and, if you prefer a prob
 Naturally, $k$-means on $ab$-values finds segments that correspond to regions of roughly a constant color. This simple approach can be surprisingly effective. notice how it segments a zebra from the background in \fig{\ref{fig:perceptual_organization:kmeans_ab_zebra_and_beach}} (because the black and white stripes have roughly the same $ab$-values). However, it fails to group more complex patterns that are not defined by color similarity, as in the beach photo in \fig{\ref{fig:perceptual_organization:kmeans_ab_zebra_and_beach}}.
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=1.0\linewidth]{./figures/perceptual_organization/kmeans_ab_zebra_and_beach.pdf}
+        \includegraphics[width=1.0\linewidth]{./figures/perceptual_organization/kmeans_ab_zebra_and_beach.pdf}
     }
     \caption{(top row): $k$-means segmentation succeeds on a seemingly hard image. \textit{Photo source}: Fredo Durand. (bottom row): $k$-means fails on an image that, to our eye, looks no more complex.}
     \label{fig:perceptual_organization:kmeans_ab_zebra_and_beach}
@@ -129,7 +129,7 @@ Because human supervision is expensive and limiting, a popular alternative is to
 
 \begin{figure}[t]
     \centerline{
-    \includegraphics[width=1.0\linewidth]{./figures/perceptual_organization/kmeans_dino.pdf}
+        \includegraphics[width=1.0\linewidth]{./figures/perceptual_organization/kmeans_dino.pdf}
     }
     \caption{Image segmentation using $k$-means over DINO~\cite{caron2021emerging} features.}
     \label{fig:perceptual_organization:kmeans_dino}
@@ -146,10 +146,10 @@ Line drawings are another way of representing the edge structure in an image, an
 \section{Layers}
 If you have ever seen an early Disney cartoon (e.g., Snow White), you may have noticed a compelling illusion of depth created by parallax between different layers of the animated scene.
 \marginnote{
-   An schematic of a multiplane camera from William E. Garity's 1940 patent for a ``Control Device for Animation.'' \\[6pt]
-\centerline{    
-\setlength{\fboxsep}{0pt}
-    \fbox{\includegraphics[width=.4\linewidth]{./figures/perceptual_organization/multiplane_patent.jpg}}
+    An schematic of a multiplane camera from William E. Garity's 1940 patent for a ``Control Device for Animation.'' \\[6pt]
+    \centerline{
+        \setlength{\fboxsep}{0pt}
+        \fbox{\includegraphics[width=.4\linewidth]{./figures/perceptual_organization/multiplane_patent.jpg}}
     }
 }[-1.6cm]
 

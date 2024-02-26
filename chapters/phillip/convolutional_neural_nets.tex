@@ -12,8 +12,8 @@ The neural nets we saw in \chap{\ref{chapter:neural_nets}} are designed to proce
 The key idea of CNNs is to chop up the input image into little patches, and then process each patch \textit{independently} and \textit{identically}. The gist of this is captured in \fig{\ref{fig:convolutional_neural_nets:CNNs_as_patch_processing}}:
 \vspace{-0.2cm}
 \begin{figure}[h]
-\centerline{
-    \includegraphics[width=0.95\linewidth]{./figures/convolutional_neural_nets/CNNs_as_patch_processing.pdf}}
+    \centerline{
+        \includegraphics[width=0.95\linewidth]{./figures/convolutional_neural_nets/CNNs_as_patch_processing.pdf}}
     \caption{CNNs as patch processing. {\em Photo source}: Fredo Durand.}
     \label{fig:convolutional_neural_nets:CNNs_as_patch_processing}
 \end{figure}
@@ -23,8 +23,8 @@ The key idea of CNNs is to chop up the input image into little patches, and then
 Each patch is processed with a classifier module, which is a neural net. Essentially, this neural net scans across the patches in the input and classifies each. The output is a label \textit{for each patch in the input image}. If we rearrange these predictions back into the shape of the input image and color code them, we get the below input-output mapping (\fig{\ref{fig:convolutional_neural_nets:CNN_example_coarse}}):
 \vspace{-0.2cm}
 \begin{figure}[h!]
-\centerline{
-    \includegraphics[width=0.95\linewidth]{./figures/convolutional_neural_nets/CNN_example_coarse.pdf}}
+    \centerline{
+        \includegraphics[width=0.95\linewidth]{./figures/convolutional_neural_nets/CNN_example_coarse.pdf}}
     \caption{Input-output mapping of a CNN.}
     \label{fig:convolutional_neural_nets:CNN_example_coarse}
 \end{figure}
@@ -33,8 +33,8 @@ Notice that this is quite different than the neural nets we saw in \chap{\ref{ch
 
 We may also chop up the image into \textit{overlapping} patches. If we do this densely, such that each patch is one pixel offset from the last, we get a full resolution image of predictions (\fig{\ref{fig:convolutional_neural_nets:CNN_example_fine}}):
 \begin{figure}[h]
-\centerline{
-    \includegraphics[width=0.95\linewidth]{./figures/convolutional_neural_nets/CNN_example_fine.pdf}}
+    \centerline{
+        \includegraphics[width=0.95\linewidth]{./figures/convolutional_neural_nets/CNN_example_fine.pdf}}
     \caption{Dense input-output mapping.}
     \label{fig:convolutional_neural_nets:CNN_example_fine}
 \end{figure}
@@ -48,15 +48,15 @@ Keeping in mind that chopping up and predicting is really all a CNN is doing, we
 \section{Convolutional Layers}
 CNNs are neural networks that are composed of \index{Convolutional layer}{\bf convolutional layers}. A convolutional layer transforms inputs $\xin$ to outputs $\xout$ by convolving $\xin$ with one or more filters $\mathbf{w}$. A convolutional layer with a single filter looks like this:
 \begin{align}
-\xout = \mathbf{w} \star \xin + b & \quad\quad \triangleleft \quad \texttt{conv}\label{eqn:convolutional_neural_nets:convolutional_filter}
+    \xout = \mathbf{w} \star \xin + b & \quad\quad \triangleleft \quad \texttt{conv}\label{eqn:convolutional_neural_nets:convolutional_filter}
 \end{align}
-where $\mathbf{w}$ is the kernel and $b$ is the bias; $\theta = [\mathbf{w}, b]$ are the parameters of this layer. 
+where $\mathbf{w}$ is the kernel and $b$ is the bias; $\theta = [\mathbf{w}, b]$ are the parameters of this layer.
 \marginnote{In this chapter, we deviate slightly from our usual notation and use lowercase for convolutional filter $\mathbf{w}$, regardless of whether the kernel is a 1D array, a 2D array, or an ND array.}[-5.4cm]
 
 Recalling the definition of the operator $\star$ from \chap{\ref{chapter:linear_image_filtering}}, we give here an example of a convolutional layer over a 2D array $\xin$, using a square kernel of size $K \times K$:
 \begin{align}
-\xoutnonbold[n,m] =
-b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] \xinnonbold[n+k_1,m+k_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(expanded)}\label{eqn:convolutional_neural_nets:convolutional_filter_expanded}
+    \xoutnonbold[n,m] =
+    b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] \xinnonbold[n+k_1,m+k_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(expanded)}\label{eqn:convolutional_neural_nets:convolutional_filter_expanded}
 \end{align}
 \marginnote{``Convolutional'' layers in deep nets are typically actually defined as cross-correlations ($\star$) and we stick to that convention in this book. We need not worry about the misnomer because whether you implement the layers with convolution or cross-correlation usually makes no difference for learning. This is because both \textit{span an identical hypothesis space} (any cross-correlation can be converted to an equivalent convolution by flipping the filter horizontally and vertically).}[-3cm]
 
@@ -69,118 +69,118 @@ As discussed in \chap{\ref{chapter:linear_image_filtering}}, convolution is just
 % \end{figure}
 \begin{figure}[h!]
     \begin{minipage}{0.45\linewidth}
-    \centering
-    \begin{tikzpicture}
-        %
-        \def\Nnodes{9}
-        \def\cellwidth{0.3}
-        % draw xin
-        \foreach \y in {1,...,\Nnodes} {
-            \draw [fill=data_color] (\cellwidth,-\cellwidth*\y-0.5*\cellwidth) rectangle ++(\cellwidth,\cellwidth);
-        }
-        %
-        \draw (\cellwidth*3,-\cellwidth) node {$=$};
-        % draw W
-        \foreach \x in {1,...,\Nnodes} {
+        \centering
+        \begin{tikzpicture}
+            %
+            \def\Nnodes{9}
+            \def\cellwidth{0.3}
+            % draw xin
             \foreach \y in {1,...,\Nnodes} {
-                \pgfmathtruncatemacro\yminusone{\y-1}
-                \pgfmathtruncatemacro\yplusone{\y+1}
-                \ifthenelse{\x=\y \OR \x=\yminusone \OR \x=\yplusone}{
-                    \draw [shift={(\cellwidth*3,0)}, fill=param_color] (\cellwidth*\x,-\cellwidth*\y-0.5*\cellwidth) rectangle ++(\cellwidth,\cellwidth);
+                    \draw [fill=data_color] (\cellwidth,-\cellwidth*\y-0.5*\cellwidth) rectangle ++(\cellwidth,\cellwidth);
                 }
-                {
-                    \draw [shift={(\cellwidth*3,0)}, fill=white] (\cellwidth*\x,-\cellwidth*\y-0.5*\cellwidth) rectangle ++(\cellwidth,\cellwidth);
+            %
+            \draw (\cellwidth*3,-\cellwidth) node {$=$};
+            % draw W
+            \foreach \x in {1,...,\Nnodes} {
+                    \foreach \y in {1,...,\Nnodes} {
+                            \pgfmathtruncatemacro\yminusone{\y-1}
+                            \pgfmathtruncatemacro\yplusone{\y+1}
+                            \ifthenelse{\x=\y \OR \x=\yminusone \OR \x=\yplusone}{
+                                \draw [shift={(\cellwidth*3,0)}, fill=param_color] (\cellwidth*\x,-\cellwidth*\y-0.5*\cellwidth) rectangle ++(\cellwidth,\cellwidth);
+                            }
+                            {
+                                \draw [shift={(\cellwidth*3,0)}, fill=white] (\cellwidth*\x,-\cellwidth*\y-0.5*\cellwidth) rectangle ++(\cellwidth,\cellwidth);
+                            }
+                        }
                 }
-            }
-        }
-        % draw lines indicating shared weights
-        \foreach \k in {-1,...,1} {
-            \pgfmathtruncatemacro\negk{-\k}
-            \ifthenelse{\k=-1} {
-                \pgfmathtruncatemacro\offtop{1}
-            }
-            {
-                \pgfmathtruncatemacro\offtop{0}
-            }
-            \ifthenelse{\k=1} {
-                \pgfmathtruncatemacro\offbot{1}
-            }
-            {
-                \pgfmathtruncatemacro\offbot{0}
-            }
-            \draw [shift={(\cellwidth*3,0)}, thick, dashed] (\cellwidth*1.5+\k*\cellwidth+\offtop*\cellwidth,-\cellwidth-\offtop*\cellwidth) -- (\cellwidth*\Nnodes+0.5*\cellwidth+\k*\cellwidth-\offbot*\cellwidth,-\cellwidth*\Nnodes+\offbot*\cellwidth);
-            \path[shift={(\cellwidth*3+\k*1.1*\cellwidth,-\k*0.25*\cellwidth)}] (\cellwidth*1.5+\offtop*\cellwidth,-\cellwidth+\k*\cellwidth-\offtop*\cellwidth) -- node[scale=0.65, fill=param_color, draw=black, thick, text centered, minimum width=1cm] {$w[\negk]$} (\cellwidth*\Nnodes+0.5*\cellwidth-\offbot*\cellwidth,-\cellwidth*\Nnodes+\k*\cellwidth+\offbot*\cellwidth);
-        }
-        % draw xout
-        \foreach \y in {1,...,\Nnodes} {
-            \draw [shift={(\cellwidth*\Nnodes+\cellwidth*3.5,0)}, fill=data_color] (\cellwidth,-\cellwidth*\y-0.5*\cellwidth) rectangle ++(\cellwidth,\cellwidth);
-        }
-        %
-        \draw (\cellwidth*1.5,-\cellwidth*\Nnodes-1.5*\cellwidth) node {$\xout$};
-        \draw [shift={(\cellwidth*\Nnodes+\cellwidth*3.5,0)}] (\cellwidth*1.5,-\cellwidth*\Nnodes-1.5*\cellwidth) node {$\xin$};
-        %
-    \end{tikzpicture}
+            % draw lines indicating shared weights
+            \foreach \k in {-1,...,1} {
+                    \pgfmathtruncatemacro\negk{-\k}
+                    \ifthenelse{\k=-1} {
+                        \pgfmathtruncatemacro\offtop{1}
+                    }
+                    {
+                        \pgfmathtruncatemacro\offtop{0}
+                    }
+                    \ifthenelse{\k=1} {
+                        \pgfmathtruncatemacro\offbot{1}
+                    }
+                    {
+                        \pgfmathtruncatemacro\offbot{0}
+                    }
+                    \draw [shift={(\cellwidth*3,0)}, thick, dashed] (\cellwidth*1.5+\k*\cellwidth+\offtop*\cellwidth,-\cellwidth-\offtop*\cellwidth) -- (\cellwidth*\Nnodes+0.5*\cellwidth+\k*\cellwidth-\offbot*\cellwidth,-\cellwidth*\Nnodes+\offbot*\cellwidth);
+                    \path[shift={(\cellwidth*3+\k*1.1*\cellwidth,-\k*0.25*\cellwidth)}] (\cellwidth*1.5+\offtop*\cellwidth,-\cellwidth+\k*\cellwidth-\offtop*\cellwidth) -- node[scale=0.65, fill=param_color, draw=black, thick, text centered, minimum width=1cm] {$w[\negk]$} (\cellwidth*\Nnodes+0.5*\cellwidth-\offbot*\cellwidth,-\cellwidth*\Nnodes+\k*\cellwidth+\offbot*\cellwidth);
+                }
+            % draw xout
+            \foreach \y in {1,...,\Nnodes} {
+                    \draw [shift={(\cellwidth*\Nnodes+\cellwidth*3.5,0)}, fill=data_color] (\cellwidth,-\cellwidth*\y-0.5*\cellwidth) rectangle ++(\cellwidth,\cellwidth);
+                }
+            %
+            \draw (\cellwidth*1.5,-\cellwidth*\Nnodes-1.5*\cellwidth) node {$\xout$};
+            \draw [shift={(\cellwidth*\Nnodes+\cellwidth*3.5,0)}] (\cellwidth*1.5,-\cellwidth*\Nnodes-1.5*\cellwidth) node {$\xin$};
+            %
+        \end{tikzpicture}
     \end{minipage}
     \begin{minipage}{0.08\linewidth}
-    \centering
-    \begin{tikzpicture}
-        \def\cellwidth{0.25}
-        \def\Nnodes{9}
-        \draw (0,-\cellwidth*0.5*\Nnodes) node {$\Longleftrightarrow$};
-    \end{tikzpicture}
+        \centering
+        \begin{tikzpicture}
+            \def\cellwidth{0.25}
+            \def\Nnodes{9}
+            \draw (0,-\cellwidth*0.5*\Nnodes) node {$\Longleftrightarrow$};
+        \end{tikzpicture}
     \end{minipage}
     \begin{minipage}{0.45\linewidth}
-    \centering
-    \begin{tikzpicture}
-        \begin{scope}[rotate=-90]
-        %
-        \def\Nnodes{9}
-        \def\Nlayers{2}
-        \def\layerheight{2.6}
-        \def\neuronrad{0.14}
-        \def\neuronstep{0.42}
-        % draw all nodes
-        \foreach \y in {1,...,\Nlayers} {
-            \foreach \x in {1,...,\Nnodes} {
-                \draw [fill=data_color] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
-            }
-        }
-        % draw nodes in RF
-        % \node [circle, draw, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${\mathbf{x}_1[3]}$] (myNode) at (\neuronstep*4,\layerheight) {};
-        %
-        % draw all edges
-        \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
-        \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
-        \foreach \y in {1,...,\NlayersMinusOne} {
-            \foreach \x in {1,...,\Nnodes} {
+        \centering
+        \begin{tikzpicture}
+            \begin{scope}[rotate=-90]
+                %
+                \def\Nnodes{9}
+                \def\Nlayers{2}
+                \def\layerheight{2.6}
+                \def\neuronrad{0.14}
+                \def\neuronstep{0.42}
+                % draw all nodes
+                \foreach \y in {1,...,\Nlayers} {
+                        \foreach \x in {1,...,\Nnodes} {
+                                \draw [fill=data_color] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
+                            }
+                    }
+                % draw nodes in RF
+                % \node [circle, draw, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${\mathbf{x}_1[3]}$] (myNode) at (\neuronstep*4,\layerheight) {};
+                %
+                % draw all edges
+                \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
+                \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
+                \foreach \y in {1,...,\NlayersMinusOne} {
+                        \foreach \x in {1,...,\Nnodes} {
+                                \foreach \k in {-1,...,1} {
+                                        \pgfmathtruncatemacro{\xk}{\x+\k}
+                                        \ifnum \xk>0
+                                            \ifnum \xk<\NNodesPlusOne
+                                                \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
+                                            \fi
+                                        \fi
+                                    }
+                            }
+                    }
+                % draw edges in RF
                 \foreach \k in {-1,...,1} {
-                    \pgfmathtruncatemacro{\xk}{\x+\k}
-                    \ifnum \xk>0
-                    \ifnum \xk<\NNodesPlusOne
-                        \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
-                    \fi
-                    \fi
-                }
-            }
-        }
-        % draw edges in RF
-        \foreach \k in {-1,...,1} {
-            \pgfmathtruncatemacro{\negk}{-\k}
-            \pgfmathtruncatemacro{\xk}{2+\k}
-            \draw [thick] [nn_edge] (\neuronstep*\xk,\neuronrad) -- (\neuronstep*2,\layerheight-\neuronrad);
-            \path[shift={(\k*0.25,-\layerheight*0.2)}] (\neuronstep*\xk,\neuronrad) -- node[scale=0.65, fill=param_color, draw=black, thick, text centered, minimum width=1cm] {$w[\negk]$} (\neuronstep*2,\layerheight-\neuronrad);
-        }
-        \foreach \k in {-1,...,1} {
-            \pgfmathtruncatemacro{\negk}{-\k}
-            \pgfmathtruncatemacro{\xk}{6+\k}
-            \draw [thick] [nn_edge] (\neuronstep*\xk,\neuronrad) -- (\neuronstep*6,\layerheight-\neuronrad);
-            \path[shift={(\k*0.25,-\layerheight*0.2)}] (\neuronstep*\xk,\neuronrad) -- node[scale=0.65, fill=param_color, draw=black, thick, text centered, minimum width=1cm] {$w[\negk]$} (\neuronstep*6,\layerheight-\neuronrad);
-        }
-        %
-        \draw (\neuronstep*\Nnodes+\neuronstep,0) node {$\xin$};
-        \draw (\neuronstep*\Nnodes+\neuronstep,\layerheight) node {$\xout$};
-        \end{scope}
-    \end{tikzpicture}
+                        \pgfmathtruncatemacro{\negk}{-\k}
+                        \pgfmathtruncatemacro{\xk}{2+\k}
+                        \draw [thick] [nn_edge] (\neuronstep*\xk,\neuronrad) -- (\neuronstep*2,\layerheight-\neuronrad);
+                        \path[shift={(\k*0.25,-\layerheight*0.2)}] (\neuronstep*\xk,\neuronrad) -- node[scale=0.65, fill=param_color, draw=black, thick, text centered, minimum width=1cm] {$w[\negk]$} (\neuronstep*2,\layerheight-\neuronrad);
+                    }
+                \foreach \k in {-1,...,1} {
+                        \pgfmathtruncatemacro{\negk}{-\k}
+                        \pgfmathtruncatemacro{\xk}{6+\k}
+                        \draw [thick] [nn_edge] (\neuronstep*\xk,\neuronrad) -- (\neuronstep*6,\layerheight-\neuronrad);
+                        \path[shift={(\k*0.25,-\layerheight*0.2)}] (\neuronstep*\xk,\neuronrad) -- node[scale=0.65, fill=param_color, draw=black, thick, text centered, minimum width=1cm] {$w[\negk]$} (\neuronstep*6,\layerheight-\neuronrad);
+                    }
+                %
+                \draw (\neuronstep*\Nnodes+\neuronstep,0) node {$\xin$};
+                \draw (\neuronstep*\Nnodes+\neuronstep,\layerheight) node {$\xout$};
+            \end{scope}
+        \end{tikzpicture}
     \end{minipage}
     \caption{Two equivalent visualizations of a convolutional layer.}
     \label{fig:convolutional_neural_nets:conv_matrix_vs_net}
@@ -202,17 +202,17 @@ Suppose we have an RGB image $\xin \in \mathbb{R}^{3 \times N \times M}$. To app
 \paragraph*{Multichannel outputs}
 Above we saw a convolutional layer with just a single filter. More commonly each convolutional layer in a neural network will apply a set of filters, i.e. a \index{Filter bank}\textbf{filter bank}.\marginnote{We introduced filter banks in \chap{\ref{chapter:filter_banks}}. The difference here is that in CNNs the filter weights are learned.}[-0.4cm] If we have a bank of $C$ filters $\mathbf{w}_0, \ldots, \mathbf{w}_{C-1}$, and apply them to a grayscale input image $\xin \in \mathbb{R}^{N \times M}$, we get $C$ output images:
 \begin{align}
-    \xout[0,:,:] &= \mathbf{w}[0,:,:] \star \xin + b[0]\\
-    &\vdots \nonumber\\
-    \xout[C,:,:] &= \mathbf{w}[C-1,:,:] \star \xin + b[C-1]
-\label{eqn:convolutional_neural_nets:convolutional_layer_filter_bank}
+    \xout[0,:,:] & = \mathbf{w}[0,:,:] \star \xin + b[0]     \\
+                 & \vdots \nonumber                          \\
+    \xout[C,:,:] & = \mathbf{w}[C-1,:,:] \star \xin + b[C-1]
+    \label{eqn:convolutional_neural_nets:convolutional_layer_filter_bank}
 \end{align}
-Now $\xout$ is an image with $C$ channels. Each channel is the response of the input image to one of the filters.\marginnote{We use the term ``image'' to refer to any 2D array of measurements or features. An image does not have to be a conventional photograph.}[-0.4cm] We call each of these channels a \index{Feature map}\textbf{feature map}, as it shows some features of the input, such as where the vertical edges are. 
+Now $\xout$ is an image with $C$ channels. Each channel is the response of the input image to one of the filters.\marginnote{We use the term ``image'' to refer to any 2D array of measurements or features. An image does not have to be a conventional photograph.}[-0.4cm] We call each of these channels a \index{Feature map}\textbf{feature map}, as it shows some features of the input, such as where the vertical edges are.
 
 \paragraph*{Multi-Input, Multi-Output} Putting both of the above together, we can define a general convolutional layer that maps a signal with $\Cin$ input channels to a signal with $\Cout$ output channels. Here is what this looks like for an image $\xin \in \mathbb{R}^{\Cin \times N \times M}$, where $c_2$ indexes the output channel, with $c_2 \in \{0, \ldots, \Cout-1\}$:
 \begin{align}
-\xout[\cout,:,:] = \sum_{\cin=1}^{\Cin} \mathbf{w}[\cin,\cout,:,:] \star \xin[\cin,:,:] + b[\cout] & \quad \triangleleft \quad\texttt{conv}\quad \text{(multi-in-out)}
-\label{eqn:convolutional_neural_nets:convolutional_layer_multichannel}
+    \xout[\cout,:,:] = \sum_{\cin=1}^{\Cin} \mathbf{w}[\cin,\cout,:,:] \star \xin[\cin,:,:] + b[\cout] & \quad \triangleleft \quad\texttt{conv}\quad \text{(multi-in-out)}
+    \label{eqn:convolutional_neural_nets:convolutional_layer_multichannel}
 \end{align}
 %$\mathbf{x}_{\texttt{out}}[c,:,:]$ is the $c$-th channel of the output, also called the $c$-th {\bf feature map}.\marginnote{We introduced filter banks in \chap{\ref{chapter:filter_banks}}. The difference here is that in CNNs the filter weights are learned.}[-0.4cm] 
 Notation for multichannel convolutions can get hard to keep track of, so let's spell out a few of the pieces here, which are also visualized in \fig{\ref{fig:convolutional_neural_networks:multichannel_conv}}:
@@ -226,85 +226,85 @@ Notation for multichannel convolutions can get hard to keep track of, so let's s
 %For images, the input signal is a $\Cin \times N \times M$ tensor of pixels, where $H$ is the image height, $W$ is the image width, and $\Cin$ is the number of color channels (usually 3), and the output signal is an $\Cout \times H \times W$ tensor of features (neural activations).
 
 \begin{figure}[t]
-  \centerline{
-  \begin{tikzpicture}
-    \def\H{7}
-    \def\W{7}
-    \def\NchannelsIn{3}
-    \def\NchannelsOut{2}
-    \def\K{3}
-    \def\cellwidth{0.25}
+    \centerline{
+        \begin{tikzpicture}
+            \def\H{7}
+            \def\W{7}
+            \def\NchannelsIn{3}
+            \def\NchannelsOut{2}
+            \def\K{3}
+            \def\cellwidth{0.25}
 
-    % draw filter bank
-    \foreach \f in {1,...,\NchannelsOut} {
-        \foreach \c in {1,...,\NchannelsIn} {
-            \foreach \x in {1,...,\K} {
-                \foreach \y in {1,...,\K} {
-                    \draw [shift={(\c*\cellwidth*0.5, -\c*\cellwidth*0.5 - \f*\cellwidth*1.5*\K + \cellwidth*1.5*\K)}, fill=param_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+            % draw filter bank
+            \foreach \f in {1,...,\NchannelsOut} {
+                    \foreach \c in {1,...,\NchannelsIn} {
+                            \foreach \x in {1,...,\K} {
+                                    \foreach \y in {1,...,\K} {
+                                            \draw [shift={(\c*\cellwidth*0.5, -\c*\cellwidth*0.5 - \f*\cellwidth*1.5*\K + \cellwidth*1.5*\K)}, fill=param_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                                        }
+                                }
+                        }
                 }
-            }
-        }
-    }
-    % draw K below
-    \draw[shift={(\NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5 - \NchannelsOut*\cellwidth*1.5*\K*0.5 + \cellwidth*1.5*\K*0.5)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*\K+\cellwidth,-\cellwidth*\K-2.5*\cellwidth) -- (\cellwidth*1,-\cellwidth*\K-2.5*\cellwidth);
-    \node[shift={(\NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5 - \NchannelsOut*\cellwidth*1.5*\K*0.5 + \cellwidth*1.5*\K*0.5)}, below, rotate=0] at (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K-3*\cellwidth) {$\small{K}$};
-    % draw K right
-    \draw[shift={(\NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5 - \NchannelsOut*\cellwidth*1.5*\K*0.5 + \cellwidth*1.5*\K*0.5)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*\K+\cellwidth*1.25,-\cellwidth*2.25) -- (\cellwidth*\K+\cellwidth*1.25,-\cellwidth*\K-2.25*\cellwidth);
-    \node[shift={(\NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5 - \NchannelsOut*\cellwidth*1.5*\K*0.5 + \cellwidth*1.5*\K*0.5)}, right, rotate=0] at (\cellwidth*\K+1.75*\cellwidth,-\cellwidth*\K*0.5-2.25*\cellwidth) {$\small{K}$};
-    % draw number of Cin and Cout
-    \draw[decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth,-\cellwidth*1.5*\K*\NchannelsOut) -- (\cellwidth,-\cellwidth*0.5);
-    \node[left, rotate=90] at (-\cellwidth*0.75,-\cellwidth*1.5*\K*\NchannelsOut*0.5+\cellwidth*1.5*\NchannelsOut*1) {$\small{\Cout \text{ filters}}$};
-    %
-    \draw[shift={(\cellwidth*\K+2*\cellwidth, 0)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (0,0) -- (\cellwidth,-\cellwidth*2);
-    \node[shift={(\cellwidth*\K+2*\cellwidth, 0)}, right, rotate=0] at (\cellwidth*0.5,0) {$\small{\Cin}$};
-    \draw[shift={(2 + \W*\cellwidth + \cellwidth*2, 0)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (0,0) -- (\cellwidth,-\cellwidth*2);
-    \node[shift={(2 + \W*\cellwidth + \cellwidth*2, 0)}, right, rotate=0] at (\cellwidth*0.5,0) {$\small{\Cin}$};
-    \draw[shift={(5 + \W*\cellwidth + \cellwidth*2, 0)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (0,0) -- (\cellwidth*0.5,-\cellwidth);
-    \node[shift={(5 + \W*\cellwidth + \cellwidth*2, 0)}, right, rotate=0] at (\cellwidth*0.65,0) {$\small{\Cout}$};
-    %
-    \draw (\cellwidth*3,\cellwidth) node {$\mathbf{w}$};
-    %
-    \draw (1.875,-\cellwidth*1-\cellwidth*0.5*\H) node {$\star$};
+            % draw K below
+            \draw[shift={(\NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5 - \NchannelsOut*\cellwidth*1.5*\K*0.5 + \cellwidth*1.5*\K*0.5)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*\K+\cellwidth,-\cellwidth*\K-2.5*\cellwidth) -- (\cellwidth*1,-\cellwidth*\K-2.5*\cellwidth);
+            \node[shift={(\NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5 - \NchannelsOut*\cellwidth*1.5*\K*0.5 + \cellwidth*1.5*\K*0.5)}, below, rotate=0] at (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K-3*\cellwidth) {$\small{K}$};
+            % draw K right
+            \draw[shift={(\NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5 - \NchannelsOut*\cellwidth*1.5*\K*0.5 + \cellwidth*1.5*\K*0.5)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*\K+\cellwidth*1.25,-\cellwidth*2.25) -- (\cellwidth*\K+\cellwidth*1.25,-\cellwidth*\K-2.25*\cellwidth);
+            \node[shift={(\NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5 - \NchannelsOut*\cellwidth*1.5*\K*0.5 + \cellwidth*1.5*\K*0.5)}, right, rotate=0] at (\cellwidth*\K+1.75*\cellwidth,-\cellwidth*\K*0.5-2.25*\cellwidth) {$\small{K}$};
+            % draw number of Cin and Cout
+            \draw[decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth,-\cellwidth*1.5*\K*\NchannelsOut) -- (\cellwidth,-\cellwidth*0.5);
+            \node[left, rotate=90] at (-\cellwidth*0.75,-\cellwidth*1.5*\K*\NchannelsOut*0.5+\cellwidth*1.5*\NchannelsOut*1) {$\small{\Cout \text{ filters}}$};
+            %
+            \draw[shift={(\cellwidth*\K+2*\cellwidth, 0)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (0,0) -- (\cellwidth,-\cellwidth*2);
+            \node[shift={(\cellwidth*\K+2*\cellwidth, 0)}, right, rotate=0] at (\cellwidth*0.5,0) {$\small{\Cin}$};
+            \draw[shift={(2 + \W*\cellwidth + \cellwidth*2, 0)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (0,0) -- (\cellwidth,-\cellwidth*2);
+            \node[shift={(2 + \W*\cellwidth + \cellwidth*2, 0)}, right, rotate=0] at (\cellwidth*0.5,0) {$\small{\Cin}$};
+            \draw[shift={(5 + \W*\cellwidth + \cellwidth*2, 0)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (0,0) -- (\cellwidth*0.5,-\cellwidth);
+            \node[shift={(5 + \W*\cellwidth + \cellwidth*2, 0)}, right, rotate=0] at (\cellwidth*0.65,0) {$\small{\Cout}$};
+            %
+            \draw (\cellwidth*3,\cellwidth) node {$\mathbf{w}$};
+            %
+            \draw (1.875,-\cellwidth*1-\cellwidth*0.5*\H) node {$\star$};
 
-    % draw signal in
-    \foreach \c in {1,...,\NchannelsIn} {
-        \foreach \x in {1,...,\H} {
-            \foreach \y in {1,...,\W} {
-                \draw [shift={(2 + \c*\cellwidth*0.5, -\c*\cellwidth*0.5)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-            }
-        }
-    }
-    % draw W
-    \draw[shift={(2 + \NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*\W+\cellwidth,-\cellwidth*\H-\cellwidth*0.5) -- (\cellwidth*1,-\cellwidth*\H-\cellwidth*0.5);
-    \node[shift={(2 + \NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5)}, below, rotate=0] at (\cellwidth*\W*0.5+\cellwidth*1,-\cellwidth*\H-\cellwidth*1) {$\small{M}$};
-    %
-    \draw[shift={(2.25 + \cellwidth*0.5*\W, 0)}] (\cellwidth*0.25,\cellwidth) node {$\xin$};
+            % draw signal in
+            \foreach \c in {1,...,\NchannelsIn} {
+                    \foreach \x in {1,...,\H} {
+                            \foreach \y in {1,...,\W} {
+                                    \draw [shift={(2 + \c*\cellwidth*0.5, -\c*\cellwidth*0.5)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                                }
+                        }
+                }
+            % draw W
+            \draw[shift={(2 + \NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*\W+\cellwidth,-\cellwidth*\H-\cellwidth*0.5) -- (\cellwidth*1,-\cellwidth*\H-\cellwidth*0.5);
+            \node[shift={(2 + \NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5)}, below, rotate=0] at (\cellwidth*\W*0.5+\cellwidth*1,-\cellwidth*\H-\cellwidth*1) {$\small{M}$};
+            %
+            \draw[shift={(2.25 + \cellwidth*0.5*\W, 0)}] (\cellwidth*0.25,\cellwidth) node {$\xin$};
 
-    % draw signal out
-    \foreach \c in {1,...,\NchannelsOut} {
-        \foreach \x in {1,...,\H} {
-            \foreach \y in {1,...,\W} {
-                \draw [shift={(5 + \c*\cellwidth*0.5, -\c*\cellwidth*0.5)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-            }
-        }
+            % draw signal out
+            \foreach \c in {1,...,\NchannelsOut} {
+                    \foreach \x in {1,...,\H} {
+                            \foreach \y in {1,...,\W} {
+                                    \draw [shift={(5 + \c*\cellwidth*0.5, -\c*\cellwidth*0.5)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                                }
+                        }
+                }
+            % draw H
+            \draw[shift={(5 + \NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*\W+\cellwidth,\cellwidth*0.5) -- (\cellwidth*\W+\cellwidth,-\cellwidth*\H+\cellwidth*0.5);
+            \node[shift={(5 + \NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5)}, right, rotate=0] at (\cellwidth*\W+\cellwidth*1.5,-\cellwidth*\H*0.5+\cellwidth*0.5) {$\small{N}$};
+            %
+            \draw (4.875,-\cellwidth*1-\cellwidth*0.5*\H) node {$=$};
+            %
+            \draw[shift={(5 + \cellwidth*0.5*\W, 0)}] (\cellwidth*1.25,\cellwidth) node {$\xout$};
+        \end{tikzpicture}
     }
-    % draw H
-    \draw[shift={(5 + \NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*\W+\cellwidth,\cellwidth*0.5) -- (\cellwidth*\W+\cellwidth,-\cellwidth*\H+\cellwidth*0.5);
-    \node[shift={(5 + \NchannelsIn*\cellwidth*0.5, -\NchannelsIn*\cellwidth*0.5)}, right, rotate=0] at (\cellwidth*\W+\cellwidth*1.5,-\cellwidth*\H*0.5+\cellwidth*0.5) {$\small{N}$};
-    %
-    \draw (4.875,-\cellwidth*1-\cellwidth*0.5*\H) node {$=$};
-    %
-    \draw[shift={(5 + \cellwidth*0.5*\W, 0)}] (\cellwidth*1.25,\cellwidth) node {$\xout$};
-  \end{tikzpicture}
-  }
-  \caption{Multichannel convolution.}
-  \label{fig:convolutional_neural_networks:multichannel_conv}
+    \caption{Multichannel convolution.}
+    \label{fig:convolutional_neural_networks:multichannel_conv}
 \end{figure}
 
 It's important to get comfortable with the shapes of the data and parameter tensors that get processed through different neural architectures. This is essential when designing and building these architectures, and when analyzing and debugging them. Let's go through an example with concrete numbers. Consider data $\xin$, which is an RGB image of size $128 \times 128$ pixels. We will pass it through a convoluational layer that applies a bank of $3 \times 3$ filters (this refers to the spatial extent of the filters). We omit the bias terms for simplicity. The output ends up being a $96 \times 128 \times 128$ tensor, as shown in \fig{\ref{fig:convolutional_neural_nets:multichannel_conv_diagram}}.
 \begin{figure}[h]
-\centerline{
-    \includegraphics[width=0.65\linewidth]{./figures/convolutional_neural_nets/multichannel_conv_diagram.pdf}}
+    \centerline{
+        \includegraphics[width=0.65\linewidth]{./figures/convolutional_neural_nets/multichannel_conv_diagram.pdf}}
     \caption{A convolutional layer that applies a bank of $3 \times 3$ filters. How many parameters does each filter have? How many filters are in the filter bank? \textit{Source}: created by Jonas Wulff.}
     \label{fig:convolutional_neural_nets:multichannel_conv_diagram}
 \end{figure}
@@ -325,10 +325,10 @@ The answers are given in the footnote.\footnote{The answers are 1-B, 2-C.}
 
 Convolutional layers, as defined previously, maintain the spatial resolution of the signal they process. However, commonly it is sufficient, or even desirable, to output a lower resolution. This can be achieved with strided convolution:
 \begin{align}
-\xoutnonbold[n,m] =
-b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] \xinnonbold[s_n n-k_1,s_m m-k_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(strided)}\label{eqn:convolutional_neural_nets:convolutional_filter_strided}
+    \xoutnonbold[n,m] =
+    b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] \xinnonbold[s_n n-k_1,s_m m-k_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(strided)}\label{eqn:convolutional_neural_nets:convolutional_filter_strided}
 \end{align}
-where $s_n$ and $s_m$ are the strides in the vertical and horizontal directions, respectively. 
+where $s_n$ and $s_m$ are the strides in the vertical and horizontal directions, respectively.
 \marginnote{Here and below, we define operations for the simplest case of convolution of a single square filter with a single channel 2D signal. All these operations can be straightforwardly extended for the multichannel in, multichannel out case, and for ND signals, and for non-square kernels. We leave it as an exercise for the reader to write out these variations as needed.}[-1.4cm]
 
 Commonly we use the same stride $s_n = s_m = s$. A convolution layer with these strides performs a mapping $\mathbb{R}^{M \times N} \rightarrow \mathbb{R}^{N/s_n \times M/s_m}$. In order to make this mapping well-defined, we require that $N$ or $M$ are divisible by $s_n$ and $s_m$, respectively; if they are not, we may may pad (or crop) the input until they are.
@@ -341,130 +341,130 @@ Strided convolution looks like this (\fig{\ref{fig:convolutional_neural_networks
 %     \label{fig:convolutional_neural_nets:strided_conv_diagram}
 % \end{figure}
 \begin{figure}[h!]
-\centerline{
-  \begin{tikzpicture}
-    \def\Hin{11}
-    \def\Win{11}
-    \def\Hout{3}
-    \def\Wout{3}
-    \def\K{3}
-    \def\cellwidth{0.25}
-    \def\stride{4}
+    \centerline{
+        \begin{tikzpicture}
+            \def\Hin{11}
+            \def\Win{11}
+            \def\Hout{3}
+            \def\Wout{3}
+            \def\K{3}
+            \def\cellwidth{0.25}
+            \def\stride{4}
 
-    % draw filter
-    \foreach \x in {1,...,\K} {
-        \foreach \y in {1,...,\K} {
-            \draw [fill=param_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-        }
-    }
-    %
-    \draw (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
-    %
-    \draw (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K-\cellwidth) node {filter};
-    %
-    \draw (\cellwidth*\K + 3*\cellwidth,-\cellwidth*\K*0.5+\cellwidth) node {$\star$};
+            % draw filter
+            \foreach \x in {1,...,\K} {
+                    \foreach \y in {1,...,\K} {
+                            \draw [fill=param_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                        }
+                }
+            %
+            \draw (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
+            %
+            \draw (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K-\cellwidth) node {filter};
+            %
+            \draw (\cellwidth*\K + 3*\cellwidth,-\cellwidth*\K*0.5+\cellwidth) node {$\star$};
 
-    % draw signal in
-    \foreach \x in {1,...,\Hin} {
-        \foreach \y in {1,...,\Win} {
-            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-        }
-    }
-    %
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\Win*0.5+\cellwidth,-\cellwidth*\Hin-\cellwidth) node {$\xin$};
-    %
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*4.5,2*\cellwidth) node {stride};
-    \draw[shift={(\cellwidth*\K + 4.5*\cellwidth,\cellwidth+0.1)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*2,-\cellwidth) -- (\cellwidth*6,-\cellwidth);
+            % draw signal in
+            \foreach \x in {1,...,\Hin} {
+                    \foreach \y in {1,...,\Win} {
+                            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                        }
+                }
+            %
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\Win*0.5+\cellwidth,-\cellwidth*\Hin-\cellwidth) node {$\xin$};
+            %
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*4.5,2*\cellwidth) node {stride};
+            \draw[shift={(\cellwidth*\K + 4.5*\cellwidth,\cellwidth+0.1)}, decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*2,-\cellwidth) -- (\cellwidth*6,-\cellwidth);
 
-    % draw overlaid filters
-    \foreach \x in {1,...,\K} {
-        \foreach \y in {1,...,\K} {
-            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, fill=param_color, opacity=0.5] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-        }
-    }
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, thick] (\cellwidth*1,0) rectangle ++(\cellwidth*\K,-\cellwidth*\K);
-    %
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
-    %
-    \foreach \x in {1,...,\K} {
-        \foreach \y in {1,...,\K} {
-            \draw [shift={(\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride)}, fill=param_color, opacity=0.5] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-        }
-    }
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride)}, thick] (\cellwidth*1,0) rectangle ++(\cellwidth*\K,-\cellwidth*\K);
-    %
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
-    %
-    \foreach \x in {1,...,\K} {
-        \foreach \y in {1,...,\K} {
-            \draw [shift={(\cellwidth*\stride+\cellwidth*\K + 4*\cellwidth,0)}, fill=param_color, opacity=0.5] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-        }
-    }
-    \draw [shift={(\cellwidth*\stride+\cellwidth*\K + 4*\cellwidth,0)}, thick] (\cellwidth*1,0) rectangle ++(\cellwidth*\K,-\cellwidth*\K);
-    %
-    \draw [shift={(\cellwidth*\stride+\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
-    %
-    \draw [shift={(\cellwidth*\stride*1.75+\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\cdots$};
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride*1.75)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\vdots$};
-    \draw [shift={(\cellwidth*\stride*0.75+\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride*0.75)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {\rotatebox[origin=c]{45}{$\vdots$}};
-    
-    %
-    \draw (\cellwidth*\K + 7*\cellwidth + \cellwidth*\Win,-\cellwidth*\K*0.5+\cellwidth) node {$=$};
+            % draw overlaid filters
+            \foreach \x in {1,...,\K} {
+                    \foreach \y in {1,...,\K} {
+                            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, fill=param_color, opacity=0.5] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                        }
+                }
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, thick] (\cellwidth*1,0) rectangle ++(\cellwidth*\K,-\cellwidth*\K);
+            %
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
+            %
+            \foreach \x in {1,...,\K} {
+                    \foreach \y in {1,...,\K} {
+                            \draw [shift={(\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride)}, fill=param_color, opacity=0.5] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                        }
+                }
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride)}, thick] (\cellwidth*1,0) rectangle ++(\cellwidth*\K,-\cellwidth*\K);
+            %
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
+            %
+            \foreach \x in {1,...,\K} {
+                    \foreach \y in {1,...,\K} {
+                            \draw [shift={(\cellwidth*\stride+\cellwidth*\K + 4*\cellwidth,0)}, fill=param_color, opacity=0.5] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                        }
+                }
+            \draw [shift={(\cellwidth*\stride+\cellwidth*\K + 4*\cellwidth,0)}, thick] (\cellwidth*1,0) rectangle ++(\cellwidth*\K,-\cellwidth*\K);
+            %
+            \draw [shift={(\cellwidth*\stride+\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
+            %
+            \draw [shift={(\cellwidth*\stride*1.75+\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\cdots$};
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride*1.75)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\vdots$};
+            \draw [shift={(\cellwidth*\stride*0.75+\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride*0.75)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {\rotatebox[origin=c]{45}{$\vdots$}};
 
-    % draw signal out
-    \foreach \x in {1,...,\Hout} {
-        \foreach \y in {1,...,\Wout} {
-            \draw [shift={(\cellwidth*\K + 8*\cellwidth + \cellwidth*\Win,0)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-        }
+            %
+            \draw (\cellwidth*\K + 7*\cellwidth + \cellwidth*\Win,-\cellwidth*\K*0.5+\cellwidth) node {$=$};
+
+            % draw signal out
+            \foreach \x in {1,...,\Hout} {
+                    \foreach \y in {1,...,\Wout} {
+                            \draw [shift={(\cellwidth*\K + 8*\cellwidth + \cellwidth*\Win,0)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                        }
+                }
+            %
+            \draw [shift={(\cellwidth*\K + 8*\cellwidth + \cellwidth*\Win,0)}] (\cellwidth*\Wout*0.5+\cellwidth,-\cellwidth*\Hout-\cellwidth) node {$\xout$};
+        \end{tikzpicture}
     }
-    %
-    \draw [shift={(\cellwidth*\K + 8*\cellwidth + \cellwidth*\Win,0)}] (\cellwidth*\Wout*0.5+\cellwidth,-\cellwidth*\Hout-\cellwidth) node {$\xout$};
-  \end{tikzpicture}
-  }
-  \caption{Strided convolution.}
-  \label{fig:convolutional_neural_networks:strided_conv_diagram}
+    \caption{Strided convolution.}
+    \label{fig:convolutional_neural_networks:strided_conv_diagram}
 \end{figure}
 \vspace{-0.5cm}
 
 Strided convolutions can significantly reduce the computational cost and memory requirements when a neural network is large. However, strided convolution can decrease the quality of the convolution. Let's look at one concrete example where the kernel is the 2D Laplacian:
 \begin{equation}
-\mathbf{w} = 
-\begin{bmatrix}
-  0 ~& -1 ~& 0 \\
-  -1 ~& 4 ~& -1\\
-  0~& -1 ~& 0
-\end{bmatrix}
+    \mathbf{w} =
+    \begin{bmatrix}
+        0 ~  & -1 ~ & 0  \\
+        -1 ~ & 4 ~  & -1 \\
+        0~   & -1 ~ & 0
+    \end{bmatrix}
 \end{equation}
 As we saw in \chap{\ref{chapter:image_derivatives}}, this filter detects boundaries on images. \Fig{\ref{fig:convolutional_neural_nets:strided_conv_results}} shows an input image, and the result of strided convolution with the Laplacian kernel with strides 1, 2, and 4. The second row shows the magnitude of the discrete Fourier transforms (DFT).
 
 \begin{figure}[h]
-$
-\begin{array}{cccc}
-\text{Input}~ & \text{Stride 1} & \text{Stride 2} & \text{Stride 4} \\
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_0.jpg}~
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_1.jpg}
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_2.jpg}
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_4.jpg}
-\\
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_0_DFT.jpg}~
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_1_DFT.jpg}
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_2_DFT.jpg}
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_4_DFT.jpg}
-\end{array}
-$
+    $
+        \begin{array}{cccc}
+            \text{Input}~ & \text{Stride 1} & \text{Stride 2} & \text{Stride 4} \\
+            \includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_0.jpg}~
+                          &
+            \includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_1.jpg}
+                          &
+            \includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_2.jpg}
+                          &
+            \includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_4.jpg}
+            \\
+            \includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_0_DFT.jpg}~
+                          &
+            \includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_1_DFT.jpg}
+                          &
+            \includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_2_DFT.jpg}
+                          &
+            \includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_4_DFT.jpg}
+        \end{array}
+    $
     \caption{Strided convolution results and their Fourier transforms.}
     \label{fig:convolutional_neural_nets:strided_conv_results}
 \end{figure}
 
-The result with stride 1 looks fine, and it is the output we would expect. However, stride 2 starts showing some artifacts on the boundaries, and stride 4 shows very severe artifacts, with some boundaries disappearing. The DFTs make the artifacts more obvious. In the stride 2 result we can see severe aliasing artifacts that introduce new lines in the Fourier domain that are not present in the DFT of the input image. 
+The result with stride 1 looks fine, and it is the output we would expect. However, stride 2 starts showing some artifacts on the boundaries, and stride 4 shows very severe artifacts, with some boundaries disappearing. The DFTs make the artifacts more obvious. In the stride 2 result we can see severe aliasing artifacts that introduce new lines in the Fourier domain that are not present in the DFT of the input image.
 
-One can argue that these artifacts might not be important when the kernel is being learned. Indeed, the learning could search for kernels that minimize the artifacts due to aliasing as those probably increase the loss. Also, as each layer is composed of many channels, the set of learned kernels could learn to compensate for the aliasing produced by other channels. However, this reduces the space of useful kernels, and the learning might not succeed in removing all the artifacts. 
+One can argue that these artifacts might not be important when the kernel is being learned. Indeed, the learning could search for kernels that minimize the artifacts due to aliasing as those probably increase the loss. Also, as each layer is composed of many channels, the set of learned kernels could learn to compensate for the aliasing produced by other channels. However, this reduces the space of useful kernels, and the learning might not succeed in removing all the artifacts.
 
 %this means that some of the strided filters will partially overlap the image boundaries.
 
@@ -478,8 +478,8 @@ One can argue that these artifacts might not be important when the kernel is bei
 
 Dilated convolution is similar to strided convolution but spaces out the \textit{filter} itself rather than spacing out where the filter is applied to the image:
 \begin{align}
-\xoutnonbold[n,m] =
-b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] \xinnonbold[n-d_kk_1,m-d_kk_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(dilated)}\label{eqn:convolutional_neural_nets:convolutional_filter_dilated}
+    \xoutnonbold[n,m] =
+    b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] \xinnonbold[n-d_kk_1,m-d_kk_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(dilated)}\label{eqn:convolutional_neural_nets:convolutional_filter_dilated}
 \end{align}
 \marginnote{Here we dilate by factor $d_k$ in both spatial dimensions but we could choose a different dilation in each dimension. Or, we could even dilate in the channel dimension, if we were using a multichannel convolution, but this is uncommon.}[-3cm]
 An example of a dilated filter is visually shown in \fig{\ref{fig:convolutional_neural_networks:dilated_conv_diagram}}:
@@ -491,135 +491,135 @@ An example of a dilated filter is visually shown in \fig{\ref{fig:convolutional_
 %     \label{fig:convolutional_neural_nets:dilated_conv_diagram}
 % \end{figure}
 \begin{figure}[h!]
-\centerline{
-  \begin{tikzpicture}
-    \def\Hin{10}
-    \def\Win{10}
-    \def\Hout{10}
-    \def\Wout{10}
-    \def\K{5}
-    \def\cellwidth{0.25}
-    \def\stride{4}
+    \centerline{
+        \begin{tikzpicture}
+            \def\Hin{10}
+            \def\Win{10}
+            \def\Hout{10}
+            \def\Wout{10}
+            \def\K{5}
+            \def\cellwidth{0.25}
+            \def\stride{4}
 
-    % draw filter
-    \foreach \x in {1,...,\K} {
-        \foreach \y in {1,...,\K} {
-            \pgfmathparse{int(mod(\x,2)==1 && mod(\y,2)==1)}
-            \ifnum\pgfmathresult=1
-                \def\fillcolor{param_color}
-            \else
-                \def\fillcolor{zero_color}
-            \fi
-            \draw [fill=\fillcolor] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-        }
-    }
-    %
-    \draw (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
-    %
-    \draw (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K-\cellwidth) node {filter};
-    %
-    \draw (\cellwidth*2.5,\cellwidth*2) node {dilation};
-    \draw [decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*1.5,0.1) -- (\cellwidth*3.5,0.1);
-    %
-    \draw (\cellwidth*\K + 3*\cellwidth,-\cellwidth*\K*0.5) node {$\star$};
+            % draw filter
+            \foreach \x in {1,...,\K} {
+                    \foreach \y in {1,...,\K} {
+                            \pgfmathparse{int(mod(\x,2)==1 && mod(\y,2)==1)}
+                            \ifnum\pgfmathresult=1
+                                \def\fillcolor{param_color}
+                            \else
+                                \def\fillcolor{zero_color}
+                            \fi
+                            \draw [fill=\fillcolor] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                        }
+                }
+            %
+            \draw (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
+            %
+            \draw (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K-\cellwidth) node {filter};
+            %
+            \draw (\cellwidth*2.5,\cellwidth*2) node {dilation};
+            \draw [decorate,decoration={brace, amplitude=5pt, angle=0}] (\cellwidth*1.5,0.1) -- (\cellwidth*3.5,0.1);
+            %
+            \draw (\cellwidth*\K + 3*\cellwidth,-\cellwidth*\K*0.5) node {$\star$};
 
-    % draw signal in
-    \foreach \x in {1,...,\Hin} {
-        \foreach \y in {1,...,\Win} {
-            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-        }
-    }
-    %
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\Win*0.5+\cellwidth,-\cellwidth*\Hin-\cellwidth) node {$\xin$};
+            % draw signal in
+            \foreach \x in {1,...,\Hin} {
+                    \foreach \y in {1,...,\Win} {
+                            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                        }
+                }
+            %
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\Win*0.5+\cellwidth,-\cellwidth*\Hin-\cellwidth) node {$\xin$};
 
-    % draw overlaid filters
-    \foreach \x in {1,...,\K} {
-        \foreach \y in {1,...,\K} {
-            \pgfmathparse{int(mod(\x,2)==1 && mod(\y,2)==1)}
-            \ifnum\pgfmathresult=1
-                \def\fillcolor{param_color}
-            \else
-                \def\fillcolor{zero_color}
-            \fi
-            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, fill=\fillcolor, opacity=0.5] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-        }
-    }
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, thick] (\cellwidth*1,0) rectangle ++(\cellwidth*\K,-\cellwidth*\K);
-    %
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
-    
-    % draw ...'s
-    \draw [shift={(\cellwidth*\stride*1+\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\cdots$};
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride*0.9)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\vdots$};
-    \draw [shift={(\cellwidth*\K + 4*\cellwidth+\cellwidth*\stride*0.8,-\cellwidth*\stride*0.8)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {\rotatebox[origin=c]{45}{$\vdots$}};
-    
-    %
-    \draw (\cellwidth*\K + 7*\cellwidth + \cellwidth*\Win,-\cellwidth*\K*0.5) node {$=$};
+            % draw overlaid filters
+            \foreach \x in {1,...,\K} {
+                    \foreach \y in {1,...,\K} {
+                            \pgfmathparse{int(mod(\x,2)==1 && mod(\y,2)==1)}
+                            \ifnum\pgfmathresult=1
+                                \def\fillcolor{param_color}
+                            \else
+                                \def\fillcolor{zero_color}
+                            \fi
+                            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, fill=\fillcolor, opacity=0.5] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                        }
+                }
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}, thick] (\cellwidth*1,0) rectangle ++(\cellwidth*\K,-\cellwidth*\K);
+            %
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\mathbf{w}$};
 
-    % draw signal out
-    \foreach \x in {1,...,\Hout} {
-        \foreach \y in {1,...,\Wout} {
-            \draw [shift={(\cellwidth*\K + 8*\cellwidth + \cellwidth*\Win,0)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
-        }
+            % draw ...'s
+            \draw [shift={(\cellwidth*\stride*1+\cellwidth*\K + 4*\cellwidth,0)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\cdots$};
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth,-\cellwidth*\stride*0.9)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {$\vdots$};
+            \draw [shift={(\cellwidth*\K + 4*\cellwidth+\cellwidth*\stride*0.8,-\cellwidth*\stride*0.8)}] (\cellwidth*\K*0.5+\cellwidth,-\cellwidth*\K*0.5) node {\rotatebox[origin=c]{45}{$\vdots$}};
+
+            %
+            \draw (\cellwidth*\K + 7*\cellwidth + \cellwidth*\Win,-\cellwidth*\K*0.5) node {$=$};
+
+            % draw signal out
+            \foreach \x in {1,...,\Hout} {
+                    \foreach \y in {1,...,\Wout} {
+                            \draw [shift={(\cellwidth*\K + 8*\cellwidth + \cellwidth*\Win,0)}, fill=data_color] (\cellwidth*\x,-\cellwidth*\y) rectangle ++(\cellwidth,\cellwidth);
+                        }
+                }
+            %
+            \draw [shift={(\cellwidth*\K + 8*\cellwidth + \cellwidth*\Win,0)}] (\cellwidth*\Wout*0.5+\cellwidth,-\cellwidth*\Hout-\cellwidth) node {$\xout$};
+        \end{tikzpicture}
     }
-    %
-    \draw [shift={(\cellwidth*\K + 8*\cellwidth + \cellwidth*\Win,0)}] (\cellwidth*\Wout*0.5+\cellwidth,-\cellwidth*\Hout-\cellwidth) node {$\xout$};
-  \end{tikzpicture}
-  }
-  \caption{Dilated convolution. Dark gray cells have value 0.}
-  \label{fig:convolutional_neural_networks:dilated_conv_diagram}
+    \caption{Dilated convolution. Dark gray cells have value 0.}
+    \label{fig:convolutional_neural_networks:dilated_conv_diagram}
 \end{figure}
 
 As can be seen in the visualization, dilation is a way to achieve a filter with large kernel while only requiring a small number of weights. The weights are just spaced out so that a few will cover a bigger region of the image.
 
 As was the case with strided convolution, dilation can also introduce artifacts. Let's look at one example in detail that illustrates the effect of dilation on a filter. Let's consider the blur kernel, $b_{2,2}$:
 \begin{equation}
-\mathbf{w} = \frac{1}{16}
-\begin{bmatrix}
-  1 ~& 2 ~& 1 \\
-  2 ~& 4 ~& 2\\
-  1~& 2 ~& 1
-\end{bmatrix}
+    \mathbf{w} = \frac{1}{16}
+    \begin{bmatrix}
+        1 ~ & 2 ~ & 1 \\
+        2 ~ & 4 ~ & 2 \\
+        1~  & 2 ~ & 1
+    \end{bmatrix}
 \end{equation}
-This filter blurs the input image by computing the weighted average of pixel intensities around each pixel location. But, dilation transforms this filter in ways that change the behavior of the filter, which does not behave as a blur filter any longer. 
+This filter blurs the input image by computing the weighted average of pixel intensities around each pixel location. But, dilation transforms this filter in ways that change the behavior of the filter, which does not behave as a blur filter any longer.
 \marginnote{We saw that the 1D signal $[-1, 1, -1, ...]$ convolved with $[1,2,1]$ outputs zero. However, check what happens when we convolve the input with the dilated kernel $[1, 0, 2, 0, 1]$.}[-1.5cm]
-The next figure shows the kernel with dilations $d_k=1$, $d_k=2$, and $d_k=4$ together with the magnitude of the DFT of the three resulting kernels (\fig{\ref{fig:convolutional_neural_nets:aliasing_dilated_kernel_binomial}}). 
+The next figure shows the kernel with dilations $d_k=1$, $d_k=2$, and $d_k=4$ together with the magnitude of the DFT of the three resulting kernels (\fig{\ref{fig:convolutional_neural_nets:aliasing_dilated_kernel_binomial}}).
 
 
 \begin{figure}[h]
-\centerline{
-    \includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/aliasing_dilated_kernel_binomial.eps}}
+    \centerline{
+        \includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/aliasing_dilated_kernel_binomial.eps}}
     \caption{Dilated filters and their Fourier transforms.}
     \label{fig:convolutional_neural_nets:aliasing_dilated_kernel_binomial}
 \end{figure}
 \vspace{-0.4cm}
 
-When using the original binomial filter (which corresponds to $d_k=1$) the DFT shows that the filter is a low-pass filter. When applying dilation ($d_k=2$) the DFT changes and it is not unimodal anymore. It has now eight additional local maximum in high spatial frequencies. With $d_k=4$, the DFT reveals an even more complex frequency behavior. \Fig{\ref{fig:convolutional_neural_nets:dilated_blur_mit_dome_example}} shows one input image and the result of the dilated convolutions with the blur kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$. 
+When using the original binomial filter (which corresponds to $d_k=1$) the DFT shows that the filter is a low-pass filter. When applying dilation ($d_k=2$) the DFT changes and it is not unimodal anymore. It has now eight additional local maximum in high spatial frequencies. With $d_k=4$, the DFT reveals an even more complex frequency behavior. \Fig{\ref{fig:convolutional_neural_nets:dilated_blur_mit_dome_example}} shows one input image and the result of the dilated convolutions with the blur kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$.
 \begin{figure}[h!]
-\centerline{
-$
-\begin{array}{cccc}
-\text{input}~ & d_k=1 & d_k=2 & d_k=4 \\
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_1.jpg}~
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_2.jpg}
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_3.jpg}
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_4.jpg}
-\\
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_1_DFT.jpg}~
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_2_DFT.jpg}
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_3_DFT.jpg}
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_4_DFT.jpg}
-\end{array}
-$
-}
-\caption{Result of the dilated convolutions with the blur kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$.}
-\label{fig:convolutional_neural_nets:dilated_blur_mit_dome_example}
+    \centerline{
+        $
+            \begin{array}{cccc}
+                \text{input}~ & d_k=1 & d_k=2 & d_k=4 \\
+                \includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_1.jpg}~
+                              &
+                \includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_2.jpg}
+                              &
+                \includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_3.jpg}
+                              &
+                \includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_4.jpg}
+                \\
+                \includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_1_DFT.jpg}~
+                              &
+                \includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_2_DFT.jpg}
+                              &
+                \includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_3_DFT.jpg}
+                              &
+                \includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_4_DFT.jpg}
+            \end{array}
+        $
+    }
+    \caption{Result of the dilated convolutions with the blur kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$.}
+    \label{fig:convolutional_neural_nets:dilated_blur_mit_dome_example}
 \end{figure}
 \vspace{-0.4cm}
 
@@ -633,55 +633,55 @@ There are  ways in which dilation can be used to increase the family of useful f
 %     \label{fig:convolutional_neural_nets:dilated_conv_cascade}
 % \end{figure}
 \begin{figure}[h!]
-\centerline{
-  \begin{tikzpicture}
-    \def\K{{0,3,5,9}}
-    \def\dilation{{0,1,2,4}}
-    \def\cellwidth{0.25}
-    \def\shift{{0,0,6,14}}
+    \centerline{
+        \begin{tikzpicture}
+            \def\K{{0,3,5,9}}
+            \def\dilation{{0,1,2,4}}
+            \def\cellwidth{0.25}
+            \def\shift{{0,0,6,14}}
 
-    % draw filters
-    \foreach \i in {1,...,3} {
-        \pgfmathparse{\shift[\i]} \let\shifti=\pgfmathresult
-        \pgfmathparse{\K[\i]} \let\Ki=\pgfmathresult
-        \pgfmathparse{\dilation[\i]} \let\dilationi=\pgfmathresult
-        
-        \foreach \x in {1,...,\Ki} {
-            \foreach \y in {1,...,\Ki} {
+            % draw filters
+            \foreach \i in {1,...,3} {
+                    \pgfmathparse{\shift[\i]} \let\shifti=\pgfmathresult
+                    \pgfmathparse{\K[\i]} \let\Ki=\pgfmathresult
+                    \pgfmathparse{\dilation[\i]} \let\dilationi=\pgfmathresult
 
-                \pgfmathparse{\x-1} \let\xminusone=\pgfmathresult
-                \pgfmathparse{\y-1} \let\yminusone=\pgfmathresult
-        
-                \pgfmathparse{int(mod(\xminusone,\dilationi)==0 && mod(\yminusone,\dilationi)==0)}
-                \ifnum\pgfmathresult=1
-                    \def\fillcolor{param_color}
-                \else
-                    \def\fillcolor{zero_color}
-                \fi
-                \draw [shift={(\shifti*\cellwidth,0)}, fill=\fillcolor] (\cellwidth*\x,-\cellwidth*\y+\Ki*0.5*\cellwidth) rectangle ++(\cellwidth,\cellwidth);
-            }
-        }
-        %
-        \ifnum\i<3:
-            \draw [shift={(\shifti*\cellwidth+\Ki*\cellwidth+2.5*\cellwidth,0)}] (0,0) node {$\star$};
-        \fi
+                    \foreach \x in {1,...,\Ki} {
+                            \foreach \y in {1,...,\Ki} {
+
+                                    \pgfmathparse{\x-1} \let\xminusone=\pgfmathresult
+                                    \pgfmathparse{\y-1} \let\yminusone=\pgfmathresult
+
+                                    \pgfmathparse{int(mod(\xminusone,\dilationi)==0 && mod(\yminusone,\dilationi)==0)}
+                                    \ifnum\pgfmathresult=1
+                                        \def\fillcolor{param_color}
+                                    \else
+                                        \def\fillcolor{zero_color}
+                                    \fi
+                                    \draw [shift={(\shifti*\cellwidth,0)}, fill=\fillcolor] (\cellwidth*\x,-\cellwidth*\y+\Ki*0.5*\cellwidth) rectangle ++(\cellwidth,\cellwidth);
+                                }
+                        }
+                    %
+                    \ifnum\i<3:
+                        \draw [shift={(\shifti*\cellwidth+\Ki*\cellwidth+2.5*\cellwidth,0)}] (0,0) node {$\star$};
+                    \fi
+                }
+        \end{tikzpicture}
     }
-  \end{tikzpicture}
-  }
-  \caption{Convolving dilated filters creates a new filter that can measure effects at a mixture of frequencies.}
-  \label{fig:convolutional_neural_networks:dilated_conv_cascade}
+    \caption{Convolving dilated filters creates a new filter that can measure effects at a mixture of frequencies.}
+    \label{fig:convolutional_neural_networks:dilated_conv_cascade}
 \end{figure}
 
 This results in a kernel with a size of $9 \times 9$ (81 values) defined by 27 values. The relative computational efficiency increases when we cascade more filters with higher levels of dilation. \Fig{\ref{fig:convolutional_neural_nets:kernels_resulting_from_dilated_filters}} shows several multiscale kernels that can be obtained by the convolutions of three dilated kernels. Can you guess which kernels were used?
 
 \begin{figure}[h]
-\centerline{
-    \includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/dilated_examples.eps}}
+    \centerline{
+        \includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/dilated_examples.eps}}
     \caption{Example kernels that each result from convolving three filters.}
     \label{fig:convolutional_neural_nets:kernels_resulting_from_dilated_filters}
 \end{figure}
 
-As the figure shows, the cascade of three dilated convolutions can generate a large family of filters with different scales, orientations, shifts, and also other patterns such as corner detectors, long edge detectors, and curved edge detectors. The last four kernels shows the result of convolving three random kernels, which provides further illustration of the diversity of kernels one can build. Each kernel is a $3 \times 3$ array sampled from a Gaussian distribution. 
+As the figure shows, the cascade of three dilated convolutions can generate a large family of filters with different scales, orientations, shifts, and also other patterns such as corner detectors, long edge detectors, and curved edge detectors. The last four kernels shows the result of convolving three random kernels, which provides further illustration of the diversity of kernels one can build. Each kernel is a $3 \times 3$ array sampled from a Gaussian distribution.
 
 \subsection{Low-Rank Filters}
 Dilation is one way to create a big filter that is parameterized by just a small number of weights, that is, a low-rank filter. This trick can be useful in many contexts where we know that good filters have low-rank structure. Dilation uses this trick to make big kernels, which can capture long-range dependences.
@@ -691,8 +691,8 @@ Separable filters are another kind of low-rank filter that is useful in many app
 \marginnote{When convolving one row and one column vector, $\mathbf{w} = \mathbf{u}^\transpose \circ \mathbf{v}$, the result is the outer product: $w \left[n,m \right] = u\left[n \right] v\left[m \right]$.}[-2cm]
 
 \begin{figure}[h]
-\centerline{
-    \includegraphics[width=.6\linewidth]{./figures/convolutional_neural_nets/kernels_separable_aprox.eps}}
+    \centerline{
+        \includegraphics[width=.6\linewidth]{./figures/convolutional_neural_nets/kernels_separable_aprox.eps}}
     \caption{Two examples of separable filters.}
     \label{fig:convolutional_neural_nets:kernels_separable_aprox}
 \end{figure}
@@ -700,23 +700,23 @@ Separable filters are another kind of low-rank filter that is useful in many app
 
 Some important kernels are nonseparable but can be approximated by a linear combination of a small number of separable filters. For instance, the Gaussian Laplacian is nonseparable but can be approximated by a separable filter as shown here (\fig{\ref{fig:convolutional_neural_nets:laplacian_separable_aprox}}):
 \begin{figure}[h]
-\centerline{
-    \includegraphics[width=.6\linewidth]{./figures/convolutional_neural_nets/laplacian_separable_aprox.eps}}
+    \centerline{
+        \includegraphics[width=.6\linewidth]{./figures/convolutional_neural_nets/laplacian_separable_aprox.eps}}
     \caption{Approximating a Gaussian Laplacian filter as the outer product of two 1D filters.}
     \label{fig:convolutional_neural_nets:laplacian_separable_aprox}
 \end{figure}
 \vspace{-0.4cm}
 
-The diagonal Gaussian derivative is another nonseparable kernel. When using a $3 \times 3$ kernel to approximate it we have: 
+The diagonal Gaussian derivative is another nonseparable kernel. When using a $3 \times 3$ kernel to approximate it we have:
 \begin{equation}
-\mathbf{w} = 
-\begin{bmatrix}
-  0 ~& -2 ~& -2 \\
-  2 ~& 0 ~& -2\\
-  2~& 2 ~& 0
-\end{bmatrix}
+    \mathbf{w} =
+    \begin{bmatrix}
+        0 ~ & -2 ~ & -2 \\
+        2 ~ & 0 ~  & -2 \\
+        2~  & 2 ~  & 0
+    \end{bmatrix}
 \end{equation}
-But we know from \chap{\ref{chapter:image_derivatives}} that this kernel can be written as a linear combination of two separable kernels: $\mathbf{w} = \text{Sobel}_x + \text{Sobel}_y$, as defined in \eqn{\ref{eq:sobel_kernels}}. In general, any $M \times N$ filter can be decomposed as a linear sum of $min(N,M)$ separable filters. The separable filters can be obtained by applying the singular value decomposition (SVD) to the kernel array $\mathbf{w}$. The SVD results in three matrices, $\mathbf{U}$, $\mathbf{S}$ and $\mathbf{V}$, so that $\mathbf{w} = \mathbf{U} \mathbf{S} \mathbf{V}^\transpose$, where the columns of $\mathbf{U}$ and $\mathbf{V}$ are the separable 1D filters and the diagonal values of the diagonal matrix $\mathbf{S}$ are the linear weights. Computational benefits are only obtained when using small linear combinations for large kernels. Also, in a neural network, one could use only separable filters for all the units and the learning could discover ways of combining them in order to build more complex, nonseparable kernels. 
+But we know from \chap{\ref{chapter:image_derivatives}} that this kernel can be written as a linear combination of two separable kernels: $\mathbf{w} = \text{Sobel}_x + \text{Sobel}_y$, as defined in \eqn{\ref{eq:sobel_kernels}}. In general, any $M \times N$ filter can be decomposed as a linear sum of $min(N,M)$ separable filters. The separable filters can be obtained by applying the singular value decomposition (SVD) to the kernel array $\mathbf{w}$. The SVD results in three matrices, $\mathbf{U}$, $\mathbf{S}$ and $\mathbf{V}$, so that $\mathbf{w} = \mathbf{U} \mathbf{S} \mathbf{V}^\transpose$, where the columns of $\mathbf{U}$ and $\mathbf{V}$ are the separable 1D filters and the diagonal values of the diagonal matrix $\mathbf{S}$ are the linear weights. Computational benefits are only obtained when using small linear combinations for large kernels. Also, in a neural network, one could use only separable filters for all the units and the learning could discover ways of combining them in order to build more complex, nonseparable kernels.
 
 % \subsection{Cross-correlation layers}
 % Most implementations of ``convolution" layers actually use cross-correlation rather than convolution, computing $\mathbf{w} \star \xin + b$. The reason we do not worry about the misnomer is that whether you implement the layers with convolution or cross-correlation usually makes no difference for learning. This is because convolution and cross-correlation \textit{span an identical hypothesis space} (any cross-correlation can be converted to an equivalent convolution by flipping the filter horizontally and vertically). However, sometimes it will be important to know whether the filters are doing convolution or cross-correlation. This may come up when examining the learned filters and trying to understand them, or when manipulating filters post-learning.%}[-1.2cm]
@@ -734,8 +734,8 @@ Downsampling layers transform the input tensor to an output tensor that is small
 
 Upsampling layers perform the opposite transformation, outputting a tensor that is larger in the spatial dimensions than the input: $\mathbb{R}^{N \times M} \rightarrow \mathbb{R}^{Ns_n \times Ms_m}$. One kind of upsampling layer can be made as the analogue of strided convolution. Strided convolution convolves then subsamples; this upsampling layer instead dilates the signal then convolves. Starting with a blank image of zeros, $\mathbf{h} = \mathbf{0}$, we set:
 \begin{align}
-    h[ns_n, ms_m] &= \xinnonbold[n, m] & \quad\quad \triangleleft \quad \texttt{dilation}\label{eqn:convolutional_neural_nets:dilation}\\
-    \xout &= \mathbf{w} \star \mathbf{h} + b & \quad\quad \triangleleft \quad \texttt{conv}
+    h[ns_n, ms_m] & = \xinnonbold[n, m]               & \quad\quad \triangleleft \quad \texttt{dilation}\label{eqn:convolutional_neural_nets:dilation} \\
+    \xout         & = \mathbf{w} \star \mathbf{h} + b & \quad\quad \triangleleft \quad \texttt{conv}
 \end{align}
 \marginnote{This equation applies for all integer values of $n \in \{1,\ldots,N\}$ and $m \in \{1,\ldots,M\}$.}[-1.2cm]
 Sometimes the combination of these two layers is called an UpConv layer or a deconvolution layer (but note that deconvolution has a different meaning in signal processing).
@@ -751,7 +751,7 @@ All the operations we have covered above are linear (or affine). It is also poss
 
 {\bf Pooling layers} are downsampling layers that summarize the information in a patch using some aggregate statistic, such as the patch's mean value, called \index{Pooling layer!Mean pooling}{\bf mean pooling}, or its max value, called \index{Pooling layer!Max pooling}{\bf max pooling}, defined as follows:
 \begin{align}
-    \xouti = \max_{i \in \mathcal{N}(i)} \xini & \quad\quad \triangleleft \quad \texttt{max pooling}\label{eqn:convolutional_neural_nets:max_pooling}\\
+    \xouti = \max_{i \in \mathcal{N}(i)} \xini                         & \quad\quad \triangleleft \quad \texttt{max pooling}\label{eqn:convolutional_neural_nets:max_pooling}   \\
     \xouti = \frac{1}{|\mathcal{N}|} \sum_{i \in \mathcal{N}(i)} \xini & \quad\quad \triangleleft \quad \texttt{mean pooling}\label{eqn:convolutional_neural_nets:mean_pooling}
 \end{align}
 \marginnote{The $\mathcal{N}(i)$ indicates the set of indices in the same patch as index $i$.}[-1.6cm]
@@ -766,11 +766,11 @@ Pooling can also be performed across channels, and this can be a way to achieve 
 \subsection{Global Pooling Layers}
 \index{Pooling layer!Global pooling}
 
-One extreme of pooling is to pool over the entire spatial extent of the feature map. Global pooling is a function that maps a $C \times M \times N$ tensor into a vector of length $C$, where $C$ is the number of channels in the input. 
+One extreme of pooling is to pool over the entire spatial extent of the feature map. Global pooling is a function that maps a $C \times M \times N$ tensor into a vector of length $C$, where $C$ is the number of channels in the input.
 
-Global pooling is generally used in layers very close to the output. As before, global pooling can be {\bf global average pooling}, averaging over all the responses of the feature map, or {\bf global max pooling}, taking the max of the feature map.   
+Global pooling is generally used in layers very close to the output. As before, global pooling can be {\bf global average pooling}, averaging over all the responses of the feature map, or {\bf global max pooling}, taking the max of the feature map.
 
-Global pooling removes spatial information from each channel. However, spatial information about input features might be still be available within the output vector if different channels learn to be sensitive to features at different spatial positions. 
+Global pooling removes spatial information from each channel. However, spatial information about input features might be still be available within the output vector if different channels learn to be sensitive to features at different spatial positions.
 
 \subsection{Local Normalization Layers}
 
@@ -794,8 +794,8 @@ CNNs are deep nets that stack convolutional layers in a series, interleaved with
 CNNs come in a large variety of architectures, each suited to a different kind of problem. We will see some of these architectures in \sect{\ref{sec:convolutional_neural_nets:popular_architectures}}. For now we will focus on just one simple architecture that is suited to image classification. This architecture progressively downsamples the image until the last layer makes a single global prediction of the image label (\fig{\ref{fig:convolutional_neural_nets:convnet_motif}}):
 %Stacking sequences of layers $\texttt{conv}, \texttt{non-linearity}, \texttt{subsample}$ over and over results in a prototypical motif of CNNs:
 \begin{figure}[h]
-\centerline{
-    \includegraphics[width=1.0\linewidth]{./figures/convolutional_neural_nets/convnet_motif.pdf}}
+    \centerline{
+        \includegraphics[width=1.0\linewidth]{./figures/convolutional_neural_nets/convnet_motif.pdf}}
     \caption{A CNN architecture for image classification. {\em Photo source}: Fredo Durand.}
     \label{fig:convolutional_neural_nets:convnet_motif}
 \end{figure}
@@ -824,11 +824,11 @@ We will now walk through an example of such a classifier. Let $\mathbf{x} \in \m
 
 
 \begin{align}
-    \mathbf{z}_1[c,:,:] &= \mathbf{w}[c,:,:] \star \mathbf{x} + b[c] &\triangleleft \quad \texttt{conv}: [M \times N] \rightarrow [C \times M \times N]\\
-    h[c,n,m] &= \max(z_1[c,n,m],0) &\triangleleft \quad \texttt{relu}: [C \times M \times N] \rightarrow [C \times M \times N]\\
-    z_2[c] &= \frac{1}{NM} \sum_{n,m} h[c,n,m]  &\triangleleft \quad \texttt{gap}: [C \times M \times N] \rightarrow [C]\\
-    \mathbf{z}_{3} &= \mathbf{W} \mathbf{z}_{2} + \mathbf{c} &\triangleleft \quad \texttt{fc}: [C] \rightarrow [K]\\
-    y[k] &= \frac{e^{-\tau z_3[k]}}{\sum_{l=1}^K e^{-\tau z_3[l]}} &\triangleleft \quad \texttt{softmax}: [K] \rightarrow [K]
+    \mathbf{z}_1[c,:,:] & = \mathbf{w}[c,:,:] \star \mathbf{x} + b[c]              & \triangleleft \quad \texttt{conv}: [M \times N] \rightarrow [C \times M \times N]          \\
+    h[c,n,m]            & = \max(z_1[c,n,m],0)                                     & \triangleleft \quad \texttt{relu}: [C \times M \times N] \rightarrow [C \times M \times N] \\
+    z_2[c]              & = \frac{1}{NM} \sum_{n,m} h[c,n,m]                       & \triangleleft \quad \texttt{gap}: [C \times M \times N] \rightarrow [C]                    \\
+    \mathbf{z}_{3}      & = \mathbf{W} \mathbf{z}_{2} + \mathbf{c}                 & \triangleleft \quad \texttt{fc}: [C] \rightarrow [K]                                       \\
+    y[k]                & = \frac{e^{-\tau z_3[k]}}{\sum_{l=1}^K e^{-\tau z_3[l]}} & \triangleleft \quad \texttt{softmax}: [K] \rightarrow [K]
 \end{align}
 \marginnote{Note that these equations apply for all $c \in \{0,\ldots,C-1\}$, $n \in \{0,\ldots,N-1\}$ and $m \in \{0,\ldots,M-1\}$.}[-4.25cm]
 
@@ -841,9 +841,9 @@ This neural net could be used to solve a $K$-way image classification problem (b
 Such a network is also very easy to define in code, once we have a library of primitives for basic operations like convolution and softmax:
 
 \begin{figure}[h]
-%\centerline{
-\begin{minipage}{1.0\linewidth}
-\begin{minted}[xleftmargin=0.075\linewidth,xrightmargin=0.075\linewidth,
+    %\centerline{
+    \begin{minipage}{1.0\linewidth}
+        \begin{minted}[xleftmargin=0.075\linewidth,xrightmargin=0.075\linewidth,
 fontsize=\fontsize{8.5}{9},
 frame=single,
 framesep=2.5pt,
@@ -860,8 +860,8 @@ z2 = nn.AvgPool2d(h)
 z3 = fc1(z2)
 y = nn.softmax(z3)
 \end{minted}
-\end{minipage}
-%}
+    \end{minipage}
+    %}
 \end{figure}
 
 % \begin{minted}[xleftmargin=0.0\linewidth,xrightmargin=0.0\linewidth,
@@ -878,66 +878,66 @@ y = nn.softmax(z3)
 
 \section{A Worked Example}
 
-In this section, we will analyze the simple network described in \sect{\ref{sec:convolutional_neural_nets:simple_CNN}}, trained to discriminate between horizontal and vertical lines. Each subsection will tackle one aspect of the analysis that should be part of training any large system: (1) training and evaluation, (2) visualize and understand the network, (3) out-of-domain generalization, and (4) identifying vulnerabilities. 
+In this section, we will analyze the simple network described in \sect{\ref{sec:convolutional_neural_nets:simple_CNN}}, trained to discriminate between horizontal and vertical lines. Each subsection will tackle one aspect of the analysis that should be part of training any large system: (1) training and evaluation, (2) visualize and understand the network, (3) out-of-domain generalization, and (4) identifying vulnerabilities.
 
 \subsection{Training and Evaluation}
 
-Let's study one simple classification task. We design a simple image dataset that contains images with lines. The lines can be horizontal or vertical. Each image will contain only one type of line. 
+Let's study one simple classification task. We design a simple image dataset that contains images with lines. The lines can be horizontal or vertical. Each image will contain only one type of line.
 
 We want to design a CNN that will classify the image according to the orientation of the lines that it contains. We define the two output classes as: $0$ (vertical) and $1$ (horizontal). A few samples from the training set are shown in \fig{\ref{fig:convolutional_neural_nets:oriented_bars_cnn_trainingset}}.
 \begin{figure}[h!]
-\centerline{
-\includegraphics[width=1.0\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_trainingset.eps}}
-\caption{A sample of images from the training set. The training set defines the concept we want to learn. In this case we look for lines. But images of lines might not be enough to describe the concept of a line. What is a line? This lack of a precise definition will haunt us later.}
-\label{fig:convolutional_neural_nets:oriented_bars_cnn_trainingset}
+    \centerline{
+        \includegraphics[width=1.0\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_trainingset.eps}}
+    \caption{A sample of images from the training set. The training set defines the concept we want to learn. In this case we look for lines. But images of lines might not be enough to describe the concept of a line. What is a line? This lack of a precise definition will haunt us later.}
+    \label{fig:convolutional_neural_nets:oriented_bars_cnn_trainingset}
 \end{figure}
 
 To solve this problem we use the CNN defined before with two convolutional channels $C=2$ in the first layer. Once we train the network, we can see that it has solve the task perfectly and that the output on the test set is 100 percent correct (there are only three errors out of 10,000 test images). Example images from the test set are shown in \fig{\ref{fig:convolutional_neural_nets:oriented_bars_cnn_testset}}.
 \begin{figure}[h!]
-\includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_testset.eps}
-\caption{A sample of images from the test set. The predicted label is shown at the top.}
-\label{fig:convolutional_neural_nets:oriented_bars_cnn_testset}
+    \includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_testset.eps}
+    \caption{A sample of images from the test set. The predicted label is shown at the top.}
+    \label{fig:convolutional_neural_nets:oriented_bars_cnn_testset}
 \end{figure}
 
 \subsection{Network Visualization}
 
-What has the network learned? How is it solving the problem? One important part of developing a system is to have tools to prove, understand, and debug it. 
+What has the network learned? How is it solving the problem? One important part of developing a system is to have tools to prove, understand, and debug it.
 
-To understand the network it is useful to {\bf visualize} the kernels. \Fig{\ref{fig:convolutional_neural_nets:oriented_bars_cnn_kernels}} shows the two learned $9 \times 9$ kernels. The first one looks like an horizontal derivative of a Gaussian filter (as we saw in \chap{\ref{chapter:image_derivatives}}) and the second one looks like a vertical derivative of a Gaussian (maybe closer to a second derivative). In fact, the DFT of each kernel shows that they are quite selective to a particular band on frequency content in the image.  
+To understand the network it is useful to {\bf visualize} the kernels. \Fig{\ref{fig:convolutional_neural_nets:oriented_bars_cnn_kernels}} shows the two learned $9 \times 9$ kernels. The first one looks like an horizontal derivative of a Gaussian filter (as we saw in \chap{\ref{chapter:image_derivatives}}) and the second one looks like a vertical derivative of a Gaussian (maybe closer to a second derivative). In fact, the DFT of each kernel shows that they are quite selective to a particular band on frequency content in the image.
 
 \begin{figure}
-\includegraphics[width=1.0\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_kernels.eps}
-\caption{Visualization of the learned kernels.}
-\label{fig:convolutional_neural_nets:oriented_bars_cnn_kernels}
+    \includegraphics[width=1.0\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_kernels.eps}
+    \caption{Visualization of the learned kernels.}
+    \label{fig:convolutional_neural_nets:oriented_bars_cnn_kernels}
 \end{figure}
 
 The fully connected layer has learnt the weights:
 \begin{equation}
-\mathbf{W} =  
-\left[
-\begin{array}{cc}
-2.83 & -2.36  \\
--0.60 & 1.14  
-\end{array}
-\right]
+    \mathbf{W} =
+    \left[
+        \begin{array}{cc}
+            2.83  & -2.36 \\
+            -0.60 & 1.14
+        \end{array}
+        \right]
 \end{equation}
-This corresponds to two channel oppositions: the  first feature is the vertical output minus the horizontal output, and the second feature computes the horizontal output minus the vertical one.  
+This corresponds to two channel oppositions: the  first feature is the vertical output minus the horizontal output, and the second feature computes the horizontal output minus the vertical one.
 
 \subsection{Out-of-Domain Generalization}
 \index{Out-of-distribution generalization}
 
-What do we learn by analyzing how the trained network works? One interesting outcome is that can we predict how the network we defined before generalizes beyond the distribution of the training set, to {\bf out-of-domain test samples}. 
+What do we learn by analyzing how the trained network works? One interesting outcome is that can we predict how the network we defined before generalizes beyond the distribution of the training set, to {\bf out-of-domain test samples}.
 \marginnote{Another term for out-of-domain is \textbf{out-of-distribution}.}[-0.4cm]
 
-For instance, it seems natural to think that the network should still perform well in classifying whether the image contains vertical or horizontal structures even if they are not lines. We can test this hypothesis by generating images that match our idea of orientation. The following test images (\fig{\ref{fig:ref:convolutional_neural_nets:oriented_bars_cnn_generalization}}) contain different oriented structures but no lines, and still captures our notion of what should be the correct generalization of the behavior. 
+For instance, it seems natural to think that the network should still perform well in classifying whether the image contains vertical or horizontal structures even if they are not lines. We can test this hypothesis by generating images that match our idea of orientation. The following test images (\fig{\ref{fig:ref:convolutional_neural_nets:oriented_bars_cnn_generalization}}) contain different oriented structures but no lines, and still captures our notion of what should be the correct generalization of the behavior.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_generalization.eps}
-\caption{Out-of-domain test examples. The predicted label is shown at the top.}
-\label{fig:ref:convolutional_neural_nets:oriented_bars_cnn_generalization}
+    \includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_generalization.eps}
+    \caption{Out-of-domain test examples. The predicted label is shown at the top.}
+    \label{fig:ref:convolutional_neural_nets:oriented_bars_cnn_generalization}
 \end{figure}
 
-In fact, the network seems to perform correctly even with these new images that come from a distribution different from the training set. 
+In fact, the network seems to perform correctly even with these new images that come from a distribution different from the training set.
 
 \subsection{Identifying Vulnerabilities}
 
@@ -946,17 +946,17 @@ Does the network solve the task that we had in mind? Can we predict which inputs
 We saw that the output of the first layer does not really look for {\em lines}, instead it looks at where the energy is in the Fourier domain. So, we could fool the classifier by creating lines that for us look like vertical lines, but that have the energy content in the wrong side of the Fourier domain. We saw one trick to do this in \chap{\ref{chapter:fourier_analysis}}: modulation. If we multiply an image containing horizontal lines, by a sinusoidal wave, $\cos (\pi n / 3)$, we can move the spectral content horizontally as shown in \fig{\ref{fig:convolutional_neural_nets:oriented_bars_cnn_test_adversarial_creation1}}.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial_creation1.eps}
-\caption{Creating a new out-of-domain test image obtained by multiplying an in-domain test image with horizontal lines (left image its DFT) with a sinusoidal wave. The resulting image and its DFT are shown on the right).}
-\label{fig:convolutional_neural_nets:oriented_bars_cnn_test_adversarial_creation1}
+    \includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial_creation1.eps}
+    \caption{Creating a new out-of-domain test image obtained by multiplying an in-domain test image with horizontal lines (left image its DFT) with a sinusoidal wave. The resulting image and its DFT are shown on the right).}
+    \label{fig:convolutional_neural_nets:oriented_bars_cnn_test_adversarial_creation1}
 \end{figure}
 
 The lines still look horizontal to us, but their spectral content now is higher in the region that overlaps with the vertical line detector learned by the network. Indeed, when the network processes images that have lines with this {\em sinusoidal texture}, it produces the wrong classification results for all the images (\fig{\ref{fig:convolutional_neural_nets:oriented_bars_cnn_test_adversarial}})!
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial.eps}
-\caption{Classification results on out-of-domain test images created by modulation.}
-\label{fig:convolutional_neural_nets:oriented_bars_cnn_test_adversarial}
+    \includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial.eps}
+    \caption{Classification results on out-of-domain test images created by modulation.}
+    \label{fig:convolutional_neural_nets:oriented_bars_cnn_test_adversarial}
 \end{figure}
 
 We have just designed an \index{Adversarial example}{\bf adversarial example} manually! The question then could be as follows: If it is not detecting line orientations, what is it really detecting? Our analysis of the learned kernels had the answer. \marginnote{For complex architectures, {\bf adversarial examples} are obtained as an optimization problem: What is the minimal perturbation of an input that will produce the wrong output in the network?}[-0.9cm]
@@ -970,20 +970,20 @@ One of the most important concepts when working with CNNs is the feature map. A 
 
 \Fig{\ref{fig:convolutional_neural_nets:feature_maps_schematic}} shows the interplay between feature maps and filter banks in a CNN:
 \begin{figure}[h!]
-\centerline{
-\includegraphics[width=1.0\linewidth]{./figures/convolutional_neural_nets/feature_maps_schematic.pdf}}
-\caption{The interplay between feature maps and filters banks in a CNN. You can think of the input image itself as an R, G, B feature map and the output logits as a 1x1 resolution feature map with class logits as the channels.}
-\label{fig:convolutional_neural_nets:feature_maps_schematic}
+    \centerline{
+        \includegraphics[width=1.0\linewidth]{./figures/convolutional_neural_nets/feature_maps_schematic.pdf}}
+    \caption{The interplay between feature maps and filters banks in a CNN. You can think of the input image itself as an R, G, B feature map and the output logits as a 1x1 resolution feature map with class logits as the channels.}
+    \label{fig:convolutional_neural_nets:feature_maps_schematic}
 \end{figure}
 
-The input to the network is an image and the output is a vector of logits. We can actually think of these inputs and outputs as feature maps as well: the input is just a feature map with red, green, and blue channels and the output is a 1x1 resolution feature map with class logits as the channels. 
+The input to the network is an image and the output is a vector of logits. We can actually think of these inputs and outputs as feature maps as well: the input is just a feature map with red, green, and blue channels and the output is a 1x1 resolution feature map with class logits as the channels.
 
 Now let's look at the feature maps in a real network, AlexNet~\cite{krizhevsky2012imagenet}. \Fig{\ref{fig:convolutional_neural_nets:alexnet_feature_maps}} shows what these look like after the first and second convolutional layer of the network:
 \begin{figure}[h!]
-\centerline{
-\includegraphics[width=1.0\linewidth]{./figures/convolutional_neural_nets/alexnet_feature_maps.pdf}}
-\caption{A selection of feature maps and filters in AlexNet. The layer 1 filter with the orange dashed border slides over the input image and produces the layer 1 feature map with the orange dashed border. The layer 2 filter with the green dashed border slides over the layer 1 feature maps and produces the layer 2 feature map with the green dashed border.}
-\label{fig:convolutional_neural_nets:alexnet_feature_maps}
+    \centerline{
+        \includegraphics[width=1.0\linewidth]{./figures/convolutional_neural_nets/alexnet_feature_maps.pdf}}
+    \caption{A selection of feature maps and filters in AlexNet. The layer 1 filter with the orange dashed border slides over the input image and produces the layer 1 feature map with the orange dashed border. The layer 2 filter with the green dashed border slides over the layer 1 feature maps and produces the layer 2 feature map with the green dashed border.}
+    \label{fig:convolutional_neural_nets:alexnet_feature_maps}
 \end{figure}
 
 There are a few things to notice in this figure. First, the spatial resolution of the feature maps get lower as we go deeper into the network, and the number of channels increases. This is common in CNNs: each layer downsamples and adds channels to partially compensate for the reduction in resolution. Second, while on the first layer the feature maps are sensitive to basic patterns in the input image -- edges, lines, etc -- the maps become more abstracted as we go deeper. This is typical of image classifier networks: channels in the shallow layers capture basic image features and channels in the deeper layers increasingly correspond to class semantics (e.g., one channel might be a heatmap of where the ``bird'' pixels are).
@@ -992,7 +992,7 @@ There are a few things to notice in this figure. First, the spatial resolution o
 
 \begin{figure}[h]
     \centerline{
-    \includegraphics[width=1.0\linewidth]{figures/convolutional_neural_nets/feature_maps_pca_viz.pdf}
+        \includegraphics[width=1.0\linewidth]{figures/convolutional_neural_nets/feature_maps_pca_viz.pdf}
     }
     \caption{PCA visualization of feature maps in three convolutional networks. Because each of these networks has a different number of layers, we select 5 that are evenly spaced from the first to last convolutional feature map.}
     \label{fig:convolutional_neural_nets:feature_maps_pca_viz}
@@ -1006,139 +1006,139 @@ There are a few things to notice in this figure. First, the spatial resolution o
 The receptive fields of two example neurons in a CNN are shown below (\fig{\ref{fig:convolutional_neural_networks:RFs}}):
 \begin{figure}[h!]
     \centerline{
-    \begin{minipage}{0.49\linewidth}
-    \centerline{
-    \begin{tikzpicture}
-        \begin{scope}[rotate=-90]
-        %
-        \def\Nnodes{7}
-        \def\Nlayers{4}
-        \def\layerheight{1.2}
-        \def\neuronrad{0.1}
-        \def\neuronstep{0.3}
-        % draw all nodes
-        \foreach \y in {1,...,\Nlayers} {
-            \foreach \x in {1,...,\Nnodes} {
-                \draw [fill=white] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
-            }
-        }
-        % draw nodes in RF
-        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${x_2[3]}$] (myNode) at (\neuronstep*4,\layerheight*3) {};
-        %
-        \foreach \x in {3,...,5} {
-            \draw [fill=black] (\neuronstep*\x,\layerheight*2) circle (\neuronrad);
-        }
-        %
-        \foreach \x in {3,...,5} {
-            \draw [fill=black] (\neuronstep*\x,\layerheight) circle (\neuronrad);
-        }
-        %
-        \foreach \x in {2,...,6} {
-            \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
-        }
-        % draw all edges
-        \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
-        \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
-        \foreach \y in {1,...,\NlayersMinusOne} {
-            \foreach \x in {1,...,\Nnodes} {
-                \foreach \k in {-1,...,1} {
-                    \pgfmathtruncatemacro{\isodd}{mod(\y,2)}
-                    \ifnum\isodd=1
+        \begin{minipage}{0.49\linewidth}
+            \centerline{
+                \begin{tikzpicture}
+                    \begin{scope}[rotate=-90]
+                        %
+                        \def\Nnodes{7}
+                        \def\Nlayers{4}
+                        \def\layerheight{1.2}
+                        \def\neuronrad{0.1}
+                        \def\neuronstep{0.3}
+                        % draw all nodes
+                        \foreach \y in {1,...,\Nlayers} {
+                                \foreach \x in {1,...,\Nnodes} {
+                                        \draw [fill=white] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
+                                    }
+                            }
+                        % draw nodes in RF
+                        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${x_2[3]}$] (myNode) at (\neuronstep*4,\layerheight*3) {};
+                        %
+                        \foreach \x in {3,...,5} {
+                                \draw [fill=black] (\neuronstep*\x,\layerheight*2) circle (\neuronrad);
+                            }
+                        %
+                        \foreach \x in {3,...,5} {
+                                \draw [fill=black] (\neuronstep*\x,\layerheight) circle (\neuronrad);
+                            }
+                        %
+                        \foreach \x in {2,...,6} {
+                                \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
+                            }
+                        % draw all edges
+                        \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
+                        \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
+                        \foreach \y in {1,...,\NlayersMinusOne} {
+                                \foreach \x in {1,...,\Nnodes} {
+                                        \foreach \k in {-1,...,1} {
+                                                \pgfmathtruncatemacro{\isodd}{mod(\y,2)}
+                                                \ifnum\isodd=1
+                                                    \foreach \k in {-1,...,1} {
+                                                            \pgfmathtruncatemacro{\xk}{\x+\k}
+                                                            \ifnum \xk>0
+                                                                \ifnum \xk<\NNodesPlusOne
+                                                                    \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
+                                                                \fi
+                                                            \fi
+                                                        }
+                                                \else
+                                                    \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\x,\layerheight*\y-\neuronrad);
+                                                \fi
+                                            }
+                                    }
+                            }
+                        % draw edges in RF
                         \foreach \k in {-1,...,1} {
-                            \pgfmathtruncatemacro{\xk}{\x+\k}
-                            \ifnum \xk>0
-                            \ifnum \xk<\NNodesPlusOne
-                                \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
-                            \fi
-                            \fi
-                        }
-                    \else
-                        \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\x,\layerheight*\y-\neuronrad);
-                    \fi
-                }
-            }
-        }
-        % draw edges in RF
-        \foreach \k in {-1,...,1} {
-            \pgfmathtruncatemacro{\xk}{4+\k}
-            \draw [thick] [nn_edge] (\neuronstep*\xk,\layerheight*3+\neuronrad-\layerheight) -- (\neuronstep*4,\layerheight*3-\neuronrad);
-        }
-        \foreach \k in {-1,...,1} {
-            \pgfmathtruncatemacro{\xk}{4+\k}
-            \draw [thick] [nn_edge] (\neuronstep*\xk,\layerheight*2+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*2-\neuronrad);
-        }
-        \foreach \kk in {-1,...,1} {
-            \foreach \k in {-1,...,1} {
-                \pgfmathtruncatemacro{\xkk}{4+\k+\kk}
-                \pgfmathtruncatemacro{\xk}{4+\k}
-                \draw [thick] [nn_edge] (\neuronstep*\xkk,\layerheight+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight-\neuronrad);
-            }
-        }
-        % draw layer labels
-        \draw (-0.2,\layerheight*0.5) node {\small \texttt{conv}};
-        \draw (-0.2,\layerheight*1.5) node {\small \texttt{relu}};
-        \draw (-0.2,\layerheight*2.5) node {\small \texttt{conv}};
-        \end{scope}
-    \end{tikzpicture}
-    }
-    \end{minipage}
-    \begin{minipage}{0.49\linewidth}
-    \centerline{
-    \begin{tikzpicture}
-        \begin{scope}[rotate=-90]
-        %
-        \def\Nnodes{7}
-        \def\Nlayers{4}
-        \def\layerheight{1.2}
-        \def\neuronrad{0.1}
-        \def\neuronstep{0.3}
-        % draw all edges
-        \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
-        \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
-        \foreach \y in {1,...,\NlayersMinusOne} {
-            \foreach \x in {1,...,\Nnodes} {
-                \foreach \k in {-1,...,1} {
-                    \pgfmathtruncatemacro{\isodd}{mod(\y,2)}
-                    \ifnum\isodd=1
+                                \pgfmathtruncatemacro{\xk}{4+\k}
+                                \draw [thick] [nn_edge] (\neuronstep*\xk,\layerheight*3+\neuronrad-\layerheight) -- (\neuronstep*4,\layerheight*3-\neuronrad);
+                            }
                         \foreach \k in {-1,...,1} {
-                            \pgfmathtruncatemacro{\xk}{\x+\k}
-                            \ifnum \xk>0
-                            \ifnum \xk<\NNodesPlusOne
-                                \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
-                            \fi
-                            \fi
-                        }
-                    \else
-                        \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\x,\layerheight*\y-\neuronrad);
-                    \fi
-                    }
+                                \pgfmathtruncatemacro{\xk}{4+\k}
+                                \draw [thick] [nn_edge] (\neuronstep*\xk,\layerheight*2+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*2-\neuronrad);
+                            }
+                        \foreach \kk in {-1,...,1} {
+                                \foreach \k in {-1,...,1} {
+                                        \pgfmathtruncatemacro{\xkk}{4+\k+\kk}
+                                        \pgfmathtruncatemacro{\xk}{4+\k}
+                                        \draw [thick] [nn_edge] (\neuronstep*\xkk,\layerheight+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight-\neuronrad);
+                                    }
+                            }
+                        % draw layer labels
+                        \draw (-0.2,\layerheight*0.5) node {\small \texttt{conv}};
+                        \draw (-0.2,\layerheight*1.5) node {\small \texttt{relu}};
+                        \draw (-0.2,\layerheight*2.5) node {\small \texttt{conv}};
+                    \end{scope}
+                \end{tikzpicture}
             }
-        }
-        % draw all nodes
-        \foreach \y in {1,...,\Nlayers} {
-            \foreach \x in {1,...,\Nnodes} {
-                \draw [fill=white] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
+        \end{minipage}
+        \begin{minipage}{0.49\linewidth}
+            \centerline{
+                \begin{tikzpicture}
+                    \begin{scope}[rotate=-90]
+                        %
+                        \def\Nnodes{7}
+                        \def\Nlayers{4}
+                        \def\layerheight{1.2}
+                        \def\neuronrad{0.1}
+                        \def\neuronstep{0.3}
+                        % draw all edges
+                        \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
+                        \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
+                        \foreach \y in {1,...,\NlayersMinusOne} {
+                                \foreach \x in {1,...,\Nnodes} {
+                                        \foreach \k in {-1,...,1} {
+                                                \pgfmathtruncatemacro{\isodd}{mod(\y,2)}
+                                                \ifnum\isodd=1
+                                                    \foreach \k in {-1,...,1} {
+                                                            \pgfmathtruncatemacro{\xk}{\x+\k}
+                                                            \ifnum \xk>0
+                                                                \ifnum \xk<\NNodesPlusOne
+                                                                    \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
+                                                                \fi
+                                                            \fi
+                                                        }
+                                                \else
+                                                    \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\x,\layerheight*\y-\neuronrad);
+                                                \fi
+                                            }
+                                    }
+                            }
+                        % draw all nodes
+                        \foreach \y in {1,...,\Nlayers} {
+                                \foreach \x in {1,...,\Nnodes} {
+                                        \draw [fill=white] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
+                                    }
+                            }
+                        % draw nodes in RF
+                        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${x_1[5]}$] (myNode) at (\neuronstep*6,\layerheight) {};
+                        %
+                        \foreach \x in {5,...,7} {
+                                \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
+                            }
+                        % draw edges in RF
+                        \foreach \k in {-1,...,1} {
+                                \pgfmathtruncatemacro{\xk}{6+\k}
+                                \draw [thick] [nn_edge] (\neuronstep*\xk,\layerheight+\neuronrad-\layerheight) -- (\neuronstep*6,\layerheight-\neuronrad);
+                            }
+                        % draw layer labels
+                        \draw (-0.2,\layerheight*0.5) node {\small \texttt{conv}};
+                        \draw (-0.2,\layerheight*1.5) node {\small \texttt{relu}};
+                        \draw (-0.2,\layerheight*2.5) node {\small \texttt{conv}};
+                    \end{scope}
+                \end{tikzpicture}
             }
-        }
-        % draw nodes in RF
-        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${x_1[5]}$] (myNode) at (\neuronstep*6,\layerheight) {};
-        %
-        \foreach \x in {5,...,7} {
-            \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
-        }
-        % draw edges in RF
-        \foreach \k in {-1,...,1} {
-            \pgfmathtruncatemacro{\xk}{6+\k}
-            \draw [thick] [nn_edge] (\neuronstep*\xk,\layerheight+\neuronrad-\layerheight) -- (\neuronstep*6,\layerheight-\neuronrad);
-        }
-        % draw layer labels
-        \draw (-0.2,\layerheight*0.5) node {\small \texttt{conv}};
-        \draw (-0.2,\layerheight*1.5) node {\small \texttt{relu}};
-        \draw (-0.2,\layerheight*2.5) node {\small \texttt{conv}};
-        \end{scope}
-    \end{tikzpicture}
-    }
-    \end{minipage}
+        \end{minipage}
     }
     \caption{Receptive fields in a CNN. The black filled neurons are within the receptive fields of each labeled neuron (left: ${x_2[3]}$, right: ${x_1[5]}$).}
     \label{fig:convolutional_neural_networks:RFs}
@@ -1151,14 +1151,14 @@ In \sect{\ref{sec:convolutional_neural_nets:simple_CNN}} we saw a CNN that outpu
 
 An example is given below:
 \begin{align}
-    \mathbf{z}_1[c_1,:,:] &= \sum_{c=0}^2 \mathbf{w}_1[c,c_1,:,:] \star \mathbf{x} + b_1[c_1]  &\triangleleft \quad \texttt{conv}\\
-    &&[3 \times N \times M] \rightarrow [C_1 \times N \times M]\nonumber\\
-    h[c_1,n,m] &= \max(z_1[c_1,n,m],0) &\triangleleft \quad \texttt{relu}\\
-    &&[C_1 \times N \times M] \rightarrow [C_1 \times N \times M]\nonumber\\
-    \mathbf{z}_2[c_2,:,:] &= \sum_{c_1=0}^{C_1-1} \mathbf{w}_2[c_1,c_2,:,:] \star \mathbf{x} + b_2[c_2] &\triangleleft \quad \texttt{conv}\\
-    &&[C_1 \times N \times M] \rightarrow [C_2 \times N \times M]\nonumber\\
-    y[k,n,m] &= \frac{e^{-\tau z_2[k,n,m]}}{\sum_{l=1}^K e^{-\tau z_2[l,n,m]}} &\triangleleft \quad \texttt{softmax}\\
-    &&[K \times N \times M] \rightarrow [K \times N \times M]\nonumber
+    \mathbf{z}_1[c_1,:,:] & = \sum_{c=0}^2 \mathbf{w}_1[c,c_1,:,:] \star \mathbf{x} + b_1[c_1]           & \triangleleft \quad \texttt{conv}                                    \\
+                          &                                                                              & [3 \times N \times M] \rightarrow [C_1 \times N \times M]\nonumber   \\
+    h[c_1,n,m]            & = \max(z_1[c_1,n,m],0)                                                       & \triangleleft \quad \texttt{relu}                                    \\
+                          &                                                                              & [C_1 \times N \times M] \rightarrow [C_1 \times N \times M]\nonumber \\
+    \mathbf{z}_2[c_2,:,:] & = \sum_{c_1=0}^{C_1-1} \mathbf{w}_2[c_1,c_2,:,:] \star \mathbf{x} + b_2[c_2] & \triangleleft \quad \texttt{conv}                                    \\
+                          &                                                                              & [C_1 \times N \times M] \rightarrow [C_2 \times N \times M]\nonumber \\
+    y[k,n,m]              & = \frac{e^{-\tau z_2[k,n,m]}}{\sum_{l=1}^K e^{-\tau z_2[l,n,m]}}             & \triangleleft \quad \texttt{softmax}                                 \\
+                          &                                                                              & [K \times N \times M] \rightarrow [K \times N \times M]\nonumber
 \end{align}
 %\marginnote{All these equations apply for all $i \in \{0,\ldots,C\}$, where $C$ is the number of channels, whatever it may be, on each layer.}[-4cm]
 
@@ -1166,65 +1166,65 @@ In \fig{\ref{fig:convolutional_neural_networks:image_to_image_arch}} we visualiz
 \marginnote{Notation reminder: nodes that are squares indicate that they represent multiple channels (each is a vector of neurons)}[-1.4cm]
 \begin{figure}
     \centerline{
-    \begin{tikzpicture}
-        \begin{scope}[rotate=-90]
-        %
-        \def\Nnodes{9}
-        \def\Nlayers{5}
-        \def\layerheight{1.2}
-        \def\neuronrad{0.1}
-        \def\neuronstep{0.35}
-        % draw input and output images
-        \draw (\neuronstep*2.75, -0.25*\layerheight) node[inner sep=0] {\includegraphics[width=0.14\linewidth]{./figures/convolutional_neural_nets/birds_skewed_input.pdf}};
-        \draw (\neuronstep*2.75, \layerheight*5.25) node[inner sep=0] {\includegraphics[width=0.14\linewidth]{./figures/convolutional_neural_nets/birds_skewed_output.pdf}};
-        % draw all edges
-        \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
-        \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
-        \foreach \y in {1,...,\NlayersMinusOne} {
-            \foreach \x in {1,...,\Nnodes} {
-                \pgfmathtruncatemacro{\isodd}{mod(\y,2)}
-                \ifnum\isodd=1
-                    \foreach \k in {-1,...,1} {
-                        \pgfmathtruncatemacro{\xk}{\x+\k}
-                        \ifnum \xk>0
-                        \ifnum \xk<\NNodesPlusOne
-                            \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
-                        \fi
-                        \fi
+        \begin{tikzpicture}
+            \begin{scope}[rotate=-90]
+                %
+                \def\Nnodes{9}
+                \def\Nlayers{5}
+                \def\layerheight{1.2}
+                \def\neuronrad{0.1}
+                \def\neuronstep{0.35}
+                % draw input and output images
+                \draw (\neuronstep*2.75, -0.25*\layerheight) node[inner sep=0] {\includegraphics[width=0.14\linewidth]{./figures/convolutional_neural_nets/birds_skewed_input.pdf}};
+                \draw (\neuronstep*2.75, \layerheight*5.25) node[inner sep=0] {\includegraphics[width=0.14\linewidth]{./figures/convolutional_neural_nets/birds_skewed_output.pdf}};
+                % draw all edges
+                \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
+                \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
+                \foreach \y in {1,...,\NlayersMinusOne} {
+                        \foreach \x in {1,...,\Nnodes} {
+                                \pgfmathtruncatemacro{\isodd}{mod(\y,2)}
+                                \ifnum\isodd=1
+                                    \foreach \k in {-1,...,1} {
+                                            \pgfmathtruncatemacro{\xk}{\x+\k}
+                                            \ifnum \xk>0
+                                                \ifnum \xk<\NNodesPlusOne
+                                                    \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
+                                                \fi
+                                            \fi
+                                        }
+                                \else
+                                    \draw [thin] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\x,\layerheight*\y-\neuronrad);
+                                \fi
+                            }
                     }
-                \else
-                    \draw [thin] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\x,\layerheight*\y-\neuronrad);
-                \fi
-            }
-        }
-        % draw all nodes
-        \foreach \y in {1,...,\Nlayers} {
-            \foreach \x in {1,...,\Nnodes} {
-                %\draw [fill=white] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
-                \draw [fill=white] (\neuronstep*\x-\neuronrad,\y*\layerheight-\layerheight-\neuronrad) rectangle ++(\neuronrad*2,\neuronrad*2);
-            }
-        }
-        % draw nodes in RF
-        %\foreach \x in {5,...,7} {
-        %    \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
-        %}
-        % draw edges in RF
-        \foreach \k in {-1,...,1} {
-            \pgfmathtruncatemacro{\xk}{2+\k}
-            \draw [thick, color=param_color_dark] [nn_edge] (\neuronstep*\xk,\layerheight+\neuronrad-\layerheight) -- (\neuronstep*2,\layerheight-\neuronrad);
-        }
-        \foreach \k in {-1,...,1} {
-            \pgfmathtruncatemacro{\xk}{2+\k}
-            \draw [thick, color=param_color_dark] [nn_edge] (\neuronstep*\xk,\layerheight*3+\neuronrad-\layerheight) -- (\neuronstep*2,\layerheight*3-\neuronrad);
-        }
-        %
-        % draw layer labels
-        \draw (-0.2,\layerheight*0.5) node {\small \texttt{conv}};
-        \draw (-0.2,\layerheight*1.5) node {\small \texttt{relu}};
-        \draw (-0.2,\layerheight*2.5) node {\small \texttt{conv}};
-        \draw (-0.2,\layerheight*3.5) node {\small \texttt{softmax}};
-        \end{scope}
-    \end{tikzpicture}
+                % draw all nodes
+                \foreach \y in {1,...,\Nlayers} {
+                        \foreach \x in {1,...,\Nnodes} {
+                                %\draw [fill=white] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
+                                \draw [fill=white] (\neuronstep*\x-\neuronrad,\y*\layerheight-\layerheight-\neuronrad) rectangle ++(\neuronrad*2,\neuronrad*2);
+                            }
+                    }
+                % draw nodes in RF
+                %\foreach \x in {5,...,7} {
+                %    \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
+                %}
+                % draw edges in RF
+                \foreach \k in {-1,...,1} {
+                        \pgfmathtruncatemacro{\xk}{2+\k}
+                        \draw [thick, color=param_color_dark] [nn_edge] (\neuronstep*\xk,\layerheight+\neuronrad-\layerheight) -- (\neuronstep*2,\layerheight-\neuronrad);
+                    }
+                \foreach \k in {-1,...,1} {
+                        \pgfmathtruncatemacro{\xk}{2+\k}
+                        \draw [thick, color=param_color_dark] [nn_edge] (\neuronstep*\xk,\layerheight*3+\neuronrad-\layerheight) -- (\neuronstep*2,\layerheight*3-\neuronrad);
+                    }
+                %
+                % draw layer labels
+                \draw (-0.2,\layerheight*0.5) node {\small \texttt{conv}};
+                \draw (-0.2,\layerheight*1.5) node {\small \texttt{relu}};
+                \draw (-0.2,\layerheight*2.5) node {\small \texttt{conv}};
+                \draw (-0.2,\layerheight*3.5) node {\small \texttt{softmax}};
+            \end{scope}
+        \end{tikzpicture}
     }
     \caption{A 1D slice of a CNN that maps an image to an image. The input is the photo of size $3 \times N \times M$ and the output is a class probability map of size $K \times N \times M$; we visualize the corresponding label map on the right (per-pixel argmax over output probabilities). The blue arrows are the learnable parameters. The gray arrows share the weights of the blue arrows.}
     \label{fig:convolutional_neural_networks:image_to_image_arch}
@@ -1251,151 +1251,151 @@ To see why, consider a CNN that processes a 1D signal, and outputs a feature map
 This is easiest to understand with a visual proof, which we give in \fig{\ref{fig:convolutional_neural_networks:CNN_as_filter}} (pointwise nonlinearities are omitted for clarity):
 \begin{figure}[h!]
     \centerline{
-    \begin{minipage}{0.49\linewidth}
-    \centerline{
-    \begin{tikzpicture}
-        \begin{scope}[rotate=-90]
-        %
-        \def\Nnodes{12}
-        \def\Nlayers{3}
-        \def\layerheight{1.2}
-        \def\neuronrad{0.1}
-        \def\neuronstep{0.3}
-        % draw all nodes
-        \foreach \y in {1,...,\Nlayers} {
-            \foreach \x in {1,...,\Nnodes} {
-                \draw [fill=white] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
+        \begin{minipage}{0.49\linewidth}
+            \centerline{
+                \begin{tikzpicture}
+                    \begin{scope}[rotate=-90]
+                        %
+                        \def\Nnodes{12}
+                        \def\Nlayers{3}
+                        \def\layerheight{1.2}
+                        \def\neuronrad{0.1}
+                        \def\neuronstep{0.3}
+                        % draw all nodes
+                        \foreach \y in {1,...,\Nlayers} {
+                                \foreach \x in {1,...,\Nnodes} {
+                                        \draw [fill=white] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
+                                    }
+                            }
+                        % draw nodes in RF
+                        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${\mathbf{x}_L[i]}$] (myNode) at (\neuronstep*3,\layerheight*2) {};
+                        %
+                        \foreach \x in {2,...,4} {
+                                \draw [fill=black] (\neuronstep*\x,\layerheight) circle (\neuronrad);
+                            }
+                        \foreach \x in {1,...,5} {
+                                \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
+                            }
+                        %
+                        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${\mathbf{x}_L[j]}$] (myNode) at (\neuronstep*10,\layerheight*2) {};
+                        %
+                        \foreach \x in {9,...,11} {
+                                \draw [fill=black] (\neuronstep*\x,\layerheight) circle (\neuronrad);
+                            }
+                        \foreach \x in {8,...,12} {
+                                \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
+                            }
+                        % draw all edges
+                        \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
+                        \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
+                        \foreach \y in {1,...,\NlayersMinusOne} {
+                                \foreach \x in {1,...,\Nnodes} {
+                                        \foreach \k in {-1,...,1} {
+                                                \pgfmathtruncatemacro{\xk}{\x+\k}
+                                                \ifnum \xk>0
+                                                    \ifnum \xk<\NNodesPlusOne
+                                                        \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
+                                                    \fi
+                                                \fi
+                                            }
+                                    }
+                            }
+                        % draw edges in RF
+                        \def\colors{{"cyan", "magenta", "orange"}}
+                        \foreach \k in {-1,...,1} {
+                                \pgfmathtruncatemacro{\xk}{3+\k}
+                                \pgfmathparse{\colors[\k+1]}
+                                \edef\colorvalue{\pgfmathresult}
+                                \draw [ultra thick, color=\colorvalue] [nn_edge] (\neuronstep*\xk,\layerheight*2+\neuronrad-\layerheight) -- (\neuronstep*3,\layerheight*2-\neuronrad);
+                            }
+                        \def\colors{{"purple", "yellow", "teal"}}
+                        \foreach \kk in {-1,...,1} {
+                                \pgfmathparse{\colors[\kk+1]}
+                                \edef\colorvalue{\pgfmathresult}
+                                \foreach \k in {-1,...,1} {
+                                        \pgfmathtruncatemacro{\xkk}{3+\k+\kk}
+                                        \pgfmathtruncatemacro{\xk}{3+\k}
+                                        \draw [ultra thick, color=\colorvalue] [nn_edge] (\neuronstep*\xkk,\layerheight+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight-\neuronrad);
+                                    }
+                            }
+                        %
+                        \def\colors{{"cyan", "magenta", "orange"}}
+                        \foreach \k in {-1,...,1} {
+                                \pgfmathtruncatemacro{\xk}{10+\k}
+                                \pgfmathparse{\colors[\k+1]}
+                                \edef\colorvalue{\pgfmathresult}
+                                \draw [ultra thick, color=\colorvalue] [nn_edge] (\neuronstep*\xk,\layerheight*2+\neuronrad-\layerheight) -- (\neuronstep*10,\layerheight*2-\neuronrad);
+                            }
+                        \def\colors{{"purple", "yellow", "teal"}}
+                        \foreach \kk in {-1,...,1} {
+                                \pgfmathparse{\colors[\kk+1]}
+                                \edef\colorvalue{\pgfmathresult}
+                                \foreach \k in {-1,...,1} {
+                                        \pgfmathtruncatemacro{\xkk}{10+\k+\kk}
+                                        \pgfmathtruncatemacro{\xk}{10+\k}
+                                        \draw [ultra thick, color=\colorvalue] [nn_edge] (\neuronstep*\xkk,\layerheight+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight-\neuronrad);
+                                    }
+                            }
+                    \end{scope}
+                \end{tikzpicture}
             }
-        }
-        % draw nodes in RF
-        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${\mathbf{x}_L[i]}$] (myNode) at (\neuronstep*3,\layerheight*2) {};
-        %
-        \foreach \x in {2,...,4} {
-            \draw [fill=black] (\neuronstep*\x,\layerheight) circle (\neuronrad);
-        }
-        \foreach \x in {1,...,5} {
-            \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
-        }
-        %
-        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${\mathbf{x}_L[j]}$] (myNode) at (\neuronstep*10,\layerheight*2) {};
-        %
-        \foreach \x in {9,...,11} {
-            \draw [fill=black] (\neuronstep*\x,\layerheight) circle (\neuronrad);
-        }
-        \foreach \x in {8,...,12} {
-            \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
-        }
-        % draw all edges
-        \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
-        \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
-        \foreach \y in {1,...,\NlayersMinusOne} {
-            \foreach \x in {1,...,\Nnodes} {
-                \foreach \k in {-1,...,1} {
-                    \pgfmathtruncatemacro{\xk}{\x+\k}
-                    \ifnum \xk>0
-                    \ifnum \xk<\NNodesPlusOne
-                        \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
-                    \fi
-                    \fi
-                }
+        \end{minipage}
+        \begin{minipage}{0.49\linewidth}
+            \centerline{
+                \begin{tikzpicture}
+                    \begin{scope}[rotate=-90]
+                        %
+                        \def\Nnodes{12}
+                        \def\Nlayers{3}
+                        \def\layerheight{1.2}
+                        \def\neuronrad{0.1}
+                        \def\neuronstep{0.3}
+                        % draw all nodes
+                        \foreach \y in {1,\Nlayers} {
+                                \foreach \x in {1,...,\Nnodes} {
+                                        \draw [fill=white] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
+                                    }
+                            }
+                        \foreach \x in {1,...,\Nnodes} {
+                                \draw [thin, color=gray!33] (\neuronstep*\x,2*\layerheight-\layerheight) circle (\neuronrad);
+                            }
+                        % draw nodes in RF
+                        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${\mathbf{x}_L[i]}$] (myNode) at (\neuronstep*3,\layerheight*2) {};
+                        %
+                        \foreach \x in {1,...,5} {
+                                \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
+                            }
+                        %
+                        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${\mathbf{x}_L[j]}$] (myNode) at (\neuronstep*10,\layerheight*2) {};
+                        %
+                        \foreach \x in {8,...,12} {
+                                \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
+                            }
+                        % draw all edges
+                        \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
+                        \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
+                        \foreach \y in {1,...,\NlayersMinusOne} {
+                                \foreach \x in {1,...,\Nnodes} {
+                                        \foreach \k in {-1,...,1} {
+                                                \pgfmathtruncatemacro{\xk}{\x+\k}
+                                                \ifnum \xk>0
+                                                    \ifnum \xk<\NNodesPlusOne
+                                                        \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
+                                                    \fi
+                                                \fi
+                                            }
+                                    }
+                            }
+                        % draw edges in RF
+                        \draw [thick, fill=gray!33, opacity=0.5] (\neuronstep*1-0.1,\neuronrad+0.1) -- (\neuronstep*3-0.1,\layerheight*2-\neuronrad-0.1) -- (\neuronstep*3+0.1,\layerheight*2-\neuronrad-0.1) -- (\neuronstep*5+0.1,\neuronrad+0.1) -- cycle;
+                        \node at (\neuronstep*3,\layerheight) {$F$};
+                        %
+                        \draw [thick, fill=gray!33, opacity=0.5] (\neuronstep*8-0.1,\neuronrad+0.1) -- (\neuronstep*10-0.1,\layerheight*2-\neuronrad-0.1) -- (\neuronstep*10+0.1,\layerheight*2-\neuronrad-0.1) -- (\neuronstep*12+0.1,\neuronrad+0.1) -- cycle;
+                        \node at (\neuronstep*10,\layerheight) {$F$};
+                    \end{scope}
+                \end{tikzpicture}
             }
-        }
-        % draw edges in RF
-        \def\colors{{"cyan", "magenta", "orange"}}
-        \foreach \k in {-1,...,1} {
-            \pgfmathtruncatemacro{\xk}{3+\k}
-            \pgfmathparse{\colors[\k+1]}
-            \edef\colorvalue{\pgfmathresult}
-            \draw [ultra thick, color=\colorvalue] [nn_edge] (\neuronstep*\xk,\layerheight*2+\neuronrad-\layerheight) -- (\neuronstep*3,\layerheight*2-\neuronrad);
-        }
-        \def\colors{{"purple", "yellow", "teal"}}
-        \foreach \kk in {-1,...,1} {
-            \pgfmathparse{\colors[\kk+1]}
-            \edef\colorvalue{\pgfmathresult}
-            \foreach \k in {-1,...,1} {
-                \pgfmathtruncatemacro{\xkk}{3+\k+\kk}
-                \pgfmathtruncatemacro{\xk}{3+\k}
-                \draw [ultra thick, color=\colorvalue] [nn_edge] (\neuronstep*\xkk,\layerheight+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight-\neuronrad);
-            }
-        }
-        %
-        \def\colors{{"cyan", "magenta", "orange"}}
-        \foreach \k in {-1,...,1} {
-            \pgfmathtruncatemacro{\xk}{10+\k}
-            \pgfmathparse{\colors[\k+1]}
-            \edef\colorvalue{\pgfmathresult}
-            \draw [ultra thick, color=\colorvalue] [nn_edge] (\neuronstep*\xk,\layerheight*2+\neuronrad-\layerheight) -- (\neuronstep*10,\layerheight*2-\neuronrad);
-        }
-        \def\colors{{"purple", "yellow", "teal"}}
-        \foreach \kk in {-1,...,1} {
-            \pgfmathparse{\colors[\kk+1]}
-            \edef\colorvalue{\pgfmathresult}
-            \foreach \k in {-1,...,1} {
-                \pgfmathtruncatemacro{\xkk}{10+\k+\kk}
-                \pgfmathtruncatemacro{\xk}{10+\k}
-                \draw [ultra thick, color=\colorvalue] [nn_edge] (\neuronstep*\xkk,\layerheight+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight-\neuronrad);
-            }
-        }
-        \end{scope}
-    \end{tikzpicture}
-    }
-    \end{minipage}
-    \begin{minipage}{0.49\linewidth}
-    \centerline{
-    \begin{tikzpicture}
-        \begin{scope}[rotate=-90]
-        %
-        \def\Nnodes{12}
-        \def\Nlayers{3}
-        \def\layerheight{1.2}
-        \def\neuronrad{0.1}
-        \def\neuronstep{0.3}
-        % draw all nodes
-        \foreach \y in {1,\Nlayers} {
-            \foreach \x in {1,...,\Nnodes} {
-                \draw [fill=white] (\neuronstep*\x,\y*\layerheight-\layerheight) circle (\neuronrad);
-            }
-        }
-        \foreach \x in {1,...,\Nnodes} {
-            \draw [thin, color=gray!33] (\neuronstep*\x,2*\layerheight-\layerheight) circle (\neuronrad);
-        }
-        % draw nodes in RF
-        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${\mathbf{x}_L[i]}$] (myNode) at (\neuronstep*3,\layerheight*2) {};
-        %
-        \foreach \x in {1,...,5} {
-            \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
-        }
-        %
-        \node [circle, draw, fill=black, inner sep=\neuronrad*0.7 cm, minimum size=\neuronrad, label=right:${\mathbf{x}_L[j]}$] (myNode) at (\neuronstep*10,\layerheight*2) {};
-        %
-        \foreach \x in {8,...,12} {
-            \draw [fill=black] (\neuronstep*\x,0) circle (\neuronrad);
-        }
-        % draw all edges
-        \pgfmathtruncatemacro{\NlayersMinusOne}{\Nlayers - 1}
-        \pgfmathtruncatemacro{\NNodesPlusOne}{\Nnodes + 1}
-        \foreach \y in {1,...,\NlayersMinusOne} {
-            \foreach \x in {1,...,\Nnodes} {
-                \foreach \k in {-1,...,1} {
-                    \pgfmathtruncatemacro{\xk}{\x+\k}
-                    \ifnum \xk>0
-                    \ifnum \xk<\NNodesPlusOne
-                        \draw [thin, color=gray!33] [nn_edge] (\neuronstep*\x,\layerheight*\y+\neuronrad-\layerheight) -- (\neuronstep*\xk,\layerheight*\y-\neuronrad);
-                    \fi
-                    \fi
-                }
-            }
-        }
-        % draw edges in RF
-        \draw [thick, fill=gray!33, opacity=0.5] (\neuronstep*1-0.1,\neuronrad+0.1) -- (\neuronstep*3-0.1,\layerheight*2-\neuronrad-0.1) -- (\neuronstep*3+0.1,\layerheight*2-\neuronrad-0.1) -- (\neuronstep*5+0.1,\neuronrad+0.1) -- cycle;
-        \node at (\neuronstep*3,\layerheight) {$F$};
-        %
-        \draw [thick, fill=gray!33, opacity=0.5] (\neuronstep*8-0.1,\neuronrad+0.1) -- (\neuronstep*10-0.1,\layerheight*2-\neuronrad-0.1) -- (\neuronstep*10+0.1,\layerheight*2-\neuronrad-0.1) -- (\neuronstep*12+0.1,\neuronrad+0.1) -- cycle;
-        \node at (\neuronstep*10,\layerheight) {$F$};
-        \end{scope}
-    \end{tikzpicture}
-    }
-    \end{minipage}
+        \end{minipage}
     }
     \caption{A CNN is a non-linear filter. Edge colors indicate shared weights; two edges with the same color have the same weight. The colors demonstrate that the same function $F$ is applied to each patch of input nodes.}
     \label{fig:convolutional_neural_networks:CNN_as_filter}
@@ -1433,7 +1433,7 @@ Chopping up into small patches like this is sufficient for many vision problems 
 
 
 \paragraph*{Property \#2: Processing Each Patch Identically}
-For images, convolution is an especially suitable strategy because visual content tends to be \textit{translation invariant}, and, as we learned in previous chapters, the convolution operator is also translation invariant. 
+For images, convolution is an especially suitable strategy because visual content tends to be \textit{translation invariant}, and, as we learned in previous chapters, the convolution operator is also translation invariant.
 
 Typically, objects can appear anywhere in an image and look the same, like the birds in the photo from \fig{\ref{fig:convolutional_neural_nets:CNNs_as_patch_processing}}. This is because as the birds fly across the frame their position changes but their identity and appearance does not. More generally, as a camera pans across a scene, the content shifts in position but is otherwise unchanged.
 
@@ -1456,16 +1456,16 @@ In \chap{\ref{chapter:image_pyramids}}, we encountered image pyramids that inclu
 Encoder and decoder networks will appear many times in this book, and can be made from many different architectures, including those that are not neural nets. In the context of CNNs, encoders are typically nets that take an image as input and then downsample it, layer by layer, until producing a much lower-dimensional feature map as output. A decoder is the opposite, taking a set of low-dimensional features as input, then upsampling them, layer by layer, until producing an image as the final output. An example of an encoder is an image classifier and an example of a decoder is an image generator (covered in \chap{\ref{chapter:generative_models}}). These two architectural patterns are shown in \fig{\ref{fig:convolutional_neural_nets:encoders_and_decoders}}.
 \begin{figure}[h]
     \centerline{
-    \includegraphics[width=0.75\linewidth]{./figures/convolutional_neural_nets/encoders_and_decoders.pdf}
+        \includegraphics[width=0.75\linewidth]{./figures/convolutional_neural_nets/encoders_and_decoders.pdf}
     }
-    \caption{A convolutional encoder (top) and a convolutional decoder (bottom). The exact ordering of the operations (e.g., downsample before or after the non-linearity) is just an example and may vary in different encoder and decoder models. The $\mathbf{z}$ is a feature map or vector of neural activations, and is sometimes called an \textbf{embedding} (see \chap{\ref{chapter:representation_learning}}).} 
+    \caption{A convolutional encoder (top) and a convolutional decoder (bottom). The exact ordering of the operations (e.g., downsample before or after the non-linearity) is just an example and may vary in different encoder and decoder models. The $\mathbf{z}$ is a feature map or vector of neural activations, and is sometimes called an \textbf{embedding} (see \chap{\ref{chapter:representation_learning}}).}
     \label{fig:convolutional_neural_nets:encoders_and_decoders}
 \end{figure}
 
 One powerful thing you can do with encoders and decoders is to put them together, forming an \index{Encoder-decoder}\textbf{encoder-decoder}. Such an architecture first encodes the input image into a low-dimensional representation, then decodes the representation back into an image output. This is therefore a suitable architecture for image-to-image problems, and it has a few advantages over the image-to-image CNNs we saw in \sect{\ref{sec:convolutional_neural_networks:spatial_outputs}}: 1) by downsampling, the internal feature maps are smaller, using less memory and computation, 2) encoder-decoders introduce an \index{Information bottleneck}\textbf{information bottleneck} -- i.e. the representation between the encoder and decoder is low-dimensional and can only transmit so much information -- and this forces abstraction. This latter concept is one we will study in much greater detail in \chap{\ref{chapter:representation_learning}}, where we will see several benefits of compressing a signal. A schematic of the encoder-decoder architecture is shown in \fig{\ref{fig:convolutional_neural_nets:encoder_decoders}}.
 \begin{figure}[h]
     \centerline{
-    \includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/encoder_decoder_arch.pdf}
+        \includegraphics[width=1\linewidth]{./figures/convolutional_neural_nets/encoder_decoder_arch.pdf}
     }
     \caption{Encoder-decoder architecture. In this example, the input is an image and the output is a segmentation map.}
     \label{fig:convolutional_neural_nets:encoder_decoders}
@@ -1483,7 +1483,7 @@ To circumvent this problem, we can add \index{Skip connections}{\bf skip connect
 Adding skip connections to an encoder-decoder results in an architecture known as a {\bf U-Net}~\cite{ronneberger2015u}. In this architecture, skip connections are arranged in a mirror pattern, where layer $l$ is connected directly to layer $(L-l)$. The output of a skip connection must somehow be reintegrated into the network. U-nets do this by concatenating the activations from the prior layer to the activations on the later layer, along the channel dimension. This architecture can maintain the information-bottleneck of the encoder-decoder, with its incumbent benefits in terms of memory and compute efficiency and forced abstraction, while also allowing residual information to flow through the skip connections, thereby not sacrificing the ability to output high-frequency spatial predictions. U-Nets look a lot like the steerable pyramids from \chap{\ref{chapter:image_pyramids}}, which also consistent of a downsampling \textit{analysis} path followed by an upsampling \textit{synthesis} path, with skip connections in between mirror image stages in the pathways. The main difference is that the U-Net has \textit{learned filters} and \textit{nonlinearities}. A schematic of a U-net is given in \fig{\ref{fig:convolutional_neural_nets:unet}}.
 \begin{figure}[h]
     \centerline{
-    \includegraphics[width=0.85\linewidth]{./figures/convolutional_neural_nets/unet.pdf}
+        \includegraphics[width=0.85\linewidth]{./figures/convolutional_neural_nets/unet.pdf}
     }
     \caption{U-net architecture. Each block contains a series of layers. The skip connections concatenate activations.}
     \label{fig:convolutional_neural_nets:unet}
@@ -1491,7 +1491,7 @@ Adding skip connections to an encoder-decoder results in an architecture known a
 
 \subsection{ResNets}
 \index{ResNet}
-Another popular architecture that uses skip connections is called {\bf Residual Networks} or {\bf ResNets}~\cite{he2016deep}.\marginnote{See also Highway Networks~\cite{srivastava2015highway}, a related architecture that uses a form of skip connection but controlled by multiplicative gates.}[-0.4cm] 
+Another popular architecture that uses skip connections is called {\bf Residual Networks} or {\bf ResNets}~\cite{he2016deep}.\marginnote{See also Highway Networks~\cite{srivastava2015highway}, a related architecture that uses a form of skip connection but controlled by multiplicative gates.}[-0.4cm]
 In the context of ResNets, skip connections are called \index{Residual connections}{\bf residual connections}. This kind of skip connection is \textit{added} to the output of a block of layers $F$:
 \begin{align}
     \xout = F(\xin) + \xin \quad\quad \triangleleft \quad \texttt{residual block}
@@ -1501,7 +1501,7 @@ In a {\bf residual block} like this, you can think of $F$ as a \textit{residual}
 It is easy for a residual block to simply perform an identity mapping, it just has to learn to set $F$ to zero. Because of this, if we stack many residual blocks in a row, it can end up that the net learns to use only a subset of them. If we set the number of stacked residual blocks to be very large then the net can essentially learn how deep to make itself, using as many blocks as necessary to solve the task. ResNets often exploit this fact by being very deep; for example, they may be hundreds of blocks deep. \Fig{\ref{fig:convolutional_neural_nets:resnet}} depicts a 5 block deep ResNet.
 \begin{figure}[h]
     \centerline{
-    \includegraphics[width=0.85\linewidth]{./figures/convolutional_neural_nets/resnet.pdf}
+        \includegraphics[width=0.85\linewidth]{./figures/convolutional_neural_nets/resnet.pdf}
     }
     \caption{ResNet architecture. Each block contains a series of layers. The skip connections add activations from one block to the next.}
     \label{fig:convolutional_neural_nets:resnet}

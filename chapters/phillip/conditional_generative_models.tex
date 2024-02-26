@@ -9,7 +9,7 @@ In the preceding chapters, we learned about two uses of generative models: (1) a
 
 \section{A Motivating Example: Image Colorization}
 
-To motivate this use case, consider the following problem. We wish to colorize a black and white photo, that is, we wish to predict the color of each pixel in a black and white photo. 
+To motivate this use case, consider the following problem. We wish to colorize a black and white photo, that is, we wish to predict the color of each pixel in a black and white photo.
 
 Now, we already have seen some tools we could apply to this problem. First we will try to solve it with least-squares regression. Second, with softmax classification. We will see that both approaches fall short of a good solution. This will motivate the necessity of conditional generative models, which turn out to solve the colorization problem quite nicely, and can produce nearly photorealistic results.
 
@@ -22,42 +22,42 @@ This kind of regression fits a function $f: \mathcal{X} \rightarrow \mathcal{Y}$
 % figure of point prediction
 
 \begin{figure}
-\centerline{
-\begin{minipage}{0.15\linewidth}
-    \begin{tikzpicture}
-        \node[] (image) at (0,0) {\includegraphics[width=0.75\linewidth]{./figures/conditional_generative_models/cgen_tshirts_obs.pdf}};
-        \draw (0,-1) node {Observation};
-    \end{tikzpicture}
-    \vspace{-0.2cm}
-\end{minipage}
-\hfill
-\begin{minipage}{0.84\linewidth}
-    \begin{subfigure}[b]{0.5\textwidth}
-        \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/cgen_tshirts_gt.pdf}
-    \caption*{(a) True data distribution}
-    \vspace{0.4cm}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.5\textwidth}
-        \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/cgen_tshirts_point.pdf}
-    \caption*{(b) Point prediction (regression)}
-    \vspace{0.4cm}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.5\textwidth}
-        \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/cgen_tshirts_gauss.pdf}
-    \caption*{(c) Gaussian}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.5\textwidth}
-        \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/cgen_tshirts_class.pdf}
-    \caption*{(d) Softmax (classification)}
-    \end{subfigure}
-    \hfill
-\end{minipage}
-}
-\caption{Different kinds of predictive distributions.}
-\label{fig:conditional_generative_models:tshirts}
+    \centerline{
+        \begin{minipage}{0.15\linewidth}
+            \begin{tikzpicture}
+                \node[] (image) at (0,0) {\includegraphics[width=0.75\linewidth]{./figures/conditional_generative_models/cgen_tshirts_obs.pdf}};
+                \draw (0,-1) node {Observation};
+            \end{tikzpicture}
+            \vspace{-0.2cm}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.84\linewidth}
+            \begin{subfigure}[b]{0.5\textwidth}
+                \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/cgen_tshirts_gt.pdf}
+                \caption*{(a) True data distribution}
+                \vspace{0.4cm}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[b]{0.5\textwidth}
+                \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/cgen_tshirts_point.pdf}
+                \caption*{(b) Point prediction (regression)}
+                \vspace{0.4cm}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[b]{0.5\textwidth}
+                \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/cgen_tshirts_gauss.pdf}
+                \caption*{(c) Gaussian}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[b]{0.5\textwidth}
+                \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/cgen_tshirts_class.pdf}
+                \caption*{(d) Softmax (classification)}
+            \end{subfigure}
+            \hfill
+        \end{minipage}
+    }
+    \caption{Different kinds of predictive distributions.}
+    \label{fig:conditional_generative_models:tshirts}
 \end{figure}
 
 What if there are multiple equally valid answers? Taking a color image and making it grayscale is a many-to-one mapping: for any given grayscale value, there are many different color values that could have projected to that value of gray. This means that the colorization problem is fundamentally ambiguous, and there may be multiple valid color solutions for any grayscale input. A point estimate is bound to be a poor inference in this case, since a point estimate can only predict one of the multiple possible solutions.
@@ -92,7 +92,7 @@ The first is not such a big issue. You can see its effect in \fig{\ref{fig:condi
 The second issue is much more severe. If we are predicting the $a$-value of a single pixel, then the classification approach says there are $k$ possible values it could take on. This approach can be extended to predicting $ab$-values: we come up with a list of discrete color classes, like \texttt{red}, \texttt{orange}, \texttt{turquoise}, and so forth. But to tile the two-dimensional space of $ab$-values will require $k^2$ color classes, if we wish to retain a resolution of $k$ for both $a$ and $b$. Nonetheless, we can still do this using a reasonable number of classes, and it might look like as shown in \fig{\ref{fig:conditional_generative_models:color_quantization}}.
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=0.8\linewidth]{./figures/conditional_generative_models/color_quantization.pdf}
+        \includegraphics[width=0.8\linewidth]{./figures/conditional_generative_models/color_quantization.pdf}
     }
     \caption{The funny shape of the $lab$ color gamut is because not every $ab$ value maps to a valid pixel color. When working with predictions over $lab$ color space, we may map $ab$ values that fall outside the gamut (valid range) to the nearest in-gamut value.}
     \label{fig:conditional_generative_models:color_quantization}
@@ -109,8 +109,8 @@ To circumvent this curse of dimensionality, we can turn to factorization: rather
 \marginnote{Note the similarity between this image model and the ``independent pixels'' model we saw in \eqn{\ref{eq:histmodel}} in \chap{\ref{chapter:stat_image_models}}. The present model can represent images with more structure because rather than assuming the pixels are all completely independent (i.e., marginally independent), it only assumes the pixel colors are \textit{conditionally} independent, conditioned on the luminance image (which provides a great deal of structure).}[-0.8cm]
 The underlying assumption of this factorization is one of conditional independence: each pixel's $ab$ value is considered to be conditionally independent from all other pixels' $ab$ values, given the observed luminance (of all pixels). This is a very common assumption in image modeling problems: in fact, \textit{whenever} you use least-squares regression for a multidimensional prediction, you are implicitly making this same assumption. To see this, suppose you are predicting a vector $\mathbf{y}$ from an observed vector $\mathbf{x}$, and your prediction is $\hat{\mathbf{y}} = f(\mathbf{x})$. Then, we can write the least-squares objective ($L_2$) as:
 \begin{align}
-    -\norm{\hat{\mathbf{y}} - \mathbf{y}}^2_2 &= \sum_i -(\hat{y}_i - y_i)^2\\
-    &= \log \prod_i \phi(\hat{y}_i,y_i)
+    -\norm{\hat{\mathbf{y}} - \mathbf{y}}^2_2 & = \sum_i -(\hat{y}_i - y_i)^2      \\
+                                              & = \log \prod_i \phi(\hat{y}_i,y_i)
 \end{align}
 The loss factorizes as a product over pairwise potentials. Therefore, by the Hammersley-Clifford theorem (\chap{\ref{chapter:probabilistic_graphical_models}}), the $L_2$ loss implies a probability distribution that treats all true values $y_i$ as independent from one another, given all the predictions $\hat{y}_i$. The predictions are a function of just the input $\mathbf{x}$, so the implication is that all the true values $y_i$ are independent from one another given the observation $\mathbf{x}$. Therefore, we have arrived at our conditional independence assumption: each dimension's predicted value is assumed to be independent of each other dimension's predicted values, given the observed input. This is a huge assumption and rarely true of prediction problems in computer vision!
 
@@ -140,8 +140,8 @@ This causes problems. Let's return to our t-shirt example. We will use a per-pix
 
 \marginnote{
     A real example of color flipping from \cite{zhang2016colorful}. The model is unsure whether the shirt, and the background, are blue or red, so it chaotically alternates between these two options.\\[6pt]
-\centerline{
-    \includegraphics[width=.5\linewidth]{./figures/conditional_generative_models/color_flipping_cic.jpg}}
+    \centerline{
+        \includegraphics[width=.5\linewidth]{./figures/conditional_generative_models/color_flipping_cic.jpg}}
 }[-4cm]
 
 %\paragraph{What distinguishes conditional generative models from other kinds of prediction?} 
@@ -160,13 +160,13 @@ In the previous section, we learned that standard approaches to prediction are i
 
 Conditional generative models are a general family of prediction methods that:
 \begin{itemize}
-    \item Model a multimodal distribution of predictions, and 
+    \item Model a multimodal distribution of predictions, and
     \item Model joint structure.
 \end{itemize}
 
 Methods that model joint structure in the output space are called \index{Structured prediction}\textbf{structured prediction} methods—they don't factorize the output into independent potentials conditioned on the input. Conditional generative modeling is a structured prediction approach that models a full distribution of possibilities over the joint configuration of outputs.
 
-\subsection{Relationship to Conditional Random Fields} 
+\subsection{Relationship to Conditional Random Fields}
 The conditional random fields (CRFs) from \chap{\ref{chapter:probabilistic_graphical_models}} are one kind of model that fits this definition. Now we will see some other ones. The big difference is that CRFs make predictions via \textit{thinking slow}~\cite{kahneman2011thinking}: given a query observation, you run belief propagation or another iterative inference algorithm to arrive at a prediction. The conditional generative models we will see in this section \textit{think fast}: they do inference through a single forward pass of a neural net. Sometimes the thinking fast approach is referred to as \index{Amortized inference}\textbf{amortized inference}, where the idea is that the cost of inference is amortized over a training phase. This training phase learns a direct mapping from inputs to outputs that approximates the solution we would have gotten if we did exact inference on that input.
 
 
@@ -176,7 +176,7 @@ We saw a bunch of unconditional generative models in the previous chapters. How 
 
 % can we make a table for this?
 
-\subsection{Conditional Generative Adversarial Networks} 
+\subsection{Conditional Generative Adversarial Networks}
 \index{Generative adversarial network!Conditional}
 We can make a generative adversarial network (GAN; \sect{\ref{sec:generative_models:GANs}}) conditional simply by adding $\mathbf{x}$ as an input to both the generator and the discriminator:
 \begin{align}
@@ -206,23 +206,23 @@ In \textbf{conditional VAEs} (\textbf{cVAEs}), we restrict our attention to late
 \begin{align}
     p_{\theta}(\mathbf{y} \given \mathbf{x}) = \int_{\mathbf{z}} p_{\theta}(\mathbf{y} \given \mathbf{z}, \mathbf{x})p_{\mathbf{z}}(\mathbf{z})d\mathbf{z} \quad\quad \triangleleft \quad\text{cVAE likelihood model}
 \end{align}\marginnote{This corresponds to this graphical model:\\
-\medbreak
+    \medbreak
     \centering
     \includegraphics[width=0.15\linewidth]{./figures/conditional_generative_models/graphical_model_x_z_to_y.pdf}
 }[-2.1cm]
 The idea is that $\mathbf{z}$ should only encode bits of information about $\mathbf{y}$ that are \textit{independent} from whatever $\mathbf{x}$ already tells us about $\mathbf{y}$. For example, suppose that we are trying to predict the motion of a billiard ball bouncing around in a video sequence. We are given a single frame $\mathbf{x}$ and asked to predict the next frame $\mathbf{y}$. Only knowing $\mathbf{x}$ we can't know whether the ball will move up, down, diagonally, and so on, but we \textit{can} know what color the ball will be in the next frame (it must be the same as the previous frame) and the rough position on the screen of the ball (it can't have moved too far). Therefore, the only missing information about $\mathbf{y}$, given we know $\mathbf{x}$, is the velocity of the ball. Naturally, then, if the model learns to interpret $\mathbf{z}$ as coding for velocity, we would have a perfect prediction $p_{\theta}(\mathbf{y} \given \mathbf{z}, \mathbf{x})$ (one that places max likelihood on the observed next frame $\mathbf{y}$), and marginalizing over all the possible $\mathbf{z}$ values would place max likelihood on the data ($p_{\theta}(\mathbf{y} \given \mathbf{x})$). This is what ends up happening in a cVAE (or, to be precise, it is one solution that maximizes the cVAE objective; it is not guaranteed to be the solution that is arrived at, but it is a good model of what tends to happen in practice). \Fig{\ref{fig:conditional_generative_models:cVAE_ball_bouncing_example}} shows this scenario.
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=0.6\linewidth]{./figures/conditional_generative_models/cVAE_ball_bouncing_example.pdf}
+        \includegraphics[width=0.6\linewidth]{./figures/conditional_generative_models/cVAE_ball_bouncing_example.pdf}
     }
     \caption{A scenario where a yellow ball is moving across a plane. The observation, $\mathbf{x}$, is a static frame. From that observation, we know what will be the color and rough position of the ball in the next frame, $\mathbf{y}$, but we don't know what direction it will have moved, because the velocity of the ball is unobserved. Therefore, velocity is a latent variable and one solution to the cVAE objective will be to encode in the model's latent variables ($\mathbf{z}$) the velocity of the ball, as is depicted here.}
     \label{fig:conditional_generative_models:cVAE_ball_bouncing_example}
 \end{figure}
 
-Just like regular VAEs, cVAEs also have an encoder, which acts to predict the optimal importance sampling distribution $p_{\theta}(Z \given \mathbf{x}, \mathbf{y})$. In practice, this means that a cVAE can be trained just like a regular VAE except that the encoder takes the conditioning information, $\mathbf{x}$, as input (in addition to $\mathbf{y}$), and the decoder also takes in $\mathbf{x}$ (in addition to $\mathbf{z}$). Figure \ref{fig:conditional_generative_models:cVAE_ball_bouncing_example_nets} depicts this setting.  
+Just like regular VAEs, cVAEs also have an encoder, which acts to predict the optimal importance sampling distribution $p_{\theta}(Z \given \mathbf{x}, \mathbf{y})$. In practice, this means that a cVAE can be trained just like a regular VAE except that the encoder takes the conditioning information, $\mathbf{x}$, as input (in addition to $\mathbf{y}$), and the decoder also takes in $\mathbf{x}$ (in addition to $\mathbf{z}$). Figure \ref{fig:conditional_generative_models:cVAE_ball_bouncing_example_nets} depicts this setting.
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=0.9\linewidth]{./figures/conditional_generative_models/cVAE_ball_bouncing_example_nets.pdf}
+        \includegraphics[width=0.9\linewidth]{./figures/conditional_generative_models/cVAE_ball_bouncing_example_nets.pdf}
     }
     \caption{cVAE architecture. The dotted lines indicate that the \textit{target encoder} is only used during training; at test time, usage follows the solid path.}
     \label{fig:conditional_generative_models:cVAE_ball_bouncing_example_nets}
@@ -230,11 +230,11 @@ Just like regular VAEs, cVAEs also have an encoder, which acts to predict the op
 
 %\paragraph{VAEs} To make a VAE conditional, just let the decoder look at $\mathbf{x}$. Then the %encoder will learn to just encode into $\mathbf{z}$ the information about %$\mathbf{y}$ that is not given by $\mathbf{x}$.
 
-\subsection{Conditional Autoregressive Models} 
-\index{Autoregressive model!Conditional} 
+\subsection{Conditional Autoregressive Models}
+\index{Autoregressive model!Conditional}
 Autoregressive models (\sect{\ref{sec:generative_models:autoregressive}}) are already modeling a sequence of conditional distributions. So, to condition them on some inputs $\mathbf{x}$, we can simply concatenate $\mathbf{x}$ as a prefix to the sequence of $y$ values we are modeling, yielding the new sequence: $[x_1, \ldots, x_m, y_1, \ldots, y_n]$. The probability model factorizes as:
 \begin{align}
-    p_{\theta}(\mathbf{y} \given \mathbf{x}) &= \prod_{i=1}^n p_{\theta}(y_i \given y_1, \ldots, y_{i-1}, x_1, \ldots, x_m)
+    p_{\theta}(\mathbf{y} \given \mathbf{x}) & = \prod_{i=1}^n p_{\theta}(y_i \given y_1, \ldots, y_{i-1}, x_1, \ldots, x_m)
 \end{align}
 Each distribution in this product is a prediction of the next item in a sequence given the previous items, which is no different than what we had for unconditional autoregressive models. Therefore, the tools for modeling unconditional autoregressive distributions are also appropriate for modeling conditional autoregressive distributions. From an implementation perspective, the same exact code will handle both cases, just depending on whether you prefix the sequence or not. %This has practical consequences: if you train an autoregressive model over your complete data (pixels, labels, etc), then \textit{any} conditional prediction of some variables given other variables can be read off ``for free" (without retraining) from the trained model. Most other generative models do not have this property, and require retraining on expensive inference to yield conditional variants. However, it's important to note that even with autoregressive models we have a tradeoff: the most efficient way to model a conditional distribution is to prefix the sequence with the conditioning information and never train the model 
 
@@ -257,7 +257,7 @@ An example where we condition on text is shown in \fig{\ref{fig:conditional_gene
 The intuition is that if we give $f_{\theta}$ a description of the image as an additional input, then it can do a better job at solving its prediction task. Because of this, $f_{\theta}$ will become sensitive to the text command, and if you give different text it will denoise toward a different image—an image that matches that text! In \chap{\ref{chapter:VLMs}} we will describe in more detail a particular neural architecture for text-to-image synthesis, which is based on this intuition.
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/text_conditional_diffusion_model.pdf}
+        \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/text_conditional_diffusion_model.pdf}
     }
     \caption{Text-conditional diffusion model.}
     \label{fig:conditional_generative_models:text_conditional_diffusion_model}
@@ -283,7 +283,7 @@ Image-to-image problems are mapping problems where the input is an image and the
 % \end{figure}
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=0.9\linewidth]{./figures/conditional_generative_models/pix2pix_facades_arch.pdf}
+        \includegraphics[width=0.9\linewidth]{./figures/conditional_generative_models/pix2pix_facades_arch.pdf}
     }
     \caption{The pix2pix~\cite{pix2pix2017} model applied to translating a facade layout map into a photo of the facade. The model was trained on the CMP Facades Database~\cite{Tylecek13} and the input and ground truth images shown here are from that dataset.}
     \label{fig:conditional_generative_models:pix2pix_facades_arch}
@@ -292,10 +292,10 @@ Image-to-image problems are mapping problems where the input is an image and the
 Notice that we have omitted the noise inputs here; instead the generator only takes as input the image $\mathbf{x}$. It turns out that in this setting the noise is not really a necessary input, and many implementations omit it. This is because the input image $\mathbf{x}$ has enough entropy by itself, and you don't necessarily need additional noise to create variety in the outputs of the model. The downside of this approach is that you only get one prediction $\mathbf{y}$ for each input $\mathbf{x}$.
 
 One way to think about this setup is that it is a regression problem with a \textit{learned loss function} $d_{
-\phi}$, a view shown in \fig{\ref{fig:conditional_generative_models:cGAN_as_learned_loss}}.
+            \phi}$, a view shown in \fig{\ref{fig:conditional_generative_models:cGAN_as_learned_loss}}.
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=0.9\linewidth]{./figures/conditional_generative_models/cGAN_as_learned_loss.pdf}
+        \includegraphics[width=0.9\linewidth]{./figures/conditional_generative_models/cGAN_as_learned_loss.pdf}
     }
     \caption{The discriminator of a GAN as a learned loss function.}
     \label{fig:conditional_generative_models:cGAN_as_learned_loss}
@@ -315,7 +315,7 @@ where $k \times k$ is the patch size. Notice that this operation is equivalent t
 The PatchGAN strategy has two advantages over just scoring the whole image as real or synthetic with a classifier architecture: (1) it can be easier to model if a patch is real or synthetic than to model if an entire image is real or synthetic ($d_{\phi}^{\texttt{patch}}$ needs fewer parameters), (2) there are more patches in the training data than their are images. These two properities give PatchGAN discriminators a statistical advantage over whole image discrimatinators (fewer parameters fit to more data). The disadvantage is that the PatchGAN only has the architectural capacity to penalize errors that are observable within a single patch. This can be seen by training models with different discriminator patch sizes and observing the results. We show this in \fig{\ref{fig:conditional_generative_models:patchgan_patch_size_variations}}. %for a conditional GAN trained to map from architectural label maps to building facade images (the label colors indicate whether that region of the image contains a window, door, column, etc.).
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/patchgan_patch_size_variations.pdf}
+        \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/patchgan_patch_size_variations.pdf}
     }
     \caption{Varying the receptive field (patch size) of the convolutional discriminator affects what kinds of structure the discriminator enforces. These results are from \cite{pix2pix2017}}.
     \label{fig:conditional_generative_models:patchgan_patch_size_variations}
@@ -340,7 +340,7 @@ A $1\times1$ discriminator can only observe a single pixel at a time and cannot 
 In the preceding section we saw how to solve image-to-image translation by treating it just like a supervised regression problem, except using a learned loss function given by a GAN discriminator. This approach works great when we have lots of training data pairs $\{\mathbf{x}, \mathbf{y}\}$ to learn from. Unfortunately, very often, paired training data is hard to obtain. For example, consider the task of translating a photo into a Cezanne painting (\fig{\ref{fig:conditional_generative_models:cyclegan_teaser}}):
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=0.6\linewidth]{./figures/conditional_generative_models/cyclegan_teaser.pdf}
+        \includegraphics[width=0.6\linewidth]{./figures/conditional_generative_models/cyclegan_teaser.pdf}
     }
     \caption{A style transfer example from the CycleGAN paper~\cite{CycleGAN2017}. \textit{Input photo source}: Alexei A. Efros.}
     \label{fig:conditional_generative_models:cyclegan_teaser}
@@ -351,7 +351,7 @@ The task depicted here is to predict: What would it have looked like if Cezanne 
 How could this be done? We can't have solved it with paired training data because, in this setting, paired data is extremely hard to come by. We would have to resurrect Cezanne and ask him to paint for us a bunch of new scenes, one for each photo in our desired training set. But is all that effort really necessary? You and I, as humans, can certainly imagine the answer to the previous question. We know what Cezanne's style looks like and can reason about the changes that would have to occur to make the photo match his style. Dabs of paint would have to replace the photographic pixels, and the colors should take on more pastel tones. We can imagine the necessary stylistic changes because we have seen many Cezanne paintings before, even though we didn't see them paired with a photograph of the exact same scenes. Let's now see how we can give a machine this same ability. We call this setting the \textbf{unpaired translation} setting, and distinguish it from \textbf{paired translation} as indicated in \fig{\ref{fig:conditional_generative_models:paired_vs_unpaired}}.
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=0.7\linewidth]{./figures/conditional_generative_models/paired_vs_unpaired.pdf}
+        \includegraphics[width=0.7\linewidth]{./figures/conditional_generative_models/paired_vs_unpaired.pdf}
     }
     \caption{(left) An example of paired image-to-image translation (colorization) versus (right) unpaired translation (photo to Cezanne). Figure adapted from \cite{CycleGAN2017}.}
     \label{fig:conditional_generative_models:paired_vs_unpaired}
@@ -372,18 +372,18 @@ Put another away, the GAN discriminator is different than a normal loss function
 
 So, a regular GAN objective, applied to mapping from $X$ to $Y$, solves the unpaired translation problem, but it does not distinguish between the correct mapping and the many other mappings that achieve the same output distribution. To break the symmetry we need to add additional constraints or inductive biases. One that works especially well is \index{Cycle-consistency}\textbf{cycle-consistency}, which was introduced in this context by CycleGAN~\cite{CycleGAN2017}, DualGAN~\cite{yi2017dualgan}, and DiscoGAN~\cite{kim2017learning}, which are all essentially the same model. The idea of cycle-consistency is that if we translate from $X$ to $Y$ and then translate back (from $Y$ to $X$) we should arrive where we started. Think about translating from English to French, for example. If we translate ``apple'' to French, ``apple''$\rightarrow$``pomme,'' and then translate back, ``pomme''$\rightarrow$``apple,'' we arrive where we started.\footnote{In natural language processing, the idea of cycle-consistency is known as \textbf{backtranslation}.} We can check the quality of a translation system, for a language we are unfamiliar with, by using this trick. If translating back does not return the word we started with then something went wrong with the translation model. This is because we expect language translation to be roughly one-to-one: for each word in English there is usually an equivalent word in French. Cycle-consistency losses are regularizers that encourage a learned mapping to be roughly one-to-one. The cycle-consistency losses from CycleGAN are simply:
 \begin{align}
-    \mathcal{L}_{\texttt{cyc}}(\mathbf{x};g_{\theta},f_{\psi}) &= \norm{\mathbf{x} - f_{\psi}(g_{\theta}(\mathbf{x}))}_1\\
-    \mathcal{L}_{\texttt{cyc}}(\mathbf{y};g_{\theta},f_{\psi}) &= \norm{\mathbf{y} - g_{\theta}(f_{\psi}(\mathbf{y}))}_1
+    \mathcal{L}_{\texttt{cyc}}(\mathbf{x};g_{\theta},f_{\psi}) & = \norm{\mathbf{x} - f_{\psi}(g_{\theta}(\mathbf{x}))}_1 \\
+    \mathcal{L}_{\texttt{cyc}}(\mathbf{y};g_{\theta},f_{\psi}) & = \norm{\mathbf{y} - g_{\theta}(f_{\psi}(\mathbf{y}))}_1
 \end{align}
 Adding this loss to \eqn{\ref{eqn:conditional_generative_models:x_to_y_GAN_learning_problem}} yields the complete CycleGAN objective:
 \begin{align}
     \arg\min_{\theta,\psi}\max_{\phi} \mathbb{E}_{\mathbf{x},\mathbf{y}} \big[ \log d_{\phi}^{Y}(g_{\theta}(\mathbf{x})) + \log (1 - d_{\phi}^{Y}(\mathbf{y})) + \norm{\mathbf{x} - f_{\psi}(g_{\theta}(\mathbf{x}))}_1 + \\
-    \log d_{\phi}^{X}(f_{\psi}(\mathbf{y})) + \log (1 - d_{\phi}^{X}(\mathbf{x})) + \norm{\mathbf{y} - g_{\theta}(f_{\psi}(\mathbf{y}))}_1 \big]
+        \log d_{\phi}^{X}(f_{\psi}(\mathbf{y})) + \log (1 - d_{\phi}^{X}(\mathbf{x})) + \norm{\mathbf{y} - g_{\theta}(f_{\psi}(\mathbf{y}))}_1 \big]
 \end{align}
 This model translates from domain $X$ to domain $Y$ and back, such that the outputs in domain $Y$ look realistic according to a domain $Y$ discriminator, and vice versa for domain $X$, \textit{and} the mappings are cycle-consistent: one complete cycle from $X$ to $Y$ and back should arrive where it started (and, again, vice versa). A diagram for this whole process is given in \fig{\ref{fig:conditional_generative_models:cyclegan_schematic}}:
 \begin{figure}[h!]
     \centerline{
-    \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/cyclegan_schematic.pdf}
+        \includegraphics[width=1.0\linewidth]{./figures/conditional_generative_models/cyclegan_schematic.pdf}
     }
     \caption{CycleGAN schematic. Figure derived from \cite{CycleGAN2017}.}
     \label{fig:conditional_generative_models:cyclegan_schematic}

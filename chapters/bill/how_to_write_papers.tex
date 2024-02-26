@@ -9,10 +9,10 @@ An important part of research is communicating your results to others, so we inc
 Many graduate students we know feel it is important to coauthor many papers.  While the number of papers a student has can be a rough measure of research productivity, it is our experience as mentors, faculty search committee members, and industrial research managers that {\em only the good papers count}. (We acknowledge that this is not true everywhere, and some institutions simply count papers. But you should still strive to make all your papers good!)  This emphasis is shown in \fig{\ref{fig:impact}}, a plot of made-up data that summarizes our impression, formed over many years, of the relationship between paper quality and its impact on one's career.  Only the really good papers matter for your career.  So it makes sense to learn how to write the best possible paper from any given piece of research work.
 
 \begin{figure}
-\centerline{
-\includegraphics[width=0.60\linewidth]{figures/papers/impact.jpg}}
-\caption{Plot of conjectured data showing the impact of a paper on one's career, as a function of paper quality. }
-\label{fig:impact}
+    \centerline{
+        \includegraphics[width=0.60\linewidth]{figures/papers/impact.jpg}}
+    \caption{Plot of conjectured data showing the impact of a paper on one's career, as a function of paper quality. }
+    \label{fig:impact}
 \end{figure}
 
 
@@ -20,33 +20,33 @@ Many graduate students we know feel it is important to coauthor many papers.  Wh
 The Ph.D. thesis advisor of two of us, Prof. Edward Adelson, wrote some good advice in response to a student's question of how to write a good paper \cite{Adelson92}:
 
 \begin{itemize}
-\item Start by stating which problem you are addressing, keeping the  
-  audience in mind.  They must care about it, which means that sometimes 
-  you must tell them why they should care about the problem. 
-  
-\item Then state briefly what the other solutions are to the problem, and why they aren't satisfactory.  If they were satisfactory, you wouldn't need to  do the work.  
+    \item Start by stating which problem you are addressing, keeping the
+          audience in mind.  They must care about it, which means that sometimes
+          you must tell them why they should care about the problem.
 
-\item Then explain your own solution, compare it with other solutions, and say why it's better.  
+    \item Then state briefly what the other solutions are to the problem, and why they aren't satisfactory.  If they were satisfactory, you wouldn't need to  do the work.
 
-\item At the end, talk about related work where similar techniques and experiments have been used, but applied to a different problem.  
+    \item Then explain your own solution, compare it with other solutions, and say why it's better.
+
+    \item At the end, talk about related work where similar techniques and experiments have been used, but applied to a different problem.
 \end{itemize}
 
 That structure fits well with a progression of section headings typical of  many conference papers.  As an example, here are the headings from paper \cite{Fergus2006}, coauthored by one of us.  The structure is useful for many research papers:
 
 \begin{tabular}{ll}
-1. & Introduction \\
-2. & Related work \\
-3. & Main idea \\
-4. & Algorithm \\
-& 4.1 Estimating the blur kernel \\
-& \hspace{1cm} 4.1.1 Multiscale approach \\
-& \hspace{1cm} 4.1.2 User supervision \\
-& 4.2 Image reconstruction \\
-5. & Experiments \\
-& 5.1 Small blurs \\
-& 5.2 Large blurs \\
-& 5.3 Images with significant saturation \\
-6. & Discussion \\
+    1. & Introduction                           \\
+    2. & Related work                           \\
+    3. & Main idea                              \\
+    4. & Algorithm                              \\
+       & 4.1 Estimating the blur kernel         \\
+       & \hspace{1cm} 4.1.1 Multiscale approach \\
+       & \hspace{1cm} 4.1.2 User supervision    \\
+       & 4.2 Image reconstruction               \\
+    5. & Experiments                            \\
+       & 5.1 Small blurs                        \\
+       & 5.2 Large blurs                        \\
+       & 5.3 Images with significant saturation \\
+    6. & Discussion                             \\
 \end{tabular}
 
 
@@ -62,22 +62,22 @@ When appropriate to the paper, it can be very helpful to show a simple example t
 
 
 \begin{figure}
-\centerline{
-\includegraphics[width=0.65\linewidth]{figures/papers/wavelet2.pdf}}
-\caption{Effect of translation on the wavelet representation of a signal  (caption and figure after \cite{Simoncelli92}).  (a) An input signal.  (b-d) The high-, mid-, and low-frequency coefficients within a wavelet subband decomposition.  (e) The same input signal, translated one sample to the right.  (f–h) The decomposition of the shifted signal into the same three bands.  Note the drastic change in the transform coefficients induced by the shift.}
-\label{fig:wavelet}
+    \centerline{
+        \includegraphics[width=0.65\linewidth]{figures/papers/wavelet2.pdf}}
+    \caption{Effect of translation on the wavelet representation of a signal  (caption and figure after \cite{Simoncelli92}).  (a) An input signal.  (b-d) The high-, mid-, and low-frequency coefficients within a wavelet subband decomposition.  (e) The same input signal, translated one sample to the right.  (f–h) The decomposition of the shifted signal into the same three bands.  Note the drastic change in the transform coefficients induced by the shift.}
+    \label{fig:wavelet}
 \end{figure}
 
 
 \subsection{Experimental Results}
-In earlier days of computer vision research, good ideas could be presented with only plausibility arguments to support them.  However, 
-modern standards require that assertions in a paper be backed up with experimental evidence.  Readers will be expecting a table quantitatively comparing the performance of your algorithm with that of the previous state-of-the-art.  If you are proposing a new task for which there aren't previous benchmarks, you should still compare with an algorithm that solves a related task, noting that the algorithm was designed for a different task.  
+In earlier days of computer vision research, good ideas could be presented with only plausibility arguments to support them.  However,
+modern standards require that assertions in a paper be backed up with experimental evidence.  Readers will be expecting a table quantitatively comparing the performance of your algorithm with that of the previous state-of-the-art.  If you are proposing a new task for which there aren't previous benchmarks, you should still compare with an algorithm that solves a related task, noting that the algorithm was designed for a different task.
 
 \begin{figure}
-\centerline{
-\includegraphics[width=0.75\linewidth]{figures/papers/resultTable.pdf}}
-\caption{A prototypical table of results, from \cite{Owens2016}  Rows are different algorithms, or ablations of a favored algorithm. Columns are datasets or tasks, and the numbers indicate performance, with the best performances given in bold. }
-\label{resultsTable}
+    \centerline{
+        \includegraphics[width=0.75\linewidth]{figures/papers/resultTable.pdf}}
+    \caption{A prototypical table of results, from \cite{Owens2016}  Rows are different algorithms, or ablations of a favored algorithm. Columns are datasets or tasks, and the numbers indicate performance, with the best performances given in bold. }
+    \label{resultsTable}
 \end{figure}
 
 
@@ -97,22 +97,22 @@ Our mental image is that of a great host, who anticipates every need of their ho
 
 In \booktitle{The Elements of Style} \cite{Strunk}, Strunk and White write, ``Vigorous writing is concise.  A sentence should contain no unnecessary words, a paragraph no unnecessary sentences, for the same reason that a drawing should have no unnecessary lines and a machine no unnecessary parts.''
 
-To make this point in the context of scientific writing, the following is a paragraph that one of the authors of this textbook wrote with a student.  
+To make this point in the context of scientific writing, the following is a paragraph that one of the authors of this textbook wrote with a student.
 
 \begin{quote}
-The underlying assumption of this work is that the estimate of a given
-node will only depend on nodes within a patch:  this is a locality
-assumption imposed at the patch-level. This assumption can be
-justified in case of skin images since a pixel in one corner of the
-image is likely to have small effect on a different pixel far away
-from itself.  Therefore, we can crop the image into smaller windows,
-as shown in Figure 5, and compute the inverse J matrix of the cropped
-window.  Since the cropped window is much smaller than the input
-image, the inversion of J matrix is computationally cheaper.  Since we
-are inferring on blocks of image patches (i.e., ignoring pixels outside
-of the cropped window), the interpolated image will have blocky
-artifacts.  Therefore, only part of xMAP is used to interpolate the
-image, as shown in Figure 5.
+    The underlying assumption of this work is that the estimate of a given
+    node will only depend on nodes within a patch:  this is a locality
+    assumption imposed at the patch-level. This assumption can be
+    justified in case of skin images since a pixel in one corner of the
+    image is likely to have small effect on a different pixel far away
+    from itself.  Therefore, we can crop the image into smaller windows,
+    as shown in Figure 5, and compute the inverse J matrix of the cropped
+    window.  Since the cropped window is much smaller than the input
+    image, the inversion of J matrix is computationally cheaper.  Since we
+    are inferring on blocks of image patches (i.e., ignoring pixels outside
+    of the cropped window), the interpolated image will have blocky
+    artifacts.  Therefore, only part of xMAP is used to interpolate the
+    image, as shown in Figure 5.
 \end{quote}
 \marginnote{Original text: 149 words.}[0.5in]
 
@@ -120,14 +120,14 @@ image, as shown in Figure 5.
 While the text above conveys the desired technical information, it describes things in a roundabout way.  The word count is 149. Below, the paragraph has been rewritten to just 88 words without changing its meaning.
 
 \begin{quote}
-We assume local influence---that nodes only depend on other nodes
-within a patch.  This condition often holds for skin images, which
-have few long edges or structures.  We crop the image into small
-windows, as shown in Fig. 5, and compute the inverse J matrix of each
-small window.  This is much faster than computing the inverse J matrix
-for the input image.  To avoid artifacts from the block processing,
-only the center region of xMAP is used in the final image, as shown in
-Fig. 5.
+    We assume local influence---that nodes only depend on other nodes
+    within a patch.  This condition often holds for skin images, which
+    have few long edges or structures.  We crop the image into small
+    windows, as shown in Fig. 5, and compute the inverse J matrix of each
+    small window.  This is much faster than computing the inverse J matrix
+    for the input image.  To avoid artifacts from the block processing,
+    only the center region of xMAP is used in the final image, as shown in
+    Fig. 5.
 \end{quote}
 \marginnote{Rewritten text conveying the same information: 88 words}[0.5in]
 
@@ -142,10 +142,10 @@ Note that writing more concise text helps your paper in two ways.  First, resear
 While we may imagine our reader reading every word of our paper, in our current era of many published papers, most of your readers will probably only skim your paper. We suspect that the engagement of readers with your paper will look something as shown in \fig{\ref{fig:engagement}}.
 
 \begin{figure}
-\centerline{
-\includegraphics[width=0.50\linewidth]{figures/papers/readership.pdf}}
-\caption{The conjectured readership of a computer science paper (conjectured relative amounts).  Many people will read the title, but far fewer will read the abstract or look at the figures.  Fewer still will read every word of the paper.  You should allow readers to access your paper at each level of engagement.}
-\label{fig:engagement}
+    \centerline{
+        \includegraphics[width=0.50\linewidth]{figures/papers/readership.pdf}}
+    \caption{The conjectured readership of a computer science paper (conjectured relative amounts).  Many people will read the title, but far fewer will read the abstract or look at the figures.  Fewer still will read every word of the paper.  You should allow readers to access your paper at each level of engagement.}
+    \label{fig:engagement}
 \end{figure}
 
 If only because that is where most of your readership lies, you should write your paper so that readers will learn from it, even at those reduced levels of engagement.  The title should convey the top-level message of the paper.  The figures and their captions should be self-contained and tell the story of the paper.  The abstract should provide a good summary.
@@ -156,10 +156,10 @@ is a delightful paper, and the title lets the reader see that right away.  In co
 Because you can assume that many of the readers of your figure captions will not be reading the full paper, {\em the captions should be self-contained}.  They should point out what readers are supposed to notice about the figure, to help both the full-paper reader and the figures-only reader. \Fig{\ref{fig:shapetime}} shows an example.
 
 \begin{figure}
-\centerline{
-\includegraphics[width=0.55\linewidth]{figures/papers/shapetimeFig.jpg}}
-\caption{Figure and caption from \cite{FreemanShapetime}. The caption should be understandable by itself, and should point to what the reader should take away from the figure. }
-\label{fig:shapetime}
+    \centerline{
+        \includegraphics[width=0.55\linewidth]{figures/papers/shapetimeFig.jpg}}
+    \caption{Figure and caption from \cite{FreemanShapetime}. The caption should be understandable by itself, and should point to what the reader should take away from the figure. }
+    \label{fig:shapetime}
 \end{figure}
 
 Equations interposed with text can pose a challenge to the reader.  Does the reader stop to work through each equation, or continue reading as quickly as if the equation were words?  Knuth \cite{Knuth1989} and Mermin \cite{Mermin1989} both give advice on writing with equations.  Knuth writes,
@@ -186,29 +186,29 @@ The quality of the papers you write matters so much more than your positions wit
 With the task of rejecting at least three-quarters of the submissions, conference area chairs, who make the acceptance decisions, are grasping for reasons to reject a paper.  Here’s a summary of reasons that are commonly used, and it is best not to provide the area chair with any of these easy reasons to reject your paper:
 
 \begin{itemize}
-\item Do the authors not deliver what they promise?
-\item Are important references missing (and therefore one suspects the authors not up on the state of the art for this problem)?
-\item Are the results too incremental (too similar to previous work)?
-\item Are the results believable, with sufficient tests to support the claims?
-\item Is the paper poorly written?  
-\item Are there mistakes or incorrect statements?
+    \item Do the authors not deliver what they promise?
+    \item Are important references missing (and therefore one suspects the authors not up on the state of the art for this problem)?
+    \item Are the results too incremental (too similar to previous work)?
+    \item Are the results believable, with sufficient tests to support the claims?
+    \item Is the paper poorly written?
+    \item Are there mistakes or incorrect statements?
 \end{itemize}
 
-As an area chair, the very good and the very bad papers are easy to deal with, and most of the decision-making effort goes to the borderline papers.  One of us writes, ``I find that much of my time is spent dealing with two kinds of borderline papers: cockroaches and  puppies with six toes.''  
+As an area chair, the very good and the very bad papers are easy to deal with, and most of the decision-making effort goes to the borderline papers.  One of us writes, ``I find that much of my time is spent dealing with two kinds of borderline papers: cockroaches and  puppies with six toes.''
 
 ``Cockroaches'' have no exciting contributions, but the reviews are ok and the results show incremental improvement to the state of the art.  They're hard to kill (hence the nickname), and maybe two-thirds are accepted as posters, and one-third are rejected.  As an author, it's best to work harder for the fresh results, to bring papers like this out of the cockroach category.
 
 At the other end of the spectrum of borderline papers are ``puppies with six toes.''  These are delightful papers, but with an easy-to-see flaw.  The flaw may not matter (like six toes on a puppy) but makes the paper easy to reject, even though the paper may be fresh and wonderful.  Maybe two-thirds of those papers get rejected, and one-third maybe accepted as posters.  As an author, it may be better to wait for another submission cycle with a paper like this, to remove the easy to spot flaw.  Then the paper might receive an oral presentation at a subsequent conference submission cycle.
 
 \begin{figure}
-\centerline{
-\sublabelnp{(a) Cockroach}{\includegraphics[width=0.23\linewidth]{figures/papers/cockroach.jpg}}
-\sublabelnp{(b) Puppy with six toes}{\includegraphics[width=0.4\linewidth]{figures/papers/puppy6.jpg}}
-}
-\caption{Borderline papers from an area chair's perspective. (a) The cockroach represents a mundane, hard-to-reject paper with no glaring issues \cite{cockroach}. (b) The six-toed puppy represents delightful paper with some minor, easily spotted flaw, leading to potential rejection \cite{puppy}. }
-\label{fig:areachair}
+    \centerline{
+        \sublabelnp{(a) Cockroach}{\includegraphics[width=0.23\linewidth]{figures/papers/cockroach.jpg}}
+        \sublabelnp{(b) Puppy with six toes}{\includegraphics[width=0.4\linewidth]{figures/papers/puppy6.jpg}}
+    }
+    \caption{Borderline papers from an area chair's perspective. (a) The cockroach represents a mundane, hard-to-reject paper with no glaring issues \cite{cockroach}. (b) The six-toed puppy represents delightful paper with some minor, easily spotted flaw, leading to potential rejection \cite{puppy}. }
+    \label{fig:areachair}
 \end{figure}
 
 \section{Concluding Remarks}
-The approaches to writing and editing described previously all take time: 
- good writing involves lots of rewriting.  We find that the last days before a paper submission deadline are often better spent improving the structure, presentation, and clarity of the paper than in trying to obtain last-minute improvements to the results.
+The approaches to writing and editing described previously all take time:
+good writing involves lots of rewriting.  We find that the last days before a paper submission deadline are often better spent improving the structure, presentation, and clarity of the paper than in trying to obtain last-minute improvements to the results.

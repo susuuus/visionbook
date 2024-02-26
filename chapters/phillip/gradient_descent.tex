@@ -23,7 +23,7 @@ In learning problems, the domain of $J$ is the training data and the parameters 
 Pretty much all optimizers work by some iterative process, where they update the parameters to be better and better. Different optimizers differ in how the parameter update function works. The update function gets to view some information about the loss landscape, then uses that information to update the parameters, as shown in \fig{\ref{fig:gradient_descent:optimization_schematic}}.
 \begin{figure}[h]
     \centerline{
-    \includegraphics[width=0.35\linewidth]{./figures/gradient_descent/optimization_schematic.pdf}
+        \includegraphics[width=0.35\linewidth]{./figures/gradient_descent/optimization_schematic.pdf}
     }
     \caption{General optimization loop.}
     \label{fig:gradient_descent:optimization_schematic}
@@ -39,21 +39,21 @@ Higher-order optimization methods observe higher-order derivatives of the loss, 
 \section{Basic Gradient Descent}
 The simplest version of gradient descent just takes a step in the gradient direction of length proportional to the gradient magnitude. This algorithm is described in \algref{\ref{alg:gradient_descent:basic_gradient_descent}}.
 \begin{algorithm}[h]
-\SetAlgoVlined
-\DontPrintSemicolon
-%\marginnote{{\bf Algorithm \ref{alg:gradient_descent:basic_gradient_descent}}: Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by descending the gradient $\nabla_{\theta} J$.}
-\caption{{\bf Algorithm \ref{alg:gradient_descent:basic_gradient_descent}}: Gradient descent (\texttt{GD}). Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by descending the gradient $\nabla_{\theta} J$.}
-\fakealgorithmcaption{}
-\label{alg:gradient_descent:basic_gradient_descent}
-{\bf Input:} objective function $J$, initial parameter vector $\theta^0$, learning rate $\eta$, number of steps $K$\;%, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$
-{\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
-\For{\upshape $k= 0, \dots, K-1$}{
-    %$J = \sum_{i=1}^N \mathcal{L}(f_{\theta^{k}}(\mathbf{x}^{(i)}),\mathbf{y}^{(i)})$\;
-    $\theta^{k+1} \leftarrow \theta^{k} - \eta \nabla_{\theta} J(\theta^k)$\;
-}
+    \SetAlgoVlined
+    \DontPrintSemicolon
+    %\marginnote{{\bf Algorithm \ref{alg:gradient_descent:basic_gradient_descent}}: Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by descending the gradient $\nabla_{\theta} J$.}
+    \caption{{\bf Algorithm \ref{alg:gradient_descent:basic_gradient_descent}}: Gradient descent (\texttt{GD}). Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by descending the gradient $\nabla_{\theta} J$.}
+    \fakealgorithmcaption{}
+    \label{alg:gradient_descent:basic_gradient_descent}
+    {\bf Input:} objective function $J$, initial parameter vector $\theta^0$, learning rate $\eta$, number of steps $K$\;%, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$
+    {\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
+    \For{\upshape $k= 0, \dots, K-1$}{
+        %$J = \sum_{i=1}^N \mathcal{L}(f_{\theta^{k}}(\mathbf{x}^{(i)}),\mathbf{y}^{(i)})$\;
+        $\theta^{k+1} \leftarrow \theta^{k} - \eta \nabla_{\theta} J(\theta^k)$\;
+    }
 \end{algorithm}
 
-This algorithm has two hyperparameters, the \index{Learning rate}\textbf{learning rate} $\eta$, which controls the step size (learning rate times gradient magnitude), and the number of steps $K$. If the learning rate is sufficiently small and the initial parameter vector $\theta^0$ is random, then this algorithm will almost surely converge to a local minimum of $J$ as $K \rightarrow \infty$~\cite{lee2016gradient}. However, to descend more quickly, it can be useful to set the learning rate to a higher value. 
+This algorithm has two hyperparameters, the \index{Learning rate}\textbf{learning rate} $\eta$, which controls the step size (learning rate times gradient magnitude), and the number of steps $K$. If the learning rate is sufficiently small and the initial parameter vector $\theta^0$ is random, then this algorithm will almost surely converge to a local minimum of $J$ as $K \rightarrow \infty$~\cite{lee2016gradient}. However, to descend more quickly, it can be useful to set the learning rate to a higher value.
 
 \section{Learning Rate Schedules}
 A generally useful strategy is to start with a high value for $\eta$ and then decay it until convergence according to a \textbf{learning rate schedule}. Researchers have come up with innumerable schedules and they generally work by calling some function $\texttt{lr}(\eta^0,k)$ to get the learning rate on each iteration of descent:
@@ -62,29 +62,29 @@ A generally useful strategy is to start with a high value for $\eta$ and then de
 \end{align}
 Generally, we want an update rule where $\eta^{k+1} < \eta^k$, so that we take smaller steps as we approach the minimizer. A few simple and popular approaches are given below:
 \begin{align}
-    \texttt{lr}(\eta^0,k) &= \beta^{-k} \eta^0 &\quad\quad \triangleleft\quad \text{exponential decay}\\
-    \texttt{lr}(\eta^0,k) &= \beta^{-\lfloor k/M \rfloor} \eta^0 &\quad\quad \triangleleft\quad \text{stepwise exponential decay}\\
-    \texttt{lr}(\eta^0,k) &= \frac{(K - k)}{K} \eta^0 &\quad\quad \triangleleft\quad \text{linear decay}
+    \texttt{lr}(\eta^0,k) & = \beta^{-k} \eta^0                   & \quad\quad \triangleleft\quad \text{exponential decay}          \\
+    \texttt{lr}(\eta^0,k) & = \beta^{-\lfloor k/M \rfloor} \eta^0 & \quad\quad \triangleleft\quad \text{stepwise exponential decay} \\
+    \texttt{lr}(\eta^0,k) & = \frac{(K - k)}{K} \eta^0            & \quad\quad \triangleleft\quad \text{linear decay}
 \end{align}
 \marginnote{One downside of linear decay is that it depends on the total number of steps $K$. This makes it hard to compare optimization runs of different lengths. This is something to also be aware of in more advanced learning rate schedules, such as cosine decay~\cite{loshchilov2016sgdr}, which also have different behavior for different settings of $K$.}[-3.2cm]
 The $\beta$ and $M$ are additional hyperparameters of these methods. The general approach of learning rate decay is summarized in \algref{\ref{alg:gradient_descent:gradient_descent_with_lr_decay}}.
 
 %but a simple one that tends to work decently is to just multiply the $\eta$ by a  constant factor $\beta \in (0,1)$ every iteration of gradient descent, where $\beta$ and the initial learning rate $\eta^1$ are the new hyperparameters to specify. 
 \begin{algorithm}[h]
-\SetAlgoVlined
-\DontPrintSemicolon
-%\marginnote{{\bf Algorithm \ref{alg:gradient_descent:gradient_descent_with_lr_decay}}: Gradient descent with a learning rate schedule.}
-\caption{{\bf Algorithm \ref{alg:gradient_descent:gradient_descent_with_lr_decay}}: Gradient descent with a learning rate schedule.}
-%\caption{{\bf Algorithm \ref{alg:gradient_descent:gradient_descent_with_lr_decay}}: \texttt{GD}+\texttt{lr}-schedule.}
-\fakealgorithmcaption{}
-\label{alg:gradient_descent:gradient_descent_with_lr_decay}
-{\bf Input:} objective function $J$, initial parameter vector $\theta^0$, initial learning rate $\eta^0$, learning rate function $\texttt{lr}$, number of steps $K$\;%, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$
-{\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
-\For{\upshape $k= 0, \dots, K-1$}{
-    %$J = \sum_{i=1}^N \mathcal{L}(f_{\theta^{k-1}}(\mathbf{x}^{(i)}),\mathbf{y}^{(i)})$\;
-    $\eta^{k} \leftarrow \texttt{lr}(\eta^0, k)$\;
-    $\theta^{k+1} \leftarrow \theta^{k} - \eta^{k} \nabla_{\theta} J(\theta^k)$\;
-}
+    \SetAlgoVlined
+    \DontPrintSemicolon
+    %\marginnote{{\bf Algorithm \ref{alg:gradient_descent:gradient_descent_with_lr_decay}}: Gradient descent with a learning rate schedule.}
+    \caption{{\bf Algorithm \ref{alg:gradient_descent:gradient_descent_with_lr_decay}}: Gradient descent with a learning rate schedule.}
+    %\caption{{\bf Algorithm \ref{alg:gradient_descent:gradient_descent_with_lr_decay}}: \texttt{GD}+\texttt{lr}-schedule.}
+    \fakealgorithmcaption{}
+    \label{alg:gradient_descent:gradient_descent_with_lr_decay}
+    {\bf Input:} objective function $J$, initial parameter vector $\theta^0$, initial learning rate $\eta^0$, learning rate function $\texttt{lr}$, number of steps $K$\;%, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$
+    {\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
+    \For{\upshape $k= 0, \dots, K-1$}{
+        %$J = \sum_{i=1}^N \mathcal{L}(f_{\theta^{k-1}}(\mathbf{x}^{(i)}),\mathbf{y}^{(i)})$\;
+        $\eta^{k} \leftarrow \texttt{lr}(\eta^0, k)$\;
+        $\theta^{k+1} \leftarrow \theta^{k} - \eta^{k} \nabla_{\theta} J(\theta^k)$\;
+    }
 \end{algorithm}
 
 Variations on this algorithm include only decaying the learning rate when a plateau is reached (i.e., when the loss is not decreasing for many iterations in a row), or decaying the learning rate according to more complex nonlinear schedules, such as one shaped like a cosine function~\cite{loshchilov2016sgdr}.%once every $M$ steps of gradient descent, for some fixed value $M$ (which becomes an additional hyperparameter of the algorithm).
@@ -96,19 +96,19 @@ Could we do a smarter update than just taking a step in the direction of the gra
 \end{align}
 The weight $\mu$ in this combination is a new hyperparameter, sometimes simply called the momentum. The full algorithm is given in \algref{\ref{alg:gradient_descent:gradient_descent_with_momentum}}.
 \begin{algorithm}[h]
-\SetAlgoVlined
-\DontPrintSemicolon
-%\marginnote{{\bf Algorithm \ref{alg:gradient_descent:gradient_descent_with_momentum}}: Gradient descent with momentum.}
-\caption{{\bf Algorithm \ref{alg:gradient_descent:gradient_descent_with_momentum}}: Gradient descent with momentum.}
-\fakealgorithmcaption{}
-\label{alg:gradient_descent:gradient_descent_with_momentum}
-{\bf Input:} objective function $J$, initial parameter vector $\theta^0$, learning rate $\eta$, momentum $\mu$, number of steps $K$\;%, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$
-{\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
-$\mathbf{v}^{0} = \mathbf{0}$\;
-\For{\upshape $k= 0, \dots, K-1$}{
-    $\mathbf{v}^{k+1} = \mu \mathbf{v}^{k} - \eta\nabla_{\theta} J(\theta^k)$\;
-    $\theta^{k+1} \leftarrow \theta^{k} + \mathbf{v}^{k+1}$\;
-}
+    \SetAlgoVlined
+    \DontPrintSemicolon
+    %\marginnote{{\bf Algorithm \ref{alg:gradient_descent:gradient_descent_with_momentum}}: Gradient descent with momentum.}
+    \caption{{\bf Algorithm \ref{alg:gradient_descent:gradient_descent_with_momentum}}: Gradient descent with momentum.}
+    \fakealgorithmcaption{}
+    \label{alg:gradient_descent:gradient_descent_with_momentum}
+    {\bf Input:} objective function $J$, initial parameter vector $\theta^0$, learning rate $\eta$, momentum $\mu$, number of steps $K$\;%, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$
+    {\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
+    $\mathbf{v}^{0} = \mathbf{0}$\;
+    \For{\upshape $k= 0, \dots, K-1$}{
+        $\mathbf{v}^{k+1} = \mu \mathbf{v}^{k} - \eta\nabla_{\theta} J(\theta^k)$\;
+        $\theta^{k+1} \leftarrow \theta^{k} + \mathbf{v}^{k+1}$\;
+    }
 \end{algorithm}
 
 \Fig{\ref{fig:gradient_descent:momentum_out1}} shows how momentum affects gradient descent for a simple objective $J = \texttt{abs}(\theta)$ (absolute value of $\theta$). As can be seen in the figure, some momentum can help convergence rate (\fig{\ref{fig:gradient_descent:momentum_out1}}, $\mu = 0.5$) but too much momentum will cause the trajectory to overshoot the optimum and even when the optimum loss is achieved, the trajectory might not stop (\fig{\ref{fig:gradient_descent:momentum_out1}}, $\mu = 0.95$).
@@ -129,21 +129,21 @@ What if a function is not differentiable? Can we still use gradient descent? Som
 
 \Fig{\ref{fig:gradient_descent:grad_descent_simple_examples}} gives examples of different types of functions being minimized with gradient descent. \Figs{\ref{fig:gradient_descent:grad_descent_simple_examples}}(b) and \ref{fig:gradient_descent:grad_descent_simple_examples}(d) are cases where the function is discontinuous, and the analytical derivative is undefined at the discontinuity. Surprisingly, in \fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(b), this is not a problem for gradient descent. This is because the gradient descent algorithm we are using here (the one used by Pytorch~\cite{paszke2019pytorch}) uses a \index{One-sided derivative}\textbf{one-sided derivative} at the discontinuity, that is, we set the gradient at the discontinuity to be equal to the gradient value an infinitesimal step away from the discontinuouity in a fixed arbitrary direction. Under the hood, for each atomic discontinuous operation, Pytorch requires that we define its gradients at the discontinuouities, and the one-sided gradient is a standard choice. This is why it can be fine in deep learning (\chap{\ref{chapter:neural_nets}}) to use functions like rectified nonlinear units (relus), which are common in deep networks and have discontinuous gradients.
 
-\Figs{\ref{fig:gradient_descent:grad_descent_simple_examples}}(c) and (e) give cases where the function is continuous, but the gradients are not well-behaved. In \fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(c) we have a gradient that has nearly \index{Vanishing gradient}\textbf{vanished}, that is, it is near zero everywhere and gradient descent, with a fixed learning rate, will therefore be slow. \Fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(e) shows the opposite scenario: the gradient at the minimizer goes to infinity; we call this an \index{Exploding gradient}\textbf{exploding gradient}, and this leads to failures of convergence. 
+\Figs{\ref{fig:gradient_descent:grad_descent_simple_examples}}(c) and (e) give cases where the function is continuous, but the gradients are not well-behaved. In \fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(c) we have a gradient that has nearly \index{Vanishing gradient}\textbf{vanished}, that is, it is near zero everywhere and gradient descent, with a fixed learning rate, will therefore be slow. \Fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(e) shows the opposite scenario: the gradient at the minimizer goes to infinity; we call this an \index{Exploding gradient}\textbf{exploding gradient}, and this leads to failures of convergence.
 
-Finally, \fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(f) shows one more problematic case: when there are multiple minima, gradient descent can get stuck in a suboptimal minimum. Which minimum we arrive at will depend on where we initialized $x$.  
+Finally, \fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(f) shows one more problematic case: when there are multiple minima, gradient descent can get stuck in a suboptimal minimum. Which minimum we arrive at will depend on where we initialized $x$.
 
 \begin{figure}[h!]
     \centerline{
-    \begin{tabular}{cc}
-        (a) convex & (b) discontinuous \\
-        \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex1.pdf} & \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex2.pdf} \\
-        (c) vanishing gradient & (d) zero gradient + discontinuous \\
-        \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex4.pdf} &
-        \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex3.pdf} \\
-        (e) exploding gradient & (f) multiple local minima \\
-        \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex5.pdf} & \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex6.pdf}
-    \end{tabular}
+        \begin{tabular}{cc}
+            (a) convex                                                                             & (b) discontinuous                                                                      \\
+            \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex1.pdf} & \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex2.pdf} \\
+            (c) vanishing gradient                                                                 & (d) zero gradient + discontinuous                                                      \\
+            \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex4.pdf} &
+            \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex3.pdf}                                                                                          \\
+            (e) exploding gradient                                                                 & (f) multiple local minima                                                              \\
+            \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex5.pdf} & \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/grad_descent_ex6.pdf}
+        \end{tabular}
     }
     \caption{How gradient descent behaves on various functions. In each subplot, left is the function $J$, the red point is the solution found by $\GD$ (with $\eta=0.01$ and $\mu=0.9$), and right is the trajectory of $x$ values over iterations of $\GD$, plotted on top of $J$ at each iteration. (a) As $\eta$ goes to zero, $\GD$ converges for convex functions. (b) Discontinuities pose no essential problem, as long as the gradient is defined on either side. (c) A nearly flat function will exhibit very slow descent. (d) Piecewise constant functions are problematic because the gradient completely vanishes. (e) For the function $J=\texttt{sqrt}(\texttt{abs}(\theta))-0.25$, the gradient goes to infinity at the minimizer, causing instability. (f) When $J$ has multiple local minima, we may not find the global minimum.}
     \label{fig:gradient_descent:grad_descent_simple_examples}
@@ -151,26 +151,26 @@ Finally, \fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(f) shows 
 
 
 \subsection{Gradient-Like Optimization for Functions without Good Gradients}\label{sec:gradient_descent:zeroth_order}
-What about minimizing functions like \fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(d), where the gradient is zero almost everywhere? This is a case where gradient descent truly struggles. However, it is often possible to transform such a problem into one that can be treated with gradient descent. Remember that the key property of a gradient, from the perspective of optimization, is that it is a locally loss-minimizing direction in parameter space. Most gradient-based optimizers don't really need true gradients; instead their update functions are compatible with a broader family of local loss-minimizing directions, $\mathbf{v}$. 
+What about minimizing functions like \fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(d), where the gradient is zero almost everywhere? This is a case where gradient descent truly struggles. However, it is often possible to transform such a problem into one that can be treated with gradient descent. Remember that the key property of a gradient, from the perspective of optimization, is that it is a locally loss-minimizing direction in parameter space. Most gradient-based optimizers don't really need true gradients; instead their update functions are compatible with a broader family of local loss-minimizing directions, $\mathbf{v}$.
 
 Besides the true gradient, what are some other good choices for $\mathbf{v}$? One common idea is to set $\mathbf{v}$ to be the gradient of a \index{Surrogate loss}\textbf{surrogate loss} function, which is a function, $J_{\texttt{surr}}$, with meaningful (non-zero) gradients, that approximates $J$. An example might be a smoothed version of $J$. Another way to get $\mathbf{v}$ is to compute it by sampling perturbations of $\theta$, and seeing which perturbation leads to lower loss. In this strategy, we evaluate $J(\theta+\epsilon)$ for a set of perturbations $\epsilon$, then move toward the $\epsilon$'s that decreased the loss. Approaches of this kind are sometimes called \index{Evolution strategies}\textbf{evolution strategies}~\cite{beyer2002evolution, salimans2017evolution}, and a basic version of this algorithm is given in \algref{\ref{alg:gradient_descent:ES}}.
 %\vspace{-0.5cm}
 \begin{algorithm}[h!]
-\SetAlgoVlined
-\DontPrintSemicolon
-%\marginnote{{\bf Algorithm \ref{alg:gradient_descent:ES}}: Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by evolution strategies, i.e., sampling different values for $\theta$ and taking a step toward the values that work best.}
-\caption{{\bf Algorithm \ref{alg:gradient_descent:ES}}: Evolution strategies (\texttt{ES}). Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by evolution strategies, i.e., sampling different values for $\theta$ and taking a step toward the values that work best.}
-\fakealgorithmcaption{}
-\label{alg:gradient_descent:ES}
-{\bf Input:} objective function $J$, initial parameter vector $\theta^0$, learning rate $\eta$, sampling standard deviation $\sigma$, number of samples $M$, number of steps $K$\;%, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$
-{\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
-\For{\upshape $k= 0, \dots, K-1$}{
+    \SetAlgoVlined
+    \DontPrintSemicolon
+    %\marginnote{{\bf Algorithm \ref{alg:gradient_descent:ES}}: Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by evolution strategies, i.e., sampling different values for $\theta$ and taking a step toward the values that work best.}
+    \caption{{\bf Algorithm \ref{alg:gradient_descent:ES}}: Evolution strategies (\texttt{ES}). Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by evolution strategies, i.e., sampling different values for $\theta$ and taking a step toward the values that work best.}
+    \fakealgorithmcaption{}
+    \label{alg:gradient_descent:ES}
+    {\bf Input:} objective function $J$, initial parameter vector $\theta^0$, learning rate $\eta$, sampling standard deviation $\sigma$, number of samples $M$, number of steps $K$\;%, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$
+    {\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
+    \For{\upshape $k= 0, \dots, K-1$}{
     \For{\upshape $i= 1, \dots, M$}{
         $\epsilon_i \sim \mathcal{N}(\mathbf{0},\mathbf{I})$\;
         $s_i = J(\theta + \sigma \epsilon_i)$\;
     }
     $\theta^{k+1} \leftarrow \theta^{k} - \eta \frac{1}{\sigma M}\sum^M_{i=1} s_i \epsilon_i$\;
-}
+    }
 \end{algorithm}
 %\vspace{-0.5cm}
 
@@ -178,7 +178,7 @@ As shown in \fig{\ref{fig:gradient_descent:sampling_out1}}, this algorithm can s
 \begin{figure}[h!]
     %\vspace{-0.75cm}
     \centerline{
-    \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/sampling_out1.pdf}
+        \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/sampling_out1.pdf}
     }
     \caption{Using \ES~(\algref{\ref{alg:gradient_descent:ES}}) to minimize a nondifferentiable (zero-gradient) loss, using $\sigma=1$, $M=10$, and $\eta=0.02$.}
     \label{fig:gradient_descent:sampling_out1}
@@ -189,28 +189,28 @@ As shown in \fig{\ref{fig:gradient_descent:sampling_out1}}, this algorithm can s
 What about \fig{\ref{fig:gradient_descent:grad_descent_simple_examples}}(e), where the gradient explodes near the optimum? Is there anything we can do to improve optimization of this function? To combat exploding gradients, a useful trick is \index{Gradient clipping}\textbf{gradient clipping}, which just means clamping the magnitude of the gradient to some maximum value. \Algref{\ref{alg:gradient_descent:grad_clipping}} describes this approach.
 
 \begin{algorithm}[h]
-\SetAlgoVlined
-\DontPrintSemicolon
-%\marginnote{{\bf Algorithm \ref{alg:gradient_descent:grad_clipping}}: Gradient descent with gradient clipping.}
-\caption{{\bf Algorithm \ref{alg:gradient_descent:grad_clipping}}: Gradient descent with gradient clipping.}
-\fakealgorithmcaption{}
-\label{alg:gradient_descent:grad_clipping}
-{\bf Input:} objective function $J$, initial parameter vector $\theta^0$, learning rate $\eta$, number of steps $K$, max gradient magnitude $m$\;%, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$
-{\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
-\For{\upshape $k= 0, \dots, K-1$}{
-    %$J = \sum_{i=1}^N \mathcal{L}(f_{\theta^{k-1}}(\mathbf{x}^{(i)}),\mathbf{y}^{(i)})$\;
-    $\mathbf{v} = \nabla_{\theta} J(\theta^k)$\;
-    %$\theta^{k+1} \leftarrow \theta^{k} - \eta %[\max(\min(v_1,m),-m),\ldots,\max(\min(v_M,m),-m)]^\transpose$\; %\quad\quad \triangleleft \text{per-dimension clipping}$\;
-    %$\theta^{k} \leftarrow \theta^{k-1} - \eta \min(\norm{\mathbf{v}},m)\frac{\mathbf{v}}{\norm{\mathbf{v}}}$\;
-     $\theta^{k+1} \leftarrow \theta^{k} - \eta [\texttt{clip}(v_1, -m, m), \ldots, \texttt{clip}(v_M, -m, m)]^\transpose$
-}
+    \SetAlgoVlined
+    \DontPrintSemicolon
+    %\marginnote{{\bf Algorithm \ref{alg:gradient_descent:grad_clipping}}: Gradient descent with gradient clipping.}
+    \caption{{\bf Algorithm \ref{alg:gradient_descent:grad_clipping}}: Gradient descent with gradient clipping.}
+    \fakealgorithmcaption{}
+    \label{alg:gradient_descent:grad_clipping}
+    {\bf Input:} objective function $J$, initial parameter vector $\theta^0$, learning rate $\eta$, number of steps $K$, max gradient magnitude $m$\;%, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$
+    {\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
+    \For{\upshape $k= 0, \dots, K-1$}{
+        %$J = \sum_{i=1}^N \mathcal{L}(f_{\theta^{k-1}}(\mathbf{x}^{(i)}),\mathbf{y}^{(i)})$\;
+        $\mathbf{v} = \nabla_{\theta} J(\theta^k)$\;
+        %$\theta^{k+1} \leftarrow \theta^{k} - \eta %[\max(\min(v_1,m),-m),\ldots,\max(\min(v_M,m),-m)]^\transpose$\; %\quad\quad \triangleleft \text{per-dimension clipping}$\;
+        %$\theta^{k} \leftarrow \theta^{k-1} - \eta \min(\norm{\mathbf{v}},m)\frac{\mathbf{v}}{\norm{\mathbf{v}}}$\;
+        $\theta^{k+1} \leftarrow \theta^{k} - \eta [\texttt{clip}(v_1, -m, m), \ldots, \texttt{clip}(v_M, -m, m)]^\transpose$
+    }
 \end{algorithm}
 \marginnote{\texttt{clip} is the ``clipping'' function: $\texttt{clip}(v, -m, m) = \max(\min(v,m),-m)$}[-1.6cm]
 
 This algorithm indeed successfully minimizes our example of the exploding gradient, as can be seen in \fig{\ref{fig:gradient_descent:clipped_out1}}.
 \begin{figure}[h]
     \centerline{
-    \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/clipped_out1.pdf}
+        \includegraphics[width=0.5\linewidth]{./figures/gradient_descent/clipped_out1.pdf}
     }
     \caption{Using \GD~with clipping to minimize a loss with exploding gradients, using $m=0.1$.}
     \label{fig:gradient_descent:clipped_out1}
@@ -235,10 +235,10 @@ This algorithm indeed successfully minimizes our example of the exploding gradie
 One problem with the gradient-based methods we have seen so far is that the gradient may in fact be very expensive to compute, and this is often the case for learning problems. This is because learning problems typically have the form that $J$ is the average of losses incurred on each training datapoint. Computing $\nabla_{\theta}J(\theta)$ requires computing the gradient for each element in the average, that is, the gradient of the function being learned evaluated at the location of each datapoint in the training set. If we train on a big dataset, say 1 million training points, then to perform just \textit{one} step of gradient descent requires computing 1 million gradients! %. If we train on big data, which often we want to do, then even just evaluating $J$, or its gradient, will be expensive.
 To make this clear, we will write out $J$ as an explicit function of the training data $\{\mathbf{x}^{(i)}, \mathbf{y}^{(i)}\}_{i=1}^N$. For typical learning problems, $\nabla_{\theta} J(\theta, \{\mathbf{x}^{(i)}, \mathbf{y}^{(i)}\}_{i=1}^N)$ decomposes as follows:
 \begin{align}
-    \nabla_{\theta} J(\theta, \{\mathbf{x}^{(i)}, \mathbf{y}^{(i)}\}_{i=1}^N) &= %\frac{1}{N}\sum_{i=1}^N \nabla_{\theta} \mathcal{J}(\theta, \mathbf{x}^{(i)}, \mathbf{y}^{(i)})\\
+    \nabla_{\theta} J(\theta, \{\mathbf{x}^{(i)}, \mathbf{y}^{(i)}\}_{i=1}^N) & =                                                                                                     %\frac{1}{N}\sum_{i=1}^N \nabla_{\theta} \mathcal{J}(\theta, \mathbf{x}^{(i)}, \mathbf{y}^{(i)})\\
     %&= 
-    \nabla_{\theta} \frac{1}{N}\sum_{i=1}^N \mathcal{L}(f_{\theta}(\mathbf{x}^{(i)}), \mathbf{y}^{(i)})\\
-    &= \frac{1}{N}\sum_{i=1}^N \nabla_{\theta} \mathcal{L}(f_{\theta}(\mathbf{x}^{(i)}), \mathbf{y}^{(i)})
+    \nabla_{\theta} \frac{1}{N}\sum_{i=1}^N \mathcal{L}(f_{\theta}(\mathbf{x}^{(i)}), \mathbf{y}^{(i)})                                                                               \\
+                                                                              & = \frac{1}{N}\sum_{i=1}^N \nabla_{\theta} \mathcal{L}(f_{\theta}(\mathbf{x}^{(i)}), \mathbf{y}^{(i)})
 \end{align}
 
 For large $N$, computing this sum is very expensive. Suppose instead we randomly subsample (without replacement) a \textit{batch} of terms from this sum, $\{\mathbf{x}^{(b)}, \mathbf{y}^{(b)}\}_{b=1}^B$, where $B$ is the \index{Batch size}\textbf{batch size}. We then compute an \textit{estimate} of the total gradient as the average gradient over this batch as follows:
@@ -247,19 +247,19 @@ For large $N$, computing this sum is very expensive. Suppose instead we randomly
 \end{align}
 If we sample a large batch, where $B$ is almost as large as $N$, then the average over the $B$ terms should be roughly the same as the average over all $N$ terms. If we sample a smaller batch, then our estimate of the gradient will be less accurate but faster to compute. Therefore we have a tradeoff between accuracy and speed, and we can navigate this tradeoff with the hyperparameter $B$. The variant of gradient descent that uses this idea is called \index{Stochastic gradient descent}\textbf{stochastic gradient descent} (SGD), because each iteration of descent uses a different randomly (stochastically) sampled batch of training data to estimate the gradient. The full description of \SGD~is given in \algref{\ref{alg:gradient_descent:SGD}}.
 \begin{algorithm}[h]
-\SetAlgoVlined
-\DontPrintSemicolon
-%\marginnote{{\bf Algorithm \ref{alg:gradient_descent:SGD}}: Stochastic gradient descent estimates the gradient from a stochastic subset (batch) of the full training data, and makes an update on that basis.}
-\caption{{\bf Algorithm \ref{alg:gradient_descent:SGD}}: Stochastic gradient descent (\SGD). Stochastic gradient descent estimates the gradient from a stochastic subset (batch) of the full training data, and makes an update on that basis.}
-\fakealgorithmcaption{}
-\label{alg:gradient_descent:SGD}
-{\bf Input:} initial parameter vector $\theta^{0}$, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$, learning rate $\eta$, batch size $B$, number of steps $K$\;
-{\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
-\For{\upshape $k= 0, \dots, K-1$}{
+    \SetAlgoVlined
+    \DontPrintSemicolon
+    %\marginnote{{\bf Algorithm \ref{alg:gradient_descent:SGD}}: Stochastic gradient descent estimates the gradient from a stochastic subset (batch) of the full training data, and makes an update on that basis.}
+    \caption{{\bf Algorithm \ref{alg:gradient_descent:SGD}}: Stochastic gradient descent (\SGD). Stochastic gradient descent estimates the gradient from a stochastic subset (batch) of the full training data, and makes an update on that basis.}
+    \fakealgorithmcaption{}
+    \label{alg:gradient_descent:SGD}
+    {\bf Input:} initial parameter vector $\theta^{0}$, data $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$, learning rate $\eta$, batch size $B$, number of steps $K$\;
+    {\bf Output:} trained parameter vector $\theta^* = \theta^K$\;
+    \For{\upshape $k= 0, \dots, K-1$}{
     $\{\mathbf{x}^{(b)},\mathbf{y}^{(b)}\}_{b=1}^B \sim \{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N \quad\quad \triangleleft \text{ sample batch of training data}$\;
     $\tilde{\mathbf{g}} = \frac{1}{N}\sum_{b=1}^B \nabla_{\theta} \mathcal{L}(f_{\theta}(\mathbf{x}^{(b)}), \mathbf{y}^{(b)})$\;
     $\theta^{k} \leftarrow \theta^{k-1} - \eta \tilde{\mathbf{g}}$\;
-}
+    }
 \end{algorithm}
 
 \SGD~has a number of useful properties beyond just being faster to compute than \GD. Because each step of descent is somewhat random, \SGD~can jump over small bumps in the loss landscape, as long those bumps disappear for some randomly sampled batches. Another important property is that \SGD~can implicitly regularize the learning problem. For example, for linear problems (i.e., $f_\theta$ is linear), then if there are multiple parameter settings that minimize the loss, \SGD~will often converge to the solution with minimum parameter norm~\cite{zhang2021understanding}.
