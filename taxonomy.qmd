@@ -148,7 +148,7 @@ that are the cause of those images.
 images not as light patterns but as pictures of real three-dimensional
 (3D) scenes. (a) Occluding figures, (b) R. Shepard's turning tables
 illusion, and (c) E. Adelson's Checkershadow illusion.
-](figures/taxonomy/measuringScene2-0.png){#fig:measuringScene
+](figures/taxonomy/measuringScene2-0.png){#fig-measuringScene
 width="100%"}
 
 In , we see a red square occluding a smaller blue square. But why do we
@@ -328,8 +328,7 @@ ZE, so is DB to AB. But the ratio of ED to ZE is known. Moreover, DB is
 known; so, AB is also known" @Burton1945.
 
 ![Adapted from Euclid (325 BC). The color and text, added here for
-clarity, is not part of the original figure @Burton1945.
-](figures/taxonomy/euclid-0.png){#fig:euclid width="0.6"}
+clarity, is not part of the original figure @Burton1945.](figures/taxonomy/euclid-0.png){#fig-euclid width="60%"}
 
 
 Many other Greek philosophers and mathematicians contributed to a deeper
@@ -356,8 +355,8 @@ perpendicularly. He described the pinhole camera and invented the
 ![Alhacen's diagram of the eyes and the optic nerve (), drawn around the
 year 1027. It is one of the first drawings of the visual system.
 *Source*: MS Fatih 3212, vol. 1, fol. 81b, Süleimaniye Mosque Library,
-Istanbul.](figures/taxonomy/Alhazen1652.png){#fig:Alhacen
-width="0.5"}
+Istanbul.](figures/taxonomy/Alhazen1652.png){#fig-Alhacen
+width="50%"}
 
 Ibn al-Haytham rejected the extramission theory. He argued that sight
 could be explained by the light rays emitted by objects and that it was
@@ -484,7 +483,7 @@ find out when those elements were grouped together into larger elements.
 ![Gestalt grouping rules for perceptual organization. Most of the
 examples are recreated from @Palmer1999. The closure pattern is from
 Koffka @Koffka1935, who modified it from
-Kohler.](figures/taxonomy/gestalt-0.png){#fig:gestalt
+Kohler.](figures/taxonomy/gestalt-0.png){#fig-gestalt
 width="100%"}
 
 Gestalt psychologists called **grouping laws** the visual cues they
@@ -547,7 +546,7 @@ perceptual grouping to explain lightness perception ().
 ![(a) A ring of uniform gray. (b) Koffka ring and (c) a variant
 introduced by Adelson @Adelson99. In all the examples, the two sides of
 the ring are
-identical.](figures/taxonomy/koffka_ring-0.png){#fig:koffka_ring
+identical.](figures/taxonomy/koffka_ring-0.png){#fig-koffka_ring
 width="100%"}
 
 In each display, the two sides of the ring have the same gray level.
@@ -584,7 +583,7 @@ this case, we see a triangle that is not really there.
 adding boundaries to the occluder, the letter B becomes clearer. (c) How
 many squares are there? Behind the occluder are there two squares or
 just one rectangle? (d) Kanizsa triangle. Illusory contours appear at
-the triangle sides.](figures/taxonomy/kanizsa-0.png){#fig:kanizsa
+the triangle sides.](figures/taxonomy/kanizsa-0.png){#fig-kanizsa
 width="100%"}
 
 The Kanizsa triangle shows both amodal and modal completion. The circles
@@ -654,8 +653,8 @@ observer themself ().
 ![The flow pattern in the optic array of a bird flying over the earth
 provides information about the environment and also about the bird.
 Figure recreated from
-@Gibson1966.](figures/taxonomy/gibson_bird-0.png){#fig:gibson_bird
-width="0.7"}
+@Gibson1966.](figures/taxonomy/gibson_bird-0.png){#fig-gibson_bird
+width="70%"}
 
 Another key concept in Gibson's theory is the notion of **affordance**
 introduced by Gibson in 1966 @Gibson1966. A *path* affords locomotion
@@ -713,7 +712,7 @@ Cones. c. Rod nucleus. d. Cone nucleus. e. Large horizontal cell f.
 Cone-associated bipolar cell. g. Rod-associated bipolar cell. h.
 Amacrine cells. i. Giant ganglion cell. j. Small ganglion cells.
 *Source*: "Structure of the Mammalian Retina" c.1900 By Santiago Ramon y
-Cajal.](figures/taxonomy/cajal-0.png){#fig:cajal width=".6"}
+Cajal.](figures/taxonomy/cajal-0.png){#fig-cajal width=".6"}
 
 The drawing of the retina () shows the first layers of neurons that
 process the visual input. The retina is an amazing piece of the brain
@@ -790,7 +789,7 @@ OFF-center RF. (c-d) Two types of oriented simple cell. (e) Sketch of
 the response of the cell from (c) to an oriented bar with different
 orientations in the center of its RF. The gray bar corresponds to the
 moment the bar is
-visible.](figures/taxonomy/receptive_fields-0.png){#fig:receptivefields
+visible.](figures/taxonomy/receptive_fields-0.png){#fig-receptivefields
 width="100%"}
 
 Between 1955 and 1958, David H. Hubel invented a microelectrode that
@@ -853,7 +852,7 @@ into the primary visual cortex following a very regular architecture
 organized along hypercolumns. The koniocellular pathway projects into
 the color blobs in the upper layer of the visual cortex. Figure modified
 from
-@kandel:neural.](figures/taxonomy/visual_pathways_aina-0.png){#fig:visual_pathways
+@kandel:neural.](figures/taxonomy/visual_pathways_aina-0.png){#fig-visual_pathways
 width=".7"}
 
 Cells in the visual cortex project their outputs to a diverse set of
@@ -940,7 +939,7 @@ visual system.
 
 ![Necker cube illusion, introduced by Louis Albert Necker @Necker1832.
 Figure recreated from
-@Marr82.](figures/taxonomy/necker-0.png){#fig:necker_cube
+@Marr82.](figures/taxonomy/necker-0.png){#fig-necker_cube
 width=".9"}
 
 Marr postulated that these three levels of understanding can be studied
@@ -980,7 +979,7 @@ between the observer and the visible surfaces of the cube. Depth is
 represented by gray levels. Intensity increases with depth.
 
 ![Image of a cube, and its 2.5D sketch. Figure inspired from figure 4-2
-from @Marr82.](figures/taxonomy/sketch-0.png){#fig:sketch
+from @Marr82.](figures/taxonomy/sketch-0.png){#fig-sketch
 width=".9"}
 
 It is hard to overstate the influence that Marr's book had in shaping
@@ -1093,7 +1092,7 @@ replicates these exemplar mappings from input to output.
 ![Two ways of programming an algorithm. Left: traditional way, Right:
 the machine learning way. You will learn about the machine learning
 "compiler", called Stochastic Gradient Descent (SGD), in
-.](figures/taxonomy/programming_vs_learning.png){#fig:taxonomy:programming_vs_learning
+.](figures/taxonomy/programming_vs_learning.png){#fig-taxonomy:programming_vs_learning
 width="100%"}
 
 Learning algorithms have been a part of computer vision since the
@@ -1113,8 +1112,8 @@ algorithms was high.
 
 ![Enthusiasm for neural nets has gone up and down over time, with a
 period of roughly 25 years. What will happen
-next?](figures/taxonomy/neural_net_enthusiasm-0.png){#fig:taxonomy:neural_net_enthusiam
-width="0.7"}
+next?](figures/taxonomy/neural_net_enthusiasm-0.png){#fig-taxonomy:neural_net_enthusiam
+width="70%"}
 
 In 1969, Marvin Minsky and Seymour Papert published a book titled
  @marvin1969perceptrons. You might think this would be a book that would
@@ -1140,7 +1139,6 @@ publication of by David Rumelhart and Jay McClelland @Rumelhart86. This
 book mixed the neuroscience of the brain with computational models of
 distributed processing in artificial networks.
 
-\[-.8in\]
 
 Unfortunately, however, at that time we did not have the compute and
 data necessary to make these systems really work, and interest waned
