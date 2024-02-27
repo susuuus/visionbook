@@ -15,6 +15,7 @@ book:
     # favicon: Figures/favicon.ico
     cover-image: figures/logo.png
     downloads: [pdf]
+    sharing: [twitter]
     sidebar:
         style: "floating"
         collapse-level: 1
@@ -77,3 +78,5 @@ format:
                 \printindex
 # https://christophertkenny.com/posts/2023-07-01-creating-quarto-journal-articles/
 latex-auto-install: true
+comments:
+    hypothesis: true
