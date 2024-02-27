@@ -6,6 +6,8 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
+SCRIPT_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+echo $SCRIPT_DIR
 input_file="$1"
 
 # Check if the input file exists
@@ -19,9 +21,9 @@ dir=$(dirname "$input_file")
 base_name=$(basename "$input_file" .tex)
 
 # Set the output file path
-output_file="${dir}/${base_name}.qmd"
+output_file="${base_name}.qmd"
 
 # Run Pandoc conversion
-pandoc "$input_file" -o "$output_file" -f latex -t markdown --filter scripts/filter.py
+pandoc "$input_file" -o "$output_file" -f latex -t markdown --filter $SCRIPT_DIR/filter.py
 
 echo "Conversion completed: $output_file"
