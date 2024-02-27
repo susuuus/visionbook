@@ -13,17 +13,16 @@ book:
         - notations.qmd
         - references.qmd
     # favicon: Figures/favicon.ico
-    # cover-image: Figures/logo.png
-    downloads: [pdf] 
+    cover-image: figures/logo.png
+    downloads: [pdf]
     sidebar:
         style: "floating"
         collapse-level: 1
-        border: true 
+        border: true
         search: true
     page-footer:
         left: "All content licensed under [CC BY-NC-SA 4.01](https://creativecommons.org/licenses/by-nc-sa/)<br> Antonio Torralba, Phillip Isola, and William Freeman"
-        center: "[Website](https://shenshen.mit.edu/cv_book) | [GitHub](https://github.com/shensquared/cv_book) | [MIT Vision Group](http://groups.csail.
-- mit.edu/vision)"
+        center: "[Website](https://shenshen.mit.edu/cv_book) | [GitHub](https://github.com/shensquared/cv_book) | [MIT Vision Group](http://groups.csail.mit.edu/vision)"
         right: Built with [Quarto](https://quarto.org/).
 
 bibliography:
