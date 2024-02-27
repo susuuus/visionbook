@@ -42,8 +42,8 @@ information?
 ![A tiny image with 32 $\times$ 32 color pixels. Despite the very low
 resolution, we can still recognize most of its content. *Source*:
 Original image created with Dall-E, and downsampled with
-Photoshop.](figures/visionscience/DALLE_32x32.png){#fig:pexels-retha-ferguson
-width=".8\\linewidth"}
+Photoshop.](figures/visionscience/DALLE_32x32.png){#fig-pexels-retha-ferguson
+width="80%"}
 
 \[-3in\]
 
@@ -73,8 +73,8 @@ shown in and try to write down everything you see down to the smallest
 detail.
 
 ![A street in Paris. Is everything fine in this
-picture?](figures/visionscience/ADE_train_00015819_messed_small.jpg){#fig:street_in_paris
-width=".98\\linewidth"}
+picture?](figures/visionscience/ADE_train_00015819_messed_small.jpg){#fig-street_in_paris
+width="98%"}
 
 But this feeling of unlimited and effortless understanding of a picture
 is also an illusion. Do you truly understand everything you see? For
@@ -91,8 +91,8 @@ developed for processing a dataset and instead apply it to the set of
 patches in an image, or vice versa.
 
 ![Each picture contains lots of
-images.](figures/visionscience/tiny_images.jpg){#fig:tiny_images
-width="1\\linewidth"}
+images.](figures/visionscience/tiny_images.jpg){#fig-tiny_images
+width="100%"}
 
 ## The Eye of the Artist
 
@@ -103,7 +103,8 @@ reflections. What mixtures of paint and what strokes can accomplish
 that? Artists learn to see the world not by what it represents, but as
 why it looks the way it does.
 
-The following sequence (), painted by Agata Lapedriza, shows different
+
+The following sequence @fig_agata_painting painted by Agata Lapedriza, shows different
 steps in the painting process of a strawberry. Layer after layer, the
 artist replicates the light that will fool your eye into seeing a
 strawberry instead of acrylic paint. It is interesting to see that the
@@ -112,19 +113,18 @@ instance, from step 3 to 4, the right side of the strawberry has lost
 realism. However, those new strokes will become the shading that will
 make the strawberry pop out from the canvas.
 
-<figure id="fig:agata_painting">
-<p> 1<img src="figures/visionscience/fresa_1.jpg" alt="image" /> 2<img
-src="figures/visionscience/fresa_2.jpg" alt="image" /> 3<img
-src="figures/visionscience/fresa_3.jpg" alt="image" /> 4<img
-src="figures/visionscience/fresa_4.jpg" alt="image" /></p>
-<p>  5<img src="figures/visionscience/fresa_5.jpg" alt="image" /> 6<img
-src="figures/visionscience/fresa_6.jpg" alt="image" /> 7<img
-src="figures/visionscience/fresa_7.jpg" alt="image" /> 8<img
-src="figures/visionscience/fresa_8.jpg" alt="image" /></p>
-<figcaption>The following sequence shows different steps in the process
-of painting a strawberry. <span><em>Source</em></span>: Original images
-by Agata Lapedriza.</figcaption>
-</figure>
+|               |               |               |               |
+| ------------- | ------------- | ------------- | ------------- |
+| ![](figures/visionscience/fresa_1.jpg) | ![](figures/visionscience/fresa_2.jpg) | ![](figures/visionscience/fresa_3.jpg) | ![](figures/visionscience/fresa_4.jpg) |
+| ![](figures/visionscience/fresa_5.jpg) | ![](figures/visionscience/fresa_6.jpg) | ![](figures/visionscience/fresa_7.jpg) | ![](figures/visionscience/fresa_8.jpg){#fig_agata_painting}|
+
+
+
+:::{.column-margin}
+The following sequence shows different steps in the process
+of painting a strawberry. <span><em>Source</em></span>: Original images by Agata Lapedriza.
+:::
+
 
 ## Tree Shadows and Image Formation
 
@@ -133,7 +133,7 @@ sun is right above us (\[left\]), we can see how some light rays get
 through the holes left between leaves, creating spots on the floor
 (\[right\]).
 
-<figure id="fig:tree_pinholes">
+<figure id="fig-tree_pinholes">
 <p><img src="figures/visionscience/IMG_2842_tree_pinholes.jpg"
 alt="image" />   <img
 src="figures/visionscience/IMG_2837_tree_shadow.JPG" alt="image" /></p>
@@ -151,8 +151,8 @@ of leaves during a solar eclipse.
 
 ![During an eclipse, the shadow of the tree contains many copies of the
 crescent
-sun.](figures/visionscience/tree_shadow_eclipse2.jpg){#fig:tree_shadow_eclipse
-width=".9\\linewidth"}
+sun.](figures/visionscience/tree_shadow_eclipse2.jpg){#fig-tree_shadow_eclipse
+width="90%"}
 
 One of the most common situations that we often encounter is the
 **pinhole cameras** formed by the spacing between the leaves of a tree.
@@ -180,8 +180,8 @@ orientations are subtle and yet it produces a very different perception.
 
 ![Line drawings. The one on the left seems to correspond to an
 horizontal surface while the one on the right looks like a vertical
-surface.](figures/visionscience/vertical_or_horizontal.eps){#fig:vertical_or_horizontal
-width="1\\linewidth"}
+surface.](figures/visionscience/vertical_or_horizontal.eps){#fig-vertical_or_horizontal
+width="100%"}
 
 In the arrangement in the left, there are two **vanishing points** (the
 points in which parallel lines intersect) and both are above the
@@ -204,8 +204,8 @@ that are far away might still look sharp while things nearby appear very
 blurry.
 
 ![Picture of Paris taken from a moving
-car.](figures/visionscience/motion_blur.jpg){#fig:Paris_from_moving_car
-width="1\\linewidth"}
+car.](figures/visionscience/motion_blur.jpg){#fig-Paris_from_moving_car
+width="100%"}
 
 The amount of blur is related to the car speed, the exposure time, and
 the distance between the camera and each object in the scene. We will
@@ -231,8 +231,8 @@ four examples of coincidences that violate the Gestalt principle of
 continuity. From top-left clockwise: finger boundary aligns with lip
 contour, cloth aligns with eye, creases align on two different shirts,
 sleeve boundary is tangent to line on a different
-shirt.](figures/visionscience/accidents_migrant_mother.jpg){#fig:visionscience:migrant_mother
-width="1\\linewidth"}
+shirt.](figures/visionscience/accidents_migrant_mother.jpg){#fig-visionscience:migrant_mother
+width="100%"}
 
 You have to be careful about this when developing vision algorithms. If
 you assume *no* accidents will happen, then you will be in for some
@@ -244,20 +244,20 @@ because they did not handle exceptions to the rules.
 When can we tell by looking that one object supports another? Consider
 the ball over a surface depicted in . The drop shadow provides a strong
 cue that the ball is above the surface in figures
-[1.10](#fig:cues_for_suppport){reference-type="ref"
-reference="fig:cues_for_suppport"}(a) and
-[1.10](#fig:cues_for_suppport){reference-type="ref"
-reference="fig:cues_for_suppport"}(c), while the slack string provides
+[1.10](#fig-cues_for_suppport){reference-type="ref"
+reference="fig-cues_for_suppport"}(a) and
+[1.10](#fig-cues_for_suppport){reference-type="ref"
+reference="fig-cues_for_suppport"}(c), while the slack string provides
 evidence for the ball being on the surface in figures
-[1.10](#fig:cues_for_suppport){reference-type="ref"
-reference="fig:cues_for_suppport"}(b) and
-[1.10](#fig:cues_for_suppport){reference-type="ref"
-reference="fig:cues_for_suppport"}(c). Only is a doctored photograph.
+[1.10](#fig-cues_for_suppport){reference-type="ref"
+reference="fig-cues_for_suppport"}(b) and
+[1.10](#fig-cues_for_suppport){reference-type="ref"
+reference="fig-cues_for_suppport"}(c). Only is a doctored photograph.
 
 In which of these figures does the ball appear to be in contact with the
 ground plane?
 
-<figure id="fig:cues_for_suppport">
+<figure id="fig-cues_for_suppport">
 
 <figcaption>Cues for support. The relative location between an object,
 and its shadow on the ground is a powerful cue for contact.</figcaption>
@@ -281,7 +281,7 @@ refocusing the image after it has been taken.
 a window contains hundreds of tiny images of the scene, one in each
 raindrop. The images to the right are individual zoomed in raindrops
 from the photo on the
-left.](figures/visionscience/droplets.jpg){#fig:droplets
+left.](figures/visionscience/droplets.jpg){#fig-droplets
 width="1.0\\linewidth"}
 
 ## Plato's Cave
@@ -308,8 +308,8 @@ without touching it, as shown in .
 
 ![Why does wet sand look dark? The answer to this question is
 interesting, but not as much as the question
-itself.](figures/visionscience/wet_sand_2.jpeg){#fig:wet_sand
-width=".8\\linewidth"}
+itself.](figures/visionscience/wet_sand_2.jpeg){#fig-wet_sand
+width="80%"}
 
 Why does sand look darker when it's wet? Does everything wet look darker
 than when it is dry? How can we tell which parts of the sand are dark
