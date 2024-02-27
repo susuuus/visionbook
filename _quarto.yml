@@ -11,6 +11,11 @@ book:
     chapters:
         - index.qmd
         - notations.qmd
+        - part: Introduction
+          chapters:
+              - simplesystem.qmd
+              - visionscience.qmd
+              - fairness.qmd
         - references.qmd
     # favicon: Figures/favicon.ico
     cover-image: figures/logo.png
