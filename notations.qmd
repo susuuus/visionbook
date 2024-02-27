@@ -256,7 +256,14 @@ simpler later): $$\begin{aligned}
             \vdots & \ddots & \vdots \\
             \frac{\partial \mathcal{L}}{\partial \mathbf{W}_{1M}} & \ldots & \frac{\partial \mathcal{L}}{\partial \mathbf{W}_{NM}} \\
         \end{bmatrix} \label{backprop:scalar_matrix_deriv}
-\end{aligned}$$ \[-.9in\]
+\end{aligned}$$
+
+::: {.column-margin}
+We will often draw matrices and vectors to help visualize the operations. For example, if $N=3$ and $M=4$:
+![](figures/notations/w.png)
+then, the gradient will have the form:
+![](figures/notations/dLdw.png)
+:::
 
 ### Conventions That Will Not Be Strictly Observed
 
