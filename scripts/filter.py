@@ -1,4 +1,5 @@
 import panflute as pf
+import re
 
 
 def latex_to_markdown_cite(elem, doc):
@@ -9,9 +10,6 @@ def latex_to_markdown_cite(elem, doc):
         # Create a new RawInline element with the concatenated citation keys
         # Ensure the format is set to 'markdown' to insert it as raw Markdown text
         return pf.RawInline(citation_keys, format="markdown")
-
-
-import re
 
 
 def convert_fig_ref(elem, doc):
@@ -25,8 +23,19 @@ def convert_fig_ref(elem, doc):
             return pf.RawInline(text, format="markdown")
 
 
+def convert_marginnote(elem, doc):
+    if isinstance(elem, pf.RawInline) and "\marginnote{" in elem.text:
+        # Extract the content within the LaTeX command
+        content = elem.text.split("\marginnote{", 1)[1].rstrip("}")
+        # Create a new Div element with the extracted content, wrapped in a Paragraph
+        new_elem = pf.Div(pf.Para(pf.Str(content)), classes=["column-margin"])
+        return new_elem
+
+
 def main(doc=None):
-    return pf.run_filters([latex_to_markdown_cite, convert_fig_ref], doc=doc)
+    return pf.run_filters(
+        [latex_to_markdown_cite, convert_fig_ref, convert_marginnote], doc=doc
+    )
 
 
 if __name__ == "__main__":
