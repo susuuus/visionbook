@@ -56,33 +56,33 @@ format:
             theme: neutral
 
     # see https://pandoc.org/MANUAL.html for all options
-    pdf:
-        documentclass: src/DL_class
-        classoption: DL_class
-        lof: false
-        lot: false
-        toc: false
-        toc-depth: 2
-        fig-cap-location: bottom
-        tbl-cap-location: top
-        urlcolor: "blue"
-        linkcolor: "black"
-        biblio-style: apalike
-        keep-tex: true
-        code-block-bg: "#f2f2f2"
-        code-block-border-left: "#f2f2f2"
-        code-overflow: wrap
-        mermaid:
-            theme: neutral
-        include-in-header:
-            - src/setup.tex
-            - text: |
-                  \usepackage{makeidx}
-                  \makeindex
-        include-after-body:
-            text: |
-                \printindex
-# https://christophertkenny.com/posts/2023-07-01-creating-quarto-journal-articles/
-latex-auto-install: true
+#     pdf:
+#         documentclass: src/DL_class
+#         classoption: DL_class
+#         lof: false
+#         lot: false
+#         toc: false
+#         toc-depth: 2
+#         fig-cap-location: bottom
+#         tbl-cap-location: top
+#         urlcolor: "blue"
+#         linkcolor: "black"
+#         biblio-style: apalike
+#         keep-tex: true
+#         code-block-bg: "#f2f2f2"
+#         code-block-border-left: "#f2f2f2"
+#         code-overflow: wrap
+#         mermaid:
+#             theme: neutral
+#         include-in-header:
+#             - src/setup.tex
+#             - text: |
+#                   \usepackage{makeidx}
+#                   \makeindex
+#         include-after-body:
+#             text: |
+#                 \printindex
+# # https://christophertkenny.com/posts/2023-07-01-creating-quarto-journal-articles/
+# latex-auto-install: true
 comments:
     hypothesis: true
