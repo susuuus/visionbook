@@ -11,7 +11,8 @@ book:
     chapters:
         - index.qmd
         - notations.qmd
-        - part: Introduction
+        - taxonomy.qmd
+        - part: FOUNDATIONS
           chapters:
               - simplesystem.qmd
               - visionscience.qmd
@@ -23,7 +24,7 @@ book:
     sharing: [twitter]
     sidebar:
         style: "floating"
-        collapse-level: 1
+        collapse-level: 2
         border: true
         search: true
     page-footer:
