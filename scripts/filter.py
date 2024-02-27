@@ -26,7 +26,7 @@ def convert_fig_ref(elem, doc):
 
 
 def main(doc=None):
-    return pf.run_filter([latex_to_markdown_cite, convert_fig_ref], doc=doc)
+    return pf.run_filters([latex_to_markdown_cite, convert_fig_ref], doc=doc)
 
 
 if __name__ == "__main__":
