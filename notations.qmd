@@ -1,5 +1,6 @@
 # Notation {.unnumbered}
 
+
 This book deals with many different fields and each has its own
 notation. We will stick to the following conventions throughout most of
 this book, and indicate when we deviate from these rules. To define the
@@ -41,6 +42,8 @@ pattern.
   \end{bmatrix}
   \end{aligned}$$
 
+
+
 - Tensor (i.e., multidimensional arrays): Typically, we will use
   lowercase bold variables to represent tensors, for example,
   $\mathbf{x}$. This is because tensors can have any number of
@@ -50,6 +53,18 @@ pattern.
   apply to $N$-dimensional arrays, for any $N$). However, in some
   sections, we use uppercase to make a distinction between tensors of
   different shapes, and we will specify when this is the case.
+
+
+:::{.column-margin}
+We will use notes inside boxes to bring attention to important concepts, or to add additional comments without breaking the flow of the main text.
+:::
+
+:::{.column-margin}
+A 3D tensor that could represent a $C \times H \times W$ color image: 
+![](figures/neural_nets/3D_tensor_example-0.png)
+:::
+
+
 
 - Index or slice of a tensor: $x[c,i,j,k]$, $\mathbf{x}[:,:,k]$; if
   $\mathbf{x}$ is a multidimensional tensor and we wish to slice by the
@@ -68,6 +83,9 @@ pattern.
 
 - Product of two scalars: $ab$ or $a*b$
 
+:::{.column-margin}
+In the geometry chapters, and in some other chapters, the variables $x$, $y$, $z$ will denote location and will have a special treatment.
+:::
 
 ### Signal Processing
 
@@ -91,6 +109,10 @@ pattern.
 
 Images are a very special signal and, whenever is convenient, we will
 use the following notation:
+
+:::{.column-margin}
+We will use the letter $\ell$, from $\ell$ight, when the signal is an image. We use this letter because it is very distinct from all the other notation. But sometimes we will use other notation if it is more convenient.
+:::
 
 - Image as a discrete 2D signal: $\ell\left[ n,m \right]$ where $n$
   indexes columns and $m$ indexes rows. The origin, $n=m=0$, corresponds
@@ -139,6 +161,10 @@ $\mathbf{x}, \mathbf{y}, \mathbf{z}$.
   $m$ as spatial coordinates, and $c$ indexing channels.
 
 - Neuron values on layer $l$ of a deep net: $\mathbf{x}_{l}$
+
+:::{.column-margin}
+![](figures/notations/nn.png)
+:::
 
 - $x_{l}[n]$ refers to the $n$-th neuron on layer $l$. For neural
   networks with spatial feature maps (such as convolutional neural
