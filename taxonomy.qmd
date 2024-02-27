@@ -859,7 +859,7 @@ Cells in the visual cortex project their outputs to a diverse set of
 other visual areas following two main streams (the ventral stream and
 the dorsal stream) and project into specialized areas performing motion
 processing (area MT), face processing (fusiform face area \[FFA\];
-see@Kanwisher1997TheFF), and object recognition (IT).
+see @Kanwisher1997TheFF), and object recognition (IT).
 
 As a result of all those discoveries in neuroscience, a large community
 of interdisciplinary researchers developed models trying to explain the
