@@ -41,8 +41,8 @@ colored paper as shown in . Here, we will not assume that we know the
 exact geometry of these objects in advance.
 
 ![A world of simple objects. Print, cut, and build your own blocks
-world!](figures/simplesystem/simpleObjects.pdf){#fig:simpleObjects
-width="1\\linewidth"}
+world!](figures/simplesystem/simpleObjects.png){#fig-simpleObjects
+width="100%"}
 
 ## A Simple Image Formation Model
 
@@ -61,8 +61,8 @@ be better described by **perspective projection**, as shown in .
 than far edges, and parallel lines in 3D are not parallel. (b) Picture
 taken from far away using zoom resulting in an image that can be
 described by parallel
-projection.](figures/simplesystem/parallelProjection.pdf){#fig:parallelProjection
-width="1\\linewidth"}
+projection.](figures/simplesystem/parallelProjection.png){#fig-parallelProjection
+width="100%"}
 
 One way of generating images that can be described by parallel
 projection is to use the camera zoom. If we increase the distance
@@ -86,8 +86,8 @@ coordinates $(x,y)$.
 Visualization of the world axis projected into the camera plane with
 parallel projection. The $Z$-axis is identical to the $Y$-axis up to a
 sign change and a
-scaling.](figures/simplesystem/projection2.eps){#fig:projection
-width="1\\linewidth"}
+scaling.](figures/simplesystem/projection2.png){#fig-projection
+width="100%"}
 
 In this simple projection model, the origin of the world coordinates
 projects on the origin of the image coordinates. Therefore, the world
@@ -126,7 +126,7 @@ sources and interreflections).
 
 ## From Images to Edges and Useful Features {#sec:algo_simple_world}
 
-The observed image is a function, $$\img(x,y)$$ that takes as input
+The observed image is a function, $$\ell(x,y)$$ that takes as input
 location, $(x,y)$, and it outputs the intensity at that location. In
 this **representation**, the image is an array of intensity values
 (color values) indexed by location ().
@@ -134,13 +134,13 @@ this **representation**, the image is an array of intensity values
 ![Image as a surface. The vertical axis corresponds to image intensity.
 For clarity here, we have reversed the vertical axis. Dark values are
 shown higher than lighter
-values.](figures/simplesystem/imageAsSurface.jpg){#fig:imageAsSurface
-width="1\\linewidth"}
+values.](figures/simplesystem/imageAsSurface.jpg){#fig-imageAsSurface
+width="100%"}
 
 This representation is ideal for determining the light intensity
 originating from different directions in space and striking the camera
 plane, as it provides explicit representation of this information. The
-array of pixel intensities, $\img(x,y)$, is a reasonable representation
+array of pixel intensities, $\ell(x,y)$, is a reasonable representation
 as input to the early stages of visual processing because, although we
 do not know the distance of surfaces in the world, the direction of each
 light ray in the world is well defined. However, other initial
@@ -172,8 +172,8 @@ orientation, changes in surface albedo, shadows).
 intensities. Those variations can be due to a multitude of scene factors
 (e.g., occlusion boundaries, changes in surface orientation, changes in
 surface albedo, and
-shadows).](figures/simplesystem/edgeLabeling.pdf){#fig:edgeLabeling
-width=".9\\linewidth"}
+shadows).](figures/simplesystem/edgeLabeling.png){#fig-edgeLabeling
+width="90%"}
 
 One of the tasks that we will solve first is to classify **image edges**
 according to their most probable cause. We will use the following
@@ -214,10 +214,10 @@ boundaries, junction analysis, inferring light sources).
 
 The first step will consist in detecting candidate edges in the image.
 Here we will start by making use of some notions from differential
-geometry. If we think of the image $\img (x,y)$ as a function of two
+geometry. If we think of the image $\ell (x,y)$ as a function of two
 (continuous) variables (), we can measure the degree of variation using
 the gradient: $$\begin{aligned}
-\nabla \img = \left( \frac{\partial \img}{\partial x}, \frac{\partial \img}{\partial y} \right)
+\nabla \ell = \left( \frac{\partial \ell}{\partial x}, \frac{\partial \ell}{\partial y} \right)
 \end{aligned}$$ The direction of the gradient indicates the direction in
 which the variation of intensities is larger. If we are on top of an
 edge, the direction of larger variation will be in the direction
@@ -226,10 +226,10 @@ perpendicular to the edge.
 \[-0.5in\]
 
 However, the image is not a continuous function as we only know the
-values of the $\img (x,y)$ at discrete locations (pixels). Therefore, we
+values of the $\ell (x,y)$ at discrete locations (pixels). Therefore, we
 will approximate the partial derivatives by: $$\begin{aligned}
-\frac{\partial \img}{\partial x} & \simeq & \img(x,y) - \img(x-1,y) \\
-\frac{\partial \img}{\partial y} & \simeq & \img(x,y) - \img(x,y-1) 
+\frac{\partial \ell}{\partial x} & \simeq & \ell(x,y) - \ell(x-1,y) \\
+\frac{\partial \ell}{\partial y} & \simeq & \ell(x,y) - \ell(x,y-1) 
 \label{eq:image_partial_derivatives_aprox}
 \end{aligned}$$
 
@@ -248,12 +248,12 @@ $$\begin{aligned}
 
 From the image gradient, we can extract a number of interesting
 quantities: $$\begin{aligned}
-    e(x,y) &= \lVert \nabla \img(x,y) \rVert   & \quad\quad \triangleleft \quad \texttt{edge strength}\\
-    \theta(x,y) &= \angle \nabla \img =  \arctan \left( \frac{\partial \img / \partial y}{\partial \img / \partial x} \right) & \quad\quad \triangleleft \quad \texttt{edge orientation}
+    e(x,y) &= \lVert \nabla \ell(x,y) \rVert   & \quad\quad \triangleleft \quad \texttt{edge strength}\\
+    \theta(x,y) &= \angle \nabla \ell =  \arctan \left( \frac{\partial \ell / \partial y}{\partial \ell / \partial x} \right) & \quad\quad \triangleleft \quad \texttt{edge orientation}
 \end{aligned}$$
 
 The unit norm vector perpendicular to an edge is: $$\begin{aligned}
-{\bf n} = \frac{\nabla \img}{\lVert \nabla \img \rVert}
+{\bf n} = \frac{\nabla \ell}{\lVert \nabla \ell \rVert}
 \end{aligned}$$
 
 The first decision that we will perform is to decide which pixels
@@ -264,8 +264,8 @@ pixels with edges, we can also measure the edge orientation
 $\theta(x,y)$. visualizes the edges and the normal vector on each edge.
 
 <figure id="fig:gradient">
-<embed src="figures/simplesystem/gradient.pdf" />
-<embed src="figures/simplesystem/edgeTypes.pdf" />
+<embed src="figures/simplesystem/gradient.png" />
+<embed src="figures/simplesystem/edgeTypes.png" />
 <figcaption>Gradient and edge types.</figcaption>
 </figure>
 
@@ -340,8 +340,8 @@ orientation.
 transitions from ground to figure are occlusion boundaries, and
 transitions from figure to ground are contact edges. This heuristic will
 fails when an object occludes
-another.](figures/simplesystem/ground_figure_points.eps){#fig:ground_figure_points
-width=".5\\linewidth"}
+another.](figures/simplesystem/ground_figure_points-0.png){#fig-ground_figure_points
+width="50%"}
 
 ### Generic View and Nonaccidental Scene Properties
 
@@ -400,8 +400,8 @@ only.
 
 ![The generic-view assumption breaks down for the central image, where
 the cube is precisely aligned with the camera axis.
-](figures/simplesystem/accidentalAlignments.pdf){#fig:accidentalAlignments
-width="1\\linewidth"}
+](figures/simplesystem/accidentalAlignments.png){#fig-accidentalAlignments
+width="100%"}
 
 In we show the edges classified as vertical or horizontal using the edge
 angle. Anything that deviates from 2D verticality by more than 15
@@ -525,8 +525,8 @@ value 0).
 
 ![The solution to our vision problem for the input image of . World
 coordinates $X$, $Y$, and $Z$ are shown as
-images.](figures/simplesystem/worldCoordinates.pdf){#fig:worldCoordinates
-width="1\\linewidth"}
+images.](figures/simplesystem/worldCoordinates.png){#fig-worldCoordinates
+width="100%"}
 
 There are a few things to reflect on:
 
@@ -554,8 +554,8 @@ accurately captured.
 
 ![To show that the algorithm for 3D interpretation gives reasonable
 results we can re-render the inferred 3D structure from different
-viewpoints.](figures/simplesystem/views.pdf){#fig:views
-width="1\\linewidth"}
+viewpoints.](figures/simplesystem/views.png){#fig-views
+width="100%"}
 
 ## Generalization
 
@@ -580,8 +580,8 @@ gone wrong.
 several assumptions we made (shadows are not soft and the green cube
 occludes the red one) and it has one object on top of the other, a
 configuration that we did not consider while designing the algorithm.
-](figures/simplesystem/out_of_domain_example.eps){#fig:out_of_domain
-width="1\\linewidth"}
+](figures/simplesystem/out_of_domain_example-0.png){#fig-out_of_domain
+width="100%"}
 
 shows the *impossible steps* inspired from @Adelson99. On the left side,
 this shape looks rectangular and the stripes appear to be painted on the
@@ -594,8 +594,8 @@ all the constraints.
 
 ![Reconstruction of an impossible figure (inspired from @Adelson99): the
 reconstruction agrees with our 3D
-perception.](figures/simplesystem/steps.pdf){#fig:impossible
-width="1\\linewidth"}
+perception.](figures/simplesystem/steps.png){#fig-impossible
+width="100%"}
 
 ## Concluding Remarks
 
