@@ -24,9 +24,13 @@ data first. shows the number of pages written as a function of time
 since we mentioned the idea to MIT press for the first time on November
 24, 2010.
 
-![Evolution of the number of pages written as a function of time.
-](figures/preface/book_evolution_final.eps){#fig:evolution_pages
-width="1\\linewidth"}
+![Evolution of the number of pages written as a function of time.](figures/preface/book_evolution_final-0.png){#fig-evolution_pages}
+
+::: {.column-margin}
+Starting to write this book was like entering this cave. 
+![](figures/preface/cave.jpg)
+We had no idea what we were getting into.
+:::
 
 Writing this book has not been a linear process. As the plot shows, the
 evolution of the manuscript length is non-monotonic, with a period when
@@ -49,7 +53,7 @@ the field since it began. During the first years after 2012, some of the
 early ideas were forgotten due to the popularity of the new approaches,
 but over time many of them returned. We find it interesting to look at
 the process of writing this book with the perspective of the changes
-that were happening in the field. shows some important events in the
+that were happening in the field. @fig-evolution_pages shows some important events in the
 field of artificial intelligence (AI) that took place while writing this
 book.
 
