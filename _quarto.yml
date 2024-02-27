@@ -5,60 +5,33 @@ book:
     title: "Foundations of Computer Vision"
     repo-url: https://github.com/shensquared/cv_book
     repo-actions: [edit, issue, source]
-    repo-subdir: book
+    repo-subdir: /
+    author: "Antonio Torralba, Phillip Isola and William Freeman"
+    date: "12/23/2023"
+    chapters:
+        - index.qmd
+        - notations.qmd
+        - references.qmd
     # favicon: Figures/favicon.ico
     # cover-image: Figures/logo.png
-    downloads: [pdf]
+    downloads: [pdf] 
     sidebar:
         style: "floating"
         collapse-level: 1
-        border: true
+        border: true 
         search: true
     page-footer:
-        left: |
-            All content licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) <br> &copy; Antonio Torralba, Phillip Isola and William Freeman.
-        center: "[Website](https://shenshen.mit.edu/cv_book) | [GitHub](https://github.com/shensquared/cv_book) | [MIT Vision Group](http://groups.csail.mit.edu/vision)"
-        right: Built with [Quarto](https://quarto.org/).
-        background: "#f8f9fa"
-    chapters:
-        - index.qmd
-        - preface.qmd
-        - notation.md
-        - part: "FOUNDATIONS"
-          chapters:
-
-    #   - part: "Tuning and Feature Selection"
-    #     chapters:
-    #     - chapters/chapter4/hyperparameter_optimization.qmd
-    #     - chapters/chapter5/advanced_tuning_methods_and_black_box_optimization.qmd
-    #     - chapters/chapter6/feature_selection.qmd
-    #   - part: "Pipelines and Preprocessing"
-    #     chapters:
-    #     - chapters/chapter7/sequential_pipelines.qmd
-    #     - chapters/chapter8/non-sequential_pipelines_and_tuning.qmd
-    #     - chapters/chapter9/preprocessing.qmd
-    #   - part: "Advanced Topics"
-    #     chapters:
-    #     - chapters/chapter10/advanced_technical_aspects_of_mlr3.qmd
-    #     - chapters/chapter11/large-scale_benchmarking.qmd
-    #     - chapters/chapter12/model_interpretation.qmd
-    #     - chapters/chapter13/beyond_regression_and_classification.qmd
-    #     - chapters/chapter14/algorithmic_fairness.qmd
-    #   - chapters/references.qmd
-    # appendices:
-    #     - chapters/appendices/solutions.qmd # online only
-    #     - chapters/appendices/tasks.qmd # online only
-    #     - chapters/appendices/overview-tables.qmd # online only
-    #     - chapters/appendices/errata.qmd # online only
+        left: "All content licensed under [CC BY-NC-SA 4.01](https://creativecommons.org/licenses/by-nc-sa/)<br> Antonio Torralba, Phillip Isola, and William Freeman"
+        center: "[Website](https://shenshen.mit.edu/cv_book) | [GitHub](https://github.com/shensquared/cv_book) | [MIT Vision Group](http://groups.csail.
+- mit.edu/vision)"
+        right: Built with [Quarto] (https://quarto.org/).
 
 bibliography:
-    - all.bib
-    - visionbib.bib
+    - src/all.bib
+    - src/visionbib.bib
 
 format:
     html:
-        theme:
-            light: [default, style/custom.scss]
         fontsize: "15px"
         linestretch: 1.6
         mainfont: "Roboto"
@@ -96,27 +69,12 @@ format:
         mermaid:
             theme: neutral
         include-in-header:
-            text: |
-                \usepackage{makeidx}
-                \makeindex
+            - src/setup.tex
+            - text: |
+                  \usepackage{makeidx}
+                  \makeindex
         include-after-body:
             text: |
                 \printindex
-
+# https://christophertkenny.com/posts/2023-07-01-creating-quarto-journal-articles/
 latex-auto-install: true
-
-knitr:
-    opts_chunk:
-        cache: true
-        cache.lazy: false
-        dpi: 600
-        fig.width: 5.5
-        fig.height: 3
-        out.width: "100%"
-        split: true
-        R.options:
-            knitr.graphics.auto_pdf: true
-            datatable.print.nrows: 10
-            datatable.print.class: false
-            datatable.print.keys: false
-            datatable.print.trunc.cols: TRUE
