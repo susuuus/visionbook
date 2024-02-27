@@ -24,7 +24,7 @@ book:
         left: "All content licensed under [CC BY-NC-SA 4.01](https://creativecommons.org/licenses/by-nc-sa/)<br> Antonio Torralba, Phillip Isola, and William Freeman"
         center: "[Website](https://shenshen.mit.edu/cv_book) | [GitHub](https://github.com/shensquared/cv_book) | [MIT Vision Group](http://groups.csail.
 - mit.edu/vision)"
-        right: Built with [Quarto] (https://quarto.org/).
+        right: Built with [Quarto](https://quarto.org/).
 
 bibliography:
     - src/all.bib
