@@ -104,7 +104,7 @@ that? Artists learn to see the world not by what it represents, but as
 why it looks the way it does.
 
 
-The following sequence @fig_agata_painting painted by Agata Lapedriza, shows different
+The following sequence @fig-agata_painting painted by Agata Lapedriza, shows different
 steps in the painting process of a strawberry. Layer after layer, the
 artist replicates the light that will fool your eye into seeing a
 strawberry instead of acrylic paint. It is interesting to see that the
@@ -113,14 +113,14 @@ instance, from step 3 to 4, the right side of the strawberry has lost
 realism. However, those new strokes will become the shading that will
 make the strawberry pop out from the canvas.
 
+
 |               |               |               |               |
 | ------------- | ------------- | ------------- | ------------- |
 | ![](figures/visionscience/fresa_1.jpg) | ![](figures/visionscience/fresa_2.jpg) | ![](figures/visionscience/fresa_3.jpg) | ![](figures/visionscience/fresa_4.jpg) |
-| ![](figures/visionscience/fresa_5.jpg) | ![](figures/visionscience/fresa_6.jpg) | ![](figures/visionscience/fresa_7.jpg) | ![](figures/visionscience/fresa_8.jpg){#fig_agata_painting}|
+| ![](figures/visionscience/fresa_5.jpg) | ![](figures/visionscience/fresa_6.jpg) | ![](figures/visionscience/fresa_7.jpg) | ![](figures/visionscience/fresa_8.jpg)|
 
 
-
-:::{.column-margin}
+:::{.column-margin #fig-agata_painting}
 The following sequence shows different steps in the process
 of painting a strawberry. <span><em>Source</em></span>: Original images by Agata Lapedriza.
 :::
