@@ -38,22 +38,22 @@ bibliography:
 
 format:
     html:
-        fontsize: "15px"
+        fontsize: "18px"
         linestretch: 1.6
-        mainfont: "Roboto"
+        mainfont: "Palatino"
         monofont: "Fira Mono"
         smooth-scroll: true
         toc-depth: 3
-        code-link: true
+        code-link: false
         code-tools:
-            toggle: true
+            toggle: false
         code-fold: false
         highlight-style: printing
         code-block-bg: true
         code-overflow: wrap
         reference-location: margin
-        mermaid:
-            theme: neutral
+        # mermaid:
+        # theme: neutral
 
     # see https://pandoc.org/MANUAL.html for all options
 #     pdf:
