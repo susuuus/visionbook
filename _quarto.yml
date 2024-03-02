@@ -38,7 +38,7 @@ bibliography:
 
 format:
     html:
-        fontsize: "18px"
+        fontsize: "16px"
         linestretch: 1.6
         mainfont: "Palatino"
         monofont: "Fira Mono"
@@ -52,6 +52,9 @@ format:
         code-block-bg: true
         code-overflow: wrap
         reference-location: margin
+        cap-location: margin
+        css: ./scripts/custom-style.css
+        theme: cosmo
         # mermaid:
         # theme: neutral
 
