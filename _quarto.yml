@@ -12,11 +12,19 @@ book:
         - index.qmd
         - notations.qmd
         - taxonomy.qmd
-        - part: FOUNDATIONS
+        - part: Foundations
           chapters:
               - simplesystem.qmd
               - visionscience.qmd
               - fairness.qmd
+        # - part: Image Formation
+        # - part: Foundations of Learning
+        #   chapters:
+        #       - intro_to_learning.qmd
+        #       - gradient_descent.qmd
+        #       - problem_of_generalization.qmd
+        #       - neural_nets.qmd
+        #       - neural_nets_as_distribution_transformers.qmd
         - references.qmd
     # favicon: Figures/favicon.ico
     cover-image: figures/logo.png
