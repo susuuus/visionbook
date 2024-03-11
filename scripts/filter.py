@@ -16,6 +16,7 @@ def convert_fig_ref(elem, doc):
     if isinstance(elem, pf.RawInline) and elem.format == "tex":
         # Pattern to match \Fig.\ref{fig:whatever} and capture 'whatever'
         pattern = r"\\Fig\\.ref\{fig:(.*?)\}"
+        pattern = r"\\fig\\.ref\{fig:(.*?)\}"
         # Replace matched patterns
         text = re.sub(pattern, r"@fig-\1", elem.text)
         # If a replacement occurred, return a new RawInline element with the updated text
@@ -24,17 +25,32 @@ def convert_fig_ref(elem, doc):
 
 
 def convert_marginnote(elem, doc):
-    if isinstance(elem, pf.RawInline) and "\marginnote{" in elem.text:
-        # Extract the content within the LaTeX command
-        content = elem.text.split("\marginnote{", 1)[1].rstrip("}")
-        # Create a new Div element with the extracted content, wrapped in a Paragraph
-        new_elem = pf.Div(pf.Para(pf.Str(content)), classes=["column-margin"])
-        return new_elem
+    if isinstance(elem, pf.RawInline):
+        pattern = r"\{(.*?)\}"
+        replacement = r"::: {.column-margin}\1:::"
+        new_text = re.sub(pattern, replacement, elem.text)
+        return pf.RawInline(new_text, format="markdown")
+
+
+def figure_refs(elem, doc):
+    if isinstance(elem, pf.RawInline) and elem.format == "latex":
+        # Check if the LaTeX command is \ref{fig:something}
+        if elem.text.startswith("\\ref{fig:"):
+            fig_id = elem.text[5:-1]  # Extract 'fig:something'
+            return pf.Str(f"@{fig_id}")  # Replace with '@fig-something'
+
+        # Check if the LaTeX command is \label{fig:something}
+        elif elem.text.startswith("\\label{fig:"):
+            fig_id = elem.text[7:-1]  # Extract 'fig:something'
+            return pf.RawInline(
+                f"{{#{fig_id}}}", format="markdown"
+            )  # Replace with '{#fig-something}'
 
 
 def main(doc=None):
     return pf.run_filters(
-        [latex_to_markdown_cite, convert_fig_ref, convert_marginnote], doc=doc
+        [latex_to_markdown_cite, convert_fig_ref, figure_refs],
+        doc=doc,
     )
 
 

@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Check if an input file was provided
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 /path/to/file.tex"
-    exit 1
-fi
-
 SCRIPT_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 echo $SCRIPT_DIR
 input_file="$1"
@@ -23,7 +17,16 @@ base_name=$(basename "$input_file" .tex)
 # Set the output file path
 output_file="${base_name}.qmd"
 
+# TEMP_TEX="${input_file%.tex}-temp.tex" # Create a temp file name based on the input file
+# sed 's/\[[^]]*pt\]//g' "$input_file" > "$TEMP_TEX"
+
+# sed -i 's/\\marginnote{\(.*\)}/::: {\.column-margin}\n\1\n:::/g' $TEMP_TEX
+# sed 's/\\marginnote{\([^}]*\)}/::: {\.column-margin}\n\1\n:::/g' "$input_file" > "$TEMP_TEX"
+# sed -i 's/\[[^]]*pt\]//g' "$TEMP_TEX"
+
+# sed 's/\\marginnote\{(.*?)\}/::: {\.column-margin}\1:::/g' "$input_file" > "$TEMP_TEX"
+
 # Run Pandoc conversion
-pandoc "$input_file" -o "$output_file" -f latex -t markdown --filter $SCRIPT_DIR/filter.py
+pandoc "$input_file" -o "$output_file" -f latex  -t markdown --filter $SCRIPT_DIR/filter.py
 
 echo "Conversion completed: $output_file"
