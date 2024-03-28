@@ -7,7 +7,7 @@ book:
     repo-actions: [edit, issue, source]
     repo-subdir: /
     author: "Antonio Torralba, Phillip Isola, and William Freeman"
-    date: "12/23/2023"
+    date: "04/16/2024"
     chapters:
         - index.qmd
         - notations.qmd
@@ -27,7 +27,7 @@ book:
         #       - neural_nets_as_distribution_transformers.qmd
         - references.qmd
     # favicon: Figures/favicon.ico
-    cover-image: figures/logo.png
+    cover-image: figures/logo.jpg
     downloads: [pdf]
     sharing: [twitter]
     sidebar:
