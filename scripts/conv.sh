@@ -18,15 +18,15 @@ base_name=$(basename "$input_file" .tex)
 output_file="${base_name}.qmd"
 
 # TEMP_TEX="${input_file%.tex}-temp.tex" # Create a temp file name based on the input file
-# sed 's/\[[^]]*pt\]//g' "$input_file" > "$TEMP_TEX"
 
 # sed -i 's/\\marginnote{\(.*\)}/::: {\.column-margin}\n\1\n:::/g' $TEMP_TEX
-# sed 's/\\marginnote{\([^}]*\)}/::: {\.column-margin}\n\1\n:::/g' "$input_file" > "$TEMP_TEX"
-# sed -i 's/\[[^]]*pt\]//g' "$TEMP_TEX"
-
-# sed 's/\\marginnote\{(.*?)\}/::: {\.column-margin}\1:::/g' "$input_file" > "$TEMP_TEX"
+# sed -E "s/\\marginnote\{([^\}]*)\}/::: {.column-margin}\n\1\n:::/g" "$input_file" > "$TEMP_TEX"
 
 # Run Pandoc conversion
 pandoc "$input_file" -o "$output_file" -f latex  -t markdown --filter $SCRIPT_DIR/filter.py
 
 echo "Conversion completed: $output_file"
+
+# remove the [x in] or [x pt]
+# sed -i '' -E 's/\\\[\-?\([0-9]*\)\(\.[0-9]+\)\?\(in\|cm\|pt\)\\\]//g' "$output_file"
+sed -i '' -E 's/\\\[[-]?[0-9]+(\.[0-9]+)?(in|cm|pt)\\\]//g' "$output_file"
