@@ -1,0 +1,89 @@
+# Scene Understanding {#chapter-scene_understanding}
+
+## Introduction
+
+Scene understanding refers to the analysis of the whole scene: the
+agents and objects in it, the relationships between them, the actions,
+the place, \...
+
+## A Few Notes About Scene Understanding in Humans
+
+### Rapid Scene Recognition
+
+Molly Poter and her experiments on rapid scene recognition.
+
+"Later she discovered that complex visual scenes can be perceived and
+understood much faster than anyone had previously recognized. She showed
+that subjects can identify the gist of a scene from an astonishingly
+brief presentation. Here Potter made innovative use of rapid serial
+visual presentation (RSVP)."
+
+FIGURE: show one experiment
+
+### Neural Processing
+
+The time it takes for us to recognize a scene is remarkable once we
+relate it to the structure of the neural pathways and the time it takes
+for a neuron to process its input. Simon Thorpe \...
+
+Face area
+
+Place fusiform area.
+
+IT
+
+### Remembering Images
+
+Another important aspect of human perception is memory.
+
+A computer vision system can compare two images directly, even at the
+pixel level. A human can not do this because it can not look at two
+images simultaneously in parallel. A human needs to look at each image
+sequentially, and compare the two images from memory. Therefore, memory
+is a crucial aspect of human visual perception.
+
+change blindness
+
+The world as an outside memory.
+
+### Recognition in Context
+
+Understanding a scene is an integrated process.
+
+Some context illusions.
+
+Out of context image.
+
+Objects that belong to the same class have a common set of affordances,
+but the affordance of an object might change depending on context. As an
+example, if we use a card-box as a table, we might still call it *a box*
+but we understand the affordance of the box as being very different to
+its typical use.
+
+Put the shoes in a place that is easy to find later.
+
+## Scene Representations
+
+Schemas
+
+Frames
+
+Movies, stories.
+
+Non-linguistic representations?
+
+Scene graphs
+
+Symbolic-representations
+
+## Taskonomy
+
+Place classification
+
+Recognizing locations
+
+3D reasoning and decomposing the scene into separated objects.
+Understanding the rules of support, parts and attachments between
+objects.
+
+## Concluding Remarks

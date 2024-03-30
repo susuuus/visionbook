@@ -16,21 +16,13 @@ describe how spatial resolution and color interact.
 ## Color Physics
 
 Isaac Newton revealed several intrinsic properties of light in
-experiments summarized by his drawing in . A pinhole of sunlight enters
-through the window shade, and a lens focuses the light onto a prism. The
-prism then divides the white light into many different colors. These
-colors are elemental: if one of the component colors is passed through a
-second prism, it doesn't split into further components.
+experiments summarized by his drawing in @fig-prism. A pinhole of
+sunlight enters through the window shade, and a lens focuses the light
+onto a prism. The prism then divides the white light into many different
+colors. These colors are elemental: if one of the component colors is
+passed through a second prism, it doesn't split into further components.
 
-![Isaac Newton's illustration of experiments with light @Fara2015. White
-light enters from a hole in the window shade at the right, where it is
-focused with a lens and then passes through the first prism. The prism
-separates the white light into different colors by bending each color a
-different amount. The second prism in the drawing demonstrates that
-those colors are elemental: as an individual color passes through the
-second prism, the light doesn't break into other
-colors.](figures/color/newtonDrawing.jpg){#fig-prism
-width=".9"}
+![](figures/color/newtonDrawing.jpg){width=".9"}
 
 Our understanding of light and color explains such experiments. Light is
 a mixture of electromagnetic waves of different wavelengths. Sunlight
@@ -49,33 +41,22 @@ components is through **diffraction**, where constructive interference
 of scattered light occurs in different directions for different
 wavelengths of light.
 
-shows a simple spectrograph, an apparatus to reveal the spectrum of
-light, based on diffraction from a compact disk (CD) @spectrometer.
-Light passes through the slit at the right, and strikes a CD (with a
-track pitch of about 1,600 nm). Constructive interference from the light
-waves striking the CD tracks will occur at a different angle for each
-wavelength of the light, yielding a separation of the different
-wavelengths of light according to their angle of diffraction. The
-diffracted light can be viewed, , or photographed through the hole at
-the bottom left of the photograph. The spectrograph gives an immediate
-visual representation of the spectral components of colors in the world.
-Some examples are shown in .
+@fig-colorWavelengthsa shows a simple spectrograph, an apparatus to
+reveal the spectrum of light, based on diffraction from a compact disk
+(CD) @spectrometer. Light passes through the slit at the right, and
+strikes a CD (with a track pitch of about 1,600 nm). Constructive
+interference from the light waves striking the CD tracks will occur at a
+different angle for each wavelength of the light, yielding a separation
+of the different wavelengths of light according to their angle of
+diffraction. The diffracted light can be viewed,
+@fig-colorWavelengthsb, or photographed through the hole at the bottom
+left of the photograph. The spectrograph gives an immediate visual
+representation of the spectral components of colors in the world. Some
+examples are shown in @fig-examples1.
 
-![(a) A simple spectrograph. Slit at right accepts light from primarily
-one object in the world. Light diffracted by the CD is viewed from the
-hole at the bottom left. (b) The bending by diffraction is wavelength
-dependent, and the light from a given direction is broken into its
-spectral components. We indicate the location of the CD in the picture
-just in case our youngest readers have not seen
-one.](figures/color/cd_spectrometer_setup-1.png){#fig-colorWavelengths
-width="100%"}
+![](figures/color/cd_spectrometer_setup-1.png){width="100%"}
 
-![The light spectra from some everyday objects, analyzed by the
-spectrograph of . (a) A leaf, with some yellowish highlights, shows
-primarily green, with a little red (red and green can combine to appear
-yellow). (b) A red door. (c) A fluorescent light (when turned on) shows
-the discrete spectral wavelengths at which the gas fluoresces.
-](figures/color/lightspectra_objects-1.png){#fig-examples1 width="100%"}
+![](figures/color/lightspectra_objects-1.png){width="100%"}
 
 ### Light Power Spectra
 
@@ -89,17 +70,14 @@ remember that this is true only within a fixed visual context.
 
 
 
-shows a spectrograph visualization of some light power spectra (the
-right image of each row) along with the image that the spectrograph was
-pointed toward (left images). shows the spectrum of a blue sky, plotted
-as intensity as a function of wavelength.
+@fig-examples1 shows a spectrograph visualization of some light power
+spectra (the right image of each row) along with the image that the
+spectrograph was pointed toward (left images). @fig-sources shows the
+spectrum of a blue sky, plotted as intensity as a function of
+wavelength.
 
-<figure id="fig:sources">
-<p><embed src="figures/color/Spectrum_of_blue_sky-1.png"
-style="width:70.0%" />       <img src="figures/color/IMG_0122.jpg"
-alt="image" /></p>
-<figcaption>Power spectrum of blue skylight .</figcaption>
-</figure>
+![](figures/color/Spectrum_of_blue_sky-1.png){width="70%"}      
+![](figures/color/IMG_0122.jpg){width=".15"}
 
 ### The Color Appearance of Different Spectral Bands
 
@@ -109,16 +87,10 @@ because the subjective appearance can change according to other factors
 than just the spectrum.
 
 The visible spectrum lies roughly in the range between 400 and 700 nm,
-see . We can divide the visible spectrum into three 100 nm bands, and
-study the appearance of light power spectra where power is present or
-absent from each of those three bands, in all of the eight ($2^3$)
-possible combinations.
-
-<figure id="fig:rainbow">
-
-<figcaption>The approximate color appearance of light over different
-spectral regions.</figcaption>
-</figure>
+see @fig-rainbow. We can divide the visible spectrum into three 100 nm
+bands, and study the appearance of light power spectra where power is
+present or absent from each of those three bands, in all of the eight
+($2^3$) possible combinations.
 
 Light with spectral power distributed in just the 400--500 nm wavelength
 band will look some shade of blue, the exact hue depending on the
@@ -138,11 +110,10 @@ film applications, this is sometimes called *minus red*, since it is the
 spectrum of white light, minus the spectrum of red light. The blue and
 red color blocks, or light in the 400--500 nm band, and in the 600--700
 nm band, is called magenta, or minus green. Red and green together, with
-spectral power from 500--700 nm, make yellow, or minus blue ().
+spectral power from 500--700 nm, make yellow, or minus blue
+(@fig-names).
 
-![For coarse orientation only, this cartoon model gives the color
-appearance of different spectral bands of the spectrum of visible
-light.](figures/color/cartoonColor2-1.png){#fig-names width="100%"}
+![](figures/color/cartoonColor2-1.png){width="100%"}
 
 ### Light Reflecting from Surfaces
 
@@ -160,9 +131,9 @@ distribution function (BRDF) @Nicodemus1965, @Matusik2002. For this
 discussion, we will focus on diffuse surface reflections, where the
 power spectrum of the reflected light, $r(\lambda)$, is proportional to
 the wavelength-by-wavelength product of the power spectrum of the
-incident light, $\imgin (\lambda)$, and a **reflectance spectrum**,
-$s(\lambda)$, of the surface:
-$$r(\lambda) = k \imgin (\lambda) s(\lambda),$$ where the
+incident light, $\ell_{\texttt{in}}(\lambda)$, and a **reflectance
+spectrum**, $s(\lambda)$, of the surface:
+$$r(\lambda) = k \ell_{\texttt{in}}(\lambda) s(\lambda),$$ where the
 proportionality constant $k$ depends on the reflection geometry. This
 diffuse reflection model characterizes most matte reflections. Such
 wavelength-by-wavelength scaling is also a good model for the spectral
@@ -170,14 +141,11 @@ changes to light caused by transmission through an attenuating filter.
 The incident power spectrum is then multiplied at each wavelength by the
 **transmittance spectrum** of the attenuating filter.
 
-Some reflectance spectra of real-world surfaces are plotted in . The
-flower *Hepatica Nobilis* (solid line) is blue, while *Pyrostegia
-venusta* (dotted line) is orange.
+Some reflectance spectra of real-world surfaces are plotted in
+@fig-sourcerefl. The flower *Hepatica Nobilis* (solid line) is blue,
+while *Pyrostegia venusta* (dotted line) is orange.
 
-![Reflectance spectra from two flowers @Arnold2010. The blue *Hepatica
-nobilis* flower @nobilis and the orange flower, *Pyrostegia venusta*
-@venusta.](figures/color/flowerSpectra-1.png){#fig-sourcerefl
-width="100%"}
+![](figures/color/flowerSpectra-1.png){width="100%"}
 
 The reflectance spectrum of a surface often carries valuable information
 about the material being viewed, such as whether a fruit is ripe,
@@ -204,18 +172,17 @@ for example, assuming the color of the brightest observed object is
 white @McCann76, to statistical methods @Brainard97 and neural network
 based approaches @Barron2015. Even humans don't solve the problem
 perfectly or consistently, revealed especially through the internet meme
-of #TheDress @Bleasdale2015, shown in .
+of #TheDress @Bleasdale2015, shown in @fig-thedress.
 
-<figure id="fig:thedress">
+  ---------------------------------------------------------------
+   ![](figures/color/thephotoofthedress.jpg){width="1.9in"}
+                               \(a\)
+  ---------------------------------------------------------------
 
-<figcaption>(a) #The Dress, photographed and posted by , reprinted with
-permission. (b) The spectra of the light we see is the product of an
-assumed illumination spectrum and the inferred surface reflectance
-spectra. If people make different assumptions about the illumination,
-they can perceive different colors within the same image, as shown in
-this illustration . Reprinted with permission from Elsevier.
-</figcaption>
-</figure>
+  ----------------------------------------------------
+   ![](figures/color/gr2_lrg.jpg){width="2.9in"}
+                         \(a\)
+  ----------------------------------------------------
 
 The perceived colors of the dress depend on the assumed color of the
 illumination, and people can disagree significantly about the colors
@@ -241,12 +208,22 @@ science.
 
 ### The Machinery of the Eye
 
-An instrument such as a spectrograph ( shows a simple one) can measure
-the light power spectrum at hundreds of different wavelengths within the
-visible band, yielding hundreds of numbers to describe the light power
-spectrum. Despite this, a useful description of the visual world can be
-obtained from a much lower dimensional description of the light power
-spectrum.
+An instrument such as a spectrograph (@fig-colorWavelengths shows a
+simple one) can measure the light power spectrum at hundreds of
+different wavelengths within the visible band, yielding hundreds of
+numbers to describe the light power spectrum. Despite this, a useful
+description of the visual world can be obtained from a much lower
+dimensional description of the light power spectrum.
+
+
+:::{.column-margin}
+The retina contains photoreceptors called the rod and
+cones. Rods are used in low-light levels, and the cones are used in
+color vision. In low-light, only the rods operate and our vision becomes
+black and white.
+:::
+
+
 
 The human visual system analyzes the incident light power spectrum with
 only three different classes photoreceptors, called the L, M, and S
@@ -255,23 +232,23 @@ This gives the human visual system a three-dimensional (3D) description
 of light, with each photoreceptor class taking a different weighted
 average of the incident light power spectrum.
 
-shows the spatial sampling pattern, for each of the three cone classes,
-measured from a subject's eye @Hofer2005. The L cones are colored red,
-the M cones green, and the S cones are colored blue. Note the hexagonal
-packing of the cones in the retina, and the stochastic assignment of L,
-M, and S cones over space. Note also the much sparser spatial sampling
-of the S cones than of either the L or M cones. shows the spectral
-sensitivity curves for the L, M, and S cones. This sampling pattern was
-measured from near the **fovea**, where there are no rods, and the cones
-are close-packed.
+@fig-ramona shows the spatial sampling pattern, for each of the three
+cone classes, measured from a subject's eye @Hofer2005. The L cones are
+colored red, the M cones green, and the S cones are colored blue. Note
+the hexagonal packing of the cones in the retina, and the stochastic
+assignment of L, M, and S cones over space. Note also the much sparser
+spatial sampling of the S cones than of either the L or M cones.
+@fig-ramonb shows the spectral sensitivity curves for the L, M, and S
+cones. This sampling pattern was measured from near the **fovea**, where
+there are no rods, and the cones are close-packed.
 
-<figure id="fig:ramon">
+  -------
+   \(a\)
+  -------
 
-<figcaption> (a) Measured cone receptor classes and positions in a human
-retina, with cone receptor classes shown as red, green, and blue
-(subject YY, redrawn from ). (b) Photoreceptor sensitivities as a
-function of light wavelength .</figcaption>
-</figure>
+  -------
+   \(b\)
+  -------
 
 We can describe the photoreceptor responses using matrix algebra. If the
 matrix $\mathbf{C}_{\mbox{eye}}$ consists of the spectral sensitivities
@@ -283,7 +260,7 @@ M, and S cone responses will be the product, $$\begin{bmatrix}
     S \\
     \end{bmatrix}
 = \mathbf{C}_{\mbox{eye}} \, \mathbf{t}
-\label{eq:lmsct}$$
+$${#eq-lmsct}
 
 The fact that our eyes have three different classes of photoreceptors
 has many consequences for color science. It determines that there are
@@ -299,13 +276,8 @@ build image displays so that the output colors match those of some
 desired target, and to manufacture items with the same colors over time.
 Much of the color industry revolves around the ability to repeatably
 control colors. Colors can be trademarked (Kodak Yellow, IBM Blue) and
-we have color standards for foods. shows French fry color standards.
-
-<figure id="fig:french">
-
-<figcaption>The USDA color standards for French fried potatoes, one of
-many color standards .</figcaption>
-</figure>
+we have color standards for foods. @fig-french shows French fry color
+standards.
 
 One of the tasks of color science is to predict when a person will
 perceive that two colors match. For example, we want to know how to
@@ -314,17 +286,17 @@ Even though the spectra may be very different, the colors can almost
 always be made to match.
 
 It is possible to infer human color matching performance by examining
-the spectral sensitivity curves of the receptors shown in . We attempt
-to match a color using a combination of reference colors, typically
-called primary colors. Through experimentation, it has been discovered
-that the appearance of any color can be matched through a linear
-combination of three primary colors. This is due to the presence of
-three classes of photoreceptors in our eyes. It has also been found that
-these color matches are transitive---if color A matches a particular
-combination of primaries and color B matches the same combination of
-primaries, then color A will match color B. Consequently, the amount of
-each primary required to match a color can serve as a set of coordinates
-indicating color @Wandell95.
+the spectral sensitivity curves of the receptors shown in @fig-ramonb.
+We attempt to match a color using a combination of reference colors,
+typically called primary colors. Through experimentation, it has been
+discovered that the appearance of any color can be matched through a
+linear combination of three primary colors. This is due to the presence
+of three classes of photoreceptors in our eyes. It has also been found
+that these color matches are transitive---if color A matches a
+particular combination of primaries and color B matches the same
+combination of primaries, then color A will match color B. Consequently,
+the amount of each primary required to match a color can serve as a set
+of coordinates indicating color @Wandell95.
 
 ### Color Metamerism
 
@@ -333,7 +305,15 @@ to our eyes. There is a large space of metamers: any two vectors
 describing light power spectra that give the same projection onto a set
 of color matching functions will look the same to our eyes. There's a
 high-dimensional space of light spectra, and we're only viewing
-projections onto a 3D subspace in the colors we see.
+projections onto a 3D subspace in the colors we
+see.
+
+:::{.column-margin}
+Do spotlights on produce in a supermarket help
+good and bad fruit become metameric matches?
+:::
+
+
 
 In practice, the three projections we observe capture much of the
 interesting action in images. Hyperspectral images (recorded at many
@@ -350,34 +330,28 @@ color matching system that relies solely on the light spectrum will
 still perform well.
 
 To measure the color associated with a light spectrum $\mathbf{t}$ we
-need to be able to predict the eye's responses to the spectrum. From ,
-the task of color measurement is to find the projection of a given light
-spectrum into the special 3D subspace defined by the eye's cone spectral
-response curves. Any basis for that 3D subspace will serve that task, so
-the three basis functions do not need to be the color sensitivity curves
-of themselves. They can be any linear combination of them, as well.
+need to be able to predict the eye's responses to the spectrum. From
+equation (@eq-lmsct), the task of color measurement is to find the
+projection of a given light spectrum into the special 3D subspace
+defined by the eye's cone spectral response curves. Any basis for that
+3D subspace will serve that task, so the three basis functions do not
+need to be the color sensitivity curves of @fig-ramon themselves. They
+can be any linear combination of them, as well.
 
-We can define a **color reproduction system**, , by first specifying its
-three spectral sensitivity curves. We put these into the $3 \times N$
-matrix, $\mathbf{C}$, where $N$ is the number of spectral samples over
-the visible illumination range. As discussed previously, the three
-curves, $\mathbf{C}$, should be a linear combination of the eye's
-spectral sensitivity curves, or
+We can define a **color reproduction system**, @fig-colorsystem, by
+first specifying its three spectral sensitivity curves. We put these
+into the $3 \times N$ matrix, $\mathbf{C}$, where $N$ is the number of
+spectral samples over the visible illumination range. As discussed
+previously, the three curves, $\mathbf{C}$, should be a linear
+combination of the eye's spectral sensitivity curves, or
 $$\mathbf{C} = \mathbf{R} \, \mathbf{C}_{\mbox{eye}},
-    \label{eq:match2}$$ where $\mathbf{R}$ is any full-rank $3 \times 3$
+    $${#eq-match2} where $\mathbf{R}$ is any full-rank $3 \times 3$
 matrix. We can translate between any two different color spaces by
 applying a general $3 \times 3$ matrix transformation to change basis
 vectors. Note, the basis vectors do not need to be orthogonal, and most
 color system basis vectors are not.
 
-![A color reproduction system. Light sensors a, b, and c respond to the
-input light spectrum $\mathbf{t}$, giving sensor activations
-$\mathbf{C} \mathbf{t}$. Combinations of those activations drive the
-display elements d, e, and f, producing the output spectrum
-$\mathbf{P}\mathbf{M} \mathbf{C} \mathbf{t}$. Conditions on
-$\mathbf{P}$, $\mathbf{M}$, and $\mathbf{C}$ can ensure that the input
-and output colors match for an
-observer.](figures/color/colorRepro2.png){#fig-colorsystem width="100%"}
+![](figures/color/colorRepro2.png){width="100%"}
 
 ### Color Matching Functions and Primary Lights
 
@@ -402,14 +376,15 @@ of colors that can be produced---of a the positive combination of a
 given set of primary lights.
 
 The color reproduction system is then defined by two sets of spectral
-curves and a $3 \times 3$ matrix, $\mathbf{M}$, see . The first set are
-the spectral sensitivities as a function of wavelength for each of the
-three photosensors. We write each of those spectral curves as a row
-vector of a matrix, $\mathbf{C}$. The $3 \times 3$ matrix, $\mathbf{M}$,
-translates any color measurement to a set of amplitude controls for the
-primary lights, $\mathbf{P}$. The second set of spectral curves of a
-color reproduction system are the spectra of the three primary lights,
-which we write as column vectors of the matrix, $\mathbf{P}$.
+curves and a $3 \times 3$ matrix, $\mathbf{M}$, see @fig-colorsystem.
+The first set are the spectral sensitivities as a function of wavelength
+for each of the three photosensors. We write each of those spectral
+curves as a row vector of a matrix, $\mathbf{C}$. The $3 \times 3$
+matrix, $\mathbf{M}$, translates any color measurement to a set of
+amplitude controls for the primary lights, $\mathbf{P}$. The second set
+of spectral curves of a color reproduction system are the spectra of the
+three primary lights, which we write as column vectors of the matrix,
+$\mathbf{P}$.
 
 For a given set of primary lights, $\mathbf{P}$, we seek to find a
 matrix of color sensitivity curves, $\mathbf{C}$, and $3 \times 3$
@@ -428,70 +403,59 @@ $\mathbf{C}_{\mbox{eye}} \mathbf{t}$.
 
 We can write the response of the eye to the *output* of the color
 matching system as the following matrix products. The light impinging on
-the sensors (a, b, c in ) of the color matching system will give
-responses $\mathbf{C} \mathbf{t}$ and controls
+the sensors (a, b, c in @fig-colorsystem) of the color matching system
+will give responses $\mathbf{C} \mathbf{t}$ and controls
 $\mathbf{M} \mathbf{C} \mathbf{t}$ to the primary lights. If this output
-modulates the corresponding primary lights (d, e, and f in ), then the
-light displayed by the color matching system will be
-$\mathbf{P} \mathbf{M} \mathbf{C} \mathbf{t}$. We want this spectrum to
-give the same responses in the eye as the original reflected color, thus
-we must have:
+modulates the corresponding primary lights (d, e, and f in
+@fig-colorsystem), then the light displayed by the color matching
+system will be $\mathbf{P} \mathbf{M} \mathbf{C} \mathbf{t}$. We want
+this spectrum to give the same responses in the eye as the original
+reflected color, thus we must have:
 $\mathbf{C}_{eye} \mathbf{P} \mathbf{M} \mathbf{C} \mathbf{t} = \mathbf{C}_{eye} \mathbf{t}$.
 Because that relation must hold for *any* input vector $\mathbf{t}$, we
 must have
 $$\mathbf{C}_{eye} \mathbf{P} \mathbf{M} \mathbf{C}  = \mathbf{C}_{eye}   
-\label{eq:match}$$
+$${#eq-match}
 
-What conditions on $\mathbf{P}$ and $\mathbf{C}$ are required for to
-hold? First, the subspace of the eye responses $\mathbf{C}_{eye}$ must
-be the same as that measured by the color sensing system, $\mathbf{C}$.
-If that weren't the case, then perceptibly different spectra could map
-onto the same color sensing system measurements. So we must have
+What conditions on $\mathbf{P}$ and $\mathbf{C}$ are required for
+equation (@eq-match) to hold? First, the subspace of the eye responses
+$\mathbf{C}_{eye}$ must be the same as that measured by the color
+sensing system, $\mathbf{C}$. If that weren't the case, then perceptibly
+different spectra could map onto the same color sensing system
+measurements. So we must have
 $\mathbf{C} = \mathbf{R} \mathbf{C}_{eye}$, for some full-rank
 $3 \times 3$ matrix, $\mathbf{R}$ (with inverse $\mathbf{R}^{-1}$).
-Substituting this twice into gives
+Substituting this twice into equation (@eq-match) gives
 $$\mathbf{R}^{-1} \mathbf{C} \mathbf{P} \mathbf{M} \mathbf{R} \mathbf{C}_{eye} = \mathbf{C}_{eye}
-\label{eq:match2}$$ From it follows that
+$${#eq-match2} From equation (@eq-match2) it follows that
 $\mathbf{C} \mathbf{P} \mathbf{M} = \mathbf{I}_3$, the $3 \times 3$
 identity matrix. These conditions on the spectral sensitivities,
 $\mathbf{C}$, the display spectra, $\mathbf{P}$ and the
 sensors-to-primaries mixing matrix, $\mathbf{M}$ for a color
 reproduction system are summarized below: $$\begin{aligned}
 \mathbf{C} & = & \mathbf{R} \mathbf{C}_{\mbox{eye}} 
-\label{eq:conditionsA} \\
+ \\
 \mathbf{M} & = & (\mathbf{C P})^{-1},
-\label{eq:conditions}
-\end{aligned}$$ where $\mathbf{C}_{\mbox{eye}}$ are the human
+\end{aligned}$${#eq-conditionsA} where $\mathbf{C}_{\mbox{eye}}$ are the human
 photoreceptor sensitivities and $\mathbf{R}$ is a full-rank $3 \times 3$
 matrix.
 
-displays the elements of two matrices $\mathbf{C}$ and $\mathbf{P}$ that
-define a valid color matching system. For a color reproduction system to
-be physically realizable, the elements of the primary spectra,
-$\mathbf{P}$, must be non-negative.
+@fig-exampleColor displays the elements of two matrices $\mathbf{C}$
+and $\mathbf{P}$ that define a valid color matching system. For a color
+reproduction system to be physically realizable, the elements of the
+primary spectra, $\mathbf{P}$, must be non-negative.
 
-<figure id="fig:exampleColor">
+  -------
+   \(a\)
+  -------
 
-<figcaption>The elements of the matrices <span
-class="math inline"><strong>C</strong></span> and <span
-class="math inline"><strong>P</strong></span> for an example color
-matching system. (a) Spectral sensitivity curves, the rows of a color
-measurement matrix, <span class="math inline"><strong>C</strong></span>.
-These should be linear combinations of the eye’s photosensitivity
-curves, <span
-class="math inline"><strong>C</strong><sub>eye</sub></span>. (b)
-Corresponding primary lights, <span
-class="math inline"><strong>P</strong></span> , satisfying <span
-class="math inline"><strong>C</strong><strong>P</strong> = <strong>I</strong><sub>3</sub></span>
-(<span
-class="math inline"><strong>M</strong> = <strong>I</strong><sub>3</sub></span>
-in equation [<a href="#eq:conditions" data-reference-type="ref"
-data-reference="eq:conditions">[eq:conditions]</a>]).</figcaption>
-</figure>
+  -------
+   \(b\)
+  -------
 
-Because many color sensitivity matrices $\mathbf{C}$ can satisfy some
-standardized color sensitivity matrices have been adopted to allow
-common representations of colors.
+Because many color sensitivity matrices $\mathbf{C}$ can satisfy
+equation (@eq-conditionsA) some standardized color sensitivity matrices
+have been adopted to allow common representations of colors.
 
 ### CIE Color Space
 
@@ -502,12 +466,7 @@ functions of the eye, $\mathbf{C}_{\mbox{eye}}$. One color standard is
 the Commission Internationale de l'Eclairage (CIE) *XYZ* color space,
 $C_{\mbox{CIE}}$. The CIE color matching functions, the rows of
 $\mathbf{C}_{\mbox{CIE}}$ were designed to be all-positive at every
-wavelength and are shown in .
-
-<figure id="fig:ciecie">
-
-<figcaption>CIE color matching functions .</figcaption>
-</figure>
+wavelength and are shown in @fig-ciecie.
 
 An unfortunate property of the CIE color-matching functions is that no
 all-positive set of color primaries, $\mathbf{P}_{\mbox{CIE}}$ forms a
@@ -536,43 +495,27 @@ insensitive to blurring.
 
 In a red-green-blue (RGB) representation, the eye is sensitive to high
 spatial frequency changes in both red and green, as shown in figures
-[1.14](#fig-girls1){reference-type="ref" reference="fig:girls1"} and
-[1.15](#fig-girls2){reference-type="ref" reference="fig:girls2"}. A
-rotation of the color coordinates of the image, followed by a nonlinear
-stretching, can put the image into a color space called L, a, b. In that
-space, the eye is very sensitive to any blurring of the L color
-component, called luminance, but is relatively insensitive to blurring
-of the a or b components, as demonstrated in and
-[1.17](#fig-girls4){reference-type="ref" reference="fig:girls4"}. This
-effect is commonly exploited in image compression, allowing some image
-components to be sampled more coarsely than others.
+[\[fig:girls1\]](#fig-girls1){reference-type="ref"
+reference="fig:girls1"} and
+[\[fig:girls2\]](#fig-girls2){reference-type="ref"
+reference="fig:girls2"}. A rotation of the color coordinates of the
+image, followed by a nonlinear stretching, can put the image into a
+color space called L, a, b. In that space, the eye is very sensitive to
+any blurring of the L color component, called luminance, but is
+relatively insensitive to blurring of the a or b components, as
+demonstrated in @fig-girls3 and
+[\[fig:girls4\]](#fig-girls4){reference-type="ref"
+reference="fig:girls4"}. This effect is commonly exploited in image
+compression, allowing some image components to be sampled more coarsely
+than others.
 
-![(a) Original image. (b) RGB components. (c) RGB components, each
-blurred. These sharp and blurred components are used in the color images
-of . ](figures/color/nonblur_girls-1.png){#fig-girls1 width="100%"}
+![](figures/color/nonblur_girls-1.png){width="100%"}
 
-![Color images composed of sharp and blurred components from figures
-[1.14](#fig-girls1){reference-type="ref" reference="fig:girls1"}(b) and
-[1.14](#fig-girls1){reference-type="ref" reference="fig:girls1"}(c). (a)
-R component blurred, G and B components sharp. (b) G component blurred,
-R and B components sharp. (c) B component blurred, R and G components
-sharp. Blurring either the R or G components of the image leads to a
-blurry-looking full-color image.
-](figures/color/blur_rgb_girls-1.png){#fig-girls2 width="100%"}
+![](figures/color/blur_rgb_girls-1.png){width="100%"}
 
-![(a) Original image. (b) Lab components. (c) Lab components, each
-blurred. These sharp and blurred components are used in the color images
-of . ](figures/color/nonblur_lab_girls-1.png){#fig-girls3 width="100%"}
+![](figures/color/nonblur_lab_girls-1.png){width="100%"}
 
-![Color images composed of sharp and blurred components from figures
-[1.16](#fig-girls3){reference-type="ref" reference="fig:girls3"}(b) and
-[1.16](#fig-girls3){reference-type="ref" reference="fig:girls3"}(c). (a)
-L component blurred, a and b components sharp. (b) a component blurred,
-L and b components sharp. (c) b component blurred, L and a components
-sharp. Blurring only either of the a or b components of the image yields
-a full-color image that appears sharp, provided the luminance component
-of the image is sharp.](figures/color/blur_lab_girls-1.png){#fig-girls4
-width="100%"}
+![](figures/color/blur_lab_girls-1.png){width="100%"}
 
 ## Concluding Remarks
 

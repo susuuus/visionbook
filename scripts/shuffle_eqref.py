@@ -9,12 +9,15 @@ def convert_eq_refs(input_file_path, output_file_path):
 
     # Updated regular expression to match the pattern across multiple lines and capture the necessary parts
     pattern = r"(\$\$.*?)(#eq-[\w-]+)(.*?\$\$)"
-
     # Function to rearrange the matched pattern
     replacement = r"\1\3{\2}"
-
+    # replacement = re.sub(r"^\s*%.*$\n?", "", replacement, flags=re.DOTALL)
     # Replace all occurrences in the text using re.DOTALL to match across newlines
     modified_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+    pattern = r"(\$\$.*?)(?:\s*\n){3}(.*?\$\$)(\{#eq-[\w-]+\})"
+    replacement = r"\1\2\3"
+    modified_content = re.sub(pattern, replacement, modified_content, flags=re.DOTALL)
+
     # Write the modified content to the output file
     with open(output_file_path, "w", encoding="utf-8") as file:
         file.write(modified_content)

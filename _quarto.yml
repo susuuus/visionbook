@@ -46,6 +46,58 @@ book:
               - upsamplig_downsampling_2.qmd
               - spatial_filter_sets.qmd
               - pyramids_new_notation.qmd
+        - part: Neural Architectures for Vision
+          chapters:
+              - convolutional_neural_nets.qmd
+              - recurrent_neural_nets.qmd
+              - transformers.qmd
+        - part: Probabilistic Models of Images
+          chapters:
+              - stat_image_models_revised.qmd
+              - textures.qmd
+              - graphical_models.qmd
+        - part: Generative Image Models and Representation Learning
+          chapters:
+              - representation_learning.qmd
+              - perceptual_organization.qmd
+              - generative_models.qmd
+              - generative_modeling_and_rep_learning.qmd
+              - conditional_generative_models.qmd
+        - part: Challenges in Learning-Based Vision
+          chapters:
+              - bias_and_shift.qmd
+              - data_augmentation.qmd
+              #   - transfer_learning.qmd
+        - part: Understanding Geometry
+          chapters:
+              - homogeneous_coordinates.qmd
+              - imaging_geometry.qmd
+              - 3d_scene_understanding_stereo.qmd
+              - homography.qmd
+              - 3d_scene_understanding_single_view.qmd
+              - 3d_learning.qmd
+              - multiview.qmd
+              - nerf.qmd
+        - part: Understanding Motion
+          chapters:
+              - motion_estimation_intro.qmd
+              - 2d_motion_from_3d.qmd
+              - motion_estimation.qmd
+        - part: Understanding Vision With Language
+          chapters:
+              - representing_the_image.qmd
+              - objects.qmd
+              - object_recognition_v3.qmd
+              - scenes.qmd
+              - VLMs.qmd
+        - part: On Research, Writing and Speaking
+          chapters:
+              - how_to_do_research.qmd
+              - how_to_write_papers.qmd
+              - how_to_give_talks.qmd
+        - part: Closing Remarks
+          chapters:
+              - simplesystem_final.qmd
         - references.qmd
     # favicon: Figures/favicon.ico
     cover-image: figures/logo.jpg
