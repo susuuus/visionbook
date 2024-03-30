@@ -70,6 +70,7 @@ format:
         cap-location: margin
         css: ./scripts/custom-style.css
         theme: cosmo
+        mathjax: true
         # mermaid:
         # theme: neutral
 
