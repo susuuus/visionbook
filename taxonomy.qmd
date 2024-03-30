@@ -24,6 +24,12 @@ collected by millions of photoreceptors in our retinas into an
 interpretation of the world in front of us. What we see is different
 than the light that reaches our eyes, as visual illusions prove to us.
 
+:::{.column-margin}
+This book will focus on the visual sense. Nonetheless, the techniques introduced aren't exclusive to images and possess the versatility to be adapted for the processing of various other signal types.
+
+:::
+
+
 Computer vision studies how to reproduce in a computer the ability to
 see. Since its origins, the study of vision has been an
 interdisciplinary study involving many disciplines (physics, psychology,
@@ -101,8 +107,14 @@ $\lambda$ (we will study color in chapter
 reference="chapter:color"}\]) at an instant in time $t$. This function,
 called the **plenoptic function** Edward H. Adelson and James R. Bergen
 @Adelson91, contains all the information needed to describe the complete
-pattern of light rays that fills the space.  The plenoptic
-function does not include information about the observer. The observer
+pattern of light rays that fills the space.  
+
+:::{.column-margin}
+**Plenoptic function**: Edward H. Adelson was going to call it
+the *holoscopic function*, but a well-known holographer told him that he would punch him in the nose if he called it that.
+:::
+
+The plenoptic function does not include information about the observer. The observer
 does not have access to the entire plenoptic function, only to a small
 slice of it. In we will describe how different mechanisms can produce
 images by sampling the ambient light in different ways.
@@ -173,6 +185,11 @@ the square in the shadow is perceived as being lighter than the square
 outside the shadow region, even though both have the same gray levels.
 
 
+:::{.column-margin}
+When looking at a two-dimensional (2D) picture, we automatically interpret it as a 3D scene if the right cues are present.
+:::
+
+
 The goal of vision is to provide the observer with information relevant
 to understanding the outside world and to enable them to solve other
 tasks such as navigating the world, interacting with other agents, and
@@ -216,6 +233,10 @@ knew that a dynamic scene could be represented by static painting.
 Paintings are a potent visual illusion that show that the image of the
 object does not need the object itself.
 
+:::{.column-margin}
+If you have never read the works of the Greek philosophers, please do. You will be astounded by how much they new about math and physics even though they lacked devices to confirm many of their hypothesis.
+:::
+
 How is information about the world being picked up by our eyes? The
 Greeks had two competing theories: intromission theories and
 extramission (or emission) theories.
@@ -242,6 +263,10 @@ occasionally. Of course, now we know that the when cats' eyes appear to
 shine, they are reflecting light from other sources, but without a
 theory of light and reflection it made sense to believe that one was
 observing rays emitted by the eyes.
+
+::: {.column-margin}
+![The extramission theory attributed the glow observed in cat eyes to the presence of fire inside them.](figures/taxonomy/cat_eyes.jpg){#fig-cats-eyes}
+:::
 
 Plato's theory of vision (427--347 BC) was very influential. Plato's
 theory contained both intromission and extramission elements. The
@@ -285,8 +310,14 @@ perception had to be water as vision needed a transparent element.
 Euclid (325 BC), a Greek mathematician, provided the first mathematical
 theory of vision, giving a mathematical description of how the emitted
 rays by the eye traveled on **straight lines** and formed a cone that
-reached the scene. He listed the following seven axioms of light,
-extracted from @Burton1945:
+reached the scene. 
+
+::: {.column-margin}
+![Modeling light as traveling along straight lines was a major discovery. This simple model of light sets the foundation upon which image formation, scene geometry, and computer vision rests.](figures/taxonomy/eye_w_fire_aina-1.png)
+:::
+
+
+He listed the following seven axioms of light, extracted from @Burton1945:
 
 > 1.  Let it be assumed that lines draw directly from the eye pass
 >     through a space of great extent;
@@ -329,6 +360,9 @@ known; so, AB is also known" @Burton1945.
 ![Adapted from Euclid (325 BC). The color and text, added here for
 clarity, is not part of the original figure @Burton1945.](figures/taxonomy/euclid-0.png){#fig-euclid width="60%"}
 
+:::{.column-margin}
+Euclid's work set the basis of **perspective**, and his discoveries influenced thinkers and artists in the following centuries.
+:::
 
 Many other Greek philosophers and mathematicians contributed to a deeper
 understanding of light. Hero of Alexandria (10-70), in the work
@@ -339,6 +373,10 @@ of incidence is the same as the angle of departure. Ptolemy described
 how light changed direction (i.e., **refraction**) when changing medium
 (e.g., from air to water). Few other discoveries about vision between
 the first and tenth centuries survive.
+
+:::{.column-margin}
+Credit assignment is unclear. For instance, early versions of the law of reflection are credited to Heron, Ptolemy, Archimedes, Plato, and was potentially known to others before @10.2307/225870.
+:::
 
 In the late tenth century Hasan Ibn al-Haytham's work transformed the
 initial Greek theories into a true scientific discipline, inspiring many
@@ -390,12 +428,18 @@ With Thomas Young, he codeveloped the theory of **trichromacy**, that
 the eye has three classes of receptors, each sensitive to different
 wavelengths of light.
 
+:::{.column-margin}
+![](figures/taxonomy/trichromacy_helmholtz-1.png)
+:::
+
+
 He measured the speed of transmission of nerves (24.6--38.4 m/s
 @wikiHelmholtz2021, previously thought to be unmeasurably fast
 @Shapin2019). He also developed the ophthalmascope, shown in , an
 instrument to observe the retina of the human eye. The key of the
 ophthalmascope was to see the need for colinear viewing and illumination
-directions. shows a schematic illustration of Helmholtz's opthalmoscope,
+directions. @fig-helmholtz
+shows a schematic illustration of Helmholtz's opthalmoscope,
 viewed from above. The glass plates along the diagonal, labeled $a$ in
 the figure, allow for viewing the eye under study by the opthalmologist
 while reflecting illumination from a light source into the eye. shows a
@@ -403,14 +447,10 @@ drawing by Helmholtz of an image from the ophthalmoscope, showing blood
 vessels (in background) and branches of the retinal artery and vein over
 the optic nerve (center).
 
-<figure id="fig:helmholtz">
 
-<figcaption>Hermann von Helmholtz invented the ophthalmoscope at age 29.
-Images from .</figcaption>
-</figure>
+![Hermann von Helmholtz invented the ophthalmoscope at age 29. Images from @Helmholtz1925](figures/taxonomy/holtzcombined.jpg){#fig-helmholtz}
 
-Helmholtz was also an important theorist in visual perception. He wrote
-@Helmholtz62,
+Helmholtz was also an important theorist in visual perception. He wrote @Helmholtz62,
 
 > The general rule determining the ideas of vision that are formed
 > whenever an impression is made on the eye, is that *such objects are

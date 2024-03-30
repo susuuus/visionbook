@@ -121,7 +121,7 @@ make the strawberry pop out from the canvas.
 
 :::{.column-margin #fig-agata_painting}
 The following sequence shows different steps in the process
-of painting a strawberry. <span><em>Source</em></span>: Original images by Agata Lapedriza.
+of painting a strawberry. Source: Original images by Agata Lapedriza.
 :::
 
 
