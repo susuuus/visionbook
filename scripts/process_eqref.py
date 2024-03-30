@@ -28,6 +28,7 @@ def convert_eq_refs(input_file_path, output_file_path):
     # Write the modified content to the output file
     with open(output_file_path, "w", encoding="utf-8") as file:
         file.write("\include{/Users/shenshen/code/cv_book/src/setup.tex}")
+        file.write("\n")
         file.write(modified_content)
 
 

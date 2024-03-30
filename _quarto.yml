@@ -31,7 +31,21 @@ book:
               - neural_nets.qmd
               - neural_nets_as_distribution_transformers.qmd
               - backpropagation.qmd
-
+        - part: Foundation of Image Processing
+          chapters:
+              - linear_image_filtering.qmd
+              - image_processing_fourier.qmd
+        - part: Linear Filters
+          chapters:
+              - blurring_2.qmd
+              - derivatives.qmd
+              - temporal_filters_v2.qmd
+        - part: Sampling and Multiscale Image Representations
+          chapters:
+              - sampling_and_aliasing.qmd
+              - upsamplig_downsampling_2.qmd
+              - spatial_filter_sets.qmd
+              - pyramids_new_notation.qmd
         - references.qmd
     # favicon: Figures/favicon.ico
     cover-image: figures/logo.jpg
