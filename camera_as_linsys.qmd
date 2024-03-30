@@ -1,0 +1,472 @@
+# Cameras as Linear Systems {#chapter:cameras_as_linear_systems}
+
+## Introduction
+
+Lens-based and pinhole cameras are special-case devices where the light
+falling on the sensors or the photographic film forms an image. For
+other imaging systems, such as medical or astronomical systems, the
+intensities recorded by the camera may look nothing like an
+interpretable image. Because the optical elements of imaging systems are
+often linear in their response to light, it is convenient and powerful
+to describe such general cameras using linear algebra, which then
+provides a powerful machinery to recover an interpretable image from the
+recorded data. This formulation also helps to build intuitions about how
+cameras work and it will allow us think about new types of cameras.
+
+## Flatland
+
+For the simplicity of visualization, let's consider one dimensional (1D)
+imaging systems. As shown in the sensor is 1D and the scene lives in
+flatland.
+
+![A one dimensional imaging system in flatland. As in , we have reversed
+the direction of the sensor
+coordinates.](figures/imaging/flatland_camera_linear.eps){#fig:flatland_camera_linear
+width=".5\\linewidth"}
+
+Let the light intensities in the world be represented by a column
+vector, $\boldsymbol\ell_{\texttt{w}}$. The value of the $n$-th
+component of $\boldsymbol\ell_{\texttt{w}}$ gives the intensity of the
+light at position $n$, heading in the direction of the camera. There are
+a few more things to notice in . The first one is that the axis in the
+camera sensor is reversed, consistent with . The value $n$ corresponds
+to image coordinates and the units are pixels. The second is that we are
+modeling the scene as being a line with varying albedos at a fixed depth
+from the camera. If the scene had a more complex spatial structure we
+would have to use the **light field** in order to use the same linear
+algebra that we will use in this chapter to model cameras. We will use
+light fields in .
+
+\[-.6in\]
+
+## Cameras as Linear Systems {#cameras-as-linear-systems}
+
+As shown in the sensor is 1D and the scene lives in flatland. Let the
+sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown
+scene be $\boldsymbol\ell_{\texttt{w}}$. If the camera sensors respond
+linearly to the light intensity at each sensor, their measurements,
+$\boldsymbol\ell_{\texttt{s}}$, will be some linear combination, given
+by the matrix, $\mathbf{A}$, of the light intensities:
+$$\boldsymbol\ell_{\texttt{s}}= \mathbf{A} \boldimg_{\texttt{w}}
+\label{eq:likelihood}$$ We represent the camera by matrix $\mathbf{A}$.
+For the case of a pinhole camera, and assuming 13 pixel sensor
+observations, the camera matrix is just a 13$\times$`<!-- -->`{=html}13
+identity matrix, depicted in , as each sensor depends only on the value
+of a single scene element. For the case of conventional lens and pinhole
+cameras, where the observed intensities, $\boldsymbol\ell_{\texttt{s}}$,
+are an image of the reflected intensities in the scene,
+$\boldsymbol\ell_{\texttt{w}}$, then $\mathbf{A}$ is approximately an
+identity matrix. For more general cameras, $\mathbf{A}$ may be very
+different from an identity matrix, and we will need to estimate
+$\boldsymbol\ell_{\texttt{w}}$ from $\boldsymbol\ell_{\texttt{s}}$.
+
+In the presence of noise, there may not be a solution
+$\boldsymbol\ell_{\texttt{w}}$ that exactly satisfies , so we often seek
+to satisfy it in a least squares sense. In most cases, $\mathbf{A}$ is
+either not invertible, or is poorly conditioned. It is often useful to
+introduce a regularizer, an additional term in the objective function to
+be minimized @Poggio85. If the regularization term favors a small
+$\boldimg_{\texttt{world}}$, then the objective term to minimize, $E$,
+could be
+$$E = \lVert \boldsymbol\ell_{\texttt{s}}- \mathbf{A} \boldsymbol\ell_{\texttt{w}}\rVert ^2 + \lambda \lVert \boldsymbol\ell_{\texttt{w}}\rVert ^2
+\label{eq:posterior}$$ The regularization parameter, $\lambda$,
+determines the trade-off between explaining the observations and
+satisfying the regularization term.
+
+![ (a) Schematic drawing of a small-hole 1D pinhole camera, and (b) the
+visualization of its imaging matrices $\mathbf{A}$, $\mathbf{A}^{-1}$,
+and the regularized inverse $\mathbf{B}$. For the small-pinhole imager,
+all three matrices are identity matrices. (c) Large-hole 1D pinhole
+camera, and (d) the visualization of its imaging
+matrices.](figures/imaging/traditional_pinholes_2.eps){#fig:amats1
+width="100%"}
+
+Setting the derivative of with respect to the elements of the vector
+$\boldsymbol\ell_{\texttt{w}}$ equal to zero, we have $$\begin{aligned}
+0 & = &  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lVert \boldsymbol\ell_{\texttt{s}}- \mathbf{A} \boldsymbol\ell_{\texttt{w}}\rVert ^2 +  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lambda \lVert \boldsymbol\ell_{\texttt{w}}\rVert ^2 \\
+& = &  \mathbf{A}^T \mathbf{A} \boldsymbol\ell_{\texttt{w}}- \mathbf{A}^T \boldsymbol\ell_{\texttt{s}}+ \lambda \boldsymbol\ell_{\texttt{w}}
+\label{eq:deriv}
+\end{aligned}$$ or
+$$\boldsymbol\ell_{\texttt{w}}= (\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1} \mathbf{A}^T \boldsymbol\ell_{\texttt{s}}
+\label{eq:deriv2}$$ Where the matrix
+$\mathbf{B}=(\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1} \mathbf{A}^T$
+is the regularized inverse of the imaging matrix $\mathbf{A}$.
+
+1D and the scene lives in flatland. Let the sensor measurements be
+$\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be
+$\boldsymbol\ell_{\texttt{w}}$. We represent the camera by matrix
+$\mathbf{A}$. For the case of a pinhole camera, and assuming 13 pixel
+sensor observations, the camera matrix is just a
+13$\times$`<!-- -->`{=html}13 identity matrix, depicted in , as each
+sensor depends only on the value of a single scene element.
+
+Next, consider the case of a wide aperture pinhole camera, shown in . If
+a single pixel in the sensor plane covers exactly two positions of the
+scene intensities, then the geometry is as shown in . also shows the
+imaging matrix, $\mathbf{A}$, its inverse, $\mathbf{A}^{-1}$, and the
+regularized inverse of the imaging matrix, which will usually give image
+reconstructions with fewer artifacts as it is less sensitive to noise.
+Note that $\mathbf{A}^{-1}$ contains lots of fast changes that will make
+the result very sensitive to noise in the observation. The regularized
+matrix, $\mathbf{B}$, shown in the bottom row of , is better behaved.
+
+The following plot () shows an example of an input 1D signal,
+$\boldsymbol\ell_{\texttt{w}}$, and the output of the 2-pixel wide
+pinhole camera, $\boldsymbol\ell_{\texttt{s}}$.
+
+<figure id="fig:2pixelwidepinhole">
+<p><span class="math inline">$\begin{array}{cc}
+\begin{tikzpicture}
+\begin{axis} [width=185pt,height=120pt,
+    axis x line=bottom,
+    axis y line=middle,
+    tick align=center,
+    every axis x label/.style={at={(current axis.right of
+origin)},anchor=west},
+    every axis y label/.style={at={(current axis.above origin)},
+anchor=north east,above=0mm},
+    xmin=0, xmax=13,
+    xtick={0,...,12},
+    xlabel=$</span>n<span class="math inline">$,
+    ymin=0, ymax=5,
+    ytick={0,...,4},
+    ylabel={$\boldsymbol\ell_{\texttt{w}}$}]
+\addplot+[ycomb]
+coordinates {(0,0) (1,1) (2,1) (3,1) (4,1) (5,0) (6,0) (7,0) (8,1)
+(9,2)  (10,3)  (11,4)  (12,0)};
+\end{axis}
+\end{tikzpicture}
+&amp;~
+\begin{tikzpicture}
+\begin{axis} [width=185pt,height=120pt,
+    axis x line=bottom,
+    axis y line=middle,
+    tick align=center,
+    every axis x label/.style={at={(current axis.right of
+origin)},anchor=west},
+    every axis y label/.style={at={(current axis.above origin)},
+anchor=north east,above=0mm},
+    xmin=0, xmax=13,
+    xtick={0,...,12},
+    xlabel=$</span>n<span class="math inline">$,
+    ymin=0, ymax=8,
+    ytick={0,...,7},
+    ylabel={$\boldsymbol\ell_{\texttt{s}}$}]
+\addplot+[ycomb]
+coordinates {(0,1) (1,2) (2,2) (3,2) (4,1) (5,0) (6,0) (7,1) (8,3)
+(9,5)  (10,7)  (11,4)  (12,0)};
+\end{axis}
+\end{tikzpicture}
+\end{array}$</span></p>
+<figcaption>Pinhole camera. (left) Input 1D signal, <span
+class="math inline"><strong>ℓ</strong><sub><code>w</code></sub></span>.
+(right) The output of the two-pixel wide pinhole camera, <span
+class="math inline"><strong>ℓ</strong><sub><code>s</code></sub></span>.</figcaption>
+</figure>
+
+The output is obtained by multiplying the input vector by the matrix
+$\mathbf{A}$ shown in . Each output value is the results of adding up
+two consecutive input values. The output is nearly identical to the
+input signal but with a larger magnitude and a bit smoother.
+
+## More General Imagers
+
+Many different optical systems can form cameras and the linear analysis
+described before can be used to characterize the imaging process. Even a
+simple edge will do. shows two non traditional imaging systems that we
+will analyze in this section.
+
+![(a) Schematic drawing of an edge camera, and (b) its imaging matrices.
+(c) A pinspeck camera (an occluder that blocks two of the values on the
+scene), and (d) its imaging
+matrices.](figures/imaging/nontraditional_pinholes_2.eps){#fig:amats3
+width="100%"}
+
+### Edge Camera
+
+Consider the example of . This camera corresponds to an **edge camera**.
+This is not a traditional pinhole camera; instead light is blocked only
+on one side.
+
+For this camera, the imaging matrix and its inverse are as follows:
+
+$$\mathbf{A} = 
+\left[ 
+\begin{array}{cccccc}
+1 & 1 & 1 & 1 & \dots & 1 \\
+0 & 1 & 1 & 1 & ~ & 1 \\
+0 & 0 & 1 & 1 & ~ & 1 \\
+0 & 0 & 0 & 1 & ~ & 1 \\
+\vdots & ~ & ~ & ~ & \ddots & ~ \\
+0 & 0 & 0 & 0 & ~ & 1 
+\end{array}
+\right], 
+\mathbf{A}^{-1} = 
+\left[ 
+\begin{array}{cccccc}
+1 & -1 & 0 & 0 & \dots & 0 \\
+0 & 1 & -1 & 0 & ~ & 0 \\
+0 & 0 & 1 & -1 & ~ & 0 \\
+0 & 0 & 0 & 1 & ~ & 0 \\
+\vdots & ~ & ~ & ~ & \ddots & ~  \\
+0 & 0 & 0 & 0 & ~ & 1 
+\end{array}
+\right]
+\label{eq:edge}$$
+
+If we consider the same input as in the pinhole camera example in the
+previous section, the output signal for the corner camera will look like
+():
+
+<figure id="fig:1dcornercamera">
+<p><span class="math inline">$\begin{array}{cc}
+\begin{tikzpicture}
+\begin{axis} [width=185pt,height=120pt,
+    axis x line=bottom,
+    axis y line=middle,
+    tick align=center,
+    every axis x label/.style={at={(current axis.right of
+origin)},anchor=west},
+    every axis y label/.style={at={(current axis.above origin)},
+anchor=north east,above=0mm},
+    xmin=0, xmax=13,
+    xtick={0,...,12},
+    xlabel=$</span>n<span class="math inline">$,
+    ymin=0, ymax=5,
+    ytick={0,...,4},
+    ylabel={$\boldsymbol\ell_{\texttt{w}}$}]
+\addplot+[ycomb]
+coordinates {(0,0) (1,1) (2,1) (3,1) (4,1) (5,0) (6,0) (7,0) (8,1)
+(9,2)  (10,3)  (11,4)  (12,0)};
+\end{axis}
+\end{tikzpicture}
+&amp;~
+\begin{tikzpicture}
+\begin{axis} [width=185pt,height=120pt,
+    axis x line=bottom,
+    axis y line=middle,
+    tick align=center,
+    every axis x label/.style={at={(current axis.right of
+origin)},anchor=west},
+    every axis y label/.style={at={(current axis.above origin)},
+anchor=north east,above=0mm},
+    xmin=0, xmax=13,
+    xtick={0,...,12},
+    xlabel=$</span>n<span class="math inline">$,
+    ymin=0, ymax=16,
+    ytick={0,5,10,14},
+    ylabel={$\boldsymbol\ell_{\texttt{s}}$}]
+\addplot+[ycomb]
+coordinates {(0,14) (1,14) (2,13) (3,12) (4,11) (5,10) (6,10) (7,10)
+(8,10) (9,9)  (10,7)  (11,4)  (12,0)};
+\end{axis}
+\end{tikzpicture}
+\end{array}$</span></p>
+<figcaption>Edge camera. (left) Input 1D signal, <span
+class="math inline"><strong>ℓ</strong><sub><code>w</code></sub></span>.
+(right) The output of an edge camera, <span
+class="math inline"><strong>ℓ</strong><sub><code>s</code></sub></span>.</figcaption>
+</figure>
+
+The output now looks very different than that of a pinhole camera. In
+the pinhole camera, the output is very similar to the input. This is not
+the case here where the output looks like the integral of the input
+(reversed along the horizontal axis). Note that the first value of
+$\boldsymbol\ell_{\texttt{s}}$ is equal to the sum of all the values of
+$\boldsymbol\ell_{\texttt{w}}$:
+$$\ell_{\texttt{s}}\left[0 \right] = \sum_{n=0}^{12} \ell_{\texttt{w}}\left[n \right]$$
+
+illustrates the imaging matrix, $\mathbf{A}$, and reconstruction
+matrices for the imager of . You can think of this imager as computing
+an integral of the input signal. Therefore, its inverse looks like a
+derivative. The regularized inverse looks like a blurred derivative (we
+will talk more about blurred derivatives in ).
+
+### Pinspeck Camera
+
+shows another nontraditional imager. Now, instead of a pinhole we have
+an occluder. The occluder blocks part of the light (complementary to the
+large-hole pinhole camera shown in ). What the camera sensor records is
+the shadow of the occluder. We can write the imaging matrix
+$\mathbf{A}$, which corresponds to 1-$\mathbf{A}_{pinhole}$ as shown in
+. also shows its inverse and the regularized inverse. This camera is
+called a **pinspeck camera** @CohenPinspeck, @Torralba2014 and has also
+been used in practice.
+
+In the example of , the occluder has the size of the wide pinhole from .
+The following plots shows, , the input scene (same as in the previous
+examples) and, , the output recorded by the camera sensor of the
+pinspeck camera.
+
+<figure id="fig:pinspeck_output_plot">
+<p><span class="math inline">$\begin{array}{cc}
+\begin{tikzpicture}
+\begin{axis} [width=185pt,height=120pt,
+    axis x line=bottom,
+    axis y line=middle,
+    tick align=center,
+    every axis x label/.style={at={(current axis.right of
+origin)},anchor=west},
+    every axis y label/.style={at={(current axis.above origin)},
+anchor=north east,above=0mm},
+    xmin=0, xmax=13,
+    xtick={0,...,12},
+    xlabel=$</span>n<span class="math inline">$,
+    ymin=0, ymax=5,
+    ytick={0,...,4},
+    ylabel={$\boldsymbol\ell_{\texttt{w}}$}]
+\addplot+[ycomb]
+coordinates {(0,0) (1,1) (2,1) (3,1) (4,1) (5,0) (6,0) (7,0) (8,1)
+(9,2)  (10,3)  (11,4)  (12,0)};
+\end{axis}
+\end{tikzpicture}
+&amp;~
+\begin{tikzpicture}
+\begin{axis} [width=185pt,height=120pt,
+    axis x line=bottom,
+    axis y line=middle,
+    tick align=center,
+    every axis x label/.style={at={(current axis.right of
+origin)},anchor=west},
+    every axis y label/.style={at={(current axis.above origin)},
+anchor=north east,above=0mm},
+    xmin=0, xmax=13,
+    xtick={0,...,12},
+    xlabel=$</span>n<span class="math inline">$,
+    ymin=0, ymax=16,
+    ytick={0,5,10,14},
+    ylabel={$\boldsymbol\ell_{\texttt{s}}$}]
+\addplot[ycomb,red]
+coordinates {(0,14) (1,14) (2,14) (3,14) (4,14) (5,14) (6,14) (7,14)
+(8,14) (9,14)  (10,14)  (11,14)  (12,14)};
+\addplot+[ycomb,blue,fill=blue,mark=*]
+coordinates {(0,13) (1,12) (2,12) (3,12) (4,13) (5,14) (6,14) (7,13)
+(8,11) (9,9)  (10,7)  (11,10)  (12,14)};
+\end{axis}
+\end{tikzpicture}
+\end{array}$</span></p>
+<figcaption>Pinspeck camera. (left) Input 1D signal, <span
+class="math inline"><strong>ℓ</strong><sub><code>w</code></sub></span>.
+(right) The output of a pinspeck camera, <span
+class="math inline"><strong>ℓ</strong><sub><code>s</code></sub></span>.</figcaption>
+</figure>
+
+The output is now a signal with a wide dynamic range (a max value of 14,
+which correspond to the sum of the values in
+$\boldsymbol\ell_{\texttt{w}}$) and with fluctuations due to the shadow
+of the occluder on the camera sensor. If there was no occluder, then the
+output would be a constant signal of value 14. In red we show the effect
+of the shadow, which is the light missing because of the presence of the
+occluder. You can see how the missing signal is identical to the output
+of the two-pixel wide pinhole camera but reversed in sign.
+
+### Corner Camera
+
+To show a real-world example of a more general imager, let us consider
+the **corner camera** @Bouman17. This is similar to the edge camera of
+and , but with slightly more complicated geometry. As shown in , a
+vertical edge partially blocks a scene from view, creating intensity
+variations on the ground, observable by viewing those intensity
+variations from around the corner.
+
+<figure id="fig:ccmodel">
+<p><span><embed src="figures/imaging/cornercam.pdf"
+style="width:40.0%" /></span> <span><embed
+src="figures/imaging/cornerKey.pdf" style="width:40.0%" /></span></p>
+<figcaption>The corner camera . (a) Objects, such as the cylinders
+labeled A and B, hidden behind a corner from a camera nonetheless cause
+a very small intensity differences in the ambient illumination falling
+on the ground. (b) the spatial mask is multiplied by the observed
+reflected ground image.</figcaption>
+</figure>
+
+In practice, we will subtract a mean image from our observations of the
+ground plane, so in the rendering equation below, we will only consider
+components of the scene that may change over time, under the assumption
+that what we want to image behind the corner (e.g., a person) is moving.
+We will call these intensities $S(\phi, \theta)$ ($S$ for the subject),
+where $\phi$ measures vertical inclination and $\theta$ measures
+azimuthal angle, relative to position where the vertical edge intersects
+the ground plane. Integrating the light intensities falling on the
+ground plane, the observed intensities on the ground will be
+$\boldsymbol\ell_{\texttt{ground}}(r, \theta)$, where the polar
+coordinates $r$ and $\theta$ are measured with respect to the corner.
+Assuming Lambertian diffuse reflection from the ground plane, we have,
+for the observed intensities
+$\boldsymbol\ell_{\texttt{ground}}(r, \theta)$,
+$$\boldsymbol\ell_{\texttt{ground}}(r, \theta) = \int_{\phi=0}^{\phi=\pi} \int_{\xi=0}^{\xi=\theta}
+ \cos(\phi) S(\phi, \xi) \mbox{d} \phi \mbox{d} \xi,
+\label{eq:corner}$$ where the $\cos(\phi)$ term in follows from the
+equation for surface reflection, .
+
+The dependence of the observation, $\boldsymbol\ell_{\texttt{ground}}$,
+on vertical variations in $S(\phi, \theta)$ is very weak, just through
+the $\cos(\phi)$ term. We can integrate over $\phi$ first, to form the
+1D signal, $\ell_{\texttt{w}}(\xi)$:
+$$\ell_{\texttt{w}}(\xi) = \int_{\phi=0}^{\phi=\pi} 
+  \cos(\phi) S(\phi, \xi) \mbox{d} \phi 
+\label{eq:xcorner}$$
+
+Then, to a good approximation, has the form,
+$$\boldsymbol\ell_{\texttt{ground}}(r, \theta) \approx \int_{\xi=0}^{\xi=\theta}
+ \ell_{\texttt{w}}(\xi) \mbox{d} \xi,
+\label{eq:corner1d}$$ where $\ell_{\texttt{w}}(\xi)$ is a 1D image of
+the scene around the corner from the vertical edge.
+
+shows the corner camera geometry for a three-dimensional (3D) scene.
+shows two objects, such as the cylinders labeled A and B, hidden behind
+a corner from a camera. Despite being behind the corner they cause a
+very small intensity differences in the ambient illumination falling on
+the ground, observable from the camera as a very small change in the
+light intensity reflecting from the ground. Can we reconstruct the scene
+hidden behind the corner using just the intensities observed on the
+ground? The image reconstruction operation is analogous to that for the
+edge camera of : we subtract the reflected intensities observed at one
+orientation angle, say $\theta_A$ from those observed at another, say
+$\theta_B$.
+
+If we sample in its continuous variables, we can write it in the form
+$\boldsymbol\ell_{\texttt{ground}}= \mathbf{A} \boldsymbol\ell_{\texttt{w}}$.
+Solving for the multiplier to apply to
+$\boldsymbol\ell_{\texttt{ground}}$ to estimate
+$\boldsymbol\ell_{\texttt{w}}$ yields the form shown in . shows the
+spatial mask to be multiplied by the observed reflected ground image,
+with the result summed over all spatial pixels in order to estimate the
+light coming from around the corner at one particular orientation angle
+relative to the corner, in this case approximately 45 degrees. We see
+that the way to read the 1D signal from the ground plane is to take a
+derivative with respect to angle. This makes intuitive sense, as the
+light intensities on the ground integrate all the light up to the angle
+of the vertical edge. To find the 1D signal at the angle of the edge, we
+ask, "What does one pie-shaped ray from the wall see that the pie-shaped
+ray next to it doesn't see?"
+
+It can be shown @Bouman17 that the image intensities from
+around-the-corner scenes introduce a perturbation of about
+$\frac{1}{1,000}$ to the light reflected from the ground from all
+sources. By averaging image intensities over the appropriate pie-shaped
+regions on the ground at the corner (\[b\]), one can extract a 1D image
+as a function of time from the scene around the corner. shows two 1D
+videos reconstructed from one (\[a\]) and two (\[b\]) people walking
+around the corner. By processing videos of very faint intensity changes
+on the ground, we can infer a 1D video of the scene around the corner.
+The image inversion formulas were derived using inversion methods very
+similar to . The corner camera is just one of the many possible
+instantiations of a computational imaging system.
+
+![Outdoor corner camera @Bouman17 experiments. (a) Camera recording
+ground plane intensities. (b) Two people walking around the corner,
+hidden from direct view of the camera. (c) Corner camera trace with one
+person moving. (d) Corner camera trace with two people moving. Angle
+from the corner is plotted vertically, and time is plotted
+horizontally.](figures/imaging/corner_camera_3D.eps){#fig:cctraces
+width="90%"}
+
+
+
+## Concluding Remarks
+
+Treating cameras as general linear systems allows for the machinery of
+linear algebra to be applied to camera design and processing. We
+reviewed several simple camera systems, including cameras utilizing
+pinholes, pinspecks, and edges to form images.
