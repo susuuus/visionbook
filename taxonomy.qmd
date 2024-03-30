@@ -751,9 +751,9 @@ Cones. c. Rod nucleus. d. Cone nucleus. e. Large horizontal cell f.
 Cone-associated bipolar cell. g. Rod-associated bipolar cell. h.
 Amacrine cells. i. Giant ganglion cell. j. Small ganglion cells.
 *Source*: "Structure of the Mammalian Retina" c.1900 By Santiago Ramon y
-Cajal.](figures/taxonomy/cajal-0.png){#fig-cajal width=".6"}
+Cajal.](figures/taxonomy/cajal.png){#fig-cajal width="100%"}
 
-The drawing of the retina () shows the first layers of neurons that
+The drawing of the retina (@fig-cajal) shows the first layers of neurons that
 process the visual input. The retina is an amazing piece of the brain
 that transforms light into impulses. Light is first transformed into
 electric signal by the photoreceptors (rods and cones) and is then
