@@ -17,10 +17,12 @@ base_name=$(basename "$input_file" .tex)
 output_file="${base_name}.qmd"
 
 TEMP_TEX="${input_file%.tex}-temp.tex" # Create a temp file name based on the input file
-python3 $SCRIPT_DIR/process_figureref.py "$input_file" "$TEMP_TEX"
+
+python3 $SCRIPT_DIR/process_eqref.py "$input_file" "$TEMP_TEX"
 echo "eq references done"
 
-pandoc "$TEMP_TEX" -s -o "$TEMP_TEX" -from latex -to latex
+pandoc "$TEMP_TEX" -s -o "$TEMP_TEX" -f latex -t latex
+echo "latex clean"
 
 python3 $SCRIPT_DIR/process_marginnote.py "$TEMP_TEX" "$TEMP_TEX"
 echo "margin done"
