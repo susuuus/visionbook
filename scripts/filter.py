@@ -72,8 +72,6 @@ def main(doc=None):
     return pf.run_filters(
         [
             latex_to_markdown_cite,
-            convert_fig_ref,
-            figure_refs,
             replace_norm,
             replace_simple,
         ],
