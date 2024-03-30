@@ -74,15 +74,14 @@ light rays that will strike the eye. As a result of this complex pattern
 of interactions even a single ray will form a complex image in the eye
 of the observer.
 
-shows some pictures taken when illuminating a complex scene with a laser
+@fig-lightRay shows some pictures taken when illuminating a complex scene with a laser
 pointer that illuminate the scene with a narrow beam of light (this is
 the best approximation to the image produced by a single light ray that
 we could do at home).
 
-![(a)(b)(c)
-(a) Scene illuminated with a ceiling lamp. (b-c) Two images
+![(a) Scene illuminated with a ceiling lamp. (b-c) Two images
 obtained by illuminating a scene with a laser pointer (the red line
-indicates the direction of the ray).](figures/taxonomy/lightGray2.png)
+indicates the direction of the ray).](figures/taxonomy/lightGray2.png){#fig-lightRay}
 
 
 The resulting images show the complexity of the interactions between the
@@ -268,7 +267,7 @@ theory of light and reflection it made sense to believe that one was
 observing rays emitted by the eyes.
 
 ::: {.column-margin}
-![The extramission theory attributed the glow observed in cat eyes to the presence of fire inside them.](figures/taxonomy/cat_eyes.jpg){#fig-cats-eyes}
+![The extramission theory attributed the glow observed in cat eyes to the presence of fire inside them.](figures/taxonomy/cat_eyes.jpg)
 :::
 
 Plato's theory of vision (427--347 BC) was very influential. Plato's
@@ -396,7 +395,7 @@ perpendicularly. He described the pinhole camera and invented the
 year 1027. It is one of the first drawings of the visual system.
 *Source*: MS Fatih 3212, vol. 1, fol. 81b, Süleimaniye Mosque Library,
 Istanbul.](figures/taxonomy/Alhazen1652.png){#fig-Alhacen
-width="50%"}
+width="60%"}
 
 Ibn al-Haytham rejected the extramission theory. He argued that sight
 could be explained by the light rays emitted by objects and that it was
@@ -432,7 +431,7 @@ the eye has three classes of receptors, each sensitive to different
 wavelengths of light.
 
 :::{.column-margin}
-![](figures/taxonomy/trichromacy_helmholtz-1.png)
+![](figures/taxonomy/trichromacy_helmholtz-1.png){width=120}
 :::
 
 
@@ -504,8 +503,17 @@ Gestalt psychology started around 1912, with the publication of
 **phi phenomenon**, a visual illusion that consists in presenting two
 images with a vertical bar at different locations in rapid succession
 giving the impression that there is continuous motion between them
-@steinman2000phi. Wertheimer, together with Kurt Koffka and Wolfgang
-Köhler, postulated that perceived motion was a new phenomenon that is
+@steinman2000phi. 
+
+:::{.column-margin}
+Frame 1
+![](figures/taxonomy/phi_phenomenon_1-0.png)
+Frame 2
+![](figures/taxonomy/phi_phenomenon_2-0.png)
+:::
+
+
+Wertheimer, together with Kurt Koffka and Wolfgang Köhler, postulated that perceived motion was a new phenomenon that is
 not present in the individual stimuli (the two flashing frames) and that
 what we perceive is the whole event as a single unit (continuous
 motion). Gestalt psychology extended this interpretation to explain many
@@ -566,14 +574,30 @@ are equally strong. Some of the most important laws are as follows:
 -   **Past experience**: Items grouped in the past are more likely to be
     perceived as a group in the future.
 
+
+:::{.column-margin}
+Law of good continuation. The following shape:
+![](figures/taxonomy/grounding_gc_1-0.png)
+\n
+has two possible groupings:
+![](figures/taxonomy/grounding_gc_2-0.png)
+The law of good continuation says that the one on the left is 
+the one an observer perceives (although we just see an X and not two lines crossing each other...)
+:::
+
 In complex displays, one will expect that multiple of these grouping
 cues will be present. Gestalt theory not did quantitatively address how
 grouping cues will balance each other when they were in conflict.
 Stephen Palmer @Palmer94 measured the strength of these grouping cues
 and introduced new ones.
 
-Gestalists also studied the problem of **lightness perception**. For a
-wonderful book on lightness perception, we refer the reader to
+Gestalists also studied the problem of **lightness perception**. 
+
+:::{.column-margin}
+**Lightness** is a perceptual quantity that is influenced by both the perceived reflectance and the perceived illumination of a surface @Adelson99. 
+:::
+
+For a wonderful book on lightness perception, we refer the reader to
 @gilchrist2006, and the work of Edward Adelson @Adelson99. Adelson
 defines lightness as "the visual system's attempt to extract reflectance
 based on the luminances in the scene."
@@ -583,13 +607,17 @@ patch is a function of the context. One has to take into account the
 grouping laws (perceptual organization) in order to explain the
 perceived lightness on a display. Koffka @Koffka1935 introduced the
 **Koffka ring**, a beautiful illusion to illustrate the power of
-perceptual grouping to explain lightness perception ().
+perceptual grouping to explain lightness perception (@fig-koffka_ring).
 
 ![(a) A ring of uniform gray. (b) Koffka ring and (c) a variant
 introduced by Adelson @Adelson99. In all the examples, the two sides of
 the ring are
 identical.](figures/taxonomy/koffka_ring-0.png){#fig-koffka_ring
 width="100%"}
+
+:::{.column-margin}
+Kurt Koffka, born in Berlin in 1886, published his *Principles of Gestalt Psychology* in 1935, after moving to the USA in 1924.
+:::
 
 In each display, the two sides of the ring have the same gray level.
 Depending on the spatial configuration of the two sides, their
@@ -634,6 +662,11 @@ completion. Modal completion produces **illusory contours** to appear in
 the image. Some observers report that the triangle on top is brighter
 than the surrounding background and that illusory contours appear at the
 triangle sides.
+
+
+:::{.column-margin}
+Gaetano Kanizsa @kanizsa79 studied how perceptual organization could be used to see what is not there.
+:::
 
 Perceptual organization remains an intriguing and rich area of research
 with many visual mechanisms still poorly understood. The list of
