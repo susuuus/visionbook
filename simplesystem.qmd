@@ -158,7 +158,7 @@ There are several representations that can be used as an initial step
 for scene interpretation. Images can be represented as collections of
 small image patches, regions of uniform properties, and edges.
 
-\[-4cm\]
+
 
 ### A Catalog of Edges
 

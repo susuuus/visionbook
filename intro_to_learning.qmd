@@ -7,7 +7,7 @@ to solve future problems. Typically, this involves searching for an
 algorithm that solves past instances of the problem. This algorithm can
 then be applied to future instances of the problem.
 
-\[-1.4cm\]
+
 
 Because learning is itself an algorithm, it can be understood as a
 meta-algorithm: an algorithm that outputs algorithms ().
@@ -23,7 +23,7 @@ solve new instances of the problem.
 
 ## Learning from Examples
 
-\[-0.6cm\]
+
 
 Imagine you find an ancient mathematics text, with marvelous looking
 proofs, but there is a symbol you do not recognize, "$\star$\". You see
@@ -81,7 +81,7 @@ write it out by hand. This is the point of machine learning. The machine
 writes the algorithm for us, but it can only do so if we give it many
 examples, not just these three.
 
-\[-.7in\]
+
 
 ## Learning without Examples
 
@@ -462,7 +462,7 @@ examples: $$\begin{aligned}
     &\{\texttt{input:} \big(x:[1,2], y:[0.5,1]\big), &&\texttt{output:} y = \frac{x}{2}\}\nonumber
 \end{aligned}$$ These are examples of performing least-squares
 regression; therefore the learner can fit these examples by learning to
-perform least-squares regression.\[-0.8cm\] Since least-squares
+perform least-squares regression. Since least-squares
 regression is itself a learning algorithm, we can say that the learner
 learned to learn.
 
@@ -479,7 +479,7 @@ width="100%"}
 Notice that you can apply this idea recursively, constructing
 meta-meta-\...-metalearners. Humans perform at least three levels of
 this process, if not more: we have *evolved* to be *taught* in school
-how to *learn* quickly on our own. \[-1.0cm\]
+how to *learn* quickly on our own. 
 
 ## Concluding Remarks
 

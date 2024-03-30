@@ -87,7 +87,7 @@ spectrum. In this initial discussion of color, we will assume that the
 power spectrum of light determines its appearance, although you should
 remember that this is true only within a fixed visual context.
 
-\[-1.6in\]
+
 
 shows a spectrograph visualization of some light power spectra (the
 right image of each row) along with the image that the spectrograph was

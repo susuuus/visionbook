@@ -37,7 +37,7 @@ would have to use the **light field** in order to use the same linear
 algebra that we will use in this chapter to model cameras. We will use
 light fields in .
 
-\[-.6in\]
+
 
 ## Cameras as Linear Systems {#cameras-as-linear-systems}
 

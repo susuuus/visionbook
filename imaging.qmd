@@ -278,7 +278,7 @@ coordinates of the camera optical axis. Note that this is different than
 what we introduced a simple projection model in in the framework of the
 simple vision system in . In that example, we placed the world
 coordinate system in front of the camera, and the origin was not the
-location of the pinhole camera. \[-1.2in\]
+location of the pinhole camera. 
 
 ### Image Formation by Orthographic Projection
 

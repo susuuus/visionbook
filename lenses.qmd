@@ -163,7 +163,7 @@ emanating at a small angle from point $a$ will be focused to point $b$.
 shows that the lens surface angle, $\theta_S$, must deviate from flat in
 linear proportional to the distance $c$ from the center of the lens.
 
-\[-.3in\]
+
 
 In the thin lens approximation, both parabolic and spherical shapes
 satisfy that constraint on the lens surface slope. For a spherical lens
