@@ -60,4 +60,5 @@ sed -i '' -e 's/\\img/\\ell/g' \
     -e 's/\\lightfield/L/g' "$output_file"
 
 python3 $SCRIPT_DIR/process_marginnoteline.py "$output_file" "$output_file"
+python3 $SCRIPT_DIR/shuffle_eqref.py "$output_file" "$output_file"
 echo "Conversion completed: $output_file"
