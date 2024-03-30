@@ -1,20 +1,18 @@
 import re
 
-# Example text that includes patterns to be rearranged
-text = """$$\\begin{aligned}
-\\frac{\\partial \\ell}{\\partial x} & \\simeq & \\ell(x,y) - \\ell(x-1,y) \\
-\\frac{\\partial \\ell}{\\partial y} & \\simeq & \\ell(x,y) - \\ell(x,y-1) 
-#eq-image_partial_derivatives_aprox
-\\end{aligned}$$"""
+text = "derivatives in equations (\\ref{eq:image_partial_derivatives_aprox}). Using this approximation, \\eqn{\\ref{eqn:derivative_Y_along_edge}} can be written as follows:"
 
-# Updated regular expression to match the pattern across multiple lines and capture the necessary parts
-# Ensure capturing the end of the aligned block separately to handle spacing and newlines
-pattern = r"(\$\$.*?\\end{aligned})(.*?)\$\$(\s*)(#eq-[\w-]+)"
+# Regular expression pattern to find all occurrences of \ref{...} and \eqn{\ref{...}}
+pattern = r"\\ref{eq:([^}]*)}|\\eqn{\\ref{eqn:([^}]*)}}"
 
-# Function to rearrange the matched pattern, placing the label directly after \end{aligned} without newlines before the label
-replacement = r"\1\4\2$$"
 
-# Replace all occurrences in the text using re.DOTALL to match across newlines
-rearranged_text = re.sub(pattern, replacement, text, flags=re.DOTALL)
+# Replacement function to format matches
+def replacement(match):
+    label = match.group(1) if match.group(1) else match.group(2)
+    return f"@eq-{label}"
 
-print(rearranged_text)
+
+# Performing the replacement
+simplified_text = re.sub(pattern, replacement, text)
+
+print(simplified_text)

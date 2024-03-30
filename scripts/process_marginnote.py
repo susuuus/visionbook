@@ -9,7 +9,8 @@ def replace_margin_notes(text):
         inner_content = match.group(1)  # The content within \margin{...}
         return ":::\{.column-margin\}" + inner_content + ":::"
 
-    pattern = r"\\marginnote\{((?:[^{}]+|\{(?:[^{}]+|\{[^{}]*\})*\})*)\}"
+    # pattern = r"\\marginnote\{((?:[^{}]+|\{(?:[^{}]+|\{[^{}]*\})*\})*)\}"
+    pattern = r"\\marginnote\{([^{}]*)\}"
     return re.sub(pattern, replacer, text)
 
 

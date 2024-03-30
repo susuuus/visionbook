@@ -11,12 +11,19 @@ def convert_eq_refs(input_file_path, output_file_path):
         r"\\eqn\{\\ref\{eqn:(.*?)\}\}", r"@eq-\1", modified_content
     )
     modified_content = re.sub(r"\\label\{eq:(.*?)\}", r"#eq-\1", modified_content)
+    modified_content = re.sub(r"\\label\{eqn:(.*?)\}", r"#eq-\1", modified_content)
     modified_content = re.sub(r"\\eqref\{eq:(.*?)\}", r"@eq-\1", modified_content)
-    modified_content = re.sub(r"\\eqn\\ref\{eq:(.*?)\}", r"@eq-\1", modified_content)
-    modified_content = re.sub(
-        r"\\eqn\{\\ref\{eqn:(.*?)\}\}", r"@eq-\1", modified_content
-    )
     modified_content = re.sub(r"^\s*%.*$\n?", "", modified_content, flags=re.MULTILINE)
+
+    pattern = r"\\ref{eq:([^}]*)}|\\eqn{\\ref{eqn:([^}]*)}}"
+
+    # Replacement function to format matches
+    def replacement(match):
+        label = match.group(1) if match.group(1) else match.group(2)
+        return f"@eq-{label}"
+
+    # Performing the replacement
+    modified_content = re.sub(pattern, replacement, modified_content)
     # Write the modified content to the output file
     with open(output_file_path, "w", encoding="utf-8") as file:
         file.write(modified_content)
