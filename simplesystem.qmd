@@ -70,7 +70,6 @@ between the camera and the object while zooming, we can keep the same
 approximate image size of the objects, but with reduced perspective
 effects, as shown in . Note how, in , 3D parallel lines in the world are
 almost parallel in the image (some weak perspective effects remain).
-\[-.1in\]
 
 The first step is to characterize how a point in world coordinates
 $(X,Y,Z)$ projects into the image plane. shows our parameterization of
@@ -223,7 +222,6 @@ which the variation of intensities is larger. If we are on top of an
 edge, the direction of larger variation will be in the direction
 perpendicular to the edge.
 
-\[-0.5in\]
 
 However, the image is not a continuous function as we only know the
 values of the $\ell (x,y)$ at discrete locations (pixels). Therefore, we

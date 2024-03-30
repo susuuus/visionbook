@@ -45,7 +45,6 @@ Original image created with Dall-E, and downsampled with
 Photoshop.](figures/visionscience/DALLE_32x32.png){#fig-pexels-retha-ferguson
 width="80%"}
 
-\[-3in\]
 
 Recognition of the meaning of that pixel can not come just from the
 intensity of that pixel or the few pixels nearby. There are way too many

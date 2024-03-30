@@ -101,7 +101,7 @@ $\lambda$ (we will study color in chapter
 reference="chapter:color"}\]) at an instant in time $t$. This function,
 called the **plenoptic function** Edward H. Adelson and James R. Bergen
 @Adelson91, contains all the information needed to describe the complete
-pattern of light rays that fills the space. \[.5in\] The plenoptic
+pattern of light rays that fills the space.  The plenoptic
 function does not include information about the observer. The observer
 does not have access to the entire plenoptic function, only to a small
 slice of it. In we will describe how different mechanisms can produce
@@ -172,7 +172,6 @@ of the shadow to infer the true gray value of each square. As a result,
 the square in the shadow is perceived as being lighter than the square
 outside the shadow region, even though both have the same gray levels.
 
-\[-.0in\]
 
 The goal of vision is to provide the observer with information relevant
 to understanding the outside world and to enable them to solve other
@@ -511,7 +510,7 @@ are equally strong. Some of the most important laws are as follows:
     that follow each other pointing in the same direction are likely to
     be grouped together. For instance, an X-shape is perceived as two
     lines that cross each other instead of perceiving it as a V-shape on
-    top of an inverted V. \[-.2in\]
+    top of an inverted V.
 
 -   Laws of **parallelism**, and **symmetry**: There are many other
     grouping cues with different strengths that induce clustering
@@ -671,7 +670,7 @@ array is very rich and contains all the information needed to perceive
 the environment. **Direct perception** is the process of **information
 pickup** directly from the ambient array. This is in contrast with other
 theories of visual perception that assume that the input stimuli
-\[-.3in\] is very impoverished and that perception is **indirect** as it
+is very impoverished and that perception is **indirect** as it
 has to be complemented by additional processes. The indirect theory of
 perception is the most common one. However, the important message to
 learn here is that, when building a perceptual system, the richer the
@@ -1012,7 +1011,7 @@ book and we will just paint here, with a few coarse strokes, the main
 directions in the field.
 
 In 1963, at MIT, Larry Roberts became the first computer vision Ph. D.
-entitled @Roberts63. \[-1in\]
+entitled @Roberts63. 
 
 The period of 1960--1990 was dominated by the geometric perspective of
 computer vision and included concepts such as stereo vision
@@ -1149,7 +1148,7 @@ much fanfare in just a few corners of academia. Nonetheless, several
 major advances did occur in the relative quiet of the 1990s and early
 2000s. For example, in 2001, Paul Viola and Michael Jones published a
 method that used a simple learning algorithm called **boosting** to
-detect faces in photos @Viola01. \[-1.25in\] This method outperformed
+detect faces in photos @Viola01. This method outperformed
 the complicated hand-engineered face detectors of the time in terms of
 computational efficiency and detection rate, and even became a popular
 algorithm used in consumer cameras.
@@ -1165,7 +1164,7 @@ for image classification, and did so with a system that used learning
 output predictions) @krizhevsky2012imagenet. This event has come to be
 called the "ImageNet Moment" since AlexNet's dramatic performance was
 first demonstrated at the 2012 ImageNet
-competition @russakovsky2015imagenet. \[-.8in\] The ImageNet moment was
+competition @russakovsky2015imagenet. The ImageNet moment was
 a watershed for learning-based vision and for neural networks. In the
 few years after 2012, learning became the key ingredient in almost all
 research on computer vision. As of the 2020s, it is hard to find any

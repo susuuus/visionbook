@@ -61,7 +61,7 @@ We will use notes inside boxes to bring attention to important concepts, or to a
 
 :::{.column-margin}
 A 3D tensor that could represent a $C \times H \times W$ color image: 
-![](figures/neural_nets/3D_tensor_example-0.png)
+![](figures/neural_nets/3D_tensor_example-0.png){width=150}
 :::
 
 
@@ -286,9 +286,10 @@ simpler later): $$\begin{aligned}
 
 ::: {.column-margin}
 We will often draw matrices and vectors to help visualize the operations. For example, if $N=3$ and $M=4$:
-![](figures/notations/w.png)
+![](figures/notations/w.png){width=100}
+
 then, the gradient will have the form:
-![](figures/notations/dLdw.png)
+![](figures/notations/dLdw.png){width=100}
 :::
 
 ### Conventions That Will Not Be Strictly Observed
