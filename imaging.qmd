@@ -29,14 +29,14 @@ outgoing rays relative to the surface
 orientation.](figures/imaging/brdf-1.png){#fig-lightSpray width="70%"}
 
 Let an incident light ray be from direction $\mathbf{p}$ and of power,
-$\ellin(\lambda)$, as a function of spectral wavelength $\lambda$ ().
+$\ell_{\texttt{in}}(\lambda)$, as a function of spectral wavelength $\lambda$ ().
 The power of the outgoing light, reflected in the direction,
 $\mathbf{q}$, is determined by what is called the **bidirectional
 reflection distribution function** (BRDF), $F$, of the surface. If the
 surface normal is $\mathbf{n}$, then outgoing power is some function,
 $F$, of the surface normal, the incoming and outgoing ray directions,
 the wavelength, and the incoming light power:
-$$\ellout = F \left( \ellin, \mathbf{n}, \lambda, \mathbf{p}, \mathbf{q} \right)
+$$\ell_{\texttt{out}} = F \left( \ell_{\texttt{in}}, \mathbf{n}, \lambda, \mathbf{p}, \mathbf{q} \right)
 $$ {#eq-Lambert}
 
 ### Lambertian Surfaces
@@ -47,11 +47,11 @@ surfaces with completely diffuse reflections can give complicated
 reflectance distributions @Oren1994. A useful approximation describing
 diffuse reflection is the **Lambertian model**, with a particularly
 simple BRDF, which we denote as $F_L$. The outgoing ray intensity,
-$\ellout$, is a function only of the surface orientation relative to the
+$\ell_{\texttt{out}}$, is a function only of the surface orientation relative to the
 incoming and outgoing ray directions, the wavelength, a scalar surface
 reflectance, and the incoming light power:
 $$%I_{\mbox{out}} = F_{L}(I_{\mbox{in}} (\lambda), \mathbf{n}, \mathbf{p})  = a I_{\mbox{in}}(\lambda) \cos(\mathbf{n} \cdot \mathbf{p}),
-\ellout = F_{L} \left( \ellin (\lambda), \mathbf{n}, \mathbf{p} \right)  = a \ellin(\lambda) \left( \mathbf{n} \cdot \mathbf{p} \right),
+\ell_{\texttt{out}} = F_{L} \left( \ell_{\texttt{in}} (\lambda), \mathbf{n}, \mathbf{p} \right)  = a \ell_{\texttt{in}}(\lambda) \left( \mathbf{n} \cdot \mathbf{p} \right),
 \label{eq:lambert}$$ where $a$ is the surface **reflectance**, or
 **albedo**, $\mathbf{n}$ is the surface normal vector, and $\mathbf{p}$
 points toward the source of the incident light. Note that the brightness
@@ -71,7 +71,7 @@ all reflections; (2) a diffuse component, which is the Lambertian
 reflection of ; and (3) a specular reflection component. For a given ray
 direction, $\mathbf{q}$, from the surface, the Phong specular
 contribution, $\ell_{\mbox{Phong spec}}$, is:
-$$\ell_{\mbox{Phong spec}} = k_s (\mathbf{r} \cdot \mathbf{q})^\alpha \ellin,$$
+$$\ell_{\mbox{Phong spec}} = k_s (\mathbf{r} \cdot \mathbf{q})^\alpha \ell_{\texttt{in}},$$
 where $k_s$ is a constant, $\alpha$ is a parameter governing the spread
 of the specular reflection, and the unit vector $\mathbf{r}$ denotes the
 direction of maximum specular reflection, given by
@@ -104,11 +104,11 @@ different directions and many different sources, as illustrated in .
 
 Mathematically, integrating the equation for Lambertian reflections (@eq-Lambert) over all possible incoming light directions
 $\mathbf{p}$, we have for the intensity reflecting off a Lambertian
-surface, $\ellout$:
-$$\ellout = \int_{\mathbf{p}}  a \ellin(\mathbf{p}) \cos(\mathbf{n} \cdot \mathbf{p}) \mbox{d} \mathbf{p}$$
-The intensity, $\ellout$, reflecting off a diffuse wall, thus tells us
-very little about the incoming light intensity $\ellin(\mathbf{p})$ from
-any given direction $\mathbf{p}$. To learn about $\ellin(\mathbf{p})$,
+surface, $\ell_{\texttt{out}}$:
+$$\ell_{\texttt{out}} = \int_{\mathbf{p}}  a \ell_{\texttt{in}}(\mathbf{p}) \cos(\mathbf{n} \cdot \mathbf{p}) \mbox{d} \mathbf{p}$$
+The intensity, $\ell_{\texttt{out}}$, reflecting off a diffuse wall, thus tells us
+very little about the incoming light intensity $\ell_{\texttt{in}}(\mathbf{p})$ from
+any given direction $\mathbf{p}$. To learn about $\ell_{\texttt{in}}(\mathbf{p})$,
 we need to form an image. Forming an image involves identifying which
 rays came from which directions. The role of a camera is to organize
 those rays, to convert the cacophony of light rays going everywhere to a
