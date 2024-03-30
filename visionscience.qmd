@@ -1,4 +1,4 @@
-# Looking at Images {#chap:looking_at_images}
+# Looking at Images {#chap-looking_at_images}
 
 ## Introduction
 
@@ -42,8 +42,8 @@ information?
 ![A tiny image with 32 $\times$ 32 color pixels. Despite the very low
 resolution, we can still recognize most of its content. *Source*:
 Original image created with Dall-E, and downsampled with
-Photoshop.](figures/visionscience/DALLE_32x32.png){#fig-pexels-retha-ferguson
-width="80%"}
+Photoshop.](figures/visionscience/DALLE_32x32.png){#fig-pexels-retha-ferguson}
+
 
 
 Recognition of the meaning of that pixel can not come just from the
@@ -54,13 +54,9 @@ context of the pen that provides the necessary information to recognize
 the pen. Taken in isolation, those pixels are impossible to recognize.
 Here we show, from left to right, the hand, the pen, and the blue mug.
 
-<figure>
-<p><img src="figures/visionscience/dalle_hand.png" alt="image" />   <img
-src="figures/visionscience/dalle_mug.png" alt="image" />   <img
-src="figures/visionscience/dalle_pen.png" alt="image" /></p>
-<figcaption>Small image patches from in isolation. It is difficult to
-recognize image patches outside their natural context.</figcaption>
-</figure>
+![Small image patches from in isolation. It is difficult to
+recognize image patches outside their natural context.](figures/visionscience/dalle-small.png){#fig-small-dalle}
+
 
 ## The More You Look, the More You See
 
@@ -72,8 +68,7 @@ shown in and try to write down everything you see down to the smallest
 detail.
 
 ![A street in Paris. Is everything fine in this
-picture?](figures/visionscience/ADE_train_00015819_messed_small.jpg){#fig-street_in_paris
-width="98%"}
+picture?](figures/visionscience/ADE_train_00015819_messed_small.jpg){#fig-street_in_paris}
 
 But this feeling of unlimited and effortless understanding of a picture
 is also an illusion. Do you truly understand everything you see? For
@@ -83,7 +78,7 @@ correspond to any chair.
 
 As you look around the image, notice that each patch you look at is
 actually a small photo in its own right. In fact, a big image like this
-contains thousands of tiny images within it (). A single photo can be
+contains thousands of tiny images within it @fig-tiny_images. A single photo can be
 *big data*; if you chop up this photo you get a big dataset of tiny
 images. A common trick in computer vision is to take a method that was
 developed for processing a dataset and instead apply it to the set of
@@ -91,7 +86,7 @@ patches in an image, or vice versa.
 
 ![Each picture contains lots of
 images.](figures/visionscience/tiny_images.jpg){#fig-tiny_images
-width="100%"}
+width="100%" }
 
 ## The Eye of the Artist
 
@@ -113,16 +108,10 @@ realism. However, those new strokes will become the shading that will
 make the strawberry pop out from the canvas.
 
 
-|               |               |               |               |
-| ------------- | ------------- | ------------- | ------------- |
-| ![](figures/visionscience/fresa_1.jpg) | ![](figures/visionscience/fresa_2.jpg) | ![](figures/visionscience/fresa_3.jpg) | ![](figures/visionscience/fresa_4.jpg) |
-| ![](figures/visionscience/fresa_5.jpg) | ![](figures/visionscience/fresa_6.jpg) | ![](figures/visionscience/fresa_7.jpg) | ![](figures/visionscience/fresa_8.jpg)|
 
 
-:::{.column-margin #fig-agata_painting}
-The following sequence shows different steps in the process
-of painting a strawberry. Source: Original images by Agata Lapedriza.
-:::
+![The following sequence shows different steps in the process
+of painting a strawberry. Source: Original images by Agata Lapedriza.](figures/visionscience/strawberries.png){#fig-agata_painting}
 
 
 ## Tree Shadows and Image Formation
@@ -132,13 +121,8 @@ sun is right above us (\[left\]), we can see how some light rays get
 through the holes left between leaves, creating spots on the floor
 (\[right\]).
 
-<figure id="fig-tree_pinholes">
-<p><img src="figures/visionscience/IMG_2842_tree_pinholes.jpg"
-alt="image" />   <img
-src="figures/visionscience/IMG_2837_tree_shadow.JPG" alt="image" /></p>
-<figcaption>The shadow of this tree on a normal day projects dozens of
-pictures of the sun on the ground.</figcaption>
-</figure>
+![The shadow of this tree on a normal day projects dozens of
+pictures of the sun on the ground.](figures/visionscience/shadow){#fig-tree_pinholes}
 
 But something is a bit odd about the shape of the bright spots projected
 on the floor. We would expect that the spots of light would have
@@ -150,8 +134,7 @@ of leaves during a solar eclipse.
 
 ![During an eclipse, the shadow of the tree contains many copies of the
 crescent
-sun.](figures/visionscience/tree_shadow_eclipse2.jpg){#fig-tree_shadow_eclipse
-width="90%"}
+sun.](figures/visionscience/tree_shadow_eclipse2.jpg){#fig-tree_shadow_eclipse}
 
 One of the most common situations that we often encounter is the
 **pinhole cameras** formed by the spacing between the leaves of a tree.
@@ -179,8 +162,8 @@ orientations are subtle and yet it produces a very different perception.
 
 ![Line drawings. The one on the left seems to correspond to an
 horizontal surface while the one on the right looks like a vertical
-surface.](figures/visionscience/vertical_or_horizontal.eps){#fig-vertical_or_horizontal
-width="100%"}
+surface.](figures/visionscience/vertical_or_horizontal-1.png){#fig-vertical_or_horizontal
+width="100%" }
 
 In the arrangement in the left, there are two **vanishing points** (the
 points in which parallel lines intersect) and both are above the
@@ -204,7 +187,7 @@ blurry.
 
 ![Picture of Paris taken from a moving
 car.](figures/visionscience/motion_blur.jpg){#fig-Paris_from_moving_car
-width="100%"}
+width="100%" }
 
 The amount of blur is related to the car speed, the exposure time, and
 the distance between the camera and each object in the scene. We will
@@ -231,7 +214,7 @@ continuity. From top-left clockwise: finger boundary aligns with lip
 contour, cloth aligns with eye, creases align on two different shirts,
 sleeve boundary is tangent to line on a different
 shirt.](figures/visionscience/accidents_migrant_mother.jpg){#fig-visionscience:migrant_mother
-width="100%"}
+width="100%" }
 
 You have to be careful about this when developing vision algorithms. If
 you assume *no* accidents will happen, then you will be in for some
@@ -242,25 +225,17 @@ because they did not handle exceptions to the rules.
 
 When can we tell by looking that one object supports another? Consider
 the ball over a surface depicted in . The drop shadow provides a strong
-cue that the ball is above the surface in figures
-[1.10](#fig-cues_for_suppport){reference-type="ref"
-reference="fig-cues_for_suppport"}(a) and
-[1.10](#fig-cues_for_suppport){reference-type="ref"
-reference="fig-cues_for_suppport"}(c), while the slack string provides
-evidence for the ball being on the surface in figures
-[1.10](#fig-cues_for_suppport){reference-type="ref"
-reference="fig-cues_for_suppport"}(b) and
-[1.10](#fig-cues_for_suppport){reference-type="ref"
-reference="fig-cues_for_suppport"}(c). Only is a doctored photograph.
+cue that the ball is above the surface in @fig-cues_for_suppport (a) and @fig-cues_for_suppport (c),
+while the slack string provides evidence for the ball being on the
+surface in figures @fig-cues_for_suppport (b) and
+@fig-cues_for_suppport (c). Only is a doctored photograph.
 
 In which of these figures does the ball appear to be in contact with the
 ground plane?
 
-<figure id="fig-cues_for_suppport">
 
-<figcaption>Cues for support. The relative location between an object,
-and its shadow on the ground is a powerful cue for contact.</figcaption>
-</figure>
+![Cues for support. The relative location between an object,
+and its shadow on the ground is a powerful cue for contact.](figures/visionscience/cues.png){#fig-cues_for_suppport}
 
 ## Looking at Raindrops
 
@@ -280,8 +255,8 @@ refocusing the image after it has been taken.
 a window contains hundreds of tiny images of the scene, one in each
 raindrop. The images to the right are individual zoomed in raindrops
 from the photo on the
-left.](figures/visionscience/droplets.jpg){#fig-droplets
-width="1.0\\linewidth"}
+left.](figures/visionscience/droplets.jpg){#fig-droplets width="100%"
+}
 
 ## Plato's Cave
 
@@ -307,8 +282,7 @@ without touching it, as shown in .
 
 ![Why does wet sand look dark? The answer to this question is
 interesting, but not as much as the question
-itself.](figures/visionscience/wet_sand_2.jpeg){#fig-wet_sand
-width="80%"}
+itself.](figures/visionscience/wet_sand_2.jpeg){#fig-wet_sand}
 
 Why does sand look darker when it's wet? Does everything wet look darker
 than when it is dry? How can we tell which parts of the sand are dark
