@@ -11,7 +11,7 @@ def replace_margin_notes(text):
 
     # pattern = r"\\marginnote\{((?:[^{}]+|\{(?:[^{}]+|\{[^{}]*\})*\})*)\}"
     pattern = r"\\marginnote\{([^{}]*)\}"
-    return re.sub(pattern, replacer, text)
+    return re.sub(pattern, replacer, text, flags=re.DOTALL)
 
 
 def process_latex_file(input_file_path, output_file_path):

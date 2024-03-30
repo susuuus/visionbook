@@ -13,6 +13,7 @@ def convert_eq_refs(input_file_path, output_file_path):
     modified_content = re.sub(r"\\label\{eq:(.*?)\}", r"#eq-\1", modified_content)
     modified_content = re.sub(r"\\label\{eqn:(.*?)\}", r"#eq-\1", modified_content)
     modified_content = re.sub(r"\\eqref\{eq:(.*?)\}", r"@eq-\1", modified_content)
+    modified_content = re.sub(r"\\centerline", "", modified_content)
     modified_content = re.sub(r"^\s*%.*$\n?", "", modified_content, flags=re.MULTILINE)
 
     pattern = r"\\ref{eq:([^}]*)}|\\eqn{\\ref{eqn:([^}]*)}}"
@@ -26,6 +27,7 @@ def convert_eq_refs(input_file_path, output_file_path):
     modified_content = re.sub(pattern, replacement, modified_content)
     # Write the modified content to the output file
     with open(output_file_path, "w", encoding="utf-8") as file:
+        file.write("\include{/Users/shenshen/code/cv_book/src/setup.tex}")
         file.write(modified_content)
 
 
