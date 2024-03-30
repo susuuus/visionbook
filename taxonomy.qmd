@@ -102,12 +102,15 @@ The pattern of light filling the space can be described by the function:
 $$P (\theta, \Phi, \lambda, t, X, Y, Z)$$ where $P$ is the light
 intensity of a ray passing by the world location $(X,Y,Z)$ in the
 direction given by the angle $(\theta, \Phi)$, and with wavelength
-$\lambda$ (we will study color in chapter
-\[[\[chapter:color\]](#chapter:color){reference-type="ref"
-reference="chapter:color"}\]) at an instant in time $t$. This function,
+$\lambda$ at an instant in time $t$. This function,
 called the **plenoptic function** Edward H. Adelson and James R. Bergen
 @Adelson91, contains all the information needed to describe the complete
-pattern of light rays that fills the space.  
+pattern of light rays that fills the space.
+
+:::{.column-margin}
+we will study color in chapter [Color](color.html)
+:::
+
 
 :::{.column-margin}
 **Plenoptic function**: Edward H. Adelson was going to call it

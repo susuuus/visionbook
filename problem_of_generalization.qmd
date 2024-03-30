@@ -1,4 +1,4 @@
-# The Problem of Generalization {#chapter:problem_of_generalization}
+# The Problem of Generalization {#chapter-problem_of_generalization}
 
 ## Introduction
 

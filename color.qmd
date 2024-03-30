@@ -1,4 +1,4 @@
-# Color {#chapter:color}
+# Color {#chapter-color}
 
 ## Introduction
 

@@ -1,4 +1,4 @@
-# Cameras as Linear Systems {#chapter:cameras_as_linear_systems}
+# Cameras as Linear Systems {#chapter-cameras_as_linear_systems}
 
 ## Introduction
 
@@ -47,8 +47,8 @@ scene be $\boldsymbol\ell_{\texttt{w}}$. If the camera sensors respond
 linearly to the light intensity at each sensor, their measurements,
 $\boldsymbol\ell_{\texttt{s}}$, will be some linear combination, given
 by the matrix, $\mathbf{A}$, of the light intensities:
-$$\boldsymbol\ell_{\texttt{s}}= \mathbf{A} \boldimg_{\texttt{w}}
-\label{eq:likelihood}$$ We represent the camera by matrix $\mathbf{A}$.
+$$\boldsymbol\ell_{\texttt{s}}= \mathbf{A} \boldsymbol\ell_{\texttt{w}}
+\label{eq-likelihood}$$ We represent the camera by matrix $\mathbf{A}$.
 For the case of a pinhole camera, and assuming 13 pixel sensor
 observations, the camera matrix is just a 13$\times$`<!-- -->`{=html}13
 identity matrix, depicted in , as each sensor depends only on the value
@@ -66,10 +66,10 @@ to satisfy it in a least squares sense. In most cases, $\mathbf{A}$ is
 either not invertible, or is poorly conditioned. It is often useful to
 introduce a regularizer, an additional term in the objective function to
 be minimized @Poggio85. If the regularization term favors a small
-$\boldimg_{\texttt{world}}$, then the objective term to minimize, $E$,
+$\boldsymbol\ell_{\texttt{world}}$, then the objective term to minimize, $E$,
 could be
 $$E = \lVert \boldsymbol\ell_{\texttt{s}}- \mathbf{A} \boldsymbol\ell_{\texttt{w}}\rVert ^2 + \lambda \lVert \boldsymbol\ell_{\texttt{w}}\rVert ^2
-\label{eq:posterior}$$ The regularization parameter, $\lambda$,
+\label{eq-posterior}$$ The regularization parameter, $\lambda$,
 determines the trade-off between explaining the observations and
 satisfying the regularization term.
 
@@ -85,10 +85,10 @@ Setting the derivative of with respect to the elements of the vector
 $\boldsymbol\ell_{\texttt{w}}$ equal to zero, we have $$\begin{aligned}
 0 & = &  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lVert \boldsymbol\ell_{\texttt{s}}- \mathbf{A} \boldsymbol\ell_{\texttt{w}}\rVert ^2 +  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lambda \lVert \boldsymbol\ell_{\texttt{w}}\rVert ^2 \\
 & = &  \mathbf{A}^T \mathbf{A} \boldsymbol\ell_{\texttt{w}}- \mathbf{A}^T \boldsymbol\ell_{\texttt{s}}+ \lambda \boldsymbol\ell_{\texttt{w}}
-\label{eq:deriv}
+\label{eq-deriv}
 \end{aligned}$$ or
 $$\boldsymbol\ell_{\texttt{w}}= (\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1} \mathbf{A}^T \boldsymbol\ell_{\texttt{s}}
-\label{eq:deriv2}$$ Where the matrix
+\label{eq-deriv2}$$ Where the matrix
 $\mathbf{B}=(\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1} \mathbf{A}^T$
 is the regularized inverse of the imaging matrix $\mathbf{A}$.
 
@@ -212,7 +212,7 @@ $$\mathbf{A} =
 0 & 0 & 0 & 0 & ~ & 1 
 \end{array}
 \right]
-\label{eq:edge}$$
+\label{eq-edge}$$
 
 If we consider the same input as in the pinhole camera example in the
 previous section, the output signal for the corner camera will look like
@@ -396,7 +396,7 @@ for the observed intensities
 $\boldsymbol\ell_{\texttt{ground}}(r, \theta)$,
 $$\boldsymbol\ell_{\texttt{ground}}(r, \theta) = \int_{\phi=0}^{\phi=\pi} \int_{\xi=0}^{\xi=\theta}
  \cos(\phi) S(\phi, \xi) \mbox{d} \phi \mbox{d} \xi,
-\label{eq:corner}$$ where the $\cos(\phi)$ term in follows from the
+\label{eq-corner}$$ where the $\cos(\phi)$ term in follows from the
 equation for surface reflection, .
 
 The dependence of the observation, $\boldsymbol\ell_{\texttt{ground}}$,
@@ -405,12 +405,12 @@ the $\cos(\phi)$ term. We can integrate over $\phi$ first, to form the
 1D signal, $\ell_{\texttt{w}}(\xi)$:
 $$\ell_{\texttt{w}}(\xi) = \int_{\phi=0}^{\phi=\pi} 
   \cos(\phi) S(\phi, \xi) \mbox{d} \phi 
-\label{eq:xcorner}$$
+\label{eq-xcorner}$$
 
 Then, to a good approximation, has the form,
 $$\boldsymbol\ell_{\texttt{ground}}(r, \theta) \approx \int_{\xi=0}^{\xi=\theta}
  \ell_{\texttt{w}}(\xi) \mbox{d} \xi,
-\label{eq:corner1d}$$ where $\ell_{\texttt{w}}(\xi)$ is a 1D image of
+\label{eq-corner1d}$$ where $\ell_{\texttt{w}}(\xi)$ is a 1D image of
 the scene around the corner from the vertical edge.
 
 shows the corner camera geometry for a three-dimensional (3D) scene.

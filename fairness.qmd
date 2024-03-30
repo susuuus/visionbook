@@ -1,4 +1,4 @@
-# Computer Vision and Society {#chapter:computer_vision_and_society}
+# Computer Vision and Society {#chapter-computer_vision_and_society}
 
 ## Introduction
 

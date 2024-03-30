@@ -1,4 +1,4 @@
-# Lenses {#chapter:lenses}
+# Lenses {#chapter-lenses}
 
 ## Introduction
 
