@@ -15,7 +15,6 @@ def convert_eq_refs(input_file_path, output_file_path):
 
     # Replace all occurrences in the text using re.DOTALL to match across newlines
     modified_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
-
     # Write the modified content to the output file
     with open(output_file_path, "w", encoding="utf-8") as file:
         file.write(modified_content)

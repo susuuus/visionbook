@@ -16,10 +16,7 @@ def convert_eq_refs(input_file_path, output_file_path):
     modified_content = re.sub(
         r"\\eqn\{\\ref\{eqn:(.*?)\}\}", r"@eq-\1", modified_content
     )
-    modified_content = re.sub(
-        r"\$\$(.*?)\s(#eq-[\w-]+)\s(.*?)\$\$", r"\$\$\1 \3 \2\$\$", modified_content
-    )
-
+    modified_content = re.sub(r"^\s*%.*$\n?", "", modified_content, flags=re.MULTILINE)
     # Write the modified content to the output file
     with open(output_file_path, "w", encoding="utf-8") as file:
         file.write(modified_content)

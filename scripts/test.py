@@ -8,10 +8,11 @@ text = """$$\\begin{aligned}
 \\end{aligned}$$"""
 
 # Updated regular expression to match the pattern across multiple lines and capture the necessary parts
-pattern = r"(\$\$.*?)(#eq-[\w-]+)(.*?)\$\$"
+# Ensure capturing the end of the aligned block separately to handle spacing and newlines
+pattern = r"(\$\$.*?\\end{aligned})(.*?)\$\$(\s*)(#eq-[\w-]+)"
 
-# Function to rearrange the matched pattern
-replacement = r"\1\3\2"
+# Function to rearrange the matched pattern, placing the label directly after \end{aligned} without newlines before the label
+replacement = r"\1\4\2$$"
 
 # Replace all occurrences in the text using re.DOTALL to match across newlines
 rearranged_text = re.sub(pattern, replacement, text, flags=re.DOTALL)

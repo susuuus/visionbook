@@ -17,9 +17,13 @@ def convert_fig_refs(input_file_path, output_file_path):
     modified_content = re.sub(
         r"\\fig\{\\ref\{fig:(.*?)\}\}", r"@fig-\1", modified_content
     )
+    modified_content = re.sub(
+        r"\\fig\{\\ref\{fig:(.*?)\}\}", r"@fig-\1", modified_content
+    )
 
     modified_content = re.sub(r"\\label\{eq:(.*?)\}", r"#eq-\1", modified_content)
     modified_content = re.sub(r"\\eqref\{eq:(.*?)\}", r"@eq-\1", modified_content)
+
     # Write the modified content to the output file
     with open(output_file_path, "w", encoding="utf-8") as file:
         file.write(modified_content)
