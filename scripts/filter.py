@@ -47,9 +47,36 @@ def figure_refs(elem, doc):
             )  # Replace with '{#fig-something}'
 
 
+def replace_norm(elem, doc):
+    if (
+        type(elem) == pf.Math
+        or isinstance(elem, pf.RawInline)
+        or isinstance(elem, pf.RawBlock)
+    ):
+        # Use regex to find and replace the \norm{...} pattern
+        new_text = re.sub(
+            r"\\norm\{(.*?)\}",
+            lambda match: "\\{\\left\\lVert{" + match.group(1) + "}\\right\\rVert\\}",
+            elem.text,
+        )
+        elem.text = new_text
+
+
+def replace_simple(elem, doc):
+    if type(elem) == pf.Math:
+        elem.text = elem.text.replace("\\given", "\\bigm |")
+        elem.text = elem.text.replace("\\transpose", "\\mathsf{T}")
+
+
 def main(doc=None):
     return pf.run_filters(
-        [latex_to_markdown_cite, convert_fig_ref, figure_refs],
+        [
+            latex_to_markdown_cite,
+            convert_fig_ref,
+            figure_refs,
+            replace_norm,
+            replace_simple,
+        ],
         doc=doc,
     )
 
