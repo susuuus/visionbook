@@ -30,4 +30,7 @@ echo "Conversion completed: $output_file"
 # remove the [x in] or [x pt]
 # sed -i '' -E 's/\\\[\-?\([0-9]*\)\(\.[0-9]+\)\?\(in\|cm\|pt\)\\\]//g' "$output_file"
 sed -i '' -E 's/\\\[[-]?[0-9]*\.?[0-9]+(in|cm|pt)\\\]//g' "$output_file"
-
+sed -i '' 's/\.pdf/.png/g' "$output_file"
+sed -i '' 's/\.eps/\-1.png/g' "$output_file"
+sed -i '' -E 's/#fig:([^ ]+)/#fig-\1/g' "$output_file"
+sed -i '' 's/\\\\linewidth//g' "$output_file"
