@@ -428,22 +428,20 @@ constraints in terms of $Y(x,y)$. Once $Y(x,y)$ is recovered we can also
 recover $Z(x,y)$ from .
 
 In a 3D vertical edge, using the projection equations, the derivative of
-$Y$ along the edge will be $$\begin{aligned}
-\partial Y / \partial y & = & 1/ \cos(\theta)
-\label{eqn:derivative_Y_along_edge}
-\end{aligned}$$
+$Y$ along the edge will be 
+
+$$\begin{aligned}
+\partial Y / \partial y & = & 1/ \cos(\theta)\end{aligned}$${#eq-derivative_Y_along_edge}
 
 In a 3D horizontal edge, the coordinate $Y$ will not change. Therefore,
 the derivative along the edge should be zero: $$\begin{aligned}
-\partial Y / \partial {\bf t} & = & 0 
-\label{eqn:derivative_Y_along_edge_hor}
-\end{aligned}$$ where the vector $\bf t$ denotes direction tangent to
+\partial Y / \partial {\bf t} & = & 0
+\end{aligned}$${#eq-derivative_Y_along_edge_hor} where the vector $\bf t$ denotes direction tangent to
 the edge, ${\bf t}=(-n_y, n_x)$. We can write this derivative as a
 function of derivatives along the $x$ and $y$ image coordinates:
 $$\begin{aligned}
 \partial Y / \partial {\bf t} =  \nabla Y \cdot {\bf t} = -n_y \partial Y / \partial x + n_x \partial Y / \partial y
-\label{eqn:derivative_Y_along_edge_tan}
-\end{aligned}$$
+\end{aligned}$${#eq-derivative_Y_along_edge_tan}
 
 When the edges coincide with occlusion edges, special care should be
 taken so that these constraints are only applied to the surface that
@@ -460,10 +458,8 @@ Y(x,y)-Y(x,y-1) & = & 1/ \cos(\theta)
 \end{aligned}$$
 
 Similar relationships can be obtained from equations
-([\[eqn:derivative_Y_along_edge_hor\]](#eqn:derivative_Y_along_edge_hor){reference-type="ref"
-reference="eqn:derivative_Y_along_edge_hor"}) and
-([\[eqn:derivative_Y_along_edge_tan\]](#eqn:derivative_Y_along_edge_tan){reference-type="ref"
-reference="eqn:derivative_Y_along_edge_tan"}).
+@eq-derivative_Y_along_edge_hor and
+@eq-derivative_Y_along_edge_tan.
 
 ### Constraint Propagation {#sect:constraint}
 

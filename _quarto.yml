@@ -26,11 +26,11 @@ book:
         - part: Foundations of Learning
           chapters:
               - intro_to_learning.qmd
-              #   - gradient_descent.qmd
+              - gradient_descent.qmd
               - problem_of_generalization.qmd
-              #   - neural_nets.qmd
-              #   - neural_nets_as_distribution_transformers.qmd
-              #   - backpropagation.qmd
+              - neural_nets.qmd
+              - neural_nets_as_distribution_transformers.qmd
+              - backpropagation.qmd
 
         - references.qmd
     # favicon: Figures/favicon.ico

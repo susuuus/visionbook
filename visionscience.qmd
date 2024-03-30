@@ -28,21 +28,35 @@ perceive the world around you.
 ## Looking at Individual Pixels
 
 Before we build systems that can see, it is good to learn to look at
-images and to pay attention to individual pixels. The image in is a tiny
-image with just $32 \times 32$ pixels. It is so small that we can
-actually look at each single pixel and think about how it is that we can
-make sense of it. For instance, let's look at the pixel in row 21
-counting from the top, and column 20 counting from the left. That pixel
-corresponds to a dark gray pixel, which is near a couple of other pixels
-with similar intensity, surrounded by a set of white pixels. That pixel
-seems to be a pen, but how do we know what it is? The pen is barely
-three pixels long and one pixel wide. How can that provide enough
-information?
+images and to pay attention to individual pixels. The image in
+@fig-pexels-retha-ferguson is a tiny image with just $32 \times 32$
+pixels. It is so small that we can actually look at each single pixel
+and think about how it is that we can make sense of it. For instance,
+let's look at the pixel in row 21 counting from the top, and column 20
+counting from the left. That pixel corresponds to a dark gray pixel,
+which is near a couple of other pixels with similar intensity,
+surrounded by a set of white pixels. That pixel seems to be a pen, but
+how do we know what it is? The pen is barely three pixels long and one
+pixel wide. How can that provide enough information?
 
 ![A tiny image with 32 $\times$ 32 color pixels. Despite the very low
 resolution, we can still recognize most of its content. *Source*:
 Original image created with Dall-E, and downsampled with
-Photoshop.](figures/visionscience/DALLE_32x32.png){#fig-pexels-retha-ferguson}
+Photoshop.](figures/visionscience/DALLE_32x32.png){#fig-pexels-retha-ferguson
+width=".8"}
+
+
+
+:::{.column-margin}
+ Same image as in @fig-pexels-retha-ferguson but
+shown small.\
+
+![](figures/visionscience/DALLE_32x32.png){width=".20"}
+
+\
+Reducing the size helps better recognizing the objects despite
+containing the same visual information. 
+:::
 
 
 
@@ -64,29 +78,39 @@ Visual perception cannot be formulated as a simple input-output function
 over predefined domains. Vision is a dynamical system, even when looking
 at a static image. The longer you look at an image, the more details you
 see and the better you understand the scene. Just look at the image
-shown in and try to write down everything you see down to the smallest
-detail.
+shown in @fig-street_in_paris and try to write down everything you see
+down to the smallest detail.
 
 ![A street in Paris. Is everything fine in this
-picture?](figures/visionscience/ADE_train_00015819_messed_small.jpg){#fig-street_in_paris}
+picture?](figures/visionscience/ADE_train_00015819_messed_small.jpg){#fig-street_in_paris
+width=".98"}
 
 But this feeling of unlimited and effortless understanding of a picture
 is also an illusion. Do you truly understand everything you see? For
-instance, are you sure you can make sense of all the chair legs in ? In
-fact, this image has been manipulated so that some of legs do not
-correspond to any chair.
+instance, are you sure you can make sense of all the chair legs in
+@fig-street_in_paris? In fact, this image has been manipulated so that
+some of legs do not correspond to any chair.
+
+
+
+:::{.column-margin}
+When solving a task, as the **visual cognitive load**
+increases we are more likely to make judgment mistakes. 
+:::
+
+
 
 As you look around the image, notice that each patch you look at is
 actually a small photo in its own right. In fact, a big image like this
-contains thousands of tiny images within it @fig-tiny_images. A single photo can be
-*big data*; if you chop up this photo you get a big dataset of tiny
-images. A common trick in computer vision is to take a method that was
-developed for processing a dataset and instead apply it to the set of
-patches in an image, or vice versa.
+contains thousands of tiny images within it (@fig-tiny_images). A single
+photo can be *big data*; if you chop up this photo you get a big dataset
+of tiny images. A common trick in computer vision is to take a method
+that was developed for processing a dataset and instead apply it to the
+set of patches in an image, or vice versa.
 
 ![Each picture contains lots of
 images.](figures/visionscience/tiny_images.jpg){#fig-tiny_images
-width="100%" }
+width="100%"}
 
 ## The Eye of the Artist
 
@@ -117,9 +141,9 @@ of painting a strawberry. Source: Original images by Agata Lapedriza.](figures/v
 ## Tree Shadows and Image Formation
 
 When walking under the shadow of a tree on a bright sunny day when the
-sun is right above us (\[left\]), we can see how some light rays get
-through the holes left between leaves, creating spots on the floor
-(\[right\]).
+sun is right above us (@fig-tree_pinholes\[left\]), we can see how some
+light rays get through the holes left between leaves, creating spots on
+the floor (@fig-tree_pinholes\[right\]).
 
 ![The shadow of this tree on a normal day projects dozens of
 pictures of the sun on the ground.](figures/visionscience/shadow){#fig-tree_pinholes}
@@ -127,14 +151,16 @@ pictures of the sun on the ground.](figures/visionscience/shadow){#fig-tree_pinh
 But something is a bit odd about the shape of the bright spots projected
 on the floor. We would expect that the spots of light would have
 irregular shapes as the openings between leaves will have all kinds of
-irregular profiles (\[left\]). Instead, as shown in (right), the spots
-appear to be circular and of similar size. This observation already
-puzzled Aristotle. What could be happening? As a hint, shows the shadow
-of leaves during a solar eclipse.
+irregular profiles (@fig-tree_pinholes\[left\]). Instead, as shown in
+@fig-tree_pinholes(right), the spots appear to be circular and of
+similar size. This observation already puzzled Aristotle. What could be
+happening? As a hint, @fig-tree_shadow_eclipse shows the shadow of
+leaves during a solar eclipse.
 
 ![During an eclipse, the shadow of the tree contains many copies of the
 crescent
-sun.](figures/visionscience/tree_shadow_eclipse2.jpg){#fig-tree_shadow_eclipse}
+sun.](figures/visionscience/tree_shadow_eclipse2.jpg){#fig-tree_shadow_eclipse
+width=".9"}
 
 One of the most common situations that we often encounter is the
 **pinhole cameras** formed by the spacing between the leaves of a tree.
@@ -154,16 +180,17 @@ Looking at the previous picture of the shadow of the tree, another
 interesting question comes to mind: How do you know you are looking at a
 picture of the ground? How do you know the orientation of the camera?
 
-Look at the two drawings in . The lines in the drawing on the left
-correspond to tiles in a floor, the line drawing on the right is the
-same drawing rotated 90 degrees. Which one seems to be an horizontal
-surface and which one seems vertical? Why? The differences in the line
-orientations are subtle and yet it produces a very different perception.
+Look at the two drawings in @fig-vertical_or_horizontal. The lines in
+the drawing on the left correspond to tiles in a floor, the line drawing
+on the right is the same drawing rotated 90 degrees. Which one seems to
+be an horizontal surface and which one seems vertical? Why? The
+differences in the line orientations are subtle and yet it produces a
+very different perception.
 
 ![Line drawings. The one on the left seems to correspond to an
 horizontal surface while the one on the right looks like a vertical
 surface.](figures/visionscience/vertical_or_horizontal-1.png){#fig-vertical_or_horizontal
-width="100%" }
+width="100%"}
 
 In the arrangement in the left, there are two **vanishing points** (the
 points in which parallel lines intersect) and both are above the
@@ -178,16 +205,16 @@ horizontal in the left drawing and vertical on the right one.
 
 When we are in a moving car and we take a picture from the passenger
 window, often images will appear blurring, specially when taken at night
-(). Blur is due to the fact that the camera sensor is collecting light
-during a period of time while the car is moving and the picture that
-results is the average of several translated copies of the same image.
-However, note that not all of the objects are equally blurry. Things
-that are far away might still look sharp while things nearby appear very
-blurry.
+(@fig-Paris_from_moving_car). Blur is due to the fact that the camera
+sensor is collecting light during a period of time while the car is
+moving and the picture that results is the average of several translated
+copies of the same image. However, note that not all of the objects are
+equally blurry. Things that are far away might still look sharp while
+things nearby appear very blurry.
 
 ![Picture of Paris taken from a moving
 car.](figures/visionscience/motion_blur.jpg){#fig-Paris_from_moving_car
-width="100%" }
+width="100%"}
 
 The amount of blur is related to the car speed, the exposure time, and
 the distance between the camera and each object in the scene. We will
@@ -195,18 +222,35 @@ talk more about how camera motion relates to distance in .
 
 ## Accidents Happen
 
-We learned about the generic view principle in , and this idea comes up
-a lot in computer vision. But it turns out that in most photographs it's
-easy to find accidents. This is because photos contain so many things,
-thousands of tiny images, and there are so many coincidences that could
-occur. shows a famous photo and we will look for some coincidences in
-it. The coincidences are of a specific variety: generically, if you see
-smooth, continuous line segments you assume that they lie on a single
-object because it's quite a coincidence for two objects to line up just
-so their contours perfectly align. The gestalt psychologists called this
-the **principle of continuity**. The insets for show several locations
-in the photo "Migrant Mother" by Dorothea Lange where exactly this
-happens. Can you find more?
+
+
+:::{.column-margin}
+Principle of continuity. In the following drawing, we
+see one wave and one line:\
+
+![](figures/visionscience/principle_continuity_1-1.png){width=".6"}
+
+\
+Despite this, other groupings are also possible.\
+
+![](figures/visionscience/principle_continuity_2-1.png){width=".6"}
+
+
+:::
+
+ We learned about the generic view principle in , and this idea comes
+up a lot in computer vision. But it turns out that in most photographs
+it's easy to find accidents. This is because photos contain so many
+things, thousands of tiny images, and there are so many coincidences
+that could occur. @fig-visionscience:migrant_mother shows a famous
+photo and we will look for some coincidences in it. The coincidences are
+of a specific variety: generically, if you see smooth, continuous line
+segments you assume that they lie on a single object because it's quite
+a coincidence for two objects to line up just so their contours
+perfectly align. The gestalt psychologists called this the **principle
+of continuity**. The insets for @fig-visionscience:migrant_mother show
+several locations in the photo "Migrant Mother" by Dorothea Lange where
+exactly this happens. Can you find more?
 
 ![Source: Migrant Mother (1936), by Dorothea Lange. On the right are
 four examples of coincidences that violate the Gestalt principle of
@@ -214,7 +258,7 @@ continuity. From top-left clockwise: finger boundary aligns with lip
 contour, cloth aligns with eye, creases align on two different shirts,
 sleeve boundary is tangent to line on a different
 shirt.](figures/visionscience/accidents_migrant_mother.jpg){#fig-visionscience:migrant_mother
-width="100%" }
+width="100%"}
 
 You have to be careful about this when developing vision algorithms. If
 you assume *no* accidents will happen, then you will be in for some
@@ -240,23 +284,22 @@ and its shadow on the ground is a powerful cue for contact.](figures/visionscien
 ## Looking at Raindrops
 
 When it rains you get to see a rare sight. Every raindrop refracts a
-panorama of the scene around it (). What you are seeing is not just one
-photo but hundreds of images of the scene, one in each raindrop, all
-from slightly different angles. It turns out specially designed cameras
-have been made that do the same thing, and they are called **light field
-cameras**. These cameras use an array of tiny lenses rather than
-raindrops, but the result is similar: they capture what the scene looks
-like from hundreds of different viewing angles, and from that density of
-information they can achieve many interesting tricks, such as
-triangulating the depth of objects in the scene and synthetically
-refocusing the image after it has been taken.
+panorama of the scene around it (@fig-droplets). What you are seeing is
+not just one photo but hundreds of images of the scene, one in each
+raindrop, all from slightly different angles. It turns out specially
+designed cameras have been made that do the same thing, and they are
+called **light field cameras**. These cameras use an array of tiny
+lenses rather than raindrops, but the result is similar: they capture
+what the scene looks like from hundreds of different viewing angles, and
+from that density of information they can achieve many interesting
+tricks, such as triangulating the depth of objects in the scene and
+synthetically refocusing the image after it has been taken.
 
 ![A naturally occurring light field camera. This picture of raindrops on
 a window contains hundreds of tiny images of the scene, one in each
 raindrop. The images to the right are individual zoomed in raindrops
 from the photo on the
-left.](figures/visionscience/droplets.jpg){#fig-droplets width="100%"
-}
+left.](figures/visionscience/droplets.jpg){#fig-droplets width="100%"}
 
 ## Plato's Cave
 
@@ -273,16 +316,28 @@ look at a picture, think about all the things you cannot see. There's
 more you don't see than you do. One job of a vision system is to infer
 everything you can't see given everything you can.
 
+
+
+:::{.column-margin}
+The allegory of the cave has several layers of
+indirection: the shadows are cast by puppets that are controlled by
+puppeteers who act out interpretations of the broader reality
+outside.
+:::
+
+
+
 ## How Do You Know Something Is Wet?
 
 Our visual system allows us to recognize not just objects, but also
 material. We can tell if something will feel hot or cold, soft or hard,
 smooth or rugged. We can also recognize if something is wet or not
-without touching it, as shown in .
+without touching it, as shown in @fig-wet_sand.
 
 ![Why does wet sand look dark? The answer to this question is
 interesting, but not as much as the question
-itself.](figures/visionscience/wet_sand_2.jpeg){#fig-wet_sand}
+itself.](figures/visionscience/wet_sand_2.jpeg){#fig-wet_sand
+width=".8"}
 
 Why does sand look darker when it's wet? Does everything wet look darker
 than when it is dry? How can we tell which parts of the sand are dark
@@ -307,3 +362,12 @@ this chapter was to show you some of the questions you should ask about
 the visual world that you experience every day. The exercise to do now
 is to go around with your camera and take pictures of interesting visual
 phenomena.
+
+
+
+:::{.column-margin}
+Your brain is like a detective looking at all the
+clues that reveal what the world is made of.
+:::
+
+
