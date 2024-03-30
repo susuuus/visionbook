@@ -14,6 +14,9 @@ def convert_fig_refs(input_file_path, output_file_path):
     # Replace the pattern in the content
     # The replacement pattern uses the captured group from the match
     modified_content = re.sub(pattern, r"@fig-\1", content)
+    modified_content = re.sub(
+        r"\\fig\{\\ref\{fig:(.*?)\}\}", r"@fig-\1", modified_content
+    )
 
     # Write the modified content to the output file
     with open(output_file_path, "w", encoding="utf-8") as file:

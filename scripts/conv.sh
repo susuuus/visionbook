@@ -35,6 +35,8 @@ sed -i '' -E 's/#fig:([^ ]+)/#fig-\1/g' "$output_file"
 sed -i '' 's/\\\\linewidth//g' "$output_file"
 sed -i '' -E 's/#fig:([^ ]+)/#fig-\1/g' "$output_file"
 sed -i '' 's/\\@fig-/@fig-/g' "$output_file"
+
+
 sed -i '' -E 's/(:::\{\.column-margin\})(.*)(:::)/\1\n\2\n\3/g' "$output_file"
 
 
@@ -51,5 +53,9 @@ sed -i '' -e 's/\\img/\\ell/g' \
     -e 's/\\capitalimgin/\\mathscr{L}_{\\texttt{in}}/g' \
     -e 's/\\capitalimgout/\\mathscr{L}_{\\texttt{out}}/g' \
     -e 's/\\lightfield/L/g' "$output_file"
+
+python3 $SCRIPT_DIR/process_marginnoteline.py "$output_file" "$output_file"
+
+sed -i '' 's/\[image\]/\[\]/g' "$output_file"
 
 echo "Conversion completed: $output_file"
