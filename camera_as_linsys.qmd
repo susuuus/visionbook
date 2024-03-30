@@ -21,8 +21,8 @@ flatland.
 
 ![A one dimensional imaging system in flatland. As in , we have reversed
 the direction of the sensor
-coordinates.](figures/imaging/flatland_camera_linear.eps){#fig:flatland_camera_linear
-width=".5\\linewidth"}
+coordinates.](figures/imaging/flatland_camera_linear.eps){#fig-flatland_camera_linear
+width=".5"}
 
 Let the light intensities in the world be represented by a column
 vector, $\boldsymbol\ell_{\texttt{w}}$. The value of the $n$-th
@@ -78,7 +78,7 @@ visualization of its imaging matrices $\mathbf{A}$, $\mathbf{A}^{-1}$,
 and the regularized inverse $\mathbf{B}$. For the small-pinhole imager,
 all three matrices are identity matrices. (c) Large-hole 1D pinhole
 camera, and (d) the visualization of its imaging
-matrices.](figures/imaging/traditional_pinholes_2.eps){#fig:amats1
+matrices.](figures/imaging/traditional_pinholes_2.eps){#fig-amats1
 width="100%"}
 
 Setting the derivative of with respect to the elements of the vector
@@ -179,7 +179,7 @@ will analyze in this section.
 ![(a) Schematic drawing of an edge camera, and (b) its imaging matrices.
 (c) A pinspeck camera (an occluder that blocks two of the values on the
 scene), and (d) its imaging
-matrices.](figures/imaging/nontraditional_pinholes_2.eps){#fig:amats3
+matrices.](figures/imaging/nontraditional_pinholes_2.eps){#fig-amats3
 width="100%"}
 
 ### Edge Camera
@@ -370,9 +370,9 @@ variations on the ground, observable by viewing those intensity
 variations from around the corner.
 
 <figure id="fig:ccmodel">
-<p><span><embed src="figures/imaging/cornercam.pdf"
+<p><span><embed src="figures/imaging/cornercam.png"
 style="width:40.0%" /></span> <span><embed
-src="figures/imaging/cornerKey.pdf" style="width:40.0%" /></span></p>
+src="figures/imaging/cornerKey.png" style="width:40.0%" /></span></p>
 <figcaption>The corner camera . (a) Objects, such as the cylinders
 labeled A and B, hidden behind a corner from a camera nonetheless cause
 a very small intensity differences in the ambient illumination falling
@@ -459,7 +459,7 @@ ground plane intensities. (b) Two people walking around the corner,
 hidden from direct view of the camera. (c) Corner camera trace with one
 person moving. (d) Corner camera trace with two people moving. Angle
 from the corner is plotted vertically, and time is plotted
-horizontally.](figures/imaging/corner_camera_3D.eps){#fig:cctraces
+horizontally.](figures/imaging/corner_camera_3D.eps){#fig-cctraces
 width="90%"}
 
 

@@ -26,7 +26,7 @@ treatment, we ignore diffraction effects.
 ![A light ray from the sun strikes a surface and generates outgoing rays
 of intensity and color depending on the angles of the incoming and
 outgoing rays relative to the surface
-orientation.](figures/imaging/brdf.eps){#fig:lightSpray width="70%"}
+orientation.](figures/imaging/brdf.eps){#fig-lightSpray width="70%"}
 
 Let an incident light ray be from direction $\mathbf{p}$ and of power,
 $\imgin(\lambda)$, as a function of spectral wavelength $\lambda$ ().
@@ -128,7 +128,7 @@ plane.
 
 ![(a) Why there are no pictures appearing on the walls? (b) The pinhole
 camera restricts the light rays reaching the wall, producing an image to
-appear.](figures/imaging/no_picture_on_a_wall_aina.eps){#fig:wallpicture
+appear.](figures/imaging/no_picture_on_a_wall_aina.eps){#fig-wallpicture
 width="100%"}
 
 Making pinhole cameras is easy and it is a good exercise to gain an
@@ -146,8 +146,8 @@ with a hole in the middle. The black paper projects a shadow on the
 white paper and, in the middle of the shadow, appears a picture of the
 scene in front of the hole. By making the hole large you will get a
 brighter, but blurrier
-image.](figures/imaging/simple_pinhole.jpg){#fig:pinhole3
-width=".8\\linewidth"}
+image.](figures/imaging/simple_pinhole.jpg){#fig-pinhole3
+width=".8"}
 
 shows how to make a pinhole camera using a paper bag with a hole in it.
 One sticks their head inside the bag, which has been padded to be
@@ -157,8 +157,8 @@ block stray light, a projection screen, and some method to view or
 record the image on the projection screen.
 
 <figure id="fig:pinhole2">
-<embed src="figures/imaging/pinholeBag.pdf" style="width:100.0%" />
-<embed src="figures/imaging/pinholeBag2.pdf" />
+<embed src="figures/imaging/pinholeBag.png" style="width:100.0%" />
+<embed src="figures/imaging/pinholeBag2.png" />
 <figcaption>A pinhole camera made from paper bags. Following steps 1–4,
 you can turn a paper bag into a light-tight pinhole camera, with the
 viewer inside. Newspapers can be added between two layers of paper bags
@@ -201,8 +201,8 @@ pinhole camera and the relevant terminology.
 
 ![Coordinate systems. In computer vision it is common to use the
 **right-hand rule** for choosing the orientation of the 3D coordinate
-axes.](figures/imaging/pinhole_names2.eps){#fig:pinhole_names
-width=".7\\linewidth"}
+axes.](figures/imaging/pinhole_names2.eps){#fig-pinhole_names
+width=".7"}
 
 shows the pinhole camera of but with the box removed, leaving visible
 the projection plane. shows the definition of the three coordinate
@@ -237,7 +237,7 @@ into the location $\mathbf{p}$ in the projection plane, located at a
 distance $f$ of the pinhole. The virtual camera plane is a radially
 symmetric projection of the camera plane. (b) Relation between the
 camera, $(x,y)$, and the image coordinate system
-$(n,m)$.](figures/imaging/pinhole_geometry2.eps){#fig:pinholeGeometry
+$(n,m)$.](figures/imaging/pinhole_geometry2.eps){#fig-pinholeGeometry
 width="100%"}
 
 If the distance from the sensing plane to the pinhole is $f$ (see ) then
@@ -261,8 +261,8 @@ to most lens-based cameras, and human vision as well.
 ![Perspective projection equations derived geometrically. From similar
 triangles, we have $x/f = X/Z$ and $y/f = Y/Z$. Similar triangles are
 indicated by the same
-color.](figures/imaging/similar_triangles2.eps){#fig:pinholeGeometry2
-width=".7\\linewidth"}
+color.](figures/imaging/similar_triangles2.eps){#fig-pinholeGeometry2
+width=".7"}
 
 Due to the choice of coordinate systems, the coordinates in the virtual
 camera plane have the $x$ coordinate in the opposite direction than the
@@ -291,8 +291,8 @@ projection.
 
 ![Orthographic projection. Projection is done by parallel rays
 orthogonal to the projection plane. In this example, we have $x = X$ and
-$y = Y$.](figures/imaging/orthogonal_projection.eps){#fig:orthographics
-width=".9\\linewidth"}
+$y = Y$.](figures/imaging/orthogonal_projection.eps){#fig-orthographics
+width=".9"}
 
 In this projection, as the rays are orthogonal to the projection plane,
 the size of objects is independent of the distance to the camera. The
@@ -323,7 +323,7 @@ easily build. The example shown in (c) used around 500 straws.
 ![Straw camera example. (a) View through parallel straws. (b) The
 subject is a hand in sunlight. (c) The resulting image of the straw
 camera (using smaller straws than (a)). The image projection is
-orthographic.](figures/imaging/straw_camera.eps){#fig:straw
+orthographic.](figures/imaging/straw_camera.eps){#fig-straw
 width="100%"}
 
 A set of parallel straws allow parallel light rays to pass from the

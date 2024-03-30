@@ -5,9 +5,9 @@
 While pinhole cameras can form good images, they suffer from a serious
 drawback: the images are very dim because not much light passes through
 the small pinhole to the sensing plane of the pinhole camera. As shown
-in figures [2.1](#fig:pinholes){reference-type="ref"
+in figures [2.1](#fig-pinholes){reference-type="ref"
 reference="fig:pinholes"} and
-[2.2](#fig:pinholeSize){reference-type="ref"
+[2.2](#fig-pinholeSize){reference-type="ref"
 reference="fig:pinholeSize"}, one can try to let in more light by making
 the pinhole aperture bigger. But that allows light from many different
 positions to land on a given position at the sensor plane, resulting in
@@ -26,15 +26,15 @@ lets in more light and generates a brighter image, but each sensor
 element records light from many different image positions, creating a
 blurry image. A lens can collect light reflected over many different
 angles from a single point, allowing a bright, sharp
-image.](figures/imaging/apertures_and_lenses.pdf){#fig:pinholes
-width=".9\\linewidth"}
+image.](figures/imaging/apertures_and_lenses.png){#fig-pinholes
+width=".9"}
 
 ![Physical demonstration of the trade-offs illustrated in . (a) Gumby
 subject, illumination light, barrier with the three apertures, and white
 projection screen. Also, a light source is added to illuminate the
 subject. (b) Picture of Gumby. (c) Images formed by light through the
 three apertures. (d) Detail of the three apertures (small pinhole, large
-pinhole, and lens).](figures/imaging/gumbyEdited.jpg){#fig:pinholeSize
+pinhole, and lens).](figures/imaging/gumbyEdited.jpg){#fig-pinholeSize
 width="100%"}
 
 ## Lensmaker's Formula {#sect:lensmaker}
@@ -174,7 +174,7 @@ $$\theta_S = \frac{c}{R},
 the desired property that $\theta_S \propto c$.
 
 ![Relation between $R$ and $\theta_S$, in , for a spherical
-lens.](figures/imaging/sphereLens3.pdf){#fig:sphereLens width="30%"}
+lens.](figures/imaging/sphereLens3.png){#fig-sphereLens width="30%"}
 
 Substituting into the focusing condition, yields the **Lensmaker's
 Formula**, $$\frac{1}{a} + \frac{1}{b} = \frac{1}{f},
@@ -193,7 +193,7 @@ as illustrated in .
 ![Considering light from off-axis sources is equivalent to rotating the
 lens surface by $\theta_R$, for small angles $\theta_R$. The lens
 focuses rays from off-axis points like $P_1$, as well as from the
-on-axis point, $P_0$.](figures/imaging/offAxis.pdf){#fig:rotatedLens
+on-axis point, $P_0$.](figures/imaging/offAxis.png){#fig-rotatedLens
 width="100%"}
 
 One can also generalize the equation for the case of a lens with
@@ -227,7 +227,7 @@ sweeps across a lens, which focuses each ray passing through the lens to
 the same spot at the wall, (c), regardless of where each ray had entered
 the lens. (c) The rays that pass outside the lens form the two line
 segments on either
-side.](figures/imaging/greenLaserBrightenedCrop2.jpg){#fig:greenLaser
+side.](figures/imaging/greenLaserBrightenedCrop2.jpg){#fig-greenLaser
 width="60%"}
 
 ## Imaging with Lenses {#sect:imagingWithLenses}
@@ -308,15 +308,15 @@ respecting the lensmaker's formula (), then the object will form an
 image in sharp focus in the sensor plane. But objects in front of the
 plane of focus by $\delta_a$ will, in general, come to focus some
 distance $\delta_b$ behind the sensor plane
-@Levoy2010.](figures/imaging/circleOfConfusion.eps){#fig:circleOfConfusion
+@Levoy2010.](figures/imaging/circleOfConfusion.eps){#fig-circleOfConfusion
 width="70%"}
 
 Objects closer or further from the focal plane will come into focus
 behind or in front of the sensor plane, respectively, resulting in a
 blur circle at the sensor plane, as illustrated in
-figures [2.10](#fig:circleOfConfusion){reference-type="ref"
+figures [2.10](#fig-circleOfConfusion){reference-type="ref"
 reference="fig:circleOfConfusion"} and
-[2.11](#fig:DOFformula){reference-type="ref"
+[2.11](#fig-DOFformula){reference-type="ref"
 reference="fig:DOFformula"}.
 
 ![Circle of confusion and depth of field. (Top) Variables used in the
@@ -324,7 +324,7 @@ computation of the depth of field of a lens. (Bottom) The elongation of
 the depth of field size for a given tolerable circle of confusion
 results from narrowing the lens aperture @Levoy2010. The catch is that
 narrowing the aperture results in less light reaching the sensor
-plane.](figures/imaging/dof.pdf){#fig:DOFformula width="100%"}
+plane.](figures/imaging/dof.png){#fig-DOFformula width="100%"}
 
 The region around the plane of focus that results in a blur at the
 sensor plane that is smaller than some tolerance is called the **depth
@@ -399,9 +399,9 @@ considerations. As shown in , we position a convex lens, lens 1, with a
 long focal length, $f_1$, and a concave lens, lens 2, with a shorter
 focal length, $f_2$, such that each are $f_1$ and $f_2$ away from some
 common point, respectively. Under those conditions, the configurations
-of figures [2.13](#fig:ConcaveLenses){reference-type="ref"
+of figures [2.13](#fig-ConcaveLenses){reference-type="ref"
 reference="fig:ConcaveLenses"}(a) and
-[2.13](#fig:ConcaveLenses){reference-type="ref"
+[2.13](#fig-ConcaveLenses){reference-type="ref"
 reference="fig:ConcaveLenses"}(b) will cause parallel rays from a
 distant object entering lens 1 to become a compressed set of parallel
 rays leaving lens 2. Referring to , an angular deviation of the input

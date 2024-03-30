@@ -29,8 +29,8 @@ separates the white light into different colors by bending each color a
 different amount. The second prism in the drawing demonstrates that
 those colors are elemental: as an individual color passes through the
 second prism, the light doesn't break into other
-colors.](figures/color/newtonDrawing.jpg){#fig:prism
-width=".9\\linewidth"}
+colors.](figures/color/newtonDrawing.jpg){#fig-prism
+width=".9"}
 
 Our understanding of light and color explains such experiments. Light is
 a mixture of electromagnetic waves of different wavelengths. Sunlight
@@ -67,7 +67,7 @@ hole at the bottom left. (b) The bending by diffraction is wavelength
 dependent, and the light from a given direction is broken into its
 spectral components. We indicate the location of the CD in the picture
 just in case our youngest readers have not seen
-one.](figures/color/cd_spectrometer_setup.eps){#fig:colorWavelengths
+one.](figures/color/cd_spectrometer_setup.eps){#fig-colorWavelengths
 width="100%"}
 
 ![The light spectra from some everyday objects, analyzed by the
@@ -75,7 +75,7 @@ spectrograph of . (a) A leaf, with some yellowish highlights, shows
 primarily green, with a little red (red and green can combine to appear
 yellow). (b) A red door. (c) A fluorescent light (when turned on) shows
 the discrete spectral wavelengths at which the gas fluoresces.
-](figures/color/lightspectra_objects.eps){#fig:examples1 width="100%"}
+](figures/color/lightspectra_objects.eps){#fig-examples1 width="100%"}
 
 ### Light Power Spectra
 
@@ -142,7 +142,7 @@ spectral power from 500--700 nm, make yellow, or minus blue ().
 
 ![For coarse orientation only, this cartoon model gives the color
 appearance of different spectral bands of the spectrum of visible
-light.](figures/color/cartoonColor2.eps){#fig:names width="100%"}
+light.](figures/color/cartoonColor2.eps){#fig-names width="100%"}
 
 ### Light Reflecting from Surfaces
 
@@ -176,7 +176,7 @@ venusta* (dotted line) is orange.
 
 ![Reflectance spectra from two flowers @Arnold2010. The blue *Hepatica
 nobilis* flower @nobilis and the orange flower, *Pyrostegia venusta*
-@venusta.](figures/color/flowerSpectra.eps){#fig:sourcerefl
+@venusta.](figures/color/flowerSpectra.eps){#fig-sourcerefl
 width="100%"}
 
 The reflectance spectrum of a surface often carries valuable information
@@ -377,7 +377,7 @@ display elements d, e, and f, producing the output spectrum
 $\mathbf{P}\mathbf{M} \mathbf{C} \mathbf{t}$. Conditions on
 $\mathbf{P}$, $\mathbf{M}$, and $\mathbf{C}$ can ensure that the input
 and output colors match for an
-observer.](figures/color/colorRepro2.pdf){#fig:colorsystem width="100%"}
+observer.](figures/color/colorRepro2.png){#fig-colorsystem width="100%"}
 
 ### Color Matching Functions and Primary Lights
 
@@ -536,42 +536,42 @@ insensitive to blurring.
 
 In a red-green-blue (RGB) representation, the eye is sensitive to high
 spatial frequency changes in both red and green, as shown in figures
-[1.14](#fig:girls1){reference-type="ref" reference="fig:girls1"} and
-[1.15](#fig:girls2){reference-type="ref" reference="fig:girls2"}. A
+[1.14](#fig-girls1){reference-type="ref" reference="fig:girls1"} and
+[1.15](#fig-girls2){reference-type="ref" reference="fig:girls2"}. A
 rotation of the color coordinates of the image, followed by a nonlinear
 stretching, can put the image into a color space called L, a, b. In that
 space, the eye is very sensitive to any blurring of the L color
 component, called luminance, but is relatively insensitive to blurring
 of the a or b components, as demonstrated in and
-[1.17](#fig:girls4){reference-type="ref" reference="fig:girls4"}. This
+[1.17](#fig-girls4){reference-type="ref" reference="fig:girls4"}. This
 effect is commonly exploited in image compression, allowing some image
 components to be sampled more coarsely than others.
 
 ![(a) Original image. (b) RGB components. (c) RGB components, each
 blurred. These sharp and blurred components are used in the color images
-of . ](figures/color/nonblur_girls.eps){#fig:girls1 width="100%"}
+of . ](figures/color/nonblur_girls.eps){#fig-girls1 width="100%"}
 
 ![Color images composed of sharp and blurred components from figures
-[1.14](#fig:girls1){reference-type="ref" reference="fig:girls1"}(b) and
-[1.14](#fig:girls1){reference-type="ref" reference="fig:girls1"}(c). (a)
+[1.14](#fig-girls1){reference-type="ref" reference="fig:girls1"}(b) and
+[1.14](#fig-girls1){reference-type="ref" reference="fig:girls1"}(c). (a)
 R component blurred, G and B components sharp. (b) G component blurred,
 R and B components sharp. (c) B component blurred, R and G components
 sharp. Blurring either the R or G components of the image leads to a
 blurry-looking full-color image.
-](figures/color/blur_rgb_girls.eps){#fig:girls2 width="100%"}
+](figures/color/blur_rgb_girls.eps){#fig-girls2 width="100%"}
 
 ![(a) Original image. (b) Lab components. (c) Lab components, each
 blurred. These sharp and blurred components are used in the color images
-of . ](figures/color/nonblur_lab_girls.eps){#fig:girls3 width="100%"}
+of . ](figures/color/nonblur_lab_girls.eps){#fig-girls3 width="100%"}
 
 ![Color images composed of sharp and blurred components from figures
-[1.16](#fig:girls3){reference-type="ref" reference="fig:girls3"}(b) and
-[1.16](#fig:girls3){reference-type="ref" reference="fig:girls3"}(c). (a)
+[1.16](#fig-girls3){reference-type="ref" reference="fig:girls3"}(b) and
+[1.16](#fig-girls3){reference-type="ref" reference="fig:girls3"}(c). (a)
 L component blurred, a and b components sharp. (b) a component blurred,
 L and b components sharp. (c) b component blurred, L and a components
 sharp. Blurring only either of the a or b components of the image yields
 a full-color image that appears sharp, provided the luminance component
-of the image is sharp.](figures/color/blur_lab_girls.eps){#fig:girls4
+of the image is sharp.](figures/color/blur_lab_girls.eps){#fig-girls4
 width="100%"}
 
 ## Concluding Remarks
