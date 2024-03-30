@@ -67,7 +67,7 @@ book:
           chapters:
               - bias_and_shift.qmd
               - data_augmentation.qmd
-              #   - transfer_learning.qmd
+              - transfer_learning.qmd
         - part: Understanding Geometry
           chapters:
               - homogeneous_coordinates.qmd
@@ -82,13 +82,14 @@ book:
           chapters:
               - motion_estimation_intro.qmd
               - 2d_motion_from_3d.qmd
+              - optical_flow.qmd
               - motion_estimation.qmd
         - part: Understanding Vision With Language
           chapters:
-              - representing_the_image.qmd
-              - objects.qmd
+              #   - representing_the_image.qmd
+              #   - objects.qmd
               - object_recognition_v3.qmd
-              - scenes.qmd
+              #   - scenes.qmd
               - VLMs.qmd
         - part: On Research, Writing and Speaking
           chapters:
