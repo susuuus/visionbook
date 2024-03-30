@@ -17,14 +17,18 @@ base_name=$(basename "$input_file" .tex)
 output_file="${base_name}.qmd"
 
 TEMP_TEX="${input_file%.tex}-temp.tex" # Create a temp file name based on the input file
-pandoc "$input_file" -s -o "$TEMP_TEX" -f latex -t latex
+python3 $SCRIPT_DIR/process_figureref.py "$input_file" "$TEMP_TEX"
+echo "eq references done"
+
+pandoc "$TEMP_TEX" -s -o "$TEMP_TEX" -from latex -to latex
+
 python3 $SCRIPT_DIR/process_marginnote.py "$TEMP_TEX" "$TEMP_TEX"
 echo "margin done"
 python3 $SCRIPT_DIR/process_figureref.py "$TEMP_TEX" "$TEMP_TEX"
-echo "fig done"
+echo "figure references done"
 # Run Pandoc conversion
 pandoc "$TEMP_TEX" -o "$output_file" -f latex  -t markdown --filter $SCRIPT_DIR/filter.py
-echo "filter done"
+echo "to qmd done"
 
 # remove the [x in] or [x pt]
 # sed -i '' -E 's/\\\[\-?\([0-9]*\)\(\.[0-9]+\)\?\(in\|cm\|pt\)\\\]//g' "$output_file"
