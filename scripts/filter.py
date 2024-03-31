@@ -12,6 +12,36 @@ def latex_to_markdown_cite(elem, doc):
         return pf.RawInline(citation_keys, format="markdown")
 
 
+def latex_to_markdown_label(elem, doc):
+    if isinstance(elem, pf.RawBlock) and elem.format == "latex":
+        # Check if the block is a LaTeX raw block
+        latex_content = elem.text.strip()
+        if latex_content.startswith("\\label{"):
+            # Extract the label content between { and }
+            label_content = latex_content[len("\\label{") : -1]
+            # Customize the conversion based on the label content
+            # For example, you can perform different actions based on label_content
+            # Here, we just return a markdown comment with the label content
+            label_content = label_content.replace(":", "-")
+            markdown_content = "#" + label_content
+            return pf.RawBlock(markdown_content, format="markdown")
+
+
+def latex_to_markdown_ref(elem, doc):
+    if isinstance(elem, pf.RawBlock) and elem.format == "latex":
+        # Check if the block is a LaTeX raw block
+        latex_content = elem.text.strip()
+        if latex_content.startswith("\\ref"):
+            # Extract the label content between { and }
+            label_content = latex_content[len("\\ref{") : -1]
+            # Customize the conversion based on the label content
+            # For example, you can perform different actions based on label_content
+            # Here, we just return a markdown comment with the label content
+            label_content = label_content.replace(":", "-")
+            markdown_content = "#" + label_content
+            return pf.RawBlock(markdown_content, format="markdown")
+
+
 def convert_fig_ref(elem, doc):
     if isinstance(elem, pf.RawInline) and elem.format == "tex":
         # Pattern to match \Fig.\ref{fig:whatever} and capture 'whatever'
@@ -72,8 +102,10 @@ def main(doc=None):
     return pf.run_filters(
         [
             latex_to_markdown_cite,
-            replace_norm,
-            replace_simple,
+            latex_to_markdown_label,
+            latex_to_markdown_ref,
+            # replace_norm,
+            # replace_simple,
         ],
         doc=doc,
     )
