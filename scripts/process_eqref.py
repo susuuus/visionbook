@@ -1,6 +1,15 @@
 import re
 import sys
 
+import os
+
+
+def current_script_path():
+    script_path = os.path.realpath(__file__)
+    script_directory = os.path.dirname(script_path)
+    parent_directory = os.path.dirname(script_directory)
+    return parent_directory
+
 
 def convert_eq_refs(input_file_path, output_file_path):
     # Read the content of the LaTeX file
@@ -26,8 +35,9 @@ def convert_eq_refs(input_file_path, output_file_path):
     # Performing the replacement
     modified_content = re.sub(pattern, replacement, modified_content)
     # Write the modified content to the output file
+    path = current_script_path() + "/src/setup.tex"
     with open(output_file_path, "w", encoding="utf-8") as file:
-        file.write("\include{/Users/shenshen/code/cv_book/src/setup.tex}")
+        file.write("\include{" + path + "}")
         file.write("\n")
         file.write(modified_content)
 
