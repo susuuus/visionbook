@@ -2,7 +2,7 @@
 
 ## Introduction
 
-are a recent family of architectures that generalize and expand the
+**Transformers** are a recent family of architectures that generalize and expand the
 ideas behind convolutional neural nets (CNNs). The term for this family
 of architectures was coined by @vaswani2017attention, where they were
 applied to language modeling. Our treatment in this chapter more closely
@@ -25,9 +25,12 @@ image. Convolutional layers are not well-suited to *globalizing*
 information since the only way they can do so is by either increasing
 the kernel size of their filters or stacking layers to increase the
 receptive field of neurons on deeper layers.
-@fig-transformers:CNN_limitations shows the inability of a shallow CNN
+@fig-transformers-CNN_limitations shows the inability of a shallow CNN
 to compare two input nodes ($x_1$ and $x_7$) that are spatially too far
 apart:
+
+![Consider a 2-layer CNN with kernel size 3, tasked to compare $x_1$ and $x_7$. It can't do it: there are no neurons that are connected to both $x_1$ and $x_7$. Hatch marks indicate which neurons are connected to $x_1$ and $x_7$ respectively.](figures/transformers/fig-transformers-CNN_limitations.png){#fig-transformers-CNN_limitations width="40%"}
+
 
 How can we efficiently pass messages across large spatial distances? We
 already have seen one option: just use a fully connected layer, so that
@@ -91,15 +94,22 @@ a token. The token vector is the vectorized patch (stacking the three
 color channels one after the other), or a lower-dimensional projection
 of the vectorized patch. With each patch represented by a token, the
 full image corresponds to an array of tokens.
-@fig-transformers:tokenization shows what it looks like to tokenize a
+@fig-transformers-tokenization shows what it looks like to tokenize a
 safari image in this way.
 
+![Tokenization: converting an image to a set of vectors. $\mathbf{W}_{\texttt{tokenize}}$ is a learnable linear projection from the dimensionality of the vectorized crops to $d$ dimensions. This is just one of many possible ways to tokenize an image.](figures/transformers/fig-transformers-tokenization.png){#fig-transformers-tokenization width="70%"}
+
+
 ### Data Structures and Notation for Working with Tokens
+:::{.column-margin}
+As we will see, transformers are invariant to permutations of the input sequence, so, as far as transformers are concerned, groups of tokens should be thought of a \textit{sets} rather than ordered sequences.
+:::
 
 A sequence of tokens will be denoted by a matrix
 $\mathbf{T} \in \mathbb{R}^{N \times d}$, in which each token in the
 sequence, $\mathbf{t}_1, \ldots, \mathbf{t}_N$, is transposed to become
-a row of the matrix: $$\mathbf{T} =  \begin{bmatrix}
+a row of the matrix: $$\mathbf{T} = 
+  \begin{bmatrix}
     \mathbf{t}_1^\mathsf{T}\\
     \vdots \\
     \mathbf{t}_N^\mathsf{T}\\
@@ -107,7 +117,10 @@ a row of the matrix: $$\mathbf{T} =  \begin{bmatrix}
 
 Graphically, $\mathbf{T}$ is constructed from
 $\mathbf{t}_1, \ldots, \mathbf{t}_N$ like this
-(@fig-transformers:T_notation):
+(@fig-transformers-T_notation):
+
+
+![In this chapter, we will represent a set of tokens as a matrix whose rows are the token vectors.](figures/transformers/T_notation.png){#fig-transformers-T_notation}
 
 The idea of this notation is that *tokens are to transformers as neurons
 are to neural nets*. Neural net layers operate over arrays of neurons;
@@ -116,15 +129,17 @@ rows are scalar neurons. Transformers operate over arrays of tokens. A
 matrix $\mathbf{T}$ is just a convenient representation of 1D array of
 vector-value tokens. 
 
+
+
 :::{.column-margin}
+
 Although we are only considering
 vector-valued tokens in this chapter, it's easy to imagine tokens that
 are any kind of structured group. We just need to define how basic
 operators, like summation, operate over these groups (and, ideally, in a
 differentiable manner).
+
 :::
-
-
 
 Transformers consist of two main operations over tokens: (1) *mixing*
 tokens via a weighted sum, and (2) *modifying* each individual token via
@@ -142,17 +157,15 @@ based on them. The first operation we will define is how to take a
 A linear combination of tokens is not the same as a fully connected
 layer in a neural net. Instead of taking a weighted sum of scalar
 neurons, it takes a weighted sum of vector-valued tokens
-(@fig-transformers:lin_bomb_neurons_vs_tokens):
+(@fig-transformers:lin_bomb_neurons_vs_tokens):The general form of these equations for multiple input and output
+neurons/tokens is: 
 
-
-
-The general form of these equations for multiple input and output
-neurons/tokens is: $$\begin{aligned}
+$$\begin{aligned}
     x_{\texttt{out}}[i]&= \sum_{j=1}^N w_{ij}x_{\texttt{in}}[j]\\ 
     \mathbf{x}_{\texttt{out}}&= \mathbf{W}\mathbf{x}_{\texttt{in}}&\quad\quad \triangleleft \quad \text{linear combination of neurons}\\
     \mathbf{T}_{\texttt{out}}[i,:]&= \sum_{j=1}^N w_{ij} \mathbf{T}_{\texttt{in}}[j,:]\\
-     \mathbf{T}_{\texttt{out}}&= \mathbf{W}\mathbf{T}_{\texttt{in}}&\quad\quad \triangleleft \quad \text{linear combination of tokens} :lin_comb_tokens
-\end{aligned}$${#eq-transformers}
+     \mathbf{T}_{\texttt{out}}&= \mathbf{W}\mathbf{T}_{\texttt{in}}&\quad\quad \triangleleft \quad \text{linear combination of tokens}
+\end{aligned}$${#eq-transformers-lin_comb_tokens}
 
 As can be seen above, operations over tokens can be defined just like
 operations over neurons except that the tokens are vector-valued while
@@ -164,8 +177,11 @@ For example, we can define a fully connected layer (fc layer) over
 tokens as a mapping from $N_1$ input tokens to $N_2$ output tokens,
 parameterized by a matrix $\mathbf{W} \in \mathbb{R}^{N_2 \times N_1}$
 (and, optionally, by a set of token biases
-$\mathbf{b} \in \mathbb{R}^{N_2 \times d}$): $$\begin{aligned}    \mathbf{T}_{\texttt{out}}&= \mathbf{W}\mathbf{T}_{\texttt{in}}+ \mathbf{b} \quad\quad &\triangleleft \quad \text{fc layer over tokens}
-\end{aligned}$$ 
+$\mathbf{b} \in \mathbb{R}^{N_2 \times d}$): 
+
+$$\begin{aligned}
+    \mathbf{T}_{\texttt{out}}&= \mathbf{W}\mathbf{T}_{\texttt{in}}+ \mathbf{b} \quad\quad &\triangleleft \quad \text{fc layer over tokens}
+\end{aligned}$${#eq-transformers}
 
 ### Modifying Tokens {#sec-transformers:modifying_tokens}
 
@@ -202,9 +218,8 @@ over a set of neuron inputs (scalars) rather than token inputs
         \end{bmatrix}\quad\quad \triangleleft \quad\text{per-neuron nonlinearity (\texttt{relu})}
 \end{aligned}$$ The $F_{\theta}$ may be any nonlinear function but some
 choices will work better than others. One popular choice is for
-$F_{\theta}$ to be a multilayer perceptron (MLP); see chapter
-[\[chapter-neural_nets\]](#chapter:neural_nets){reference-type="ref"
-reference="chapter-neural_nets"}. In this case, $F_{\theta}$ has
+$F_{\theta}$ to be a multilayer perceptron (MLP); see Chapter
+[Neural Nets](#chapter-neural_nets.html). In this case, $F_{\theta}$ has
 learnable parameters $\theta$, which are the weights and biases of the
 MLP. This reveals an important difference between pointwise operations
 in regular neural nets and in token nets: relus, and most other
@@ -214,10 +229,12 @@ working with tokens, the pointwise operations become expressive and
 parameter-rich.
 
 ## Token Nets
-
 We will use the term **token nets** to refer to computation graphs that
-use tokens as the primary nodes, rather than neurons. Token
-nets are just like neural nets, alternating between layers that mix
+use tokens as the primary nodes, rather than neurons.
+:::{.column-margin}
+Note that the terminology in this chapter is not standard. The term *token nets*, and some of the definitions we have given, are our own invention.
+:::
+Token nets are just like neural nets, alternating between layers that mix
 nodes in linear combinations (e.g., fully connected linear layers,
 convolutional layers, etc.) and layers that apply a pointwise
 nonlinearity to each node (e.g., relus, per-token MLPs). Of course,
@@ -275,16 +292,16 @@ heads in their receptive field; after all, this would be a solution that
 would solve our problem (it would minimize the loss and correctly answer
 the question). Other solutions might be possible, but we will focus on
 this intuitive solution, which we illustrate in
-@fig-transformers:attention_layer_safari_query_cartoon.
+@fig-transformers-attention_layer_safari_query_cartoon.
 
 What's neat here is that attention gives us a way to make the layer
 dynamically change its behavior in response to different input
 questions; asking different questions results in different answers, as
 is visualized below in
-@fig-transformers:attention_layer_safari_query_cartoon.
+@fig-transformers-attention_layer_safari_query_cartoon.
 
 Let's walk through the logic of
-@fig-transformers:attention_layer_safari_query_cartoon. Here we are
+@fig-transformers-attention_layer_safari_query_cartoon. Here we are
 imagining a token representation that can answer two different kinds of
 questions, one about number and the other about color. The
 representation we have come up with (which learning could have arrived
@@ -329,23 +346,31 @@ $\mathbf{t}$, we have: $$\begin{aligned}
     \mathbf{v} &= \mathbf{W}_v \mathbf{t} \quad\quad \triangleleft \text{ value}
 \end{aligned}$$ 
 
+
+
 :::{.column-margin}
+
 Here is a question to think about:
 Could you use other differentiable functions to compute the query,
 value, and key? Would that be useful?
+
 :::
-
-
 
 In transformers, all inputs to the net are tokenized, so the textual
 question "How many animals are in the photo?" will also be represented
 as a token.
 
+
+
 :::{.column-margin}
+
 We do not cover them in this book, but
 methods from natural language processing can be used to transform text
 into a token, or into a sequence of tokens.
+
 :::
+
+
 
  This token will
 submit its query vector, $\mathbf{q}_{\texttt{question}}$ to be matched
@@ -354,27 +379,29 @@ image; the similarity between the query and the key determines the
 amount of attention weight the query will apply to the token with that
 key. The most common measure of similarity between a query $\mathbf{q}$
 and a key $\mathbf{k}$ is the dot product
-$\mathbf{q}^\mathsf{T}\mathbf{k}$. Querying each token in
-$\mathbf{T}_{\texttt{in}}$ in this way gives us a vector of
+$\mathbf{q}^\mathsf{T}\mathbf{k}$. 
+
+Querying each token in $\mathbf{T}_{\texttt{in}}$ in this way gives us a vector of
 similarities: $$\begin{aligned}
-    \mathbf{s} = [s_1, \ldots, s_N]^\mathsf{T}&= [\mathbf{q}_{\texttt{question}}^\mathsf{T}\mathbf{k}_1, \ldots, \mathbf{q}_{\texttt{question}}^\mathsf{T}\mathbf{k}_N]^\mathsf{T}:attention_question_keys
-\end{aligned}$${#eq-transformers}
+    \mathbf{s} = [s_1, \ldots, s_N]^\mathsf{T}&= [\mathbf{q}_{\texttt{question}}^\mathsf{T}\mathbf{k}_1, \ldots, \mathbf{q}_{\texttt{question}}^\mathsf{T}\mathbf{k}_N]^\mathsf{T}
+\end{aligned}$${#eq-transformers-attention_question_keys}
 
 We then normalize the vector $\mathbf{s}$ using the softmax function to
 give us our attention weights $\mathbf{a} \in \mathbb{R}^{N \times 1}$,
 and finally, rather than applying $\mathbf{a}$ over token codes directly
 (i.e., taking a weighted sum over tokens), we take a weighted sum over
 token value vectors, to obtain $\mathbf{T}_{\texttt{out}}$:
-$$\begin{aligned}    \mathbf{a} &= \texttt{softmax}(\mathbf{s})\\
+
+$$\begin{aligned}
+    \mathbf{a} &= \texttt{softmax}(\mathbf{s})\\
     \mathbf{T}_{\texttt{out}}&= \begin{bmatrix}
         a_1\mathbf{v}_1^\mathsf{T}\\
         \vdots \\
         a_N\mathbf{v}_N^\mathsf{T}\\
     \end{bmatrix} 
-\end{aligned}$$  Figure
-[\[fig:transformers:attn_arch1\]](#fig-transformers:attn_arch1){reference-type="ref"
-reference="fig:transformers:attn_arch1"} visualizes these steps.
+\end{aligned}$${#eq-transformers}
 
+@fig-transformers-attn_arch1 visualizes these steps.
 
 ### Self-Attention
 
@@ -395,7 +422,7 @@ queries, we take a weighted sum over *all* tokens in that layer. If
 $\mathbf{T}_{\texttt{in}}$ is a set of $N$ input tokens, then we have
 $N$ queries, $N$ weighted sums, and $N$ output tokens to form
 $\mathbf{T}_{\texttt{out}}$. This is visualized below in
-@fig-transformers:self_attn_layer.
+@fig-transformers-self_attn_layer.
 
 To compute the query, key, and value for a set of input tokens,
 $\mathbf{T}_{\texttt{in}}$, we apply the same linear transformations to
@@ -404,14 +431,20 @@ $\mathbf{Q}_{\texttt{in}}, \mathbf{K}_{\texttt{in}} \in \mathbb{R}^{N \times m}$
 and $\mathbf{V}_{\texttt{in}} \in \mathbb{R}^{N \times d}$, where each
 row is the query/key/value for each token: 
 
+
+
 :::{.column-margin}
+
 Note that
 the query and key vectors must have the same dimensionality, $m$,
 because we take a dot product between them. Conversely, the value
 vectors must match the dimensionality of the token code vectors, $d$,
 because these are summed up to produce the new token code
 vectors.
+
 :::
+
+
 
  $$\begin{aligned}
     \mathbf{Q}_{\texttt{in}}&= 
@@ -453,15 +486,17 @@ vectors.
         (\mathbf{W}_v \mathbf{t}_N)^\mathsf{T}\\
     \end{bmatrix} 
     = \mathbf{T}_{\texttt{in}}\mathbf{W}_v^\mathsf{T}&\triangleleft \quad\quad \text{value matrix}
-\end{aligned}$${#eq-transformers}
+\end{aligned}$$
 
-Finally, we have the attention equation: $$\begin{aligned}    \mathbf{A} &= f(\mathbf{T}_{\texttt{in}}) = \texttt{softmax}\Big(\frac{\mathbf{Q}_{\texttt{in}}\mathbf{K}_{\texttt{in}}^\mathsf{T}}{\sqrt{m}}\Big) &\triangleleft \quad\quad \text{attention matrix}\\
+Finally, we have the attention equation: $$\begin{aligned}
+    \mathbf{A} &= f(\mathbf{T}_{\texttt{in}}) = \texttt{softmax}\Big(\frac{\mathbf{Q}_{\texttt{in}}\mathbf{K}_{\texttt{in}}^\mathsf{T}}{\sqrt{m}}\Big) &\triangleleft \quad\quad \text{attention matrix}\\
     \mathbf{T}_{\texttt{out}}&= \mathbf{A}\mathbf{V}_{\texttt{in}}
-\end{aligned}$$ where the softmax is taken within each row (i.e., over
+\end{aligned}$${#eq-transformers}
+where the softmax is taken within each row (i.e., over
 the vector of matches for each separate query vector, like in
-@eq-transformers:attention_question_keys). In expanded detail, here are
+@eq-transformers-attention_question_keys). In expanded detail, here are
 the full mechanics of a self-attention layer
-(@fig-transformers:attn_arch):
+(@fig-transformers-attn_arch):
 
 This fully defines a self-attention layer, which is the kind of
 attention layer used in transformers. Before we move on though, let's
@@ -469,7 +504,7 @@ think through the intuition of what self-attention might be doing.
 
 Consider that we are processing the safari image, and our task is
 semantic segmentation (label each patch with an object class). Figure
-[\[fig:attention_layer_cartoon\]](#fig-attention_layer_cartoon){reference-type="ref"
+[\[fig:attention_layer_cartoon\]](#fig:attention_layer_cartoon){reference-type="ref"
 reference="fig:attention_layer_cartoon"} illustrates this scenario. We
 start by tokenizing the image so that each patch is represented by a
 token. Now we have a token, $\mathbf{t}_2$, that represents the patch of
@@ -546,20 +581,23 @@ shown in the math below: $$\begin{aligned}
         \mathbf{T}_{\texttt{out}}^1[N-1,:] & \ldots & \mathbf{T}_{\texttt{out}}^k[N-1,:]\\
     \end{bmatrix} &\quad\quad \triangleleft \quad \bar{\mathbf{T}}_{\texttt{out}} \in \mathbb{R}^{N \times kv}\\
     \mathbf{T}_{\texttt{out}}&= \bar{\mathbf{T}}_{\texttt{out}}\mathbf{W}_{\texttt{MSA}} &\quad\quad \triangleleft \quad \mathbf{W}_{\texttt{MSA}} \in \mathbb{R}^{kv \times d} :MSA_merge
-\end{aligned}$${#eq-transformers} where $v$ is the dimensionality of the value vectors and
+\end{aligned}$${} where $v$ is the dimensionality of the value vectors and
 $d$ is the dimensionality of the code vectors of the output
 (@dosovitskiy2020vit recommends setting $kv = d$). The matrix
 $\mathbf{W}_{\texttt{MSA}}$ *merges* all the heads; its values are
 learnable parameters. The other learnable parameters of MSA are the
 query, key, and value projections for each of the $k$ attention heads.
 
-
 :::{.column-margin}
+
 Notice that here, unlike in the single-headed
 self-attention layers presented previously, the value vectors need not
 have the same dimensionality as the token code vectors, since we are
 applying the projection @eq-transformers:MSA_merge.
+
 :::
+
+
 
 
 
@@ -583,7 +621,7 @@ from @dosovitskiy2020vit, showing where these additional pieces enter
 the picture.
 
 This architecture uses layer normalization (section
-[\[sec-neural_nets:normalization_layers\]](#sec:neural_nets:normalization_layers){reference-type="ref"
+[\[sec-neural_nets:normalization_layers\]](#sec-neural_nets:normalization_layers){reference-type="ref"
 reference="sec-neural_nets:normalization_layers"}) before each attention
 layer and before each token-wise MLP layer. The normalization is done
 *within* each token (the token code vector is treated as a akin to a
@@ -626,10 +664,10 @@ The output of a transformer, as we have so far defined it, is a set of
 tokens $\mathbf{T}_{\texttt{out}}$. Often we want an output of a
 different format, such as a single vector of logits for image
 classification (section
-[\[sec-intro_to_learning:image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
+[\[sec-intro_to_learning:image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
 reference="sec-intro_to_learning:image_classification"}), or in the
 format of an image for image-to-image tasks (section
-[\[sec-conditional_generative_models:im2im\]](#sec:conditional_generative_models:im2im){reference-type="ref"
+[\[sec-conditional_generative_models:im2im\]](#sec-conditional_generative_models:im2im){reference-type="ref"
 reference="sec-conditional_generative_models:im2im"}). To handle these
 cases, we typically define a task-specific output layer that takes
 $\mathbf{T}_{\texttt{out}}$ as input and produces the desired format as
@@ -643,9 +681,10 @@ vector into a $K$-dimensional vector (for $K$-way classification).
 An important property of transformers is that they are equivariant to
 permutations of the input token sequence. This follows from the fact
 that both tokenwise layers, $F_{\theta}$, and attention layers,
-$\texttt{attn}$, are **permutation equivariant**: $$\begin{aligned}    F_{\theta}(\texttt{permute}(\mathbf{T}_{\texttt{in}})) &= \texttt{permute}(F_{\theta}(\mathbf{T}_{\texttt{in}}))\\
+$\texttt{attn}$, are **permutation equivariant**: $$\begin{aligned}
+    F_{\theta}(\texttt{permute}(\mathbf{T}_{\texttt{in}})) &= \texttt{permute}(F_{\theta}(\mathbf{T}_{\texttt{in}}))\\
     \texttt{attn}(\texttt{permute}(\mathbf{T}_{\texttt{in}})) &= \texttt{permute}(\texttt{attn}(\mathbf{T}_{\texttt{in}}))
-\end{aligned}$$ where $\texttt{permute}$ is a permutation of the order
+\end{aligned}$${#eq-transformers} where $\texttt{permute}$ is a permutation of the order
 of tokens in $\mathbf{T}_{\texttt{in}}$ (i.e., permutes the rows of the
 matrix). This means that if you scramble (i.e. permute) the patches in
 the input image then apply attention, the output will be unchanged up to
@@ -657,7 +696,7 @@ equivariant functions results in a permutation equivariant operation, we
 have: $$\begin{aligned}
     \texttt{transformer}(\texttt{permute}(\mathbf{T}_{\texttt{in}})) &= \texttt{permute}(\texttt{transformer}(\mathbf{T}_{\texttt{in}}))
 \end{aligned}$$ This property is visualized in
-@fig-transformers:permutation_equivariance.
+@fig-transformers-permutation_equivariance.
 
 It is often useful to understand layers in terms of their invariances
 and equivariances. Convolutational layers are translation equivariant
@@ -701,11 +740,13 @@ to vectors via a linear projection. You might already have noticed that
 this operation can be written as convolution; after all we said the
 whole idea of CNNs is to chop the signal into patches. In particular,
 this form of tokenization can be written as a convolutional layer with
-kernel size and stride both equal to $K$: $$\begin{aligned}
+kernel size and stride both equal to $K$: 
+$$\begin{aligned}
 &\mathbf{T}[n(N/K)+m,c_{\texttt{2}}] = \nonumber\\
-&b[c_{\texttt{2}}] +  \sum_{c_{\texttt{1}}=1}^{C_{\texttt{in}}} \sum_{k_1,k_2=-K}^K w[c_{\texttt{1}},c_{\texttt{2}},k_1,k_2] x_{\texttt{in}}[c_{\texttt{1}},K n-k_1,K m-k_2] \quad \triangleleft \quad \text{(tokenization)} :tokenization_as_conv
-\end{aligned}$${#eq-transformers} where, for RGB images,
-$\mathbf{x}_{\texttt{in}}\in \mathbb{R}^{3 \times N \times M}$,
+&b[c_{\texttt{2}}] +  \sum_{c_{\texttt{1}}=1}^{C_{\texttt{in}}} \sum_{k_1,k_2=-K}^K w[c_{\texttt{1}},c_{\texttt{2}},k_1,k_2] x_{\texttt{in}}[c_{\texttt{1}},K n-k_1,K m-k_2] \quad \triangleleft \quad \text{(tokenization)}
+\end{aligned}$${#eq-tokenization_as_conv} 
+
+where, for RGB images, $\mathbf{x}_{\texttt{in}}\in \mathbb{R}^{3 \times N \times M}$,
 $C_{\texttt{in}}=3$, and $C_{\texttt{out}}=d$ (the token
 dimensionality). This math assumes $N$ and $M$ are evenly divisible by
 $K$; if they aren't then the input can be resized or padded until they
@@ -714,7 +755,7 @@ are.
 Although the equation starts to look complicated, it is just a
 $\texttt{conv}$ operator with the following parameters:
 
-``` {.python xleftmargin="0.0" xrightmargin="0.0" fontsize="\\fontsize{8.5}{9}" frame="single" framesep="2.5pt" baselinestretch="1.05"}
+``` {.python}
 T = conv(x_in, channels_in=3, channels_out=d, kernel=K, stride=K) # tokenize
 ```
 
@@ -726,7 +767,7 @@ projection, since key and value follow exactly the same pattern.
 
 We wrote this operation as a matrix multiply
 $\mathbf{T}_{\texttt{in}}\mathbf{W}_q^\mathsf{T}$
-(@eq-transformers:query_matrix). What this multiply is doing is applying
+(@eq-transformers-query_matrix). What this multiply is doing is applying
 the same linear transformation ($\mathbf{W}_q$) to each token vector
 (each row of $\mathbf{T}_{\texttt{in}}$). Applying the same linear
 operation to each element in a sequence is exactly what convolution
@@ -734,7 +775,7 @@ does. Specifically, the query operation can be written as convolving the
 set of $N$ $d$-channel tokens with a filter bank of $m$ filters, with
 kernel size 1, producing a new set of $N$ $m$-channel tokens. This
 equivalence is visualized below
-(@fig-transformers:conv_matmul_equivalence):
+(@fig-transformers-conv_matmul_equivalence):
 
 Therefore, the query, key, and value projections are all multichannel
 convolutions with kernels of size 1.
@@ -746,12 +787,14 @@ the same MLP $F_{\theta}$ to each token in a sequence. The $F_{\theta}$
 consists of linear layers and pointwise nonlinearities. For simplicity,
 we will assume no biases (as an exercise, this can be relaxed). The
 linear layers in $F_{\theta}$ all have the following form:
-$$\begin{aligned}    \mathbf{t}_{\texttt{out}} &= \mathbf{W}\mathbf{t}_{\texttt{in}}
-\end{aligned}$$ When we apply such a layer to each token in the
-sequence, we have: $$\begin{aligned}
+$$\begin{aligned}
+    \mathbf{t}_{\texttt{out}} &= \mathbf{W}\mathbf{t}_{\texttt{in}}
+\end{aligned}$${#eq-transformers} When we apply such a layer to each token in the
+sequence, we have: 
+$$\begin{aligned}
     \mathbf{T}_{\texttt{out}}&= \mathbf{T}_{\texttt{in}}\mathbf{W}^{\mathsf{T}}
 \end{aligned}$$ Notice that this looks just like the query operation we
-covered in the previous section, @eq-transformers:query_matrix.
+covered in the previous section, @eq-transformers-query_matrix.
 Therefore, the same result holds: the linear layers of the token-wise
 MLP can all be written as convolutions with kernel size 1.
 
@@ -778,14 +821,17 @@ When we wrote them as convolutions, the query-key-value projections and
 token-wise MLPs *only used 1x1 filters*.
 
 :::{.column-margin}
+
 We use the
 term "1x1 filter" to refer to any filter whose kernel size is 1 in all
 its dimensions, regardless of whether the signal is one-dimensional,
 two-dimensional, three-dimensional, etc.
+
 :::
 
- In fact it cannot
-be otherwise. If you used larger kernel it would break the permutation
+
+
+In fact it cannot be otherwise. If you used larger kernel it would break the permutation
 invariance property of transformers, since the output of the filters
 would depend on which token is next to which. This is one of the key
 differences between CNNs and transformers. CNNs use $K \times K$
@@ -795,9 +841,7 @@ architectural way of knowing about spatial structure (which token is
 next to which). For vision problems, where spatial structure is often
 crucially important, transformers can instead be given knowledge of
 position through the *inputs* to the network, rather than through the
-architectural structure. We will cover this idea in section
-[1.11](#sec-transformers:positional_encodings){reference-type="ref"
-reference="sec-transformers:positional_encodings"}.
+architectural structure. We will cover this idea in section [Positional Encodings](#sec-transformers-positional_encodings)
 
 #### Transformers have attention layers
 
@@ -829,12 +873,12 @@ this looks like diagrammatically, and on the right is the layer shown as
 matrix multiplication:
 
 During training, we will give examples like this: $$\begin{aligned}
-    \{\mathbf{t}_1, \ldots, \mathbf{t}_n\} &\rightarrow \mathbf{t}_{n+1} :causal_training_batches\\
+    \{\mathbf{t}_1, \ldots, \mathbf{t}_n\} &\rightarrow \mathbf{t}_{n+1}\\
     \{\mathbf{t}_1, \ldots, \mathbf{t}_{n-1}\} &\rightarrow \mathbf{t}_n\\
     \{\mathbf{t}_1, \ldots, \mathbf{t}_{n-2}\} &\rightarrow \mathbf{t}_{n-1}
-\end{aligned}$${#eq-transformers} and so on. We can make all these predictions at once
+\end{aligned}$${#eq-transformers-causal_training_batches} and so on. We can make all these predictions at once
 with a single matrix multiply
-(@fig-transformers:masked_attn_one_matmul):
+(@fig-transformers-masked_attn_one_matmul):
 
 This way, one forward pass makes $N$ predictions rather than one
 prediction. This is equivalent to doing a single next token prediction
@@ -866,7 +910,7 @@ that predict each previous token. That is, there is sharing of
 computation between all the prediction problems. We will see a more
 concrete application of this strategy when we get to autoregressive
 models in section
-[\[sec-generative_models:autoregressive\]](#sec:generative_models:autoregressive){reference-type="ref"
+[\[sec-generative_models:autoregressive\]](#sec-generative_models:autoregressive){reference-type="ref"
 reference="sec-generative_models:autoregressive"}.
 
 ## Positional Encodings {#sec-transformers:positional_encodings}
@@ -892,7 +936,7 @@ sinusoidal waves take on at each position: $$\begin{aligned}
         \mathbf{p}_x\\
         \mathbf{p}_y
     \end{bmatrix}
-\end{aligned}$$ where $x$ and $y$ are the coordinates of the token. This
+\end{aligned}$${#eq-transformers} where $x$ and $y$ are the coordinates of the token. This
 representation is visualized in @fig-transformers:positional_codes:
 
 Another strategy is to simply let the positional codes be *learned* by
@@ -905,7 +949,7 @@ useful for CNNs as well, as a way to make convolutional filters that are
 conditioned on position, thereby applying a different weighted sum at
 each location in the image @liu2018intriguing. Positional encodings also
 appear in radiance fields, which we cover in chapter
-[\[chapter-nerfs\]](#chapter:nerfs){reference-type="ref"
+[\[chapter-nerfs\]](#chapter-nerfs){reference-type="ref"
 reference="chapter-nerfs"}.
 
 ![](figures/transformers/affine_layer_comparison.png){width="100%"}
@@ -914,10 +958,16 @@ reference="chapter-nerfs"}.
 
 
 
+
+
 :::{.column-margin}
+
 The shorthand "fc" is often used to indicate a
 fully-connected linear layer.
+
 :::
+
+
 
  Many layers in deep nets are special
 kinds of affine transformations. Three we have seen so far are
