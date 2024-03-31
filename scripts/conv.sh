@@ -1,3 +1,4 @@
+# >>>>>>>>>>>>>>>>>>>>>>>> boilerplat_variable_names >>>>>>>>>>>>>>>>>>>>>>>>
 #!/bin/bash
 SCRIPT_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 echo $SCRIPT_DIR
@@ -13,8 +14,10 @@ fi
 dir=$(dirname "$input_file")
 base_name=$(basename "$input_file" .tex)
 
+TEMP_TEX="${input_file%.tex}-temp.tex" # Create a temp file name based on the input file
 # Set the output file path
 output_file="${base_name}.qmd"
+# <<<<<<<<<<<<<<<<<<<<<<<< boilerplat_variable_names <<<<<<<<<<<<<<<<<<<<<<<<
 
 TEMP_TEX="${input_file%.tex}-temp.tex" # Create a temp file name based on the input file
 
