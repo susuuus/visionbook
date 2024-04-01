@@ -1,4 +1,4 @@
-# Preface {#preface .unnumbered}
+## Preface {#preface .unnumbered}
 
 Dedicated to all the pixels.
 

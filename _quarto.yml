@@ -121,26 +121,29 @@ bibliography:
 
 format:
     html:
+        anchor-sections: true
         fontsize: "16px"
         linestretch: 1.6
         mainfont: "Palatino"
         monofont: "Fira Mono"
         smooth-scroll: true
         toc-depth: 3
-        code-link: false
-        code-tools:
-            toggle: false
-        code-fold: false
+        # code stuff
+        code-link: true
+        code-tools: false
+        code-fold: true
         highlight-style: printing
-        code-block-bg: true
+        code-block-bg: false
         code-overflow: wrap
+        # css: ./scripts/custom-style.css
+        theme: cosmo
+        # theme: neutral
+        fig-align: center
         reference-location: margin
         cap-location: margin
-        css: ./scripts/custom-style.css
-        theme: cosmo
         mathjax: true
+        lightbox: true
         # mermaid:
-        # theme: neutral
 
     # see https://pandoc.org/MANUAL.html for all options
 #     pdf:
