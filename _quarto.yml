@@ -130,15 +130,15 @@ format:
         toc-depth: 3
         # code stuff
         code-link: true
+        code-fold: false
         code-tools: false
-        code-fold: true
         highlight-style: printing
-        code-block-bg: false
+        code-block-bg: true
         code-overflow: wrap
         # css: ./scripts/custom-style.css
         theme: cosmo
         # theme: neutral
-        fig-align: center
+        fig-align: "center"
         reference-location: margin
         cap-location: margin
         mathjax: true
