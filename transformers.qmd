@@ -459,7 +459,7 @@ vectors.
         \vdots \\
         (\mathbf{W}_q \mathbf{t}_N)^\mathsf{T}\\
     \end{bmatrix} 
-    = \mathbf{T}_{\texttt{in}}\mathbf{W}_q^\mathsf{T}&\triangleleft \quad\quad \text{query matrix} :query_matrix\\
+    = \mathbf{T}_{\texttt{in}}\mathbf{W}_q^\mathsf{T}&\triangleleft \quad\quad \text{query matrix} \\
     \mathbf{K}_{\texttt{in}}&= 
      \begin{bmatrix}
         \mathbf{k}_1^\mathsf{T}\\
@@ -486,7 +486,7 @@ vectors.
         (\mathbf{W}_v \mathbf{t}_N)^\mathsf{T}\\
     \end{bmatrix} 
     = \mathbf{T}_{\texttt{in}}\mathbf{W}_v^\mathsf{T}&\triangleleft \quad\quad \text{value matrix}
-\end{aligned}$$
+\end{aligned}$${#eq-transformers-query_matrix}
 
 Finally, we have the attention equation: $$\begin{aligned}
     \mathbf{A} &= f(\mathbf{T}_{\texttt{in}}) = \texttt{softmax}\Big(\frac{\mathbf{Q}_{\texttt{in}}\mathbf{K}_{\texttt{in}}^\mathsf{T}}{\sqrt{m}}\Big) &\triangleleft \quad\quad \text{attention matrix}\\
@@ -952,7 +952,7 @@ appear in radiance fields, which we cover in chapter
 [\[chapter-nerfs\]](#chapter-nerfs){reference-type="ref"
 reference="chapter-nerfs"}.
 
-![](figures/transformers/affine_layer_comparison.png){width="100%"}
+![](figures/transformers/affine_layer_comparison.png){width="100%" #fig-transformers-affine_layer_comparison}
 
 ## Comparing Fully Connected, Convolutional, and Self-Attention Layers
 
@@ -989,7 +989,7 @@ structure in these matrices can be a useful way to understand their
 similarities and differences. The matrix for an `fc` layer is full rank,
 whereas the matrices for `conv` and `attn` layers have low-rank
 structure, but different kinds of low-rank structure. In
-@fig-transformers:affine_layer_comparison, we show what these matrices
+@fig-transformers-affine_layer_comparison, we show what these matrices
 look like, and also catalog some of the other important properties of
 each of these layers.
 

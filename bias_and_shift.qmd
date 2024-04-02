@@ -431,7 +431,7 @@ $$\begin{aligned}
 \end{aligned}$$ where $H$ is the cross-entropy loss and
 $\mathbf{y}_{\texttt{ostrich}}$ is a one-hot code for the ostrich class.
 
-![](./figures/bias_and_shift/adversarial_perturbation_3.png){width="80%"}
+![An adversarial attack that adds subtle changes to the cat photo to make a neural net classify it instead as an ostrich. The noise image color values are scaled 20x for visualization.](./figures/bias_and_shift/adversarial_perturbation_3.png){width="80%"}
 
 This type of attack required that the attacker has access to your system
 (the neural net $f$) so that they can optimize the noise pattern
