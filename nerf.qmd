@@ -37,7 +37,7 @@ the continuous wavelength. We can represent the plenoptic function with
 the parametric form $L_{\theta}$ where the parameters $\theta$ have to
 be adapted to represent each scene.
 
-![](figures/nerfs/plenoptic_function-1.png){width="100%"}
+![](figures/nerfs/plenoptic_function.png){width="100%"}
 
 An image gets formed by summing all the light rays that reach each
 sensor on the camera (that is, we sum over a section of the plenoptic

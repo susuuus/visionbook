@@ -154,10 +154,12 @@ operations for transforming these tokens and eventually making decisions
 based on them. The first operation we will define is how to take a
 *linear combination of tokens*.
 
+![Linear combination of neurons versus tokens.](figures/transformers/lin_bomb_neurons_vs_tokens.png){#fig-transformers-lin_bomb_neurons_vs_tokens}
+
 A linear combination of tokens is not the same as a fully connected
 layer in a neural net. Instead of taking a weighted sum of scalar
 neurons, it takes a weighted sum of vector-valued tokens
-(@fig-transformers:lin_bomb_neurons_vs_tokens):The general form of these equations for multiple input and output
+(@fig-transformers-lin_bomb_neurons_vs_tokens):The general form of these equations for multiple input and output
 neurons/tokens is: 
 
 $$\begin{aligned}
@@ -166,6 +168,8 @@ $$\begin{aligned}
     \mathbf{T}_{\texttt{out}}[i,:]&= \sum_{j=1}^N w_{ij} \mathbf{T}_{\texttt{in}}[j,:]\\
      \mathbf{T}_{\texttt{out}}&= \mathbf{W}\mathbf{T}_{\texttt{in}}&\quad\quad \triangleleft \quad \text{linear combination of tokens}
 \end{aligned}$${#eq-transformers-lin_comb_tokens}
+
+
 
 As can be seen above, operations over tokens can be defined just like
 operations over neurons except that the tokens are vector-valued while

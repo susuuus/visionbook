@@ -59,7 +59,7 @@ the output at the discarded samples (pixels at an odd row or column) do
 not matter, or may even serve as extra degrees of freedom that can be
 used to make the attack less noticeable.
 
-![](figures/upsamplig_downsampling/toy_example_book2-1.png){width="80%"}
+![](figures/upsamplig_downsampling/toy_example_book2.png){width="80%"}
 
 In this chapter we will study aliasing when manipulating image
 resolution and how to reduce it.
@@ -102,7 +102,7 @@ The @fig-subsampled_textures shows an example of a picture and two
 decimated images with factors $k=2$ and $k=4$. For visualization
 purposes, the images are scaled so that they occupy the same area.
 
-![](figures/upsamplig_downsampling/subsampled_textures-1.png){width="100%"}
+![](figures/upsamplig_downsampling/subsampled_textures.png){width="100%"}
 
 As we downsample the image, we lose details in the texture such as the
 orientation of the knitting, and it becomes harder to see the overall
@@ -153,7 +153,7 @@ Fourier transform, $\Delta_k \left[u,v\right]$, in the bottom, for
 images size of $32 \times 32$ pixels. For the FT we plot signals using
 an interval that puts the frequency $[0,0]$ in the center.
 
-![](figures/upsamplig_downsampling/discrete_delta_train-1.png){width="100%"}
+![](figures/upsamplig_downsampling/discrete_delta_train.png){width="100%"}
 
 Now we are ready to write the DFT of $x_{\delta_k} \left[n,m\right]$.
 This is the DFT of the product of two images, equation (@eq-down2), so
@@ -175,7 +175,7 @@ $\ell\left[n,m\right]$, is $128 \times 128$. The DFT of the sampled
 image, $\ell_{\downarrow k} \left[n,m\right]$, is the inner window with
 size $N/2k \times M/2k$ (shown as a green square).
 
-![](figures/upsamplig_downsampling/discrete_texture_sampling2-1.png){width="100%"}
+![](figures/upsamplig_downsampling/discrete_texture_sampling2.png){width="100%"}
 
 In the case of $k=2$, it is useful to see how the spectrum of the
 decimated signal is obtained. As shown from equation (@eq-decimationFT),
@@ -184,7 +184,7 @@ spectrum, $\mathscr{L}\left[u,v\right]$, as shown in
 @fig-components_aliasing_FT. The image shows the four copies that are
 summed to obtain the decimated spectrum:
 
-![](figures/upsamplig_downsampling/components_aliasing_FT2-1.png){width="100%"}
+![](figures/upsamplig_downsampling/components_aliasing_FT2.png){width="100%"}
 
 The first component is $\mathscr{L}\left[u,v\right]$, the three other
 copies are shifted versions of $\mathscr{L}\left[u,v\right]$. Shifting
@@ -230,7 +230,7 @@ derivations intuitive. For 1D signals of length $N=16$, equation
 (@eq-matrixformsubsampling) has the visual form shown in
 @fig-aliasing_in_matrix_form:
 
-![](figures/upsamplig_downsampling/aliasing_in_matrix_form-1.png){width=".9"}
+![](figures/upsamplig_downsampling/aliasing_in_matrix_form.png){width=".9"}
 
 Note that for the matrices $\mathbf{F}_{N}$ used here, we are not using
 the convention of putting the frequency 0 in the middle as this makes
@@ -239,7 +239,7 @@ visualizations in matrix form easier.
 The product between the decimation matrix and the inverse DFT,
 $\mathbf{D}_2 \mathbf{F^*}_{16}$, is (@fig-decimationFT_inmatrixform):
 
-![](figures/upsamplig_downsampling/decimationFT_inmatrixform-1.png){width=".9"}
+![](figures/upsamplig_downsampling/decimationFT_inmatrixform.png){width=".9"}
 
 In @fig-decimationFT_inmatrixform we can see how the odd rows of
 $\mathbf{F^*}_{16}$ gives a new sub matrix composed of two identical
@@ -248,7 +248,7 @@ $\mathbf{F^*}_{8}$. A similar structure emerges also when applying
 $\mathbf{D}_4$. Combining these last equations together, we get the
 final result:
 
-![](figures/upsamplig_downsampling/decimation_finalequations_inmatrixform2-1.png){width="90%"}
+![](figures/upsamplig_downsampling/decimation_finalequations_inmatrixform2.png){width="90%"}
 
 This last result shows visually how aliasing happens. Each component of
 the final DFT, $\mathscr{L}_{\downarrow 2} \left[u\right]$, is the sum
@@ -364,7 +364,7 @@ still one oscillation on the filter impulse response.
 @fig-ringing_artifactsc shows the result applying am anti-aliasing
 binomial filter.
 
-![](figures/upsamplig_downsampling/ringing_artifacts-1.png){width="100%"}
+![](figures/upsamplig_downsampling/ringing_artifacts.png){width="100%"}
 
 For most applications using a binomial filter ($b_2$ or $b_4$) is enough
 because it reduces aliasing and it does not introduce undesired image
@@ -383,7 +383,7 @@ filter as the anti-aliasing filter followed by decimation by 2, and
 @fig-subsampled_antialiasing_textures shows results for different
 downsampling factors.
 
-![](figures/upsamplig_downsampling/downsampling_bilinear-1.png){width="100%"}
+![](figures/upsamplig_downsampling/downsampling_bilinear.png){width="100%"}
 
 In the anti-aliased downsampled images shown in
 @fig-subsampled_antialiasing_textures, fine details are gone while
@@ -392,7 +392,7 @@ images below, even at $32 \times 32$, we can still see some of the
 orientations of the knitting pattern and the shading due to the
 three-dimensional shape.
 
-![](figures/upsamplig_downsampling/subsampled_antialiasing_textures-1.png){width="100%"}
+![](figures/upsamplig_downsampling/subsampled_antialiasing_textures.png){width="100%"}
 
 As the convolution and downsampling are linear operators, sometimes it
 will be useful to write it as a matrix. For instance, for a 1D signal of
@@ -443,7 +443,7 @@ interpolation results in an image that is piecewise-constant.
 @fig-upsampling_and_downsampling:nn_interp shows the nearest neighbor
 interpolation process graphically.
 
-![](figures/upsamplig_downsampling/nearest_interp2-1.png){width="100%"}
+![](figures/upsamplig_downsampling/nearest_interp2.png){width="100%"}
 
 ### Linear and Bilinear Interpolation {#sec-bilinearinterpolation}
 
@@ -463,7 +463,7 @@ interpolation between those two values to obtain
 $\ell_{\texttt{out}}(a,b)$. The result is illustrated in
 @fig-bilinear_interp.
 
-![](figures/upsamplig_downsampling/bilinear_interp2-1.png){width="100%"}
+![](figures/upsamplig_downsampling/bilinear_interp2.png){width="100%"}
 
 The linear (and bilinear) interpolations are linear operations. In the
 case when the upsampling factor $k$ is an integer value, the resampling
@@ -586,7 +586,7 @@ padding the convolutional kernel to match the image size. Despite that
 this interpolation does correspond to an ideal interpolation filter (a
 sinc) the interpolated image looks reasonably good.
 
-![](figures/upsamplig_downsampling/upsampling_bilinear-1.png){width="100%"}
+![](figures/upsamplig_downsampling/upsampling_bilinear.png){width="100%"}
 
 The upsampling operator is also a linear operation, therefore we can
 also write it in matrix form. For instance, for a 1D signal of length

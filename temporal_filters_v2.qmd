@@ -45,7 +45,7 @@ figures [\[fig:motion\]](#fig-motion){reference-type="ref"
 reference="fig:motion"}(c and d), static objects appear as vertical
 stripes in @fig-motionb, and horizontal stripes in @fig-motiond.
 
-![](figures/temporal_filters/motion_illustration-1.png){width="100%"}
+![](figures/temporal_filters/motion_illustration.png){width="100%"}
 
 One special sequence is when the image has a global motion with constant
 velocity $(v_x,v_y)$. In such a case we can write:
@@ -82,7 +82,7 @@ of the static image $\ell_0(x,y)$ and a delta wall. To better understand
 this function let's look at a simple example on only one spatial
 dimension, as shown in @fig-mov_pulse_012.
 
-![](figures/temporal_filters/mov_pulse_012-1.png){width="100%"}
+![](figures/temporal_filters/mov_pulse_012.png){width="100%"}
 
 @fig-mov_pulse_012 shows the FT for a sequence with one spatial
 dimension, $\ell(x,t)$, that contains a blurry rectangular pulse moving
@@ -195,7 +195,7 @@ memory. However, if we are processing a streamed video, we will have to
 bound and shift the filter to make it causal, which will result in a
 delay in the output.
 
-![](figures/temporal_filters/seq_filtered_kernel-1.png){width="100%"}
+![](figures/temporal_filters/seq_filtered_kernel.png){width="100%"}
 
 @fig-sec_filtered_blura shows one sequence and @fig-sec_filtered_blurb
 shows the sequence filtered with the Gaussian from
@@ -205,7 +205,7 @@ strongly blurred across time. The moving objects show motion blur and
 are strongly affected by the temporal blur, while the static background
 is only affected by the spatial width of the Gaussian.
 
-![](figures/temporal_filters/seq_filtered_blur-1.png){width="100%"}
+![](figures/temporal_filters/seq_filtered_blur.png){width="100%"}
 
 How could we create a filter that keeps sharp objects that move at some
 velocity $(v_x,v_y)$ while blurring the rest? @fig-sec_filtered_blurc
@@ -292,7 +292,7 @@ size $7 \times 7 \times 7$. Figures
 reference="fig:gaussian_seq"}(b,c and d) show the filter $h$ for
 different velocities: $(v_x,v_y) =$ $(0,0)$, $(1,0)$ and $(-1,0)$.
 
-![](figures/temporal_filters/gaussians_xyt_seq-1.png){width="100%"}
+![](figures/temporal_filters/gaussians_xyt_seq.png){width="100%"}
 
 @fig-gaussian_xyt_section shows a different visualization of the same
 filter $h$ from equation (@eq-spt_nulling_filter). Each image in
@@ -301,7 +301,7 @@ spatiotemporal Gaussian derivatives as the ones shown in
 @fig-gaussian_seq. Both visualizations are equivalent and help to
 understand how the filter works.
 
-![](figures/temporal_filters/gaussians_xyt_section-1.png){width="100%"}
+![](figures/temporal_filters/gaussians_xyt_section.png){width="100%"}
 
 Such a filter $h$ will cancel any objects moving at the velocity
 $(v_x,v_y)$. By using different filters, each one computing derivatives
@@ -309,7 +309,7 @@ a long different space-time orientations, we can create output sequences
 where specific objects disappear, as shown in @fig-tunedfilter. This
 filter is called a **nulling filter** @Darrell93.
 
-![](figures/temporal_filters/seq_filtered_der-1.png){width="100%"}
+![](figures/temporal_filters/seq_filtered_der.png){width="100%"}
 
 Note that despite that we assumed that the sequence contained a single
 moving object when deriving the formulation for the nulling filter, the

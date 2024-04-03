@@ -24,7 +24,7 @@ camera: for instance, how high and large is the table? We will also
 answer questions about the camera, like how high is the camera above the
 floor?
 
-![](figures/imaging_geometry/world_and_camera_coordinates-1.png){width="100%"}
+![](figures/imaging_geometry/world_and_camera_coordinates.png){width="100%"}
 
 In settings where we have multiple cameras we will have to be able to
 transform the coordinates frames between cameras. And finally, to
@@ -44,7 +44,7 @@ But before we move into the material, we are sure you would like to see
 the picture that the standing character from the previous sketch took.
 Here it is:
 
-![](figures/imaging_geometry/the_picture-1.png){width=".25"}
+![](figures/imaging_geometry/the_picture.png){width=".25"}
 
 ## 3D Camera Projections in Homogeneous Coordinates
 
@@ -64,7 +64,7 @@ geometry and homogeneous coordinates are tools that simplify those
 algebraic relations, and thus simplify many of the equations that
 involve geometric transformations.
 
-![](figures/imaging_geometry/camera_centric-1.png){width="80%"}
+![](figures/imaging_geometry/camera_centric.png){width="80%"}
 
 To write points in 3D space in homogeneous coordinates, we add a fourth
 coordinate to the three coordinates of Euclidean space, as described in
@@ -178,7 +178,7 @@ image sampling by the sensor. We need to account for the perspective
 projection of the point, $\mathbf{P}$, described in camera coordinates,
 to pixel coordinates in the sensor plane of the camera.
 
-![](figures/imaging_geometry/pinhole_and_sensor-1.png){width="100%"}
+![](figures/imaging_geometry/pinhole_and_sensor.png){width="100%"}
 
 The units of the position in pixel space may be different than those of
 the world coordinates, which scales the focal length, $f$, in equation
@@ -244,7 +244,7 @@ which means the signs of $a$ and $b$ will be negative. This is the
 convention used by Python and OpenCV. @fig-conventions shows two
 different common conventions.
 
-![](figures/imaging_geometry/conventions_coordinates-1.png){width="100%"}
+![](figures/imaging_geometry/conventions_coordinates.png){width="100%"}
 
 ### From Pixels to Rays {#sec-pixel_to_rays}
 
@@ -264,7 +264,7 @@ origin along the $Z$-axis (@fig-coordinate_systems_ray). Therefore, in
 where $f$ is the focal length, $X_c=x$, and $Y_c=y$, as illustrated in
 @fig-coordinate_systems_ray.
 
-![](figures/imaging_geometry/light_ray-1.png){width="75%"}
+![](figures/imaging_geometry/light_ray.png){width="75%"}
 
 The ray that connects the camera center and the point $\mathbf{p}$ is
 $\lambda (x,y,f)$, with $\lambda$ being a positive real number. Any 3D
@@ -401,7 +401,7 @@ finally translating it by $\mathbf{T}$ (the order of these two
 operations matters). We use the inverse of $\mathbf{R}$ (equal to its
 transpose) to simplify the derivations later.
 
-![](figures/imaging_geometry/world_and_camera_coordinates_2-1.png){width="70%"}
+![](figures/imaging_geometry/world_and_camera_coordinates_2.png){width="70%"}
 
 We are now given a point in the world $\mathbf{P}_W$, with its
 coordinates are described in terms of the world-coordinate system. Our
@@ -591,7 +591,7 @@ build models for different camera types such as orthographic cameras,
 weak-perspective model, affine cameras, and so on.
 @fig-summary_camera_projection summarizes this section.
 
-![](figures/imaging_geometry/summary_camera_model-1.png){width="80%"}
+![](figures/imaging_geometry/summary_camera_model.png){width="80%"}
 
 In the rest, we will usually refer to the camera projection matrix,
 which includes both intrinsic as extrinsic parameters as:
@@ -609,7 +609,7 @@ Let's write down the full camera model for a few concrete scenarios that
 are also of practical relevance. The four scenarios we will consider
 have growing complexity as shown in @fig-camera_calibration_scenarios.
 
-![](figures/imaging_geometry/camera_calibration_scenarios-1.png){width="100%"}
+![](figures/imaging_geometry/camera_calibration_scenarios.png){width="100%"}
 
 . We will start with a camera located at the origin of the
 world-coordinate systems, as shown in
@@ -764,7 +764,7 @@ equations, their eyes will be located at the position
 $y = a \tan(\theta)$ in the picture, which is independent of $Z$ and the
 same vertical location as the horizon line.
 
-![](figures/imaging_geometry/eyes_location-1.png){width=".9"}
+![](figures/imaging_geometry/eyes_location.png){width=".9"}
 
 Note that if $a$ is known (i.e., if the camera is calibrated), then we
 can infer $\theta$ by locating the horizon line in the image.
@@ -1099,7 +1099,7 @@ locations, $\mathbf{p}'_i$, of their projections. The reprojection error
 is the distance between those points, as shown in
 @fig-reprojection_error.
 
-![](figures/imaging_geometry/reprojection_error-1.png){width=".6"}
+![](figures/imaging_geometry/reprojection_error.png){width=".6"}
 
 The reprojection error can be evaluated with the loss:
 $$\sum_{i=1}^N \|\mathbf{p}_i - \mathbf{p}'_i \|^2=\sum_{i=1}^N 
@@ -1153,7 +1153,7 @@ points and their corresponding image coordinates. The image coordinates
 are approximated also and are collected manually. We use Adobe Photoshop
 to read the pixel coordinates.
 
-![](figures/imaging_geometry/correspondences_img-1.png){width="100%"}
+![](figures/imaging_geometry/correspondences_img.png){width="100%"}
 
 Photoshop has the image coordinates origin on the top left. Our
 convention has been to put the origin on the bottom and the $x$-axis
@@ -1240,7 +1240,7 @@ correct. @fig-result_toymodel_3dscene_and_estimated_camera shows a
 visualization of the annotated 3D points and the inferred camera
 location and orientation. The figure shows three different viewpoints.
 
-![](figures/imaging_geometry/result_toymodel_3dscene_and_estimated_camera_b-1.png){width="100%"}
+![](figures/imaging_geometry/result_toymodel_3dscene_and_estimated_camera_b.png){width="100%"}
 
 ## Concluding Remarks
 

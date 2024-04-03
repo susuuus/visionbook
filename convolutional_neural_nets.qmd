@@ -331,7 +331,7 @@ dilations $d_k=1$, $d_k=2$, and $d_k=4$ together with the magnitude of
 the DFT of the three resulting kernels
 (@fig-convolutional_neural_nets:aliasing_dilated_kernel_binomial).
 
-![](./figures/convolutional_neural_nets/aliasing_dilated_kernel_binomial-1.png){width="100%"}
+![](./figures/convolutional_neural_nets/aliasing_dilated_kernel_binomial.png){width="100%"}
 
 When using the original binomial filter (which corresponds to $d_k=1$)
 the DFT shows that the filter is a low-pass filter. When applying
@@ -381,7 +381,7 @@ shows several multiscale kernels that can be obtained by the
 convolutions of three dilated kernels. Can you guess which kernels were
 used?
 
-![](./figures/convolutional_neural_nets/dilated_examples-1.png){width="100%"}
+![](./figures/convolutional_neural_nets/dilated_examples.png){width="100%"}
 
 As the figure shows, the cascade of three dilated convolutions can
 generate a large family of filters with different scales, orientations,
@@ -413,7 +413,7 @@ such separable filters are given below
 
 
 
-![](./figures/convolutional_neural_nets/kernels_separable_aprox-1.png){width=".6"}
+![](./figures/convolutional_neural_nets/kernels_separable_aprox.png){width=".6"}
 
 Some important kernels are nonseparable but can be approximated by a
 linear combination of a small number of separable filters. For instance,
@@ -421,7 +421,7 @@ the Gaussian Laplacian is nonseparable but can be approximated by a
 separable filter as shown here
 (@fig-convolutional_neural_nets:laplacian_separable_aprox):
 
-![](./figures/convolutional_neural_nets/laplacian_separable_aprox-1.png){width=".6"}
+![](./figures/convolutional_neural_nets/laplacian_separable_aprox.png){width=".6"}
 
 The diagonal Gaussian derivative is another nonseparable kernel. When
 using a $3 \times 3$ kernel to approximate it we have: $$\mathbf{w} = 
@@ -658,7 +658,7 @@ classes as: $0$ (vertical) and $1$ (horizontal). A few samples from the
 training set are shown in
 @fig-convolutional_neural_nets:oriented_bars_cnn_trainingset.
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_trainingset-1.png){width="100%"}
+![](./figures/convolutional_neural_nets/oriented_bars_cnn_trainingset.png){width="100%"}
 
 To solve this problem we use the CNN defined before with two
 convolutional channels $C=2$ in the first layer. Once we train the
@@ -667,7 +667,7 @@ output on the test set is 100 percent correct (there are only three
 errors out of 10,000 test images). Example images from the test set are
 shown in @fig-convolutional_neural_nets:oriented_bars_cnn_testset.
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_testset-1.png){width="100%"}
+![](./figures/convolutional_neural_nets/oriented_bars_cnn_testset.png){width="100%"}
 
 ### Network Visualization
 
@@ -685,7 +685,7 @@ vertical derivative of a Gaussian (maybe closer to a second derivative).
 In fact, the DFT of each kernel shows that they are quite selective to a
 particular band on frequency content in the image.
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_kernels-1.png){width="100%"}
+![](./figures/convolutional_neural_nets/oriented_bars_cnn_kernels.png){width="100%"}
 
 The fully connected layer has learnt the weights: $$\mathbf{W} =  
 \left[
@@ -713,7 +713,7 @@ following test images
 contain different oriented structures but no lines, and still captures
 our notion of what should be the correct generalization of the behavior.
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_generalization-1.png){width="100%"}
+![](./figures/convolutional_neural_nets/oriented_bars_cnn_generalization.png){width="100%"}
 
 In fact, the network seems to perform correctly even with these new
 images that come from a distribution different from the training set.
@@ -740,7 +740,7 @@ $\cos (\pi n / 3)$, we can move the spectral content horizontally as
 shown in
 @fig-convolutional_neural_nets:oriented_bars_cnn_test_adversarial_creation1.
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial_creation1-1.png){width="100%"}
+![](./figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial_creation1.png){width="100%"}
 
 The lines still look horizontal to us, but their spectral content now is
 higher in the region that overlaps with the vertical line detector
@@ -749,7 +749,7 @@ have lines with this *sinusoidal texture*, it produces the wrong
 classification results for all the images
 (@fig-convolutional_neural_nets:oriented_bars_cnn_test_adversarial)!
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial-1.png){width="100%"}
+![](./figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial.png){width="100%"}
 
 We have just designed an manually! The question then could be as
 follows: If it is not detecting line orientations, what is it really

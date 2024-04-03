@@ -140,7 +140,7 @@ corresponding to distribution A,
 @fig-bias_and_shift:training_test_sets(bottom-right). In each case, the
 fitted model is shown as a dashed line.
 
-![](figures/bias_and_shift/toy_example/training_test_sets-1.png){width="100%"}
+![](figures/bias_and_shift/toy_example/training_test_sets.png){width="100%"}
 
 When training and testing is done using samples from the same
 distribution (A to A, or B to B) the learned model (best fit) passes
@@ -184,7 +184,7 @@ hypothesis space. But we can check what happens in this toy example.
 error (vertical axis) when evaluating on dataset A as a function of the
 amount of training data (horizontal axis).
 
-![](figures/bias_and_shift/toy_example/test_as_function_of_data-1.png){width="60%"}
+![](figures/bias_and_shift/toy_example/test_as_function_of_data.png){width="60%"}
 
 Interestingly, both training sets (A and B) succeed in reducing the
 generalization error on the test set of dataset A when more training
@@ -223,7 +223,7 @@ world it would be impossible to win the game, yet researchers with
 experience on these datasets can get around 75 percent of the matches
 right @Torralba2011.
 
-![](figures/bias_and_shift/datasetsJeopardy-1.png){width="100%"}
+![](figures/bias_and_shift/datasetsJeopardy.png){width="100%"}
 
  One can also train a classifier to play the *Name That
 Dataset!* game automatically. We can do that by selecting a random
@@ -332,7 +332,7 @@ appear on the right side, and most of the mugs are fully visible,
 without any occlusions from hands or other objects, and the only two
 cases of occlusions from mugs occluded by another mug.
 
-![](figures/bias_and_shift/mugs-1.png){width="100%"}
+![](figures/bias_and_shift/mugs.png){width="100%"}
 
 The example of the mug, although a bit of a caricature, helps to
 understand some of the biases that come from the particular collection
@@ -344,7 +344,7 @@ under specific searches).
 "horse." Interestingly many of the pictures are similar to the horse
 canonical orientation shown in @fig-bias_and_shift:palmer_1981enhanced.
 
-![](figures/bias_and_shift/horses-1.png){width="100%"}
+![](figures/bias_and_shift/horses.png){width="100%"}
 
 ### Annotation Bias
 

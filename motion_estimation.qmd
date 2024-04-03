@@ -53,7 +53,7 @@ h_\theta \left( \boldsymbol\ell_1, \boldsymbol\ell_2 \right)$$ One of
 the first approaches to use this formulation with neural networks was
 FlowNet @Dosovitskiy2015. The architecture is simple.
 
-![](figures/optical_flow/supervised_estimation-1.png){width=".8"}
+![](figures/optical_flow/supervised_estimation.png){width=".8"}
 
 The direct approach depicted in @fig-supervised_estimation learns to
 estimate optical flow directly from a pair of frames. This architecture
@@ -84,7 +84,7 @@ follows the same steps as traditional approaches:
     the optical flow to warp the features and the next finer level of
     the pyramid.
 
-![](figures/optical_flow/supervised_estimation_modular-1.png){width=".8"}
+![](figures/optical_flow/supervised_estimation_modular.png){width=".8"}
 
 Other variations over this architecture incorporate some of the concepts
 we studied before, such as coarse-to-fine refinement, matching, and

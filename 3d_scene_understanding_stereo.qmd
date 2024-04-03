@@ -15,7 +15,7 @@ changes as a function of their depth, which allows us to form a 3D
 interpretation of the ship when viewing the image with the glasses
 (@fig-titanic\[b\]).
 
-![](figures/3d_scene_understanding/titanic-1.png){width="100%"}
+![](figures/3d_scene_understanding/titanic.png){width="100%"}
 
 In this chapter, we study how to compute depth from a pair of images
 from spatially offset cameras, such as those of @fig-titanic. There are
@@ -58,7 +58,7 @@ methods. The first one uses a single observation point but will use the
 horizon line as a reference. The second method will use two observation
 points. Both methods are illustrated in @fig-2boats.
 
-![](figures/3d_scene_understanding/boats-1.png){width="100%"}
+![](figures/3d_scene_understanding/boats.png){width="100%"}
 
 The first method measures the location of the boat relative to the
 horizon line. An observer is standing on top of an elevated point (a
@@ -103,7 +103,7 @@ statistics of the natural world. But this seems not to affect our
 ability to compute the displacements between the two images and perceive
 3D structure.
 
-![](figures/3d_scene_understanding/random_dot_stereogram-1.png){width="100%"}
+![](figures/3d_scene_understanding/random_dot_stereogram.png){width="100%"}
 
 ### Building a Stereo Pinhole Camera
 
@@ -196,7 +196,7 @@ for the projection in both cameras will be equal, $y_L=y_R$. Therefore,
 we can look at the top view of the setting as shown in @fig-stereob. We
 consider the depth estimate within a single image row.
 
-![](figures/3d_scene_understanding/triangularization_stereo-1.png){width="100%"}
+![](figures/3d_scene_understanding/triangularization_stereo.png){width="100%"}
 
 The point $\mathbf{P}$, for which we want to estimate the depth, $Z$,
 appears in the left camera at position $x_L$ and in the right camera at
@@ -445,7 +445,7 @@ corresponding point in the image from camera 2. The following sketch
 (@fig-epipolar_1) shows the setting of the problem we are trying to
 solve.
 
-![](figures/3d_scene_understanding/epipolar_1-1.png){width="70%"}
+![](figures/3d_scene_understanding/epipolar_1.png){width="70%"}
 
 Are there any geometric constraints that can help us to identify
 candidate matches? We know that the observed point in camera 1,
@@ -453,7 +453,7 @@ $\mathbf{p}_1$, corresponds to a 3D point that lies within the ray that
 connects the camera 1 origin and $\mathbf{p}_1$ (shown in red in
 @fig-epipolar_3):
 
-![](figures/3d_scene_understanding/epipolar_3-1.png){width="70%"}
+![](figures/3d_scene_understanding/epipolar_3.png){width="70%"}
 
 Therefore, $\mathbf{p}_2$ is constrained to be within the line that
 results of projecting the ray into camera 2. Remember that a line in 3D
@@ -482,7 +482,7 @@ point, $\mathbf{P}$, in the world, we define the following objects:
     location does not depend on the point $\mathbf{P}$. Therefore, all
     the epipolar lines intersect at the same epipoles.
 
-![](figures/3d_scene_understanding/epipolar_geometry-1.png){width="80%"}
+![](figures/3d_scene_understanding/epipolar_geometry.png){width="80%"}
 
 In the example shown in @fig-epipolar_geometry_terminology, as both
 cameras are only rotated along their vertical axis and there is no
@@ -637,7 +637,7 @@ play a game. @fig-epipolarlinesgame shows a set of camera pairs and a
 set of epipolar lines. Can you guess what camera pair goes with what set
 of epipolar lines? [^1]
 
-![](figures/3d_scene_understanding/epipolar_game_play-1.png){width="100%"}
+![](figures/3d_scene_understanding/epipolar_game_play.png){width="100%"}
 
 To solve the game, visualize mentally the cameras and think about how
 rays from the origin of one camera will be seen from the other camera.

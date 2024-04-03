@@ -113,7 +113,7 @@ limited signal is a signal with no spectral content above a frequency
 $w_{max}$. An example of band-limited signal is a signal with the
 following Fourier transform:
 
-![](figures/Image_processing_sampling/band_limited_signal-1.png){width="30%"}
+![](figures/Image_processing_sampling/band_limited_signal.png){width="30%"}
 
 The **sampling theorem** (also known as Nyquist theorem) states that for
 a signal to be perfectly reconstructed from a set of samples (under the
@@ -229,7 +229,7 @@ frequency content in $\mathscr{L}(w)$ will affect the low frequency
 content of $\mathscr{L}_{\delta} (w)$, and this is exactly what produces
 aliasing.
 
-![](figures/Image_processing_sampling/sketch_aliasing-1.png){width="100%"}
+![](figures/Image_processing_sampling/sketch_aliasing.png){width="100%"}
 
 The Nyquist limit is reached when the maximum frequency, $w_{max}$, with
 spectral content in $\mathscr{L}(w)$ overlaps with its translated copy.
@@ -280,7 +280,7 @@ shows how the linear superposition of all the scaled and shifted sincs
 produces a smooth interpolation of the sampled function. Note how the
 zero crossings of each sinc coincide with the sample locations.
 
-![](figures/Image_processing_sampling/sampling_reconstruction2-1.png){width="100%"}
+![](figures/Image_processing_sampling/sampling_reconstruction2.png){width="100%"}
 
 @fig-alias1d illustrates how the reconstruction degrades as a function
 of the sampling rate. In this example, there is one band-limited input
@@ -295,7 +295,7 @@ information will be lost, making it impossible (without any additional
 prior information) to reconstruct the continuous function from its
 samples.
 
-![](figures/Image_processing_sampling/sampling_FT4-1.png){width="100%"}
+![](figures/Image_processing_sampling/sampling_FT4.png){width="100%"}
 
 
 
@@ -337,7 +337,7 @@ values.
 All of them can be written as a linear convolution with a kernel $h(t)$
 as shown in @fig-sampling_reconstruction3:
 
-![](figures/Image_processing_sampling/sampling_reconstruction3-1.png){width="100%"}
+![](figures/Image_processing_sampling/sampling_reconstruction3.png){width="100%"}
 
 The nearest neighbor interpolation is the result of the convolution of
 $\ell_\delta (t)$ with a box of width $T_s$. The linear interpolation,
@@ -364,7 +364,7 @@ obtain an **hexagonal sampling**. We can also place the samples at
 random locations (**irregular sampling**). @fig-sampling_grids shows
 different sampling patterns.
 
-![](figures/Image_processing_sampling/sampling_grids-1.png){width="100%"}
+![](figures/Image_processing_sampling/sampling_grids.png){width="100%"}
 
 Now we can ask the following question: What is the optimal 2D sample
 arrangement given a fixed number of samples? What we want is to chose
@@ -417,7 +417,7 @@ has spectral content within that region, then there will be no aliasing.
 The optimal sampling will be the one that makes that region as large as
 possible for a fixed number of samples.
 
-![](figures/Image_processing_sampling/sampling_grids_FT-1.png){width="100%"}
+![](figures/Image_processing_sampling/sampling_grids_FT.png){width="100%"}
 
 The optimal sampling strategy is the regular hexagonal sampling. This is
 not the sampling used in computer vision as all images are always
@@ -460,7 +460,7 @@ magnitude of the DFT of the sampled image (it corresponds to the region
 inside the green square in @fig-aliasingFTzebrab. The DFT changes
 substantially, due to aliasing, from one resolution to the next one.
 
-![](figures/Image_processing_sampling/aliasing_ft_abc1-1.png){width="100%"}
+![](figures/Image_processing_sampling/aliasing_ft_abc1.png){width="100%"}
 
 In order to reduce aliasing artifacts we need to filter the continuous
 signal with a low-pass filter in order to make it band-limited. Then we
@@ -473,7 +473,7 @@ sampling. Each resolution requires a different filter. The anti-aliasing
 filter can be a box filter like in equation (@eq-boxfilterFT) with the
 support equal to the green region in @fig-aliasingFTzebrab.
 
-![](figures/Image_processing_sampling/aliasing_ft_abc2-1.png){width="100%"}
+![](figures/Image_processing_sampling/aliasing_ft_abc2.png){width="100%"}
 
 ## Spatiotemporal Sampling
 

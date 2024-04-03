@@ -308,7 +308,7 @@ respecting the lensmaker's formula (), then the object will form an
 image in sharp focus in the sensor plane. But objects in front of the
 plane of focus by $\delta_a$ will, in general, come to focus some
 distance $\delta_b$ behind the sensor plane
-@Levoy2010.](figures/imaging/circleOfConfusion-1.png){#fig-circleOfConfusion
+@Levoy2010.](figures/imaging/circleOfConfusion.png){#fig-circleOfConfusion
 width="70%"}
 
 Objects closer or further from the focal plane will come into focus

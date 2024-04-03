@@ -167,7 +167,7 @@ to recover the scenes that are the cause of those images.
 images not as light patterns but as pictures of real three-dimensional
 (3D) scenes. (a) Occluding figures, (b) R. Shepard's turning tables
 illusion, and (c) E. Adelson's Checkershadow illusion.
-](figures/taxonomy/measuringScene2-1.png){#fig-measuringScene
+](figures/taxonomy/measuringScene2.png){#fig-measuringScene
 width="100%"}
 
 In , we see a red square occluding a smaller blue square. But why do we
@@ -327,7 +327,7 @@ rays by the eye traveled on **straight lines** and formed a cone that
 reached the scene. 
 
 ::: {.column-margin}
-![Modeling light as traveling along straight lines was a major discovery. This simple model of light sets the foundation upon which image formation, scene geometry, and computer vision rests.](figures/taxonomy/eye_w_fire_aina-1.png)
+![Modeling light as traveling along straight lines was a major discovery. This simple model of light sets the foundation upon which image formation, scene geometry, and computer vision rests.](figures/taxonomy/eye_w_fire_aina.png)
 :::
 
 
@@ -374,7 +374,7 @@ known; so, AB is also known" @Burton1945.
 
 ![Adapted from Euclid (325 BC). The color and text, added here for
 clarity, is not part of the original figure @Burton1945.
-](figures/taxonomy/euclid-1.png){#fig-euclid width="60%"}
+](figures/taxonomy/euclid.png){#fig-euclid width="60%"}
 
 
 
@@ -456,7 +456,7 @@ the eye has three classes of receptors, each sensitive to different
 wavelengths of light.
 
 :::{.column-margin}
-![](figures/taxonomy/trichromacy_helmholtz-1.png){width=120}
+![](figures/taxonomy/trichromacy_helmholtz.png){width=120}
 :::
 
 
@@ -560,7 +560,7 @@ find out when those elements were grouped together into larger elements.
 ![Gestalt grouping rules for perceptual organization. Most of the
 examples are recreated from @Palmer1999. The closure pattern is from
 Koffka @Koffka1935, who modified it from
-Kohler.](figures/taxonomy/gestalt-1.png){#fig-gestalt width="100%"}
+Kohler.](figures/taxonomy/gestalt.png){#fig-gestalt width="100%"}
 
 Gestalt psychologists called **grouping laws** the visual cues they
 uncovered. However, they are not strictly laws and not all grouping cues
@@ -645,7 +645,7 @@ perceptual grouping to explain lightness perception (@fig-koffka_ring).
 ![(a) A ring of uniform gray. (b) Koffka ring and (c) a variant
 introduced by Adelson @Adelson99. In all the examples, the two sides of
 the ring are
-identical.](figures/taxonomy/koffka_ring-1.png){#fig-koffka_ring
+identical.](figures/taxonomy/koffka_ring.png){#fig-koffka_ring
 width="100%"}
 
 In each display, the two sides of the ring have the same gray level.
@@ -682,7 +682,7 @@ shown in . In this case, we see a triangle that is not really there.
 adding boundaries to the occluder, the letter B becomes clearer. (c) How
 many squares are there? Behind the occluder are there two squares or
 just one rectangle? (d) Kanizsa triangle. Illusory contours appear at
-the triangle sides.](figures/taxonomy/kanizsa-1.png){#fig-kanizsa
+the triangle sides.](figures/taxonomy/kanizsa.png){#fig-kanizsa
 width="100%"}
 
 The Kanizsa triangle shows both amodal and modal completion. The circles
@@ -748,7 +748,7 @@ perception. Other notions of ecological importance are the concepts of
 Drawing by Gibson
 showing how few lines induce a strong 3D percept of a ground plane.\
 
-![](figures/taxonomy/gibson_cover_the_perception_of_visual_world-1.png){width=".3"}
+![](figures/taxonomy/gibson_cover_the_perception_of_visual_world.png){width=".3"}
 
 
 :::
@@ -772,7 +772,7 @@ observer themself ().
 ![The flow pattern in the optic array of a bird flying over the earth
 provides information about the environment and also about the bird.
 Figure recreated from
-@Gibson1966.](figures/taxonomy/gibson_bird-1.png){#fig-gibson_bird
+@Gibson1966.](figures/taxonomy/gibson_bird.png){#fig-gibson_bird
 width="70%"}
 
 Another key concept in Gibson's theory is the notion of **affordance**
@@ -889,7 +889,7 @@ a precise portion of the retina.
 Only stimulation within the **receptive field** (RF)
 of a neuron produces a response.\
 
-![](figures/taxonomy/receptive_field-1.png){width=".4"}
+![](figures/taxonomy/receptive_field.png){width=".4"}
 
 
 :::
@@ -947,7 +947,7 @@ OFF-center RF. (c-d) Two types of oriented simple cell. (e) Sketch of
 the response of the cell from (c) to an oriented bar with different
 orientations in the center of its RF. The gray bar corresponds to the
 moment the bar is
-visible.](figures/taxonomy/receptive_fields-1.png){#fig-receptivefields
+visible.](figures/taxonomy/receptive_fields.png){#fig-receptivefields
 width="100%"}
 
 Between 1955 and 1958, David H. Hubel invented a microelectrode that
@@ -1011,7 +1011,7 @@ into the primary visual cortex following a very regular architecture
 organized along hypercolumns. The koniocellular pathway projects into
 the color blobs in the upper layer of the visual cortex. Figure modified
 from
-@kandel:neural.](figures/taxonomy/visual_pathways_aina-1.png){#fig-visual_pathways
+@kandel:neural.](figures/taxonomy/visual_pathways_aina.png){#fig-visual_pathways
 width="80%"}
 
 
@@ -1107,7 +1107,7 @@ visual system.
 
 ![Necker cube illusion, introduced by Louis Albert Necker @Necker1832.
 Figure recreated from
-@Marr82.](figures/taxonomy/necker-1.png){#fig-necker_cube
+@Marr82.](figures/taxonomy/necker.png){#fig-necker_cube
 width=".9"}
 
 Marr postulated that these three levels of understanding can be studied
@@ -1159,7 +1159,7 @@ cube. Depth is represented by gray levels. Intensity increases with
 depth.
 
 ![Image of a cube, and its 2.5D sketch. Figure inspired from figure 4-2
-from @Marr82.](figures/taxonomy/sketch-1.png){#fig-sketch
+from @Marr82.](figures/taxonomy/sketch.png){#fig-sketch
 width=".9"}
 
 It is hard to overstate the influence that Marr's book had in shaping
@@ -1327,7 +1327,7 @@ algorithms was high.
 
 ![Enthusiasm for neural nets has gone up and down over time, with a
 period of roughly 25 years. What will happen
-next?](figures/taxonomy/neural_net_enthusiasm-1.png){#fig-taxonomy:neural_net_enthusiam
+next?](figures/taxonomy/neural_net_enthusiasm.png){#fig-taxonomy:neural_net_enthusiam
 width="70%"}
 
 In 1969, Marvin Minsky and Seymour Papert published a book titled

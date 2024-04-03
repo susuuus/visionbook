@@ -189,7 +189,7 @@ very different perception.
 
 ![Line drawings. The one on the left seems to correspond to an
 horizontal surface while the one on the right looks like a vertical
-surface.](figures/visionscience/vertical_or_horizontal-1.png){#fig-vertical_or_horizontal
+surface.](figures/visionscience/vertical_or_horizontal.png){#fig-vertical_or_horizontal
 width="100%"}
 
 In the arrangement in the left, there are two **vanishing points** (the
@@ -228,12 +228,12 @@ talk more about how camera motion relates to distance in .
 Principle of continuity. In the following drawing, we
 see one wave and one line:\
 
-![](figures/visionscience/principle_continuity_1-1.png){width=".6"}
+![](figures/visionscience/principle_continuity_1.png){width=".6"}
 
 \
 Despite this, other groupings are also possible.\
 
-![](figures/visionscience/principle_continuity_2-1.png){width=".6"}
+![](figures/visionscience/principle_continuity_2.png){width=".6"}
 
 
 :::

@@ -14,7 +14,7 @@ fi
 
 sed -i '' -E 's/\\\[[-]?[0-9]*\.?[0-9]+(in|cm|pt)\\\]//g' "$input_file"
 sed -i '' 's/\.pdf/.png/g' "$input_file"
-sed -i '' 's/\.eps/\-1.png/g' "$input_file"
+sed -i '' 's/\.eps/\.png/g' "$input_file"
 sed -i '' -E 's/#fig:([^ ]+)/#fig-\1/g' "$input_file"
 sed -i '' 's/\\\\linewidth//g' "$input_file" 
 # sed -i '' -E 's/(width=".*?)(\\\\linewidth")/\1"/g' "$input_file"

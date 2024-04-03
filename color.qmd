@@ -54,9 +54,9 @@ left of the photograph. The spectrograph gives an immediate visual
 representation of the spectral components of colors in the world. Some
 examples are shown in @fig-examples1.
 
-![](figures/color/cd_spectrometer_setup-1.png){width="100%"}
+![](figures/color/cd_spectrometer_setup.png){width="100%"}
 
-![](figures/color/lightspectra_objects-1.png){width="100%"}
+![](figures/color/lightspectra_objects.png){width="100%"}
 
 ### Light Power Spectra
 
@@ -76,7 +76,7 @@ spectrograph was pointed toward (left images). @fig-sources shows the
 spectrum of a blue sky, plotted as intensity as a function of
 wavelength.
 
-![](figures/color/Spectrum_of_blue_sky-1.png){width="70%"}      
+![](figures/color/Spectrum_of_blue_sky.png){width="70%"}      
 ![](figures/color/IMG_0122.jpg){width=".15"}
 
 ### The Color Appearance of Different Spectral Bands
@@ -113,7 +113,7 @@ nm band, is called magenta, or minus green. Red and green together, with
 spectral power from 500--700 nm, make yellow, or minus blue
 (@fig-names).
 
-![](figures/color/cartoonColor2-1.png){width="100%"}
+![](figures/color/cartoonColor2.png){width="100%"}
 
 ### Light Reflecting from Surfaces
 
@@ -145,7 +145,7 @@ Some reflectance spectra of real-world surfaces are plotted in
 @fig-sourcerefl. The flower *Hepatica Nobilis* (solid line) is blue,
 while *Pyrostegia venusta* (dotted line) is orange.
 
-![](figures/color/flowerSpectra-1.png){width="100%"}
+![](figures/color/flowerSpectra.png){width="100%"}
 
 The reflectance spectrum of a surface often carries valuable information
 about the material being viewed, such as whether a fruit is ripe,
@@ -509,13 +509,13 @@ reference="fig:girls4"}. This effect is commonly exploited in image
 compression, allowing some image components to be sampled more coarsely
 than others.
 
-![](figures/color/nonblur_girls-1.png){width="100%"}
+![](figures/color/nonblur_girls.png){width="100%"}
 
-![](figures/color/blur_rgb_girls-1.png){width="100%"}
+![](figures/color/blur_rgb_girls.png){width="100%"}
 
-![](figures/color/nonblur_lab_girls-1.png){width="100%"}
+![](figures/color/nonblur_lab_girls.png){width="100%"}
 
-![](figures/color/blur_lab_girls-1.png){width="100%"}
+![](figures/color/blur_lab_girls.png){width="100%"}
 
 ## Concluding Remarks
 

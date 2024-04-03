@@ -138,7 +138,7 @@ origin): $$\begin{aligned}
 0 & \sin(\theta) & \cos(\theta) 
 \end{bmatrix}.
 \end{aligned}$$
-![](figures/simplesystem_revisited/projection-revisted-1.png){width=".24"}
+![](figures/simplesystem_revisited/projection-revisted.png){width=".24"}
 In order to apply equation (@eq-recoverworldcoord), we need to define
 certain parameters: $d_0$, $n_0$, $m_0$, $a$, and $\theta$. Although we
 could determine these parameters using a calibration image, in this
@@ -236,7 +236,7 @@ space, and it reasons about perspective geometry to find vanishing
 points and estimate shape (as we have discussed along many chapters in
 this book).
 
-![](figures/simplesystem_revisited/chatgpt_blockworld-1.png){width="100%"}
+![](figures/simplesystem_revisited/chatgpt_blockworld.png){width="100%"}
 
 But it's not all solved. Because if we reconstruct the image from this
 text, it looks not quite right: @fig-chatgpt_blockworld2. What is
@@ -245,7 +245,7 @@ it is likely that this particular example will be fixed, but there will
 be other failures. And some of those failures will give clues to what is
 the next fundamental question that will need to be addressed.
 
-![](figures/simplesystem_revisited/chatgpt_blockworld_2-1.png){width=".5"}
+![](figures/simplesystem_revisited/chatgpt_blockworld_2.png){width=".5"}
 
 ## Unsolved Solved Computer Vision Problems
 
@@ -320,4 +320,4 @@ With learning-based systems we find ourselves doing experiments similar
 to the ones performed by psychophysics in trying to understand the
 mechanisms implemented by the human visual system.
 
-![](figures/simplesystem_revisited/gibson_bird-1.png){width=".06"}
+![](figures/simplesystem_revisited/gibson_bird.png){width=".06"}

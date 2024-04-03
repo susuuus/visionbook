@@ -366,7 +366,7 @@ the image that would be hard to control using the pixels directly.
 @fig-edit_with_derivatives shows an example of image editing using
 derivatives.
 
-![](figures/derivatives/stop_impainting-1.png){width="100%"}
+![](figures/derivatives/stop_impainting.png){width="100%"}
 
 First, the image is **encoded** using derivatives along the $x$ and $y$
 dimensions: $$\mathbf{r} = 
@@ -619,11 +619,11 @@ containing a square and a circle. Different derivatives detect a diverse
 set of image features. However, this representation might not be very
 useful as it is not rotationally invariant.
 
-![](figures/spatial_filters/gauss_derivatives_triangle-1.png){width="80%"}
+![](figures/spatial_filters/gauss_derivatives_triangle.png){width="80%"}
 
-![](figures/spatial_filters/gauss_derivatives_triangle_FT-1.png){width="80%"}
+![](figures/spatial_filters/gauss_derivatives_triangle_FT.png){width="80%"}
 
-![](figures/derivatives/fig_gauss_derivatives_triangle_mondrian-1.png){width="80%"}
+![](figures/derivatives/fig_gauss_derivatives_triangle_mondrian.png){width="80%"}
 
 The Gaussian derivatives share many of the properties of the Gaussian.
 The convolution of two Gaussian derivatives of order $n$ and $m$ and
@@ -691,7 +691,7 @@ Sobel-Feldman operator has the profile of $D_1$ along the axis $u=0$ and
 it is proportional to the profile of $B_2$ along any section
 $v=constant$.
 
-![](figures/spatial_filters/DFTderivativeoperators-1.png){width="100%"}
+![](figures/spatial_filters/DFTderivativeoperators.png){width="100%"}
 
 @fig-DFTderivativeoperators compares the DFT of the four types of
 approximations of the derivatives that we have discussed. These
@@ -702,7 +702,7 @@ output of different derivative approximations to a simple input image
 containing a circle. In the next section we will discuss how to use
 these derivatives to extract other interesting quantities.
 
-![](figures/spatial_filters/circle-1.png){width="100%"}
+![](figures/spatial_filters/circle.png){width="100%"}
 
 ## Image Gradient and Directional Derivatives
 
@@ -793,7 +793,7 @@ Laplacian for three different values of $\sigma$. For values $\sigma>1$
 the resulting filter is band-pass, which is the expected behavior for
 the Gaussian Laplacian.
 
-![](figures/spatial_filters/DFTlaplacians-1.png){width="100%"}
+![](figures/spatial_filters/DFTlaplacians.png){width="100%"}
 
 In one dimension, the Laplacian can be approximated by
 $\left[ 1,-2,1 \right]$, which is the result of the convolution of two
@@ -994,7 +994,7 @@ is equal to the DC gain of the visual filter (here we have set up
 $\lambda = 2$ and $\sigma=5$). This results in the profile shown in
 @fig-EVS_sigma5_lambda2.
 
-![](figures/derivatives/EVS_sigma5_lambda2-1.png){width=".4"}
+![](figures/derivatives/EVS_sigma5_lambda2.png){width=".4"}
 
 The first thing worth pointing out is that the Fourier transform of the
 impulse response shown in shown in @fig-EVS_sigma5_lambda2 has a shape
@@ -1006,7 +1006,7 @@ and Robson chart, together with a radial section of the Fourier
 transform of $h$ from equation (@eq-humanmodel):
 
 ![](figures/spatial_filters/csf.jpg){width=".45"}
-![](figures/derivatives/dft_radial_EVS-1.png){width=".45"}
+![](figures/derivatives/dft_radial_EVS.png){width=".45"}
 
 This particular form of impulse response explains some visual illusions
 as shown in @fig-vasarely. This visual illusion is called the
@@ -1045,7 +1045,7 @@ $\begin{array}{ccc}
 &
 \includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_d.jpg}
 &
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_section-1.png}
+\includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_section.png}
 \\
 \text{(a)} & \text{(b)} & \text{(c)}
 \\
@@ -1053,7 +1053,7 @@ $\begin{array}{ccc}
 &
 \includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_b.jpg}
 &
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_section_b-1.png}
+\includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_section_b.png}
 \\
 \text{(d)} & \text{(e)} & \text{(f)}
 \end{array}$
@@ -1216,7 +1216,7 @@ $$\frac{\partial \log r(x,y)}{ \partial x} =  \left\{
 @fig-simultaneous2 shows how the image derivatives are decomposed into
 reflectance and illumination changes.
 
-![](figures/statistical_image_models/retinex_solution_b-1.png){width="100%"}
+![](figures/statistical_image_models/retinex_solution_b.png){width="100%"}
 
 Then, the image $\log r(x,y)$ is obtained by integrating the gradients,
 as shown in section
@@ -1226,7 +1226,7 @@ result. Finally, the illumination can be obtained as
 $l(x,y) = \ell(x,y)/r(x,y)$. The results are shown in
 @fig-simultaneous3.
 
-![](figures/statistical_image_models/retinex_solution_a-1.png){width="100%"}
+![](figures/statistical_image_models/retinex_solution_a.png){width="100%"}
 
 Note that the illumination derivatives have much lower magnitude than
 the reflectance derivatives; however they extend over much larger

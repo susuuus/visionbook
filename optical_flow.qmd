@@ -50,7 +50,7 @@ between them. This visualization using a color code was introduced in
 more direct visualization and it is sufficient for the examples we will
 work with.
 
-![](figures/optical_flow/visualization_optical_flow-1.png){width="100%"}
+![](figures/optical_flow/visualization_optical_flow.png){width="100%"}
 
 ### When Optical Flow and Motion Flow Are Not the Same
 
@@ -93,7 +93,7 @@ termination points are in view within the observation window (i.e., the
 aperture), it is impossible to measure the actual image motion. Only the
 component orthogonal to the moving structure can be measured.
 
-![](figures/optical_flow/apperture_problem-1.png){width=".9"}
+![](figures/optical_flow/apperture_problem.png){width=".9"}
 
 
 
@@ -156,7 +156,7 @@ remains onboard without getting confused by the indices and how the
 translation works, here is a simple toy example of a translation with
 $(u=1, v=0)$:
 
-![](figures/optical_flow/toy_motion_figure-1.png){width=".5"}
+![](figures/optical_flow/toy_motion_figure.png){width=".5"}
 
 The constant brightness assumption only approximately holds in reality.
 For it to be exact, we should have a scene with Lambertian objects
@@ -272,7 +272,7 @@ velocity of $(0,0.5)$ pixels/frame and the bottom one moves at
 $(-0.5, -0.5)$ pixels/frame (the figure shows frames $0$ and $10$ to
 make the motion more visible).
 
-![](figures/optical_flow/square_grandient_based_1-1.png){width=".4"}
+![](figures/optical_flow/square_grandient_based_1.png){width=".4"}
 
 To apply the gradient-based optical flow algorithm we need to compute
 the gradients along $x$, $y$, and $t$. In practice, the image
@@ -292,7 +292,7 @@ and temporal location in the $x-y-t$ volume). For the moving squares
 sequence, the spatial and temporal derivatives are shown in
 @fig-square_grandient_based_2.
 
-![](figures/optical_flow/square_grandient_based_2-1.png){width=".7"}
+![](figures/optical_flow/square_grandient_based_2.png){width=".7"}
 
 The next step consists of computing $\ell_x^2$, $\ell_x\ell_y$,
 $\ell_y^2$, $\ell_x\ell_t$, and $\ell_y\ell_t$ and blurring them with
@@ -300,7 +300,7 @@ the Gaussian kernel, $g$, which will then be used to build the matrix
 $\mathbf{A}$ at each pixel. @fig-square_grandient_based_3 shows the
 results.
 
-![](figures/optical_flow/square_grandient_based_3-1.png){width="100%"}
+![](figures/optical_flow/square_grandient_based_3.png){width="100%"}
 
 In order to compute the optical flow, we need to compute the matrix
 inverse $\mathbf{A}^{-1}$. This matrix depends only on the spatial
@@ -308,7 +308,7 @@ derivatives and thus is independent of the motion present in the scene.
 If we compute optical flow at each pixel, the result looks like the
 image in @fig-square_grandient_based_5.
 
-![](figures/optical_flow/square_grandient_based_5-1.png){width=".25"}
+![](figures/optical_flow/square_grandient_based_5.png){width=".25"}
 
 We can see that the result seems to be wrong for the motion estimated
 near the center of the side of each square. The inverse can only be
@@ -328,7 +328,7 @@ the estimated optical flow in the regions with $R > 2$. Harris proposed
 this formulation to avoid the computation of the eigenvalues at each
 pixel because it is computational expensive.
 
-![](figures/optical_flow/square_grandient_based_4-1.png){width=".7"}
+![](figures/optical_flow/square_grandient_based_4.png){width=".7"}
 
 The regions for which $R > 2$ will increase by making the apertures
 larger, which is achieved by using a Gaussian filter, $g$, with larger
@@ -367,7 +367,7 @@ initialization at the next level. We iterate this process until arriving
 at the highest possible resolution. This process is shown in
 @fig-multiscale_iterative_optical_flow.
 
-![](figures/optical_flow/multiscale_iterative_optical_flow-1.png){width="100%"}
+![](figures/optical_flow/multiscale_iterative_optical_flow.png){width="100%"}
 
 @fig-comparison_gradient_vs_iterative compares the optical flow
 computed using the gradient-based algorithm (i.e., one iteration) and
@@ -377,7 +377,7 @@ displacement between consecutive frames is close to four pixels and that
 makes the first-order Taylor approximation very poor. The multiscale
 method is capable of estimating large displacements.
 
-![](figures/optical_flow/comparison_gradient_vs_iterative-1.png){width="100%"}
+![](figures/optical_flow/comparison_gradient_vs_iterative.png){width="100%"}
 
 The photometric reconstruction can incorporate a regularization term
 penalizing fast variations on the estimated optical flow:

@@ -114,7 +114,7 @@ illusion, using very simple elements to produce the illusion. The effect
 becomes more intense as we move our eyes to explore different parts of
 the bicycle.
 
-![](figures/optical_flow/moving_bike-1.png){width="100%"}
+![](figures/optical_flow/moving_bike.png){width="100%"}
 
 The opposite visual illusion can also be achieved: perceiving no motion
 when there is movement. By creating sequences with isoluminant and
@@ -238,14 +238,14 @@ detecting the same logo, is not identical to the input patch. This
 discrepancy can be attributed to factors such as nondiscrete motion and
 the slight enlargement of the logo as the car approaches the camera.
 
-![](figures/optical_flow/matching_cost_figure-1.png){width="100%"}
+![](figures/optical_flow/matching_cost_figure.png){width="100%"}
 
 The patch size used to represent each pixel is the most important
 parameter in this algorithm.
 @fig-matching_optical_flow_patch_size_effect shows the effect of the
 choice of the parameter $s$ on the estimated optical flow.
 
-![](figures/optical_flow/matching_optical_flow_patch_size_effect-1.png){width=".8"}
+![](figures/optical_flow/matching_optical_flow_patch_size_effect.png){width=".8"}
 
 When using single pixels to represent each location, the matching fails
 in detecting true correspondences and the estimated motion field is very
@@ -302,7 +302,7 @@ reference="chapter-sampling"} and
 [\[chapter-temporal_filters\]](#chapter:temporal_filters){reference-type="ref"
 reference="chapter-temporal_filters"}.
 
-![](figures/optical_flow/ted_demo_motion_1-1.png){width="100%"}
+![](figures/optical_flow/ted_demo_motion_1.png){width="100%"}
 
 The signals, and magnitudes of their space-time Fourier transforms, are
 developed in
@@ -337,7 +337,7 @@ temporal frequencies, and multiplied by a sinc function over temporal
 frequency. The resulting Fourier transform magnitude is shown in
 @fig-motionIllusion2c.
 
-![](figures/optical_flow/ted_demo_motion_2-1.png){width="100%"}
+![](figures/optical_flow/ted_demo_motion_2.png){width="100%"}
 
 Because orientation in space-time tells motion direction (section
 [\[sect:modelingSequences\]](#sect:modelingSequences){reference-type="ref"

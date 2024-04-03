@@ -68,7 +68,7 @@ details to the resulting function making it closer to the ramp. These
 plots show the signal in the interval $t \in (-4 \pi, 4 \pi)$ to reveal
 the periodic nature of the result of the sine series.
 
-![](figures/Image_processing_fourier/FourierSeries6-1.png){width="100%"}
+![](figures/Image_processing_fourier/FourierSeries6.png){width="100%"}
 
 It is useful to think of the **Fourier series** of a signal as a
 **change of representation** as shown in
@@ -79,7 +79,7 @@ coefficients $a_n$. The coefficients $a_n$ give us an alternative
 description of the function $\ell(t)$ and the rest of this chapter will
 be devoted to understand what this **transformation** has to offer.
 
-![](figures/Image_processing_fourier/FourierSeries5_representation-1.png){width=".9"}
+![](figures/Image_processing_fourier/FourierSeries5_representation.png){width=".9"}
 
 Fourier series can also be written as sums of different sets of harmonic
 functions. For instance, using cosine functions we can describe the ramp
@@ -318,7 +318,7 @@ complex-value matrix for the 1D DFT, which when used as a multiplicand
 yields the Fourier transform of 1D vectors. Many Fourier transform
 properties and symmetries can be observed from inspecting that matrix.
 
-![](figures/Image_processing_fourier/visualization_DFT_color-1.png){width="70%"}
+![](figures/Image_processing_fourier/visualization_DFT_color.png){width="70%"}
 
 ### Visualizing the Fourier Transform
 
@@ -336,7 +336,7 @@ where $A \left[u,v \right] \in \mathbb{R}^+$ is the amplitude and
 $\theta \left[u,v \right] \in \left[-\pi, \pi \right]$ is the phase.
 @fig-DFT_a shows both decompositions of the Fourier transform.
 
-![](figures/Image_processing_fourier/dft_a-1.png){width="100%"}
+![](figures/Image_processing_fourier/dft_a.png){width="100%"}
 
 Upon first learning about Fourier transforms, it may be a surprise for
 readers to learn that one can synthesize any image as a sum of complex
@@ -357,7 +357,7 @@ slowly emerges. In this example, the first 127 coefficients are
 sufficient for recognizing this 64$\times$`<!-- -->`{=html}64 resolution
 image.
 
-![](figures/Image_processing_fourier/dft_b-1.png){width="100%"}
+![](figures/Image_processing_fourier/dft_b.png){width="100%"}
 
 ## Useful Transforms
 
@@ -406,7 +406,7 @@ $$\sin{ \left( 2\pi \left( \frac{u_0\, n}{N} + \frac{v_0 m}{M} \right) \right) }
 @fig-2ddftexampleswaves shows the DFT of several waves with different
 frequencies and orientations.
 
-![](figures/Image_processing_fourier/DFT_examples_waves-1.png){width="100%"}
+![](figures/Image_processing_fourier/DFT_examples_waves.png){width="100%"}
 
 @fig-2ddftexamples shows the 2D Fourier transforms of some periodic
 signals. The depicted signals all happen to be symmetric about the
@@ -419,7 +419,7 @@ zero for the signals we'll examine. Also, all these images but the last
 one are separable (they can be written as the product of two 1D
 signals). Therefore, their DFT is also the product of 1D DFTs.
 
-![](figures/Image_processing_fourier/DFT_toy_examples-1.png){width="100%"}
+![](figures/Image_processing_fourier/DFT_toy_examples.png){width="100%"}
 
 ### Box Function {#sec-box_function}
 
@@ -688,7 +688,7 @@ the imaginary part). In fact, @fig-shiftFTe shows the inverse DFT of
 the ratio between DFTs, considering both real and imaginary components,
 which is very close to an impulse at $[16,-4]$.
 
-![](figures/Image_processing_fourier/shiftFT2-1.png){width="100%"}
+![](figures/Image_processing_fourier/shiftFT2.png){width="100%"}
 
 Locating the maximum on @fig-shiftFTf can be used to estimate the
 displacement between two images when the translation corresponds to a
@@ -721,7 +721,7 @@ property in image analysis and we will see its use later.
 by multiplying by diagonal wave. The bottom row shows the corresponding
 Fourier transforms.
 
-![](figures/Image_processing_fourier/modulation-1.png){width="100%"}
+![](figures/Image_processing_fourier/modulation.png){width="100%"}
 
 Note that a shift and a modulation are equivalent operations in
 different domains. A shift in space is a modulation in the frequency
@@ -842,7 +842,7 @@ the image, the magnitude of the Fourier transform, or its phase.
 consists of computing the Fourier transform for two images and building
 two new images by swapping their phases @Oppenheim1981.
 
-![](figures/Image_processing_fourier/amp_phase_swap_color-1.png){width="100%"}
+![](figures/Image_processing_fourier/amp_phase_swap_color.png){width="100%"}
 
 The first output image is the inverse Fourier transform of the amplitude
 of the first input image and the phase of the DFT of the second input
@@ -875,7 +875,7 @@ reference="chapter-stat_image_models"}. This typical structure of the
 DFT magnitude of natural images has been used as a prior for many tasks
 such as image denoising.
 
-![](figures/Image_processing_fourier/dft_random_phaseandamplitude-1.png){width="100%"}
+![](figures/Image_processing_fourier/dft_random_phaseandamplitude.png){width="100%"}
 
 However, this does not mean that all the information of the image is
 contained inside the phase only. The amplitude contains very useful
@@ -908,7 +908,7 @@ This observation has been the basis for many image descriptors
 elements in the scene). However the phase is a complex signal that does
 not seem to make explicit any information about the image.
 
-![](figures/Image_processing_fourier/FTgame-1.png){width="100%"}
+![](figures/Image_processing_fourier/FTgame.png){width="100%"}
 
 Take the following quiz: match the Fourier transform magnitudes with the
 corresponding images in @fig-quiz[^1]. Some image patterns are easily
@@ -979,7 +979,7 @@ block or let pass certain frequencies. Filters are many times classified
 according to the frequencies that they let pass through the filter (low,
 medium, or high frequencies) as shown in @fig-typestypes.
 
-![](figures/Image_processing_fourier/filter-types-1.png){width=".9"}
+![](figures/Image_processing_fourier/filter-types.png){width=".9"}
 
 When filtering images, low-pass filters will output a blurry picture
 encoding the **coarse** elements of the image. A band-pass filter will
@@ -1030,7 +1030,7 @@ resulting image where the columns are almost gone while the rest of the
 image is little affected. @fig-filteringFTe shows the complementary
 image (in fact, $a=c+e$) and its DFT in @fig-filteringFTf.
 
-![](figures/Image_processing_fourier/mit_columns-1.png){width="100%"}
+![](figures/Image_processing_fourier/mit_columns.png){width="100%"}
 
 ### Example 2: The Human Visual System and the Contrast Sensitivity Function
 

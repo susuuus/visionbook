@@ -61,7 +61,7 @@ seeing any single frame (as shown in @fig-demos_motivation_sfm\[a\]) it
 is hard to see the cylinders or even to say which points are attached to
 the same surface.
 
-![](figures/sfm/demos_motivation-1.png){width=".7"}
+![](figures/sfm/demos_motivation.png){width=".7"}
 
 One of the first algorithms for structure from motion for rigid bodies
 was introduced by Tomasi and Kanade @Tomasi92. For simplicity, their
@@ -325,7 +325,7 @@ together with the transformed images as new ground truth to train a more
 robust classifier. This is the approach proposed by SuperPoint
 @DeTone2018.
 
-![](figures/sfm/toy_keypoint_detector-1.png){width="100%"}
+![](figures/sfm/toy_keypoint_detector.png){width="100%"}
 
 ![](figures/sfm/sugar/keypoints_8_3_examples.png){width="100%"}
 
@@ -345,12 +345,12 @@ keypoints, such as window corners, bricks, and other building details,
 than the ones detected on the sugar bowl.
 
   -------------------------------------------------------------------------------
-    ![](figures/sfm/sugar/sugar_keypoints_examples_many-1.png){width="100%"}
+    ![](figures/sfm/sugar/sugar_keypoints_examples_many.png){width="100%"}
                                        \(a\)
   -------------------------------------------------------------------------------
 
   -------------------------------------------------------------------------------
-    ![](figures/sfm/palma/palma_keypoints_examples_many-1.png){width="100%"}
+    ![](figures/sfm/palma/palma_keypoints_examples_many.png){width="100%"}
                                        \(b\)
   -------------------------------------------------------------------------------
 
@@ -378,7 +378,7 @@ Mikolajczyk and Cordelia Schmid @Mikolajczyk2005.
 bowl and the three associated descriptors. In this example, each
 descriptor is a vector of length 256.
 
-![](figures/sfm/sugar/point_cloud_key_points_figure-1.png){width="100%"}
+![](figures/sfm/sugar/point_cloud_key_points_figure.png){width="100%"}
 
 As shown in @fig-sfm:palma_keypoint_matching_figure, the keypoint
 detector and descriptor finds image regions and its matches even under
@@ -393,12 +393,12 @@ scene. In this case the keypoint detects the same window corner across
 multiple views.
 
   --------------------------------------------------------------------------------
-    ![](figures/sfm/sugar/sugar_keypoint_matching_figure-1.png){width="100%"}
+    ![](figures/sfm/sugar/sugar_keypoint_matching_figure.png){width="100%"}
                                        \(a\)
   --------------------------------------------------------------------------------
 
   --------------------------------------------------------------------------------
-    ![](figures/sfm/palma/palma_keypoint_matching_figure-1.png){width="100%"}
+    ![](figures/sfm/palma/palma_keypoint_matching_figure.png){width="100%"}
                                        \(b\)
   --------------------------------------------------------------------------------
 
@@ -441,22 +441,22 @@ recovered camera locations for the two sets of images that we have used
 in this chapter.
 
   ---------------------------------------------------------------------------------
-   ![](figures/sfm/sugar/point_cloud_sugar_view1-1.png){width=".46"}
+   ![](figures/sfm/sugar/point_cloud_sugar_view1.png){width=".46"}
                                         \(a\)
   ---------------------------------------------------------------------------------
 
   ---------------------------------------------------------------------------------
-   ![](figures/sfm/sugar/point_cloud_sugar_view2-1.png){width=".46"}
+   ![](figures/sfm/sugar/point_cloud_sugar_view2.png){width=".46"}
                                         \(b\)
   ---------------------------------------------------------------------------------
 
   ------------------------------------------------------------------------
-   ![](figures/sfm/palma/3d_palma_view2-1.png){width=".46"}
+   ![](figures/sfm/palma/3d_palma_view2.png){width=".46"}
                                    \(a\)
   ------------------------------------------------------------------------
 
   ------------------------------------------------------------------------
-   ![](figures/sfm/palma/3d_palma_view1-1.png){width=".46"}
+   ![](figures/sfm/palma/3d_palma_view1.png){width=".46"}
                                    \(b\)
   ------------------------------------------------------------------------
 

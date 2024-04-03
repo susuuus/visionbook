@@ -53,7 +53,7 @@ level by reducing the number of pixels by a factor of $25$ percent (that
 is, each image in the pyramid has 3/4 of the size of the precedent
 image)[^1].
 
-![](figures/pyramids/multiscale_birds_boxes-1.png){width="80%"}
+![](figures/pyramids/multiscale_birds_boxes.png){width="80%"}
 
 Now we can use the pyramid to detect birds at different sizes using a
 single template. The red box in the figure denotes the size of the
@@ -343,13 +343,13 @@ build the Laplacian pyramid for the two input images; in this example we
 use seven levels and we also keep the last low-pass residual as shown in
 @fig-blending_pyrs.
 
-![](figures/pyramids/blending_pyrs-1.png){width="90%"}
+![](figures/pyramids/blending_pyrs.png){width="90%"}
 
 The second step is to build the Gaussian pyramid of the mask as shown in
 @fig-blending_pyrs_mask (note that we use eight levels, one level more
 than for the Laplacian pyramid).
 
-![](figures/pyramids/blending_pyrs_mask-1.png){width="90%"}
+![](figures/pyramids/blending_pyrs_mask.png){width="90%"}
 
 In the third step, we combine the three pyramids to compute the
 Laplacian pyramid of the blended image. The Laplacian pyramid of the
@@ -400,7 +400,7 @@ component into angular and low-pass frequency components. Pyramid
 subsampling steps are preceded by sufficient low-pass filtering to
 remove aliasing.
 
-![](figures/pyramids/steerable_pyr_sp3Filters-1.png){width="80%"}
+![](figures/pyramids/steerable_pyr_sp3Filters.png){width="80%"}
 
 
 
@@ -425,7 +425,7 @@ pyramid decomposition using four orientations and three scales. The
 steerable pyramid is a self-inverting overcomplete representation (more
 coefficients than pixels).
 
-![](figures/pyramids/steerable_pyr_clock-1.png){width="100%"}
+![](figures/pyramids/steerable_pyr_clock.png){width="100%"}
 
 ## A Pictorial Summary
 

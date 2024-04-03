@@ -127,7 +127,7 @@ transform of the cosine phase Gabor function, $\Psi_r(u,v;u_0,v_0)$, and
 @fig-gabor_ftd shows the Fourier transform of the complex Gabor
 function, $\Psi(u,v;u_0,v_0)$.
 
-![](figures/spatial_filter_sets/gabor_FT-1.png){width="100%"}
+![](figures/spatial_filter_sets/gabor_FT.png){width="100%"}
 
 @fig-gabor_ex_ft shows how the Gabor function changes when modifying
 its parameters (central frequency, $(u_0,v_0)$, and width, $\sigma$).
@@ -138,7 +138,7 @@ frequency extend small. A small value of $\sigma$ has the opposite
 behavior. Analyzing the image with a set of Gabor functions with a large
 $\sigma$ is like computing the Fourier transform of the image.
 
-![](figures/spatial_filter_sets/gabor_examples_FT-1.png){width="100%"}
+![](figures/spatial_filter_sets/gabor_examples_FT.png){width="100%"}
 
 The sine phase Gabor function is zero mean. However, the cosine phase
 Gabor function is not zero mean. The Gaussian width $\sigma$ has to be
@@ -164,7 +164,7 @@ detect vertical edges. Gabor filters are useful for analyzing line or
 edge phase structures in images. But they have many other benefits when
 we combine them together in quadrature pairs.
 
-![](figures/spatial_filter_sets/gabor_zebra-1.png){width="100%"}
+![](figures/spatial_filter_sets/gabor_zebra.png){width="100%"}
 
 ### Quadrature Pairs and the Hilbert Transform
 
@@ -238,7 +238,7 @@ in the first layer, a squaring nonlinearity and then followed by a sum
 in the second layer. This very simple system can perform a number of
 interesting operations.
 
-![](figures/spatial_filter_sets/gabor_magnitude-1.png){width="50%"}
+![](figures/spatial_filter_sets/gabor_magnitude.png){width="50%"}
 
 To see how useful the local amplitude is, let's start by computing it
 for some simple images. If the input image is a delta,
@@ -270,7 +270,7 @@ are encoded in the local phase image as we will discuss in the following
 section. @fig-gabor_zebra shows the local amplitude signal computed on
 real images.
 
-![](figures/spatial_filter_sets/gabor_quad_examples-1.png){width="100%"}
+![](figures/spatial_filter_sets/gabor_quad_examples.png){width="100%"}
 
 One property to notice in all these examples, is that, although the
 images $\ell_h(x,y)$ and $\ell_q(x,y)$ are band-pass, the amplitude
@@ -313,7 +313,7 @@ Here, the Gaussian width $\sigma$ is proportional to the distance
 between the central frequency and the origin. This produces filters that
 are rotated and scaled versions of each other.
 
-![](figures/spatial_filter_sets/gabor_rectandpolar_tiles-1.png){width="100%"}
+![](figures/spatial_filter_sets/gabor_rectandpolar_tiles.png){width="100%"}
 
 If we write in detail the convolution from equation (@eq-gaborconv) we
 can see that the convolution with a Gabor function is like doing a
@@ -392,7 +392,7 @@ due to the positive direction of $\theta$ to be counter-clockwise.
 @fig-steer1 shows examples for the first- and second-order Gaussian
 derivatives.
 
-![](figures/spatial_filter_sets/steer1-1.png){width="100%"}
+![](figures/spatial_filter_sets/steer1.png){width="100%"}
 
 This leads to an architecture for processing images with oriented
 *steerable* filters shown in @fig-steer1arc. The input images pass
@@ -402,7 +402,7 @@ each pixel). Those gain maps adjust the linear combinations of the basis
 filters to allow the input filter to be steered to the desired
 orientations at each position.
 
-![](figures/spatial_filter_sets/steer_architecture-1.png){width="60%"}
+![](figures/spatial_filter_sets/steer_architecture.png){width="60%"}
 
 In the case of oriented Gabor filters it is not possible to reconstruct
 exactly any filter orientation by interpolating filter responses. It is
@@ -517,7 +517,7 @@ spectra may not be exactly the same. The blue line shows the magnitude
 of the analytic filter $g_{xx}+jh_{xx}$. It has double amplitude, and
 the content for negative frequencies is close to zero.
 
-![](figures/spatial_filter_sets/steer_quad_aprox_a-1.png){width="100%"}
+![](figures/spatial_filter_sets/steer_quad_aprox_a.png){width="100%"}
 
 To steer $h_{xx}(x,y)$ to an angle $\theta$, this approximation requires
 four basis functions, and not just three as for the second-order
@@ -543,7 +543,7 @@ span all rotations on $h_{xx}$ spanning the same space as the filters of
 @fig-steer_quad_basisb. Spatial scaling of the filters will result in
 changing $\sigma$.
 
-![](figures/spatial_filter_sets/steer_quad_basis-1.png){width="100%"}
+![](figures/spatial_filter_sets/steer_quad_basis.png){width="100%"}
 
 Putting it all together, can we compute oriented energy as a function of
 angle, for all angles, just from the seven basis filter responses shown
@@ -559,7 +559,7 @@ derivatives and their quadrature pairs don't suffer from that problem,
 the $g_{xx}$, $h_{xx}$ filters actually do have enough angular
 resolution. In this case, the issue is a more subtle one.
 
-![](figures/spatial_filter_sets/steer_quad_polarplot_cross-1.png){width="100%"}
+![](figures/spatial_filter_sets/steer_quad_polarplot_cross.png){width="100%"}
 
 When there are two oriented structures within the passband of the
 quadrature pair filters, the sum of the energies of the individual
@@ -580,7 +580,7 @@ $g_{xx}$, $h_{xx}$ filters in the junctions, @fig-multiorifloretsb.
 @fig-multioriflorets_examples shows two examples on real images. At
 each pixel, the polar plots reveal the local image structure.
 
-![](figures/spatial_filter_sets/steer_quad_polarplot_zebra_cube-1.png){width="100%"}
+![](figures/spatial_filter_sets/steer_quad_polarplot_zebra_cube.png){width="100%"}
 
 We can also make steerable filters in three dimensions (3D), allowing us
 to analyze medical volumetric data, or to process spatiotemporal volumes
@@ -613,7 +613,7 @@ pass by the frequencies of the Gabor filter. All those planes intersect
 the red line shown in @fig-spacetimefiltsc. A single Gabor filter
 cannot disambiguate the input velocity.
 
-![](figures/temporal_filters/gabor_spacetime_FT-1.png){width="100%"}
+![](figures/temporal_filters/gabor_spacetime_FT.png){width="100%"}
 
 ### Velocity-Tuned Filters {#sect:velocityTunedFilters}
 
@@ -634,7 +634,7 @@ identify the plane in the Fourier domain that contains the input energy.
 @fig-spacetimetiles2b shows the subset of filters that have the
 strongest output for a particular input motion.
 
-![](figures/temporal_filters/gabor_spacetime_tiles-1.png){width="100%"}
+![](figures/temporal_filters/gabor_spacetime_tiles.png){width="100%"}
 
 As an illustration, @fig-MT_velocity_tuned shows one possible
 architecture to create velocity-selective units. The first layer is
@@ -650,7 +650,7 @@ full architecture is nonlinear.
 Given an input sequence, one can estimate velocity by looking at the
 velocity-tuned unit with the strongest response.
 
-![](figures/temporal_filters/MT_velocity_tuned-1.png){width="100%"}
+![](figures/temporal_filters/MT_velocity_tuned.png){width="100%"}
 
 ## Concluding Remarks
 

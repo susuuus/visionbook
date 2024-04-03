@@ -280,7 +280,7 @@ unit $i$, $\ell_{\texttt{out}}\left[i \right]$, is a linear combination
 of the input signal $\boldsymbol\ell_{\texttt{in}}$ with weights given
 by the row vectors of $\mathbf{H}$. Graphically it looks like this:
 
-![](figures/linear_image_filtering/linear_filter-1.png){width=".4"}
+![](figures/linear_image_filtering/linear_filter.png){width=".4"}
 
 In two dimensions the equations are analogous. Each pixel of the output
 image, $\ell_{\texttt{out}}\left[n,m\right]$, is computed as a linear
@@ -298,7 +298,7 @@ Linear systems are still too general for us. So let's consider an even
 smaller family of systems: **linear translation invariant** (LTI)
 **systems**.
 
-![](figures/linear_image_filtering/space_of_functions-1.png){width=".25"}
+![](figures/linear_image_filtering/space_of_functions.png){width=".25"}
 
 Translation invariant systems are motivated by the following
 observation: typically, we don't know where within the image we expect
@@ -398,7 +398,7 @@ This operation is much easier to understand if we draw it as a
 **convolutional layer** of a neural network as shown in
 @fig-conv_filter2_nn.
 
-![](figures/linear_image_filtering/conv_filter2-1.png){width=".5"}
+![](figures/linear_image_filtering/conv_filter2.png){width=".5"}
 
 In two dimensions, the processing is analogous: the input filter is
 flipped vertically and horizontally, then slid over the image to record
@@ -415,7 +415,7 @@ upside-down and left-right, and then we multiply all the pixels in the
 image patch with the corresponding flipped kernel values and we sum the
 results.
 
-![](figures/linear_image_filtering/circle_conv_example-1.png){width="100%"}
+![](figures/linear_image_filtering/circle_conv_example.png){width="100%"}
 
 Let's revisit the four image transformation examples from
 @fig-transformationsquizz and ask a new question. Which ones of the
@@ -509,7 +509,7 @@ results in two superimposed copies of the same image shifted diagonally
 in opposite directions. And finally, @fig-convExampsd shows the result
 of convolving the image with a uniform kernel of all $1/25$.
 
-![](figures/linear_image_filtering/examples_cube2-1.png){width="100%"}
+![](figures/linear_image_filtering/examples_cube2.png){width="100%"}
 
 ### Handling Boundaries
 
@@ -566,7 +566,7 @@ darkening appear on the boundary of the image. This is not very
 desirable in general. The other padding methods seem to produce better
 visual results.
 
-![](figures/linear_image_filtering/boundary-1.png){width="100%"}
+![](figures/linear_image_filtering/boundary.png){width="100%"}
 
 But which one is the best boundary extension? Ideally, we would to get a
 result that is a close as possible to the output we would get if we had
@@ -673,7 +673,7 @@ triangles points down, @fig-corrvsconvf, while the correlation will
 output the maximum values in the center of the triangles pointing up
 (@fig-corrvsconv\[g\]).
 
-![](figures/linear_image_filtering/correlation_vs_convolution-1.png){width="100%"}
+![](figures/linear_image_filtering/correlation_vs_convolution.png){width="100%"}
 
 Another important difference between the two operators is that the
 convolution is commutative and associative while the correlation is not.
@@ -691,7 +691,7 @@ detect all the occurrences of the letter "a" with an image of text,
 shown in @fig-normcorrb. @fig-normcorra shows the template of the
 letter "a".
 
-![](figures/linear_image_filtering/normcorr-1.png){width="100%"}
+![](figures/linear_image_filtering/normcorr.png){width="100%"}
 
 Cross-correlation is a potential method for template matching, but it
 has certain flaws. Consider matching the "a" template in @fig-normcorra
@@ -761,7 +761,7 @@ you are in a room you often hear that sounds are distorted with echos
 depend on the geometry of the room, whether it is full or empty and the
 materials in the walls and ceilings.
 
-![](figures/linear_image_filtering/impulse_response_room_a1-1.png){width=".6"}
+![](figures/linear_image_filtering/impulse_response_room_a1.png){width=".6"}
 
 Interestingly the relationship between the sounds that are originated in
 one location and what a listener hears in another position are related
@@ -774,7 +774,7 @@ convolution of the acoustic signal with the echoes that you hear before
 when you clapped. @fig-impulse_response_room_a2 shows a recording made
 in a restaurant in Cambridge, Massachusetts.
 
-![](figures/linear_image_filtering/impulse_response_room_a2-1.png){width="100%"}
+![](figures/linear_image_filtering/impulse_response_room_a2.png){width="100%"}
 
 @fig-impulse_response_room_b, adapted from @TraerE7856, shows a sketch
 of how a voice signal gets distorted by the impulse response of a room
@@ -795,7 +795,7 @@ $$\ell_{\texttt{out}}(t) = \ell_{\texttt{in}}(t) \circ h(t) = a_0 \ell_{\texttt{
 + a_3 \ell_{\texttt{in}}(t-T_3)$$ which is shown graphically in
 @fig-impulse_response_room_b.
 
-![](figures/linear_image_filtering/impulse_response_room_b-1.png){width="100%"}
+![](figures/linear_image_filtering/impulse_response_room_b.png){width="100%"}
 
 ## Concluding Remarks
 

@@ -49,7 +49,7 @@ breaking the object in "regions of sharp concavity". And the third
 observation is that the object resembles other known objects. Does it
 look like an ice cream or hot-dog cart to you?
 
-![](figures/object_recognition/do_it_yourself-1.png){width="50%"}
+![](figures/object_recognition/do_it_yourself.png){width="50%"}
 
 Biederman postulated that objects are represented by decomposing the
 object into a small set of geometric components (e.g., blocks,
@@ -103,7 +103,7 @@ performing a **mental rotation** in order to compare both views. Whether
 humans actually perform mental rotations or not still remains
 controversial.
 
-![](figures/object_recognition/mental_rotation-1.png){width="60%"}
+![](figures/object_recognition/mental_rotation.png){width="60%"}
 
 Michael Tarr and Steven Pinker @Tarr1989MentalRA showed that similar
 results where obtained on a learning task. When observers learn to
@@ -231,7 +231,7 @@ function that maps the input image ${\bf x}$ into an output vector
 $\hat {\bf y}$: $$\hat {\bf y} = f({\bf x})$$ The output,$\hat {\bf y}$, of the function will be a binary response: $1=yes$, the
 object is present; and $0=no$, the object is not present.
 
-![](figures/object_recognition/image_classification-1.png){width="50%"}
+![](figures/object_recognition/image_classification.png){width="50%"}
 
 In general we want to classify an image according to multiple classes.
 We can do this by having as output a vector $\hat {\bf y}$ of length
@@ -307,7 +307,7 @@ interpreted as the probability
 $\hat{y}_c = p_\theta(Y_c=1 \bigm | \mathbf{x})$, but without the
 constraint that the sum across classes is 1.
 
-![](figures/object_recognition/class_architecture-1.png){width="70%"}
+![](figures/object_recognition/class_architecture.png){width="70%"}
 
 ### Classification Loss
 
@@ -522,7 +522,7 @@ image ${\bf x}$ into a list of bounding boxes $\hat {\bf b}_i$ and the
 associated classes to each bounding box encoded by a vector
 $\hat {\bf y}_i$, as illustrated in @fig-object_detection_bb.
 
-![](figures/object_recognition/object_detection_bb-1.png){width="40%"}
+![](figures/object_recognition/object_detection_bb.png){width="40%"}
 
 The class vector, $\hat {\bf y}_i$, has the same structure as in the
 image classification task but now it is applied to describe each
@@ -550,7 +550,7 @@ turned into a detector by sliding it across the image (or image
 pyramid), and classifying each local window as shown in
 @fig-scanningWindow2.
 
-![](figures/object_recognition/scanningWindow2-1.png){width="100%"}
+![](figures/object_recognition/scanningWindow2.png){width="100%"}
 
 The window scanning algorithm is the following:
 
@@ -625,7 +625,7 @@ Each step can be implemented in several different ways, giving rise to
 different approaches. The whole pipeline is summarized in
 @fig-selective_search_pipeline.
 
-![](figures/object_recognition/selective_search-1.png){width="100%"}
+![](figures/object_recognition/selective_search.png){width="100%"}
 
 Bounding box proposal (represented as $f_0$ in
 @fig-selective_search_architecture) can be implemented in several ways
@@ -634,7 +634,7 @@ Bounding box proposal (represented as $f_0$ in
 classification and bounding box refinement, $f_1$, can be implemented by
 a classifier and a regression function.
 
-![](figures/object_recognition/selective_search_architecture-1.png){width=".4"}
+![](figures/object_recognition/selective_search_architecture.png){width=".4"}
 
 #### Cascade of classifiers
 
@@ -681,7 +681,7 @@ classifier allocates computing power in the image when trained to detect
 faces. The intensity shown in the heat map is proportional to the number
 of levels in the cascade applied to each location.
 
-![](figures/object_recognition/cascade-1.png){width=".8"}
+![](figures/object_recognition/cascade.png){width=".8"}
 
 It is interesting to point out that the scanning window approach
 ($Levels = 1$) and the selective search procedure ($Levels = 2$) are
@@ -735,7 +735,7 @@ or assigned to the background class (indicated in white). Note that
 several detections can be assigned to the same ground truth bounding
 box.
 
-![](figures/object_recognition/detections-1.png){width="100%"}
+![](figures/object_recognition/detections.png){width="100%"}
 
 Now that we have assigned detections to ground truth annotations, we can
 compare them to measure the loss. For the classification loss, as each
@@ -749,7 +749,7 @@ loss $\mathcal{L}_{\text{loc}} (\hat{\mathbf{b}}_i, \mathbf{b}_i)$? One
 typical measure of similarity between two bounding boxes is the
 **Intersection over Union** (IoU) as shown in the following drawing:
 
-![](figures/object_recognition/iou-1.png){width="55%"}
+![](figures/object_recognition/iou.png){width="55%"}
 
 The IoU is a quantity between 0 and 1, with 0 meaning no overlap and 1
 meaning that both bounding boxes are identical. As the IoU is a
@@ -765,7 +765,7 @@ invariant. The L2 loss is larger for big bounding boxes. The next graph
 loss for two square bounding boxes, with an area equal to 1, as a
 function of the relative $x$-displacement.
 
-![](figures/object_recognition/iou_l2_comparison-1.png){width=".9"}
+![](figures/object_recognition/iou_l2_comparison.png){width=".9"}
 
 The IoU loss becomes 1 when the two bounding boxes do not overlap, which
 means that there will be no gradient information when running
@@ -834,7 +834,7 @@ values of precision and recall correspond to high performance. The next
 graph (@fig-example_precision_recall) shows the precision-recall curve
 as a function of $\beta$ (decision threshold).
 
-![](figures/object_recognition/example_precision_recall-1.png){width=".45"}
+![](figures/object_recognition/example_precision_recall.png){width=".45"}
 
 The precision-recall curve is non-monotonic. The average precision (AP)
 summarizes the entire curve with one number. The AP is the area under
@@ -886,7 +886,7 @@ Per-pixel classification of object labels, illustrated in
 @fig-semantic_class_segmentation, is referred to as **semantic
 segmentation**.
 
-![](figures/object_recognition/semantic-1.png){width="60%"}
+![](figures/object_recognition/semantic.png){width="60%"}
 
 In the most generic formulation, semantic segmentation takes an image as
 input, $\mathbf{x}(n,m)$, and it outputs a classification vector at each
@@ -898,7 +898,7 @@ Generally the function $f$ is a neural network with an encoder-decoder
 structure (@fig-segmentation_architecture), first introduced in
 @Badrinarayanan2015.
 
-![](figures/object_recognition/segmentation_architecture-1.png){width="30%"}
+![](figures/object_recognition/segmentation_architecture.png){width="30%"}
 
 Another formulation consists of implementing a window-scanning approach
 where the function $f$ scans the image and takes as input an image patch
@@ -951,7 +951,7 @@ set of localized objects, but rather than representing them as bounding
 boxes we represent them as pixel-level masks as shown in
 @fig-instance_segmentation.
 
-![](figures/object_recognition/instance_segmentation-1.png){width="60%"}
+![](figures/object_recognition/instance_segmentation.png){width="60%"}
 
 The difference from semantic segmentation is that if there are $K$
 objects of the same type, we will output $K$ masks; conversely, semantic
@@ -969,7 +969,7 @@ way we get an instance mask for each box. Such an approach was
 introduced in @he2017. The architecture is illustrated in
 @fig-instance_segmentation_architecture.
 
-![](figures/object_recognition/instance_segmentation_architecture-1.png){width="50%"}
+![](figures/object_recognition/instance_segmentation_architecture.png){width="50%"}
 
 As before, $f_0$ is a low-cost detector that proposes regions likely to
 contain instances of the target object. The function $f_1$ performs

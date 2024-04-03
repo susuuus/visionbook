@@ -355,7 +355,7 @@ orientation.
 transitions from ground to figure are occlusion boundaries, and
 transitions from figure to ground are contact edges. This heuristic will
 fails when an object occludes
-another.](figures/simplesystem/ground_figure_points-1.png){#fig-ground_figure_points
+another.](figures/simplesystem/ground_figure_points.png){#fig-ground_figure_points
 width=".5"}
 
 ### Generic View and Nonaccidental Scene Properties
@@ -588,7 +588,7 @@ to be good, but it could have gone wrong.
 several assumptions we made (shadows are not soft and the green cube
 occludes the red one) and it has one object on top of the other, a
 configuration that we did not consider while designing the algorithm.
-](figures/simplesystem/out_of_domain_example-1.png){#fig-out_of_domain
+](figures/simplesystem/out_of_domain_example.png){#fig-out_of_domain
 width="100%"}
 
 @fig-impossible shows the *impossible steps* inspired from @Adelson99.
