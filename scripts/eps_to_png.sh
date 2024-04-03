@@ -17,6 +17,6 @@ for file; do
     
     # Convert the file
     echo "Converting $file to $png"
-    convert "$file" "$png"
+    convert -density 300 "$file" -background white -flatten -resize 1024x1024 "$png"
 done
 ' sh {} +
