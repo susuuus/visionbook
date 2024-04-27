@@ -1,3 +1,7 @@
+## Disclaimer {.unnumbered}
+
+This is a draft site for the book. 
+
 ## Preface {#preface .unnumbered}
 
 Dedicated to all the pixels.
