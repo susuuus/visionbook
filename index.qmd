@@ -163,8 +163,7 @@ into computer vision is still in print: *Vision*, by David Marr
 
 The geometry of vision through multiple cameras is covered thoroughly in
 Hartley and Zisserman's classic, *Multiple View Geometry in Computer
-Vision* @Hartley2004. *Solid Shape* @KoenderinkSolidShape1990, by
-Koenderink, offers a general treatment of three-dimensional (3D)
+Vision* @Hartley2004. *Solid Shape* @KoenderinkSolidShape1990, offers a general treatment of three-dimensional (3D)
 geometry. Useful and related books include *Three-Dimensional Computer
 Vision*, by Faugeras @Faugeras93, and *Introductory Techniques for 3D
 Computer Vision* @Trucco1998, by Trucco and Verri.
