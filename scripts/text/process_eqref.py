@@ -35,7 +35,7 @@ def convert_eq_refs(input_file_path, output_file_path):
     # Performing the replacement
     modified_content = re.sub(pattern, replacement, modified_content)
     # Write the modified content to the output file
-    path = current_script_path() + "/src/setup.tex"
+    path = current_script_path() + "../src/setup.tex"
     with open(output_file_path, "w", encoding="utf-8") as file:
         file.write("\include{" + path + "}")
         file.write("\n")
