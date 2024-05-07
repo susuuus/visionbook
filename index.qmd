@@ -156,31 +156,31 @@ to learn from. For a number of years, we taught our computer vision
 class from the *Computer Vision: A Modern Approach* by 
 @Forsyth2012, and have also used @Szeliski2011 book, *Computer Vision:
 Algorithms and Applications* . These are excellent general
-texts. *Robot Vision*, @Horn86 is an older textbook, but covers
+texts. *Robot Vision*, by @Horn86 is an older textbook, but covers
 physics-based fundamentals very well. The book that enticed one of us
-into computer vision is still in print: *Vision* @Marr2010. The intuitions are timeless and the writing is wonderful.
+into computer vision is still in print: *Vision* by @Marr2010. The intuitions are timeless and the writing is wonderful.
 
 The geometry of vision through multiple cameras is covered thoroughly in the classic, *Multiple View Geometry in Computer
-Vision* @Hartley2004. *Solid Shape* @KoenderinkSolidShape1990, offers a general treatment of three-dimensional (3D)
+Vision* by @Hartley2004. *Solid Shape* by @KoenderinkSolidShape1990, offers a general treatment of three-dimensional (3D)
 geometry. Useful and related books include *Three-Dimensional Computer
-Vision* @Faugeras93, and *Introductory Techniques for 3D
-Computer Vision* @Trucco1998.
+Vision* by @Faugeras93, and *Introductory Techniques for 3D
+Computer Vision* by @Trucco1998.
 
 A number of recent textbooks focus on learning. Our favorites are @mackay2003information, @Bishop2006, @murphy2022,
 and @Goodfellow-et-al-2016.
 Probabilistic models for vision are well covered in the textbook of @princeCVMLI2012.
 
-*Vision Science: Photons to Phenomenology* @Palmer1999,
+*Vision Science: Photons to Phenomenology* by @Palmer1999,
 is a wonderful book covering human visual perception. It includes some
 chapters discussing connections between studies in visual cognition and
 computer vision. This is an indispensable book if you are interested in
 the science of vision.
 
-*Signal Processing for Computer Vision* @Granlund95, covers many basics of low-level vision. Ullman insightfully
+*Signal Processing for Computer Vision* by @Granlund95, covers many basics of low-level vision. Ullman insightfully
 addresses *High-level Vision* in his book of that title, @Ullman2000.
 
 Finally, a favorite book of ours, about light and vision, is *Light and
-Color in the Outdoors*, @Minnaert2012, a delightful
+Color in the Outdoors*, by @Minnaert2012, a delightful
 treatment of optical effects in nature.
 
 ## Acknowledgments {#acknowledgments .unnumbered}
