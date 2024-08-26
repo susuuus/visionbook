@@ -3,7 +3,7 @@ name: Quarto Deploy
 on:
   push:
     branches:
-      - main
+      # - main
 
 jobs:
   build:
