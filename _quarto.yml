@@ -1,178 +1,177 @@
 project:
-    type: book
+  type: book
 
 book:
-    title: "Foundations of Computer Vision"
-    repo-url: https://github.com/shensquared/cv_book
-    repo-actions: [edit, issue, source]
-    repo-subdir: /
-    author: "Antonio Torralba, Phillip Isola, and William Freeman"
-    date: "04/16/2024"
-    chapters:
-        - index.qmd
-        - notations.qmd
-        - taxonomy.qmd
-        - part: Foundations
-          chapters:
-              - simplesystem.qmd
-              - visionscience.qmd
-              - fairness.qmd
-        - part: Image Formation
-          chapters:
-              - imaging.qmd
-              - lenses.qmd
-              - camera_as_linsys.qmd
-              - color.qmd
-        - part: Foundations of Learning
-          chapters:
-              - intro_to_learning.qmd
-              - gradient_descent.qmd
-              - problem_of_generalization.qmd
-              - neural_nets.qmd
-              - neural_nets_as_distribution_transformers.qmd
-              - backpropagation.qmd
-        - part: Foundation of Image Processing
-          chapters:
-              - linear_image_filtering.qmd
-              - image_processing_fourier.qmd
-        - part: Linear Filters
-          chapters:
-              - blurring_2.qmd
-              - derivatives.qmd
-              - temporal_filters_v2.qmd
-        - part: Sampling and Multiscale Image Representations
-          chapters:
-              - sampling_and_aliasing.qmd
-              - upsamplig_downsampling_2.qmd
-              - spatial_filter_sets.qmd
-              - pyramids_new_notation.qmd
-        - part: Neural Architectures for Vision
-          chapters:
-              - convolutional_neural_nets.qmd
-              - recurrent_neural_nets.qmd
-              - transformers.qmd
-        - part: Probabilistic Models of Images
-          chapters:
-              - stat_image_models_revised.qmd
-              - textures.qmd
-              - graphical_models.qmd
-        - part: Generative Image Models and Representation Learning
-          chapters:
-              - representation_learning.qmd
-              - perceptual_organization.qmd
-              - generative_models.qmd
-              - generative_modeling_and_rep_learning.qmd
-              - conditional_generative_models.qmd
-        - part: Challenges in Learning-Based Vision
-          chapters:
-              - bias_and_shift.qmd
-              - data_augmentation.qmd
-              - transfer_learning.qmd
-        - part: Understanding Geometry
-          chapters:
-              - homogeneous_coordinates.qmd
-              - imaging_geometry.qmd
-              - 3d_scene_understanding_stereo.qmd
-              - homography.qmd
-              - 3d_scene_understanding_single_view.qmd
-              - 3d_learning.qmd
-              - multiview.qmd
-              - nerf.qmd
-        - part: Understanding Motion
-          chapters:
-              - motion_estimation_intro.qmd
-              - 2d_motion_from_3d.qmd
-              - optical_flow.qmd
-              - motion_estimation.qmd
-        - part: Understanding Vision With Language
-          chapters:
-              #   - representing_the_image.qmd
-              #   - objects.qmd
-              - object_recognition_v3.qmd
-              #   - scenes.qmd
-              - VLMs.qmd
-        - part: On Research, Writing and Speaking
-          chapters:
-              - how_to_do_research.qmd
-              - how_to_write_papers.qmd
-              - how_to_give_talks.qmd
-        - part: Closing Remarks
-          chapters:
-              - simplesystem_final.qmd
-        - references.qmd
-    # favicon: Figures/favicon.ico
-    cover-image: figures/logo.jpg
-    downloads: [pdf]
-    sharing: [twitter]
-    sidebar:
-        style: "floating"
-        collapse-level: 2
-        border: true
-        search: true
-    page-footer:
-        left: "All content licensed under [CC BY-NC-SA 4.01](https://creativecommons.org/licenses/by-nc-sa/)<br> Antonio Torralba, Phillip Isola, and William Freeman"
-        center: "[Website](https://shenshen.mit.edu/cv_book) | [GitHub](https://github.com/shensquared/cv_book) | [MIT Vision Group](http://groups.csail.mit.edu/vision)"
-        right: Built with [Quarto](https://quarto.org/).
-    page-navigation: true
+  title: "Foundations of Computer Vision"
+  repo-url: https://github.com/shensquared/cv_book
+  repo-actions: [edit, issue, source]
+  repo-subdir: /
+  author: "Antonio Torralba, Phillip Isola, and William Freeman"
+  date: "04/16/2024"
+  chapters:
+    - index.qmd
+    - notations.qmd
+    - taxonomy.qmd
+    - part: Foundations
+      chapters:
+        - simplesystem.qmd
+        - visionscience.qmd
+        - fairness.qmd
+    - part: Image Formation
+      chapters:
+        - imaging.qmd
+        - lenses.qmd
+        - camera_as_linsys.qmd
+        - color.qmd
+    - part: Foundations of Learning
+      chapters:
+        - intro_to_learning.qmd
+        - gradient_descent.qmd
+        - problem_of_generalization.qmd
+        - neural_nets.qmd
+        - neural_nets_as_distribution_transformers.qmd
+        - backpropagation.qmd
+    - part: Foundation of Image Processing
+      chapters:
+        - linear_image_filtering.qmd
+        - image_processing_fourier.qmd
+    - part: Linear Filters
+      chapters:
+        - blurring_2.qmd
+        - derivatives.qmd
+        - temporal_filters_v2.qmd
+    - part: Sampling and Multiscale Image Representations
+      chapters:
+        - sampling_and_aliasing.qmd
+        - upsamplig_downsampling_2.qmd
+        - spatial_filter_sets.qmd
+        - pyramids_new_notation.qmd
+    - part: Neural Architectures for Vision
+      chapters:
+        - convolutional_neural_nets.qmd
+        - recurrent_neural_nets.qmd
+        - transformers.qmd
+    - part: Probabilistic Models of Images
+      chapters:
+        - stat_image_models_revised.qmd
+        - textures.qmd
+        - graphical_models.qmd
+    - part: Generative Image Models and Representation Learning
+      chapters:
+        - representation_learning.qmd
+        - perceptual_organization.qmd
+        - generative_models.qmd
+        - generative_modeling_and_rep_learning.qmd
+        - conditional_generative_models.qmd
+    - part: Challenges in Learning-Based Vision
+      chapters:
+        - bias_and_shift.qmd
+        - data_augmentation.qmd
+        - transfer_learning.qmd
+    - part: Understanding Geometry
+      chapters:
+        - homogeneous_coordinates.qmd
+        - imaging_geometry.qmd
+        - 3d_scene_understanding_stereo.qmd
+        - homography.qmd
+        - 3d_scene_understanding_single_view.qmd
+        - 3d_learning.qmd
+        - multiview.qmd
+        - nerf.qmd
+    - part: Understanding Motion
+      chapters:
+        - motion_estimation_intro.qmd
+        - 2d_motion_from_3d.qmd
+        - optical_flow.qmd
+        - motion_estimation.qmd
+    - part: Understanding Vision With Language
+      chapters:
+        #   - representing_the_image.qmd
+        #   - objects.qmd
+        - object_recognition_v3.qmd
+        #   - scenes.qmd
+        - VLMs.qmd
+    - part: On Research, Writing and Speaking
+      chapters:
+        - how_to_do_research.qmd
+        - how_to_write_papers.qmd
+        - how_to_give_talks.qmd
+    - part: Closing Remarks
+      chapters:
+        - simplesystem_final.qmd
+    - references.qmd
+  favicon: Figures/favicon.ico
+  cover-image: figures/logo.jpg
+  downloads: [pdf]
+  sharing: [twitter]
+  sidebar:
+    style: "floating"
+    collapse-level: 2
+    border: true
+    search: true
+  page-footer:
+    left: "All content licensed under [CC BY-NC-SA 4.01](https://creativecommons.org/licenses/by-nc-sa/)<br> Antonio Torralba, Phillip Isola, and William Freeman"
+    center: "[Website](https://shenshen.mit.edu/cv_book) | [GitHub](https://github.com/shensquared/cv_book) | [MIT Vision Group](http://groups.csail.mit.edu/vision)"
+    right: Built with [Quarto](https://quarto.org/).
+  page-navigation: true
 
 bibliography:
-    - src/all.bib
-    - src/visionbib.bib
+  - src/all.bib
+  - src/visionbib.bib
 
 format:
-    html:
-        anchor-sections: true
-        fontsize: "16px"
-        linestretch: 1.6
-        mainfont: "Palatino"
-        monofont: "Fira Mono"
-        smooth-scroll: true
-        toc-depth: 3
-        # code stuff
-        code-link: true
-        code-fold: false
-        code-tools: false
-        highlight-style: printing
-        code-block-bg: true
-        code-overflow: wrap
-        # css: ./scripts/custom-style.css
-        theme: cosmo
-        # theme: neutral
-        fig-align: "center"
-        reference-location: margin
-        cap-location: margin
-        mathjax: true
-        lightbox: true
-        # mermaid:
-
+  html:
+    anchor-sections: true
+    fontsize: "16px"
+    linestretch: 1.6
+    mainfont: "Palatino"
+    monofont: "Fira Mono"
+    smooth-scroll: true
+    toc-depth: 3
+    # code stuff
+    code-link: true
+    code-fold: false
+    code-tools: false
+    highlight-style: printing
+    code-block-bg: true
+    code-overflow: wrap
+    # css: ./scripts/custom-style.css
+    theme: cosmo
+    # theme: neutral
+    fig-align: "center"
+    reference-location: margin
+    cap-location: margin
+    mathjax: true
+    lightbox: true
+    # mermaid:
+  pdf:
     # see https://pandoc.org/MANUAL.html for all options
-#     pdf:
-#         documentclass: src/DL_class
-#         classoption: DL_class
-#         lof: false
-#         lot: false
-#         toc: false
-#         toc-depth: 2
-#         fig-cap-location: bottom
-#         tbl-cap-location: top
-#         urlcolor: "blue"
-#         linkcolor: "black"
-#         biblio-style: apalike
-#         keep-tex: true
-#         code-block-bg: "#f2f2f2"
-#         code-block-border-left: "#f2f2f2"
-#         code-overflow: wrap
-#         mermaid:
-#             theme: neutral
-#         include-in-header:
-#             - src/setup.tex
-#             - text: |
-#                   \usepackage{makeidx}
-#                   \makeindex
-#         include-after-body:
-#             text: |
-#                 \printindex
+    documentclass: src/DL_class
+    classoption: src/DL_class
+    #         lof: false
+    #         lot: false
+    toc: true
+    #         toc-depth: 2
+    #         fig-cap-location: bottom
+    #         tbl-cap-location: top
+    #         urlcolor: "blue"
+    #         linkcolor: "black"
+    #         biblio-style: apalike
+    #         keep-tex: true
+    #         code-block-bg: "#f2f2f2"
+    #         code-block-border-left: "#f2f2f2"
+    #         code-overflow: wrap
+    #         mermaid:
+    #             theme: neutral
+    include-in-header:
+      - src/setup.tex
+      - text: |
+          \usepackage{makeidx}
+          \makeindex
+    include-after-body:
+      text: |
+        \printindex
 # # https://christophertkenny.com/posts/2023-07-01-creating-quarto-journal-articles/
-# latex-auto-install: true
+latex-auto-install: true
 comments:
-    hypothesis: true
+  hypothesis: true
