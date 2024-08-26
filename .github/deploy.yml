@@ -1,0 +1,25 @@
+name: Quarto Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Quarto
+        run: |
+          install.packages("quarto")
+
+      - name: Render Quarto Project
+        run: |
+          quarto render
+
+      # - name: Deploy to remote
+      # run: |
