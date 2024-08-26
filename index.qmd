@@ -216,3 +216,20 @@ a wonderful source of support along this journey.
 
 William Freeman thanks Franny, Roz, Taylor, Maddie, Michael, and Joseph
 for their love and support.
+
+## How to Cite This Book
+
+If you would like to cite this book, please use the following BibTeX entry:
+
+```bibtex
+@book{foundationsCVbook,
+  title={Foundations of Computer Vision},
+  author={Torralba, A. and Isola, P. and Freeman, W.T.},
+  isbn={9780262378666},
+  lccn={2023024589},
+  series={Adaptive Computation and Machine Learning series},
+  url={https://mitpress.mit.edu/9780262048972/foundations-of-computer-vision/},
+  year={2024},
+  publisher={MIT Press}
+}
+```
