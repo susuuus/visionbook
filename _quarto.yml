@@ -86,10 +86,7 @@ book:
         - motion_estimation.qmd
     - part: Understanding Vision With Language
       chapters:
-        #   - representing_the_image.qmd
-        #   - objects.qmd
         - object_recognition_v3.qmd
-        #   - scenes.qmd
         - VLMs.qmd
     - part: On Research, Writing and Speaking
       chapters:
@@ -144,13 +141,13 @@ format:
     mathjax: true
     lightbox: true
     # mermaid:
-  pdf:
+  # pdf:
     # see https://pandoc.org/MANUAL.html for all options
-    documentclass: src/DL_class
-    classoption: src/DL_class
+    # documentclass: src/DL_class
+    # classoption: src/DL_class
     #         lof: false
     #         lot: false
-    toc: true
+    # toc: true
     #         toc-depth: 2
     #         fig-cap-location: bottom
     #         tbl-cap-location: top
@@ -163,15 +160,15 @@ format:
     #         code-overflow: wrap
     #         mermaid:
     #             theme: neutral
-    include-in-header:
-      - src/setup.tex
-      - text: |
-          \usepackage{makeidx}
-          \makeindex
-    include-after-body:
-      text: |
-        \printindex
+    # include-in-header:
+      # - src/setup.tex
+    #   - text: |
+    #       \usepackage{makeidx}
+    #       \makeindex
+    # include-after-body:
+    #   text: |
+    #     \printindex
 # # https://christophertkenny.com/posts/2023-07-01-creating-quarto-journal-articles/
-latex-auto-install: true
+# latex-auto-install: true
 comments:
   hypothesis: true
