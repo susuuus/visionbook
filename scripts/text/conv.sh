@@ -1,5 +1,6 @@
-# >>>>>>>>>>>>>>>>>>>>>>>> boilerplat_variable_names >>>>>>>>>>>>>>>>>>>>>>>>
 #!/bin/bash
+
+
 SCRIPT_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 echo $SCRIPT_DIR
 input_file="$1"
@@ -17,18 +18,18 @@ base_name=$(basename "$input_file" .tex)
 TEMP_TEX="${input_file%.tex}-temp.tex" # Create a temp file name based on the input file
 # Set the output file path
 output_file="${base_name}.qmd"
-# <<<<<<<<<<<<<<<<<<<<<<<< boilerplat_variable_names <<<<<<<<<<<<<<<<<<<<<<<<
-
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>> at LaTeX Level >>>>>>>>>>>>>>>>>>>>>>>>
+echo "processing into temp latex"
 # python3 $SCRIPT_DIR/process_eqref.py "$input_file" "$TEMP_TEX"
 # pandoc "$TEMP_TEX" -s -o "$TEMP_TEX" -f latex -t latex
 # echo "latex clean"
 
+
 python3 $SCRIPT_DIR/process_marginnote.py "$TEMP_TEX" "$TEMP_TEX"
 echo "margin done"
-# python3 $SCRIPT_DIR/process_figureref.py "$TEMP_TEX" "$TEMP_TEX"
+python3 $SCRIPT_DIR/process_figureref.py "$TEMP_TEX" "$TEMP_TEX"
 echo "figure references done"
 # <<<<<<<<<<<<<<<<<<<<<<<< at LaTeX Level <<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -39,10 +40,18 @@ echo "figure references done"
 
 # remove the [x in] or [x pt]
 # sed -i '' -E 's/\\\[\-?\([0-9]*\)\(\.[0-9]+\)\?\(in\|cm\|pt\)\\\]//g' "$output_file"
+# This script removes occurrences of LaTeX measurement units (e.g., \[10cm\], \[-5in\], etc.) from a file.
+
+# The sed command is used to perform text substitution in a file.
+# -i '' option is used to edit the file in-place without creating a backup.
+# -E option enables extended regular expressions.
+# 's/\\\[[-]?[0-9]*\.?[0-9]+(in|cm|pt)\\\]//g' is the regular expression pattern to match LaTeX measurement units.
+# The pattern matches any number (positive or negative) followed by a unit (in, cm, or pt) enclosed in square brackets.
+# The 'g' flag at the end of the pattern is used to perform the substitution globally (i.e., replace all occurrences).
+# "$output_file" is the file path where the substitution will be performed.
 sed -i '' -E 's/\\\[[-]?[0-9]*\.?[0-9]+(in|cm|pt)\\\]//g' "$output_file"
 sed -i '' 's/\\\\linewidth//g' "$output_file"
 sed -i '' 's/\[image\]/\[\]/g' "$output_file"
-
 sed -i '' 's/\.pdf/.png/g' "$output_file"
 sed -i '' 's/\.eps/\.png/g' "$output_file"
 # sed -i '' -E 's/#fig:([^ ]+)/#fig-\1/g' "$output_file"
