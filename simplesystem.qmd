@@ -56,7 +56,7 @@ perspective projection, to be discussed in , where the image is formed
 by the convergence of the light rays into a single point (focal point).
 If we do not take special care, most pictures taken with a camera will
 be better described by **perspective projection**, as shown in
-@fig-parallelProjectiona.
+@fig-parallelProjection, (a).
 
 ![(a) Close up picture without zoom. Note that near edges are larger
 than far edges, and parallel lines in 3D are not parallel. (b) Picture
@@ -69,8 +69,8 @@ One way of generating images that can be described by parallel
 projection is to use the camera zoom. If we increase the distance
 between the camera and the object while zooming, we can keep the same
 approximate image size of the objects, but with reduced perspective
-effects, as shown in @fig-parallelProjectionb. Note how, in
-@fig-parallelProjectionb, 3D parallel lines in the world are almost
+effects, as shown in @fig-parallelProjection (b). Note how, in
+@fig-parallelProjection (b), 3D parallel lines in the world are almost
 parallel in the image (some weak perspective effects remain).
 
 
@@ -84,7 +84,7 @@ background moves away or closer to the subject.
 
 
 The first step is to characterize how a point in world coordinates
-$(X,Y,Z)$ projects into the image plane. @fig-projectiona shows our
+$(X,Y,Z)$ projects into the image plane. @fig-projection (a) shows our
 parameterization of the world and the camera coordinate systems. The
 camera center is inside the 3D plane $X=0$, and the horizontal axis of
 the camera ($x$) is parallel to the ground plane ($Y=0$). The camera is
@@ -230,8 +230,6 @@ which the variation of intensities is larger. If we are on top of an
 edge, the direction of larger variation will be in the direction
 perpendicular to the edge.
 
-
-
 However, the image is not a continuous function as we only know the
 values of the $\ell (x,y)$ at discrete locations (pixels). Therefore, we
 will approximate the partial derivatives by: $$\begin{aligned}
@@ -264,25 +262,22 @@ magnitude, and the edge orientation is perpendicular to the gradient
 direction.
 :::
 
-
-
 The unit norm vector perpendicular to an edge is: $$\begin{aligned}
 {\bf n} = \frac{\nabla \ell}{\lVert \nabla \ell \rVert}
 \end{aligned}$$
+
 
 The first decision that we will perform is to decide which pixels
 correspond to edges (regions of the image with sharp intensity
 variations) and which ones belong to uniform regions (flat surfaces). We
 will do this by simply thresholding the edge strength $e(x,y)$. In the
 pixels with edges, we can also measure the edge orientation
-$\theta(x,y)$. @fig-gradient visualizes the edges and the normal vector
-on each edge.
+$\theta(x,y)$. @fig-gradient and @fig-edge visualize the edges and the normal vector on each edge.
 
-<figure id="fig:gradient">
-<embed src="figures/simplesystem/gradient.png" style="width:100.0%" />
-<embed src="figures/simplesystem/edgeTypes.png" style="width:100.0%" />
-<figcaption>Gradient and edge types.</figcaption>
-</figure>
+![Gradient and edge types.](figures/simplesystem/gradient.png){#fig-gradient}
+
+![](figures/simplesystem/edgeTypes.png){#fig-edge}
+
 
 ## From Edges to Surfaces
 
