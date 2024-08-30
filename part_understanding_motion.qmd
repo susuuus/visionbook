@@ -1,0 +1,21 @@
+# Understanding Motion {#sec-understanding-motion}
+
+Images are observed by a moving camera recording a dynamic world, but we have devoted little space to discuss the analysis of image sequences. We will focus on understanding motion in this set of chapters. This part is composed of four chapters:
+
+## Outline
+
+- **Chapter {@sec-motion_estimation}** introduces the problem of motion estimation and provides a very simple approach to estimate motion across two frames of a video.
+
+- **Chapter {@sec-3D_motion_and_its_2D_projection}** explains the image formation process and how the three-dimensional (3D) motion in the scene projects into a sequence of two-dimensional (2D) images.
+
+- **Chapter {@sec-optical_flow_estimation}** goes deeper into optical flow estimation, describing classical methods for motion estimation.
+
+- **Chapter {@sec-learning_to_estimate_motion}** introduces supervised and unsupervised learning-based methods for motion estimation.
+
+## Notation
+
+We will continue using the same notation as in the previous chapters:
+
+- Moving points: $\mathbf{P}(t)$ for 3D points, and $\mathbf{p}(t)$ for 2D points, where $t$ is time.
+
+- Temporal derivatives: to simplify the equations, we will use the dot notation for temporal derivatives, $\dot{\mathbf{P}}(t) = \partial \mathbf{P} / \partial t$.

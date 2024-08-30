@@ -1,0 +1,11 @@
+# Understanding Vision with Language {#sec-understanding-vision-with-language}
+
+Visual understanding consists of inferring scene properties from images. Some properties might refer to mid-level scene attributes such as motion or depth, while others may relate to high-level features like semantic segmentation.
+
+In this part, we will focus on the semantics of visual processing; that is, the association between visual stimuli and meaning. The goal is to infer from visual input what the significance of what we see is. Therefore, there is a strong connection between semantic visual processing and natural language processing.
+
+## Outline
+
+- **Chapter {@sec-object_recognition}** describes how to learn to recognize and localize objects in images, assigning words to them.
+
+- **Chapter {@sec-VLMs}** explores the role of language as a representation of the visual world and its connection with vision systems.

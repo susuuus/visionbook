@@ -1,0 +1,15 @@
+# Sampling and Multiscale Image Representations {#sec-sampling-and-multiscale-image-representations}
+
+Changing the scale of an image is one of the most important operations. It does not matter what area of computer vision you focus on. If there is one thing that you will always do, it is to resize images. This seemingly innocuous operation can have detrimental effects if the right precautions are not taken into consideration. In this part, we will study image resizing in detail.
+
+Image resizing is also a key operation to build scale-invariant representations. The last two chapters of this part will be devoted to constructing multiscale image representations.
+
+## Outline
+
+- **Chapter {@sec-sampling}** explains how to sample a continuous signal. Sampling is a necessary step to digitize a signal.
+
+- **Chapter {@sec-downsampling_and_upsampling}** describes the process of downsampling and upsampling an image.
+
+- **Chapter {@sec-filter_banks}** introduces filter banks as a type of image representation.
+
+- **Chapter {@sec-image_pyramids}** describes multiscale image pyramids.

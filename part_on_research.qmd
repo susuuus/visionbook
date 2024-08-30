@@ -1,0 +1,15 @@
+# On Research, Writing and Speaking {#sec-on-research-writing-and-speaking}
+
+The following chapters contain general advice for students and researchers. This advice is not limited to computer vision, nor is it limited to researchers. It is our personal perspective on skills that a good computer vision practitioner should have. However, as in all advice, you should always get multiple opinions and choose the one that helps you become the most successful student, researcher, or engineer. See, e.g., the excellent videos from this 2018 workshop @cvpr2018citizen from the Computer Vision and Pattern Recognition Conference (CVPR).
+
+While there are many topics important to a researcher's career that we don't cover (how to review papers, mentor and advise, and manage collaborations), we hope that these chapters will be useful to both students, researchers, and engineers.
+
+## Outline
+
+- **Chapter {@sec-how_to_do_research}** presents actionable tips for doing research, especially for those just starting out.
+
+- **Chapter {@sec-how_to_write_papers}** gives our tips for writing and organizing your research manuscripts.
+
+- **Chapter {@sec-how_to_give_talks}** provides some tips for giving engaging talks and managing nervousness.
+
+Feel free to read these chapters at any moment and in any order.
