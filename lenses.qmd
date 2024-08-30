@@ -34,7 +34,7 @@ three apertures. (d) Detail of the three apertures (small pinhole, large
 pinhole, and lens).](figures/imaging/gumbyEdited.jpg){#fig-pinholeSize
 width="100%"}
 
-## Lensmaker's Formula {#sect:lensmaker}
+## Lensmaker's Formula {#sec-lensmaker}
 
 In general, light changes both its wavelength and its speed as it passes
 from one material to another. Those changes at the material interface
@@ -98,10 +98,11 @@ view of @fig-lens (a), with angles and distances distorted for clarity of labeli
 
 
 ::: {#fig-lens layout-nrow=2}
-![(a) The geometry of a thin lens.](figures/imaging/lensRealCropped.png){#fig-lens-a}
+![](figures/imaging/lensRealCropped.png){#fig-lens-a}
 
-![(b) Showing the labels of adding angles referenced in table @tbl-lensmaker, used to describe the conditions for the lens shape, $\theta_S$ to give the desired focusing. Geometry  is distorted for visibility.](figures/imaging/lensDistortedCropped.png){#fig-lens-b}
+![](figures/imaging/lensDistortedCropped.png){#fig-lens-b}
 
+Fig (a) The geometry of a thin lens. (b) Showing the labels of adding angles referenced in table @tbl-lensmaker, used to describe the conditions for the lens shape, $\theta_S$ to give the desired focusing. Geometry  is distorted for visibility.
 
 :::
 
@@ -129,7 +130,7 @@ $2 \theta_s = \theta_2 + \theta_3$
 | $\theta_3$ | Angle of refracted ray wrt back surface normal | $2 \theta_S  = \theta_2 + \theta_3$ | Symmetry of lens, thin lens approx. |
 | $\theta_4 + \theta_S$ | Angle of ray exiting lens wrt back surface normal | $n \theta_3 = \theta_4+\theta_S$ | Snell's law, small angle approx. |
 | $\theta_4$ | Final angle from optical axis | $\theta_4 = c/b$ | Small angle approx. |
-: Relations between angles of thin lens example, @fig-lens (b). {#tbl-lensmaker}
+: Relations between angles of thin lens example, @fig-lens-b. {#tbl-lensmaker}
 
 
 If we start from the relation in table @tbl-lensmaker for $\theta_4$, and substitute for each angle
@@ -164,7 +165,7 @@ Substituting into the focusing condition, yields the **Lensmaker's
 Formula**, $$\frac{1}{a} + \frac{1}{b} = \frac{1}{f},
 $${#eq-lensmaker} where the lens **focal length**, $f$ is defined to be $$f = \frac{R}{2(n-1)}$$
 
-It is straightforward to show, by rotating the lens in @fig-lens (a) through an angle $\theta_R$ in the above derivation, thus adding $\theta_R$ to $\theta_S$ in table @tbl-lensmaker, that the lensmaker's equation also holds for
+It is straightforward to show, by rotating the lens in @fig-lens-a through an angle $\theta_R$ in the above derivation, thus adding $\theta_R$ to $\theta_S$ in table @tbl-lensmaker, that the lensmaker's equation also holds for
 light originating off the optical axis. Thus, under the paraxial and thin lens approximations, the lens focuses light from points on a plane onto points on a second plane, both perpendicular to the optical axis,
 as illustrated in @fig-rotatedLens.
 
@@ -203,7 +204,7 @@ segments on either
 side.](figures/imaging/greenLaserBrightenedCrop2.jpg){#fig-greenLaser
 width="60%"}
 
-## Imaging with Lenses {#sect:imagingWithLenses}
+## Imaging with Lenses {#sec-imagingWithLenses}
 
 Armed with the lensmaker's formula and the observation of @fig-thinLens, we can
 analyze how rays travel through lenses in the approximation of
@@ -221,12 +222,9 @@ bending. Thus a convex thin lens images as a pinhole camera does, creating a per
 Light travels straight through the center of a thin lens, where front and back surfaces are parallel. (a) Lens with non-zero thickness. (b) Idealized thin lens. (c) Rays passing through the center of the lens behave like rays passing through a pinhole camera, and thus lenses impose a *perspective projection*.
 :::
 
-
-
-
 Two points on opposite sides of the lens at distances $a$ and $b$ from the lens that satisfy are known as conjugate points. Light from one
 conjugate point, traveling through the lens, focuses to the other
-conjugate point, and vice versa (see ). The rules for tracing light
+conjugate point, and vice versa (see @fig-lenspropt). The rules for tracing light
 travel through a lens include the following:
 
 1.  Every ray passing through one conjugate point and passing through
@@ -338,7 +336,7 @@ Showing the linear relationship between f-number and depth of field.  From the s
 
 ### Concave Lenses
 
-The lens we designed in @sect-lensmaker was convex. Also of interest are **concave**
+The lens we designed in @sec-lensmaker was convex. Also of interest are **concave**
 lenses, with the lens surface curve bowing inward toward the center of
 the lens. For example, consider the concave lens with the surface
 orientation, $\theta_{Sx} = -\theta_S$ in @eq-lensmaker. By the reflection symmetry
@@ -393,7 +391,7 @@ lens of $\delta_o$.
 Fig (a) Galilean telescope. The convex lens 1 and the concave lens 2 share the same focal point, marked with a dot, resulting in parallel rays in giving parallel rays out. (b) A small change in the input ray angle gives a larger change in the output ray angle. The magnification of the telescope is the ratio, $M$, of the angular deviation of an output ray, $\delta_o$, to the angular deviation of an input ray, $\delta_i$.  Writing the focal point offset, $d$, in terms of the rays passing through the centers of lenses 1 and 2 gives the relation, $M = f_1/f_2$, where $f_1$ and $f_2$ are the respective ray focal lengths.
 :::
 
-By property 3 of @sect-imagingWithLenses, and the small angle approximation, we have
+By property 3 of @sec-imagingWithLenses, and the small angle approximation, we have
 $\delta_i f_1 = d$, because the point $p$ is a distance $f_1$ from
 lens 1. Similarly, we have $\delta_o f_2 = d$. Substituting for $d$
 gives $$M = \frac{\delta_o}{\delta_i} = \frac{f_1}{f_2},$$ where we have
