@@ -273,7 +273,7 @@ high-spatial frequencies in the image.
 
 The ideal anti-aliasing filter is a box in the Fourier domain with a
 cut-off frequency of $L=N/(2k)$ (using the notation introduced in
-chapter [\[chapter-sampling\]](#chapter:sampling){reference-type="ref"
+chapter [\[chapter-sampling\]](#sec-sampling){reference-type="ref"
 reference="chapter-sampling"}). The inverse Fourier transform of a box
 in the frequency domain, with width $2L+1=N/k+1$, is the **discrete
 sinc** function of length $N$ in the spatial domain:
@@ -286,7 +286,7 @@ box_{N/2k} \left[ u \right]$$
 In 2D, the ideal anti-aliasing filter is separable and is obtained by
 two consecutive 1D convolutions along each dimension. The discrete sinc
 is very similar to the continuous sinc described in chapter
-[\[chapter-sampling\]](#chapter:sampling){reference-type="ref"
+[\[chapter-sampling\]](#sec-sampling){reference-type="ref"
 reference="chapter-sampling"}. The discrete sinc is periodic, with
 period $N$. The following plot (@fig-discretesinc) shows the
 anti-aliasing sinc for $N=32$ and $k=2$ and the magnitude of its Fourier
@@ -617,21 +617,21 @@ to extending the input using repeat padding.
 Aliasing is a constant source of problems in many image processing
 pipelines. In computer vision, aliasing can introduce noise, spurious
 features and textures, and lack of translation invariance. In chapter
-[\[chapter-convolutional_neural_nets\]](#chapter:convolutional_neural_nets){reference-type="ref"
+[\[chapter-convolutional_neural_nets\]](#sec-convolutional_neural_nets){reference-type="ref"
 reference="chapter-convolutional_neural_nets"} we will discuss how
 aliasing affects the quality of some of the convolutional layers used in
 neural networks.
 
 Some of the tools we discussed in this chapter will also be used in
 other settings such as when building image pyramids (chapter
-[\[chapter-image_pyramids\]](#chapter:image_pyramids){reference-type="ref"
+[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
 reference="chapter-image_pyramids"}), and geometry (chapter
-[\[chapter-geometry_homogeneous\]](#chapter:geometry_homogeneous){reference-type="ref"
+[\[chapter-geometry_homogeneous\]](#sec-geometry_homogeneous){reference-type="ref"
 reference="chapter-geometry_homogeneous"}).
 
 Aliasing is often a source of image artifacts in generative image
 models. One example are generative adversarial networks (chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}) where images are produced as a
 sequence of learned convolutions and upsampling stages. When the
 upsampling operations are done without paying attention to aliasing, the

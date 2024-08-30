@@ -3,7 +3,7 @@
 ## Introduction
 
 In chapter
-[\[chapter-geometry_homogeneous\]](#chapter:geometry_homogeneous){reference-type="ref"
+[\[chapter-geometry_homogeneous\]](#sec-geometry_homogeneous){reference-type="ref"
 reference="chapter-geometry_homogeneous"} we discussed several types of
 geometric transformations of two-dimensional (2D) images: translations,
 rotations, skewing, scalings, and we saw that all could be modeled as

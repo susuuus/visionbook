@@ -31,14 +31,14 @@ called **natural language processing** (**NLP**). We will present just
 one way, which follows almost exactly the same format as modern computer
 vision systems: tokenize the text, then process it with a transformer.
 In chapter
-[\[chapter-transformers\]](#chapter:transformers){reference-type="ref"
+[\[chapter-transformers\]](#sec-transformers){reference-type="ref"
 reference="chapter-transformers"} we saw how to apply transformers to
 images and now we will see how to apply them to text. 
 
 The amazing thing about transformers is that they work well for a wide
 variety of data types: in fact, the same architectures that we saw in
 chapter
-[\[chapter-transformers\]](#chapter:transformers){reference-type="ref"
+[\[chapter-transformers\]](#sec-transformers){reference-type="ref"
 reference="chapter-transformers"} also works for text processing. To
 apply transformers to a new data modality may require nothing more than
 figuring out how to represent that data as numbers.
@@ -96,7 +96,7 @@ reference="sec-VLMs:im2text"}.
 ## Learning Visual Representations from Language Supervision {#sec-VLMs:CLIP}
 
 In chapter
-[\[chapter-representation_learning\]](#chapter:representation_learning){reference-type="ref"
+[\[chapter-representation_learning\]](#sec-representation_learning){reference-type="ref"
 reference="chapter-representation_learning"}, we saw that one approach
 of learning visual representations is to set up a pretext task that
 requires arriving at a good representation of the scene. In this section
@@ -263,7 +263,7 @@ can add more text vectors to partition the space in more ways.
 ## Translating between Images and Text
 
 In chapter
-[\[chapter-conditional_generative_models\]](#chapter:conditional_generative_models){reference-type="ref"
+[\[chapter-conditional_generative_models\]](#sec-conditional_generative_models){reference-type="ref"
 reference="chapter-conditional_generative_models"}, we saw how to
 translate between different image domains. Could we be even more
 ambitious and translate between entirely different data *modalities*? It
@@ -313,7 +313,7 @@ One amazing ability of modern generative models is to synthesize an
 image just from a text description, a problem called **text-to-image**.
 This can be achieved using any of the conditional generative models we
 saw in chapter
-[\[chapter-conditional_generative_models\]](#chapter:conditional_generative_models){reference-type="ref"
+[\[chapter-conditional_generative_models\]](#sec-conditional_generative_models){reference-type="ref"
 reference="chapter-conditional_generative_models"}. We simply have to
 find an effective way to use text as the conditioning information to
 these models. @fig-vision_and_language:text2im_schematic_mapping shows

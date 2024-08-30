@@ -127,7 +127,7 @@ of the losses at each timestep: $$\begin{aligned}
 \end{aligned}$$ The graph for backpropagation, shown in
 @fig-recurrent_neural_networks:bptt_J, has a branching structure, which
 we saw how to deal with in chapter
-[\[chapter-backpropagation\]](#chapter:backpropagation){reference-type="ref"
+[\[chapter-backpropagation\]](#sec-backpropagation){reference-type="ref"
 reference="chapter-backpropagation"}: gradients (red arrows) summate
 wherever the forward pass (black arrows) branches.
 
@@ -250,7 +250,7 @@ but $\mathbf{f}_t$ can learn to be all ones so that information
 propagates forward through an identity connection from the previous cell
 state to the subsequent cell state. This idea is similar to the idea of
 skip connections and residual connections in U-Nets and ResNets (chapter
-[\[chapter-convolutional_neural_nets\]](#chapter:convolutional_neural_nets){reference-type="ref"
+[\[chapter-convolutional_neural_nets\]](#sec-convolutional_neural_nets){reference-type="ref"
 reference="chapter-convolutional_neural_nets"}).
 
 ## Concluding Remarks

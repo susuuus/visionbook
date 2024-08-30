@@ -206,7 +206,7 @@ represented in some layer of a neural net.
 ## Learning from a Teacher
 
 When we first encountered supervised learning in chapter
-[\[chapter-intro_to_learning\]](#chapter:intro_to_learning){reference-type="ref"
+[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
 reference="chapter-intro_to_learning"}, we described it as *learning
 from examples*. You are given a dataset of example inputs and their
 corresponding outputs and the task is to infer the relationship that can
@@ -348,7 +348,7 @@ prompt to an intermediate feature space. Let's look next at one way to
 do this. Jia, Tang, *et al.* @jia2022visual proposed to use a *token* as
 the prompt for a vision transformer architecture @dosovitskiy2020vit
 (see chapter
-[\[chapter-transformers\]](#chapter:transformers){reference-type="ref"
+[\[chapter-transformers\]](#sec-transformers){reference-type="ref"
 reference="chapter-transformers"} for details on transformers). This new
 token is concatenated to the input of the transformer, which is a set of
 tokens representing image patches
@@ -372,11 +372,11 @@ representative example of both of these use cases can be found in
 in this book: any system that interactively adapts to user inputs can be
 considered a promptable system. In particular, many promptable systems
 use the tools of conditional generative modeling (chapter
-[\[chapter-conditional_generative_models\]](#chapter:conditional_generative_models){reference-type="ref"
+[\[chapter-conditional_generative_models\]](#sec-conditional_generative_models){reference-type="ref"
 reference="chapter-conditional_generative_models"}) to train systems can
 are conditioned on user text instructions (e.g., @dalle1,
 @rombach2022high, which we cover in chapter
-[\[chapter-VLMs\]](#chapter:VLMs){reference-type="ref"
+[\[chapter-VLMs\]](#sec-VLMs){reference-type="ref"
 reference="chapter-VLMs"}).
 
 ## Domain Adaptation
@@ -404,7 +404,7 @@ domain adaptation**. Here we cannot make use of test labels but we can
 still align the test inputs to look like the training inputs (or vice
 versa). One way to do so is to use a generative adversarial network
 (GAN; chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}) that translates the data in one
 domain to look identically distributed as the data in the other domain,
 as has been explored in e.g.,
@@ -444,7 +444,7 @@ return $F = f \circ g$
 ## Generative Data
 
 Generative models (chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}) produce synthetic data that
 looks like real data. Could this ability be useful for transfer
 learning? At first glance it may seem like the answer is no: Why use
@@ -456,14 +456,14 @@ generative model) is not just a cheap copy of real data. It can be
 we can draw an unbounded number of samples from a generative model.
 These samples are not just copies of the training datapoints but can
 interpolate and remix the training data in novel ways (chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}). Generative models can also
 produce *better* data because the data comes coupled with a procedure
 that generated it, and this procedure has structure that can be
 exploited to understand and manipulate the data distribution.
 
 One such structure is latent variables (chapter
-[\[chapter-generative_modeling_and_representation_learning\]](#chapter:generative_modeling_and_representation_learning){reference-type="ref"
+[\[chapter-generative_modeling_and_representation_learning\]](#sec-generative_modeling_and_representation_learning){reference-type="ref"
 reference="chapter-generative_modeling_and_representation_learning"}).
 Suppose you have generated a training set of outdoor images with a
 latent variable generative model. You want to train an object classifier

@@ -111,7 +111,7 @@ Stereo cameras generally are built by having two cameras mounted on a
 rigid rig so that the camera parameters do not change over time.
 
 We can also build a **stereo pinhole camera**. As we discussed in
-chapter [\[chapter-imaging\]](#chapter:imaging){reference-type="ref"
+chapter [\[chapter-imaging\]](#sec-imaging){reference-type="ref"
 reference="chapter-imaging"}, a pinhole camera is formed by a dark
 chamber with a single hole in one extreme that lets light in. The light
 gets projected into the opposite wall, forming an image. One interesting
@@ -287,7 +287,7 @@ performed using filtering methods.
 
 We will describe next a classical method to find key points and extract
 image descriptors to find image correspondences. In chapter
-[\[chapter-3D_multiview\]](#chapter:3D_multiview){reference-type="ref"
+[\[chapter-3D_multiview\]](#sec-3D_multiview){reference-type="ref"
 reference="chapter-3D_multiview"} we will describe other learning-based
 approaches.
 
@@ -306,7 +306,7 @@ image derivatives. Therefore, we will write an image as a continuous
 function on $x$ and $y$. The compute the final quantities in practice we
 will approximate the derivatives using their discrete approximations as
 discussed in chapter
-[\[chapter-image_derivatives\]](#chapter:image_derivatives){reference-type="ref"
+[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
 reference="chapter-image_derivatives"}. Let the input image be
 $\ell(x,y)$, and let the small translation be $\Delta x$ in $x$ and
 $\Delta y$ in $y$. Then, the squared intensity difference,
@@ -415,7 +415,7 @@ robust to small image translations @Freeman98c, @Lowe04.
 Methods to interpolate depth between the depths of matched points
 include probabilistic methods such as belief propagation, discussed in
 chapter
-[\[chapter-probabilistic_graphical_models\]](#chapter:probabilistic_graphical_models){reference-type="ref"
+[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
 reference="chapter-probabilistic_graphical_models"}. Under assumptions
 about the local spatial relationships between depth values, optimal
 shapes can be inferred provided the spatial structure over which
@@ -666,7 +666,7 @@ two cameras, then the epipolar lines will be along image scanlines,
 simplifying the stereo search.
 
 Using the homography transformations (chapter
-[\[chapter-homography\]](#chapter:homography){reference-type="ref"
+[\[chapter-homography\]](#sec-homography){reference-type="ref"
 reference="chapter-homography"}), we can warp observed stereo camera
 images taken under general conditions to synthesize the images that
 would have been recorded had the cameras been aligned to yield epipolar
@@ -815,7 +815,7 @@ geometry methods to reconstruct the 3D scene.
 Stereo matching is often also formulated as a problem of estimating the
 image motion between two views captured at different locations. In
 chapter
-[\[chapter-motion_estimation\]](#chapter:motion_estimation){reference-type="ref"
+[\[chapter-motion_estimation\]](#sec-motion_estimation){reference-type="ref"
 reference="chapter-motion_estimation"} we will discuss motion estimation
 algorithms.
 

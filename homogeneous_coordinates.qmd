@@ -468,7 +468,7 @@ transformations**.
 ### Geometric Transformations as Convolutions
 
 In chapter
-[\[chapter-linear_image_filtering\]](#chapter:linear_image_filtering){reference-type="ref"
+[\[chapter-linear_image_filtering\]](#sec-linear_image_filtering){reference-type="ref"
 reference="chapter-linear_image_filtering"} we showed how certain
 geometric transformations can be written as convolutions (such as the
 translation) while others cannot (such as rotations, scalings, shears,
@@ -697,7 +697,7 @@ aliasing would be by sampling the output on a finer grid and then
 blurring and downsampling the result to the desired image size. The
 second observation is that the way the boundary is extended is not like
 any of the methods that we studied in chapter
-[\[chapter-linear_image_filtering\]](#chapter:linear_image_filtering){reference-type="ref"
+[\[chapter-linear_image_filtering\]](#sec-linear_image_filtering){reference-type="ref"
 reference="chapter-linear_image_filtering"}; instead the image is padded
 by some form of noise that smoothly extends the image without adding
 strong image derivatives.

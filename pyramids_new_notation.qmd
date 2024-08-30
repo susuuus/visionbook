@@ -3,7 +3,7 @@
 ## Introduction
 
 In chapter
-[\[chapter-linear_image_filtering\]](#chapter:linear_image_filtering){reference-type="ref"
+[\[chapter-linear_image_filtering\]](#sec-linear_image_filtering){reference-type="ref"
 reference="chapter-linear_image_filtering"} we motivated translation
 invariant linear filters as a way of accounting for the fact that
 objects in images might appear at any location. Therefore, a reasonable

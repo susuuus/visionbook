@@ -14,7 +14,7 @@ treat them as inverse problems, where solving the problem in one
 direction can inform the solution in the other direction.
 
 In chapter
-[\[chapter-neural_nets\]](#chapter:neural_nets){reference-type="ref"
+[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
 reference="chapter-neural_nets"}, we described neural nets as being a
 sequence of mappings from raw data to ever more abstracted
 representations, layer by layer. This perspective puts representation
@@ -35,7 +35,7 @@ the full picture looks like this
 ## Latent Variables as Representations
 
 In chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}, we introduced generative models
 with latent variables $\mathbf{z}$. In that context, the role of the
 latent variable was to specify all unobserved factors that might affect
@@ -51,7 +51,7 @@ properties of the generated images are controlled by the latent
 variables.
 
 What we did not mention in chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}, but will focus on now, is that
 *latent variables are representations of the data*. In the case of an
 unconditional generative model, the latent variables are a *complete*
@@ -124,7 +124,7 @@ data.
 ### The Decoder of an Autoencoder is a Data Generator
 
 In chapter
-[\[chapter-representation_learning\]](#chapter:representation_learning){reference-type="ref"
+[\[chapter-representation_learning\]](#sec-representation_learning){reference-type="ref"
 reference="chapter-representation_learning"} we learned about
 autoencoders. These are models that learn an embedding that can be
 decoded to reconstruct the input data. You may already have noticed that
@@ -180,12 +180,12 @@ particular hypothesis space and optimization algorithm. We will first
 describe the hypothesis space.
 
 Remember the Gaussian generative model from chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"} (i.e., fitting a Gaussian to
 data)? We stated that this model is too simple for most purposes, but
 can form the basis for more flexible density models, which work by
 combining a lot of simple distributions. We gave one example in chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}: autoregressive models, which
 model a complicated distribution as a product over many simple
 conditional distributions. VAEs follow a slightly different strategy:
@@ -235,7 +235,7 @@ $p_{\mathbf{z}}(\mathbf{z})$ in this example, VAEs can also be
 constructed using other base distributions, even complicated ones. For
 example, we could make an infinite mixture of the autoregressive
 distributions we saw in chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}. In this sense, mixture models
 are metamodels, and their components can themselves be any of the
 density models we have learned about in this book, including other
@@ -621,7 +621,7 @@ synthesizes cartoon images of rivers given input noise (this is a more
 elaborate version of the script we saw in algorithm
 [\[alg:generative_models:simple_rivers_script\]](#alg:generative_models:simple_rivers_script){reference-type="ref"
 reference="alg:generative_models:simple_rivers_script"} of chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"} ). The script takes in random
 values that control the attributes of the scene (the grass color, the
 heading of the river, the number of trees, etc.) and generates an image
@@ -660,7 +660,7 @@ of Bernoulli variables that rotate the heading left and right as the
 river extends (using the same algorithm as in algorithm
 [\[alg:generative_models:simple_rivers_script\]](#alg:generative_models:simple_rivers_script){reference-type="ref"
 reference="alg:generative_models:simple_rivers_script"} of chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}). The VAE has discovered a latent
 dimension that somehow summarizes a more global mode of behavior (i.e.,
 bend left or bend right) than is explicit in the Python script. It is
@@ -679,7 +679,7 @@ have seen that a VAE can be considered two things:
 ## Generative Adversarial Networks Are Representation Learners Too
 
 In chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"} we covered generative adversarial
 networks (GANs), which, like VAEs, train a mapping from latent variables
 to synthesized data, $g: \mathbf{z} \rightarrow \mathbf{y}$. Do GANs

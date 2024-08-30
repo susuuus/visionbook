@@ -134,7 +134,7 @@ generative models like generative adversarial networks (GANs) or
 variational autoencoders (VAEs) are especially suitable, because the
 latent variables can be used to control different factors of variation
 in the generated data (see chapter
-[\[chapter-generative_modeling_and_representation_learning\]](#chapter:generative_modeling_and_representation_learning){reference-type="ref"
+[\[chapter-generative_modeling_and_representation_learning\]](#sec-generative_modeling_and_representation_learning){reference-type="ref"
 reference="chapter-generative_modeling_and_representation_learning"}).
 Given a datapoint $\mathbf{x}$, an encoder
 $f_{\phi}: \mathcal{X} \rightarrow \mathcal{Z}$, and a generator
@@ -223,7 +223,7 @@ epsilon-ball attacks we saw in the previous chapter.
 Adversarial training has many other uses as well, beyond the scope of
 the current chapter- it is used for training generative adversarial
 networks (chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}), for training agents to explore
 in reinforcement learning @pathak2017curiosity, and for training agents
 that compete against other agents @silver2016mastering. This general
@@ -250,7 +250,7 @@ broaden the *data* but to also broaden the *task*. The idea is to define
 a new task, $AB$, for which tasks $A$ and $B$ are special cases. Then we
 can train $AB$ on both the data for task $A$ and for task $B$. An
 example of a metatask like $AB$ is data imputation (see chapter
-[\[chapter-generative_modeling_and_representation_learning\]](#chapter:generative_modeling_and_representation_learning){reference-type="ref"
+[\[chapter-generative_modeling_and_representation_learning\]](#sec-generative_modeling_and_representation_learning){reference-type="ref"
 reference="chapter-generative_modeling_and_representation_learning"}).
 One example of data imputation is to predict missing color channels;
 this is the colorization problem, call this task $A$. Another data

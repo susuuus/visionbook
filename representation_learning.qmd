@@ -655,7 +655,7 @@ sometimes it takes a lot of effort to see the connection).
 
 In vision, the problem of clustering is related to the idea of
 **perceptual grouping**, which we cover in detail in chapter
-[\[chapter-perceptual_organization\]](#chapter:perceptual_organization){reference-type="ref"
+[\[chapter-perceptual_organization\]](#sec-perceptual_organization){reference-type="ref"
 reference="chapter-perceptual_organization"}. We humans see the world as
 organized into different levels of perceptual structure: contours and
 surfaces, objects and events. These structures are groupings, or
@@ -790,7 +790,7 @@ can therefore think of this loss as corresponding to a classification
 problem where the ground truth class is $\mathbf{x}^+$ and the other
 possible classes are $\{\mathbf{x}_1^-, \ldots, \mathbf{x}_N^-\}$ (refer
 to chapter
-[\[chapter-intro_to_learning\]](#chapter:intro_to_learning){reference-type="ref"
+[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
 reference="chapter-intro_to_learning"} to revisit softmax
 classification).
 

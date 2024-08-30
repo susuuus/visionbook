@@ -78,7 +78,7 @@ density associated with this prediction is shown in
 This prediction is entirely wrong! It splits the difference between the
 two true possibilities and comes out with something that has *zero*
 probability under the data distribution. As discussed in chapter
-[\[chapter-probabilistic_graphical_models\]](#chapter:probabilistic_graphical_models){reference-type="ref"
+[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
 reference="chapter-probabilistic_graphical_models"}, we could have done
 regression with a different loss function (using the $L_1$ loss for
 example, rather than $L_2$), and we would have come up with a different
@@ -195,7 +195,7 @@ $$\begin{aligned}
     &= \log \prod_i \phi(\hat{y}_i,y_i)
 \end{aligned}$$ The loss factorizes as a product over pairwise
 potentials. Therefore, by the Hammersley-Clifford theorem (chapter
-[\[chapter-probabilistic_graphical_models\]](#chapter:probabilistic_graphical_models){reference-type="ref"
+[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
 reference="chapter-probabilistic_graphical_models"}), the $L_2$ loss
 implies a probability distribution that treats all true values $y_i$ as
 independent from one another, given all the predictions $\hat{y}_i$. The
@@ -253,7 +253,7 @@ distribution of possibilities over the joint configuration of outputs.
 ### Relationship to Conditional Random Fields
 
 The conditional random fields (CRFs) from chapter
-[\[chapter-probabilistic_graphical_models\]](#chapter:probabilistic_graphical_models){reference-type="ref"
+[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
 reference="chapter-probabilistic_graphical_models"} are one kind of
 model that fits this definition. Now we will see some other ones. The
 big difference is that CRFs make predictions via *thinking
@@ -399,7 +399,7 @@ as an additional input, then it can do a better job at solving its
 prediction task. Because of this, $f_{\theta}$ will become sensitive to
 the text command, and if you give different text it will denoise toward
 a different image---an image that matches that text! In chapter
-[\[chapter-VLMs\]](#chapter:VLMs){reference-type="ref"
+[\[chapter-VLMs\]](#sec-VLMs){reference-type="ref"
 reference="chapter-VLMs"} we will describe in more detail a particular
 neural architecture for text-to-image synthesis, which is based on this
 intuition.

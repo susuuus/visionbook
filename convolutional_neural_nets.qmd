@@ -3,7 +3,7 @@
 ## Introduction
 
 The neural nets we saw in chapter
-[\[chapter-neural_nets\]](#chapter:neural_nets){reference-type="ref"
+[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
 reference="chapter-neural_nets"} are designed to process generic data.
 But in many domains the data has special structure, and we can design
 neural net architectures that are better suited to exploiting that
@@ -38,7 +38,7 @@ input image and color code them, we get the below input-output mapping
 
 Notice that this is quite different than the neural nets we saw in
 chapter
-[\[chapter-neural_nets\]](#chapter:neural_nets){reference-type="ref"
+[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
 reference="chapter-neural_nets"}, which output a single prediction an
 the entire image; CNNs output a two-dimensional (2D) *array* of
 predictions.
@@ -74,7 +74,7 @@ single filter looks like this: $$\begin{aligned}\mathbf{x}_{\texttt{out}}= \math
 $\theta = [\mathbf{w}, b]$ are the parameters of this layer. 
 
 Recalling the definition of the operator $\star$ from chapter
-[\[chapter-linear_image_filtering\]](#chapter:linear_image_filtering){reference-type="ref"
+[\[chapter-linear_image_filtering\]](#sec-linear_image_filtering){reference-type="ref"
 reference="chapter-linear_image_filtering"}, we give here an example of
 a convolutional layer over a 2D array $\mathbf{x}_{\texttt{in}}$, using
 a square kernel of size $K \times K$: $$\begin{aligned}x_{\texttt{out}}[n,m] =
@@ -82,7 +82,7 @@ b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] x_{\texttt{in}}[n+k_1,m+k_2] & \quad\quad \tr
 \end{aligned}$${#eq-convolutional_neural_nets} 
 
 As discussed in chapter
-[\[chapter-linear_image_filtering\]](#chapter:linear_image_filtering){reference-type="ref"
+[\[chapter-linear_image_filtering\]](#sec-linear_image_filtering){reference-type="ref"
 reference="chapter-linear_image_filtering"}, convolution is just a
 special kind of linear transform. Similarly, a convolutional layer is
 just a special kind of linear layer. It is a linear layer whose matrix
@@ -242,7 +242,7 @@ $$\mathbf{w} =\begin{bmatrix}
   -1 ~& 4 ~& -1\\
   0~& -1 ~& 0
 \end{bmatrix}$$ As we saw in chapter
-[\[chapter-image_derivatives\]](#chapter:image_derivatives){reference-type="ref"
+[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
 reference="chapter-image_derivatives"}, this filter detects boundaries
 on images. @fig-convolutional_neural_nets:strided_conv_results shows an
 input image, and the result of strided convolution with the Laplacian
@@ -401,7 +401,7 @@ capture long-range dependences.
 
 Separable filters are another kind of low-rank filter that is useful in
 many applications (see chapter
-[\[chapter-fourier_analysis\]](#chapter:fourier_analysis){reference-type="ref"
+[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
 reference="chapter-fourier_analysis"}). We can create a convolutional
 layer with separable filters by simply stacking two convolutional layers
 in sequence, with no other layers in between. The first layer is a
@@ -430,7 +430,7 @@ using a $3 \times 3$ kernel to approximate it we have: $$\mathbf{w} =
   2 ~& 0 ~& -2\\
   2~& 2 ~& 0
 \end{bmatrix}$$ But we know from chapter
-[\[chapter-image_derivatives\]](#chapter:image_derivatives){reference-type="ref"
+[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
 reference="chapter-image_derivatives"} that this kernel can be written
 as a linear combination of two separable kernels:
 $\mathbf{w} = \text{Sobel}_x + \text{Sobel}_y$, as defined in equation
@@ -451,7 +451,7 @@ nonseparable kernels.
 ### Downsampling and Upsampling Layers
 
 In chapter
-[\[chapter-image_pyramids\]](#chapter:image_pyramids){reference-type="ref"
+[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
 reference="chapter-image_pyramids"} we saw image pyramids and showed how
 they can be used for analysis and synthesis. CNNs can also be structured
 as analysis and synthesis pyramids, and this is a very powerful tool. To
@@ -568,7 +568,7 @@ Although local normalization is a common structure within the brain, it
 is not very frequently used in current neural networks, which more often
 use global normalization layers like batchnorm or layernorm (which we
 saw in chapter
-[\[chapter-neural_nets\]](#chapter:neural_nets){reference-type="ref"
+[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
 reference="chapter-neural_nets"}).
 
 ## A Simple CNN Classifier {#sec-convolutional_neural_nets:simple_CNN}
@@ -679,7 +679,7 @@ To understand the network it is useful to **visualize** the kernels.
 @fig-convolutional_neural_nets:oriented_bars_cnn_kernels shows the two
 learned $9 \times 9$ kernels. The first one looks like an horizontal
 derivative of a Gaussian filter (as we saw in chapter
-[\[chapter-image_derivatives\]](#chapter:image_derivatives){reference-type="ref"
+[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
 reference="chapter-image_derivatives"}) and the second one looks like a
 vertical derivative of a Gaussian (maybe closer to a second derivative).
 In fact, the DFT of each kernel shows that they are quite selective to a
@@ -733,7 +733,7 @@ We saw that the output of the first layer does not really look for
 So, we could fool the classifier by creating lines that for us look like
 vertical lines, but that have the energy content in the wrong side of
 the Fourier domain. We saw one trick to do this in chapter
-[\[chapter-fourier_analysis\]](#chapter:fourier_analysis){reference-type="ref"
+[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
 reference="chapter-fourier_analysis"}: modulation. If we multiply an
 image containing horizontal lines, by a sinusoidal wave,
 $\cos (\pi n / 3)$, we can move the spectral content horizontally as
@@ -818,7 +818,7 @@ reference="chap-challenge_of_vision"}, we learned about history of
 receptive fields in neuroscience. As a reminder, the receptive field of
 a neuron is the region of the input signal that the neuron is sensitive
 to, i.e. its support. In multilayer perceptrons (MLPs, chapter
-[\[chapter-neural_nets\]](#chapter:neural_nets){reference-type="ref"
+[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
 reference="chapter-neural_nets"}), the receptive field of each neuron is
 the entire input vector since MLPs use *fully* connected layers. In
 CNNs, on the other hand, each neuron only sees a portion of the input,
@@ -1006,7 +1006,7 @@ together to make a variety of useful architectures.
 ### Encoder and Decoders
 
 In chapter
-[\[chapter-image_pyramids\]](#chapter:image_pyramids){reference-type="ref"
+[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
 reference="chapter-image_pyramids"}, we encountered image pyramids that
 include both an analysis pipeline, which converts an image into a
 multiscale representation of filter responses, and a synthesis pipeline,
@@ -1027,7 +1027,7 @@ decoder is the opposite, taking a set of low-dimensional features as
 input, then upsampling them, layer by layer, until producing an image as
 the final output. An example of an encoder is an image classifier and an
 example of a decoder is an image generator (covered in chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}). These two architectural
 patterns are shown in
 @fig-convolutional_neural_nets:encoders_and_decoders.
@@ -1048,7 +1048,7 @@ bottleneck** -- i.e. the representation between the encoder and decoder
 is low-dimensional and can only transmit so much information -- and this
 forces abstraction. This latter concept is one we will study in much
 greater detail in chapter
-[\[chapter-representation_learning\]](#chapter:representation_learning){reference-type="ref"
+[\[chapter-representation_learning\]](#sec-representation_learning){reference-type="ref"
 reference="chapter-representation_learning"}, where we will see several
 benefits of compressing a signal. A schematic of the encoder-decoder
 architecture is shown in
@@ -1083,7 +1083,7 @@ abstraction, while also allowing residual information to flow through
 the skip connections, thereby not sacrificing the ability to output
 high-frequency spatial predictions. U-Nets look a lot like the steerable
 pyramids from chapter
-[\[chapter-image_pyramids\]](#chapter:image_pyramids){reference-type="ref"
+[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
 reference="chapter-image_pyramids"}, which also consistent of a
 downsampling *analysis* path followed by an upsampling *synthesis* path,
 with skip connections in between mirror image stages in the pathways.
@@ -1126,7 +1126,7 @@ a 5 block deep ResNet.
 We will see in later chapters that several new kinds of models are
 recently supplanting CNNs as the most successful architectures for
 vision problems. One such architecture is the **transformer** (chapter
-[\[chapter-transformers\]](#chapter:transformers){reference-type="ref"
+[\[chapter-transformers\]](#sec-transformers){reference-type="ref"
 reference="chapter-transformers"}). It may be tempting to think, "Why
 did we bother learning about CNNs then, if transformers are better!" The
 reason we cover CNNs is not because the exact architecture presented

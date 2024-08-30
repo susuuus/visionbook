@@ -707,7 +707,7 @@ these derivatives to extract other interesting quantities.
 ## Image Gradient and Directional Derivatives
 
 As we saw in chapter
-[\[chapter-simplesystem\]](#chapter:simplesystem){reference-type="ref"
+[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"}, an important image representation is
 given by the image gradient. From the image derivatives we can define
 also the image gradient as the vector:
@@ -973,7 +973,7 @@ compute edges, but this method is not used nowadays for edge detection.
 Instead the Laplacian filter is widely used in a number of other image
 representations. It is used to build image pyramids (multiscale
 representations, chapter
-[\[chapter-image_pyramids\]](#chapter:image_pyramids){reference-type="ref"
+[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
 reference="chapter-image_pyramids"}), and to detect points of interest
 in images (it is the basic operator used to detect keypoints to compute
 SIFT descriptors @Lowe04).
@@ -1000,7 +1000,7 @@ The first thing worth pointing out is that the Fourier transform of the
 impulse response shown in shown in @fig-EVS_sigma5_lambda2 has a shape
 that is qualitatively similar to the shape of the human contrast
 sensitivity function as discussed in chapter
-[\[chapter-fourier_analysis\]](#chapter:fourier_analysis){reference-type="ref"
+[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
 reference="chapter-fourier_analysis"}. Here we show again the Campbell
 and Robson chart, together with a radial section of the Fourier
 transform of $h$ from equation (@eq-humanmodel):

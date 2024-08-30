@@ -80,7 +80,7 @@ multiple images. Finding image correspondences is a topic that we have
 already mentioned in multiple places (e.g., chapter
 [\[chap-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
 reference="chap-stereo_vision"} and
-[\[chapter-homography\]](#chapter:homography){reference-type="ref"
+[\[chapter-homography\]](#sec-homography){reference-type="ref"
 reference="chapter-homography"}) and that will be mentioned again
 (chapter
 [\[chap-optical_flow_estimation\]](#chap:optical_flow_estimation){reference-type="ref"

@@ -102,7 +102,7 @@ boundary between them. We will start with the first.
 ### $K$-Means Segmentation
 
 $K$-means, which we covered in chapter
-[\[chapter-representation_learning\]](#chapter:representation_learning){reference-type="ref"
+[\[chapter-representation_learning\]](#sec-representation_learning){reference-type="ref"
 reference="chapter-representation_learning"}, is one of the simplest and
 most useful clustering algorithms, so let's try it for segmentation.
 
@@ -156,7 +156,7 @@ should belong to two different groups. Methods that use this idea
 include those based on graph cuts @shi2000normalized, spectral
 clustering @arbelaez2010contour, and Markov random field (MRF)-based
 clustering (chapter
-[\[chapter-probabilistic_graphical_models\]](#chapter:probabilistic_graphical_models){reference-type="ref"
+[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
 reference="chapter-probabilistic_graphical_models"}).
 
 We do not have time to cover all these methods and in fact they are no
@@ -232,10 +232,10 @@ edge that represents an occluding contour indicates that there is a
 depth discontinuity at that location in the scene.
 
 Chapter
-[\[chapter-simplesystem\]](#chapter:simplesystem){reference-type="ref"
+[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"} described some simple edge detectors
 and showed their use in reconstructing scene geometry. Chapter
-[\[chapter-3D_single_view\]](#chapter:3D_single_view){reference-type="ref"
+[\[chapter-3D_single_view\]](#sec-3D_single_view){reference-type="ref"
 reference="chapter-3D_single_view"} covers more recent approaches to
 inferring three-dimensional (3D) scene structure, which have largely
 superseded the methods that explicitly reasoned about edges.

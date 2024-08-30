@@ -17,7 +17,7 @@ image representations.
 ## Gabor Filters
 
 In chapter
-[\[chapter-fourier_analysis\]](#chapter:fourier_analysis){reference-type="ref"
+[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
 reference="chapter-fourier_analysis"} we discussed several useful image
 representations: representing an image in the frequency domain and
 decomposing it into amplitude and phase, and also the analysis of image
@@ -26,10 +26,10 @@ is a tool that allows us to extract that information, but only globally.
 For this information to be useful it needs to be localized. For
 instance, the analysis of orientations of local image structures can be
 done using image gradients (chapter
-[\[chapter-image_derivatives\]](#chapter:image_derivatives){reference-type="ref"
+[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
 reference="chapter-image_derivatives"}), which are localized in space.
 In fact, we made use of image derivatives in chapter
-[\[chapter-simplesystem\]](#chapter:simplesystem){reference-type="ref"
+[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"} to recover the three-dimensional (3D)
 structure of a scene. Here we will discuss another family of filters
 that has a long history of being used for image analysis: Gabor filters.
@@ -81,7 +81,7 @@ localization in space and frequency.
 
 Gabor functions can be extended to two dimensions by using 2D Gaussians
 and waves. We can also use complex waves (chapter
-[\[chapter-fourier_analysis\]](#chapter:fourier_analysis){reference-type="ref"
+[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
 reference="chapter-fourier_analysis"}) as they will give us a more
 general form of the Gabor function. We can multiply a complex Fourier
 basis function, $\exp{ \left(j  \left(u_0 x + v_0 y \right)  \right)}$,
@@ -364,7 +364,7 @@ of filter samples needed to interpolate depends on the form of the
 filter.
 
 In chapter
-[\[chapter-image_derivatives\]](#chapter:image_derivatives){reference-type="ref"
+[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
 reference="chapter-image_derivatives"}, we described the simplest
 example of an oriented filer: a Gaussian derivative. As we discussed in
 equation (@eq-steerable_derivative_filter), we can synthesize a
@@ -620,7 +620,7 @@ cannot disambiguate the input velocity.
 How can we measure input velocity? There are many different approaches
 in the computer vision community for measuring motion, and we will study
 them in chapter
-[\[chapter-motion_estimation\]](#chapter:motion_estimation){reference-type="ref"
+[\[chapter-motion_estimation\]](#sec-motion_estimation){reference-type="ref"
 reference="chapter-motion_estimation"}. Here we show that it is possible
 to measure motion even with the simple processing machinery that we've
 developed so far.

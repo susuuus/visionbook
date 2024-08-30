@@ -4,7 +4,7 @@
 
 Generative models perform (or describe) the synthesis of data. Recall
 the image classifier from chapter
-[\[chapter-intro_to_learning\]](#chapter:intro_to_learning){reference-type="ref"
+[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
 reference="chapter-intro_to_learning"}, shown again below
 (@fig-gen_models_image_classification):
 
@@ -68,7 +68,7 @@ Generally we will refer to unconditional generative models simply as
 generative models and use the term **conditional generative model** for
 a model of any conditional distribution $p(X \bigm | Y)$. Conditional
 generative models will be the focus of chapter
-[\[chapter-conditional_generative_models\]](#chapter:conditional_generative_models){reference-type="ref"
+[\[chapter-conditional_generative_models\]](#sec-conditional_generative_models){reference-type="ref"
 reference="chapter-conditional_generative_models"}; in the present
 chapter we will restrict our attention, from this point on, to
 unconditional models.
@@ -147,7 +147,7 @@ generative model. Two examples are:
     a density model fit to the real data.
 
 The first approach is the one we saw in chapter
-[\[chapter-stat_image_models\]](#chapter:stat_image_models){reference-type="ref"
+[\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
 reference="chapter-stat_image_models"} on statistical image models,
 where synthetic textures were made that had the same filter response
 statistics as a real training example. This approach works well when we
@@ -192,7 +192,7 @@ the direct approach only became popular recently, with models like
 **generative adversarial networks** (**GANs**) and **diffusion models**,
 which we will see later in this chapter. The indirect approach is more
 classical, and describes many of the methods we saw in chapter
-[\[chapter-stat_image_models\]](#chapter:stat_image_models){reference-type="ref"
+[\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
 reference="chapter-stat_image_models"}. Indirect approaches come in two
 general flavors, density models and energy models, which we will
 describe next. Both follow the schematic given in
@@ -580,7 +580,7 @@ show how the cross-entropy loss can be computed in
 @fig-generative_models:autoregressive_softmax_regression. Notice that
 it looks almost identical to @fig-softmax_regression_diagram from
 chapter
-[\[chapter-intro_to_learning\]](#chapter:intro_to_learning){reference-type="ref"
+[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
 reference="chapter-intro_to_learning"}.
 
 ![](./figures/generative_models/autoregressive_softmax_regression.png){width="100%"}
@@ -768,7 +768,7 @@ parameters (mean and variance) as a Gaussian density model fit to the
 data. This formulation yields useful probabilistic interpretations (in
 fact, such a diffusion model can be framed as a variational autoencoder,
 which we will see in chapter
-[\[chapter-generative_modeling_and_representation_learning\]](#chapter:generative_modeling_and_representation_learning){reference-type="ref"
+[\[chapter-generative_modeling_and_representation_learning\]](#sec-generative_modeling_and_representation_learning){reference-type="ref"
 reference="chapter-generative_modeling_and_representation_learning"}).
 However, diffusion models can still work well without these nice
 interpretations, instead using a wide variety of prediction models for
@@ -874,7 +874,7 @@ practice, setting $K=1$ is often sufficient.
 ### GANs are Statistical Image Models
 
 GANs are related to the image and texture models we saw in chapters
-[\[chapter-stat_image_models\]](#chapter:stat_image_models){reference-type="ref"
+[\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
 reference="chapter-stat_image_models"} and
 [\[chap-textures\]](#chap:textures){reference-type="ref"
 reference="chap-textures"}. For example, in the Heeger-Bergen model

@@ -354,7 +354,7 @@ function is a Python program that maps $x$ to $y$. Learning consisted of
 searching over the space of all possible Python programs (within some
 max length). Clearly that's a much harder search problem than just
 finding two scalars. In chapter
-[\[chapter-problem_of_generalization\]](#chapter:problem_of_generalization){reference-type="ref"
+[\[chapter-problem_of_generalization\]](#sec-problem_of_generalization){reference-type="ref"
 reference="chapter-problem_of_generalization"}, we will see some
 pitfalls of using too powerful a hypothesis space when a simpler one
 will do.

@@ -637,7 +637,7 @@ several important properties:
 
 The impulse will be useful in analytical derivations and we will see it
 again in chapter
-[\[chapter-sampling\]](#chapter:sampling){reference-type="ref"
+[\[chapter-sampling\]](#sec-sampling){reference-type="ref"
 reference="chapter-sampling"} when we discuss sampling.
 
 ## Cross-Correlation Versus Convolution

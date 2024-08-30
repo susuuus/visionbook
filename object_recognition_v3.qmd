@@ -86,7 +86,7 @@ However, perception is not completely invariant to those variables.
 
 One well studied property of the human visual system is its invariance
 to image and 3D rotations. As we discussed in chapter
-[\[chapter-bias_and_shift\]](#chapter:bias_and_shift){reference-type="ref"
+[\[chapter-bias_and_shift\]](#sec-bias_and_shift){reference-type="ref"
 reference="chapter-bias_and_shift"}, studies in human visual perception
 have shown that objects are recognized faster when they appear in
 canonical poses. In a landmark study, Roger N. Shepard and Jaqueline
@@ -341,7 +341,7 @@ the first product loops over all $T$ training examples while the second
 product loops over all the classes $K$. We want to find the parameters
 $\theta$ that maximize the likelihood of the ground truth labels for
 whole training image. As we have seen in chapter
-[\[chapter-convolutional_neural_nets\]](#chapter:convolutional_neural_nets){reference-type="ref"
+[\[chapter-convolutional_neural_nets\]](#sec-convolutional_neural_nets){reference-type="ref"
 reference="chapter-convolutional_neural_nets"}, maximizing the
 likelihood corresponds to minimizing the **cross-entropy loss** (which
 we get by just taking the negative log of the equation

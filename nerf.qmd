@@ -156,7 +156,7 @@ examples are the following:
 -   **Optical flow fields**, $f: x, y, t \rightarrow u, v$, measure
     motion in a video in terms of how scene content flows across the
     image plane. We encountered these fields in chapter
-    [\[chapter-3D_motion_and_its_2D_projection\]](#chapter:3D_motion_and_its_2D_projection){reference-type="ref"
+    [\[chapter-3D_motion_and_its_2D_projection\]](#sec-3D_motion_and_its_2D_projection){reference-type="ref"
     reference="chapter-3D_motion_and_its_2D_projection"}.
 
 -   **Signed distance functions** (**SDFs**) @curless1996volumetric,
@@ -495,7 +495,7 @@ modules like $\texttt{ray2coords}$ or $\texttt{vrender}$. However, such
 an unconstrained approach would be much less sample efficient and would
 require far more data and parameters to learn a good rendering solution
 (refer back to chapter
-[\[chapter-problem_of_generalization\]](#chapter:problem_of_generalization){reference-type="ref"
+[\[chapter-problem_of_generalization\]](#sec-problem_of_generalization){reference-type="ref"
 reference="chapter-problem_of_generalization"} to recall why a more
 constrained hypothesis space can reduce the required amount of training
 data to find a good solution). However, such a solution could also be

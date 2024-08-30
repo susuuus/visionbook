@@ -187,7 +187,7 @@ direction. Under the hood, for each atomic discontinuous operation,
 Pytorch requires that we define its gradients at the discontinuouities,
 and the one-sided gradient is a standard choice. This is why it can be
 fine in deep learning (chapter
-[\[chapter-neural_nets\]](#chapter:neural_nets){reference-type="ref"
+[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
 reference="chapter-neural_nets"}) to use functions like rectified
 nonlinear units (relus), which are common in deep networks and have
 discontinuous gradients.

@@ -87,7 +87,7 @@ object sizes to reason about 3D geometry is @Hoiem2008.
 
 And finally, **linear perspective** provides strong cues for 3D
 reconstruction as we already studied in chapter
-[\[chapter-3D_single_view\]](#chapter:3D_single_view){reference-type="ref"
+[\[chapter-3D_single_view\]](#sec-3D_single_view){reference-type="ref"
 reference="chapter-3D_single_view"}.
 
 ## 3D Representations
@@ -401,7 +401,7 @@ the motion of the camera alone.
 
 Not all camera motions provide enough information to learn about the 3D
 world structure. As we discussed in chapter
-[\[chapter-homography\]](#chapter:homography){reference-type="ref"
+[\[chapter-homography\]](#sec-homography){reference-type="ref"
 reference="chapter-homography"}, if all the videos contain only
 sequences captured by a rotating camera, the points are related by a
 homography regardless of the 3D structure. Therefore, to learn depth

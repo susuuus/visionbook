@@ -373,7 +373,7 @@ can have a negative social impact once they are deployed. It is
 important to be aware of those biases, and incorporate techniques to
 mitigate their effects. Now it is a good moment for the reader to
 revisit chapter
-[\[chapter-computer_vision_and_society\]](#chapter:computer_vision_and_society){reference-type="ref"
+[\[chapter-computer_vision_and_society\]](#sec-computer_vision_and_society){reference-type="ref"
 reference="chapter-computer_vision_and_society"}.
 
 ### Testing and Benchmark Bias
@@ -440,7 +440,7 @@ deploy your system to the public, then you have to give people access to
 it and that makes it vulnerable to attack.
 
 In chapter
-[\[chapter-neural_nets\]](#chapter:neural_nets){reference-type="ref"
+[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
 reference="chapter-neural_nets"} we described a simple neural network
 for line classification and showed how, by accessing the architecture
 and the learned filters, we could manually design input examples that
@@ -461,7 +461,7 @@ error over the training data. Because we only focus on the mean, the
 *worst case* might be arbitrarily bad. Alternative approaches try to
 minimize worst-case error, and this can result in systems that are more
 . In chapter
-[\[chapter-data_augmentation\]](#chapter:data_augmentation){reference-type="ref"
+[\[chapter-data_augmentation\]](#sec-data_augmentation){reference-type="ref"
 reference="chapter-data_augmentation"} we will discuss how **adversarial
 training** can be used to increase the robustness of the models to
 adversarial attacks.

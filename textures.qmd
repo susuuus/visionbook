@@ -205,7 +205,7 @@ image, so that all aspects of a texture can be synthesized, and the
 subbands should not be aliased, to avoid artifacts in the synthesized
 results. In the examples shown here we use a steerable pyramid
 @Simoncelli95 described in chapter
-[\[chapter-image_pyramids\]](#chapter:image_pyramids){reference-type="ref"
+[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
 reference="chapter-image_pyramids"} with six orientations and three
 scales. The final texture representation is the concatenation of the 18
 subband histograms, the low-pass residual histogram and the input image
@@ -293,7 +293,7 @@ neural networks emerged around 2014.
 
 Nonparametric Markov random field image models, introduced earlier in
 chapter
-[\[chapter-stat_image_models\]](#chapter:stat_image_models){reference-type="ref"
+[\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
 reference="chapter-stat_image_models"}, define the probability
 distribution of a pixel as dependent of neighborhood around the pixel.
 As we said before, if the values of enough pixels surrounding a given
@@ -377,9 +377,9 @@ scale @DeBonet98 or which are more efficient by operating on patches
 ## Connection to Deep Generative Models
 
 In chapters
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"} and
-[\[chapter-generative_modeling_and_representation_learning\]](#chapter:generative_modeling_and_representation_learning){reference-type="ref"
+[\[chapter-generative_modeling_and_representation_learning\]](#sec-generative_modeling_and_representation_learning){reference-type="ref"
 reference="chapter-generative_modeling_and_representation_learning"} we
 will learn about generative models for image synthesis. These chapters
 cover models that generate images of all kinds, not just textures.

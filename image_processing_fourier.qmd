@@ -870,7 +870,7 @@ natural images is quite similar and can be approximated by
 $A \left[u,v \right] = a/ (u^2+v^2)^b$ with $a$ and $b$ being two
 constants. We will talk more about this property when discussing
 statistical models of natural images in chapter
-[\[chapter-stat_image_models\]](#chapter:stat_image_models){reference-type="ref"
+[\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
 reference="chapter-stat_image_models"}. This typical structure of the
 DFT magnitude of natural images has been used as a prior for many tasks
 such as image denoising.

@@ -145,7 +145,7 @@ by Hassenstein and Reichardt @hassenstein1956 when studying the motion
 detectors in the fly's visual system. Another computational model of
 human motion perception is the energy model proposed by Adelson and
 Bergen @Adelson85 and briefly discussed in chapter
-[\[chapter-filter_banks\]](#chapter:filter_banks){reference-type="ref"
+[\[chapter-filter_banks\]](#sec-filter_banks){reference-type="ref"
 reference="chapter-filter_banks"}. In this chapter we will focus on
 motion estimation algorithms developed by the computer vision community
 without trying to follow biologically plausible mechanisms.
@@ -191,7 +191,7 @@ but might fail if there is sufficient geometric distortion between the
 two frames due to motion. By representing each pixel with a patch, we
 are transforming the image into a feature map of size
 $3\times(2s+1)\times(2s+1)$. As in chapter
-[\[chapter-perceptual_organization\]](#chapter:perceptual_organization){reference-type="ref"
+[\[chapter-perceptual_organization\]](#sec-perceptual_organization){reference-type="ref"
 reference="chapter-perceptual_organization"}, we could also use other
 patch embeddings such as DINO or SIFT descriptors. But since the image
 transformation between two consecutive frames is usually small, using
@@ -274,7 +274,7 @@ One advantage of this algorithm is that motion is computed in a way that
 is independent of the objects present in the scene. We did not make any
 assumption about what objects are moving or how. We did not introduce
 any grouping cues (as in chapter
-[\[chapter-perceptual_organization\]](#chapter:perceptual_organization){reference-type="ref"
+[\[chapter-perceptual_organization\]](#sec-perceptual_organization){reference-type="ref"
 reference="chapter-perceptual_organization"}) to presegment the image
 into candidate objects. Therefore, we could use the computed motion as
 new cue for grouping.
@@ -288,7 +288,7 @@ method is an example of **pattern matching methods** @Adelson85, which
 are often based on image correlations. A second class of motion
 algorithms are based on **spatiotemporal filtering** @Adelson85 and
 their principles were briefly described in chapter
-[\[chapter-filter_banks\]](#chapter:filter_banks){reference-type="ref"
+[\[chapter-filter_banks\]](#sec-filter_banks){reference-type="ref"
 reference="chapter-filter_banks"}. Spatiotemporal filtering uses the
 responses of velocity-tuned filters to estimate the motion.
 
@@ -297,9 +297,9 @@ distinguishes between two classes of motion algorithms that might be
 used by the visual system (@fig-motionIllusion1). The illusion involves
 temporal filtering, motion processing, and aliasing and thus provides a
 good review of the material in this chapter and also chapters
-[\[chapter-sampling\]](#chapter:sampling){reference-type="ref"
+[\[chapter-sampling\]](#sec-sampling){reference-type="ref"
 reference="chapter-sampling"} and
-[\[chapter-temporal_filters\]](#chapter:temporal_filters){reference-type="ref"
+[\[chapter-temporal_filters\]](#sec-temporal_filters){reference-type="ref"
 reference="chapter-temporal_filters"}.
 
 ![](figures/optical_flow/ted_demo_motion_1.png){width="100%"}

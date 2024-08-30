@@ -2,14 +2,14 @@
 
 ## Introduction
 
-In chapter [\[chapter-imaging\]](#chapter:imaging){reference-type="ref"
+In chapter [\[chapter-imaging\]](#sec-imaging){reference-type="ref"
 reference="chapter-imaging"} we described the image formation process
 assuming that the camera was the central element and we placed the
 origin of the world coordinates system in the pinhole. But, as we will
 be interested in interpreting the scene in front of the camera, other
 systems of reference might be more appropriate. For instance, in the
 simple world model of chapter
-[\[chapter-simplesystem\]](#chapter:simplesystem){reference-type="ref"
+[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"} we placed the origin of the world
 coordinates system on the ground, away from the camera. What formulation
 of the image formation process will allow us changing coordinate systems
@@ -69,7 +69,7 @@ involve geometric transformations.
 To write points in 3D space in homogeneous coordinates, we add a fourth
 coordinate to the three coordinates of Euclidean space, as described in
 chapter
-[\[chapter-geometry_homogeneous\]](#chapter:geometry_homogeneous){reference-type="ref"
+[\[chapter-geometry_homogeneous\]](#sec-geometry_homogeneous){reference-type="ref"
 reference="chapter-geometry_homogeneous"}. Using homogeneous
 coordinates, camera projections can be written in a simple form as a
 matrix multiplication. Consider a coordinate system with the origin
@@ -285,7 +285,7 @@ factor is $\lambda = Z/f$: $$\frac{Z}{f}    \begin{pmatrix}
     Z
     \end{pmatrix}$$ We should use $a$ instead of $f$ if we are using
 coordinates in pixels. We will revisit this again in chapter
-[\[chapter-3D_learning_from_single_image\]](#chapter:3D_learning_from_single_image){reference-type="ref"
+[\[chapter-3D_learning_from_single_image\]](#sec-3D_learning_from_single_image){reference-type="ref"
 reference="chapter-3D_learning_from_single_image"}.
 
 ### A Simple, although Unreliable, Calibration Method {#sec-simple_unreliable_calibration_method}
@@ -382,7 +382,7 @@ optical axis aligned with the world $Z$-axis. In practice, there will be
 many situations where placing the camera at a special position will be
 more convenient. For instance, in the simple vision system we studied in
 chapter
-[\[chapter-simplesystem\]](#chapter:simplesystem){reference-type="ref"
+[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"} the camera center was placed above the
 $Z$-axis. Let's now study a more general setup where the camera is
 placed at an arbitrary location away from the world coordinate system.
@@ -805,7 +805,7 @@ $a$, and $\theta$).
 
 . The setting shown in shown in @fig-camera_calibration_scenariosd is
 like the one we used in the simple visual system (chapter
-[\[chapter-simplesystem\]](#chapter:simplesystem){reference-type="ref"
+[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"}). Let's see if we recover the same
 equations!
 
@@ -877,7 +877,7 @@ y &=& a \frac{\cos (\theta) (Y-h) + \sin(\theta) (d-Z)}{\sin( \theta ) (h-Y) + \
 
 This setting is similar to the one we used when studying the simple
 visual system from chapter
-[\[chapter-simplesystem\]](#chapter:simplesystem){reference-type="ref"
+[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"}. However, you will notice that the
 equations obtained are different. The reason is that in the simple
 visual system projection model we made two additional simplifying
@@ -909,7 +909,7 @@ this results in: $$\begin{aligned}x &=& -a X\\
 y &=& a \cos (\theta) Y - a\sin(\theta) Z
 \end{aligned}$$ These equations are similar to equation (@eq-projection)
 from chapter
-[\[chapter-simplesystem\]](#chapter:simplesystem){reference-type="ref"
+[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"} (with $a=1$). One remaining difference
 is that $x$ has the opposite sign. This is because we are using here a
 different convention for the sign of the $x$-axis of the image

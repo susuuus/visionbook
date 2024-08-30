@@ -7,7 +7,7 @@ layers. In this chapter we will think of layers as modular blocks that
 can be chained together into a **computation graph**.
 @fig-backpropagation:simple_MLP shows the computation graph for the
 two-layer multilayer perceptron (MLP) from chapter
-[\[chapter-neural_nets\]](#chapter:neural_nets){reference-type="ref"
+[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
 reference="chapter-neural_nets"}.
 
 Each [layer]{style="background-color: comp_graph_node_bcolor"} takes in
@@ -185,9 +185,9 @@ $\frac{\partial J}{\partial \theta_l} = \mathbf{g}_{l}\mathbf{L}^{\theta}_{l}$
 
 So far, we have only examined computing the gradient of the loss for a
 single datapoint, $\mathbf{x}$. As you may recall from chapters
-[\[chapter-intro_to_learning\]](#chapter:intro_to_learning){reference-type="ref"
+[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
 reference="chapter-intro_to_learning"} and
-[\[chapter-gradient_descent\]](#chapter:gradient_descent){reference-type="ref"
+[\[chapter-gradient_descent\]](#sec-gradient_descent){reference-type="ref"
 reference="chapter-gradient_descent"}, the total cost function we wish
 to minimize will typically be the *average* of the losses over *all* the
 datapoints in a training set, $\{\mathbf{x}^{(i)}\}_{i=1}^N$. However,
@@ -518,7 +518,7 @@ So far we have only seen chain-like graphs,
 --\[\]--\[\]--\[\]$\rightarrow$. Can backprop handle other graphs? It
 turns out the answer is *yes*. Presently we will consider (**DAGs**). In
 chapter
-[\[chapter-recurrent_neural_nets\]](#chapter:recurrent_neural_nets){reference-type="ref"
+[\[chapter-recurrent_neural_nets\]](#sec-recurrent_neural_nets){reference-type="ref"
 reference="chapter-recurrent_neural_nets"}, we will see that neural nets
 can also include cycles and still be trained with variants of backprop
 (e.g., backprop through time).

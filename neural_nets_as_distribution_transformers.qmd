@@ -168,7 +168,7 @@ represent a dataset of images of different semantic classes, where each
 color represents a different semantic class. The network we are
 visualizing is of the transformer architecture, and we will learn about
 all its details in chapter
-[\[chapter-transformers\]](#chapter:transformers){reference-type="ref"
+[\[chapter-transformers\]](#sec-transformers){reference-type="ref"
 reference="chapter-transformers"}. For now, the important things to note
 are that (1) we are only showing a selected few of the layers (this net
 actually has dozen of layers) and (2) the embeddings are

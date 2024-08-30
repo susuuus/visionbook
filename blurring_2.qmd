@@ -301,7 +301,7 @@ remove unwanted image details (the blocky artifacts) from an image
     $\sigma_3^2 = \sigma_1^2 + \sigma_2^2$. This is a remarkable
     property of Gaussian filters and is the basis of the Gaussian
     pyramid that we will see later in chapter
-    [\[chapter-image_pyramids\]](#chapter:image_pyramids){reference-type="ref"
+    [\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
     reference="chapter-image_pyramids"}. To prove this property, one can
     use the Fourier transform of the Gaussian and the fact that the
     convolution is the product of Fourier transforms.

@@ -31,7 +31,7 @@ while allowing the development of analytic tools to characterize them.
 In the last decade, researchers have developed large neural networks
 that learned generative models of images and we discuss these models
 more in depth in chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}. In this chapter we will focus on
 simpler image models as they will serve as motivation for some of the
 concepts that will be used later when describing generative models.
@@ -232,7 +232,7 @@ realistic, but it is useful in explaining the distribution of albedos in
 natural images. This model is used by the Retinex algorithm @Land83 to
 separate an image into illumination and albedo variations, as we saw in
 chapter
-[\[chapter-image_derivatives\]](#chapter:image_derivatives){reference-type="ref"
+[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
 reference="chapter-image_derivatives"}.
 
 ### The Power Spectrum of Natural Images
@@ -277,7 +277,7 @@ frequency $(0,0)$ lies in the middle of each FT. From the images in the
 middle row, we can see that the largest amplitudes concentrate in the
 low spatial frequencies for the natural images (we already discussed
 this in chapter
-[\[chapter-fourier_analysis\]](#chapter:fourier_analysis){reference-type="ref"
+[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
 reference="chapter-fourier_analysis"}). However, the random image has
 similar spectral content at all frequencies. In order to better
 appreciate the particular decay in the spectral amplitude with
@@ -323,7 +323,7 @@ to the power (squared magnitude) of the frequency components of the
 Fourier transform. This is, the matrix ${\bf C}$ can be written as
 ${\bf C} = {\bf F}{\bf D}{\bf F}^\mathsf{T}$. Where ${\bf F}$ is the
 matrix that contains the Fourier basis, as seen in chapter
-[\[chapter-fourier_analysis\]](#chapter:fourier_analysis){reference-type="ref"
+[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
 reference="chapter-fourier_analysis"}, and the diagonal matrix ${\bf D}$
 has, along the diagonal, the values $1/ w  ^\alpha$ for all radial
 frequencies $w$. The value of $\alpha$ can be set to a fix value of 1.5.
@@ -642,14 +642,14 @@ case of the wavelet image prior.
 A powerful class of image models is known as **Markov random field**
 (MRF) models. They have a precise mathematical form, which we will
 describe later, in chapter
-[\[chapter-probabilistic_graphical_models\]](#chapter:probabilistic_graphical_models){reference-type="ref"
+[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
 reference="chapter-probabilistic_graphical_models"}. For now, we present
 the intuition for these models: if the values of enough pixels
 surrounding a given pixel are specified, then the probability
 distribution of the given pixel is independent of the other pixels in
 the image. To fit and sample from the MRF structure requires the
 mathematical tools of graphical models, to be introduced in chapter
-[\[chapter-probabilistic_graphical_models\]](#chapter:probabilistic_graphical_models){reference-type="ref"
+[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
 reference="chapter-probabilistic_graphical_models"}. As we will see in
 the following chapter, Efros and Leung @Efros99 introduced an algorithm
 for texture synthesis that exploits intuitions about the Markov
@@ -726,7 +726,7 @@ this chapter, only help in reducing a bit the space of possible images.
 ![](figures/statistical_image_models/spaces_real_images_and_models_final.png){width="100%"}
 
 We will see stronger generative image models in chapter
-[\[chapter-generative_models\]](#chapter:generative_models){reference-type="ref"
+[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
 reference="chapter-generative_models"}.
 
 [^1]: Additive stationary noise is noise with statistical properties

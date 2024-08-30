@@ -249,7 +249,7 @@ this classification. One way to do so would be to enumerate all possible
 parameter settings and pick one that successfully separates the zeros
 from the ones. This kind of exhaustive enumeration is a slow process,
 but don't worry, in chapter
-[\[chapter-backpropagation\]](#chapter:backpropagation){reference-type="ref"
+[\[chapter-backpropagation\]](#sec-backpropagation){reference-type="ref"
 reference="chapter-backpropagation"} we will see how to speed things up
 using gradient descent. But it's worth remarking that enumeration is
 always a sufficient solution, at least when the possible parameter
@@ -357,7 +357,7 @@ research.
 ## Deep Learning: Learning with Neural Nets
 
 Using the formalism we defined in chapter
-[\[chapter-intro_to_learning\]](#chapter:intro_to_learning){reference-type="ref"
+[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
 reference="chapter-intro_to_learning"}, learning consists of using an
 *optimizer* to find a function in a *hypothesis space*, that maximizes
 an *objective*. From this perspective, neural nets are simply a special
@@ -368,7 +368,7 @@ use this parameterized hypothesis space.
 Deep learning also typically involves using gradient-based optimization
 to search the hypothesis space for the best fit to the data. We will
 investigate this approach in detail in chapter
-[\[chapter-backpropagation\]](#chapter:backpropagation){reference-type="ref"
+[\[chapter-backpropagation\]](#sec-backpropagation){reference-type="ref"
 reference="chapter-backpropagation"}, where we will learn about the
 **backpropagation** algorithm for gradient-based learning with neural
 nets. However, it is certainly possible to optimize neural nets with
@@ -653,7 +653,7 @@ reasons:
 
 Let's look at reasons 1-3 in light of the discussion of searching for
 truth from chapter
-[\[chapter-problem_of_generalization\]](#chapter:problem_of_generalization){reference-type="ref"
+[\[chapter-problem_of_generalization\]](#sec-problem_of_generalization){reference-type="ref"
 reference="chapter-problem_of_generalization"} (see
 @fig-problem_of_generalization:search_space_tools). Reason 1 relates to
 the size of the hypothesis space. The hypothesis space can be made very

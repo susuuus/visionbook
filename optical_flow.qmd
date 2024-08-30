@@ -278,7 +278,7 @@ To apply the gradient-based optical flow algorithm we need to compute
 the gradients along $x$, $y$, and $t$. In practice, the image
 derivatives, $\ell_x$ and $\ell_y$, are computed by convolving the image
 with Gaussian derivatives (see chapter
-[\[chapter-image_derivatives\]](#chapter:image_derivatives){reference-type="ref"
+[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
 reference="chapter-image_derivatives"}). In the experiments here we
 first blur the two input frames with a Gaussian of $\sigma=1$,
 approximated with a five-tap kernel (i.e., a kernel with size

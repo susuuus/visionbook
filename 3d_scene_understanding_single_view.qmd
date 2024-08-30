@@ -322,7 +322,7 @@ lines in the scene and finding their intersection.
 
 Vanishing points can be extracted automatically from images by first
 detecting image edges and their orientations (like we did in chapter
-[\[chapter-simplesystem\]](#chapter:simplesystem){reference-type="ref"
+[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"}) and then using RANSAC (section
 [\[sec-RANSAC\]](#sec:RANSAC){reference-type="ref"
 reference="sec-RANSAC"}) to group the edges: every pair of edges will
@@ -772,7 +772,7 @@ However, most of the steps required some manual intervention. All of
 those steps can be performed in a fully automatic way by training
 detectors to localize the full extend of an object as we will discuss in
 chapter
-[\[chapter-object_recognition\]](#chapter:object_recognition){reference-type="ref"
+[\[chapter-object_recognition\]](#sec-object_recognition){reference-type="ref"
 reference="chapter-object_recognition"} and detecting points of contact
 between objects.
 
