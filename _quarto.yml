@@ -12,18 +12,18 @@ book:
     - index.qmd
     - notations.qmd
     - taxonomy.qmd
-    - part: Foundations
+    - part: part_foundations.qmd
       chapters:
         - simplesystem.qmd
         - visionscience.qmd
         - fairness.qmd
-    - part: Image Formation
+    - part: part_image_formation.qmd
       chapters:
         - imaging.qmd
         - lenses.qmd
         - camera_as_linsys.qmd
         - color.qmd
-    - part: Foundations of Learning
+    - part: part_foundation_learning.qmd
       chapters:
         - intro_to_learning.qmd
         - gradient_descent.qmd

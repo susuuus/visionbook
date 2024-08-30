@@ -1,0 +1,23 @@
+# Foundations of Learning {#sec-foundations-of-learning}
+
+Learning is one of the key components of a computer vision system. In these chapters, we cover the foundations of machine learning from a general perspective but explore examples using vision problems.
+
+## Outline
+
+- **Chapter {@sec-intro-to-learning}** introduces the basic principles of machine learning.
+
+- **Chapter {@sec-gradient-descent}** describes how to learn the parameters that fit a model to data.
+
+- **Chapter {@sec-problem-of-generalization}** describes the difference between fitting to training data and generalizing to test data, and the new considerations that arise given this difference.
+
+- **Chapter {@sec-neural-nets}** introduces neural networks, a general family of models common in both biological and artificial vision systems.
+
+- **Chapter {@sec-neural-nets-as-distribution-transformers}** presents neural networks as functions that apply a series of geometric transformations to a data distribution.
+
+- **Chapter {@sec-backpropagation}** describes the backpropagation algorithm for calculating the gradient of a neural network with respect to its parameters.
+
+## Notation
+
+- The algorithms we will see apply to many kinds of signals, not just images. Therefore, in this part we will use $\mathbf{x}$ to represent model inputs rather than $\boldimg$. A model's final output will usually be represented by $\mathbf{y}$.
+  
+- Neural networks consist of a sequence of layers that perform a sequence of transformations $\mathbf{x}_0 \rightarrow \mathbf{x}_1 \rightarrow \ldots \rightarrow \mathbf{y}$. When we consider a single layer in isolation, we will generically refer to its input as $\xin$ and its output as $\xout$. We will also use the variables $\mathbf{h}$ and $\mathbf{z}$ to represent certain kinds of intermediate representations in neural nets, which will be defined when they are first used.
