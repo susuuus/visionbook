@@ -238,14 +238,17 @@ $(n,m)$.](figures/imaging/pinhole_geometry2.png){#fig-pinholeGeometry
 width="100%"}
 
 If the distance from the sensing plane to the pinhole is $f$ (see ) then
-similar triangles gives us the following relations: $$\begin{aligned}
-x & = & f \frac{X}{Z} 
-\label{eq:perspctiveProj1} \\
-y & = & f \frac{Y}{Z} 
-\label{eq:perspctiveProj}
-\end{aligned}$$
+similar triangles gives us the following relations: 
 
-Equations @eq-perspctiveProj1 and @eq-perspectiveProj are called the **perspective projection
+$$\begin{align}
+x & = & f \frac{X}{Z}
+\end{align}$$ {#eq-perspctiveProj1}
+
+$$\begin{align}
+y & = & f \frac{Y}{Z} 
+\end{align}$${#eq-perspctiveProj}
+
+Equations @eq-perspctiveProj1 and @eq-perspctiveProj are called the **perspective projection
 equations**. Under perspective projection, distant objects become
 smaller, through the inverse scaling by $Z$. As we will see, the
 perspective projection equations apply not just to pinhole cameras but

@@ -6,9 +6,9 @@ Many of the techniques in computer vision are rooted in signal processing. The g
 
 ## Outline
 
-- **Chapter {@sec-linear-image-filtering}** introduces signal processing, linear image filtering, and convolutions.
+- **Chapter {@sec-linear_image_filtering}** introduces signal processing, linear image filtering, and convolutions.
 
-- **Chapter {@sec-fourier-analysis}** describes the Fourier transform and some applications.
+- **Chapter {@sec-fourier_analysis}** describes the Fourier transform and some applications.
 
 ## Notation 
 
