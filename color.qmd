@@ -29,7 +29,11 @@ prism.  The prism separates the white light into different colors by
 bending each color a different amount.  The second prism in the
 drawing demonstrates that those colors are elemental:  as an individual
 color passes through the second prism, the light doesn't break into
-other colors.](figures/color/newtonDrawing.jpg){#fig-prism width=".9"}
+other colors.](figures/color/newtonDrawing.jpg){#fig-prism}
+
+:::{.column-margin}
+Newton understood that white light could be decomposed into different colors and invented the term {\bf spectrum}.
+:::
 
 Our understanding of light and color explains such experiments. Light is
 a mixture of electromagnetic waves of different wavelengths. Sunlight
@@ -81,127 +85,71 @@ remember that this is true only within a fixed visual context.
 
 :::{.column-margin}
 Why does the sky look blue? And why does it look orange during a sunset? 
-![](figures/color/sunset_key_west.jpg){width=".4"}
+![](figures/color/sunset_key_west.jpg){width="80%"}
 :::
 
-@fig-examples1 shows a spectrograph visualization of some light power
-spectra (the right image of each row) along with the image that the
-spectrograph was pointed toward (left images). @fig-sources shows the
-spectrum of a blue sky, plotted as intensity as a function of
-wavelength.
+@fig-examples1 shows a spectrograph visualization of some light power spectra (the right image of each row) along with the image that the spectrograph was pointed toward (left images). @fig-sources shows the spectrum of a blue sky, plotted as intensity as a function of wavelength.
 
 :::{#fig-sources layout-ncol="2"}
-![](figures/color/Spectrum_of_blue_sky.png){width="70%"}   
-   
-![](figures/color/IMG_0122.jpg){width=".15"}
 
+![](figures/color/Spectrum_of_blue_sky-0.png){width="80%"}
+
+
+![](figures/color/IMG_0122.jpg){width="15%"}
+
+   
 Power spectrum of blue skylight @blueskyWiki.
+
 :::
+
 
 ### The Color Appearance of Different Spectral Bands
 
-It is helpful to develop a feel for the approximate color appearance of
-different light spectra. Again, we say the approximate appearance
-because the subjective appearance can change according to other factors
-than just the spectrum.
+It is helpful to develop a feel for the approximate color appearance of different light spectra. Again, we say the approximate appearance because the subjective appearance can change according to other factors than just the spectrum.
 
-The visible spectrum lies roughly in the range between 400 and 700 nm,
-see @fig-rainbow. We can divide the visible spectrum into three 100 nm
-bands, and study the appearance of light power spectra where power is
-present or absent from each of those three bands, in all of the eight
-($2^3$) possible combinations.
-
+The visible spectrum lies roughly in the range between 400 and 700 nm, see @fig-rainbow. We can divide the visible spectrum into three 100 nm bands, and study the appearance of light power spectra where power is present or absent from each of those three bands, in all of the eight ($2^3$) possible combinations.
 
 ![The approximate color appearance of light over different spectral regions.](figures/color/rainbow3.png){#fig-rainbow}
 
-Light with spectral power distributed in just the 400--500 nm wavelength
-band will look some shade of blue, the exact hue depending on the
-precise distribution. Light in the 500--600 nm band will appear
-greenish. Most distributions within the 600--700 nm band will look red.
+Light with spectral power distributed in just the 400--500 nm wavelength band will look some shade of blue, the exact hue depending on the precise distribution. Light in the 500--600 nm band will appear greenish. Most distributions within the 600--700 nm band will look red.
 
-White light is a mixture of all spectral colors. A spectrum of light
-containing power evenly distributed over 400---700 nm would appear
-approximately white. Light with no power in any of those three bands,
-that is, darkness, appears black.
+White light is a mixture of all spectral colors. A spectrum of light containing power evenly distributed over 400---700 nm would appear approximately white. Light with no power in any of those three bands, that is, darkness, appears black.
 
-There are three other spectral classes left in this simplified grouping
-of spectra: spectral power present in two of the spectral bands, but
-missing in the third. Cyan is a combination of both blue and green, or
-roughly spectral power between 400 and 600 nm. In printing and color
-film applications, this is sometimes called *minus red*, since it is the
-spectrum of white light, minus the spectrum of red light. The blue and
-red color blocks, or light in the 400--500 nm band, and in the 600--700
-nm band, is called magenta, or minus green. Red and green together, with
-spectral power from 500--700 nm, make yellow, or minus blue
-(@fig-names).
+There are three other spectral classes left in this simplified grouping of spectra: spectral power present in two of the spectral bands, but missing in the third. Cyan is a combination of both blue and green, or roughly spectral power between 400 and 600 nm. In printing and color film applications, this is sometimes called *minus red*, since it is the spectrum of white light, minus the spectrum of red light. The blue and
+red color blocks, or light in the 400--500 nm band, and in the 600--700nm band, is called magenta, or minus green. Red and green together, with spectral power from 500--700 nm, make yellow, or minus blue @fig-names.
 
 ![For coarse orientation only, this cartoon model gives the color appearance of different spectral bands of the spectrum of visible light.](figures/color/cartoonColor2.png){#fig-names}
 
 ### Light Reflecting from Surfaces
 
-When light reflects off a surface, the power spectrum alters in ways
-that depend on the surface's characteristics and geometry. These changes
-in light allow us to perceive objects and surfaces by observing their
-influence on the reflected light.
+When light reflects off a surface, the power spectrum alters in ways that depend on the surface's characteristics and geometry. These changes in light allow us to perceive objects and surfaces by observing their influence on the reflected light.
 
-The interaction between light and a surface can be quite complex.
-Reflections can be specular or diffuse, and the reflected power spectrum
-may depend on the relative orientations of the incident light, surface,
-and the observed reflected ray. In its full generality, the reflection
-of light from a surface is described by the bidirectional reflectance
-distribution function (BRDF) @Nicodemus1965, @Matusik2002. For this
-discussion, we will focus on diffuse surface reflections, where the
-power spectrum of the reflected light, $r(\lambda)$, is proportional to
-the wavelength-by-wavelength product of the power spectrum of the
-incident light, $\ell_{\texttt{in}}(\lambda)$, and a **reflectance
-spectrum**, $s(\lambda)$, of the surface:
-$$r(\lambda) = k \ell_{\texttt{in}}(\lambda) s(\lambda),$$ where the
-proportionality constant $k$ depends on the reflection geometry. This
-diffuse reflection model characterizes most matte reflections. Such
-wavelength-by-wavelength scaling is also a good model for the spectral
-changes to light caused by transmission through an attenuating filter.
-The incident power spectrum is then multiplied at each wavelength by the
-**transmittance spectrum** of the attenuating filter.
+The interaction between light and a surface can be quite complex. Reflections can be specular or diffuse, and the reflected power spectrum may depend on the relative orientations of the incident light, surface, and the observed reflected ray. In its full generality, the reflection
+of light from a surface is described by the bidirectional reflectance distribution function (BRDF) @Nicodemus1965, @Matusik2002. For this discussion, we will focus on diffuse surface reflections, where the power spectrum of the reflected light, $r(\lambda)$, is proportional to the wavelength-by-wavelength product of the power spectrum of the
+incident light, $\ell_{\texttt{in}}(\lambda)$, and a **reflectance spectrum**, $s(\lambda)$, of the surface:
+$$r(\lambda) = k \ell_{\texttt{in}}(\lambda) s(\lambda),$$ 
+
+where the proportionality constant $k$ depends on the reflection geometry. This diffuse reflection model characterizes most matte reflections. Such wavelength-by-wavelength scaling is also a good model for the spectral changes to light caused by transmission through an attenuating filter. The incident power spectrum is then multiplied at each wavelength by the **transmittance spectrum** of the attenuating filter.
 
 Some reflectance spectra of real-world surfaces are plotted in
-@fig-sourcerefl. The flower *Hepatica Nobilis* (solid line) is blue,
-while *Pyrostegia venusta* (dotted line) is orange.
+@fig-sourcerefl. The flower *Hepatica Nobilis* (solid line) is blue, while *Pyrostegia venusta* (dotted line) is orange.
 
 ![Reflectance spectra from two flowers @Arnold2010. The blue *Hepatica nobilis* flower @nobilis and the orange flower, *Pyrostegia venusta* @venusta}.](figures/color/flowerSpectra.png){#fig-sourcerefl}
 
-The reflectance spectrum of a surface often carries valuable information
-about the material being viewed, such as whether a fruit is ripe,
-whether a human's skin is healthy, or whether the material differs from
-another viewed material. It may be the case that a low-dimensional
-version of the surface reflectance spectrum is sufficient for many
-visual tasks, and as we see subsequently, the human visual system
-represents color with only three numbers. So it is an important visual
+The reflectance spectrum of a surface often carries valuable information about the material being viewed, such as whether a fruit is ripe, whether a human's skin is healthy, or whether the material differs from another viewed material. It may be the case that a low-dimensional version of the surface reflectance spectrum is sufficient for many visual tasks, and as we see subsequently, the human visual system represents color with only three numbers. So it is an important visual
 task to estimate either the surface reflectance spectrum, or a
 low-dimensional summary of it.
 
-To estimate surface colors by looking, a vision system has the task of
-estimating the illumination spectrum and the surface reflectance
-spectra, from observations of only their products. When the illumination
-is white light with equal power in all spectral bands, the observed
-reflected spectrum is proportional to the reflectance spectrum of the
-material itself. However, under the more general condition of unknown
-illumination color, a visual system will need to estimate the surface
-reflectance spectrum, or projections of it, by taking the context of
-nearby image information into account.
+To estimate surface colors by looking, a vision system has the task of estimating the illumination spectrum and the surface reflectance spectra, from observations of only their products. When the illumination is white light with equal power in all spectral bands, the observed reflected spectrum is proportional to the reflectance spectrum of the material itself. However, under the more general condition of unknown illumination color, a visual system will need to estimate the surface reflectance spectrum, or projections of it, by taking the context of nearby image information into account.
 
-There are many proposed algorithms to do that, ranging from heuristics,
-for example, assuming the color of the brightest observed object is
-white @McCann76, to statistical methods @Brainard97 and neural network
-based approaches @Barron2015. Even humans don't solve the problem
-perfectly or consistently, revealed especially through the internet meme
-of #TheDress @Bleasdale2015, shown in @fig-thedress.
+There are many proposed algorithms to do that, ranging from heuristics, for example, assuming the color of the brightest observed object is white @McCann76, to statistical methods @Brainard97 and neural network based approaches @Barron2015. Even humans don't solve the problem perfectly or consistently, revealed especially through the internet meme of \#TheDress @Bleasdale2015, shown in @fig-thedress.
 
 
 :::{#fig-thedress layout-ncol="2"}
-![](figures/color/thephotoofthedress.jpg){width="1.9in"}
+![](figures/color/thephotoofthedress.jpg){width="1.9in" #fig-thedress-a}
 
 
-![](figures/color/gr2_lrg.jpg){width="2.9in"}
+![](figures/color/gr2_lrg.jpg){width="2.9in" #fig-thedress-b}
 
 Fig (a) The Dress, photographed and posted by @Bleasdale2015, reprinted with permission.  (b) The spectra of the light we see is the product of an assumed illumination spectrum and the inferred surface reflectance spectra.  If people make different assumptions about the illumination, they can perceive different colors within the same image, as shown in this illustration @Brainard2015.  Reprinted with permission from Elsevier.
 
@@ -221,27 +169,16 @@ Did you perceive the dress, \fig{\ref{fig:thedress}}, to be black on blue, or go
 :::
 
 
-While such context-dependent effects are important in color perception,
-as we quantify color perception we will assume that our perception of
-color depends only on the spectrum of light entering the eye. This will
-serve us well for many industrial applications.
+While such context-dependent effects are important in color perception, as we quantify color perception we will assume that our perception of color depends only on the spectrum of light entering the eye. This will serve us well for many industrial applications.
 
 ## Color Perception
 
-Now we turn to our perception of color. We first describe the machinery
-of the eye, then describe some methods to measure color appearance.
-These methods to measure color appearance implicitly assume a white
-illumination spectrum, but they often serve the needs of industry and
-science.
+Now we turn to our perception of color. We first describe the machinery of the eye, then describe some methods to measure color appearance. These methods to measure color appearance implicitly assume a white illumination spectrum, but they often serve the needs of industry and science.
 
 ### The Machinery of the Eye
 
 An instrument such as a spectrograph (@fig-colorWavelengths shows a
-simple one) can measure the light power spectrum at hundreds of
-different wavelengths within the visible band, yielding hundreds of
-numbers to describe the light power spectrum. Despite this, a useful
-description of the visual world can be obtained from a much lower
-dimensional description of the light power spectrum.
+simple one) can measure the light power spectrum at hundreds of different wavelengths within the visible band, yielding hundreds of numbers to describe the light power spectrum. Despite this, a useful description of the visual world can be obtained from a much lower dimensional description of the light power spectrum.
 
 
 :::{.column-margin}
@@ -250,8 +187,6 @@ cones. Rods are used in low-light levels, and the cones are used in
 color vision. In low-light, only the rods operate and our vision becomes
 black and white.
 :::
-
-
 
 The human visual system analyzes the incident light power spectrum with
 only three different classes photoreceptors, called the L, M, and S
@@ -271,9 +206,9 @@ cones. This sampling pattern was measured from near the **fovea**, where there a
 
 :::{#fig-ramon layout-ncol="2"}
 
-![](figures/color/YYretina.png)
+![](figures/color/YYretina.png){#fig-ramon-a}
 
-![](figures/color/Cones_SMJ2_E.jpg)
+![](figures/color/Cones_SMJ2_E.jpg){#fig-ramon-b}
 
 Fig (a) Measured cone receptor classes and positions in a human retina, with cone receptor classes shown as red, green, and blue (subject YY, redrawn from \cite{Hofer2005}).
 (b) Photoreceptor sensitivities as a function of light wavelength \cite{Vanessaezekowitz2007}.
@@ -306,6 +241,8 @@ build image displays so that the output colors match those of some
 desired target, and to manufacture items with the same colors over time.
 Much of the color industry revolves around the ability to repeatably
 control colors. Colors can be trademarked (Kodak Yellow, IBM Blue) and we have color standards for foods. @fig-french shows French fry color standards.
+
+![The USDA color standards for French fried potatoes, one of many color standards @Munsell2020](figures/color/munsell.jpg){#fig-french}
 
 One of the tasks of color science is to predict when a person will
 perceive that two colors match. For example, we want to know how to
@@ -481,8 +418,7 @@ primary spectra, $\mathbf{P}$, must be non-negative.
 
 ![](figures/color/primaryLights.jpg){}
 
-The elements of the matrices $\mathbf{C}$ and $\mathbf{P}$ for an example color matching system.  (a) Spectral sensitivity curves, the rows of a color measurement matrix, $\mathbf{C}$. These should be linear combinations of the eye's photosensitivity curves, $\mathbf{C}_{\mbox{eye}}$.
-(b) Corresponding primary lights, $\mathbf{P}$ \cite{Acdx2009},  satisfying $\mathbf{C} \mathbf{P}= \mathbf{I}_3$ ($\mathbf{M} = \mathbf{I}_3$  in @eq-conditions
+The elements of the matrices $\mathbf{C}$ and $\mathbf{P}$ for an example color matching system.  (a) Spectral sensitivity curves, the rows of a color measurement matrix, $\mathbf{C}$. These should be linear combinations of the eye's photosensitivity curves, $\mathbf{C}_{\mbox{eye}}$. (b) Corresponding primary lights, $\mathbf{P}$ \cite{Acdx2009},  satisfying $\mathbf{C} \mathbf{P}= \mathbf{I}_3$ ($\mathbf{M} = \mathbf{I}_3$ in @eq-conditions
 :::
 
 Because many color sensitivity matrices $\mathbf{C}$ can satisfy
@@ -527,28 +463,23 @@ image data sparsely along color axes where human perception is
 insensitive to blurring.
 
 In a red-green-blue (RGB) representation, the eye is sensitive to high
-spatial frequency changes in both red and green, as shown in figures
-[\[fig:girls1\]](#fig-girls1){reference-type="ref"
-reference="fig:girls1"} and
-[\[fig:girls2\]](#fig-girls2){reference-type="ref"
-reference="fig:girls2"}. A rotation of the color coordinates of the
+spatial frequency changes in both red and green, as shown in figures @fig-girls1 and @fig-girls2. A rotation of the color coordinates of the
 image, followed by a nonlinear stretching, can put the image into a
 color space called L, a, b. In that space, the eye is very sensitive to
 any blurring of the L color component, called luminance, but is
 relatively insensitive to blurring of the a or b components, as
 demonstrated in @fig-girls3 and
-[\[fig:girls4\]](#fig-girls4){reference-type="ref"
-reference="fig:girls4"}. This effect is commonly exploited in image
+@fig-girls4. This effect is commonly exploited in image
 compression, allowing some image components to be sampled more coarsely
 than others.
 
-![](figures/color/nonblur_girls.png){width="100%"}
+![(a) Original image.  (b) RGB components.  (c) RGB components, each blurred.  These sharp and blurred components are used  in the color images of @fig-girls2](figures/color/nonblur_girls.png){#fig-girls1}
 
-![](figures/color/blur_rgb_girls.png){width="100%"}
+![Color images composed of sharp and blurred components from figures @fig-girls1 (b) and @fig-girls1 (c).  (a) R component blurred, G and B components sharp.  (b)  G component blurred, R and B components sharp. (c) B component blurred, R and G components sharp. Blurring either the R or G components of the image leads to a blurry-looking full-color image.](figures/color/blur_rgb_girls.png){#fig-girls2}
 
-![](figures/color/nonblur_lab_girls.png){width="100%"}
+![(a) Original image.  (b) Lab components.  (c) Lab components, each blurred.   These sharp and blurred components are used  in the color images of @fig-girls4](figures/color/nonblur_lab_girls.png){#fig-girls3}
 
-![](figures/color/blur_lab_girls.png){width="100%"}
+![Color images composed of sharp and blurred components from figures @fig-girls3 (b) and @fig-girls3 (c). Fig (a) L component blurred, a and b components sharp.  (b)  a component blurred, L and b components sharp. (c) b component blurred, L and a components sharp. Blurring only either of the a or b components of the image yields a full-color image that appears sharp, provided the luminance component of the image is sharp.](figures/color/blur_lab_girls.png){#fig-girls4}
 
 ## Concluding Remarks
 
