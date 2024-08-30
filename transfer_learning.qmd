@@ -249,8 +249,8 @@ learning a classifier from a teacher. We assume that the teacher is a
 well-trained classifier that outputs a $K-1$-dimensional probability
 mass function (pmf), $t: \mathcal{X} \rightarrow \vartriangle^{K-1}$
 (see section
-[\[sec-intro_to_learning:image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning:image_classification"}). The student, a
+[\[sec-intro_to_learning-image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
+reference="sec-intro_to_learning-image_classification"}). The student, a
 model $f_{\theta}: \mathcal{X} \rightarrow \vartriangle^{K-1}$, simply
 tries to imitate the teacher's output pmf: for each input $x$ that the
 student sees, its goal is to output the same pmf vector as the teacher

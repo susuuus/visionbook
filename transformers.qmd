@@ -668,8 +668,8 @@ The output of a transformer, as we have so far defined it, is a set of
 tokens $\mathbf{T}_{\texttt{out}}$. Often we want an output of a
 different format, such as a single vector of logits for image
 classification (section
-[\[sec-intro_to_learning:image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning:image_classification"}), or in the
+[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning-image_classification){reference-type="ref"
+reference="sec-intro_to_learning-image_classification"}), or in the
 format of an image for image-to-image tasks (section
 [\[sec-conditional_generative_models:im2im\]](#sec-conditional_generative_models:im2im){reference-type="ref"
 reference="sec-conditional_generative_models:im2im"}). To handle these

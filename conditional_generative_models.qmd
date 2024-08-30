@@ -126,8 +126,8 @@ our quantized data).
 
 In fact, we have already seen one super important use of the categorical
 distribution: *softmax regression* (section
-[\[sec-intro_to_learning:image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning:image_classification"}). Now you might
+[\[sec-intro_to_learning-image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
+reference="sec-intro_to_learning-image_classification"}). Now you might
 have a better understanding of why classification is such a ubiquitous
 modeling tool: it models a maximally expressive predictive distribution
 over a quantized decision space.

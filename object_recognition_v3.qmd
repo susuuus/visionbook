@@ -208,8 +208,8 @@ The goal is to answer the following, seemingly simple, question: Is
 object class $c$ present anywhere in the image ${\bf x}$? We also
 covered image classification as a case study of machine learning in
 section
-[\[sec-intro_to_learning:image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning:image_classification"}. Even though we
+[\[sec-intro_to_learning-image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
+reference="sec-intro_to_learning-image_classification"}. Even though we
 will use the same words now, and even the same sentences, you should
 read them in a different way. The same words will mean something
 different. Before, we emphasized the problem of learning; now we are
@@ -280,8 +280,8 @@ using a neural net, the vector $\hat{\mathbf{y}}$ is usually computed as
 the output of a softmax layer.
 
 This yields the softmax regression model we saw previously in section
-[\[sec-intro_to_learning:image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning:image_classification"}. Given the
+[\[sec-intro_to_learning-image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
+reference="sec-intro_to_learning-image_classification"}. Given the
 constraint of @eq-object_recognition:sum_to_one_constraint, the output
 of $f_{\theta}$ can be interpreted as a probability mass function over
 $K$ classes: $$\begin{aligned}

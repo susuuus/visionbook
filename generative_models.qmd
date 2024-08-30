@@ -563,8 +563,8 @@ $\mathbf{x_1}$ is the first pixel and $\mathbf{x_2}$ is the second.
 Treating $\mathbf{x}_2$ as a categorical variable (just like
 $\mathbf{x_1}$), we can simply use a softmax regression, which we saw in
 section
-[\[sec-intro_to_learning:image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning:image_classification"}. In that section
+[\[sec-intro_to_learning-image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
+reference="sec-intro_to_learning-image_classification"}. In that section
 we were modeling a $K$-way categorical distribution over $K$ object
 classes, conditioned on an input image. Now we can use exactly the same
 tools to model a $256$-way distribution over a the second pixel in a
