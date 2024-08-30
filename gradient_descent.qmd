@@ -33,9 +33,9 @@ update the parameters to be better and better. Different optimizers
 differ in how the parameter update function works. The update function
 gets to view some information about the loss landscape, then uses that
 information to update the parameters, as shown in
-@fig-gradient_descent:optimization_schematic.
+@fig-gradient_descent-optimization_schematic.
 
-![](./figures/gradient_descent/optimization_schematic.png){width="35%"}
+![](./figures/gradient_descent/optimization_schematic.png){#fig-gradient_descent-optimization_schematic width="35%"}
 
 In the simplest setting, called **zeroth-order optimization**, the
 update function only gets to observe the value $J(\theta)$. The only
@@ -60,76 +60,62 @@ popularity @martens2015optimizing, @foret2020sharpness.
 
 The simplest version of gradient descent just takes a step in the
 gradient direction of length proportional to the gradient magnitude.
-This algorithm is described in algorithm
-[\[alg:gradient_descent:basic_gradient_descent\]](#alg:gradient_descent:basic_gradient_descent){reference-type="ref"
-reference="alg:gradient_descent:basic_gradient_descent"}.
+This algorithm is described in algorithm @alg-gradient_descent-basic_gradient_descendent.
 
-::: algorithm
-[]{#alg:gradient_descent:basic_gradient_descent
-label="alg:gradient_descent:basic_gradient_descent"} **Input:**
+::: {algorithm #alg-gradient_descent:basic_gradient_descent}
+**Input:**
 objective function $J$, initial parameter vector $\theta^0$, learning
 rate $\eta$, number of steps $K$ **Output:** trained parameter vector
 $\theta^* = \theta^K$
 :::
 
-This algorithm has two hyperparameters, the **learning rate** $\eta$,
-which controls the step size (learning rate times gradient magnitude),
-and the number of steps $K$. If the learning rate is sufficiently small
-and the initial parameter vector $\theta^0$ is random, then this
-algorithm will almost surely converge to a local minimum of $J$ as
-$K \rightarrow \infty$ @lee2016gradient. However, to descend more
-quickly, it can be useful to set the learning rate to a higher value.
+This algorithm has two hyperparameters, the **learning rate** $\eta$, which controls the step size (learning rate times gradient magnitude), and the number of steps $K$. If the learning rate is sufficiently small and the initial parameter vector $\theta^0$ is random, then this
+algorithm will almost surely converge to a local minimum of $J$ as $K \rightarrow \infty$ @lee2016gradient. However, to descend more quickly, it can be useful to set the learning rate to a higher value.
 
 ## Learning Rate Schedules
 
-A generally useful strategy is to start with a high value for $\eta$ and
-then decay it until convergence according to a **learning rate
-schedule**. Researchers have come up with innumerable schedules and they
-generally work by calling some function $\texttt{lr}(\eta^0,k)$ to get
-the learning rate on each iteration of descent: $$\begin{aligned}
+A generally useful strategy is to start with a high value for $\eta$ and then decay it until convergence according to a **learning rate schedule**. Researchers have come up with innumerable schedules and they generally work by calling some function $\texttt{lr}(\eta^0,k)$ to get the learning rate on each iteration of descent: 
+$$
+\begin{aligned}
     \eta^{k} = \texttt{lr}(\eta^0,k)
-\end{aligned}$$ Generally, we want an update rule where
-$\eta^{k+1} < \eta^k$, so that we take smaller steps as we approach the
-minimizer. A few simple and popular approaches are given below:
-$$\begin{aligned}
+\end{aligned}
+$$ 
+
+Generally, we want an update rule where $\eta^{k+1} < \eta^k$, so that we take smaller steps as we approach the minimizer. A few simple and popular approaches are given below:
+$$
+\begin{aligned}
     \texttt{lr}(\eta^0,k) &= \beta^{-k} \eta^0 &\quad\quad \triangleleft\quad \text{exponential decay}\\
     \texttt{lr}(\eta^0,k) &= \beta^{-\lfloor k/M \rfloor} \eta^0 &\quad\quad \triangleleft\quad \text{stepwise exponential decay}\\
     \texttt{lr}(\eta^0,k) &= \frac{(K - k)}{K} \eta^0 &\quad\quad \triangleleft\quad \text{linear decay}
-\end{aligned}$$  The $\beta$ and $M$ are additional
-hyperparameters of these methods. The general approach of learning rate
-decay is summarized in algorithm
-[\[alg:gradient_descent:gradient_descent_with_lr_decay\]](#alg:gradient_descent:gradient_descent_with_lr_decay){reference-type="ref"
-reference="alg:gradient_descent:gradient_descent_with_lr_decay"}.
+\end{aligned}
+$$ 
 
-::: algorithm
-[]{#alg:gradient_descent:gradient_descent_with_lr_decay
-label="alg:gradient_descent:gradient_descent_with_lr_decay"} **Input:**
+The $\beta$ and $M$ are additional hyperparameters of these methods. The general approach of learning rate decay is summarized in algorithm @alg-gradient_descent:gradient_descent_with_lr_decay.
+
+::: {algorithm #alg:gradient_descent:gradient_descent_with_lr_decay}
+
+**Input:**
 objective function $J$, initial parameter vector $\theta^0$, initial
 learning rate $\eta^0$, learning rate function $\texttt{lr}$, number of
 steps $K$ **Output:** trained parameter vector $\theta^* = \theta^K$
 :::
 
-Variations on this algorithm include only decaying the learning rate
-when a plateau is reached (i.e., when the loss is not decreasing for
-many iterations in a row), or decaying the learning rate according to
-more complex nonlinear schedules, such as one shaped like a cosine
-function @loshchilov2016sgdr.
+Variations on this algorithm include only decaying the learning rate when a plateau is reached (i.e., when the loss is not decreasing for many iterations in a row), or decaying the learning rate according to more complex nonlinear schedules, such as one shaped like a cosine function @loshchilov2016sgdr.
 
 ## Momentum
 
-Could we do a smarter update than just taking a step in the direction of
-the gradient? Of the countless ideas that have been proposed, one of the
-few that has stuck is
-**momentum** @polyak1964some, @sutskever2013importance. Momentum makes
-the analogy to skiing even more precise: momentum is like the inertia of
-the skier, carrying them over the little bumps and imperfections in the
-ski slope and increasing their speed as they descend along a straight
+Could we do a smarter update than just taking a step in the direction of the gradient? Of the countless ideas that have been proposed, one of the few that has stuck is
+**momentum** @polyak1964some, @sutskever2013importance. Momentum makes the analogy to skiing even more precise: momentum is like the inertia of
+the skier, carrying them over the little bumps and imperfections in the ski slope and increasing their speed as they descend along a straight
 path. In math, momentum just means that we set the parameter update to
 be a direction $\mathbf{v}^{k+1}$, given by a weighted combination of
 the previous update direction, $\mathbf{v}^{k}$, plus the current
-negative gradient: $$\begin{aligned}
+negative gradient: 
+
+$$\begin{aligned}
     \mathbf{v}^{k+1} = \mu \mathbf{v}^{k} - \eta\nabla_{\theta} J(\theta^k)
-\end{aligned}$$ The weight $\mu$ in this combination is a new
+\end{aligned}
+$$ The weight $\mu$ in this combination is a new
 hyperparameter, sometimes simply called the momentum. The full algorithm
 is given in algorithm
 [\[alg:gradient_descent:gradient_descent_with_momentum\]](#alg:gradient_descent:gradient_descent_with_momentum){reference-type="ref"
@@ -143,15 +129,15 @@ rate $\eta$, momentum $\mu$, number of steps $K$ **Output:** trained
 parameter vector $\theta^* = \theta^K$ $\mathbf{v}^{0} = \mathbf{0}$
 :::
 
-@fig-gradient_descent:momentum_out1 shows how momentum affects gradient
+@fig-gradient_descent-momentum_out1 shows how momentum affects gradient
 descent for a simple objective $J = \texttt{abs}(\theta)$ (absolute
 value of $\theta$). As can be seen in the figure, some momentum can help
-convergence rate (@fig-gradient_descent:momentum_out1, $\mu = 0.5$) but
+convergence rate (@fig-gradient_descent-momentum_out1, $\mu = 0.5$) but
 too much momentum will cause the trajectory to overshoot the optimum and
 even when the optimum loss is achieved, the trajectory might not stop
-(@fig-gradient_descent:momentum_out1, $\mu = 0.95$).
+(@fig-gradient_descent-momentum_out1, $\mu = 0.95$).
 
-![](./figures/gradient_descent/momentum_out1.png){width="100%"}
+![](./figures/gradient_descent/momentum_out1.png){#fig-gradient_descent-momentum_out1}
 
 It is also possible to come up with other kinds of momentum, which bias
 the update direction based on some accumulated information from previous
@@ -170,14 +156,13 @@ gradients (e.g., if the gradient is zero everywhere), and a function may
 be nondifferentiable (at certain points) but still allow for meaningful
 gradient-based updates (e.g., `abs`).
 
-@fig-gradient_descent:grad_descent_simple_examples gives examples of
+@fig-gradient_descent-grad_descent_simple_examples gives examples of
 different types of functions being minimized with gradient descent. (b)
 and
-[\[fig:gradient_descent:grad_descent_simple_examples\]](#fig-gradient_descent:grad_descent_simple_examples){reference-type="ref"
-reference="fig:gradient_descent:grad_descent_simple_examples"}(d) are
+@fig-gradient_descent:grad_descent_simple_examples (d) are
 cases where the function is discontinuous, and the analytical derivative
 is undefined at the discontinuity. Surprisingly, in
-@fig-gradient_descent:grad_descent_simple_examples(b), this is not a
+@fig-gradient_descent-grad_descent_simple_examples (b), this is not a
 problem for gradient descent. This is because the gradient descent
 algorithm we are using here (the one used by Pytorch @paszke2019pytorch)
 uses a **one-sided derivative** at the discontinuity, that is, we set
@@ -186,41 +171,37 @@ infinitesimal step away from the discontinuouity in a fixed arbitrary
 direction. Under the hood, for each atomic discontinuous operation,
 Pytorch requires that we define its gradients at the discontinuouities,
 and the one-sided gradient is a standard choice. This is why it can be
-fine in deep learning (chapter
-[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
-reference="chapter-neural_nets"}) to use functions like rectified
+fine in deep learning @sec-neural_nets to use functions like rectified
 nonlinear units (relus), which are common in deep networks and have
 discontinuous gradients.
 
-\(c\) and (e) give cases where the function is continuous, but the
+(c) and (e) give cases where the function is continuous, but the
 gradients are not well-behaved. In
-@fig-gradient_descent:grad_descent_simple_examples(c) we have a
+@fig-gradient_descent-grad_descent_simple_examples (c) we have a
 gradient that has nearly **vanished**, that is, it is near zero
-everywhere and gradient descent, with a fixed learning rate, will
-therefore be slow.
-@fig-gradient_descent:grad_descent_simple_examples(e) shows the
-opposite scenario: the gradient at the minimizer goes to infinity; we
-call this an **exploding gradient**, and this leads to failures of
-convergence.
+everywhere and gradient descent, with a fixed learning rate, will therefore be slow。 @fig-gradient_descent-grad_descent_simple_examples (e) shows the
+opposite scenario: the gradient at the minimizer goes to infinity; we call this an **exploding gradient**, and this leads to failures of convergence.
 
-Finally, @fig-gradient_descent:grad_descent_simple_examples(f) shows
-one more problematic case: when there are multiple minima, gradient
-descent can get stuck in a suboptimal minimum. Which minimum we arrive
-at will depend on where we initialized $x$.
+Finally, @fig-gradient_descent-grad_descent_simple_examples (f) shows one more problematic case: when there are multiple minima, gradient descent can get stuck in a suboptimal minimum. Which minimum we arrive at will depend on where we initialized $x$.
 
-  ------------------------------------------------------------------------ ------------------------------------------------------------------------
-                                \(a\) convex                                                         \(b\) discontinuous
-   ![](./figures/gradient_descent/grad_descent_ex1.png){width="50%"}   ![](./figures/gradient_descent/grad_descent_ex2.png){width="50%"}
+
+::: {#fig-gradient_descent-grad_descent_simple_examples caption="Examples of functions that can be minimized with gradient descent."}
+![(a) convex](./figures/gradient_descent/grad_descent_ex1.png){}
+
+![(b) discontinuous](./figures/gradient_descent/grad_descent_ex1.png){width="50%"} 
+
+  ![](./figures/gradient_descent/grad_descent_ex2.png){width="50%"}
                           \(c\) vanishing gradient                                           \(d\) zero gradient + discontinuous
    ![](./figures/gradient_descent/grad_descent_ex4.png){width="50%"}   ![](./figures/gradient_descent/grad_descent_ex3.png){width="50%"}
                           \(e\) exploding gradient                                               \(f\) multiple local minima
    ![](./figures/gradient_descent/grad_descent_ex5.png){width="50%"}   ![](./figures/gradient_descent/grad_descent_ex6.png){width="50%"}
-  ------------------------------------------------------------------------ ------------------------------------------------------------------------
+
+:::
 
 ### Gradient-Like Optimization for Functions without Good Gradients {#sec-gradient_descent:zeroth_order}
 
 What about minimizing functions like
-@fig-gradient_descent:grad_descent_simple_examples(d), where the
+@fig-gradient_descent-grad_descent_simple_examples(d), where the
 gradient is zero almost everywhere? This is a case where gradient
 descent truly struggles. However, it is often possible to transform such
 a problem into one that can be treated with gradient descent. Remember
@@ -253,21 +234,39 @@ $M$, number of steps $K$ **Output:** trained parameter vector
 $\theta^* = \theta^K$
 :::
 
-As shown in @fig-gradient_descent:sampling_out1, this algorithm can
+As shown in @fig-gradient_descent-sampling_out1, this algorithm can
 successfully minimize the function in
-@fig-gradient_descent:grad_descent_simple_examples(c).
+@fig-gradient_descent-grad_descent_simple_examples(c).
 
 ![](./figures/gradient_descent/sampling_out1.png){width="50%"}
 
 ### Gradient Clipping
 
-What about @fig-gradient_descent:grad_descent_simple_examples(e), where
+What about @fig-gradient_descent-grad_descent_simple_examples(e), where
 the gradient explodes near the optimum? Is there anything we can do to
 improve optimization of this function? To combat exploding gradients, a
 useful trick is **gradient clipping**, which just means clamping the
 magnitude of the gradient to some maximum value. Algorithm
-[\[alg:gradient_descent:grad_clipping\]](#alg:gradient_descent:grad_clipping){reference-type="ref"
-reference="alg:gradient_descent:grad_clipping"} describes this approach.
+@alg-gradient_descent:grad_clipping describes this approach.
+
+```{=latex}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\begin{algorithm}
+\caption{Example Algorithm}
+\begin{algorithmic}[1]
+\REQUIRE $n \geq 0$
+\ENSURE $y = x^n$
+\STATE $y \leftarrow 1$
+\STATE $i \leftarrow 0$
+\WHILE{$i < n$}
+    \STATE $y \leftarrow y * x$
+    \STATE $i \leftarrow i + 1$
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+```
 
 ::: algorithm
 []{#alg:gradient_descent:grad_clipping
@@ -281,7 +280,7 @@ parameter vector $\theta^* = \theta^K$
 
 This algorithm indeed successfully minimizes our example of the
 exploding gradient, as can be seen in
-@fig-gradient_descent:clipped_out1.
+@fig-gradient_descent-clipped_out1.
 
 ![](./figures/gradient_descent/clipped_out1.png){width="50%"}
 

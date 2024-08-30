@@ -247,11 +247,7 @@ y & = & f \frac{Y}{Z}
 \label{eq:perspctiveProj}
 \end{aligned}$$
 
-Equations
-([\[eq:perspctiveProj1\]](#eq:perspctiveProj1){reference-type="ref"
-reference="eq:perspctiveProj1"}) and
-([\[eq:perspctiveProj\]](#eq:perspctiveProj){reference-type="ref"
-reference="eq:perspctiveProj"}) are called the **perspective projection
+Equations @eq-perspctiveProj1 and @eq-perspectiveProj are called the **perspective projection
 equations**. Under perspective projection, distant objects become
 smaller, through the inverse scaling by $Z$. As we will see, the
 perspective projection equations apply not just to pinhole cameras but
