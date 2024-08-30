@@ -1,4 +1,4 @@
-# A Simple Vision System {#chapter-simplesystem}
+# A Simple Vision System {#sec-simplesystem}
 
 ## Introduction
 

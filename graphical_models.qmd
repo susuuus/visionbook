@@ -1,4 +1,4 @@
-# Probabilistic Graphical Models {#chapter-probabilistic_graphical_models}
+# Probabilistic Graphical Models {#sec-probabilistic_graphical_models}
 
 ## Introduction
 

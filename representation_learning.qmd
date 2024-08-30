@@ -1,4 +1,4 @@
-# Representation Learning {#chapter-representation_learning}
+# Representation Learning {#sec-representation_learning}
 
 ## Introduction
 

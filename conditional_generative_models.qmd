@@ -1,4 +1,4 @@
-# Conditional Generative Models {#chapter-conditional_generative_models}
+# Conditional Generative Models {#sec-conditional_generative_models}
 
 ## Introduction
 

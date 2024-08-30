@@ -1,4 +1,4 @@
-# Transformers {#chapter-transformers}
+# Transformers {#sec-transformers}
 
 ## Introduction
 
@@ -223,7 +223,7 @@ over a set of neuron inputs (scalars) rather than token inputs
 \end{aligned}$$ The $F_{\theta}$ may be any nonlinear function but some
 choices will work better than others. One popular choice is for
 $F_{\theta}$ to be a multilayer perceptron (MLP); see Chapter
-[Neural Nets](#chapter-neural_nets.html). In this case, $F_{\theta}$ has
+[Neural Nets](#sec-neural_nets.html). In this case, $F_{\theta}$ has
 learnable parameters $\theta$, which are the weights and biases of the
 MLP. This reveals an important difference between pointwise operations
 in regular neural nets and in token nets: relus, and most other
@@ -953,7 +953,7 @@ useful for CNNs as well, as a way to make convolutional filters that are
 conditioned on position, thereby applying a different weighted sum at
 each location in the image @liu2018intriguing. Positional encodings also
 appear in radiance fields, which we cover in chapter
-[\[chapter-nerfs\]](#chapter-nerfs){reference-type="ref"
+[\[chapter-nerfs\]](#sec-nerfs){reference-type="ref"
 reference="chapter-nerfs"}.
 
 ![](figures/transformers/affine_layer_comparison.png){width="100%" #fig-transformers-affine_layer_comparison}

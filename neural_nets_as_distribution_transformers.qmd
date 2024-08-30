@@ -1,4 +1,4 @@
-# Neural Networks as Distribution Transformers {#chapter-neural_nets_as_distribution_transformers}
+# Neural Networks as Distribution Transformers {#sec-neural_nets_as_distribution_transformers}
 
 ## Introduction
 

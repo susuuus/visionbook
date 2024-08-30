@@ -1,4 +1,4 @@
-# Training for Robustness and Generality {#chapter-data_augmentation}
+# Training for Robustness and Generality {#sec-data_augmentation}
 
 ## Introduction
 

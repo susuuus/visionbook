@@ -1,4 +1,4 @@
-# Homographies {#chapter-homography}
+# Homographies {#sec-homography}
 
 ## Introduction
 

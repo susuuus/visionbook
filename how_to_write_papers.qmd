@@ -1,4 +1,4 @@
-# How to Write Papers {#chapter-how_to_write_papers}
+# How to Write Papers {#sec-how_to_write_papers}
 
 ## Introduction
 

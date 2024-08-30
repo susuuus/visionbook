@@ -1,4 +1,4 @@
-# Object Recognition {#chapter-object_recognition}
+# Object Recognition {#sec-object_recognition}
 
 ## Introduction
 

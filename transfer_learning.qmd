@@ -1,4 +1,4 @@
-# Transfer Learning and Adaptation {#chapter-transfer_learning}
+# Transfer Learning and Adaptation {#sec-transfer_learning}
 
 ## Introduction
 

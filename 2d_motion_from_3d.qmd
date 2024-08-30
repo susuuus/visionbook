@@ -1,4 +1,4 @@
-# 3D Motion and Its 2D Projection {#chapter-3D_motion_and_its_2D_projection}
+# 3D Motion and Its 2D Projection {#sec-3D_motion_and_its_2D_projection}
 
 ## Introduction
 

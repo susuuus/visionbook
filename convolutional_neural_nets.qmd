@@ -1,4 +1,4 @@
-# Convolutional Neural Nets {#chapter-convolutional_neural_nets}
+# Convolutional Neural Nets {#sec-convolutional_neural_nets}
 
 ## Introduction
 

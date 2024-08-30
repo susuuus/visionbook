@@ -1,4 +1,4 @@
-# Learning to Estimate Depth from a Single Image {#chapter-3D_learning_from_single_image}
+# Learning to Estimate Depth from a Single Image {#sec-3D_learning_from_single_image}
 
 ## Introduction
 

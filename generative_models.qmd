@@ -1,4 +1,4 @@
-# Generative Models {#chapter-generative_models}
+# Generative Models {#sec-generative_models}
 
 ## Introduction
 

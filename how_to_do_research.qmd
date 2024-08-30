@@ -1,4 +1,4 @@
-# How to Do Research {#chapter-how_to_do_research}
+# How to Do Research {#sec-how_to_do_research}
 
 ## Introduction
 

@@ -1,4 +1,4 @@
-# Image Derivatives {#chapter-image_derivatives}
+# Image Derivatives {#sec-image_derivatives}
 
 ## Introduction
 

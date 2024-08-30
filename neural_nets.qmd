@@ -1,4 +1,4 @@
-# Neural Networks {#chapter-neural_nets}
+# Neural Networks {#sec-neural_nets}
 
 ## Introduction
 

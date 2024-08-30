@@ -1,4 +1,4 @@
-# Fourier Analysis {#chapter-fourier_analysis}
+# Fourier Analysis {#sec-fourier_analysis}
 
 ## Introduction
 

@@ -1,4 +1,4 @@
-# Filter Banks {#chapter-filter_banks}
+# Filter Banks {#sec-filter_banks}
 
 ## Introduction
 

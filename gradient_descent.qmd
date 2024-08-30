@@ -1,4 +1,4 @@
-# Gradient-Based Learning Algorithms {#chapter-gradient_descent}
+# Gradient-Based Learning Algorithms {#sec-gradient_descent}
 
 ## Introduction
 

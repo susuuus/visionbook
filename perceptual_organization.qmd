@@ -1,4 +1,4 @@
-# Perceptual Grouping {#chapter-perceptual_organization}
+# Perceptual Grouping {#sec-perceptual_organization}
 
 ## Introduction
 

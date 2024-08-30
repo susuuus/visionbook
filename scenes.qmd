@@ -1,4 +1,4 @@
-# Scene Understanding {#chapter-scene_understanding}
+# Scene Understanding {#sec-scene_understanding}
 
 ## Introduction
 

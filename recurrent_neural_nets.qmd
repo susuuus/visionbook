@@ -1,4 +1,4 @@
-# Recurrent Neural Nets {#chapter-recurrent_neural_nets}
+# Recurrent Neural Nets {#sec-recurrent_neural_nets}
 
 ## Introduction
 

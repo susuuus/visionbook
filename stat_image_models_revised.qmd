@@ -1,4 +1,4 @@
-# Statistical Image Models {#chapter-stat_image_models}
+# Statistical Image Models {#sec-stat_image_models}
 
 ## Introduction
 

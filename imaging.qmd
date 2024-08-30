@@ -1,6 +1,6 @@
 # Imaging
 
-[]{#chapter-imaging label="chapter:imaging"}
+[]{#sec-imaging label="chapter:imaging"}
 
 ## Introduction
 

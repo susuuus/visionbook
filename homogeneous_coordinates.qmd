@@ -1,4 +1,4 @@
-# Representing Images and Geometry {#chapter-geometry_homogeneous}
+# Representing Images and Geometry {#sec-geometry_homogeneous}
 
 ## Introduction
 

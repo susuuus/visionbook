@@ -1,4 +1,4 @@
-# Vision and Language {#chapter-VLMs}
+# Vision and Language {#sec-VLMs}
 
 ## Introduction
 

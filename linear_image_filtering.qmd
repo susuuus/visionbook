@@ -1,4 +1,4 @@
-# Linear Image Filtering {#chapter-linear_image_filtering}
+# Linear Image Filtering {#sec-linear_image_filtering}
 
 ## Introduction
 

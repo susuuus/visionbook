@@ -1,4 +1,4 @@
-# Backpropagation {#chapter-backpropagation}
+# Backpropagation {#sec-backpropagation}
 
 ## Introduction
 

@@ -1,4 +1,4 @@
-# Multiview Geometry and Structure from Motion {#chapter-3D_multiview}
+# Multiview Geometry and Structure from Motion {#sec-3D_multiview}
 
 ## Introduction
 

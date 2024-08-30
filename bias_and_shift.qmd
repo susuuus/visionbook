@@ -1,4 +1,4 @@
-# Data Bias and Shift {#chapter-bias_and_shift}
+# Data Bias and Shift {#sec-bias_and_shift}
 
 ## Introduction
 

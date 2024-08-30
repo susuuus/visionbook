@@ -1,4 +1,4 @@
-# Radiance Fields {#chapter-nerfs}
+# Radiance Fields {#sec-nerfs}
 
 ## Introduction
 
