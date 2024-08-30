@@ -1,4 +1,4 @@
-# Optical Flow Estimation {#chap-optical_flow_estimation}
+# Optical Flow Estimation {#sec-optical_flow_estimation}
 
 ## Introduction
 

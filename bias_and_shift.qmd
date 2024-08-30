@@ -445,8 +445,8 @@ reference="chapter-neural_nets"} we described a simple neural network
 for line classification and showed how, by accessing the architecture
 and the learned filters, we could manually design input examples that
 would get wrongly classified. Similarly, in chapter
-[\[chap-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
-reference="chap-downsampling_and_upsampling"} we showed how aliasing
+[\[sec-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
+reference="sec-downsampling_and_upsampling"} we showed how aliasing
 could also create vulnerabilities in a network. For large systems,
 adversarial attacks are not manually designed, instead they are the
 result of an optimization procedure that optimizes the noise pattern

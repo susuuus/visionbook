@@ -1,4 +1,4 @@
-# Downsampling and Upsampling Images {#chap-downsampling_and_upsampling}
+# Downsampling and Upsampling Images {#sec-downsampling_and_upsampling}
 
 ## Introduction
 

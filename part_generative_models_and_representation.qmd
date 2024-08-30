@@ -1,0 +1,23 @@
+# Generative Image Models and Representation Learning {#sec-generative_models_and_representation_learning}
+
+Vision is the problem of mapping visual data to representations. This section examines that mapping and its inverse—mapping representations to data—and forges a tight link between them. This part of the book covers some of the same topics as in other parts but with a new set of tools that revolve primarily around deep neural nets. These tools are highly effective and provide a simple and unified framework for dealing with a large family of problems in computer vision.
+
+## Outline
+
+- **Chapter {@sec-representation_learning}** introduces the idea of representation learning, where the goal is to train a model that produces good representations of the raw data, such as vector embeddings.
+
+- **Chapter {@sec-perceptual_organization}** zooms in on the particular problem of identifying perceptual groups, which are an important kind of visual representation with a long history in vision science.
+
+- **Chapter {@sec-generative_models}** describes generative models that synthesize images.
+
+- **Chapter {@sec-generative_modeling_and_representation_learning}** forges a connection between representation learning and generative modeling, describing these as inverses of each other.
+
+- **Chapter {@sec-conditional_generative_models}** extends generative models to the conditional setting, where some data is synthesized based on other data.
+
+## Notation
+
+This part deals extensively with random variables and probability distributions. See the Notation section before chapter 1 for our conventions. A few reminders follow.
+
+- $X$ and $Y$ are random variables, while $x$ and $y$ are realizations of those variables. $\mathcal{X}$ and $\mathcal{Y}$ are the domains of those variables.
+
+- $p(X)$ is a distribution over $X$; that is, $p(X)$ is a function over the domain $\mathcal{X}$. Conversely, $p(\mathbf{x})$ is the probability of a realization $X=\mathbf{x}$. It is short for $p(X = \mathbf{x})$, and it is a scalar.

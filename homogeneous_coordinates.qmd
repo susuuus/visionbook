@@ -605,8 +605,8 @@ the inverse geometric transform, $\mathbf{M}^{-1}$; we then use
 interpolation (as described in section
 [\[sec-interpolation\]](#sec:interpolation){reference-type="ref"
 reference="sec-interpolation"} in chapter
-[\[chap-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
-reference="chap-downsampling_and_upsampling"}) to get the correct color
+[\[sec-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
+reference="sec-downsampling_and_upsampling"}) to get the correct color
 value (@fig-warping_sketch). This process guarantees that there will be
 no missing values (unless the coordinates go outside the frame of the
 input image) and there will be no aliasing if the interpolation is done

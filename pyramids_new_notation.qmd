@@ -532,5 +532,5 @@ corresponding other ones, you can easily introduce artifacts (although
 artifacts will also appear in overcompleted representations).
 
 [^1]: Downsampling is discussed in detail in chapter
-    [\[chap-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
-    reference="chap-downsampling_and_upsampling"}.
+    [\[sec-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
+    reference="sec-downsampling_and_upsampling"}.

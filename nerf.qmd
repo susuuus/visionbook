@@ -4,8 +4,8 @@
 
 In this chapter we will come full circle. Starting from the Greek's
 model of optics (chapter
-[\[chap-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
-reference="chap-challenge_of_vision"}) that postulated that light is
+[\[sec-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
+reference="sec-challenge_of_vision"}) that postulated that light is
 emitted by the eyes and travels in straight lines, touching objects in
 order to produce the sensation of sight (extramission theory), radiance
 fields will use that analogy to model scenes from multiple images. Here,
@@ -19,8 +19,8 @@ represent a portion of the plenoptic function.
 
 We first discussed the plenoptic function when we introduced the
 challenge of vision in chapter
-[\[chap-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
-reference="chap-challenge_of_vision"}.
+[\[sec-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
+reference="sec-challenge_of_vision"}.
 
 As stated in the work by Adelson and Bergen @Adelson91, the plenoptic
 function tries to answer the following question: "We begin by asking
@@ -48,8 +48,8 @@ function inside the pinhole camera has most of the values set to zero
 and only specific directions at each location have non-zero values.
 
 In chapter
-[\[chap-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
-reference="chap-challenge_of_vision"} we discarded the plenoptic
+[\[sec-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
+reference="sec-challenge_of_vision"} we discarded the plenoptic
 function by simply saying, "Although recovering the entire plenoptic
 function would have many applications, fortunately, the goal of vision
 is not to recover this function." But we did not really give any

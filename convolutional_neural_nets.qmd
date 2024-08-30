@@ -813,8 +813,8 @@ common networks, AlexNet, VGG16 @vgg16, and ResNet18 @he2016deep.
 
 **Receptive fields** are another important concept when working with
 CNNs. In chapter
-[\[chap-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
-reference="chap-challenge_of_vision"}, we learned about history of
+[\[sec-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
+reference="sec-challenge_of_vision"}, we learned about history of
 receptive fields in neuroscience. As a reminder, the receptive field of
 a neuron is the region of the input signal that the neuron is sensitive
 to, i.e. its support. In multilayer perceptrons (MLPs, chapter

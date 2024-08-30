@@ -1,4 +1,4 @@
-# Textures {#chap-textures}
+# Textures {#sec-textures}
 
 ## Introduction
 

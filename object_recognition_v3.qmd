@@ -853,8 +853,8 @@ that do not have well-defined boundaries (@fig-segmenting_trees). It is
 useful to differentiate between **stuff** and **objects**. Stuff refers
 to things that do not have well-defined boundaries such as grass, water,
 and sky (we already discussed this in chapter
-[\[chap-textures\]](#chap:textures){reference-type="ref"
-reference="chap-textures"}). But the distinction between stuff and
+[\[sec-textures\]](#chap:textures){reference-type="ref"
+reference="sec-textures"}). But the distinction between stuff and
 objects is not very sharp. In some images, object instances might be
 easy to separate like the two trees in the left image below, or become a
 texture where instances cannot be detected individually (as shown in the

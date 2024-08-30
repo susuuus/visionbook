@@ -4,15 +4,15 @@ Many of the techniques in computer vision are rooted in signal processing. The g
 
 ## Outline
 
-- **Chapter {@sec-linear-image-filtering}** introduces signal processing, linear image filtering, and convolutions.
+- **Chapter {@sec-linear_image_filtering}** introduces signal processing, linear image filtering, and convolutions.
 
-- **Chapter {@sec-fourier-analysis}** describes the Fourier transform and some applications.
+- **Chapter {@sec-fourier_analysis}** describes the Fourier transform and some applications.
 
 ## Notation 
 
 - Images: We will use the $\ell$ symbol to denote images (i.e., $\ell$ight), but also arbitrary signals that correspond to physical quantities (such as sounds). 
 
-- Discrete signals: We will index specific values using $\ell \left[ n\right]$ or $\ell \left[ n, m \right]$ for 1D and 2D discrete signals/images, where $n$ and $m$ are discrete spatial indices. We will use bold fonts when signals are treated as vectors: $\boldell$. Vectors will be column vectors, and their transpose is $\boldell^T$.
+- Discrete signals: We will index specific values using $\ell \left[ n\right]$ or $\ell \left[ n, m \right]$ for 1D and 2D discrete signals/images, where $n$ and $m$ are discrete spatial indices. We will use bold fonts when signals are treated as vectors: ${\boldsymbol\ell}$. Vectors will be column vectors, and their transpose is ${\boldsymbol\ell}^T$.
 
 - Continuous signals: We will use parentheses for continuous signals, $\ell(t)$, where $t$ is a continuous variable.  
 
@@ -20,6 +20,6 @@ Many of the techniques in computer vision are rooted in signal processing. The g
 
 - Convolution kernels: $h\left[ n\right]$ or $h \left[ n, m \right]$. 
 
-- Discrete Fourier transforms: We will use capital letters: $\capitalell \left[ u\right]$, where $u$ is a discrete frequency index of the discrete Fourier transform of $\ell \left[ n \right]$.
+- Discrete Fourier transforms: We will use capital letters: ${\mathcal{L}} \left[ u\right]$, where $u$ is a discrete frequency index of the discrete Fourier transform of $\ell \left[ n \right]$.
 
 - Convolution operator, $\circ$, and cross-correlation operator, $\star$, as in $\ell_1 \left[ n\right] \circ \ell_2 \left[ n\right]$.

@@ -14,8 +14,8 @@ more general geometric image transformation that opens the door to many
 applications: the homography.
 
 As we discussed in the previous chapter
-[\[chap-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
-reference="chap-stereo_vision"}, if we capture a scene with two cameras
+[\[sec-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
+reference="sec-stereo_vision"}, if we capture a scene with two cameras
 from different viewpoints, corresponding points across both images are
 constrained by the epipolar constrain. In general, there is not a simple
 geometric transformation that maps pixels from one image into the pixels

@@ -53,8 +53,8 @@ have been proposed over time @Witkin81.
 
 Another source of information about the 3D scene structure are shadows
 and interreflections. We saw in chapter
-[\[chap-looking_at_images\]](#chap:looking_at_images){reference-type="ref"
-reference="chap-looking_at_images"}, @fig-cues_for_suppport an example
+[\[sec-looking_at_images\]](#chap:looking_at_images){reference-type="ref"
+reference="sec-looking_at_images"}, @fig-cues_for_suppport an example
 of how interreflections can inform us about the location of a ball. The
 use of shadows and interreflections by the human visual system has been
 the focus of lots of studies @Knill97, @Madison2001. There are also
@@ -102,9 +102,7 @@ implicit functions, surface normals, meshes) and there are methods for
 each one of those representations.
 
 In the rest of this chapter we will use depth maps (or disparity maps
-which is related to the inverse of the depth as we saw in chapter
-[\[chap-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
-reference="chap-stereo_vision"}.
+which is related to the inverse of the depth as we saw in chapter @sec-stereo_vision).
 
 Most depth sensors capture aligned RGB images, $\ell[n,m]$, and dense
 depth maps, $z [n,m]$, as shown in @fig-kinect. Given a dense depth

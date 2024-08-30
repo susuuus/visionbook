@@ -1,4 +1,4 @@
-# Blur Filters {#chap-blur_filters}
+# Blur Filters {#sec-blur_filters}
 
 ## Introduction
 
@@ -430,8 +430,8 @@ binomial kernel, $b_0$, is the impulse.
     $\left[0,0,0,0,...\right]$. This is a very nice property of binomial
     filters and will become very useful later when talking about
     downsampling an image (see chapter
-    [\[chap-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
-    reference="chap-downsampling_and_upsampling"}).
+    [\[sec-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
+    reference="sec-downsampling_and_upsampling"}).
 
 ### 2D Binomial Filters
 

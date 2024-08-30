@@ -46,8 +46,8 @@ locally inside the analyzed image.
 A good start for a localized image analysis is to restrict the spatial
 support of a sinusoidal basis function. One function that has a local
 support (a lots of nice properties as we discussed in chapter
-[\[chap-blur_filters\]](#chap:blur_filters){reference-type="ref"
-reference="chap-blur_filters"}) is the Gaussian function
+[\[sec-blur_filters\]](#chap:blur_filters){reference-type="ref"
+reference="sec-blur_filters"}) is the Gaussian function
 (@fig-1D_gabor_function\[b\]). The product of the Gaussian and the sine
 wave (or a cosine wave) gives the function with the profile shown in
 @fig-1D_gabor_functionc called a Gabor filter. Gabor functions were

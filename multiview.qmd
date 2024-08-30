@@ -78,13 +78,13 @@ by Sturm and Triggs @Sturm1996 to handle perspective projection.
 One of the key problems in SFM is to find correspondences across
 multiple images. Finding image correspondences is a topic that we have
 already mentioned in multiple places (e.g., chapter
-[\[chap-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
-reference="chap-stereo_vision"} and
+[\[sec-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
+reference="sec-stereo_vision"} and
 [\[chapter-homography\]](#sec-homography){reference-type="ref"
 reference="chapter-homography"}) and that will be mentioned again
 (chapter
-[\[chap-optical_flow_estimation\]](#chap:optical_flow_estimation){reference-type="ref"
-reference="chap-optical_flow_estimation"}).
+[\[sec-optical_flow_estimation\]](#chap:optical_flow_estimation){reference-type="ref"
+reference="sec-optical_flow_estimation"}).
 
 SIFT @Lowe04 made image matching more reliable and structure from motion
 started to work much better under difficult conditions such as where
@@ -277,8 +277,8 @@ minima and to noisy matches.
 ### Finding Matches across Images
 
 When describing stereo vision in chapter
-[\[chap-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
-reference="chap-stereo_vision"} we had to find matching points across
+[\[sec-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
+reference="sec-stereo_vision"} we had to find matching points across
 two views in order to recover depth, but we did not spend much time on
 the problem of matching points across images. Matching features across
 views in a stereo pair is challenging, but it is easy in comparison with
@@ -368,8 +368,8 @@ extract at each location a descriptor that will allow finding the same
 keypoint across the different images.
 
 In chapter
-[\[chap-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
-reference="chap-stereo_vision"} we described SIFT @Lowe04 as a local
+[\[sec-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
+reference="sec-stereo_vision"} we described SIFT @Lowe04 as a local
 image descriptor. Other classical descriptors are SURF @Bay2008346, and
 ORB @Rublee2011. For a review of several hand-engineered descriptors and
 their evaluation, we refer the reader to the work of Krystian
@@ -421,8 +421,8 @@ the matches between those two images to compute the fundamental and
 essential matrices, while accounting for outliers using RANSAC. We can
 then compute an initial 3D reconstruction of the matched points using
 triangulation as we have already discussed in chapter
-[\[chap-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
-reference="chap-stereo_vision"}. Then, we add another image and we
+[\[sec-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
+reference="sec-stereo_vision"}. Then, we add another image and we
 repeat the same process until we have incorporated all the images. This
 process will result in a first set of approximated camera poses and 3D
 locations for a subset of the detected keypoints.

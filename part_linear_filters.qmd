@@ -6,11 +6,11 @@ This part is composed of the following chapters:
 
 ## Outline
 
-- **Chapter {@sec-blur-filters}** introduces low-pass filters. These are filters used to lower the resolution of an image and are a key building block of many image processing operations such as image upsampling and downsampling.
+- **Chapter {@sec-blur_filters}** introduces low-pass filters. These are filters used to lower the resolution of an image and are a key building block of many image processing operations such as image upsampling and downsampling.
 
-- **Chapter {@sec-image-derivatives}** describes a set of band-pass filters, such as image derivatives, and several applications.
+- **Chapter {@sec-image_derivatives}** describes a set of band-pass filters, such as image derivatives, and several applications.
 
-- **Chapter {@sec-temporal-filters}** extends filtering to the temporal domain, and describes applications of spatiotemporal filters for motion estimation, a topic that will be further extended in Chapter {@sec-understanding-motion}.
+- **Chapter {@sec-temporal_filters}** extends filtering to the temporal domain, and describes applications of spatiotemporal filters for motion estimation, a topic that will be further extended in Chapter {@sec-understanding_motion}.
 
 ## Notation
 

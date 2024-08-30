@@ -59,7 +59,7 @@ sed -i '' 's/height="\\\\textheight"//g' "$output_file"
 sed -i '' 's/\\@fig-/@fig-/g' "$output_file"
 sed -i '' 's/\\@eq/@eq/g' "$output_file"
 sed -i '' 's/\\mathbbm/\\mathbb/g' "$output_file"
-sed -i '' 's/sec:\(.*\)/sec-\1/g; s/chap:\(.*\)/chap-\1/g; s/chapter:\(.*\)/chapter-\1/g; s/eq:\(.*\)/eq-\1/g' "$output_file"
+sed -i '' 's/sec:\(.*\)/sec-\1/g; s/chap:\(.*\)/sec-\1/g; s/chapter:\(.*\)/chapter-\1/g; s/eq:\(.*\)/eq-\1/g' "$output_file"
 # sed -i '' -E 's/(:::\{\.column-margin\})(.*)(:::)/\1\n\2\n\3/g' "$output_file"
 
 

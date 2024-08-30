@@ -1,4 +1,4 @@
-# Stereo Vision {#chap-stereo_vision}
+# Stereo Vision {#sec-stereo_vision}
 
 ## Introduction
 

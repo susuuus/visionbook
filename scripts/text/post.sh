@@ -19,7 +19,7 @@ sed -i '' 's/\.eps/\.png/g' "$input_file"
 sed -i '' -E 's/#fig:([^ ]+)/#fig-\1/g' "$input_file"
 sed -i '' 's/\\\\linewidth//g' "$input_file" 
 # sed -i '' -E 's/(width=".*?)(\\\\linewidth")/\1"/g' "$input_file"
-sed -i '' 's/sec:\(.*\)/sec-\1/g; s/chap:\(.*\)/chap-\1/g; s/chapter:\(.*\)/chapter-\1/g; s/eq:\(.*\)/eq-\1/g' "$input_file"
+sed -i '' 's/sec:\(.*\)/sec-\1/g; s/chap:\(.*\)/sec-\1/g; s/chapter:\(.*\)/chapter-\1/g; s/eq:\(.*\)/eq-\1/g' "$input_file"
 
 sed -i '' -e 's/\\img/\\ell/g' \
     -e 's/\\imgin/\\ell\\_{\\texttt{in}}/g' \

@@ -1,4 +1,4 @@
-# Learning to Estimate Motion {#chap-learning_to_estimate_motion}
+# Learning to Estimate Motion {#sec-learning_to_estimate_motion}
 
 ## Introduction
 

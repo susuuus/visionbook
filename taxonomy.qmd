@@ -1,4 +1,4 @@
-# The Challenge of Vision {#chap-challenge_of_vision}
+# The Challenge of Vision {#sec-challenge_of_vision}
 
 ## Introduction
 

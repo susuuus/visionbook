@@ -876,8 +876,8 @@ practice, setting $K=1$ is often sufficient.
 GANs are related to the image and texture models we saw in chapters
 [\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
 reference="chapter-stat_image_models"} and
-[\[chap-textures\]](#chap:textures){reference-type="ref"
-reference="chap-textures"}. For example, in the Heeger-Bergen model
+[\[sec-textures\]](#chap:textures){reference-type="ref"
+reference="sec-textures"}. For example, in the Heeger-Bergen model
 (section
 [\[section:Heeger_Bergen\]](#section:Heeger_Bergen){reference-type="ref"
 reference="section:Heeger_Bergen"}; @RG:Heeger-Bergen95), we synthesize

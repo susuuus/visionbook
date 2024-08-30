@@ -1,4 +1,4 @@
-# A Simple Vision System---Revisited {#chap-simple_system_revisited}
+# A Simple Vision System---Revisited {#sec-simple_system_revisited}
 
 ## Introduction
 
