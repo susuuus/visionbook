@@ -1,6 +1,6 @@
 # Image Formation {#sec-image-formation}
 
-This set of chapters describes how images are formed. How can the light illuminating the space around us be captured by a device to form a picture? We will discuss pinhole cameras and lenses, which will let us introduce the geometry and formulation of the image formation process. We will then further develop the geometry of the image formation process in part {#part-understanding-geometry}. We will also describe how to interpret cameras as linear systems, which will allow us to understand and design new cameras. Together with computation, this can be used to form images in a wide range of situations, going beyond the pinhole and lens-based cameras. We will finalize by describing how color works.
+This set of chapters describes how images are formed. How can the light illuminating the space around us be captured by a device to form a picture? We will discuss pinhole cameras and lenses, which will let us introduce the geometry and formulation of the image formation process. We will then further develop the geometry of the image formation process in part {@sec-understanding-geometry}. We will also describe how to interpret cameras as linear systems, which will allow us to understand and design new cameras. Together with computation, this can be used to form images in a wide range of situations, going beyond the pinhole and lens-based cameras. We will finalize by describing how color works.
 
 ## Outline
 
@@ -14,6 +14,6 @@ This set of chapters describes how images are formed. How can the light illumina
 
 ## Notation
 
-- Images: We will use the $\ell$ symbol to denote images (i.e., $\img$ight). We will also use the same symbol when referring to light rays and other physical quantities.
+- Images: We will use the $\ell$ symbol to denote images (i.e., $\ell$ight). We will also use the same symbol when referring to light rays and other physical quantities.
 
 - Matrices and vectors: We will use bold fonts to denote vectors and matrices. We will use lowercase for vectors and uppercase for matrices.

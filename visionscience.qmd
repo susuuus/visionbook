@@ -1,4 +1,4 @@
-# Looking at Images {#chap-looking_at_images}
+# Looking at Images {#sec-looking_at_images}
 
 ## Introduction
 

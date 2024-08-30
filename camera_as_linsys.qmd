@@ -1,4 +1,4 @@
-# Cameras as Linear Systems {#sec-cameras_as_linear_systems}
+# Cameras as Linear Systems {#sec-cameras-as-linear-systems}
 
 ## Introduction
 
