@@ -336,18 +336,15 @@ $3 \times 3$ matrices, we can write $$\lambda
 coordinates of points on the plane are related to the corresponding
 points in the image plane by a homography.
 
-As equation (@eq-projectionintofirstcamera) is true for any camera, the
-relationship between corresponding points in the two cameras will also
-be related by a homography when the points correspond to points in a
-plane in the 3D space. 
+As @eq-projectionintofirstcamera is true for any camera, the
+relationship between corresponding points in the two cameras will also be related by a homography when the points correspond to points in a plane in the 3D space. 
 
 :::{.column-margin}
-A homography is a stronger
-constraint than the epipolar constraint between corresponding points
-across two camera views. However, the homography only applies under
-certain conditions as we have seen, while the epipolar constraint always
-holds. 
-:::## Creating Image Panoramas
+A homography is a stronger constraint than the epipolar constraint between corresponding points across two camera views. However, the homography only applies under
+certain conditions as we have seen, while the epipolar constraint always holds. 
+:::
+
+## Creating Image Panoramas
 
 Let's now study a popular application of the homography: stitching
 images to create large panoramas. To create a large panorama from
