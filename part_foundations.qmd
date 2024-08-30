@@ -6,8 +6,8 @@ This first block of three chapters defines the problem that computer vision trie
 
 - **Chapter {@sec-simplesystem}** will make you think about the math foundations needed to understand the rest of the book and it will also introduce some important general concepts in vision.
 
-- **Chapter {@sec-looking-at-images}** will make you think about the vision problem from the perspective of an observer.
+- **Chapter {@sec-looking_at_images}** will make you think about the vision problem from the perspective of an observer.
 
-- **Chapter {@sec-computer-vision-and-society}** will make you think about the social implications of this area of work.
+- **Chapter {@sec-computer_vision_and_society}** will make you think about the social implications of this area of work.
 
 Readers might want to skip this part and directly jump into the latest and most exciting techniques in computer vision (deep learning, image generative models) that will be presented later in the book, but it is important to slow down and be patient. We believe that being patient will result in rewards in the long run. Let's first focus on foundational concepts.
