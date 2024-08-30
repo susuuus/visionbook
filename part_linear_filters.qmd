@@ -1,0 +1,23 @@
+# Linear Filters {#sec-linear-filters}
+
+In this set of chapters, we will discuss a wide family of linear filters. These filters lay the foundation for most representations for images and sequences. Even learning-based representations end up learning filters that are similar to those we will discuss here.
+
+This part is composed of the following chapters:
+
+## Outline
+
+- **Chapter {@sec-blur-filters}** introduces low-pass filters. These are filters used to lower the resolution of an image and are a key building block of many image processing operations such as image upsampling and downsampling.
+
+- **Chapter {@sec-image-derivatives}** describes a set of band-pass filters, such as image derivatives, and several applications.
+
+- **Chapter {@sec-temporal-filters}** extends filtering to the temporal domain, and describes applications of spatiotemporal filters for motion estimation, a topic that will be further extended in Chapter {@sec-understanding-motion}.
+
+## Notation
+
+We will continue using the same notation as in the previous chapters.
+
+- Images and sequences: We will use the $\ell$ symbol to denote images and sequences: $\ell \left[ n, m, t \right]$ or $\ell \left( x, y, t \right)$.
+
+- Convolution kernels: We will use $h$, $g$.
+
+- Derivatives: We will use subindices for partial derivatives, for example $\ell_x = \partial \ell / \partial x$.

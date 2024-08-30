@@ -31,44 +31,44 @@ book:
         - neural_nets.qmd
         - neural_nets_as_distribution_transformers.qmd
         - backpropagation.qmd
-    - part: Foundation of Image Processing
+    - part: part_foundation_image_processing.qmd
       chapters:
         - linear_image_filtering.qmd
         - image_processing_fourier.qmd
-    - part: Linear Filters
+    - part: part_linear_filters.qmd
       chapters:
         - blurring_2.qmd
         - derivatives.qmd
         - temporal_filters_v2.qmd
-    - part: Sampling and Multiscale Image Representations
+    - part: part_sampling_and_multiscale.qmd
       chapters:
         - sampling_and_aliasing.qmd
         - upsamplig_downsampling_2.qmd
         - spatial_filter_sets.qmd
         - pyramids_new_notation.qmd
-    - part: Neural Architectures for Vision
+    - part: part_neural_architectures.qmd
       chapters:
         - convolutional_neural_nets.qmd
         - recurrent_neural_nets.qmd
         - transformers.qmd
-    - part: Probabilistic Models of Images
+    - part: part_statistical_image_models.qmd
       chapters:
         - stat_image_models_revised.qmd
         - textures.qmd
         - graphical_models.qmd
-    - part: Generative Image Models and Representation Learning
+    - part: part_generative_models_and_representation.qmd
       chapters:
         - representation_learning.qmd
         - perceptual_organization.qmd
         - generative_models.qmd
         - generative_modeling_and_rep_learning.qmd
         - conditional_generative_models.qmd
-    - part: Challenges in Learning-Based Vision
+    - part: part_challenges_in_learning_based_vision.qmd
       chapters:
         - bias_and_shift.qmd
         - data_augmentation.qmd
         - transfer_learning.qmd
-    - part: Understanding Geometry
+    - part: part_understanding_geometry.qmd
       chapters:
         - homogeneous_coordinates.qmd
         - imaging_geometry.qmd
@@ -78,22 +78,22 @@ book:
         - 3d_learning.qmd
         - multiview.qmd
         - nerf.qmd
-    - part: Understanding Motion
+    - part: part_understanding_motion.qmd
       chapters:
         - motion_estimation_intro.qmd
         - 2d_motion_from_3d.qmd
         - optical_flow.qmd
         - motion_estimation.qmd
-    - part: Understanding Vision With Language
+    - part: part_scene_understanding.qmd
       chapters:
         - object_recognition_v3.qmd
         - VLMs.qmd
-    - part: On Research, Writing and Speaking
+    - part: part_on_research.qmd
       chapters:
         - how_to_do_research.qmd
         - how_to_write_papers.qmd
         - how_to_give_talks.qmd
-    - part: Closing Remarks
+    - part: part_closing_remarks.qmd
       chapters:
         - simplesystem_final.qmd
     - references.qmd

@@ -1,0 +1,17 @@
+\cleardoublepage
+\part{Challenges in Learning-Based Vision}
+\reviewcomment{Summarize the content of this part.}
+
+Learning-based vision comes with a unique set of challenges. This approach to vision derives rules from \textit{data}, and therefore requires tools for understanding where data can go wrong. This part of the book first presents several failure modes of data-driven methods, and then provides tools for mitigating these failures.
+
+
+\vspace{\baselineskip}
+
+\begin{itemize}
+\item {\bf{\Chap{\ref{chapter:bias_and_shift}}}} introduces the problem of dataset bias and distribution shift. We also encounter the issue of adversarial examples. These problems all come down to a gap between how the model is trained and how it will be used.
+
+\item {\bf{\Chap{\ref{chapter:data_augmentation}}}} presents one way of dealing with this gap: train on a more diverse distribution of data.
+
+\item {\bf{\Chap{\ref{chapter:transfer_learning}}}} presents a second way of dealing with the gap: adapt your models to bridge the gap.
+
+\end{itemize}
