@@ -1,4 +1,4 @@
-# Cameras as Linear Systems {#chapter-cameras_as_linear_systems}
+# Cameras as Linear Systems {#sec-cameras_as_linear_systems}
 
 ## Introduction
 
@@ -22,95 +22,60 @@ flatland.
 ![A one dimensional imaging system in flatland. As in , we have reversed
 the direction of the sensor
 coordinates.](figures/imaging/flatland_camera_linear.png){#fig-flatland_camera_linear
-width=".5"}
+width="70%"}
 
-Let the light intensities in the world be represented by a column
-vector, $\boldsymbol\ell_{\texttt{w}}$. The value of the $n$-th
-component of $\boldsymbol\ell_{\texttt{w}}$ gives the intensity of the
-light at position $n$, heading in the direction of the camera. There are
-a few more things to notice in . The first one is that the axis in the
-camera sensor is reversed, consistent with . The value $n$ corresponds
-to image coordinates and the units are pixels. The second is that we are
-modeling the scene as being a line with varying albedos at a fixed depth
-from the camera. If the scene had a more complex spatial structure we
-would have to use the **light field** in order to use the same linear
-algebra that we will use in this chapter to model cameras. We will use
-light fields in .
+Let the light intensities in the world be represented by a column vector, $\boldsymbol\ell_{\texttt{w}}$. The value of the $n$-th component of $\boldsymbol\ell_{\texttt{w}}$ gives the intensity of the light at position $n$, heading in the direction of the camera. There are a few more things to notice in @fig-flatland_camera_linear. The first one is that the axis in the camera sensor is reversed, consistent with @fig-pinholeGeometry. The value $n$ corresponds to image coordinates and the units are pixels. The second is that we are modeling the scene as being a line with varying albedos at a fixed depth from the camera. If the scene had a more complex spatial structure we would have to use the **light field** in order to use the same linear algebra that we will use in this chapter to model cameras. We will use light fields in Chapter {@sec-nerfs}.
 
 
+::: {.column-margin}
+In this chapter we will approximate the input light by a discrete and finite set of light rays instead of a continuous wave. This approximation allow us to use linear algebra to describe the imaging process.
+:::
 
 ## Cameras as Linear Systems {#cameras-as-linear-systems}
+As shown in @fig-amats1-a, the sensor is 1D and the scene lives in flatland. Let the sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be $\boldsymbol\ell_{\texttt{w}}$. If the camera sensors respond linearly to the light intensity at each sensor, their measurements, $\boldsymbol\ell_{\texttt{s}}$, will be some linear combination, given by the matrix, $\mathbf{A}$, of the light intensities:
+$$
+\boldsymbol\ell_{\texttt{s}} = \mathbf{A} \boldsymbol\ell_{\texttt{w}} 
+$$ {#eq-likelihood}
 
-As shown in the sensor is 1D and the scene lives in flatland. Let the
-sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown
-scene be $\boldsymbol\ell_{\texttt{w}}$. If the camera sensors respond
-linearly to the light intensity at each sensor, their measurements,
-$\boldsymbol\ell_{\texttt{s}}$, will be some linear combination, given
-by the matrix, $\mathbf{A}$, of the light intensities:
-$$\boldsymbol\ell_{\texttt{s}}= \mathbf{A} \boldsymbol\ell_{\texttt{w}}
-\label{eq-likelihood}$$ We represent the camera by matrix $\mathbf{A}$.
-For the case of a pinhole camera, and assuming 13 pixel sensor
-observations, the camera matrix is just a 13$\times$`<!-- -->`{=html}13
-identity matrix, depicted in , as each sensor depends only on the value
-of a single scene element. For the case of conventional lens and pinhole
-cameras, where the observed intensities, $\boldsymbol\ell_{\texttt{s}}$,
-are an image of the reflected intensities in the scene,
-$\boldsymbol\ell_{\texttt{w}}$, then $\mathbf{A}$ is approximately an
-identity matrix. For more general cameras, $\mathbf{A}$ may be very
-different from an identity matrix, and we will need to estimate
-$\boldsymbol\ell_{\texttt{w}}$ from $\boldsymbol\ell_{\texttt{s}}$.
+We represent the camera by matrix $\mathbf{A}$. For the case of a pinhole camera, and assuming 13 pixel sensor observations, the camera matrix is just a 13×13 identity matrix, depicted in @fig-amats1-b, as each sensor depends only on the value of a single scene element. For the case of conventional lens and pinhole cameras, where the observed intensities, $\boldsymbol\ell_{\texttt{s}}$, are an image of the reflected intensities in the scene, $\boldsymbol\ell_{\texttt{w}}$, then $\mathbf{A}$ is approximately an identity matrix. For more general cameras, $\mathbf{A}$ may be very different from an identity matrix, and we will need to estimate $\boldsymbol\ell_{\texttt{w}}$ from $\boldsymbol\ell_{\texttt{s}}$.
 
-In the presence of noise, there may not be a solution
-$\boldsymbol\ell_{\texttt{w}}$ that exactly satisfies , so we often seek
-to satisfy it in a least squares sense. In most cases, $\mathbf{A}$ is
-either not invertible, or is poorly conditioned. It is often useful to
-introduce a regularizer, an additional term in the objective function to
-be minimized @Poggio85. If the regularization term favors a small
-$\boldsymbol\ell_{\texttt{world}}$, then the objective term to minimize, $E$,
-could be
+
+In the presence of noise, there may not be a solution $\boldsymbol\ell_{\texttt{w}}$ that exactly satisfies ast squares sense. In most cases, $\mathbf{A}$ is either not invertible, or is poorly conditioned. It is often useful to introduce a regularizr, an additional term in the objective function to. be minimized @Poggio85. If the regularizaion term favors a smallworld $\boldsymbol\ell_{\texttt{world}}$, then the objective term to minimize, $E$, could be 
 $$E = \lVert \boldsymbol\ell_{\texttt{s}}- \mathbf{A} \boldsymbol\ell_{\texttt{w}}\rVert ^2 + \lambda \lVert \boldsymbol\ell_{\texttt{w}}\rVert ^2
-\label{eq-posterior}$$ The regularization parameter, $\lambda$,
-determines the trade-off between explaining the observations and
-satisfying the regularization term.
+$$
+{#eq-posterior}
 
-![ (a) Schematic drawing of a small-hole 1D pinhole camera, and (b) the
-visualization of its imaging matrices $\mathbf{A}$, $\mathbf{A}^{-1}$,
-and the regularized inverse $\mathbf{B}$. For the small-pinhole imager,
-all three matrices are identity matrices. (c) Large-hole 1D pinhole
-camera, and (d) the visualization of its imaging
-matrices.](figures/imaging/traditional_pinholes_2.png){#fig-amats1
-width="100%"}
+The regularization parameter, $\lambda$, determines the trade-off between explaining the observations and satisfying the regularization term. 
 
-Setting the derivative of with respect to the elements of the vector
-$\boldsymbol\ell_{\texttt{w}}$ equal to zero, we have $$\begin{aligned}
+![Figure: (a) Schematic drawing of a small-hole 1D pinhole camera, and (b) the visualization of its imaging matrices $\mathbf{A}$, $\mathbf{A}^{-1}$, and the regularized inverse $\mathbf{B}$. For the small-pinhole imager, all three matrices are identity matrices. Also shown is (c) a large-hole 1D pinhole camera, and (d) the visualization of its imaging matrices.](figures/imaging/traditional_pinholes_2.png){#fig-amats1}
+
+Setting the derivative of @eq-posterior of the vector $\boldsymbol\ell_{\texttt{w}}$ equal to zero, we have 
+$$\begin{aligned}
 0 & = &  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lVert \boldsymbol\ell_{\texttt{s}}- \mathbf{A} \boldsymbol\ell_{\texttt{w}}\rVert ^2 +  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lambda \lVert \boldsymbol\ell_{\texttt{w}}\rVert ^2 \\
 & = &  \mathbf{A}^T \mathbf{A} \boldsymbol\ell_{\texttt{w}}- \mathbf{A}^T \boldsymbol\ell_{\texttt{s}}+ \lambda \boldsymbol\ell_{\texttt{w}}
-\label{eq-deriv}
-\end{aligned}$$ or
-$$\boldsymbol\ell_{\texttt{w}}= (\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1} \mathbf{A}^T \boldsymbol\ell_{\texttt{s}}
-\label{eq-deriv2}$$ Where the matrix
-$\mathbf{B}=(\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1} \mathbf{A}^T$
-is the regularized inverse of the imaging matrix $\mathbf{A}$.
+{#eq-deriv}
+\end{aligned}$$ or 
 
-1D and the scene lives in flatland. Let the sensor measurements be
-$\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be
-$\boldsymbol\ell_{\texttt{w}}$. We represent the camera by matrix
-$\mathbf{A}$. For the case of a pinhole camera, and assuming 13 pixel
-sensor observations, the camera matrix is just a
-13$\times$`<!-- -->`{=html}13 identity matrix, depicted in , as each
-sensor depends only on the value of a single scene element.
+$$\boldsymbol\ell_{\texttt{w}}= (\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1}\mathbf{A}^T \boldsymbol\ell_{\texttt{s}}
+\label{eq-deriv2}$$ 
+
+Where the matrix $\mathbf{B}=(\mathb is the regularizd inverse of the imaging matrix $\mathbf{A}$.
+
+1D and the scene lives in flatland. 
+
+Let the sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be $\boldsymbol\ell_{\texttt{w}}$. We represent the camera by matrix $\mathbf{A}$. For the case of a pinhole camera, and assuming 13 pixel sensor observations, the camera matrix is just a 13$\times$13 identity matrix, depicted in @fig-amats1 (b), as each sensor depends only on the value of a single scene element.  
 
 Next, consider the case of a wide aperture pinhole camera, shown in . If
-a single pixel in the sensor plane covers exactly two positions of the
-scene intensities, then the geometry is as shown in . also shows the
-imaging matrix, $\mathbf{A}$, its inverse, $\mathbf{A}^{-1}$, and the
-regularized inverse of the imaging matrix, which will usually give image
+ingle pixel in the sensor plane covers exactly two positions of the
+scene intensities, then the geometry is as shown in .{A}$, its inver
+e, $\mathbf{A}^{-1}$, and the regular
+zed inverse of the imaging matrix, which will usually give image
 reconstructions with fewer artifacts as it is less sensitive to noise.
 Note that $\mathbf{A}^{-1}$ contains lots of fast changes that will make
 the result very sensitive to noise in the observation. The regularized
-matrix, $\mathbf{B}$, shown in the bottom row of , is better behaved.
+matrix, $\mathbf{B}$, shown in the bottom row of 
 
-The following plot () shows an example of an input 1D signal,
+The following plot (ignal,
 $\boldsymbol\ell_{\texttt{w}}$, and the output of the 2-pixel wide
 pinhole camera, $\boldsymbol\ell_{\texttt{s}}$.
 
@@ -165,7 +130,7 @@ class="math inline"><strong>ℓ</strong><sub><code>s</code></sub></span>.</figca
 </figure>
 
 The output is obtained by multiplying the input vector by the matrix
-$\mathbf{A}$ shown in . Each output value is the results of adding up
+$\mathbf{A}$ shown in he results of adding up
 two consecutive input values. The output is nearly identical to the
 input signal but with a larger magnitude and a bit smoother.
 
@@ -173,7 +138,7 @@ input signal but with a larger magnitude and a bit smoother.
 
 Many different optical systems can form cameras and the linear analysis
 described before can be used to characterize the imaging process. Even a
-simple edge will do. shows two non traditional imaging systems that we
+simple edge will do.l imaging syst ms that we
 will analyze in this section.
 
 ![(a) Schematic drawing of an edge camera, and (b) its imaging matrices.
@@ -184,7 +149,7 @@ width="100%"}
 
 ### Edge Camera
 
-Consider the example of . This camera corresponds to an **edge camera**.
+Consider the example of s to an **edge camera**.
 This is not a traditional pinhole camera; instead light is blocked only
 on one side.
 
