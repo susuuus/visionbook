@@ -32,7 +32,7 @@ In this chapter we will approximate the input light by a discrete and finite set
 :::
 
 ## Cameras as Linear Systems {#cameras-as-linear-systems}
-As shown in @fig-amats1-a, the sensor is 1D and the scene lives in flatland. Let the sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be $\boldsymbol\ell_{\texttt{w}}$. If the camera sensors respond linearly to the light intensity at each sensor, their measurements, $\boldsymbol\ell_{\texttt{s}}$, will be some linear combination, given by the matrix, $\mathbf{A}$, of the light intensities:
+As shown in @fig-amats1 (a), the sensor is 1D and the scene lives in flatland. Let the sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be $\boldsymbol\ell_{\texttt{w}}$. If the camera sensors respond linearly to the light intensity at each sensor, their measurements, $\boldsymbol\ell_{\texttt{s}}$, will be some linear combination, given by the matrix, $\mathbf{A}$, of the light intensities:
 $$
 \boldsymbol\ell_{\texttt{s}} = \mathbf{A} \boldsymbol\ell_{\texttt{w}} 
 $$ {#eq-likelihood}
@@ -42,26 +42,26 @@ We represent the camera by matrix $\mathbf{A}$. For the case of a pinhole camera
 
 In the presence of noise, there may not be a solution $\boldsymbol\ell_{\texttt{w}}$ that exactly satisfies ast squares sense. In most cases, $\mathbf{A}$ is either not invertible, or is poorly conditioned. It is often useful to introduce a regularizr, an additional term in the objective function to. be minimized @Poggio85. If the regularizaion term favors a smallworld $\boldsymbol\ell_{\texttt{world}}$, then the objective term to minimize, $E$, could be 
 $$E = \lVert \boldsymbol\ell_{\texttt{s}}- \mathbf{A} \boldsymbol\ell_{\texttt{w}}\rVert ^2 + \lambda \lVert \boldsymbol\ell_{\texttt{w}}\rVert ^2
-$$
-{#eq-posterior}
+$$ {#eq-posterior}
 
 The regularization parameter, $\lambda$, determines the trade-off between explaining the observations and satisfying the regularization term. 
 
 ![Figure: (a) Schematic drawing of a small-hole 1D pinhole camera, and (b) the visualization of its imaging matrices $\mathbf{A}$, $\mathbf{A}^{-1}$, and the regularized inverse $\mathbf{B}$. For the small-pinhole imager, all three matrices are identity matrices. Also shown is (c) a large-hole 1D pinhole camera, and (d) the visualization of its imaging matrices.](figures/imaging/traditional_pinholes_2.png){#fig-amats1}
 
 Setting the derivative of @eq-posterior of the vector $\boldsymbol\ell_{\texttt{w}}$ equal to zero, we have 
-$$\begin{aligned}
+$$
+\begin{aligned}
 0 & = &  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lVert \boldsymbol\ell_{\texttt{s}}- \mathbf{A} \boldsymbol\ell_{\texttt{w}}\rVert ^2 +  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lambda \lVert \boldsymbol\ell_{\texttt{w}}\rVert ^2 \\
 & = &  \mathbf{A}^T \mathbf{A} \boldsymbol\ell_{\texttt{w}}- \mathbf{A}^T \boldsymbol\ell_{\texttt{s}}+ \lambda \boldsymbol\ell_{\texttt{w}}
-{#eq-deriv}
-\end{aligned}$$ or 
+\end{aligned}
+$$ {#eq-deriv}
+or 
 
 $$\boldsymbol\ell_{\texttt{w}}= (\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1}\mathbf{A}^T \boldsymbol\ell_{\texttt{s}}
-\label{eq-deriv2}$$ 
+$$ {#eq-deriv2} 
 
-Where the matrix $\mathbf{B}=(\mathb is the regularizd inverse of the imaging matrix $\mathbf{A}$.
+Where the matrix $\mathbf{B}=(\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1} \mathbf{A}^T$ is the regularized inverse of the imaging matrix $\mathbf{A}$.
 
-1D and the scene lives in flatland. 
 
 Let the sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be $\boldsymbol\ell_{\texttt{w}}$. We represent the camera by matrix $\mathbf{A}$. For the case of a pinhole camera, and assuming 13 pixel sensor observations, the camera matrix is just a 13$\times$13 identity matrix, depicted in @fig-amats1 (b), as each sensor depends only on the value of a single scene element.  
 
@@ -79,6 +79,50 @@ The following plot (ignal,
 $\boldsymbol\ell_{\texttt{w}}$, and the output of the 2-pixel wide
 pinhole camera, $\boldsymbol\ell_{\texttt{s}}$.
 
+```{=latex}
+\begin{tikzpicture}
+\begin{axis} [width=185pt,height=120pt,
+	axis x line=bottom, 
+	axis y line=middle, 
+	tick align=center,
+	every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+	every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
+	xmin=0, xmax=13,
+	xtick={0,...,12},
+	xlabel=$n$,
+	ymin=0, ymax=5,
+	ytick={0,...,4},
+	ylabel={$\boldimgworld$}]
+\addplot+[ycomb] 
+coordinates {(0,0) (1,1) (2,1) (3,1) (4,1) (5,0) (6,0) (7,0) (8,1) (9,2)  (10,3)  (11,4)  (12,0)};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{axis} [width=185pt,height=120pt,
+	axis x line=bottom, 
+	axis y line=middle, 
+	tick align=center,
+	every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+	every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
+	xmin=0, xmax=13,
+	xtick={0,...,12},
+	xlabel=$n$,
+	ymin=0, ymax=8,
+	ytick={0,...,7},
+	ylabel={$\boldimgsensor$}]
+\addplot+[ycomb] 
+coordinates {(0,1) (1,2) (2,2) (3,2) (4,1) (5,0) (6,0) (7,1) (8,3) (9,5)  (10,7)  (11,4)  (12,0)};
+\end{axis} 
+\end{tikzpicture}
+\end{array}
+$
+%\end{center}
+}
+\caption{Pinhole camera. (left) Input 1D signal, $\boldimgworld$. (right) The output of the two-pixel wide pinhole camera, $\boldimgsensor$.} 
+\label{fig:2pixelwidepinhole}
+\end{figure}
+```
 <figure id="fig:2pixelwidepinhole">
 <p><span class="math inline">$\begin{array}{cc}
 \begin{tikzpicture}
