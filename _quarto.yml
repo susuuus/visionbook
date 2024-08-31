@@ -113,8 +113,8 @@ book:
   page-navigation: true
 
 bibliography:
-  - src/all.bib
-  - src/visionbib.bib
+  - all.bib
+  - visionbib.bib
 
 format:
   html:
