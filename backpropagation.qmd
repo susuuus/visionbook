@@ -5,10 +5,8 @@
 A key idea of neural nets is to decompose computation into a series of
 layers. In this chapter we will think of layers as modular blocks that
 can be chained together into a **computation graph**.
-@fig-backpropagation:simple_MLP shows the computation graph for the
-two-layer multilayer perceptron (MLP) from chapter
-[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
-reference="chapter-neural_nets"}.
+@fig-backpropagation-simple_MLP shows the computation graph for the
+two-layer multilayer perceptron (MLP) from chapter @sec-neural_nets.
 
 Each [layer]{style="background-color: comp_graph_node_bcolor"} takes in
 some inputs and transforms them into some outputs. We call this the
@@ -16,7 +14,7 @@ $\texttt{forward}$ pass through the layer. If the layer has parameters,
 we will consider the parameters to be an *input* to a parameter-free
 transformation: $$\begin{aligned}    \mathbf{x}_{\texttt{out}}&= f(\mathbf{x}_{\texttt{in}},\theta)
 \end{aligned}$$ Graphically, we will depict the forward operation of a
-layer like shown below (@fig-backpropagation:mod_block_forward).
+layer like shown below (@fig-backpropagation-mod_block_forward).
 
 The learning problem is to find the parameters
 [$\theta$]{style="background-color: comp_graph_param_bcolor"} that
@@ -49,7 +47,7 @@ respect to a loss function $\mathcal{L}$. The loss can be treated as
 another node in our computation graph, which takes in $\mathbf{x}_L$
 (the output of $f_L$) and outputs a scalar $J$, the loss. This
 computation graph appears as follows
-(@fig-backpropagation:composed_modules).
+(@fig-backpropagation-composed_modules).
 
 
 
@@ -85,7 +83,7 @@ reuse them.
 To come up with a general algorithm for reusing all the shared
 computation, we will first look at one generic layer in isolation, and
 see what we need in order to update its parameters
-(@fig-backpropagation:generic_layer_g_L).
+(@fig-backpropagation-generic_layer_g_L).
 
 Here we have introduced two new shorthands, $\mathbf{L}$ and
 $\mathbf{g}$; these represent arrays of partial derivatives, defined
@@ -122,12 +120,12 @@ following recurrence relation: $$\begin{aligned}    \mathbf{g}_{\texttt{in}} &= 
     :backward
 \end{aligned}$${#eq-backpropagation} This recurrence is essence of backprop: it sends error
 signals (gradients) backward through the network, starting at the last
-layer and iteratively applying @eq-backpropagation:backward to compute
+layer and iteratively applying @eq-backpropagation-backward to compute
 $\mathbf{g}$ for each previous layer. 
 
 We are finally ready to define the full `backward` function promised at
 the beginning of this chapter! It consists of the following operation,
-shown in @fig-backpropagation:mod_block_backward, which has three
+shown in @fig-backpropagation-mod_block_backward, which has three
 inputs ($\mathbf{x}_{\texttt{in}}, \theta, \mathbf{g}_{\texttt{out}}$)
 and two outputs ($\mathbf{g}_{\texttt{in}}$ and
 $\frac{\partial J}{\partial \theta}$).
@@ -151,7 +149,7 @@ layer $l$ we have these two arrays ready. The way to do it is to first
 compute a **forward pass** through the entire network, which means
 starting with input data $\mathbf{x}_0$ and evaluating layer by layer to
 produce the sequence $\mathbf{x}_0, \mathbf{x}_1, \ldots, \mathbf{x}_L$.
-@fig-backpropagation:forward_pass shows what the forward pass looks
+@fig-backpropagation-forward_pass shows what the forward pass looks
 like.
 
 
@@ -159,7 +157,7 @@ like.
 Next, we compute a **backward pass**, iteratively evaluating the
 $\mathbf{g}$'s and obtaining the sequence
 $\mathbf{g}_L, \mathbf{g}_{L-1}, \ldots$, as well as the parameter
-gradients for each layer (@fig-backpropagation:backward_pass).
+gradients for each layer (@fig-backpropagation-backward_pass).
 
  The full algorithm is summarized in algorithm
 [\[alg:backpropagation:backprop_for_chains\]](#alg:backpropagation:backprop_for_chains){reference-type="ref"
@@ -193,7 +191,10 @@ to minimize will typically be the *average* of the losses over *all* the
 datapoints in a training set, $\{\mathbf{x}^{(i)}\}_{i=1}^N$. However,
 once we know how to compute the gradient for a single datapoint, we can
 easily compute the gradient for the whole dataset, due to the following
-identity: $$\begin{aligned}    \frac{\partial \frac{1}{N}\sum_{i=1}^N J_i(\theta)}{\partial \theta} = \frac{1}{N} \sum_{i=1}^N \frac{\partial J_i(\theta)}{\partial \theta}:average_of_gradients
+identity: 
+
+$$\begin{aligned}
+\frac{\partial \frac{1}{N}\sum_{i=1}^N J_i(\theta)}{\partial \theta} = \frac{1}{N} \sum_{i=1}^N \frac{\partial J_i(\theta)}{\partial \theta}:average_of_gradients
 \end{aligned}$${#eq-backpropagation} 
 
 :::{.column-margin}
@@ -213,7 +214,7 @@ can be done in parallel) and then average the results.
 In the remaining sections, we will still focus only on the case of
 backpropagation for the loss at a single datapoint. As you read on, keep
 in mind that doing the same for batches simply requires applying
-@eq-backpropagation:average_of_gradients.
+@eq-backpropagation-average_of_gradients.
 
 ## Example: Backpropagation for an MLP
 
@@ -267,19 +268,19 @@ imply: $$\begin{aligned}
 \end{aligned}$$ There is no such simple shorthand for
 $\mathbf{L}^\mathbf{W}$, but that is no matter, as we can proceed at
 this point to implement `backward` for a linear layer by plugging our
-computed $\mathbf{L}^\mathbf{x}$ into @eq-backpropagation:backward, and
+computed $\mathbf{L}^\mathbf{x}$ into @eq-backpropagation-backward, and
 $\mathbf{L}^\mathbf{W}$ and $\mathbf{L}^\mathbf{b}$ into
-@eq-backpropagation:djdtheta. $$\begin{aligned}
+@eq-backpropagation-djdtheta. $$\begin{aligned}
     \mathbf{g}_{\texttt{in}} &= \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{x}} = \mathbf{g}_{\texttt{out}}\mathbf{W} :linear_backward_costgrad\\
     \frac{\partial J}{\partial \mathbf{W}} &=  \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{W}}\\
     \frac{\partial J}{\partial \mathbf{b}} &= \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{b}} = \mathbf{g}_{\texttt{out}}
 \end{aligned}$${#eq-backpropagation} To get an intuition for
-@eq-backpropagation:linear_backward_costgrad, it can help to draw the
+@eq-backpropagation-linear_backward_costgrad, it can help to draw the
 matrices being multiplied. Below, in
-@fig-backpropagation:linear_forward_backward_matrices, on the left we
+@fig-backpropagation-linear_forward_backward_matrices, on the left we
 have the forward operation of the layer (omitting biases) and on the
 right we have the backward operation in
-@eq-backpropagation:linear_backward_costgrad.
+@eq-backpropagation-linear_backward_costgrad.
 
 Unlike the other equations, at first glance
 $\frac{\partial J}{\partial \mathbf{W}}$ does not seem to have a simple
@@ -333,16 +334,16 @@ zero-indexing into vectors and matrices.
  So we see that in
 the end this gradient has the simple form of an outer product between
 two vectors, $\mathbf{x}_{\texttt{in}}$ and $\mathbf{g}_{\texttt{out}}$
-(@fig-backpropagation:parameter_grad_linear_matrices).
+(@fig-backpropagation-parameter_grad_linear_matrices).
 
 We can summarize all these operations in the `forward` and `backward`
-diagram for linear layer in @fig-backpropagation:linear_layer_backprop.
+diagram for linear layer in @fig-backpropagation-linear_layer_backprop.
 
 Notice that all these operations are simple expressions, mainly
 involving matrix multiplies. `Forward` and `backward` for a linear layer
 are also very easy to write in code, using any library that provides
 matrix multiplication (`matmul`) as a primitive.
-@fig-backpropagation:backprop_code gives Python pseudocode for this
+@fig-backpropagation-backprop_code gives Python pseudocode for this
 layer.
 
 ``` {.python xleftmargin="0.2" xrightmargin="0.2" fontsize="\\fontsize{8.5}{9}" frame="single" framesep="2.5pt" baselinestretch="1.05"}
@@ -380,7 +381,7 @@ Then we have $$\begin{aligned}
     \mathbf{L}^{\mathbf{x}} &= f^{\prime}(\mathbf{x}_{\texttt{in}}) = \texttt{diag}([h^\prime(x_{\texttt{in}}[0]), \ldots, h^\prime(x_{\texttt{in}}[N-1])]^\mathsf{T}) \triangleq \mathbf{H}^\prime
 \end{aligned}$$  There are no parameters to update, so we just
 have to calculate $\mathbf{g}_{\texttt{in}}$ in the `backward`
-operation, using @eq-backpropagation:backward: $$\begin{aligned}
+operation, using @eq-backpropagation-backward: $$\begin{aligned}
     \mathbf{g}_{\texttt{in}} = \mathbf{g}_{\texttt{out}}\mathbf{H}^\prime
 \end{aligned}$$
 
@@ -391,7 +392,7 @@ As an example, for a `relu` layer we have: $$\begin{aligned}
             0 &\text{otherwise}
         \end{cases}
 \end{aligned}$$ As a matrix multiply, the `backward` operation is shown
-in @fig-backpropagation:pointwise_backward_matices.
+in @fig-backpropagation-pointwise_backward_matices.
 
 with $a = h^\prime(x_{\texttt{in}}[0])$,
 $b = h^\prime(x_{\texttt{in}}[1])$, and
@@ -401,7 +402,7 @@ follows: $$\begin{aligned}
 \end{aligned}$${#eq-backpropagation}
 
 The full set of operations for a pointwise layer is shown next in
-@fig-backpropagation:pointwise_layer_backprop.
+@fig-backpropagation-pointwise_layer_backprop.
 
 ### Backpropagation for Loss Layers
 
@@ -412,7 +413,7 @@ $\hat{\mathbf{y}}$ is the output of the network (prediction) and
 $\mathbf{y}$ is the ground truth.
 
 This layer has no parameters so we only need to derive
-@eq-backpropagation:backward for this layer: $$\begin{aligned}
+@eq-backpropagation-backward for this layer: $$\begin{aligned}
     \mathbf{L}^{\mathbf{x}} &= \frac{\partial \left\lVert\hat{\mathbf{y}} - \mathbf{y}\right\rVert^2_2}{\partial \hat{\mathbf{y}}} = 2(\hat{\mathbf{y}} - \mathbf{y}) \quad\quad \triangleleft \quad [1 \times |\mathbf{y}|]\\
     \mathbf{g}_{\texttt{in}} &= \mathbf{g}_{\texttt{out}}*2(\hat{\mathbf{y}} - \mathbf{y}) = 2(\hat{\mathbf{y}} - \mathbf{y})
 \end{aligned}$$ Here we have made use of the fact that
@@ -424,16 +425,16 @@ per-dimension errors between the prediction and the target.
 
 This completes our derivation of $\texttt{forward}$ and
 $\texttt{backward}$ for a $L_2$ loss layer, yielding
-@fig-backpropagation:L2_loss_layer_backprop.
+@fig-backpropagation-L2_loss_layer_backprop.
 
 ### Putting It All Together: Backpropagation through an MLP
 
 Let's see what happens when we put all these operations together in an
-MLP. We will start with the MLP in @fig-backpropagation:simple_MLP. For
+MLP. We will start with the MLP in @fig-backpropagation-simple_MLP. For
 simplicity, we will omit biases. Let $\mathbf{x}$ be four-dimensional
 and $\mathbf{z}$ and $\mathbf{h}$ be three-dimensional, and
 $\hat{\mathbf{y}}$ be two-dimensional. The forward pass for this network
-is shown below in @fig-backpropagation:forward_pass_MLP.
+is shown below in @fig-backpropagation-forward_pass_MLP.
 
 For the backward pass, we will here make a slight change in convention,
 which will clarify an interesting connection between the forward and
@@ -447,13 +448,13 @@ $$\begin{aligned}
 \end{aligned}$$
 
 Now we will draw the backward pass, using these transposed
-$\mathbf{g}$'s, in @fig-backpropagation:backward_pass_MLP.
+$\mathbf{g}$'s, in @fig-backpropagation-backward_pass_MLP.
 
 This reveals an interesting connection between `forward` and `backward`
 for linear layers: `backward` for a linear layer is the same operation
 as `forward`, just with the weights transposed! We have omitted the bias
 terms here, but recall from
-@eq-backpropagation:linear_backward_costgrad that the backward pass to
+@eq-backpropagation-linear_backward_costgrad that the backward pass to
 the activations ignores biases anyway.
 
 In contrast, the `relu` layer is not a `relu` on the backward pass.
@@ -473,7 +474,7 @@ parameter gradients. At each step of the backward pass, these are
 computed as an outerproduct between the activations input to that layer,
 $\mathbf{x}_{\texttt{in}}$, and the gradients being sent back,
 $\mathbf{g}_{\texttt{out}}$ (see
-@fig-backpropagation:parameter_grad_linear_matrices).
+@fig-backpropagation-parameter_grad_linear_matrices).
 
 ### Forward-Backward Is Just a Bigger Neural Network {#section:backpropagation:backprop_as_neural_net}
 
@@ -488,14 +489,14 @@ pass---can be viewed as just one big neural network. The parameter
 gradients can be computed from this network via one additional matrix
 multiply (`matmul`) for each layer of the layer of the backward network.
 The full network, for a three-layer MLP, is shown in
-@fig-backpropagation:backprop_as_neural_net.
+@fig-backpropagation-backprop_as_neural_net.
 
 ![](./figures/backpropagation/backprop_as_neural_net.png){width="100%"}
 
 There are a few interesting things about this forward-backward network.
 One is that *activations* from the `relu` layers get transformed to
 become *parameters* of a `linear` layer of the backward network (see
-@eq-backpropagation:pointwise_costgrad). There is a general term for
+@eq-backpropagation-pointwise_costgrad). There is a general term for
 this setup, where one neural net outputs values that parameterize
 another neural net; this is called a
 **hypernetwork** @ha2016hypernetworks. The forward network is a
@@ -536,7 +537,7 @@ graphs.
 However, to work with general DAGs, it helps to introduce two new
 special modules, which act to construct the topology of the graph. We
 will call these special operators `merge` and `branch`
-(@fig-backpropagation:branch_and_merge).
+(@fig-backpropagation-branch_and_merge).
 
 :::{.column-margin}
 We only
@@ -600,12 +601,12 @@ Both $\texttt{merge}$ and $\texttt{branch}$ have no parameters, so there
 is no parameter gradient to define. Thus, we have fully specified the
 forward and backward behavior of these layers. The next diagrams
 summarize the behavior
-(@fig-backpropagation:branch_and_merge_layers_backprop_diagram).
+(@fig-backpropagation-branch_and_merge_layers_backprop_diagram).
 
 With `merge` and `branch`, we can construct any DAG computation graph by
 simply inserting these layers wherever we want a layer to have multiple
 inputs or multiple outputs. An example is given in
-@fig-backpropagation:backprop_DAG.
+@fig-backpropagation-backprop_DAG.
 
 ![](./figures/backpropagation/DAG.png){width="25%"}
 
@@ -613,7 +614,7 @@ inputs or multiple outputs. An example is given in
 
 **Parameter sharing** consists of a single parameter being sent as input
 to multiple different layers. We can consider this as a branching
-operation, as shown in @fig-backpropagation:parameter_sharing.
+operation, as shown in @fig-backpropagation-parameter_sharing.
 
 Then, from the previous section, it is clear that gradients summate for
 shared parameters. Let $\{\theta^i\}^N_{i=1}$ be a set of variables that
@@ -640,7 +641,7 @@ $F = f_L \circ \cdots \circ f_1$ and loss function $\mathcal{L}$, is
 $\mathcal{L}(F(\mathbf{x}_0), \mathbf{y}, \theta) \triangleq J(\mathbf{x}_0, \mathbf{y}, \theta)$.
 This function can itself be thought of as a single computation block,
 with inputs and outputs as specified previously
-(@fig-backpropagation:J_forward_backward_blocks). 
+(@fig-backpropagation-J_forward_backward_blocks). 
 
 From this diagram, it should be clear that data inputs and parameter
 inputs play symmetric roles. Just as we can optimize parameters to
@@ -655,23 +656,23 @@ of the value of the neuron we are probing[^1], that is,
 $J(\mathbf{x}_0,\theta) = -x_{l}[i]$ if we are interested in the $i$-th
 neuron on layer $l$ (notice $\mathbf{y}$ is not used for this problem).
 We show an example of this in
-@fig-backpropagation:backprop_to_the_data_example below, where we used
+@fig-backpropagation-backprop_to_the_data_example below, where we used
 backprop to find the input image that most activates a node in the
 computation graph that scores whether or not an image is "a photo of a
 cat." Do you see cat-like stuff in the optimized image? What does this
 tell you about how the network is working?
 
-![](./figures/backpropagation/backprop_to_the_data_example.png){width=".45"}
 
+![Visualizing the optimal image of a cat according to a particular neural net. The net we used is called Contrastive Language-Image Pre-Training (CLIP)@radford2021learning and here we found the image that maximizes a node in CLIP's computation graph that measures how much the image matches the text ``a photo of a cat.'' In @sec-VLMs we will cover exactly how the CLIP model works in more detail.](./figures/backpropagation/backprop_to_the_data_example.png){#fig-backpropagation-backprop_to_the_data_example
+width="45%"}
 
+:::{.column-margin}
+Visualizations like this are a useful way to figure out what visual features a given neuron is sensitive to. Researchers often combine this visualization method with a natural image prior in order to find an image that not only strongly activates the neuron in question but also looks like a natural photograph (e.g., @olah2017feature).
+:::
 
 ## Concluding Remarks
 
-Backprop is often presented as a method just for training neural
-networks, but it is actually a much more general tool than that.
-Backprop is an efficient way to find partial derivatives in computation
-graphs. It is general to a large family of computation graphs and can be
-used not just for learning parameters but also for optimizing data.
+Backprop is often presented as a method just for training neural networks, but it is actually a much more general tool than that. Backprop is an efficient way to find partial derivatives in computation graphs. It is general to a large family of computation graphs and can be used not just for learning parameters but also for optimizing data.
 
 [^1]: It is negative so that minimizing the loss maximizes the
     activation.
