@@ -7,6 +7,9 @@ to solve future problems. Typically, this involves searching for an
 algorithm that solves past instances of the problem. This algorithm can
 then be applied to future instances of the problem.
 
+:::{.column-margin}
+Past and future do not necessarily refer to the calendar date; instead they refer to what the \textit{learner} has previously seen and what the learner will see next.
+:::
 
 Because learning is itself an algorithm, it can be understood as a
 meta-algorithm: an algorithm that outputs algorithms
@@ -22,6 +25,9 @@ solve new instances of the problem.
 ## Learning from Examples
 
 
+:::{.column-margin}
+Learning from examples is also called \textbf{supervised learning}.
+:::
 
 Imagine you find an ancient mathematics text, with marvelous looking
 proofs, but there is a symbol you do not recognize, "$\star$\". You see
@@ -62,6 +68,10 @@ $$\begin{aligned}
 
 This kind of learning, where you observe example input-output behavior and infer a functional mapping that explains this behavior, is called **supervised learning**.
 
+:::{.column-margin}
+Another name for this kind of learning is **fitting a model** to data.
+:::
+
 We were able to model the behavior of $\star$, on the examples we were
 given, with a simple algebraic equation. Let's try something rather more
 complicated. From the three examples in
@@ -91,8 +101,6 @@ finite time. However, it might be possible to learn a good approximation
 to it.
 :::
 
-
-
 ## Learning without Examples
 
 Even without examples, we can still learn. Instead of matching
@@ -107,7 +115,7 @@ or representation of the input data that has useful properties, as
 measured by some **objective function**. The objective could be, for
 example, to compress the data into a lower dimensional format that still
 preserves all information about the inputs. We will encounter this kind
-of learning in part @generative_models_and_representation_learning of this
+of learning in part @sec-generative_models_and_representation_learning of this
 book, on representation learning and generative modeling.
 
 In reinforcement learning, we suppose that we are given a that
@@ -138,6 +146,8 @@ on sufficient hardware (referred to as **compute**) can do amazing
 things. We will focus on the learning algorithms in this chapter, but
 often the data and compute turn out to be more important.
 
+![](./figures/intro_to_learning/key_ingredients.png){#fig-intro_to_learning-key_ingredients}
+
 A learner outputs an algorithm, $f: \mathcal{X} \rightarrow \mathcal{Y}$, which maps inputs, $\mathbf{x} \in \mathcal{X}$, to outputs, $\mathbf{y} \in \mathcal{Y}$.
 Commonly, $f$ is referred to as the **learned function**. The objective
 that the learner optimizes is typically a function that scores model
@@ -166,6 +176,11 @@ functions. However, these two parameterizations are not equivalent,
 because optimizers and objectives may treat different parameterizations
 differently. Because of this, to fully define a learning algorithm, it
 is important to specify how the hypothesis space is parameterized.
+
+:::{.column-margin}
+**Overparameterized** models, where you use more parameters than the minimum necessary to fit the data, are especially important in modern computer vision; most neural networks @sec-neural_nets are overparameterized.
+:::
+
 
 ## Empirical Risk Minimization: A Formalization of Learning from Examples
 
@@ -198,6 +213,10 @@ is called the **likelihood** of the $\mathbf{y}$ values given the model
 $f$ and the observed $\mathbf{x}$ values, and maximizing this quantity
 is called **maximum likelihood learning**.
 
+:::{.column-margin}
+To fully specify this model, we have to define the form of this conditional distribution. One common choice is that the prediction errors, $(\mathbf{y} - f(\mathbf{x}))$, are Gaussian distributed, which leads to the least-squares objective @sec-intro_to_learning-least_squares.
+:::
+
 In later chapters we will see that **priors** $p(f)$ can also be used
 for inferring the most probable hypothesis. When a prior is used in
 conjunction with a likelihood function, we arrive at **maximum a
@@ -228,7 +247,7 @@ as $\{x^{(i)},y^{(i)}\}_{i=1}^N$. At test time, this model can be
 applied to predict the $y$ value of a new query $x'$, as shown in
 @fig-intro_to_learning-ols_train_test.
 
-![](./figures/intro_to_learning/ols_train_test.png){#fig-intro_to_learning-ols_train_test}
+![The goal of learning is to use the training data to predict the $y$ value of the test query. In our example we find that for every 1 degree increase in temperature, we can expect $\sim 10$ more people to go to the beach.](./figures/intro_to_learning/ols_train_test.png){#fig-intro_to_learning-ols_train_test}
 
 Our *hypothesis space* is linear functions, that is, the relationship
 between $x$ and our predictions $\hat{y}$ of $y$ has the form
@@ -249,8 +268,13 @@ $$\begin{aligned}
     &\quad \mathcal{L}(\hat{y}, y) = (\hat{y} - y)^2 \quad\quad \triangleleft \quad L_2 \text{ loss}
 \end{aligned}$$ 
 
-The full learning problem is as follows: 
 
+:::{.column-margin}
+We will use $J(\theta)$ to denote the total objective, over all training datapoints, as a function of the parameters; we will use $\mathcal{L}$ to denote the loss per datapoint. That is, $J(\theta) = \sum_{i=1}^N \mathcal{L}(f_{\theta}(x^{(i)}), y^{(i)})$.
+:::
+
+
+The full learning problem is as follows: 
 $$\begin{aligned}
     \theta^* = \mathop{\mathrm{arg\,min}}_{\theta} \sum_{i=1}^N (\theta_1 x^{(i)} + \theta_0 - y^{(i)})^2.
 \end{aligned}
@@ -312,10 +336,12 @@ The $\theta^*$ defines the best fitting line to our data, and this line
 can be used to predict the $y$ value of future observations of $x$
 (@fig-intro_to_learning-ols_fit).
 
-![](./figures/intro_to_learning/ols_fit.png){#fig-intro_to_learning-ols_fit}
+![A best fit line is a visualization of a function $f_{\theta}$, that predicts the $y$-value for each input $x$-value.](./figures/intro_to_learning/ols_fit.png){#fig-intro_to_learning-ols_fit}
 
 We can now summarize the entire linear least-squares learning problem as
 follows:
+
+![](./figures/intro_to_learning/ols_summary.png){#fig-ols_summary}
 
 :::{.column-margin}
 In these diagrams, we will sometimes describe the objective just in terms of $\mathcal{L}$, in which case it should be understood that this implies $J(\theta) = \sum_{i=1}^N \mathcal{L}(f_{\theta}(x^{(i)}), y^{(i)})$.
@@ -331,7 +357,7 @@ contrast linear least-squares with Python program induction.
 @fig-intro_to_learning-ols_system_diagram shows what linear
 least-squares looks like.
 
-![](./figures/intro_to_learning/ols_system_diagram.png){#fig-intro_to_learning-ols_system_diagram}
+![Linear regression finds a line that predicts the training data's $y$-values from its $x$-values.](./figures/intro_to_learning/ols_system_diagram.png){#fig-intro_to_learning-ols_system_diagram}
 
 The learned function is an algebraic expression that maps $x$ to $y$.
 Learning consisting of searching over two scalar parameters, $\theta_0$
@@ -342,11 +368,9 @@ program induction solving the same problem. In this case, the learned
 function is a Python program that maps $x$ to $y$. Learning consisted of
 searching over the space of all possible Python programs (within some
 max length). Clearly that's a much harder search problem than just
-finding two scalars. In chapter @sec-problem_of_generalization, we will see some
-pitfalls of using too powerful a hypothesis space when a simpler one
-will do.
+finding two scalars. In chapter @sec-problem_of_generalization, we will see some pitfalls of using too powerful a hypothesis space when a simpler one will do.
 
-![](./figures/intro_to_learning/program_induction_system_diagram.png){#fig-intro_to_learning-program_induction_system_diagram}
+![Python program induction finds a Python program that predicts the training data's $y$-values from its $x$-values.](./figures/intro_to_learning/program_induction_system_diagram.png){#fig-intro_to_learning-program_induction_system_diagram}
 
 ### Example 3: Classification and Softmax Regression {#sec-intro_to_learning-image_classification}
 
@@ -354,15 +378,13 @@ A common problem in computer vision is to recognize objects. This is a
 problem. Our input is an image $\mathbf{x}$, and our target output is a
 class label $\mathbf{y}$ (@fig-intro_to_learning-image_classification).
 
-![](./figures/intro_to_learning/image_classification.png){width="100%"}
+![Image classification.](./figures/intro_to_learning/image_classification.png){#fig-intro_to_learning-image_classification}
 
 How should we formulate this task as a learning problem? The first
 question is how do we even represent the input and output? Representing
 images is pretty straightforward; as we have seen elsewhere in this
 book, they can be represented as arrays of numbers representing
-red-green-blue colors:
-$\mathbf{x} \in \mathbb{R}^{H \times W \times 3}$, where $H$ is image
-height and $W$ is image width.
+red-green-blue colors: $\mathbf{x} \in \mathbb{R}^{H \times W \times 3}$, where $H$ is image height and $W$ is image width.
 
 How can we represent class labels? It turns out a convenient
 representation is to let $\mathbf{y}$ be a $K$-dimensional vector, for
@@ -375,6 +397,13 @@ learning. Our goal is to learn a function $f_{\theta}$ that output
 vectors $\hat{\mathbf{y}}$ that match the one-hot codes, thereby
 correctly classifying the input images. 
 
+:::{.column-margin}
+An example of one-hot codes for representing $K$=5 different classes:
+
+![](figures/intro_to_learning/one_hot_codes.png){width="50%"}
+
+:::
+
 Next, we need to pick a loss function. Our first idea might be that we
 should minimize misclassifications. That would correspond to the so
 called : $$\begin{aligned}
@@ -386,7 +415,9 @@ and it is NP-hard. Instead, people commonly use the , which is
 continuous and differentiable (making it easier to optimize):
 $$\begin{aligned}
     \mathcal{L}(\hat{\mathbf{y}},\mathbf{y}) = H(\mathbf{y}, \hat{\mathbf{y}}) = - \sum_{k=1}^K y_k \log \hat{y}_k \quad\quad \triangleleft \quad \text{cross-entropy loss}
-\end{aligned}$$ The way to think about this is $\hat{y}_k$ should
+\end{aligned}$$ 
+
+The way to think about this is $\hat{y}_k$ should
 *represent the probability* we think the image is an image of class $k$.
 Under that interpretation, minimizing cross-entropy maximizes the log
 likelihood of the ground truth observation $\mathbf{y}$ under our
@@ -398,6 +429,11 @@ as a $K$-dimensional vector with elements in the range $[0,1]$ that sums
 to 1. In other words, $\mathbf{p}$ is a point on the
 $(K-1)$-**simplex**, which we denote as
 $\mathbf{p} \in \vartriangle^{K-1}$.
+
+:::{.column-margin}
+The $(K-1)$-simplex, $\vartriangle^{K-1}$, is the set of all $K$-dimensional vectors whose elements sum to 1. $K$-dimensional one-hot codes live on the vertices of $\vartriangle^{K-1}$.
+:::
+
 
 To ensure that the output of our learned function $f_{\theta}$ has this
 property, i.e., $f_{\theta} \in \vartriangle^{K-1}$, we can compose two
@@ -412,19 +448,31 @@ modeling choice; we could have used any function that squashes into a
 valid pmf, that is, a nonnegative vector that sums to 1.
 :::
 
+A popular way to squash is via the **softmax** function:
+
+:::{.column-margin}
+Using softmax is a modeling choice; we could have used any function that squashes into a valid pmf, that is, a nonnegative vector that sums to 1.
+:::
 
 $$\begin{aligned}
     &\mathbf{z} = z_{\theta}(\mathbf{x})\\
     &\hat{\mathbf{y}} = \texttt{softmax}(\mathbf{z})\\
     &\quad \quad \hat{y}_j = \frac{e^{-z_j}}{\sum_{i=1}^K e^{-z_k}}.
-\end{aligned}$$ The values in $\mathbf{z}$ are called the **logits** and
+\end{aligned}$$ 
+
+The values in $\mathbf{z}$ are called the **logits** and
 can be interpreted as the unnormalized log probabilities of each class.
-Now we have, $$\begin{aligned}
+
+Now we have, 
+
+$$\begin{aligned}
     \hat{\mathbf{y}} = f_{\theta}(\mathbf{x}) = \texttt{softmax}(z_{\theta}(\mathbf{x}))
-\end{aligned}$$ @fig-softmax_regression_diagram shows what the
+\end{aligned}$$ 
+
+@fig-softmax_regression_diagram shows what the
 variables look like for processing one photo of a fish during training.
 
-![](./figures/intro_to_learning/softmax_regression_diagram.png){width="100%"}
+![Softmax regression for image classification. The $\odot$ symbol represents an elementwise product. The cross-entropy loss is the negative of the sum over elementwise agreements between the prediction vector $\hat{\mathbf{y}}$ and the label vector $\mathbf{y}$, that is, if $\mathbf{s} = \mathbf{y} \odot \log \hat{\mathbf{y}}$ is the vector of scores for how well our prediction agrees with the label, then our cross-entropy loss is $H(\mathbf{y}, \hat{\mathbf{y}}) = - \sum_{k=1}^K s_k$.](./figures/intro_to_learning/softmax_regression_diagram.png){#fig-softmax_regression_diagram}
 
 The prediction placed about 40 percent probability on the true class,
 "guitarfish," so we are 60 percent off from an ideal prediction
@@ -440,10 +488,7 @@ classification problem. We could have made other choices for how to map
 input data to class labels.
 :::
 
-
-
-::: center
-:::
+![](./figures/intro_to_learning/softmax_regression_learning_problem.png){#fig-softmax_regression_learning_problem}
 
 Notice that we have left the hypothesis space only partially specified,
 and we left the optimizer unspecified. This is because softmax
@@ -478,8 +523,7 @@ examples, and the metalearner might arrive at a different solution that
 fits equally well.
 :::
 
- Since least-squares regression is itself
-a learning algorithm, we can say that the learner learned to learn.
+Since least-squares regression is itself a learning algorithm, we can say that the learner learned to learn.
 
 We started this chapter by saying the learning is a meta-algorithm: it's
 an algorithm that outputs an algorithm. Metalearning is a
@@ -487,12 +531,16 @@ meta-meta-algorithm and we can visualize it by just adding another outer
 loop on top of a learner, as shown in
 @fig-intro_to_learning-meta_learning_diagram.
 
-![](./figures/intro_to_learning/meta_learning_diagram.png){width="100%"}
+![Learning is a meta-algorithm, an algorithm that outputs algorithms; metalearning is just learning applied to learning, and therefore it is a meta-meta-algorithm.](./figures/intro_to_learning/meta_learning_diagram.png){#fig-intro_to_learning-meta_learning_diagram}
 
 Notice that you can apply this idea recursively, constructing
 meta-meta-\...-metalearners. Humans perform at least three levels of
 this process, if not more: we have *evolved* to be *taught* in school
 how to *learn* quickly on our own. 
+
+:::{.column-margin}
+**Evolution** is a learning algorithm according to our present definition.
+:::
 
 ## Concluding Remarks
 
