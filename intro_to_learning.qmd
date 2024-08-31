@@ -499,20 +499,25 @@ can often develop them each in isolation, then mix and match.
 
 ## Learning to Learn
 
-Learning to learn, also called , is a special case of learning where the
-hypothesis space is learning algorithms.
+Learning to learn, also called **metalearning**, is a special case of learning where the hypothesis space is learning algorithms.
 
 Recall that learners train on past instances of a problem to produce an
 algorithm that can solve future instances of the problem. The goal of
 metalearning is to handle the case where the future problem we will
 encounter is itself a learning problem, such as "find the least-squares
 line fit to these data points." One way to train for this would be by
-example. Suppose that we are given the following {`input`, `output`}
-examples: $$\begin{aligned}
+example. 
+
+Suppose that we are given the following {`input`, `output`}
+examples: 
+
+$$\begin{aligned}
     &\{\texttt{input:} \big(x:[1,2], y:[1,2]\big), &&\texttt{output:} y = x\}\nonumber \\
     &\{\texttt{input:} \big(x:[1,2], y:[2,4]\big), &&\texttt{output:} y = 2x\}\nonumber \\
     &\{\texttt{input:} \big(x:[1,2], y:[0.5,1]\big), &&\texttt{output:} y = \frac{x}{2}\}\nonumber
-\end{aligned}$$ These are examples of performing least-squares
+\end{aligned}$$
+
+These are examples of performing least-squares
 regression; therefore the learner can fit these examples by learning to
 perform least-squares regression.
 

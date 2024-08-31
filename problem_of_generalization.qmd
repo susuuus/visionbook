@@ -32,34 +32,28 @@ about underfitting, overfitting, and generalization.
 
 ### Background: The Polynomial Regression Learning Problem
 
-Polynomial regression is just like linear regression (chapter
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"}) except that the hypothesis space
+Polynomial regression is just like linear regression (@sec-intro_to_learning) except that the hypothesis space
 is polynomial functions rather than linear functions, that is,
 $$\begin{aligned}
 y = f_{\theta}(x) = \sum_{k=0}^K \theta_k x^k
-\end{aligned}$$ where $K$, the degree of the polynomial, is a
-hyperparameter of the hypothesis space.Let us consider the setting where we use the least-squares ($L_2$) loss
-function. It turns out polynomial regression is highly related to linear
-regression; in fact, we can transform a polynomial regression problem
-into a linear regression problem! We can see this by rewriting the
-polynomial as: $$\begin{aligned}
+\end{aligned}$$ 
+
+where $K$, the degree of the polynomial, is a hyperparameter of the hypothesis space.Let us consider the setting where we use the least-squares ($L_2$) loss function. It turns out polynomial regression is highly related to linear regression; in fact, we can transform a polynomial regression problem into a linear regression problem! 
+
+We can see this by rewriting the polynomial as: 
+
+$$\begin{aligned}
     \sum_{k=0}^K \theta_k x^k = \theta^\mathsf{T}\phi(x)\\
     \quad\quad\quad\quad \phi(x) = \begin{bmatrix}
                             1 \\ x \\ x^2 \\ \vdots \\ x^K
                         \end{bmatrix}
-\end{aligned}$$ Now the form of $f_{\theta}$ is
-$f_{\theta}(x) = \theta^\mathsf{T}\phi(x)$, *which is a linear function
-in the parameters $\theta$*. Therefore, if we *featurize* $x$,
-representing each datapoint $x$ with a feature vector $\phi(x)$, then we
-have arrived at a linear regression problem in this feature space. So,
-the learning problem, and closed form optimizer, for $L_2$ polynomial
-regression looks almost identical to that of $L_2$ linear regression:
+\end{aligned}$$ 
 
-::: center
-:::
+Now the form of $f_{\theta}$ is $f_{\theta}(x) = \theta^\mathsf{T}\phi(x)$, *which is a linear function in the parameters $\theta$*. Therefore, if we *featurize* $x$, representing each datapoint $x$ with a feature vector $\phi(x)$, then we have arrived at a linear regression problem in this feature space. So, the learning problem, and closed form optimizer, for $L_2$ polynomial regression looks almost identical to that of $L_2$ linear regression:
 
-where $$\mathbf{\Phi} = 
+
+where 
+$$\mathbf{\Phi} = 
      \begin{bmatrix}
         1 & x^{(1)} & x^{(1)^2} & ... & x^{(1)^K} \\
         1 & x^{(2)} & x^{(2)^2} & ... & x^{(2)^K} \\
@@ -69,28 +63,16 @@ where $$\mathbf{\Phi} =
 
 The matrix $\mathbf{\Phi}$ is an array of the features (columns) for
 each datapoint (rows). It plays the same role as data matrix
-$\mathbf{X}$ did in chapter
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"}; in fact we often call matrices
-of the feature representations of each datapoint also as a **data
-matrix**. As an exercise, you can derive the closed form of the
+$\mathbf{X}$ did in @sec-intro_to_learning; in fact we often call matrices of the feature representations of each datapoint also as a **data matrix**. As an exercise, you can derive the closed form of the
 optimizer, given above, using the same steps as we did for linear
-regression in chapter
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"}.
+regression in chapter @sec-intro_to_learning.
+
 
 :::{.column-margin}
-When we get to
-the chapters on neural nets we will see that data matrices appear all
-over. A neural net is a sequence of transformations of an input data
-matrix into increasingly more powerful feature representations of the
-data, i.e. a sequence of better and better data matrices.
+When we get to the chapters on neural nets we will see that data matrices appear all over. A neural net is a sequence of transformations of an input data matrix into increasingly more powerful feature representations of the data, i.e. a sequence of better and better data matrices.
 :::
 
-
-
 ### Polynomial Regression as a Lens into Generalization
-
 What happens as we increase the order of the polynomial $K$, that is, we
 use $K+1$ basis functions $x^0, \ldots, x^K$? With $K=1$, we arrive back
 at linear regression. With $K=2$, we are fitting quadratic functions
@@ -98,7 +80,7 @@ at linear regression. With $K=2$, we are fitting quadratic functions
 space expands to include ever more curvy fits to the data, as shown in
 @fig-under_and_overfitting.
 
-![](./figures/problem_of_generalization/under_and_overfitting.png){width="100%"}
+![](./figures/problem_of_generalization/under_and_overfitting.png){#fig-under_and_overfitting}
 
 The black line is the model's fit. The green line is the ground truth
 relationship between random variables $X$ and $Y$. The observed data
@@ -132,24 +114,25 @@ we used above has a tendency to pick, among all the equally good
 hypotheses, one that is very curvy. This is an especially bad choice in
 this example, because the true function is much more smooth.
 
-is the gap between the black line and the training data points. Let
-$\{x_{(\texttt{train})}^{(i)}, y_{(\texttt{train})}^{(i)}\}_{i=1}^N$ be
+**Approximation error** is the gap between the black line and the training data points. Let $\{x_{(\texttt{train})}^{(i)}, y_{(\texttt{train})}^{(i)}\}_{i=1}^N$ be
 our training data set (the black points). Then the approximation error
 $J_{\texttt{approx}}$ is defined as the total cost incurred on this
-training data: $$\begin{aligned}
-    J_{\texttt{approx}} = \frac{1}{N} \sum_{i=1}^N \mathcal{L}(f_{\theta}(x_{(\texttt{train})}^{(i)}), y_{(\texttt{train})}^{(i)})
-\end{aligned}$$ Notice that approximation error is the cost function we
-minimize in empirical risk minimization (chapter
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"}).
+training data: 
 
-is the gap between the black line and the green line, that is, the
-expected cost we would incur if we sampled a new test point at random
+$$\begin{aligned}
+    J_{\texttt{approx}} = \frac{1}{N} \sum_{i=1}^N \mathcal{L}(f_{\theta}(x_{(\texttt{train})}^{(i)}), y_{(\texttt{train})}^{(i)})
+\end{aligned}$$ 
+
+Notice that approximation error is the cost function we minimize in empirical risk minimization @sec-intro_to_learning.
+
+**Generalization error** is the gap between the black line and the green line, that is, the expected cost we would incur if we sampled a new test point at random
 from the true data generating process. Generalization error is often
 approximated by measuring performance on a heldout ,
 $\{x_{(\texttt{val})}^{(i)}, y_{(\texttt{val})}^{(i)}\}_{i=1}^N$, which
 can simply be a subset of the data that we don't use for training or
-testing: $$\begin{aligned}
+testing: 
+
+$$\begin{aligned}
     J_{\texttt{gen}} &= \mathbb{E}_{x,y \sim p_{\texttt{data}}} [ \mathcal{L}(f_{\theta}(x), y)]\\
                         &\approx \frac{1}{N} \sum_{i=1}^N \mathcal{L}(f_{\theta}(x_{(\texttt{val})}^{(i)}), y_{(\texttt{val})}^{(i)})
 \end{aligned}$$
@@ -164,21 +147,16 @@ eventually we overfit, with generalization error becoming high again.
 @fig-under_and_overfitting_vs_polyK shows how it looks like for our
 example.
 
-![](./figures/problem_of_generalization/under_and_overfitting_vs_polyK.png){width="48%"}
+![](./figures/problem_of_generalization/under_and_overfitting_vs_polyK.png){#fig-under_and_overfitting_vs_polyK}
 
 This U-shaped curve is characteristic of classical learning regimes like
 polynomial regression, where we often find that the more parameters a
 model has, the more it will tend to overfit. However, this behavior does
 not well characterize modern learners like deep neural networks. Deep
-networks, which we will see in chapter
-[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
-reference="chapter-neural_nets"}, can indeed either underfit or overfit,
-but it is not the case that there is a simple relationship between the
+networks, which we will see in chapter @sec-neural_nets can indeed either underfit or overfit, but it is not the case that there is a simple relationship between the
 number of parameters the net has and whether that leads to underfitting
 versus overfitting. In fact, bigger deep nets with more parameters may
-overfit less than smaller nets. We discuss this further in section
-[1.4](#sect:problem_of_generalization:rethinking_generalization){reference-type="ref"
-reference="sect:problem_of_generalization:rethinking_generalization"}.
+overfit less than smaller nets. We discuss this further in @sec-problem_of_generalization_rethinking_generalization.
 
 ## Regularization
 
@@ -191,16 +169,25 @@ refers to mechanisms that penalize function complexity so that we avoid
 learning too flexible a function that overfits. Typically, regularizers
 are terms we add to the objective that prefer simple functions in the
 hypothesis space, all else being equal. They therefore embody the
-principle of . The general form of a regularized objective is:
+principle of **Occam's razor**. 
+
+The general form of a regularized objective is:
 $$\begin{aligned}
     J(\theta) = \overbrace{\frac{1}{N} \sum^N_{i=1} \mathcal{L}(f_{\theta}(x)^{(i)}, y^{(i)})}^\text{data fit loss} + \underbrace{\lambda R(\theta)}_\text{regularizer} \quad\quad\triangleleft \quad\text{regularized objective function}
-\end{aligned}$${#eq-problem_of_generalization} where $\lambda$ is a hyperparameter that controls the
-strength of the regularization.
+\end{aligned}$${#eq-problem_of_generalization_regularized_objective} 
+where $\lambda$ is a hyperparameter that controls the strength of the regularization.
 
 One of the most common regularizers is to penalize the $L_p$ norm of the
 parameters of our model, $\theta$:
-$$R(\theta) = \left\lVert\theta\right\rVert_{p}.$$  An
-especially common choice is $p=2$, in which case the regularizer is
+$$
+R(\theta) = \left\lVert\theta\right\rVert_{p}.
+$$ 
+
+::: {.column-margin}
+The $L_p$-norm of $\mathbf{x}$ is $(\sum_i |x_i|^{p})^{\frac{1}{p}}$. The $L_2$-norm is the familiar least-squares objective.
+:::
+
+An especially common choice is $p=2$, in which case the regularizer is
 called (which is also known as **Tikonov regression**). In the context
 of neural networks, this regularizer is called . When $p=1$, the
 regularizer, applied to regression problems, is called . For any $p$,
@@ -212,7 +199,9 @@ $L_p$ regularizer, and if a linear fit is almost perfect, then
 $\theta_2$ will be forced to zero and the learned function will be
 linear rather than quadratic. Again, we find that regularization is an
 embodiment of Occam's razor: when multiple functions can explain the
-data, give preference to the simplest.### Regularizers as Probabilistic Priors
+data, give preference to the simplest.
+
+### Regularizers as Probabilistic Priors
 
 Regularizers can be interpreted as **priors** that prefer, a priori
 (before looking at the data), some solutions over others. Under this
@@ -223,24 +212,23 @@ the posterior $p(\theta \bigm | \{x^{(i)}, y^{(i)}\}^N_{i=1})$ is
 proportional to the product of the prior and the likelihood. The log
 posterior is then the *sum* of the log likelihood and the log prior,
 plus a constant. Hence we arrive at the form of
-@eq-problem_of_generalization:regularized_objective.
+@eq-problem_of_generalization_regularized_objective.
 
-### Revisiting the $\star$ Problem {#sec-problem_of_generalization:star_problem_revisited}
+### Revisiting the $\star$ Problem {#sec-problem_of_generalization_star_problem_revisited}
 
-Remember the $\star$ problem from chapter
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"}? $$\begin{aligned}
+Remember the $\star$ problem from @sec-intro_to_learning
+
+$$\begin{aligned}
     3 \star 2 &= 36\nonumber \\
     7 \star 1 &= 49\nonumber \\
     5 \star 2 &= 100\nonumber \\
     2 \star 2 &= 16\nonumber
-\end{aligned}$$ You may have figured out that $x \star y = (xy)^2$. We
-said that is the correct answer. But hold on, couldn't it be that
-$x \star y =  94.5x - 9.5x^2 + 4y^2 - 151$? That also perfectly explains
-these four examples (trust us, we checked). Or maybe $\star$ is the
-following Python program
-(@fig-problem_of_generalization:python_star_solution).
+\end{aligned}$$ 
 
+You may have figured out that $x \star y = (xy)^2$. We said that is the correct answer. But hold on, couldn't it be that $x \star y =  94.5x - 9.5x^2 + 4y^2 - 151$? That also perfectly explains these four examples (trust us, we checked). Or maybe $\star$ is the
+following Python program @fig-problem_of_generalization_python_star_solution.
+
+::: {#fig-problem_of_generalization_python_star_solution}
 ``` {.python xleftmargin="0.33" xrightmargin="0.33" fontsize="\\fontsize{8.5}{9}" frame="single" framesep="2.5pt" baselinestretch="1.05"}
 def star(x,y):
     if x==2 && y==3:
@@ -254,6 +242,8 @@ def star(x,y):
     else:
         return 0
 ```
+A function written in Python that solves the $\star$ problem from @sec-intro_to_learning.
+:::
 
 That also perfectly fits the observed data. Why didn't you come up with
 those answers? What made $x \star y = (xy)^2$ more compelling?
@@ -275,7 +265,7 @@ probability of all possible hypotheses in the hypothesis space must sum
 to 1) @jefferys1992ockham, @mackay2003information. This is why,
 probabilistically, simpler hypotheses are more likely to be true.
 
-## Rethinking Generalization {#sect:problem_of_generalization:rethinking_generalization}
+## Rethinking Generalization {#sec-problem_of_generalization_rethinking_generalization}
 
 A recent empirical finding is that some seemingly complex hypothesis
 spaces, such as deep nets (which we will see in later chapters), tend
@@ -328,7 +318,7 @@ looking there," a cop asks. "Because this is where the light is."
 
 Together these three tools allow us to pinpoint one (or a few) good
 solutions in the space of all possibilities, as depicted in the cartoon
-in @fig-problem_of_generalization:search_space_tools.
+in @fig-problem_of_generalization_search_space_tools.
 
 In this cartoon, we are learning a mapping from some domain
 $\mathcal{X}$ to another domain $\mathcal{Y}$. The hypothesis space,
@@ -339,7 +329,7 @@ preferred over which others, and the data (green ellipse) also places a
 soft constraint on the space, preferring mappings that well fit the
 data.
 
-![](./figures/problem_of_generalization/search_space_tools.png){width="65%"}
+![A cartoon of the tools for honing in on the truth.](./figures/problem_of_generalization/search_space_tools.png){#fig-problem_of_generalization_search_space_tools}
 
 Approximation error is low within the green region. If we didn't care
 about generalization, then it would be sufficient just to select any
@@ -365,8 +355,14 @@ look at how data shapes the objective function $J$ for the following
 empirical risk minimization problem: $$\begin{aligned}
     J(\theta; \{x^{(i)}, y^{(i)}\}^N_{i=1}) &= \frac{1}{N}\sum_i \lvert f_{\theta}(x^{(i)}) - y^{(i)}\rvert^{0.25} \quad\quad \triangleleft \quad\text{objective}:error_fn_1\\
     f_{\theta}(x) &= \theta_0 x + \theta_1 \sin(x)  \quad\quad \triangleleft \quad\text{hypothesis space}
-\end{aligned}$${#eq-problem_of_generalization} In
-@fig-problem_of_generalization:more_data_more_constraints, bottom row,
+\end{aligned}$${#eq-problem_of_generalization_error_fn_1} 
+
+
+:::{.column_margin}
+We use the exponent $0.25$, rather than the more common squared error, just so that the plots in @fig-problem_of_generalization_more_data_more_constraints show more clearly the linear constraints (the dark lines) added by each datapoint to the objective $J$.
+:::
+
+In @fig-problem_of_generalization_more_data_more_constraints, bottom row,
 we plot $J$ as a heatmap over the values obtained for different settings
 of $\theta$. On the top row we plot the data being fit,
 $\{x^{(i)}, y^{(i)}\}^N_{i=1}$, along with the function $f_{\theta}$
@@ -375,9 +371,11 @@ achieve within 0.1 of the cost of the best fit. Each column corresponds
 to some amount of training data $N$. Moving to the right, we increase
 $N$.
 
-![](./figures/problem_of_generalization/more_data_more_constraints.png){width="100%"}
+![More data, more (soft) constraints.](./figures/problem_of_generalization/more_data_more_constraints.png){#fig-problem_of_generalization_more_data_more_constraints}
 
-
+:::{.column_margin}
+The heatmaps here are reminiscent of a classic computer vision algorithm called the Hough transform @hough1959machine, @duda1972use. This transform can be used to find geometric primitives that fit feature points in images. In fact, the bottom row is \textit{exactly} the generalized Hough transform~\cite{duda1972use} of the data points in the top row, using $\theta_0 x + \theta_1 \sin(x)$ as the family of geometric primitives we are fitting.
+:::
 
 The first thing to look at is the leftmost column, where $N=1$. For a
 single datapoint, there are an infinite number of functions in our
@@ -426,10 +424,12 @@ this experiment we will use a slightly different hypothesis space and
 objective function, namely $$\begin{aligned}
     J(\theta; \{x^{(i)}, y^{(i)}\}^N_{i=1}) &= \frac{1}{N}\sum_i \left\lVert f_{\theta}(x^{(i)}) - y^{(i)}\right\rVert_2^2 + \lambda \left\lVert\theta\right\rVert_2^2 \quad\quad \triangleleft \quad\text{objective}\\
     f_{\theta}(x) &= \theta_0 x + \theta_1 x \quad\quad \triangleleft \quad\text{hypothesis space}
-\end{aligned}$$ We will look at the effect of the ridge regularizer
+\end{aligned}$$ 
+
+We will look at the effect of the ridge regularizer
 $\left\lVert\theta\right\rVert_2^2$. We plot the energy landscape and
 function fit for this problem in
-@fig-problem_of_generalization:more_regularizer_more_constraints,
+@fig-problem_of_generalization_more_regularizer_more_constraints,
 fitting to a single datapoint. The ridge regularizer prefers solutions
 with small parameter norm, so its contribution to the energy landscape
 is to place a quadratic bowl around the origin. As we increase $\lambda$
@@ -437,7 +437,7 @@ is to place a quadratic bowl around the origin. As we increase $\lambda$
 becomes stronger and pulls the learned solution closer and closer to the
 origin.
 
-![](./figures/problem_of_generalization/more_regularizer_more_constraints.png){width="100%"}
+![More regularization, more (soft) constraints.](./figures/problem_of_generalization/more_regularizer_more_constraints.png){#fig-problem_of_generalization_more_regularizer_more_constraints}
 
 In this example, the true solution lies near the origin, so adding some
 regularization gets us closer to the truth. But using too strong a
@@ -461,17 +461,17 @@ You can take away a few lessons from this example:
 
 Now we turn to the last of our tools: the hypothesis space itself. For
 this experiment, we will use the same objective as in
-@eq-problem_of_generalization:error_fn_1 and we will consider the
+@eq-problem_of_generalization_error_fn_1 and we will consider the
 following three hypothesis spaces: $$\begin{aligned}
     f_{\theta}(x) &= \theta_0 x + \theta_1 x^2 &\triangleleft \quad\texttt{quadratic}\\
     f_{\theta}(x) &= \theta_0 x &\triangleleft \quad\texttt{linear}\\
     f_{\theta}(x) &= 0 &\triangleleft \quad\texttt{constant}
 \end{aligned}$$ Our experiment on these three spaces is shown in
-@fig-problem_of_generalization:fewer_hypotheses_more_constraints. We
+@fig-problem_of_generalization_fewer_hypotheses_more_constraints. We
 show the hypothesis spaces in order of decreasing size moving to the
 right.
 
-![](./figures/problem_of_generalization/fewer_hypotheses_more_constraints.png){width="100%"}
+![Fewer hypotheses, more (hard) constraints](./figures/problem_of_generalization/fewer_hypotheses_more_constraints.png){#fig-problem_of_generalization_fewer_hypotheses_more_constraints}
 
 The true function is linear, and because of that both the `quadratic`
 and `linear` hypothesis spaces contain the true solution. However, the
@@ -479,7 +479,7 @@ linear hypothesis space is *much* smaller than the quadratic space. For
 the linear hypothesis space, searching for the solution (i.e., learning)
 only considers the slice of parameter space where $\theta_1=0$; all the
 gray region in
-@fig-problem_of_generalization:fewer_hypotheses_more_constraints can be
+@fig-problem_of_generalization_fewer_hypotheses_more_constraints can be
 ignored. Using a smaller hypothesis space can potentially accelerate our
 search.
 
