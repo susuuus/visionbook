@@ -26,7 +26,13 @@ way of transforming an image. Linear image transforms with the form
 $\mathbf{x} =  \mathbf{H} \boldsymbol\ell_{\texttt{in}}$ can be thought
 of as a way of changing the initial pixels representation of
 $\boldsymbol\ell_{\texttt{in}}$ into a different representation in
-$\mathbf{x}$. This representation is specially interesting when it can
+$\mathbf{x}$.
+
+:::{.column-margin}
+We use $\mathbf{x}$ to denote an intermediate representation. The representation might not be an image.
+:::
+
+This representation is specially interesting when it can
 be inverted so that the original pixels can be recovered as
 $\boldsymbol\ell_{\texttt{in}}=  \mathbf{H}^{-1} \mathbf{x}$. The
 Fourier transform is one of those representations. A useful
@@ -68,7 +74,8 @@ details to the resulting function making it closer to the ramp. These
 plots show the signal in the interval $t \in (-4 \pi, 4 \pi)$ to reveal
 the periodic nature of the result of the sine series.
 
-![](figures/Image_processing_fourier/FourierSeries6.png){width="100%"}
+
+![Reconstruction of a ramp with the first five sine functions.](figures/Image_processing_fourier/FourierSeries6.png){#fig-FourierSeries6}
 
 It is useful to think of the **Fourier series** of a signal as a
 **change of representation** as shown in
@@ -79,7 +86,8 @@ coefficients $a_n$. The coefficients $a_n$ give us an alternative
 description of the function $\ell(t)$ and the rest of this chapter will
 be devoted to understand what this **transformation** has to offer.
 
-![](figures/Image_processing_fourier/FourierSeries5_representation.png){width=".9"}
+![Two representations for the ramp function. (left) Time domain. (right) Fourier domain with coefficients of the sine series.](figures/Image_processing_fourier/FourierSeries5_representation.png){width="90%" #fig-FourierSeries5_representation}
+
 
 Fourier series can also be written as sums of different sets of harmonic
 functions. For instance, using cosine functions we can describe the ramp
@@ -93,8 +101,7 @@ The fields of signal and image processing have introduced different
 types of Fourier series. In the next sections we will study how these
 series are applied to describe discrete images using discrete sine and
 cosine functions and then we will focus on using complex exponentials.
-The representation using Fourier series is important for studying linear
-systems and convolutions.
+The representation using Fourier series is important for studying linear systems and convolutions.
 
 ## Continuous and Discrete Waves
 
@@ -105,6 +112,10 @@ The **continuous time sine wave** is
 $$s\left(t\right) = A \sin\left(w ~t - \theta \right)$$ where $A$ is the
 **amplitude**, $w$ is the **frequency**, and $\theta$ is the **phase**.
 The wave signal is periodic with a period $T=2 \pi / w$.
+
+:::{.column-margin}
+![](figures/Image_processing_fourier/amplitudeandperiod-0.png)
+:::
 
 In discrete time, the **discrete time sine wave** is as follows
 $$s\left[n\right] = A \sin\left(w ~n  - \theta \right)$$ Note that the
@@ -136,29 +147,8 @@ Therefore, for frequencies $k>N/2$ we find the same set of waves as the
 ones in the interval $s \in \left[1, N/2\right]$. @fig-contsignal shows
 some examples.
 
-  -------
-   \(a\)
-  -------
 
-  -------
-   \(b\)
-  -------
-
-  -------
-   \(c\)
-  -------
-
-  -------
-   \(d\)
-  -------
-
-  -------
-   \(e\)
-  -------
-
-  -------
-   \(f\)
-  -------
+![Sine and cosine waves with $A=1$ and $N=20$. Each row corresponds to $k=1$, $k=2$ and $k=3$. Note that for $k=3$ the waves oscillates three times in the interval $\left[0,N-1\right]$, but the samples in each oscillation are not identical, and it is only truly periodic once every $N$ samples. This is because $3/20$ is an irreducible fraction.](figures/Image_processing_fourier/contsignal.png){width="80%" #fig-contsignal}
 
 ### Sines and Cosines in 2D
 
@@ -170,21 +160,8 @@ where $A$ is the amplitude and $u$ and $v$ are the two spatial
 frequencies and define how fast or slow the waves change along the
 spatial dimensions $n$ and $m$. @fig-disc2Dsignal shows some examples.
 
-  -------
-   \(a\)
-  -------
 
-  -------
-   \(b\)
-  -------
-
-  -------
-   \(c\)
-  -------
-
-In 2D, the sine and cosine waves can also be described using polar
-coordinates for encoding the frequency: radial frequency,
-$\sqrt{u^2+v^2}$, and orientation, $\angle (u,v)$.
+![2D sine waves with $N=M=20$. The frequency values are (a) $u=2, v=0$; (b) $u=3, v=1$; (c) $u=7,v=-5$.](figures/image_processing_fourier/disc2Dsignal.png){#fig-disc2Dsignal}
 
 ### Complex Exponentials
 
@@ -200,13 +177,8 @@ the real component and in the $y$-axis the imaginary component. As $n$
 goes from 0 to $N-1$ the function rotates along the complex circle of
 unit magnitude.
 
-  -------
-   \(a\)
-  -------
 
-  -------
-   \(b\)
-  -------
+![Complex exponential wave with (a) $N=40$, $k=1$, $A=1$; and (b) $N=40$, $k=3$, $A=1$. The red and green curves show the real and imaginary waves. The black line is the complex exponential. The dots correspond to the discrete samples.](figures/image_processing_fourier/complexexponential.png){width="80%" #fig-complexexponential}
 
 In 2D, the complex exponential wave is
 $$e_{u,v}\left[n,m\right] = \exp \left(2 \pi j \left(  \frac{u\, n}{N}  + \frac{v\,m}{M}  \right) \right)$$where $u$ and $v$ are the two spatial frequencies. Note that complex
@@ -295,6 +267,10 @@ combination of the exponentials that will result in a given signal.
 
 
 
+:::{.column-margin}
+The DFT became very popular thanks to the **Fast Fourier Transform** (FFT) algorithm. The most common FFT algorithm is the Cooley–Tukey algorithm @Cooley1965 that reduces the computation cost from $O(N^2)$ to $O(N \log N)$.
+:::
+
 ### Matrix Form of the Fourier Transform
 
 As the DFT is a linear transform we can also write the DFT in matrix
@@ -306,7 +282,9 @@ $$\mathbf{F} = \begin{bmatrix}1 & 1 & 1 & \dots & 1\\ %u=0
 1 & \exp{ \left(-2\pi j \frac{2}{N} \right)} & \exp{ \left(-2\pi j \frac{4}{N} \right)} & \dots & \exp{ \left(-2\pi j \frac{2\, (N-1)}{N} \right)}\\ %u=2
 \vdots & \vdots & \vdots & ~ & \vdots \\
 1 & \exp{ \left(-2\pi j \frac{(N-1)}{N} \right)} & \exp{ \left(-2\pi j \frac{(N-1)\, 2}{N} \right)} & \dots & \exp{ \left(-2\pi j \frac{(N-1)\, (N-1)}{N} \right)}\
-\end{bmatrix}$$ Each entry in the matrix is
+\end{bmatrix}$$ 
+
+Each entry in the matrix is
 $\mathbf{F}_{u,n} = \exp{ \left(-2\pi j \frac{u\, n}{N} \right)}$, with
 $u$ indexing rows and $n$ indexing columns. Note that $\mathbf{F}$ is a
 symmetric matrix. The inverse of the DFT is the complex conjugate:
@@ -318,7 +296,20 @@ complex-value matrix for the 1D DFT, which when used as a multiplicand
 yields the Fourier transform of 1D vectors. Many Fourier transform
 properties and symmetries can be observed from inspecting that matrix.
 
-![](figures/Image_processing_fourier/visualization_DFT_color.png){width="70%"}
+\caption{Visualization of the discrete Fourier transform as a matrix.  The signal to be
+ transformed forms the entries of the column vector at right.  The
+ complex values of the Fourier transform matrix are indicated by the color,
+ with the key in the bottom left.  In the vector at the right, black
+ values indicate zero.
+} 
+\label{fig:colorDFT}
+
+![Visualization of the discrete Fourier transform as a matrix.  The signal to be
+ transformed forms the entries of the column vector at right.  The
+ complex values of the Fourier transform matrix are indicated by the color,
+ with the key in the bottom left.  In the vector at the right, black
+ values indicate zero.
+](figures/Image_processing_fourier/visualization_DFT_color.png){#fig-colorDFT}
 
 ### Visualizing the Fourier Transform
 
@@ -336,7 +327,9 @@ where $A \left[u,v \right] \in \mathbb{R}^+$ is the amplitude and
 $\theta \left[u,v \right] \in \left[-\pi, \pi \right]$ is the phase.
 @fig-DFT_a shows both decompositions of the Fourier transform.
 
-![](figures/Image_processing_fourier/dft_a.png){width="100%"}
+
+![DFT of an image and visualization of (top) the real and imaginary components, and (bottom) the amplitude and phase  of the Fourier transform.](figures/Image_processing_fourier/dft_a.png){width="100%" #fig-DFT_a}
+
 
 Upon first learning about Fourier transforms, it may be a surprise for
 readers to learn that one can synthesize any image as a sum of complex
@@ -357,7 +350,7 @@ slowly emerges. In this example, the first 127 coefficients are
 sufficient for recognizing this 64$\times$`<!-- -->`{=html}64 resolution
 image.
 
-![](figures/Image_processing_fourier/dft_b.png){width="100%"}
+![Reconstructing an image from the $N$ Fourier coefficients of the largest amplitude.  The right frame shows the location, in the Fourier domain, of the $N$ Fourier coefficients, which when inverted, give the image at the left.](figures/Image_processing_fourier/dft_b.png){width="100%" #fig-DFT_b}
 
 ## Useful Transforms
 
@@ -406,7 +399,8 @@ $$\sin{ \left( 2\pi \left( \frac{u_0\, n}{N} + \frac{v_0 m}{M} \right) \right) }
 @fig-2ddftexampleswaves shows the DFT of several waves with different
 frequencies and orientations.
 
-![](figures/Image_processing_fourier/DFT_examples_waves.png){width="100%"}
+
+![Some 2D Fourier transform pairs. Images are $64 \times 64$ pixels. The waves are cosine with frequencies $(1,2)$, $(5,0)$, $(10,7)$, $(11,-15)$. The last two examples show the sum of two waves and the product.](figures/Image_processing_fourier/DFT_examples_waves.png){width="100%" #fig-2ddftexampleswaves}
 
 @fig-2ddftexamples shows the 2D Fourier transforms of some periodic
 signals. The depicted signals all happen to be symmetric about the
@@ -419,7 +413,13 @@ zero for the signals we'll examine. Also, all these images but the last
 one are separable (they can be written as the product of two 1D
 signals). Therefore, their DFT is also the product of 1D DFTs.
 
-![](figures/Image_processing_fourier/DFT_toy_examples.png){width="100%"}
+
+![Some two-dimensional Fourier transform pairs.
+  Note the trends visible in the collection of transform pairs:  As
+  the support of the image in one domain gets larger, the magnitude in
+  the other domain becomes more localized.  A line transforms to a
+  line oriented perpendicularly to the first. Images are $64 \times 64$ pixels, origin is in the center.
+](figures/Image_processing_fourier/DFT_toy_examples.png){width="100%" #fig-2ddftexamples}
 
 ### Box Function {#sec-box_function}
 
@@ -445,13 +445,14 @@ $N/2-1=15$ and the rest is its periodic extension.
 We will compute here the DFT of the finite length box function, with a
 length $N$. To compute the DFT we use the DFT definition and change the
 interval of the sum making use of the periodic nature of the terms
-inside the sum: $$\begin{aligned}
+inside the sum: 
+
+$$\begin{aligned}
 \mathcal{F} \left\{ \text{box}_{L} \left[n \right] \right\} &=& 
 \sum_{n=0}^{N-1} \, \text{box}_{L} \left[n \right] 
 \exp{ \left( -2\pi j \frac{u\, n}{N} \right)} \\
 &=& \sum_{n=-L}^{L} \,
 \exp{ \left( -2\pi j \frac{u\, n}{N} \right)} 
-
 \end{aligned}$${#eq-boxdftderivation}
 
 We can use the equation of the sum of a geometric series:
@@ -465,7 +466,6 @@ $$\begin{aligned}
 \frac{\exp{ \left( \pi j \frac{u(2L+1)}{N} \right)} - \exp{ \left( -\pi j \frac{u(2L+1)}{N} \right)}}
 {\exp{ \left( \pi j \frac{u}{N} \right)} - \exp{ \left( - \pi j \frac{u}{N} \right)} } \\
 & = & \frac{\sin \left( \pi u(2L+1)/N \right)}{\sin \left( \pi u/N \right)}
-
 \end{aligned}$${#eq-discrete_sinc_function}
 
 This last function in equation (@eq-discrete_sinc_function) gets the
@@ -494,25 +494,22 @@ and aspect ratios.
 
 ## Discrete Fourier Transform Properties {#section:DFTproperties}
 
-It is important to be familiar with the properties for the DFT. Table
-[\[table:tableDFT\]](#table:tableDFT){reference-type="ref"
-reference="table:tableDFT"} summarizes some important transforms and
+It is important to be familiar with the properties for the DFT. 
+
+@tbl-dft summarizes some important transforms and
 properties.
 
-::: center
-                 **$\ell\left[ n \right]$**                                            **$\mathscr{L}\left[u \right]$**
-  --------------------------------------------------------- ---------------------------------------------------------------------------------------
-   $\ell_1 \left[ n \right] \circ \ell_2 \left[ n \right]$               $\mathscr{L}_1 \left[u \right] \mathscr{L}_2 \left[u \right]$
-     $\ell_1 \left[ n \right]$ $\ell_2 \left[ n \right]$        $\frac{1}{N} \mathscr{L}_1 \left[u \right] \circ \mathscr{L}_2 \left[u \right]$
-                 $\ell\left[ n-n_0 \right]$                      $\mathscr{L}\left[u \right] \exp{ \left( - 2 \pi j \frac{u n_0}{N} \right) }$
-                  $\delta \left[ n \right]$                                                           $1$
-       $\exp{ \left( 2 \pi u_0 \frac{n}{N} \right) }$                                    $\delta \left[u-u_0 \right]$
-       $\cos{ \left( 2 \pi u_0 \frac{n}{N} \right) }$        $\frac{1}{2} \left( \delta \left[u-u_0 \right] +  \delta \left[u+u_0\right] \right)$
-       $\sin{ \left( 2 \pi u_0 \frac{n}{N} \right) }$        $\frac{1}{2j} \left( \delta \left[u-u_0 \right] -  \delta \left[u+u_0\right] \right)$
-              $\text{box}_{L} \left[n \right]$                                    $\frac{\sin \pi u (2L+1)/N}{\sin \pi u/N}$
-:::
-
-[]{#table:tableDFT label="table:tableDFT"}
+| $\ell[n]$ | $\mathscr{L}[u]$ |
+| :---: | :---: |
+| $\ell_1[n] \circ \ell_2[n]$ | $\mathscr{L}_1[u] \mathscr{L}_2[u]$ |
+| $\ell_1[n] \ell_2[n]$ | $\frac{1}{N} \mathscr{L}_1[u] \circ \mathscr{L}_2[u]$ |
+| $\ell\left[n-n_0\right]$ | $\mathscr{L}[u] \exp \left(-2 \pi j \frac{u n_0}{N}\right)$ |
+| $\delta[n]$ | 1 |
+| $\exp \left(2 \pi u_0 \frac{n}{N}\right)$ | $\delta\left[u-u_0\right]$ |
+| $\cos \left(2 \pi u_0 \frac{n}{N}\right)$ | $\frac{1}{2}\left(\delta\left[u-u_0\right]+\delta\left[u+u_0\right]\right)$ |
+| $\sin \left(2 \pi u_0 \frac{n}{N}\right)$ | $\frac{1}{2 j}\left(\delta\left[u-u_0\right]-\delta\left[u+u_0\right]\right)$ |
+| $\operatorname{box}_L[n]$ | $\frac{\sin \pi u(2 L+1) / N}{\sin \pi u / N}$ |
+:{#tbl-dft}
 
 ### Linearity
 
