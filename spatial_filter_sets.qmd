@@ -16,54 +16,14 @@ image representations.
 
 ## Gabor Filters
 
-In chapter
-[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
-reference="chapter-fourier_analysis"} we discussed several useful image
-representations: representing an image in the frequency domain and
-decomposing it into amplitude and phase, and also the analysis of image
-content across different scales and orientations. The Fourier transform
-is a tool that allows us to extract that information, but only globally.
-For this information to be useful it needs to be localized. For
-instance, the analysis of orientations of local image structures can be
-done using image gradients (chapter
-[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
-reference="chapter-image_derivatives"}), which are localized in space.
-In fact, we made use of image derivatives in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"} to recover the three-dimensional (3D)
-structure of a scene. Here we will discuss another family of filters
-that has a long history of being used for image analysis: Gabor filters.
+In @sec-fourier_analysis we discussed several useful image representations: representing an image in the frequency domain and decomposing it into amplitude and phase, and also the analysis of image content across different scales and orientations. The Fourier transform is a tool that allows us to extract that information, but only globally. For this information to be useful it needs to be localized. For instance, the analysis of orientations of local image structures can be done using image gradients (@sec-image_derivatives), which are localized in space. In fact, we made use of image derivatives in @sec-simplesystem to recover the three-dimensional (3D) structure of a scene. Here we will discuss another family of filters that has a long history of being used for image analysis: Gabor filters.
 
-@fig-1D_gabor_functiona shows a one-dimensional (1D) sine function.
-This function has infinite support. When used as a representation, the
-Fourier coefficients are obtained as the scalar product between the sine
-wave and the input image. Each Fourier coefficient involves a point-wise
-multiplication between the wave and the input image and then the sum of
-the result. As a consequence of the infinite support of the wave, one
-single Fourier coefficient does not tell us anything about what happens
-locally inside the analyzed image.
+@fig-1D_gabor_function (a) shows a one-dimensional (1D) sine function. This function has infinite support. When used as a representation, the Fourier coefficients are obtained as the scalar product between the sine wave and the input image. Each Fourier coefficient involves a point-wise multiplication between the wave and the input image and then the sum of the result. As a consequence of the infinite support of the wave, one single Fourier coefficient does not tell us anything about what happens locally inside the analyzed image.
 
-A good start for a localized image analysis is to restrict the spatial
-support of a sinusoidal basis function. One function that has a local
-support (a lots of nice properties as we discussed in chapter
-[\[sec-blur_filters\]](#chap:blur_filters){reference-type="ref"
-reference="sec-blur_filters"}) is the Gaussian function
-(@fig-1D_gabor_function\[b\]). The product of the Gaussian and the sine
-wave (or a cosine wave) gives the function with the profile shown in
-@fig-1D_gabor_functionc called a Gabor filter. Gabor functions were
-introduced by Dennis Gabor in 1946 @Gabor1946TheoryOC.
+A good start for a localized image analysis is to restrict the spatial support of a sinusoidal basis function. One function that has a local support (a lot of nice properties as we discussed in @sec-blur_filters) is the Gaussian function (@fig-1D_gabor_function [b]). The product of the Gaussian and the sine wave (or a cosine wave) gives the function with the profile shown in @fig-1D_gabor_function (c) called a Gabor filter. Gabor functions were introduced by Dennis Gabor in 1946 @cite(Gabor1946TheoryOC).
 
-  -------
-   \(a\)
-  -------
 
-  -------
-   \(b\)
-  -------
-
-  -------
-   \(c\)
-  -------
+![Construction of a Gabor function. (a) Sine function. (b) Gaussian function. (c) Gabor function obtained as the product of (a) and (b).](figures/spatial_filter_sets/gabor_1D.png){#fig-1D_gabor_function width="100%"}
 
 Gabor functions, originally proposed in 1D, were made popular as an
 operator for image analysis by Goesta Granlund in his paper *In Search
@@ -78,18 +38,18 @@ localization in space and frequency.
 :::
 
 
+Gabor functions can be extended to two dimensions by using 2D Gaussians and waves. We can also use complex waves (@sec-fourier_analysis) as they will give us a more general form of the Gabor function.
 
-Gabor functions can be extended to two dimensions by using 2D Gaussians
-and waves. We can also use complex waves (chapter
-[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
-reference="chapter-fourier_analysis"}) as they will give us a more
-general form of the Gabor function. We can multiply a complex Fourier
+
+We can multiply a complex Fourier
 basis function, $\exp{ \left(j  \left(u_0 x + v_0 y \right)  \right)}$,
 by a spatially localized 2D Gaussian window,
 $\exp{\left(-\frac{x^2 + y^2}{2 \sigma^2} \right) }$ to obtain a Gabor
 function, $\psi(x,y)$:
 $$\psi(x,y;u_0,v_0) = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{x^2 + y^2}{2 \sigma^2} \right)} \exp{ \left( j \left(u_0 x + v_0 y \right) \right)}
-$${#eq-gaborcomplexfilter}A Gabor function defined as in equation (@eq-gaborcomplexfilter) is a
+$${#eq-gaborcomplexfilter}
+
+A Gabor function defined as in equation (@eq-gaborcomplexfilter) is a
 complex-valued function of location and frequency. We can get the cosine
 and sine waves by looking at the real and imaginary components,
 $\psi(x,y;u_0,v_0) =  \psi_r(x,y;u_0,v_0) + j \psi_i(x,y;u_0,v_0)$ with
@@ -99,11 +59,7 @@ Where $\psi_r(x,y;u_0,v_0)$ and $\psi_i(x,y;u_0,v_0)$ are the cosine and
 sine phase Gabor filters. @fig-gabors shows the Gaussian window and the
 real and imaginary parts of the Gabor function.
 
-\(a\)
-
- (b)
-
- (c)
+![2D Gabor functions.  (a) The localizing Gaussian window ($\sigma=1$), which can be thought of as a Gabor function for a zero frequency sinusoid.  (b) Cosine, and (c) sine phase Gabor functions with central frequency $u_0=2\pi$ and $v_0=0$.](figures/spatial_filter_sets/gabors.png){#fig-gabors width="100%"}
 
 The Fourier transform of a complex Gabor function is a Gaussian in the
 Fourier domain shifted with respect to the origin:
@@ -127,7 +83,11 @@ transform of the cosine phase Gabor function, $\Psi_r(u,v;u_0,v_0)$, and
 @fig-gabor_ftd shows the Fourier transform of the complex Gabor
 function, $\Psi(u,v;u_0,v_0)$.
 
-![](figures/spatial_filter_sets/gabor_FT.png){width="100%"}
+:::{#fig-gabor_ft}
+![](figures/spatial_filter_sets/gabor_FT.png){width=100%}
+
+(a) Cosine and (b) sine Gabor functions. (c) Magnitude of the Fourier transform of both the cosine and sine Gabor functions (their FT only differs in the phase). (d) FT of the complex Gabor function, which is asymmetrical with a single lobe.
+:::
 
 @fig-gabor_ex_ft shows how the Gabor function changes when modifying
 its parameters (central frequency, $(u_0,v_0)$, and width, $\sigma$).
@@ -138,7 +98,11 @@ frequency extend small. A small value of $\sigma$ has the opposite
 behavior. Analyzing the image with a set of Gabor functions with a large
 $\sigma$ is like computing the Fourier transform of the image.
 
-![](figures/spatial_filter_sets/gabor_examples_FT.png){width="100%"}
+:::{#fig-gabor_ex_ft}
+![](figures/spatial_filter_sets/gabor_examples_FT.png){width=100%}
+
+Cosine phase Gabor functions tuned to different widths, frequencies, and orientations, and their corresponding Fourier transforms (only the magnitude is shown).
+:::
 
 The sine phase Gabor function is zero mean. However, the cosine phase
 Gabor function is not zero mean. The Gaussian width $\sigma$ has to be
@@ -164,7 +128,11 @@ detect vertical edges. Gabor filters are useful for analyzing line or
 edge phase structures in images. But they have many other benefits when
 we combine them together in quadrature pairs.
 
-![](figures/spatial_filter_sets/gabor_zebra.png){width="100%"}
+:::{#fig-gabor_zebra}
+![](figures/spatial_filter_sets/gabor_zebra.png){width=100%}
+
+Zebra picture filtered by cosine and sine Gabor functions at three scales with $\sigma = 2,4,8$ and $u_0 = 1/(2\sigma)$, $v_0=0$. Each row shows one scale. (a) Cosine and sine Gabor filters. (b) Cosine and sine outputs. (c) Magnitude and phase of the output of the complex Gabor filter.
+:::
 
 ### Quadrature Pairs and the Hilbert Transform
 
@@ -186,26 +154,39 @@ Hilbert transform pairs if: $$\mathscr{L}_h(\omega) = \begin{cases}
     ~  - j \mathscr{L}(\omega)    & \quad \text{if } \omega >0 \\
     j \mathscr{L}(\omega)    & \quad \text{if } \omega <0 \\
 \end{cases}$$We now define the complex signal: $$\ell_a(t) = \ell(t) + j \ell_h(t)
-$${#eq-analyticsignal} where $\ell_h(t)$ is the Hilbert transform of
+$${#eq-analyticsignal} 
+
+where $\ell_h(t)$ is the Hilbert transform of
 $\ell(t)$. The signal $\ell_a(t)$ is called the **analytic signal** and
-its Fourier transform has no negative frequency components. It is easy
-to show that $$\mathscr{L}_a(\omega) = \begin{cases}
+its Fourier transform has no negative frequency components.
+
+It is easy to show that 
+$$\mathscr{L}_a(\omega) = \begin{cases}
     ~  2\mathscr{L}(\omega)    & \quad \text{if } \omega >0 \\
     0    & \quad \text{if } \omega <0 \\
-\end{cases}$$ It is interesting to write the complex signal $\ell_a(t)$
+\end{cases}$$ 
+
+It is interesting to write the complex signal $\ell_a(t)$
 in polar form: $$\ell_a(t) = a(t) \exp \left( j \, \theta (t) \right)
 $${#eq-analyticsignalpolar} where $a(t)$ is the instantaneous amplitude
 (**local amplitude**) and $\theta (t)$ is the instantaneous phase
 (**local phase**). This particular representation is common in
 communications theory, and it has been used to build image
 representations invariant to certain image structures as we will discuss
-in the following sections.The extension of the Hilbert transform to images can be done in several
+in the following sections.
+
+The extension of the Hilbert transform to images can be done in several
 ways. The most common approach in image processing is to define one
 direction in the frequency space $n$ and then the Hilbert transform is
-as follows: $$\mathscr{L}_h(\omega_x,\omega_y) = \begin{cases}
+as follows: 
+
+$$
+\mathscr{L}_h(\omega_x,\omega_y) = \begin{cases}
     ~  - j \mathscr{L}(\omega_x,\omega_y)    & \quad \text{if } n^T \cdot (\omega_x,\omega_y) > 0 \\
     j \mathscr{L}(\omega_x,\omega_y)    & \quad \text{if } n^T \cdot (\omega_x,\omega_y) <0 \\
-\end{cases}$$
+\end{cases}
+$$
+
 
 Two band-pass filters are said to be in quadrature if the impulse
 responses are Hilbert transform pairs along some orientation in the
@@ -238,39 +219,32 @@ in the first layer, a squaring nonlinearity and then followed by a sum
 in the second layer. This very simple system can perform a number of
 interesting operations.
 
-![](figures/spatial_filter_sets/gabor_magnitude.png){width="50%"}
+
+![Computation of localized amplitude. The input is filtered by a pair of quadrature Gabor filters. Each filter output is squared and the result is added.](figures/spatial_filter_sets/quad2.png){#fig-quad2}
+
 
 To see how useful the local amplitude is, let's start by computing it
 for some simple images. If the input image is a delta,
 $\ell(x,y) = \delta(x,y)$ (this is an image with a single bright dot on
 it), and the filters $h$ and $q$ are the cosine and sine phase Gabor
-filters, then, the local amplitude image is: $$\begin{split}
+filters, then, the local amplitude image is: 
+
+$$\begin{split}
 a(x,y)  & = \sqrt{\ell_h(x,y)^2 + \ell_q(x,y)^2} = \\ 
  & = \sqrt{\psi^2_r(x,y;u_0,v_0) + \psi^2_i(x,y;u_0,v_0)} = \\
  & = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{x^2 + y^2}{2 \sigma^2} \right)}
-\end{split}$$ The amplitude of the delta function is the Gaussian
-envelope of the Gabor function. This result is independent of the
-contrast of the input image. For instance, if the input is
-$\ell(x,y) = -\delta(x,y)$, the amplitude image does not change (it is
-**sign invariant**). @fig-quad3a shows an image with two impulses of
-opposite signs. @fig-quad3b show the output of the cosine and sine
-filters, and @fig-quad3c shows the local amplitude $a(x,y)$. The local
-amplitude is two Gaussians centered on each impulse. Note that the sign
-of each impulse does not affect the sign or shape of the local
-amplitude. Therefore, this system is sign invariant.
+\end{split}
+$$
 
-The sign invariance property is specially useful when using the local
-amplitude to localize edges in images. @fig-quad3d shows an image
-composed of several squares. Each square is defined by different
-polarities with respect to the background. Two of the squares are solid
-while the other two are only defined by lines. The local amplitude,
-@fig-quad3f, provides a detector for the square boundaries that is
-invariant to all those changes. The differences between all the squares
-are encoded in the local phase image as we will discuss in the following
-section. @fig-gabor_zebra shows the local amplitude signal computed on
-real images.
+The amplitude of the delta function is the Gaussian envelope of the Gabor function. This result is independent of the contrast of the input image. For instance, if the input is $\img(x,y) = -\delta(x,y)$, the amplitude image does not change (it is **sign invariant**). @fig-quad3 (a) shows an image with two impulses of opposite signs. @fig-quad3 (b) shows the output of the cosine and sine filters, and @fig-quad3 (c) shows the local amplitude $a(x,y)$. The local amplitude is two Gaussians centered on each impulse. Note that the sign of each impulse does not affect the sign or shape of the local amplitude. Therefore, this system is sign invariant.
 
-![](figures/spatial_filter_sets/gabor_quad_examples.png){width="100%"}
+The sign invariance property is especially useful when using the local amplitude to localize edges in images. @fig-quad3 (d) shows an image composed of several squares. Each square is defined by different polarities with respect to the background. Two of the squares are solid while the other two are only defined by lines. The local amplitude, @fig-quad3 (f), provides a detector for the square boundaries that is invariant to all those changes. The differences between all the squares are encoded in the local phase image as we will discuss in the following section. @fig-gabor_zebra shows the local amplitude signal computed on real images.
+
+:::{#fig-quad3}
+![](figures/spatial_filter_sets/gabor_quad_examples.png){width=100%}
+
+Examples of Gabor outputs to illustrate the contrast invariances present in the local amplitude. In these examples, the Gabor filters are centered along the horizontal frequency axis ($v_0=0$) therefore detecting only vertical edges.
+:::
 
 One property to notice in all these examples, is that, although the
 images $\ell_h(x,y)$ and $\ell_q(x,y)$ are band-pass, the amplitude
@@ -313,7 +287,11 @@ Here, the Gaussian width $\sigma$ is proportional to the distance
 between the central frequency and the origin. This produces filters that
 are rotated and scaled versions of each other.
 
-![](figures/spatial_filter_sets/gabor_rectandpolar_tiles.png){width="100%"}
+:::{#fig-gabor_rectandpolar_tiles}
+![](figures/spatial_filter_sets/gabor_rectandpolar_tiles.png){width=100%}
+
+Examples of Gabor sets. Two different ways of tiling the frequency domain.
+:::
 
 If we write in detail the convolution from equation (@eq-gaborconv) we
 can see that the convolution with a Gabor function is like doing a
@@ -323,9 +301,12 @@ $$\begin{split}
 & = \iint  \ell\left(x',y'\right) g(x-x',y-y') \exp \left( j \left(u (x-x') + v (y-y') \right) \right) dx' dy' = \\
 \end{split}$$ If we extract the term that does not depend on $(x',y')$,
 and we also use the symmetry of the Gaussian window, we get the
-following expression: $$\begin{split}
+following expression: 
+$$\begin{split}
 & = \exp \left( j \left(u x + v y \right) \right) \iint \ell\left(x',y'\right) g(x'-x,y'-y) \exp \left(- j \left(u x' + v y' \right) \right) dx' dy'
-\end{split}$$ The analogous to the Fourier transform is obtained when we
+\end{split}$$ 
+
+The analogous to the Fourier transform is obtained when we
 vary the central frequency of the Gabor function $(u,v)$. This is
 usually called the Gabor transform. Note that the Gabor transform is not
 self-inverting.
@@ -363,16 +344,8 @@ arbitrary, intermediate orientation? The answer is yes, and the number
 of filter samples needed to interpolate depends on the form of the
 filter.
 
-In chapter
-[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
-reference="chapter-image_derivatives"}, we described the simplest
-example of an oriented filer: a Gaussian derivative. As we discussed in
-equation (@eq-steerable_derivative_filter), we can synthesize a
-directional derivative in any direction as a linear combination of
-derivatives in the horizontal and vertical directions. By the linearity
-of convolution, that applies to the derivative applied to any filter or
-image, as well. It can be seen that the **steering equation** for the
-first derivative of a Gaussian filter is
+In @sec-image_derivatives, we described the simplest example of an oriented filter: a Gaussian derivative. As we discussed in @eq-steerable_derivative_filter, we can synthesize a directional derivative in any direction as a linear combination of derivatives in the horizontal and vertical directions. By the linearity of convolution, that applies to the derivative applied to any filter or image, as well. It can be seen that the **steering equation** for the first derivative of a Gaussian filter is
+
 $$g_{x}(x,y,\theta) = \cos(\theta) g_x(x,y) + \sin(\theta) g_y(x,y)$$
 where $g_x$ and $g_y$ are the Gaussian derivatives along $x$ and $y$,
 and $g_{x}(x,y,\theta)$ is the derivative along the direction defined by
@@ -392,7 +365,14 @@ due to the positive direction of $\theta$ to be counter-clockwise.
 @fig-steer1 shows examples for the first- and second-order Gaussian
 derivatives.
 
-![](figures/spatial_filter_sets/steer1.png){width="100%"}
+:::{#fig-steer1}
+![](figures/spatial_filter_sets/steer1.png){width=100%}
+
+The simplest steerable filters: a first-order derivative filter of any
+orientation can be synthesized from a linear combination of two
+basis filter derivatives. The second-order derivative needs three basis.
+:::
+
 
 This leads to an architecture for processing images with oriented
 *steerable* filters shown in @fig-steer1arc. The input images pass
@@ -402,7 +382,12 @@ each pixel). Those gain maps adjust the linear combinations of the basis
 filters to allow the input filter to be steered to the desired
 orientations at each position.
 
-![](figures/spatial_filter_sets/steer_architecture.png){width="60%"}
+:::{#fig-steer1arc}
+![](figures/spatial_filter_sets/steer_architecture.png){width=60%}
+
+Architecture for steerable filters. This architecture computes the second-order image derivative along orientation $\theta$.
+:::
+
 
 In the case of oriented Gabor filters it is not possible to reconstruct
 exactly any filter orientation by interpolating filter responses. It is
@@ -430,12 +415,16 @@ $${#eq-steeringcondition}
 If we express the filter to be steered as a Fourier series in angle
 (using complex exponentials for notational convenience), we have
 $$h(r,\phi) = \sum_{n=-N}^{N} a_n(r) \exp \left( j n \phi \right)
-$${#eq-fourierseriesinangle}Substituting equation (@eq-fourierseriesinangle) into equation
+$${#eq-fourierseriesinangle}
+
+Substituting equation (@eq-fourierseriesinangle) into equation
 (@eq-steeringcondition), we have an equation for the interpolation
 functions, $k_{j}(\theta)$. The steering condition, equation
 (@eq-steeringcondition), holds for functions expandable in the form of
 equation (@eq-fourierseriesinangle) if and only if the interpolation
-functions $k_{j}(\theta)$ are solutions of: $$\left[
+functions $k_{j}(\theta)$ are solutions of: 
+
+$$\left[
 \begin{array}{c}
 1 \\
 \exp (j \theta) \\
@@ -517,7 +506,12 @@ spectra may not be exactly the same. The blue line shows the magnitude
 of the analytic filter $g_{xx}+jh_{xx}$. It has double amplitude, and
 the content for negative frequencies is close to zero.
 
-![](figures/spatial_filter_sets/steer_quad_aprox_a.png){width="100%"}
+:::{#fig-steerg2h2}
+![](figures/spatial_filter_sets/steer_quad_aprox_a.png){width=100%}
+
+Quadrature pair, $g_{xx} \left[n,m \right]$ and $h_{xx} \left[n,m \right]$. The filters are sampled in space and cropped into a window of $13\times13$ pixels.
+:::
+
 
 To steer $h_{xx}(x,y)$ to an angle $\theta$, this approximation requires
 four basis functions, and not just three as for the second-order
@@ -526,24 +520,15 @@ $$\begin{split}
 h_2(x,y) &= -0.9780(-0.7515+x^2) y \exp \left(-(x^2+y^2) \right) \\
 h_3(x,y) &= -0.9780(-0.7515+y^2) x \exp \left(-(x^2+y^2) \right) \\
 h_4(x,y) &= -0.9780 (-2.254 y+y^3) \exp \left(-(x^2+y^2) \right) 
-\end{split}$$ These functions have been optimized in order to be $x-y$
-separable. The basis function for steerability are not unique. For
-instance, figures
-[\[fig:steer_quad_basis\]](#fig-steer_quad_basis){reference-type="ref"
-reference="fig:steer_quad_basis"}(a and c) show two basis functions that
-span all rotations of $g_{xx}$. @fig-steer_quad_basisa has separable
-filters corresponding to $g_{xx}$, $g_{xy}$ and $g_{yy}$, and
-@fig-steer_quad_basisc shows three rotated versions of $g_{xx}$ at 0,
-60, and 120 degrees. @fig-steer_quad_basisc is a non-separable basis
-spanning the same space as the filters of @fig-steer_quad_basisa.
-Figures
-[\[fig:steer_quad_basis\]](#fig-steer_quad_basis){reference-type="ref"
-reference="fig:steer_quad_basis"}(b and d) show two basis functions that
-span all rotations on $h_{xx}$ spanning the same space as the filters of
-@fig-steer_quad_basisb. Spatial scaling of the filters will result in
-changing $\sigma$.
+\end{split}$$ 
 
-![](figures/spatial_filter_sets/steer_quad_basis.png){width="100%"}
+These functions have been optimized in order to be $x-y$ separable. The basis function for steerability are not unique. For instance, figures @fig-steer_quad_basis (a and c) show two basis functions that span all rotations of $g_{xx}$. @fig-steer_quad_basis (a) has separable filters corresponding to $g_{xx}$, $g_{xy}$ and $g_{yy}$, and @fig-steer_quad_basis (c) shows three rotated versions of $g_{xx}$ at 0, 60, and 120 degrees. @fig-steer_quad_basis (c) is a non-separable basis spanning the same space as the filters of @fig-steer_quad_basis (a). Figures @fig-steer_quad_basis (b and d) show two basis functions that span all rotations on $h_{xx}$ spanning the same space as the filters of @fig-steer_quad_basis (b). Spatial scaling of the filters will result in changing $\sigma$.
+
+:::{#fig-steer_quad_basis}
+![](figures/spatial_filter_sets/steer_quad_basis.png){width=100%}
+
+(a) Second derivative of Gaussian, $x-y$ separable steerable basis set. (b) Approximation to Hilbert transform of second derivative of Gaussian, $x-y$ steerable basis set. (c) Nonseparable basis equivalent to (a). (d) Nonseparable basis set equivalent to (b).
+:::
 
 Putting it all together, can we compute oriented energy as a function of
 angle, for all angles, just from the seven basis filter responses shown
@@ -559,7 +544,12 @@ derivatives and their quadrature pairs don't suffer from that problem,
 the $g_{xx}$, $h_{xx}$ filters actually do have enough angular
 resolution. In this case, the issue is a more subtle one.
 
-![](figures/spatial_filter_sets/steer_quad_polarplot_cross.png){width="100%"}
+:::{#fig-multioriflorets}
+![](figures/spatial_filter_sets/steer_quad_polarplot_cross.png){width=100%}
+
+(Polar plots of orientation energy as a function of angle, computed using $g_{xx}$, $h_{xx}$ filters. (a) Note the non-superposition of oriented energies near the junction of the two lines. (b) Spatially blurring the oriented energy components of the filters results in much improved linear superposition of the orientation plots, removing spurious interference terms, as described in the text.
+:::
+
 
 When there are two oriented structures within the passband of the
 quadrature pair filters, the sum of the energies of the individual
@@ -580,7 +570,11 @@ $g_{xx}$, $h_{xx}$ filters in the junctions, @fig-multiorifloretsb.
 @fig-multioriflorets_examples shows two examples on real images. At
 each pixel, the polar plots reveal the local image structure.
 
-![](figures/spatial_filter_sets/steer_quad_polarplot_zebra_cube.png){width="100%"}
+:::{#fig-multioriflorets_examples}
+![](figures/spatial_filter_sets/steer_quad_polarplot_zebra_cube.png){width=100%}
+
+Polar plots of orientation energy as a function of angle, computed using $g_{xx}$, $h_{xx}$ filters in two images.
+:::
 
 We can also make steerable filters in three dimensions (3D), allowing us
 to analyze medical volumetric data, or to process spatiotemporal volumes
@@ -613,17 +607,15 @@ pass by the frequencies of the Gabor filter. All those planes intersect
 the red line shown in @fig-spacetimefiltsc. A single Gabor filter
 cannot disambiguate the input velocity.
 
-![](figures/temporal_filters/gabor_spacetime_FT.png){width="100%"}
+:::{#fig-spacetimefilts}
+![](figures/temporal_filters/gabor_spacetime_FT.png){width=100%}
+
+Space-time Gabor filters. (a) Cosine and sine $x$-$t$ Gabor filter, and (b) the sketch of its transfer function. (c) Sketch of the transfer function of a spatiotemporal Gabor filter in two spatial dimensions ($x$-$y$-$t$). The two planes show examples of spatiotemporal planes that intersect the Gabor filter in the same way.
+:::
 
 ### Velocity-Tuned Filters {#sect:velocityTunedFilters}
 
-How can we measure input velocity? There are many different approaches
-in the computer vision community for measuring motion, and we will study
-them in chapter
-[\[chapter-motion_estimation\]](#sec-motion_estimation){reference-type="ref"
-reference="chapter-motion_estimation"}. Here we show that it is possible
-to measure motion even with the simple processing machinery that we've
-developed so far.
+How can we measure input velocity? There are many different approaches in the computer vision community for measuring motion, and we will study them in @sec-motion_estimation. Here we show that it is possible to measure motion even with the simple processing machinery that we've developed so far.
 
 We can use quadrature pairs of oriented filters in space-time to find
 motion speed and direction in the video signal. We just need to find the
@@ -650,7 +642,7 @@ full architecture is nonlinear.
 Given an input sequence, one can estimate velocity by looking at the
 velocity-tuned unit with the strongest response.
 
-![](figures/temporal_filters/MT_velocity_tuned.png){width="100%"}
+![Architecture to create velocity-selective units. In the first layer, cosine and sine filters are combined to create phase-invariant frequency-tuned outputs. In the second layer, the outputs of spatiotemporal Gabor filters are grouped according to different planes in the Fourier domain to create velocity-selective outputs.](figures/temporal_filters/MT_velocity_tuned.png){#fig-MT_velocity_tuned}
 
 ## Concluding Remarks
 
