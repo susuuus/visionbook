@@ -75,13 +75,7 @@ The Gabor filter is an oriented band-pass filter.
 
 
 
-@fig-gabor_ft shows the magnitude of the Fourier transform of the Gabor
-filters. @fig-gabor_fta shows the cosine phase Gabor function,
-$\psi_r(x,y;u_0,v_0)$, and @fig-gabor_ftb shows the sine phase Gabor
-function, $\psi_i(x,y;u_0,v_0)$. @fig-gabor_ftc shows the Fourier
-transform of the cosine phase Gabor function, $\Psi_r(u,v;u_0,v_0)$, and
-@fig-gabor_ftd shows the Fourier transform of the complex Gabor
-function, $\Psi(u,v;u_0,v_0)$.
+@fig-gabor_ft shows the magnitude of the Fourier transform of the Gabor filters. @fig-gabor_ft (a) shows the cosine phase Gabor function, $\psi_r(x,y;u_0,v_0)$, and @fig-gabor_ft (b) shows the sine phase Gabor function, $\psi_i(x,y;u_0,v_0)$. @fig-gabor_ft (c) shows the Fourier transform of the cosine phase Gabor function, $\Psi_r(u,v;u_0,v_0)$, and @fig-gabor_ft (d) shows the Fourier transform of the complex Gabor function, $\Psi(u,v;u_0,v_0)$.
 
 :::{#fig-gabor_ft}
 ![](figures/spatial_filter_sets/gabor_FT.png){width=100%}
