@@ -27,7 +27,7 @@ We now build a discrete signal by sampling with a period of $T_s=1/11$, which re
 
 If we now want to reconstruct the original continuous signal from its samples $\img [n]$, there are many possibilities because the samples do not constrain what happens between samples. Therefore, we will need to make some assumptions about the continuous signal. In the absence of any other prior information, we will assume that the most likely signal is the slowest and smoothest signal (we will make this assumption more precise later). Therefore, our preferred interpolation will be the one shown in red in the following plot:
 
-![There are infinite waves (only two shown) that perfectly pass by all the samples.](figures/Image_processing_sampling/sampling_reconstruction1.png)
+![There are infinite waves (only two shown) that perfectly pass by all the samples.](figures/Image_processing_sampling/sampling_reconstruction1.png){#fig-sampling_reconstruction1}
 
 The plot above shows the superposition of the original signal before sampling and the reconstructed one after sampling (in red). Both signals perfectly pass through the same samples. Under the slow and smooth prior, the samples seem to correspond to a cosine function with a lower frequency (in this example $T=1/2$) than the input (which had $T=1/9$).
 
@@ -55,6 +55,10 @@ The same theorem can be stated in terms of periods: the sampling period, $T_s$, 
 
 > In this book, we use the **radian frequency** for continuous signals, $w = 2 \pi f$, where $f$ is the **hertz frequency**. For a sinusoidal wave of period $T$ seconds, its frequency is $w=2\pi / T$.
 
+::: {.column-margin}
+In this book, we use the **radian frequency** for continuous signals, $w = 2 \pi f$, where $f$ is the **hertz frequency**. For a sinusoidal wave of period $T$ seconds, its frequency is $w=2\pi / T$.
+:::
+
 One way of characterizing the sampling process is achieved by analyzing the relationship between the Fourier transform of the continuous and discrete signals. There are many ways of finding the relationship between the two Fourier transforms. Here we will describe the most common one.
 
 ### Modeling the Sampling Process
@@ -69,7 +73,7 @@ $$
 
 When $T_s = 1$, the delta train has the following shape:
 
-![Delta train with period $T_s=1$. The arrows show when the train's value is infinite. The height of each impulse represents its area.](figures/Image_processing_sampling/delta_train.png)
+![Delta train with period $T_s=1$. The arrows show when the train's value is infinite. The height of each impulse represents its area.](figures/Image_processing_sampling/delta_train.png){#fig-delta_train}
 
 The delta train can be used to model the sampling process. Remember the sampling property of the delta distribution $\img (t) \delta (t-a) = \img(a)$. If we multiply a function, $\img(t)$, by the delta train, $\delta_{T_s}(t)$, we obtain its sampled version at times $nT_s$, which we will denote as $\img_{\delta} 
 
@@ -200,6 +204,18 @@ where $\widetilde \img(t)$ is the reconstructed signal from the samples $\img_s[
 
 ![(left column)  Spatial sampling pattern.  (middle column)  Fourier transform of that spatial pattern, revealing replication locations of the Fourier transform spectrum of the subsampled signal.  (right column) Subsampled signal.  Zeroing out all but the central replication of the image spectrum yields the interpolated signal shown in red.](figures/Image_processing_sampling/aliasing1d.png){#fig-alias1d}
 
+::: {.column-margin}
+A signal cannot be simultaneously time-limited and frequency band-limited. For any time-limited signal (i.e., a signal that is defined inside an interval $t \in \left[a,b \right]$ and is zero outside), the Fourier transform is not band-limited.
+:::
+
+All the derivations extend naturally to 2D because all the functions are separable along the two spatial dimensions. In two dimensions, the ideal interpolation function is:
+
+$$
+\text{sinc} (x,y)  = \frac{\sin (\pi x)}{\pi x} \frac{\sin (\pi y)}{\pi y}
+$$
+
+We will discuss the 2D case a bit more in detail later as sampling images opens the door to different sampling strategies beyond simply adjusting the sampling rate.
+
 ### Approximate Reconstruction with Local Kernels
 
 One disadvantage of the ideal reconstruction is that the $\text{sinc}$ function has infinite support, which means that to interpolate each instant, we need to linearly combine all the samples $\img [n]$. Sometimes it is better to have a local reconstruction that only depends on the nearby samples.
@@ -284,6 +300,62 @@ $$
 
 This is similar to the 1D case. We leave it to the reader to write down the form of the hexagonal sampling.
 
+Figure @fig-sampling_grids_FT shows a sketch of the Fourier transforms of the rectangular and hexagonal samplings. The region delimited by the red polygon shows the region of valid frequencies. If the input signal only has spectral content within that region, then there will be no aliasing. The optimal sampling will be the one that makes that region as large as possible for a fixed number of samples.
+
+
 ![Sketch of the Fourier transforms of the rectangular and hexagonal samplings. The red boundary denotes the spectral content that gets periodically repeated.](figures/Image_processing_sampling/sampling_grids_FT.png){#fig-sampling_grids_FT}
 
-The optimal sampling strategy is the regular hexagonal sampling. This is not the sampling used in computer vision as all images are always represented on a rectangular grid, but hexagonal sampling achieves an increase of around 10
+The optimal sampling strategy is the regular hexagonal sampling. This is not the sampling used in computer vision as all images are always represented on a rectangular grid, but a hexagonal sampling achieves an increase of around $10$ percent in resolution for the same amount of samples. In fact, the distribution of photoreceptors at the center of the retina [@Curcio87; @Curcio1990] closely resembles a hexagonal array over small patches, as shown in Figure @fig-samplingfovea.
+
+Working with convolutional filters defined over a hexagonal grid is more efficient, and it can achieve better radial symmetry [@Mersereau79; @Simoncelli90subbandimage].
+
+::: {#fig-samplingfovea}
+![](figures/Image_processing_sampling/sampling_fovea.jpg){width=60%}
+
+Distributions of cones in the fovea of a Monkey [@Curcio1990]. The image shows a cross-section of the retina at the level of the photoreceptors. *Source:* [@Curcio1990].
+:::
+
+The analysis we have presented in this chapter assumes signals of infinite length. However, images will have a finite size. The same results can be applied by extending the image to infinity with zero padding.
+
+## Anti-Aliasing Filter
+\index{Filter!Anti-aliasing}
+
+Sampling with the wrong frequency has interesting effects in 2D. Figure @fig-aliasingFTzebra-a shows an example of a picture downsampled at different resolutions (412×512, 103×128, 52×64, and 26×32) and then reconstructed to the original resolution (412×512 pixels). For the figures, as we do not have access to the continuous image, we always work with sampled versions. But the original image is very high resolution and we can think of it as being the continuous image.
+
+The images in Figure @fig-aliasingFTzebra-a show the effects of aliasing. The stripes on the zebra's body change orientation as we downsample them. And for the lowest resolution image, it is even hard to recognize the animal as being a zebra. Figure @fig-aliasingFTzebra-b shows what happens with the image Fourier transform when we multiply the image with the delta train, with one every four samples along each dimension (second column of Figure @fig-aliasingFTzebra-b). Figure @fig-aliasingFTzebra-c shows the magnitude of the DFT of the sampled image (it corresponds to the region inside the green square in Figure @fig-aliasingFTzebra-b). The DFT changes substantially, due to aliasing, from one resolution to the next one.
+
+::: {#fig-aliasingFTzebra}
+![](figures/Image_processing_sampling/aliasing_ft_abc1.png){width=100%}
+
+Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking like a cow. (b) Fourier transform of the continuous signal $\img(x,y)$ multiplied by delta trains: $\img_{\delta}(x,y)$. (c) Discrete Fourier transform of the corresponding sampled signals, $\img\left[n,m\right]$. (d) Fourier transform of the reconstructed signal with aliasing. (e) Sampled image after processing it with an anti-aliasing filter. (f) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\img\left[n,m\right]$. Note that now the central part of the Fourier transform is not changing.
+:::
+
+In order to reduce aliasing artifacts, we need to filter the continuous signal with a low-pass filter to make it band-limited. Then we will be able to sample it, avoiding high-spatial frequencies that interfere with the low-frequency content of the image. The anti-aliasing filter will not prevent the loss of information contained in the high spatial frequencies. @fig-aliasingFTzebra2-a shows the reconstructed images at different resolutions when an anti-aliasing filter is applied before sampling. Each resolution requires a different filter. The anti-aliasing filter can be a box filter like in Equation @eq-boxfilterFT with the support equal to the green region in @fig-aliasingFTzebra-b.
+
+::: {#fig-aliasingFTzebra2}
+![](figures/Image_processing_sampling/aliasing_ft_abc2.png){width=100%}
+
+Subsampling with anti-aliasing filter. (a) Sampled image after processing it with an anti-aliasing filter. (b) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\img\left[n,m\right]$. Note that now the central part of the Fourier transform is almost not changing.
+:::
+
+## Spatiotemporal Sampling
+
+Spatiotemporal sampling can be studied with the tools we have already seen. In particular, Equation @eq-genericsampling can explain sampling in the $N$-dimensional case. Temporal aliasing is responsible for the typical illusion in which we see wheels or fans changing the sense of rotation in movies. To avoid those artifacts, it is important to apply an anti-aliasing filter as before.
+
+The most common type of spatiotemporal sampling is regular sampling: here, all the pixels are sampled in a regular spatial 2D grid and at regular time instants in which all the pixels are exposed simultaneously. This is also called global shutter mode.
+
+In many cameras (DSLRs, mobile phones, etc.), the most commonly used sampling is the rolling shutter mode. Here, every row in the image is sampled simultaneously. But different rows are sampled at different instants. This sampling mode allows for a faster sampling rate with current hardware implementations, but it can create spatial distortions in the image if the camera moves or when taking pictures of moving objects.
+
+
+## Concluding Remarks
+
+Aliasing is a common artifact that appears whenever an image is captured by sampling a continuous light field. As we will discuss in the next chapter, aliasing also affects images whenever there is upsampling or downsampling. Therefore, understanding how aliasing introduces artifacts and the best way to avoid it is an important skill.
+
+However, aliasing is not always bad and it might be possible to use aliasing to recover high-frequency content that would be otherwise lost. Superresolution algorithms can learn to extract, from the aliasing pattern, fine image details.
+
+Also, when an image is encoded by multiple channels, aliasing in one channel does not mean that the information is lost because multiple channels could contain complementary information that allows the recovery of high-resolution details.
+
+::: {.column-margin}
+**Moire patterns**, also related to aliasing, are interference patterns that appear when superposing semitransparent patterns on top of each other.  
+![](figures/upsamplig_downsampling/moire.png){width=40%}
+:::
