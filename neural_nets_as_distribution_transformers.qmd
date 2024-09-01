@@ -24,7 +24,7 @@ Each of the above are layers that could be found in a deep net. Linear layers, l
 
 In this way, an incoming data distribution can be reshaped layer by layer into a desired configuration. The goal of a binary softmax classifier, for example, is to move the datapoints around until all the class 0 points end up moved to $(1,0)$ on the output layer and all the class 1 points end up moved to $(0,1)$.
 
-:::{.column_margin}
+:::{.column-margin}
 This is because the one-hot code for the integer 0 is $[1,0]$ and the one-hot code for the integer 1 is $[0,1]$.
 :::
 
@@ -73,7 +73,7 @@ In this example, the target output places all the red dots at $(0,1)$ and all th
 We will visualize how the net transforms the training dataset, layer by layer, at four **checkpoints** over the course of training.
 
 
-:::{.column_margin}
+:::{.column-margin}
 A checkpoint is a record of the parameters at some iteration of training, that is, if iterates of the parameter vector are $\theta^0, \theta^1, \ldots, \theta^T$, then any $\theta^k$ can be recorded as a checkpoint.
 :::
 

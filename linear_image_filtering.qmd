@@ -42,7 +42,7 @@ Although most of the signals that exist in nature are infinite
 sampled and transformed into a finite sequence of numbers, also called a
 **discrete signal**.
 
-:::{.column_margin}
+:::{.column-margin}
 **Sampling** is the process of transforming a continuous signal into a discrete one and will be studied in detail in @sec-sampling.
 :::
 
@@ -147,7 +147,7 @@ defined as the sum of squared magnitude values:
 $$E = \sum_{n = -\infty}^{\infty} \left| \ell\left[n\right] \right| ^2$$
 
 
-:::{.column_margin}
+:::{.column-margin}
 Siganl energy and general energy are equivalent up to a normalization constant. For instance, the energy dissipated by a resistance $R$ with voltage $v(t)$ is
 \begin{equation}
 E = \frac{1}{R} \int_{-\infty}^{\infty} v(t) ^2 dt
@@ -264,7 +264,7 @@ unit $i$, $\ell_{\texttt{out}}\left[i \right]$, is a linear combination
 of the input signal $\boldsymbol\ell_{\texttt{in}}$ with weights given
 by the row vectors of $\mathbf{H}$. Graphically it looks like this:
 
-![A linear function drawn as a {\bf fully connected layer} in a neural network.](figures/linear_image_filtering/linear_filter.png){width=".4" #fig-linear_filter}
+![A linear function drawn as a {\bf fully connected layer} in a neural network.](figures/linear_image_filtering/linear_filter.png){width=".4" #fig-linear_filter }
 
 In two dimensions the equations are analogous. Each pixel of the output
 image, $\ell_{\texttt{out}}\left[n,m\right]$, is computed as a linear

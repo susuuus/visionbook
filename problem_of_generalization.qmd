@@ -358,7 +358,7 @@ empirical risk minimization problem: $$\begin{aligned}
 \end{aligned}$${#eq-problem_of_generalization_error_fn_1} 
 
 
-:::{.column_margin}
+:::{.column-margin}
 We use the exponent $0.25$, rather than the more common squared error, just so that the plots in @fig-problem_of_generalization_more_data_more_constraints show more clearly the linear constraints (the dark lines) added by each datapoint to the objective $J$.
 :::
 
@@ -373,7 +373,7 @@ $N$.
 
 ![More data, more (soft) constraints.](./figures/problem_of_generalization/more_data_more_constraints.png){#fig-problem_of_generalization_more_data_more_constraints}
 
-:::{.column_margin}
+:::{.column-margin}
 The heatmaps here are reminiscent of a classic computer vision algorithm called the Hough transform @hough1959machine, @duda1972use. This transform can be used to find geometric primitives that fit feature points in images. In fact, the bottom row is \textit{exactly} the generalized Hough transform~\cite{duda1972use} of the data points in the top row, using $\theta_0 x + \theta_1 \sin(x)$ as the family of geometric primitives we are fitting.
 :::
 
