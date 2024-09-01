@@ -1,306 +1,125 @@
+
 # Image Derivatives {#sec-image_derivatives}
 
 ## Introduction
 
-Computing image derivatives is an essential operator for extracting
-useful information from images. As we show in the previous chapter,
-image derivatives allowed us computing boundaries between objects and to
-have access to some of the three-dimensional (3D) information lost when
-projecting the 3D world into the camera plane. Derivatives are useful
-because they give us information about where are happening the changes
-in the image and we expect those changes to be correlated with
-transitions between objects.
+Computing image derivatives is an essential operator for extracting useful information from images. As we show in the previous chapter, image derivatives allowed us to compute boundaries between objects and to have access to some of the three-dimensional (3D) information lost when projecting the 3D world into the camera plane. Derivatives are useful because they give us information about where changes are happening in the image, and we expect those changes to be correlated with transitions between objects.
 
-The operator that computes the image derivatives a long the spatial
-dimensions ($x$ and $y$) is a linear system:
+The operator that computes the image derivatives along the spatial dimensions ($x$ and $y$) is a linear system:
 
-=\[draw, minimum size=3em\] = \[pin edge=to-,thin,black\]
+![Computing image derivatives along $x$- and $y$-dimensions.](figures/derivatives/genericfilterH.png){#fig-genericfilterH}
 
-The derivative operator is linear and translation invariant. Therefore,
-it can be written as a convolution. The following images show an input
-image and the resulting derivatives along the horizontal and vertical
-dimensions using one of the discrete approximations that we will discuss
-in this chapter.
+The derivative operator is linear and translation invariant. Therefore, it can be written as a convolution. The following images show an input image and the resulting derivatives along the horizontal and vertical dimensions using one of the discrete approximations that we will discuss in this chapter.
 
-![](figures/derivatives/mit_der_a.jpg){width=".32"} 
-![](figures/derivatives/mit_der_b.jpg){width=".32"} 
-![](figures/derivatives/mit_der_c.jpg){width=".32"}
-
-[]{#fig-derivativesmit label="fig:derivativesmit"}
+![Image derivatives. (left) Input image, (middle) its $x$-derivative, and (right) its $y$-derivative.](figures/derivatives/mit_der_c.jpg){#fig-derivativesmit}
 
 ## Discretizing Image Derivatives
 
-If we had access to the continuous image, then image derivatives could
-be computed as: $\partial \ell(x,y) / \partial x$, which is defined as
+If we had access to the continuous image, then image derivatives could be computed as: $\partial \img (x,y) / \partial x$, which is defined as:
 
-$$\frac{\partial \ell(x,y)} {\partial x} = \lim_{\epsilon \to 0} \frac{ \ell(x+\epsilon,y) -\ell(x,y)} {\epsilon}$$However, there are several reasons why we might not be able to apply
-this definition:
+$$
+\frac{\partial \img(x,y)} {\partial x} = \lim_{\epsilon \to 0} \frac{ \img(x+\epsilon,y) -\img(x,y)} {\epsilon}
+$$
 
--   We only have access to a sampled version of the input image,
-    $\ell\left[n,m\right]$, and we can not compute the limit when
-    $\epsilon$ goes to zero.
+However, there are several reasons why we might not be able to apply this definition:
 
--   The image could contains many nonderivable points and the gradient
-    would not be defined. We will see how to address this issue later
-    when we study Gaussian derivatives.
+- We only have access to a sampled version of the input image, $\img \left[n,m\right]$, and we cannot compute the limit when $\epsilon$ goes to zero.
+- The image could contain many non-derivable points, and the gradient would not be defined. We will see how to address this issue later when we study Gaussian derivatives.
+- In the presence of noise, the image derivative might not be meaningful as it might just be dominated by the noise and not by the image content.
 
--   In the presence of noise, the image derivative might not be
-    meaningful as it might just be dominated by the noise and not the by
-    image content.
+For now, let's focus on the problem of approximating the continuous derivative with discrete operators. As the derivative is a linear operator, it can be approximated by a discrete linear filter. There are several ways in which image derivatives can be approximated.
 
-For now, let's focus on the problem of approximating the continuous
-derivative with discrete operators. As the derivative is a linear
-operator, it can be approximated by a discrete linear filter. There are
-several ways in which image derivatives can be approximated.
+Let's start with a simple approximation to the derivative operator that we have already played with $d_0  = \left[1, -1 \right]$. In one dimension (1D), convolving a signal $\img \left[n \right]$ with this filter results in:
+$$
+\img \circ d_0 = \img \left[n \right] - \img \left[n-1 \right]
+$$
+This approximates the derivative by the difference between consecutive values, which is obtained when $\epsilon=1$. @fig-discretederivative (c) shows the result of filtering a 1D signal (@fig-discretederivative [a]) convolved with $d_0 \left[n\right]$ (@fig-discretederivative [b]). The output is zero wherever the input signal is constant, and it is large in the places where there are variations in the input values. However, note that the output is not perfectly aligned with the input. In fact, there is half a sample displacement to the right. This is due to the fact that $d_0 \left[n\right]$ is not centered around the origin.
 
-Let's start with a simple approximation to the derivative operator that
-we have already played with $d_0  = \left[1, -1 \right]$. In one
-dimension (1D), convolving a signal $\ell\left[n \right]$ with this
-filter results in
-$$\ell\circ d_0 = \ell\left[n \right] - \ell\left[n-1 \right]$$ this
-approximates the derivative by the difference between consecutive
-values, which is obtained when $\epsilon=1$. @fig-discretederivativec
-shows the result of filtering a 1D signal (@fig-discretederivative\[a\])
-convolved with $d_0 \left[n\right]$ (@fig-discretederivative\[b\]). The
-output is zero wherever the input signal is constant and it is large in
-the places where there are variations in the input values. However, note
-that the output is not perfectly aligned with the input. In fact there
-is half a sample displacement to the right. This is due to the fact that
-$d_0 \left[n\right]$ is not centered around the origin.
+This can be addressed with a different approximation to the spatial derivative $d_1  = \left[1, 0, -1 \right]/2$. In one dimension, convolving a signal $\img \left[n \right]$ with $d_1 \left[n\right]$ results in:
+$$
+\img \circ d_1 = \frac{\img \left[n+1 \right] - \img \left[n-1 \right]}{2}
+$$
+@fig-discretederivative (e) shows the result of filtering the 1D signal (@fig-discretederivative [a]) convolved with $d_1 \left[n\right]$ (@fig-discretederivative [d]). Now the output shows the highest magnitude output in the midpoint where there is variation in the input signal.
 
-This can be addressed with a different approximation to the spatial
-derivative $d_1  = \left[1, 0, -1 \right]/2$. In one dimension,
-convolving a signal $\ell\left[n \right]$ with $d_1 \left[n\right]$
-results in
-$$\ell\circ d_1 = \frac{\ell\left[n+1 \right] - \ell\left[n-1 \right]}{2}$$
-@fig-discretederivativee shows the result of filtering the 1D signal
-(@fig-discretederivative\[a\]) convolved with $d_1 \left[n\right]$
-(@fig-discretederivative\[d\]). Now the output shows the highest
-magnitude output in the midpoint where there is variation in the input
-signal.
+![(a) Input signal, $\img [n]$. (b) Convolutional kernel $d_0 [n]$, defined as $d_0 [0]=1$ and $d_0 [1]=-1$ and zero everywhere else. (c) Output of the convolution between $\img [n]$ and $d_0 [n]$. (d) Kernel $d_1 [n]$, defined as $d_1 [-1]=1$ and $d_1 [1]=-1$ and zero everywhere else. (e) Output of the convolution between $\img [n]$ and $d_1 [n]$.](figures/derivatives/discretederivative.png){#fig-discretederivative}
 
-$\begin{array}{lcr}
-~&~&
- \begin{tabular}{c} 
-\begin{tikzpicture}
-\begin{axis} [width=200pt,height=100pt,
-    axis x line=bottom, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=22,
-    xtick={0, 5,10, 20},
-    xlabel=$n$,
-    ymin=0, ymax=2.4,
-    ytick={0,...,2},
-    ylabel={$\ell\left[n\right]$}]
-\addplot+[ycomb] plot coordinates {(0,0) (1,0) (2,0) (3,0) (4,0) (5,1) (6,2) (7,2) (8,2) (9,2) (10,2) (11,2) (12,2) (13,2) (14,1) (15,0) (16,0) (17,0) (18,0) (19,0) (20,0)};
-\end{axis} 
-\end{tikzpicture}
- \\  (a) \end{tabular}
-\\
- \begin{tabular}{c} 
-\begin{tikzpicture}
-\begin{axis} [width=120pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=4,
-    xtick={-3,3},
-    xlabel=$n$,
-    ymin=-1.4, ymax=1.4,
-    ytick={-1,0,1},
-    ylabel={$d_0 \left[n\right]$},
-    color=black]
-\addplot+[ycomb] plot coordinates {(-3,0) (-2,0) (-1,0) (0,1) (1,-1) (2,0) (3,0) };
-\end{axis}
-\end{tikzpicture}
- \\  (b) \end{tabular}
-&
-~
-&
- \begin{tabular}{c} 
-\begin{tikzpicture}
-\begin{axis} [width=200pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=22,
-    xtick={0, 5, 10, 20},
-    xlabel=$n$,
-    ymin=-1.4, ymax=1.4,
-    ytick={-1,...,1},
-    ylabel={$\ell\left[n\right] \circ d_0 \left[n\right]$}]
-\addplot+[ycomb] plot coordinates {(0,0) (1,0) (2,0) (3,0) (4,0) (5,1) (6,1) (7,0) (8,0) (9,0) (10,0) (11,0) (12,0) (13,0) (14,-1) (15,-1) (16,0) (17,0) (18,0) (19,0) (20,0)};
-\end{axis} 
-\end{tikzpicture}
- \\  (c) \end{tabular}
-\\
- \begin{tabular}{c} 
-\begin{tikzpicture}
-\begin{axis} [width=120pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=4,
-    xtick={-3,3},
-    xlabel=$n$,
-    ymin=-1.4, ymax=1.4,
-    ytick={-1,0,1},
-    ylabel={$d_1 \left[n\right]$},
-    color=black]
-\addplot+[ycomb] plot coordinates {(-3,0) (-2,0) (-1,1/2) (0,0) (1,-1/2) (2,0) (3,0) };
-\end{axis}
-\end{tikzpicture}
- \\  (d) \end{tabular}
-&
-~
-&
- \begin{tabular}{c} 
-\begin{tikzpicture}
-\begin{axis} [width=200pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=22,
-    xtick={0, 5,10, 20},
-    xlabel=$n$,
-    ymin=-1.4, ymax=1.4,
-    ytick={-1,...,1},
-    ylabel={$\ell\left[n\right] \circ d_1 \left[n\right]$}]
-\addplot+[ycomb] plot coordinates {(0,0) (1,0) (2,0) (3,0) (4,1/2) (5,1) (6,1/2) (7,0) (8,0) (9,0) (10,0) (11,0) (12,0) (13,-1/2) (14,-1) (15,-1/2) (16,0) (17,0) (18,0) (19,0) (20,0)};
-\end{axis} 
-\end{tikzpicture}
- \\  (e) \end{tabular}
-\end{array}$
-
-It is also interesting to see the behavior of the derivative and its
-discrete approximations in the Fourier domain. In the continuous domain,
-the relation ship between the Fourier transform on a function and the
-Fourier transform of its derivative is
-$$\frac{\partial \ell(x)}{\partial x}  
+It is also interesting to see the behavior of the derivative and its discrete approximations in the Fourier domain. In the continuous domain, the relationship between the Fourier transform on a function and the Fourier transform of its derivative is:
+$$
+\frac{\partial \img (x)}{\partial x}  
 \xrightarrow{\mathscr{F}} 
-j w \mathscr{L}(w)$$ In the continuous Fourier domain, derivation is
-equivalent to multiplying by $jw$. In the discrete domain, the DFT of a
-signal derivative will depend on the approximation used. Let's study now
-the DFT of the two approximations that we have discussed here, $d_0$ and
-$d_1$.
+j w \capitalimg (w)
+$$
+In the continuous Fourier domain, derivation is equivalent to multiplying by $jw$. In the discrete domain, the DFT of a signal derivative will depend on the approximation used. Let's study now the DFT of the two approximations that we have discussed here, $d_0$ and $d_1$.
 
-The DFT of $d_0 \left[n\right]$ is $$\begin{split}
+The DFT of $d_0 \left[n\right]$ is:
+$$
+\begin{split}
 D_0 \left[u \right] & = 1 - \exp \left( -2 \pi j \frac{u}{N} \right)  \\
 & = \exp \left( - \pi j \frac{u}{N} \right) \left(  \exp \left( \pi j \frac{u}{N} \right) - \exp \left( -\pi j \frac{u}{N} \right)  \right) \\
 & = \exp \left( - \pi j \frac{u}{N} \right) 2 j \sin (\pi u /N)
-\end{split}$$ the first term is a pure phase shift and it is responsible
-of the half a sample delay in the output. The second term is the
-amplitude gain and it can be approximated by a linear dependency on $u$
-for small $u$ values.
+\end{split}
+$$
+The first term is a pure phase shift, and it is responsible for the half a sample delay in the output. The second term is the amplitude gain, and it can be approximated by a linear dependency on $u$ for small $u$ values.
 
-The DFT of $d_1 \left[n\right]$ is $$\begin{split}
+The DFT of $d_1 \left[n\right]$ is:
+$$
+\begin{split}
 D_1 \left[u \right] & =  1/2\exp \left( 2 \pi j \frac{u}{N} \right) - 1/2 \exp \left( -2 \pi j \frac{u}{N} \right)  \\
 & =  j \sin (2 \pi u /N)
-\end{split}$$
+\end{split}
+$$
 
-@fig-d0andd1_dft shows the magnitude of $D_0\left[u \right]$ and
-$D_1\left[u \right]$ and compares it with $\left| 2 \pi u/N \right|$,
-which will be the ideal approximation to the derivative. The amplitude
-of $D_0\left[u \right]$ provides a better approximation to the ideal
-derivative, but the phase of $D_0\left[u \right]$ introduces a small
-shift in the output. Conversely, $D_1\left[u \right]$ has no shift, but
-it approximates the derivative over a smaller range of frequencies. The
-output to $D_1\left[u \right]$ is smoother than the output to
-$D_0\left[u \right]$, and, in particular, $D_1\left[u \right]$ gives a
-zero output when the input is the signal
-$\left[ 1, -1, 1, -1, ... \right]$. In fact, we can see that
-$\left[1,0,-1\right] = \left[1,-1\right] \circ \left[1,1\right]$, and,
-therefore $D_1\left[u \right] = D_0\left[u \right] B_1\left[u \right]$,
-where $B_1\left[u \right]$ is the DFT of the binomial filter
-$b_1 \left[n \right]$.
+@fig-d0andd1_dft shows the magnitude of $D_0\left[u \right]$ and $D_1\left[u \right]$ and compares it with $\left| 2 \pi u/N \right|$, which will be the ideal approximation to the derivative. The amplitude of $D_0\left[u \right]$ provides a better approximation to the ideal derivative, but the phase of $D_0\left[u \right]$ introduces a small shift in the output. Conversely, $D_1\left[u \right]$ has no shift, but it approximates the derivative over a smaller range of frequencies. The output to $D_1\left[u \right]$ is smoother than the output to $D_0\left[u \right]$, and, in particular, $D_1\left[u \right]$ gives a zero output when the input is the signal $\left[ 1, -1, 1, -1, ... \right]$. In fact, we can see that $\left[1,0,-1\right] = \left[1,-1\right] \circ \left[1,1\right]$, and, therefore $D_1\left[u \right] = D_0\left[u \right] B_1\left[u \right]$, where $B_1\left[u \right]$ is the DFT of the binomial filter $b_1 \left[n \right]$.
 
-  -------
-   \(a\)
-  -------
+![Magnitude of (a) $D_0\left[u \right]$ and (b) $D_1\left[u \right]$ and comparison with $\left| 2 \pi u/N \right|$, shown as a thin black line. Both DFTs are computed over 20 samples.](figures/derivatives/d0andd1_dft.png){#fig-d0andd1_dft}
 
-  -------
-   \(b\)
-  -------
+When working with two-dimensional (2D) images, there are several ways in which partial image derivatives can be approximated. For instance, we can compute derivatives along
 
-When working with two-dimensional (2D) images there are several ways in
-which partial image derivatives can be approximated. For instance, we
-can compute derivatives along the $n$ and $m$ components.
+ the $n$ and $m$ components:
 
-$$\begin{bmatrix}
+$$
+\begin{bmatrix}
   1 \\
   -1
-  \end{bmatrix}
-  ~~~~~~~
-  \begin{bmatrix}
+\end{bmatrix}
+~~~~~~~
+\begin{bmatrix}
   1 & -1
-  \end{bmatrix}$$ The problem with this discretization of the image
-derivatives is that the outputs are spatially miss-aligned because a
-filter of length 2 shifts the output image by half a pixel as we
-discussed earlier. The spatial miss-alignment can be removed by using a
-slightly different version of the same operator: we can use a rotated
-reference frame as it is done in the **Roberts cross** operator,
-introduced in 1963 @Roberts63 in a time when reading an image of
-$256 \times 256$ pixels into memory took several minutes:
-$$\begin{bmatrix}
+\end{bmatrix}
+$$
+The problem with this discretization of the image derivatives is that the outputs are spatially misaligned because a filter of length 2 shifts the output image by half a pixel as we discussed earlier. The spatial misalignment can be removed by using a slightly different version of the same operator: we can use a rotated reference frame as it is done in the **Roberts cross** operator, introduced in 1963 @cite(Roberts63) in a time when reading an image of $256 \times 256$ pixels into memory took several minutes:
+
+$$
+\begin{bmatrix}
   1 & ~0\\
- 0 & -1
-  \end{bmatrix}
-  ~~~~~~~
-  \begin{bmatrix}
+  0 & -1
+\end{bmatrix}
+~~~~~~~
+\begin{bmatrix}
   ~0 & 1 \\
   -1 & 0
-  \end{bmatrix}$$ Now, both outputs are spatially aligned because they
-are shifted in the same way. Another discretization is the Sobel
-operator, based on the $[-1,0,1]$ kernel, and will be discussed in
-section [1.7](#sec-derivatives_binomial_filters){reference-type="ref"
-reference="sec-derivatives_binomial_filters"}.
+\end{bmatrix}
+$$
+Now, both outputs are spatially aligned because they are shifted in the same way. Another discretization is the Sobel operator, based on the $[-1,0,1]$ kernel, and will be discussed in @sec-derivatives_binomial_filters.
 
-While newer algorithms for edge extraction have been developed since the
-creation of these operators, they still hold value in cases where
-efficiency is important. These simple operators continue to be used as
-fundamental components in modern computer vision descriptors, including
-the Scale-invariant feature transform (SIFT) @Lowe04 and the histogram
-of oriented gradients (HOG) @Dalal2005.
+While newer algorithms for edge extraction have been developed since the creation of these operators, they still hold value in cases where efficiency is important. These simple operators continue to be used as fundamental components in modern computer vision descriptors, including the Scale-invariant feature transform (SIFT) @cite(Lowe04) and the histogram of oriented gradients (HOG) @cite(Dalal2005).
 
 ## Gradient-Based Image Representation
 
-Derivatives have become an important tool to represent images and they
-can be used to extract a great deal of information from the image as it
-was shown in the previous chapter. One thing about derivatives is that
-it might seem as we are loosing information from the input image. An
-important question is if we have the derivative of a signal, can we
-recover the original image? What information is being lost? Intuitively,
-we should be able to recover the input image by integrating its
-derivative, but it is an interesting exercise to look in detail how this
-integration can be performed. We will start with a 1D signal and then we
-will discuss the 2D case.
+Derivatives have become an important tool to represent images, and they can be used to extract a great deal of information from the image as it was shown in the previous chapter. One thing about derivatives is that it might seem as though we are losing information from the input image. An important question is if we have the derivative of a signal, can we recover the original image? What information is being lost? Intuitively, we should be able to recover the input image by integrating its derivative, but it is an interesting exercise to look in detail at how this integration can be performed. We will start with a 1D signal, and then we will discuss the 2D case.
 
-A simple way of seeing that we can recover the input from its
-derivatives is to write the derivative in matrix form. This is the
-matrix that corresponds to the convolution with the kernel
-$\left[1, -1 \right]$ that we will call $\mathbf{D_0}$. The next two
-matrices show the matrix $\mathbf{D_0}$ and its inverse
-$\mathbf{D_0}^{-1}$ for a 1D image of length five pixels using zero
-boundary conditions: $$\mathbf{D_0} = 
+A simple way of seeing that we can recover the input from its derivatives is to write the derivative in matrix form. This is the matrix that corresponds to the convolution with the kernel $\left[1, -1 \right]$ that we will call $\mathbf{D_0}$. The next two matrices show the matrix $\mathbf{D_0}$ and its inverse $\mathbf{D_0}^{-1}$ for a 1D image of length five pixels using zero boundary conditions:
+
+$$
+\mathbf{D_0} = 
 \begin{bmatrix}
   1 ~& 0 ~& 0 ~& 0~& 0 \\
   -1 ~& 1 ~& 0 ~& 0~& 0 \\
   0 ~& -1 ~& 1 ~& 0 ~& 0\\
   0~& 0 ~& -1 ~& 1 ~& 0\\
   0~& 0 ~& 0 ~& -1 ~& 1
- \end{bmatrix}
- ~~~~~~~~~
+\end{bmatrix}
+~~~~~~~~~
 \mathbf{D_0}^{-1} = 
 \begin{bmatrix}
   1 ~&~ 0 ~&~ 0 ~&~ 0~&~ 0 \\
@@ -308,974 +127,172 @@ boundary conditions: $$\mathbf{D_0} =
   1 ~&~ 1 ~&~ 1 ~&~ 0 ~&~ 0\\
   1~&~ 1 ~&~ 1 ~&~ 1 ~&~ 0\\
   1~&~ 1 ~&~ 1 ~&~ 1 ~&~ 1
- \end{bmatrix}$$ We can see that the inverse $\mathbf{D_0}^{-1}$ is
-reconstructing each pixel as a sum of all the derivative values from the
-left-most pixel to the right. And the inverse perfectly reconstructs the
-input. But, this is cheating because the first sample of the derivative
-gets to see the actual value of the input signal and then we can
-integrate back the entire signal. That matrix is assuming zero boundary
-conditions for the signal and the boundary gives us the needed
-constraint to be able to integrate back the input signal.
+\end{bmatrix}
+$$
+We can see that the inverse $\mathbf{D_0}^{-1}$ is reconstructing each pixel as a sum of all the derivative values from the left-most pixel to the right. And the inverse perfectly reconstructs the input. But, this is cheating because the first sample of the derivative gets to see the actual value of the input signal, and then we can integrate back the entire signal. That matrix is assuming zero boundary conditions for the signal, and the boundary gives us the needed constraint to be able to integrate back the input signal.
 
-But what happens if you only get to see valid differences and you remove
-any pixel that was affected by the boundary? In this case, the
-derivative operator in matrix form is $$\mathbf{D_0} = 
+But what happens if you only get to see valid differences and you remove any pixel that was affected by the boundary? In this case, the derivative operator in matrix form is:
+
+$$
+\mathbf{D_0} = 
 \begin{bmatrix}
   -1 ~& 1 ~& 0 ~& 0~& 0 \\
   0 ~& -1 ~& 1 ~& 0 ~& 0\\
   0~& 0 ~& -1 ~& 1 ~& 0\\
   0~& 0 ~& 0 ~& -1 ~& 1
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 Let's consider the next 1D input signal:
-$$\boldsymbol\ell= \left[1, 1, 2, 2, 0\right]$$
 
-Then, the output of the derivative operator is
-$$\mathbf{r}=\mathbf{D_0} \boldsymbol\ell=\left[0, -1, 0, 2\right]$$
-Note that this vector has one sample less than the input. To recover the
-input $\boldsymbol\ell$ we can not invert $\mathbf{D_0}$ as it is not a
-square matrix, but we can compute the pseudoinverse which turns out to
-be $$\mathbf{D_0}^{+} = \frac{1}{5}
+$$
+\boldimg = \left[1, 1, 2, 2, 0\right]
+$$
+
+Then, the output of the derivative operator is:
+
+$$
+\mathbf{r}=\mathbf{D_0} \boldimg=\left[0, -1, 0, 2\right]
+$$
+Note that this vector has one sample less than the input. To recover the input $\boldimg$ we cannot invert $\mathbf{D_0}$ as it is not a square matrix, but we can compute the pseudoinverse, which turns out to be:
+
+$$
+\mathbf{D_0}^{+} = \frac{1}{5}
 \begin{bmatrix}
   -4 ~& -3 ~& -2~& -1 \\
   1 ~& -3 ~& -2 ~&-1 \\
   1~& 2 ~& -2 ~& -1\\
   1~& 2 ~& 3 ~& -1\\
   1~& 2 ~& 3 ~& 4
- \end{bmatrix}$$ The pseudoinverse has an interesting structure and it
-is easy to see how it can be written in the general form for signals of
-length $N$. Also note that $\mathbf{D_0}^{+}$ can not be written as a
-convolution. Another important thing is that the inversion process is
-trying to recover more samples than there are observations. The trade
-off is that the signal that it will recover will have zero mean (so it
-looses one degree of freedom that can not be estimated). In this
-example, the reconstructed input is
-$$\hat{\boldsymbol\ell} = \mathbf{D_0}^{+} \mathbf{r} =
-\left[-0.2, -0.2, 0.8, 0.8, -1.2 \right]$$ Note that
-$\hat{\boldsymbol\ell}$ is a zero mean vector. In fact, the recovered
-input is a shifted version of the original input,
-$\hat{\boldsymbol\ell} = \boldsymbol\ell- 1.2$, where 1.2 is the mean
-value of samples on $\boldsymbol\ell$. Then, you still can recover the
-input signal up to the DC component (mean signal value).
+\end{bmatrix}
+$$
+The pseudoinverse has an interesting structure, and it is easy to see how it can be written in the general form for signals of length $N$. Also, note that $\mathbf{D_0}^{+}$ cannot be written as a convolution. Another important thing is that the inversion process is trying to recover more samples than there are observations. The trade-off is that the signal that it will recover will have zero mean (so it loses one degree of freedom that cannot be estimated). In this example, the reconstructed input is:
 
-## Image Editing in the Gradient Domain {#section:editinggradientdomain}
+$$
+\hat{\boldimg} = \mathbf{D_0}^{+} \mathbf{r} =
+\left[-0.2, -0.2, 0.8, 0.8, -1.2 \right]
+$$
+Note that $\hat{\boldimg}$ is a zero mean vector. In fact, the recovered input is a shifted version of the original input, $\hat{\boldimg} = \boldimg - 1.2$, where 1.2 is the mean value of samples on $\boldimg$. Then, you still can recover the input signal up to the DC component (mean signal value).
 
-One of the interests of transforming an image into a different
-representation than pixels is that it allows us to manipulate aspects of
-the image that would be hard to control using the pixels directly.
-@fig-edit_with_derivatives shows an example of image editing using
-derivatives.
+## Image Editing in the Gradient Domain {#sec-editinggradientdomain}
 
-![](figures/derivatives/stop_impainting.png){width="100%"}
+One of the interests of transforming an image into a different representation than pixels is that it allows us to manipulate aspects of the image that would be hard to control using the pixels directly. @fig-edit_with_derivatives shows an example of image editing using derivatives.
 
-First, the image is **encoded** using derivatives along the $x$ and $y$
-dimensions: $$\mathbf{r} = 
-    \left[ 
-    \begin{array}{c}
-    \mathbf{D_x}  \\
-    \mathbf{D_y} 
-    \end{array}
-    \right] 
-    \boldsymbol\ell$$ The resulting representation, $\mathbf{r}$,
-contains the concatenation of the output of both derivative operators.
-$\mathbf{r}$ will have high values in the image regions that contains
-changes in pixel intensities and colors and will be near zero in regions
-with small variations. This representation can be **decoded** back into
-the input image by using the pseudoinverse as we did in the 1D case. The
-pseudoinverse can be efficiently computed in the Fourier domain
-@Weiss01derivingintrinsic.
+![Image inpainting: Using image derivatives, we delete the word “stop” by setting to zero the gradients indicated by the mask. The resulting decoded image propagates the red color inside the region that contained the word.](figures/derivatives/edit_with_derivatives.png){#fig-edit_with_derivatives}
 
-We can now manipulate this representation. In the example shown in
-@fig-edit_with_derivatives, if we set to zero the image derivatives
-that correspond to the word "stop", when we decode the representation we
-obtain a new image where the word "stop" has been removed. The red color
-fills[^1] the region with the word is present in the input image. We did
-not have to specify what color that region had to be, that information
-comes from the integration process. Therefore, deleting an object using
-image derivatives can be achieved by setting to zero the gradients
-regardless of the color of the background. Unfortunately, things get
-more complex when the background has texture and this simple technique
-will fail.
+First, the image is **encoded** using derivatives along the $x$ and $y$ dimensions:
+$$
+\mathbf{r} = 
+\left[ 
+\begin{array}{c}
+\mathbf{D_x}  \\
+\mathbf{D_y} 
+\end{array}
+\right] 
+\boldimg 
+$$
+The resulting representation, $\mathbf{r}$, contains the concatenation of the output of both derivative operators. $\mathbf{r}$ will have high values in the image regions that contain changes in pixel intensities and colors and will be near zero in regions with small variations. This representation can be **decoded** back into the input image by using the pseudoinverse as we did in the 1D case. The pseudoinverse can be efficiently computed in the Fourier domain @cite(Weiss01derivingintrinsic).
 
-## Gaussian Derivatives
+We can now manipulate this representation. In the example shown in @fig-edit_with_derivatives, if we set to zero the image derivatives that correspond to the word “stop,” when we decode the representation, we obtain a new image where the word “stop” has been removed. The red color fills the region with the word present in the input image. We did not have to specify what color that region had to be; that information comes from the integration process. Therefore, deleting an object using image derivatives can be achieved by setting to zero the gradients regardless
 
-In the previous sections we studied how to discretize derivatives and
-how to use them to represent images. However, computing derivatives in
-practice presents several difficulties. First, derivatives are sensitive
-to noise. In the presence of noise, as images tend to vary slowly, the
-difference between two continuous pixel values will be dominated by
-noise. This is illustrated in @fig-derivativesnoisystop.
-
-  ---------------------------------------------------------------------
-   ![](figures/derivatives/stop_noise.jpg){width=".3"}
-                                  \(a\)
-  ---------------------------------------------------------------------
-
-  ------------------------------------------------------------------------------
-   ![](figures/derivatives/stop_noise_gradient.jpg){width=".3"}
-                                      \(b\)
-  ------------------------------------------------------------------------------
-
-  ---------------------------------------------------------------------------------------
-   ![](figures/derivatives/stop_noise_gaussian_gradient.jpg){width=".3"}
-                                           \(c\)
-  ---------------------------------------------------------------------------------------
-
-As shown in @fig-derivativesnoisystop, the input is an image corrupted
-with Gaussian noise. The result of convolving the input noisy image with
-the kernel $[1, -1]$ results in an output with an increased noise. This
-is because the noise at each pixel is independent of each other, so when
-computing the difference between two adjacent pixels we get increased
-noise (the difference between two Gaussian random variables with
-variance $\sigma^2$ is a new Gaussian with variance $2\sigma^2$). On the
-other hand, the values of the pixels of the original image are very
-similar and the difference is a small number (except at the object
-boundaries). As a consequence, the output is dominated by noise as shown
-in @fig-derivativesnoisystopb.
-
-There are also situations in which the derivative of an image is not
-defined. For instance, consider an image in the continuous domain with
-the form $\ell(x,y) = 0$ if $x<0$ and 1 otherwise. If we try to compute
-$\partial \ell(x,y) / \partial x$ we will get 0 everywhere, but around
-$x=0$ the value of the derivative is not defined. We avoided this issue
-in the previous section because for discrete images the approximation of
-the derivative is always defined.
-
-Let's start with the following observation. For two functions defined in
-the continuous domain $\ell(x,y)$ and $g(x,y)$, the convolution and the
-derivative are commutative:
-$$\frac {\partial \ell(x,y)}{\partial x} \circ g(x,y) = \ell(x,y) \circ \frac {\partial g(x,y)}{\partial x}$$
-This equality is easy to prove in the Fourier domain. If our goal is to
-compute image derivatives and then blur the output using a
-differentiable low-pass filter, $g(x,y)$, then instead of computing the
-derivative of the image we can compute the derivatives of the filter
-kernel and convolve it with the image. Even if the derivative of
-$\ell(x,y)$ is not defined in some locations (e.g., step boundaries), we
-can always compute the result of this convolution.
-
-If $g(x,y)$ is a blurring kernel it will smooth the derivatives,
-reducing the output noise at the expense of a loss in spatial resolution
-(@fig-derivativesnoisystop\[c\]). A common smoothing kernel for
-computing derivatives is the Gaussian kernel. The Gaussian has nice
-smoothing properties as we discussed in the previous chapter, and it is
-infinitely differentiable.
-
-If $g$ is a Gaussian, then the first order derivative is
-$$g_x(x,y; \sigma) = \frac {\partial g(x,y; \sigma)}{\partial x}= \frac{-x}{2 \pi \sigma^4} \exp{-\frac{x^2 +
-   y^2}{2 \sigma^2}} = \frac{-x}{\sigma^2} g(x,y; \sigma)
-$${#eq-derivate1gauss2dcont}
-
-The next plots shows the 2D Gaussian with $\sigma=1$, and its
-$x$-derivative:
-
-  -------
-   \(a\)
-  -------
-
-  -------
-   \(b\)
-  -------
-
-@fig-gaussiander_zebra shows an image filtered with three Gaussian
-derivatives with different widths, $\sigma$. Derivatives at different
-scales emphasize different aspects of the image. The fine-scale
-derivatives (@fig-gaussiander_zebra\[a\]) highlight the bands in the
-zebra, while the coarse-scale derivatives (@fig-gaussiander_zebra\[c\])
-emphasize more the object boundaries. This multiscale image analysis
-will be studied in depth in the following chapter.
-
-$\begin{array}{ccc}
-\text{(a)}
-\includegraphics[width=.28\linewidth]{figures/spatial_filters/gausian_der_c_2.jpg}
-&
-\text{(b)}
-\includegraphics[width=.28\linewidth]{figures/spatial_filters/gausian_der_c_4.jpg}
-&
-\text{(c)}
-\includegraphics[width=.28\linewidth]{figures/spatial_filters/gausian_der_c_8.jpg}
-\\
-\text{(d)}
-\includegraphics[width=.28\linewidth]{figures/spatial_filters/gausian_der_c_2plot.jpg}
-&
-\text{(e)}
-\includegraphics[width=.28\linewidth]{figures/spatial_filters/gausian_der_c_4plot.jpg}
-&
-\text{(f)}
-\includegraphics[width=.28\linewidth]{figures/spatial_filters/gausian_der_c_8plot.jpg}
-\end{array}$
+ of the content that will fill that region. Similarly, we could remove any object in an image or create new textures by modifying its gradient representation.
 
 ## High-Order Gaussian Derivatives
 
-The second order derivative of a Gaussian is
-$$g_{x^2}(x,y; \sigma) = \frac{x^2-\sigma^2}{\sigma^4} g(x,y; \sigma)$${#eq-derivate2gauss2dcont}
+The second-order derivative of a Gaussian is:
+$$
+g_{x^2}(x,y; \sigma) = \frac{x^2-\sigma^2}{\sigma^4} g(x,y; \sigma)
+$$
 
-The $n$-th order derivative of a Gaussian can be written as the product
-between a polynomial on $x$, with the same order as the derivative,
-times a Gaussian. The family of polynomials that result on computing
-Gaussian derivatives is called Hermite polynomials. The general
-expression for the $n$ derivative of a Gaussian is
-$$g_{x^n}(x; \sigma) =\frac{\partial^{n} g(x)}{\partial x^n}
+The $n$-th order derivative of a Gaussian can be written as the product between a polynomial on $x$, with the same order as the derivative, times a Gaussian. The family of polynomials that result in computing Gaussian derivatives is called Hermite polynomials. The general expression for the $n$ derivative of a Gaussian is:
+$$
+g_{x^n}(x; \sigma) =  
+\frac{\partial^{n} g(x)}{\partial x^n}
 =
 \left( \frac{-1}{\sigma \sqrt{2}} \right)^n
 H_n\left( \frac{x}{\sigma \sqrt {2}} \right)
 g(x; \sigma)
-$${#eq-derivate2gauss1dhermite} The first Hermite polynomial is
-$H_0(x)=1$. For $n=0$ we have the original Gaussian.
-@fig-gaussian_gaussiander shows the 1D Gaussian derivatives.
-
-$\begin{array}{cc}
-\text{(a)}
-\begin{tikzpicture}
-\begin{axis} [width=190pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=4,
-    xtick={-3, -1, 0, 1, 3},
-    xlabel=$x$,
-    ymin=-0, ymax=.45,
-    ytick={-.1,0.4},
-    ylabel={$g(x)$}]
-\addplot[domain=-4:4,samples=101,samples y=0] 
- ({x}, {1/(sqrt(2*pi))*exp(-x*x/2)}); 
-\end{axis} 
-\end{tikzpicture}
-~&~
-\text{(b)}
-\begin{tikzpicture}
-\begin{axis} [width=190pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=4,
-    xtick={-3, -1, 0, 1, 3},
-    xlabel=$x$,
-    ymin=-.65, ymax=.65,
-    ytick={-0.5,0,0.5},
-    ylabel={$g_x(x)$},
-    color=black]
-\addplot[domain=-4:4,samples=101,samples y=0] 
- ({x}, {(-x)*exp(-x*x/2)}); 
-\end{axis}
-\end{tikzpicture}
-\\
-\text{(c)}
-\begin{tikzpicture}
-\begin{axis} [width=190pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=4,
-    xtick={-3, -1, 0, 1, 3},
-    xlabel=$x$,
-    ymin=-1.2, ymax=.55,
-    ytick={0.5},
-    ylabel={$g_{x^2}(x)$}]
-\addplot[domain=-4:4,samples=101,samples y=0] 
- ({x}, {(x*x-1)*exp(-x*x/2)}); 
-\end{axis} 
-\end{tikzpicture}
-~&~
-\text{(d)}
-\begin{tikzpicture}
-\begin{axis} [width=190pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=4,
-    xtick={-3, -1, 0, 1, 3},
-    xlabel=$x$,
-    ymin=-1.5, ymax=1.5,
-    ytick={-1,0,1},
-    ylabel={$g_{x^3}(x)$},
-    color=black]
-\addplot[domain=-4:4,samples=101,samples y=0] 
- ({x}, {(-(x^3-3*x))*exp(-x*x/2)}); 
-\end{axis}
-\end{tikzpicture}
-\end{array}$
-
-In two dimensions, as the Gaussian is separable, the partial derivatives
-result on the product of two Hermite polynomial, one for each spatial
-dimension: $$g_{x^n,y^m}(x,y; \sigma) =\frac{\partial^{n+m} g(x,y)}{\partial x^n \partial y^m}
-= %(-1)^{n+m}
-\left( \frac{-1}{\sigma \sqrt{2}} \right)^{n+m}
-H_n\left( \frac{x}{\sigma \sqrt {2}} \right)
-H_m\left( \frac{y}{\sigma \sqrt {2}} \right)
-g(x,y; \sigma)
-$${#eq-derivate2gauss2dhermite} @fig-gauss_derivatives_triangle shows the
-2D Gaussian derivatives, and @fig-gauss_derivatives_triangle_FT shows
-the corresponding Fourier transforms. @fig-gauss_derivatives_mondrian
-shows the output of the derivatives when applied to a simple input image
-containing a square and a circle. Different derivatives detect a diverse
-set of image features. However, this representation might not be very
-useful as it is not rotationally invariant.
-
-![](figures/spatial_filters/gauss_derivatives_triangle.png){width="80%"}
-
-![](figures/spatial_filters/gauss_derivatives_triangle_FT.png){width="80%"}
-
-![](figures/derivatives/fig_gauss_derivatives_triangle_mondrian.png){width="80%"}
-
-The Gaussian derivatives share many of the properties of the Gaussian.
-The convolution of two Gaussian derivatives of order $n$ and $m$ and
-variances $\sigma_1^2$ and $\sigma_2^2$ result in another Gaussian
-derivative of order $n+m$ and variance $\sigma_1^2 + \sigma_2^2$.
-Proving this property on the spatial domain can be tedious. However, it
-is trivial to prove it in the Fourier domain.
-
-## Derivatives of Binomial Filters {#sec-derivatives_binomial_filters}
-
-When processing images we have to use discrete approximations for the
-Gaussian derivatives. After discretization, many of the properties of
-the continuous Gaussian will not hold exactly.
-
-There are many discrete approximations. For instance, we can take
-samples of the continuous functions. In practice it is common to use the
-discrete approximation given by the binomial filters.
-@fig-derivativepascaltriangle shows the result of convolving the
-binomial coefficients, $b_n$, with $\left[1, -1\right]$.
-
-$\begin{array}{ccccccccccccccccccccl} 
-d_0 &    ~ &  ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~~1 & ~~~ & -1 & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &\\
-d_1 &    ~ &  ~ & ~ & ~ & ~ & ~ & ~ & ~~1 & ~ & ~~0 & ~ & -1 & ~ & ~ & ~ & ~ & ~ & ~ & ~ & \\
-d_2 &    ~ &  ~ & ~ & ~ & ~ & ~ & ~~~1 & ~ & ~~~1 & ~~~ & -1 & ~ & -1 & ~ & ~ & ~ & ~ & ~ & ~ & \\
-d_3 &    ~ &  ~ & ~ & ~ & ~ & ~~~1 & ~ & ~~~2 & ~ &  ~~0 & ~~~  & -2 & ~ & -1 & ~ & ~ & ~ & ~ & ~ &\\
-d_4 &    ~ &  ~ & ~  & ~ & ~~~1 & ~   & ~~~3   & ~   & ~~~2  &  ~~~  & -2 & ~   & -3   & ~   & -1 & ~ & ~ & ~ & ~ &\\
-d_5 &    ~ &  ~ & ~  & ~~~1 & ~ & ~~~4   & ~   & ~~~5 & ~   & ~~0 & ~   & -5 & ~   & -4   & ~ & -1 & ~ & ~ & ~ &
-\end{array}$
-
-In two dimensions, we can use separable filters and build a partial
-derivative as $$Sobel_x =  \begin{bmatrix}  1 ~& 0 ~& -1 \\
-\end{bmatrix}\circ \begin{bmatrix}
-  1 \\
-  2 \\
-  1
-\end{bmatrix}=
-\begin{bmatrix}
-  1 ~& 0 ~& -1 \\
-  2 ~& 0 ~& -2\\
-  1~&  0 ~& -1
-\end{bmatrix}$$ $$Sobel_y =  \begin{bmatrix}
-  -1 & -2 & -1 \\
- ~0 & ~0 & ~0\\
-  ~1&  ~2 & ~1
-\end{bmatrix}
-$${#eq-sobel_kernels} This particular filter is called the **Sobel-Feldman
-operator**. The goal of this operator was to be compact and to be as
-isotropic as possible. The Sobel-Feldman operator can be implemented
-very efficiently as it can be written as the convolution with four small
-kernels, $Sobel_x=b_1 \circ d_0 \circ b_1^T \circ b_1^T$.
-
-
-:::{.column-margin}
-Remember that $b_1=[1, 1]$, and
-$b_2=b_1 \circ b_1 = [1,2,1]$.
-:::
-
- The DFT of the Sobel-Feldman operator
-is
-$$Sobel_x \left[u,v \right] = D_1\left[u\right] B_2 \left[v \right] = j \sin \left( 2 \pi u /N \right) \left( 2+2 \cos \left(2 \pi v/N \right) \right)$$and it is shown in @fig-DFTderivativeoperatorsd. $N \times N$ is the
-extension of the domain (the operator is zero padded). As $d_0$ and
-$d_1$ are 1D their 2D DFT vary only along one dimension. The Roberts
-cross operator is similar to a rotated version of $d_1$. The
-Sobel-Feldman operator has the profile of $D_1$ along the axis $u=0$ and
-it is proportional to the profile of $B_2$ along any section
-$v=constant$.
-
-![](figures/spatial_filters/DFTderivativeoperators.png){width="100%"}
-
-@fig-DFTderivativeoperators compares the DFT of the four types of
-approximations of the derivatives that we have discussed. These
-operators are still very popular. $Sobel$ has the best tolerance to
-noise due to its band-pass nature. The kernel $d_0$ is the one that
-provides the highest resolution in the output. @fig-circle shows the
-output of different derivative approximations to a simple input image
-containing a circle. In the next section we will discuss how to use
-these derivatives to extract other interesting quantities.
-
-![](figures/spatial_filters/circle.png){width="100%"}
-
-## Image Gradient and Directional Derivatives
-
-As we saw in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"}, an important image representation is
-given by the image gradient. From the image derivatives we can define
-also the image gradient as the vector:
-$$\nabla \ell(x,y) = \left( \frac{\partial \ell(x,y)}{\partial x}, \frac{\partial \ell(x,y)}{\partial y} \right)$$
-For each pixel, the output is a 2D vector. In the case of using Gaussian
-derivatives, we can write:
-$$\nabla \ell\circ g = \nabla g \circ \ell= \left( g_x(x,y), g_y(x,y) \right) \circ \ell$$
-
-Although we have mostly computed derivatives along the $x$ and $y$
-variables, we can obtain the derivative on any orientation as a linear
-combination of the two derivatives along the main axes. With
-${\bf t}=\left( \cos (\theta), \sin(\theta) \right)$, we can write the
-directional derivative a long the vector ${\bf t}$ as:
-$$\frac{\partial \ell(x,y)}{\partial {\bf t}} =  \nabla \ell\cdot {\bf t} = \cos(\theta) \frac{\partial \ell}{\partial x} + \sin(\theta) \frac{\partial \ell}{\partial y}$$
-In the Gaussian case:
-$$\frac{\partial \ell}{\partial {\bf t}} \circ g = \left( \cos(\theta) g_x(x,y) + \sin(\theta) g_y(x,y) \right) \circ \ell= \left( \nabla g  \cdot {\bf t} \right) \circ \ell
-= g_{\theta} (x,y)  \circ \ell
-$${#eq-steerable_derivative_filter} with
-$g_{\theta} (x,y) = \cos(\theta) g_x(x,y) + \sin(\theta) g_y(x,y)$.
-However, to compute the derivative along any arbitrary angle $\theta$
-does not require doing new convolutions. Instead, we can compute any
-derivative as a linear combination of the output of convolving the image
-with $g_x(x,y)$ and $g_y(x,y)$:
-$$\frac{\partial \ell}{\partial {\bf t}} \circ g =  \cos(\theta) g_x(x,y) \circ \ell+ \sin(\theta) g_y(x,y) \circ \ell$$When using discrete convolutional kernels $d_n\left[n,m\right]$ and
-$d_m\left[n,m\right]$ to approximate the derivatives along $n$ and $m$,
-it can be written as
-$$\nabla \ell= \left( d_n\left[n,m\right], d_m\left[n,m\right] \right) \circ \ell\left[n,m\right]$$
-and
-$$\nabla \ell\cdot {\bf t} =d_{\theta} \left[n,m\right] \circ \ell\left[n,m\right]$$
-with
-$d_{\theta} \left[n,m\right]  = \cos(\theta) d_n\left[n,m\right] + \sin(\theta) d_m\left[n,m\right]$.
-We expect that the linear combination of these two kernels should
-approximate the derivative along the direction $\theta$. The quality of
-this approximation will vary for the different kernels we have seen in
-the previous sections.
-
-## Image Laplacian
-
-The **Laplacian filter** was made popular by Marr and Hildreth in 1980
-@Marr80 in the search for operators that locate the boundaries between
-objects. The Laplacian is a common operator from differential geometry
-to measure the divergence of the gradient and it appears frequently in
-modeling fields in physics. The Laplacian also has applications in graph
-theory and in spectral methods for image segmentation @ng2002.
-
-
-
-The Laplacian operator is defined as the sum of the second order partial
-derivatives of a function:
-
-$$\nabla^2 \ell= \frac{\partial^2 \ell}{\partial x^2} + \frac{\partial^2 \ell}{\partial y^2}$$
-
-The Laplacian is more sensitive to noise than the first order
-derivative. Therefore, in the presence of noise, when computing the
-Laplacian operator on an image $\ell(x,y)$, it is useful to smooth the
-output with a Gaussian kernel, $g(x,y)$. We can write,
-$$\nabla^2 \ell\circ g = \nabla^2 g \circ \ell$$ Therefore, the same
-result can be obtained if we first compute the Laplacian of the Gaussian
-kernel, $g(x,y)$ and then convolve it with the input image. The
-Laplacian of the Gaussian is
-$$\nabla^2 g = \frac{x^2 + y^2 -2\sigma^2}{\sigma^4} g(x,y)$$
-
-The next plot (@fig-mexican_hat_wavelet) shows the Gaussian Laplacian
-($sigma = 1$). Due to its shape, the Laplacian is also called the
-inverted **mexican hat wavelet**. Despite that visually it might seem as
-if the Laplacian has a negative mean value, the mean is actually zero as
-the positive side is wider than the negative.
-
-  -------
-   \(a\)
-  -------
-
-  -------
-   \(b\)
-  -------
-
-In the discrete domain there are several approximations to the Laplacian
-filter. The simplest one consists in sampling the continuous Gaussian
-Laplacian in discrete locations. Figures
-[\[fig:DFTlaplacians\]](#fig-DFTlaplacians){reference-type="ref"
-reference="fig:DFTlaplacians"}(a-c) shows the DFT of the Gaussian
-Laplacian for three different values of $\sigma$. For values $\sigma>1$
-the resulting filter is band-pass, which is the expected behavior for
-the Gaussian Laplacian.
-
-![](figures/spatial_filters/DFTlaplacians.png){width="100%"}
-
-In one dimension, the Laplacian can be approximated by
-$\left[ 1,-2,1 \right]$, which is the result of the convolution of two
-2-tap discrete approximations of the derivative
-$\left[1,-1 \right] \circ \left[1,-1 \right]$. In two dimensions, the
-most popular approximation is the five-point formula, which consists in
-convolving the image with the kernel: $$\nabla_5^2 = 
-\begin{bmatrix}
-  0& 1 & 0 \\
-  1 & -4 & 1\\
-  0 &  1 & 0
-\end{bmatrix}
-$${#eq-five_point_laplacian} It involves the central pixel and its four
-nearest neighbors. This is a sum-separable kernel: it corresponds to
-approximating the second-order derivative for each coordinate and
-summing the result (i.e., convolve the image with $\left[1,-2,1\right]$
-and also with its transpose and summing the two outputs).
-@fig-DFTlaplaciansd shows the DFT of this approximation. It also has a
-quadratic from near the origin of the frequency domain, but it has a
-high-pass shape similar to the one obtained for a small value of
-$\sigma$.
-
-@fig-wheellaplacian compares the output of image derivatives and the
-Laplacian. Note that when summing two first-order derivatives along $x$
-and $y$, what we obtain is a first-order derivative along the 45 degree
-angle. However, when summing up the two second-order derivatives we
-obtain a rotationally invariant kernel, as shown in
-@fig-wheellaplaciand.
-
-  -----------------------------------------------------------------------
-   ![](figures/spatial_filters/wheel256.jpg){width=".2"}
-                                   \(a\)
-  -----------------------------------------------------------------------
-
-  ------------------------------------------------------------------------------
-   ![](figures/spatial_filters/wheelLaplacianx.jpg){width=".2"}
-                                      \(b\)
-  ------------------------------------------------------------------------------
-
-  ------------------------------------------------------------------------------
-   ![](figures/spatial_filters/wheelLaplaciany.jpg){width=".2"}
-                                      \(c\)
-  ------------------------------------------------------------------------------
-
-  -----------------------------------------------------------------------------
-   ![](figures/spatial_filters/wheelLaplacian.jpg){width=".2"}
-                                      \(d\)
-  -----------------------------------------------------------------------------
-
-The discrete approximation also provides a better intuition of how it
-works than its continuous counterpart. The Laplacian filter has a number
-of advantages with respect to the gradient:
-
--   It is rotationally invariant. It is a linear operator that responds
-    equally to edges in any orientation (this is only approximate in the
-    discrete case).
-
--   It measures curvature. If the image contains a linear trend the
-    derivative will be non-zero despite having no boundaries, while the
-    Laplacian will be zero.
-
--   Edges can be located as the zero-crossings in the Laplacian output.
-    However, this way of detecting edges is not very reliable.
-
--   Zero crossings of an image form closed contours.
-
-@fig-discretelaplacian1d compares the output of the first order
-derivative (@fig-discretelaplacian1d\[b\]) and the Laplacian
-(@fig-discretelaplacian1d\[d\]) on a simple 1D signal
-(@fig-discretelaplacian1d\[a\]). The local maximum of the derivative
-output (@fig-discretelaplacian1d\[c\]) and the zero crossings of the
-Laplacian output (@fig-discretelaplacian1d\[e\]) are aligned with the
-transitions (boundaries) of the input signal
-(@fig-discretelaplacian1d\[a\]).
-
-$\begin{array}{lcr}
-~&~&
-\text{(a)}
-\begin{tikzpicture}
-\begin{axis} [width=200pt,height=100pt,
-    axis x line=bottom, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=22,
-    xtick={0, 5,10, 20},
-    xlabel=$n$,
-    ymin=0, ymax=2.4,
-    ytick={0,...,2},
-    ylabel={$\ell\left[n\right]$}]
-\addplot+[ycomb] plot coordinates {(0,0) (1,0) (2,0) (3,0) (4,0) (5,1) (6,2) (7,2) (8,2) (9,2) (10,2) (11,2) (12,2) (13,2) (14,1) (15,0) (16,0) (17,0) (18,0) (19,0) (20,0)};
-\end{axis} 
-\end{tikzpicture}
-\\
-\text{(b)}
-\begin{tikzpicture}
-\begin{axis} [width=120pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=4,
-    xtick={-3,3},
-    xlabel=$n$,
-    ymin=-1.4, ymax=1.4,
-    ytick={-1,0,1},
-    ylabel={$d_1 \left[n\right]$},
-    color=black]
-\addplot+[ycomb] plot coordinates {(-3,0) (-2,0) (-1,1/2) (0,0) (1,-1/2) (2,0) (3,0) };
-\end{axis}
-\end{tikzpicture}
-&
-~
-&
-\text{(c)}
-\begin{tikzpicture}
-\begin{axis} [width=200pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=22,
-    xtick={0, 5,10, 20},
-    xlabel=$n$,
-    ymin=-1.4, ymax=1.4,
-    ytick={-1,...,1},
-    ylabel={$\ell\left[n\right] \circ d_1 \left[n\right]$}]
-\addplot+[ycomb] plot coordinates {(0,0) (1,0) (2,0) (3,0) (4,1/2) (5,1) (6,1/2) (7,0) (8,0) (9,0) (10,0) (11,0) (12,0) (13,-1/2) (14,-1) (15,-1/2) (16,0) (17,0) (18,0) (19,0) (20,0)};
-\end{axis} 
-\end{tikzpicture}
-\\
-\text{(d)}
-\begin{tikzpicture}
-\begin{axis} [width=120pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=4,
-    xtick={-3,3},
-    xlabel=$n$,
-    ymin=-2.8, ymax=2.8,
-    ytick={-2,0,2},
-    ylabel={$d_0 \left[n\right] \circ d_0 \left[n\right]$},
-    color=black]
-\addplot+[ycomb] plot coordinates {(-3,0) (-2,0) (-1,1) (0,-2) (1,1) (2,0) (3,0) };
-\end{axis}
-\end{tikzpicture}
-&
-~
-&
-\text{(e)}
-\begin{tikzpicture}
-\begin{axis} [width=200pt,height=100pt,
-    axis x line=middle, 
-    axis y line=middle, 
-    tick align=center,
-    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
-    every axis y label/.style={at={(current axis.above origin)}, anchor=north east,above=0mm},
-    xmin=-4, xmax=22,
-    xtick={0, 5,10, 20},
-    xlabel=$n$,
-    ymin=-1.4, ymax=1.4,
-    ytick={-1,...,1},
-    ylabel={$\ell\left[n\right] \circ d_0^2 \left[n\right]$}]
-\addplot+[ycomb] plot coordinates    {(0,0) (1,0) (2,0) (3,0) (4,1) (5,0) (6,-1) (7,0) (8,0) (9,0) (10,0) (11,0) (12,0) (13,-1) (14,0) (15,1) (16,0) (17,0) (18,0) (19,0) (20,0)};
-\end{axis} 
-\end{tikzpicture}
-\end{array}$
-
-Marr and Hildreth @Marr80 used zero-crossings of the Laplacian output to
-compute edges, but this method is not used nowadays for edge detection.
-Instead the Laplacian filter is widely used in a number of other image
-representations. It is used to build image pyramids (multiscale
-representations, chapter
-[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
-reference="chapter-image_pyramids"}), and to detect points of interest
-in images (it is the basic operator used to detect keypoints to compute
-SIFT descriptors @Lowe04).
-
-## A Simple Model of the Early Visual System
-
-The Laplacian filter can also be used as a coarse approximation of the
-behavior of the **early visual system**. When looking at the magnitude
-of the DFT of the Laplacian with $\sigma=1$ (@fig-DFTlaplacians), the
-shape seems reminiscent of our subjective evaluation of our own visual
-sensitivity to spatial frequencies when we look at the Campbell and
-Robson chart (@fig-csfchart). As the visual filter does not seem to
-cancel exactly the very low spatial frequencies as the Laplacian does, a
-better approximation is $$h = -\nabla^2 g  + \lambda g$${#eq-humanmodel} where the negative sign in front of the Laplacian helps
-to fit our perception better. The kernel $h$ is the approximate impulse
-response of the human visual system, $\lambda$ is a small constant that
-is equal to the DC gain of the visual filter (here we have set up
-$\lambda = 2$ and $\sigma=5$). This results in the profile shown in
-@fig-EVS_sigma5_lambda2.
-
-![](figures/derivatives/EVS_sigma5_lambda2.png){width=".4"}
-
-The first thing worth pointing out is that the Fourier transform of the
-impulse response shown in shown in @fig-EVS_sigma5_lambda2 has a shape
-that is qualitatively similar to the shape of the human contrast
-sensitivity function as discussed in chapter
-[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
-reference="chapter-fourier_analysis"}. Here we show again the Campbell
-and Robson chart, together with a radial section of the Fourier
-transform of $h$ from equation (@eq-humanmodel):
-
-![](figures/spatial_filters/csf.jpg){width=".45"}
-![](figures/derivatives/dft_radial_EVS.png){width=".45"}
-
-This particular form of impulse response explains some visual illusions
-as shown in @fig-vasarely. This visual illusion is called the
-**Vasarely visual illusion**. Figures
-[\[fig:vasarely\]](#fig-vasarely){reference-type="ref"
-reference="fig:vasarely"}(a) and
-[\[fig:vasarely\]](#fig-vasarely){reference-type="ref"
-reference="fig:vasarely"}(d) show two grayscale pyramids formed by
-superimposing squares of increasing (or decreasing) intensity. When
-looking at them we perceive the diagonal directions as being brighter
-(a) or darker (d) than their neighborhood. This is an illusion because
-there is not such a difference in image intensity. What mechanism is
-responsible of this illusion?
-
-One explanation consists in saying that the image that we perceive is
-the output of a filter (as shown in equation (@eq-humanmodel)). Figures
-[\[fig:vasarely\]](#fig-vasarely){reference-type="ref"
-reference="fig:vasarely"}(b) and
-[\[fig:vasarely\]](#fig-vasarely){reference-type="ref"
-reference="fig:vasarely"}(e) show the output of such a filter. We can
-see the diagonals again as being brighter or darker but now this effect
-is not an illusion, the brighter and darker diagonals are really part of
-the filtered image. In fact, @fig-vasarelyc shows in blue a horizontal
-section at one quarter of @fig-vasarelyb. The red curve is the section
-of the input image in @fig-vasarelya. We can see that the output really
-contains a pick in intensity on the diagonals of @fig-vasarelyb. The
-plot in @fig-vasarelyf shows the same for figures
-[\[fig:vasarely\]](#fig-vasarely){reference-type="ref"
-reference="fig:vasarely"} (d and e). For the results shown in the
-@fig-vasarely we have set $\lambda = 2$ and $\sigma = 5$. The result is
-probably overly smooth and a more appropriate value might be around
-$\sigma =2$.
-
-$\begin{array}{ccc}
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_c.jpg}
-&
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_d.jpg}
-&
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_section.png}
-\\
-\text{(a)} & \text{(b)} & \text{(c)}
-\\
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_a.jpg}
-&
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_b.jpg}
-&
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/vasarely_section_b.png}
-\\
-\text{(d)} & \text{(e)} & \text{(f)}
-\end{array}$
-
-## Sharpening Filter
-
-One example of a simple but very useful filter is a **sharpening
-filter**. The goal of a sharpening filter is to transform an image so
-that it appears sharper (i.e., it contains more fine details). This can
-be achieved by amplifying the amplitude of the high-spatial frequency
-content of the image. We can achieve this with a combination of filters
-that we have already discussed in this section.
-
-A simple way to design a sharpening filter is to de-emphasize the blurry
-components of an image. By the linearity of the convolution operator,
-we're allowed to add and subtract kernels to make a new kernel that
-would give us the same filtered image as if we had added and subtracted
-the filtered outputs of each of the component kernels. For this example,
-we start with twice the original image (sharp plus blurred parts), then
-subtract away the blurred components of the image:
-$$\text{sharpening filter} =\begin{bmatrix}
-  0& 0 & 0 \\
-  0 & 2 & 0\\
-  0 &  0 & 0
-\end{bmatrix}
--
-\frac{1}{16}
-\begin{bmatrix}
-  1& 2 & 1 \\
-  2 & 4 & 2\\
-  1 &  2 & 1
-\end{bmatrix}
-$${#eq-sharpening} Note that the DC gain of this sharpening filter is 1.
-That would leave one original image in there, plus an additional
-component of the sharp details. The perceptual result is that of a
-sharpened image (@fig-convExamps3). We can apply this filter
-successively in order to further enhance the image details. If too much
-sharpening is applied we might end up enhancing noise and introducing
-image artifacts.
-
-$\begin{array}{ccc}
-\text{(a)}
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/boat_sharp.jpg}
-&
-\text{(b)}
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/boat_sharp0.jpg}
-&
-\text{(c)}
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/boat_sharp1.jpg}
-\\
-\text{(d)}
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/boat_sharp2.jpg}
-&
-\text{(e)}
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/boat_sharp3.jpg}
-&
-\text{(f)}
-\includegraphics[width=.27\linewidth]{figures/spatial_filters/boat_sharp4.jpg}
-\end{array}$
-
-Note that the sharpening filter described here does not introduce new
-fine image details, it only enhances the ones already present in the
-image.
-
-It is also interesting to note that this sharpening filter is very
-similar to the model of the early visual system that we described
-before.
-
-## Retinex
-
-How do you tell gray from white? This might seem like a simple question,
-but one remarkable aspect of vision is that perception of the simplest
-quantity might be far from trivial. As a final example to illustrate the
-power of using image derivatives as an image representation, we will
-discuss here a partial answer to this question.
-
-To understand that answering this question is not trivial, let's
-consider the structure of light that reaches the eye, which is the input
-upon which our visual system will try to differentiate black from white.
-The amount of light that reaches the eye from painted piece of paper is
-the result of two quantities: the amount of light reaching the piece of
-paper, and the reflectance of the surface (what fraction of the light is
-reflected back into space and what fraction is absorbed by the
-material).
-
-If two patches receive the same amount of light, then we will perceive
-as being darker the patch that reflects less light. But what happens if
-we change the amount of light that reaches the scene? If we increase the
-amount of light projected on top of the dark patch, what will be seen
-now? What will happen if we have two patches on the same scene, each of
-them receiving different amounts of light? How does the visual system
-decide what white is and how does it deal with changes in the amount of
-light illuminating the scene? The visual system is constantly trying to
-estimate what the incident illumination is and what are the actual
-reflectances of the surfaces present in the scene.
-
-If our goal is to estimate the shade of gray of a piece of painted
-paper, then the quantity that we care about is the reflectance of the
-surface. But, what happens if we see two patches of unknown reflectance,
-and each is illuminated with two different light sources of unknown
-identity? How does the visual system manages to infer what the
-illumination and reflectances are?
-
-Visual illusions are a way of getting to feel how our own visual system
-processes images. To experience how this estimation process works let's
-start by considering a very simple image as shown in @fig-simultaneous.
-
-![](figures/statistical_image_models/retinex.jpg){width="100%"}
-
-This image shows a very simple scene formed by a surface with a set of
-squares of different gray levels illuminated by a light spot oriented
-toward the left. Our visual system tries to estimate the two quantities:
-the reflectance of each square and the illumination intensity reaching
-each pixel.
-
-Let's think of the image formation process. The surface is made of
-patches of different reflectances $r(x,y) \in (0,1)$. Each location
-receives an illumination $l(x,y)$. The observed brightness is the
-product: $$\ell(x,y) = r(x,y) \times l(x,y)$$
-
-Despite that what reaches the eye is the signal $\ell(x,y)$, our
-perception is not the value of $\ell(x,y)$. In fact, the squares 1 and 2
-in @fig-simultaneous have the exact same values of intensity but we see
-them differently which is generally explained by saying that we discount
-(at least partially) the effects of the illumination, $l(x,y)$.
-
-But how can we estimate $r(x,y)$ and $l(x,y)$ by only observing
-$\ell(x,y)$? One of the first solutions to this problem was the
-**Retinex** algorithm proposed by Land and McCann @Land1971. Land and
-McCann observed that it is possible to extract $r$ and $l$ from $\ell$
-if one takes into account some constraints about the expected nature of
-the images $r$ and $l$. Land and McCann noted that if one considers two
-adjacent pixels inside one of the patches of uniform reflectance, the
-difference between the two pixel values will be very small as the
-illumination, even if it is nonuniform, will only produce a small change
-in the brightness of the two pixels. However, if the two adjacent pixels
-are in the boundary between two patches of different reflectances, then
-the intensities of these two pixels will be very different.
-
-
-
-The Retinex algorithm works by first extracting $x$ and $y$ spatial
-derivatives of the image $\ell(x,y)$ and then thresholding the
-gradients. First, we transform the product into a sum using the $\log$:
-$$\log \ell(x,y) = \log r(x,y) + \log l(x,y)$$ Taking derivatives along
-$x$ and $y$ is now simple:
-$$\frac{\partial \log \ell(x,y)}{ \partial x} = \frac{\partial \log r(x,y)}{ \partial x} + \frac{\partial \log l(x,y)}{ \partial_x}$$
-And the same thing is done for the derivative along $y$.
-
-Any derivative larger that the threshold is assigned to the derivative
-of the reflectance image $r(x,y)$ and the ones smaller than a threshold
-are assigned to the illumination image $l(x,y)$:
-
-$$\frac{\partial \log r(x,y)}{ \partial x} =  \left\{
-\begin{array}{rl}
-\frac{\partial \log \ell(x,y)}{ \partial x} & \text{if} ~  \left| \frac{\partial \log \ell(x,y)}{ \partial x} \right|>T\\
-0 ~~~~~~~~& \text{otherwise}
-\end{array} \right.$$
-
-@fig-simultaneous2 shows how the image derivatives are decomposed into
-reflectance and illumination changes.
-
-![](figures/statistical_image_models/retinex_solution_b.png){width="100%"}
-
-Then, the image $\log r(x,y)$ is obtained by integrating the gradients,
-as shown in section
-[1.4](#section:editinggradientdomain){reference-type="ref"
-reference="section:editinggradientdomain"}, and exponentiating the
-result. Finally, the illumination can be obtained as
-$l(x,y) = \ell(x,y)/r(x,y)$. The results are shown in
-@fig-simultaneous3.
-
-![](figures/statistical_image_models/retinex_solution_a.png){width="100%"}
-
-Note that the illumination derivatives have much lower magnitude than
-the reflectance derivatives; however they extend over much larger
-spatial regions, which means that once they are integrated, changes in
-brightness due to nonuniform illumination might be larger than changes
-due to variations in reflectance values.
-
-Despite the simplicity of this approach it works remarkably well with
-images like the ones shown in @fig-simultaneous and also with a number
-of real images. However, the algorithm is limited and it is easy to make
-it fail in situations where the visual system works, as we will see
-later in more depth.
-
-The Retinex algorithm works by making assumptions about the structure of
-the images it tries to separate. The underlying assumption is that the
-illumination image, $l(x,y)$, varies smoothly and the reflectance image,
-$r(x,y)$, is composed of uniform regions separated by sharp boundaries.
-These assumptions are very restrictive and will limit the domain of
-applicability of such an approach. Understanding the structure of images
-in order to build models such as Retinex has been the focus of a large
-amount of research. This chapter will introduce some of the most
-important image models.
-
-The recovered brightness is stronger than what we perceive. There are a
-number of reasons that weaken the perceived brightness. The effect is
-bigger if the display occupies the entire visual field. Right now the
-picture appears in the context of the page, which also affects our
-perception of the illumination. Also, the two larger squares do not seem
-to group well with the rest of the display, as if they were floating in
-a different plane. And finally, for such a simple display, the visual
-system does not fully separate the perception of both components.
-
-Decomposing an image into different physical causes is known as
-**intrinsic images decomposition**. The intrinsic image decomposition,
-proposed by Barrow and Tenenbaum @Barrow1978, aims to recover intrinsic
-scene characteristics from images, such as occlusions, depth, surface
-normals, shading, reflectance, reflections, and so on.
-
-## Concluding Remarks
-
-In this chapter we have covered a very powerful image representation:
-image derivatives (first order, second order, and the Laplacian) and
-their discrete approximations. Despite the simplicity of this
-representation, we have seen that it can be used in a number of
-applications such as image inpaining, separation of illumination and
-reflectance, and it can be used to explain simple visual illusions. It
-is not surprising that similar filters like the ones we have seen in
-this chapter emerge in convolutional neural networks when trained to
-solve visual tasks.
-
-[^1]: **Image inpainting** consists in filling a missing region in an
-    image.
+$$
+The first Hermite polynomial is $H_0(x)=1$, the second is $H_1(x) = 2x$, the third is $H_2(x)=4x^2-2$, and they can be computed recursively as:
+$$
+H_n(x) = 2x H_{n-1}(x) - 2(n-1)H_{n-2}(x)
+$$
+The second-order Gaussian derivative with a $\sigma=1$ can be seen in @fig-Gaussian_derivatives2.
+
+![Second derivative of a Gaussian with $\sigma=1$ in the horizontal direction.](figures/derivatives/derivative_gaussian.png){#fig-Gaussian_derivatives2}
+
+When implementing a linear system to compute the derivative of an image, we would be convolving the image with the derivative of the Gaussian. However, computing a high-order Gaussian derivative as a single step convolution might not be the best solution, and, in practice, we prefer to compute it in a step-by-step fashion.
+
+## Derivatives using Binomial Filters {#sec-derivatives_binomial_filters}
+
+One of the main problems of computing image derivatives is that the operation will enhance the high-frequency noise present in most natural images. To reduce the influence of noise, the most common solution is to smooth the input image before computing the derivative. The amount of smoothing can be selected based on the application or from prior knowledge of the amount of noise present in the input.
+
+The solution that minimizes the influence of noise is to smooth the image with a Gaussian. In fact, as we just showed in the previous section, the Gaussian operator is the smoothing operator that best approximates the human visual system. If the Gaussian width is correctly selected, then this is the best solution. Unfortunately, the width of the Gaussian cannot always be determined. This is the case when we are working with 3D scenes, as objects at different depths will show different amounts of smoothing. Therefore, it is common to use a simpler smoothing operator that approximates the Gaussian but requires fewer operations. This approximation is obtained using the **binomial filter**.
+
+The binomial filter has two main properties that make it an ideal candidate for smoothing images in order to compute the image derivatives:
+
+- **It approximates a Gaussian:** It can be shown that if we increase the filter size, the binomial kernel approximates a Gaussian.
+- **It can be computed using recursive operations:** As we will show later, the binomial kernel can be applied by just adding and multiplying pixel values without the need to keep a large filter in memory.
+
+As we did with the Gaussian, we will first compute the derivative of the binomial kernel and then convolve the input image with it.
+
+The binomial kernel is defined as follows:
+$$
+\mathbf{b_1} = \left[1, 1\right]/2
+$$
+Higher-order binomial filters can be computed recursively by convolving the binomial kernel with itself:
+$$
+\mathbf{b_2} = \mathbf{b_1} \circ \mathbf{b_1} = \left[1, 2, 1\right]/4
+$$
+$$
+\mathbf{b_3} = \mathbf{b_2} \circ \mathbf{b_1} = \left[1, 3, 3, 1\right]/8
+$$
+$$
+\mathbf{b_4} = \mathbf{b_3} \circ \mathbf{b_1} = \left[1, 4, 6, 4, 1\right]/16
+$$
+$$
+\vdots
+$$
+
+In general, the $N$-th binomial filter, $\mathbf{b_N}$ is:
+$$
+b_N[n] = \frac{1}{2^N}
+\begin{pmatrix}
+N\\
+n
+\end{pmatrix}
+$$
+@fig-binomialkernels shows the binomial kernels for $N=1$ to $N=5$.
+
+![Binomial kernels of increasing size.](figures/derivatives/binomial_kernels.png){#fig-binomialkernels}
+
+The $N$-th binomial filter can be used to compute image derivatives by first convolving the input image with $\mathbf{b_N}$ and then applying a derivative operator $\mathbf{d}=\left[1,-1\right]$.
+
+But note that this can be performed in one single step. If we first compute the derivative of the kernel and then convolve the image with it, the result is the same, and the cost is lower. The $N$-th binomial derivative operator is computed by convolving the binomial filter with $\mathbf{d}$:
+
+$$
+\mathbf{d_1} \circ \mathbf{b_1} = \mathbf{d_2} =  \left[1, 0, -1 \right]/2
+$$
+$$
+\mathbf{d_2} \circ \mathbf{b_1} = \mathbf{d_3} =  \left[1, -2, 1 \right]/4
+$$
+$$
+\mathbf{d_3} \circ \mathbf{b_1} = \mathbf{d_4} =  \left[1, -3, 3, -1 \right]/8
+$$
+$$
+\vdots
+$$
+In general, the $N$-th derivative binomial filter is:
+$$
+d_N[n] = \frac{1}{2^N} \left( \binom{N}{n} - \binom{N}{n-1} \right)
+$$
+@fig-binomialderivatives shows the first derivatives of the binomial kernel for $N=2$ to $N=5$. This kernel can be used to approximate the derivative in a single step.
+
+![Binomial derivative kernels of increasing size.](figures/derivatives/binomial_derivatives.png){#fig-binomialderivatives}
+
+This method reduces noise and does not misalign the output. Another important advantage of binomial filters is that the convolution can be implemented using a recursive filter.
+
+## Summary
+
+In this chapter, we have reviewed how to compute image derivatives and the importance of filtering the input image before performing the derivative operation to reduce the influence of noise. The filters that we presented are linear and shift-invariant, and their implementation can be performed using convolution. We studied how binomial filters approximate a Gaussian and how their derivatives approximate the Gaussian derivative. Using binomial filters allows for reducing the influence of noise in a very efficient way, both in the spatial and frequency domains.
+.
