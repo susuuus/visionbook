@@ -2,22 +2,13 @@
 
 ## Introduction
 
-In chapter
-[\[chapter-linear_image_filtering\]](#sec-linear_image_filtering){reference-type="ref"
-reference="chapter-linear_image_filtering"} we motivated translation
-invariant linear filters as a way of accounting for the fact that
-objects in images might appear at any location. Therefore, a reasonable
-way of processing an image is by manipulating pixel neighborhoods in the
-same way independently on the image location. In addition to translation
-invariance, scale invariance is another fundamental property of images.
-Due to perspective projection, objects at different distances will
-appear with different sizes as shown in @fig-birds_multiscale.
-Therefore, if we want to locate all the bird instances in this image, we
-will have to apply an operator that is invariant in translation and in
-scale. Image pyramids provide an efficient representation for
-space-scale invariant processing.
+In @sec-linear_image_filtering we motivated translation invariant linear filters as a way of accounting for the fact that objects in images might appear at any location. Therefore, a reasonable way of processing an image is by manipulating pixel neighborhoods in the same way independently on the image location. In addition to translation invariance, scale invariance is another fundamental property of images. Due to perspective projection, objects at different distances will appear with different sizes as shown in @fig-birds_multiscale. Therefore, if we want to locate all the bird instances in this image, we will have to apply an operator that is invariant in translation and in scale. Image pyramids provide an efficient representation for space-scale invariant processing.
 
-![](figures/pyramids/birds_multiscale.jpg){width=".8"}
+:::{#fig-birds_multiscale}
+![](figures/pyramids/birds_multiscale.jpg){width=80%}
+
+Objects in images appear at arbitrary locations and with arbitrary image sizes.
+:::
 
 ## Image Pyramids and Multiscale Image Analysis
 
@@ -46,14 +37,16 @@ disadvantage of this approach is that it will be computationally
 expensive as detecting large birds will require computing convolutions
 with big kernels, which is very slow. Another alternative is to change
 the image size as shown in @fig-birds_multiscale_processing, resulting
-in a **multiscale image pyramid**. In this example, the original image
-has a resolution of 848$\times$`<!-- -->`{=html}643 pixels. Each image
-in the pyramid is obtained by scaling down the image from the previous
-level by reducing the number of pixels by a factor of $25$ percent (that
-is, each image in the pyramid has 3/4 of the size of the precedent
-image)[^1].
+in a **multiscale image pyramid**. 
 
-![](figures/pyramids/multiscale_birds_boxes.png){width="80%"}
+In this example, the original image has a resolution of 848 $\times$ 643 pixels. Each image in the pyramid is obtained by scaling down the image from the previous level by reducing the number of pixels by a factor of $25$ percent (that is, each image in the pyramid has 3/4 of the size of the precedent image)^[Downsampling is discussed in detail in @sec-downsampling_and_upsampling.].
+
+:::{#fig-birds_multiscale_processing}
+![](figures/pyramids/multiscale_birds_boxes.png){width=80%}
+
+Multiscale image pyramid. Each image is 25 percent smaller than the previous one. The red box indicates the size of a template used for detecting birds. As the size of the template is fixed; it will only be able to detect the birds that tightly fit inside the box. By running the same template across many levels in this pyramid, different instances of birds are detected at different scales.
+:::
+
 
 Now we can use the pyramid to detect birds at different sizes using a
 single template. The red box in the figure denotes the size of the
@@ -78,7 +71,9 @@ are the projection vectors. The vector $\mathbf{r}$ contains the
 transform coefficients:
 $\mathbf{r}_i = \mathbf{P}_i^\mathsf{T}\boldsymbol\ell$. The vector
 $\mathbf{r}$ corresponds to a different representation of the image
-$\boldsymbol\ell$ than the original pixel space.We are interested in transforms that are invertible, so that we can
+$\boldsymbol\ell$ than the original pixel space.
+
+We are interested in transforms that are invertible, so that we can
 recover the input $\boldsymbol\ell$ from the projection coefficients
 $\mathbf{r}$:
 $$\boldsymbol\ell= \mathbf{Q} \mathbf{r} = \sum_{i=0}^{M-1} \mathbf{r}_i \mathbf{Q}_i$$
@@ -105,6 +100,35 @@ $\mathbf{P}$ can be real or complex (like in the Fourier transform). For
 complex transforms, we should replace the $\mathbf{P}^\mathsf{T}$ by
 $\mathbf{P}^{*\mathsf{T}}$ (i.e., complex conjugate transpose).
 
+:::{.column-margin}
+The quadrature mirror filter (QMF) transform is an example of self-inverting transform @Adelson87b. For 1D signals of length 4, the QMF transform can be written as:
+\[
+\mathbf{P}=\frac{1}{\sqrt{2}}
+ \begin{bmatrix}
+  1 ~& 1 ~& 0 ~& 0 \\
+  1 ~& -1 ~& 0 ~& 0 \\
+  0 ~& 0 ~& 1 ~& 1 \\
+  0 ~& 0 ~& 1 ~& -1  
+ \end{bmatrix}
+\]
+This is equivalent to the convolution of the input signal with two orthogonal kernels, $[1,1]$ and $[1,-1]$, with a stride of 2.
+
+This transform also has a multiscale version that is also self-inverting:
+\[
+\mathbf{P}=
+ \begin{bmatrix}
+  \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 & 0 \\[5pt]
+  0 & 0 & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \\[5pt]
+  \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \\[5pt] 
+  \frac{1}{2} & \frac{1}{2} & -\frac{1}{2} & -\frac{1}{2} 
+ \end{bmatrix}
+\]
+You can check that in both cases $\mathbf{Q} = \left( \mathbf{P^\transpose} \right) ^{-1} = \mathbf{P^\transpose}$.
+These transforms can be extended to 2D.
+:::
+
+
+
 ## Gaussian Pyramid
 
 We'd like to make a recursive algorithm for creating a multiresolution
@@ -126,12 +150,22 @@ processing.
 @fig-gausspyr shows the Gaussian pyramid of an image with six levels.
 Each level has half the resolution of the previous level.
 
-![](figures/pyramids/gaussianPyr_1.jpg){width="50%"}
-![](figures/pyramids/gaussianPyr_2.jpg){width="25%"}
-![](figures/pyramids/gaussianPyr_3.jpg){width="12.5%"}
-![](figures/pyramids/gaussianPyr_4.jpg){width="6.25%"}
-![](figures/pyramids/gaussianPyr_5.jpg){width="3.125%"}
-![](figures/pyramids/gaussianPyr_6.jpg){width="1.5625%"}
+:::{#fig-gausspyr layout-ncol=6}
+![](figures/pyramids/gaussianPyr_1.jpg){width="0.5%"}
+
+![](figures/pyramids/gaussianPyr_2.jpg){width="0.25%"}
+
+![](figures/pyramids/gaussianPyr_3.jpg){width="0.125%"}
+
+![](figures/pyramids/gaussianPyr_4.jpg){width="0.0625%"}
+
+![](figures/pyramids/gaussianPyr_5.jpg){width="0.03125%"}
+
+![](figures/pyramids/gaussianPyr_6.jpg){width="0.015625%"}
+
+
+Gaussian pyramid with six levels. The first level, $\mathbf{g}_0$, is the input image. The Gaussian pyramid is built for each color channel independently.
+:::
 
 To make the filters more intuitive, it is useful to write the two steps
 in matrix form. The following matrix shows the recursive construction of
@@ -141,6 +175,15 @@ where $\mathbf{D}_k$ is the downsampling operator, $\mathbf{B}_k$ is the
 convolution with the fourth binomial filter, and
 $\mathbf{G}_k = \mathbf{D}_k \mathbf{B}_k$ is the blur-and-downsample
 operator for level $k$.
+
+
+::: {.column-margin}
+One **block** of the Gaussian pyramid computation.
+
+\centerline{
+![](path_to_image.png)
+}
+:::
 
 We call the sequence of images
 $\mathbf{g}_0,  \mathbf{g}_1, . . ., \mathbf{g}_N$ as the Gaussian
@@ -192,7 +235,10 @@ Gaussian pyramid image of one level, but not present at the level below
 it. We calculate that by expanding the lower-resolution Gaussian pyramid
 image to the same pixel resolution as the neighboring higher-resolution
 Gaussian pyramid image, then subtracting the two. This calculation is
-made in a recursive, telescoping fashion. Let's look at the steps for
+made in a recursive, telescoping fashion. 
+
+
+Let's look at the steps for
 calculating a Laplacian pyramid. What we want is to compute the
 difference between $\mathbf{g}_k$ and $\mathbf{g}_{k+1}$. To do this
 first we need to upsample the image $\mathbf{g}_{k+1}$ so that it has
@@ -206,6 +252,19 @@ coefficients, $\mathbf{l}_k$, at pyramid level $k$, are:
 $$\mathbf{l}_{k} =  \mathbf{g}_k - \mathbf{F}_k \mathbf{g}_{k+1} =  (\mathbf{I}_k - \mathbf{F}_k \mathbf{G}_k) \mathbf{g}_{k} = \mathbf{L}_k \mathbf{g}_{k}
 $${#eq-laplacian_pyr_coef}
 
+::: {.column-margin}
+One **block** of the Laplacian pyramid computation.  
+\\[6pt]  
+
+![](path_to_image.png)
+
+\centerline{  
+
+![](path_to_image.png)
+
+}
+:::
+
 
 
 @fig-laplacpyr shows the resulting Laplacian pyramid for an image. To
@@ -214,12 +273,23 @@ the Gaussian pyramid of the input image with $N+1$ levels. The last
 level of this pyramid is the smallest level of the Gaussian pyramid used
 to compute the Laplacian pyramid and is called the low-pass residual.
 
-![](figures/pyramids/laplacianPyr_1.jpg){width="48%"}
-![](figures/pyramids/laplacianPyr_2.jpg){width="24%"}
-![](figures/pyramids/laplacianPyr_3.jpg){width="12%"}
-![](figures/pyramids/laplacianPyr_4.jpg){width="6%"}
-![](figures/pyramids/laplacianPyr_5.jpg){width="3%"}
-![](figures/pyramids/gaussianPyr_6.jpg){width="1.5%"}
+::: {#fig-laplacpyr layout-ncol=6}
+![](figures/pyramids/laplacianPyr_1.jpg){width="0.48\linewidth"}
+
+![](figures/pyramids/laplacianPyr_2.jpg){width="0.24\linewidth"}
+
+![](figures/pyramids/laplacianPyr_3.jpg){width="0.12\linewidth"}
+
+![](figures/pyramids/laplacianPyr_4.jpg){width="0.06\linewidth"}
+
+![](figures/pyramids/laplacianPyr_5.jpg){width="0.03\linewidth"}
+
+![](figures/pyramids/gaussianPyr_6.jpg){width="0.015\linewidth"}
+
+Laplacian pyramid, including the tiny low-pass residual as the last image.  
+The Laplacian pyramid is built for each color channel independently.  
+:::
+
 
 Let's write down the matrices in @eq-laplacian_pyr_coef for a 1D input
 $\boldsymbol\ell$ of length 8, and assuming zero boundary conditions.
@@ -274,7 +344,9 @@ $$\mathbf{l}_{0} =  (\mathbf{I} - \mathbf{F}_0 \mathbf{G}_0) \mathbf{g}_0=
      0   ~&   0  ~&  -2  ~&  -8  ~& -24  ~& -56 ~&  182  ~& -48\\
      0   ~&   0   ~&  0  ~&   0   ~& -8  ~& -32 ~&  -48 ~&  224
 \end{bmatrix}
-\boldsymbol\ell$$Interestingly, the Laplacian pyramid is an invertible transform, but
+\boldsymbol\ell$$
+
+Interestingly, the Laplacian pyramid is an invertible transform, but
 only if we keep the low-pass residual. We can reconstruct the original
 image from the Laplacian pyramid. Using the **low-pass residual** signal
 associated with the Laplacian pyramid, we can recursively reconstruct
@@ -292,6 +364,12 @@ pyramid $\mathbf{l}_0,\mathbf{l}_1,...,\mathbf{l}_2$ and the low pass
 residual $\mathbf{g}_3$ to recover the input signal
 $\boldsymbol\ell=\mathbf{g}_0$.
 
+::: { #fig-laplacian_pyr_architecture}
+![](figures/pyramids/laplacianPyr_architecture.png)
+
+The diagram shows the Gaussian pyramid (black), the Laplacian pyramid (red) and the Laplacian inversion for a three-level Laplacian pyramid (blue).
+:::
+
 This architecture has two parts: (1) the analysis network (or
 **encoder**) that transforms the input image $\mathbf{x}$ into a
 representation composed of $\mathbf{l}_0, \mathbf{l}_1, ...$ and the low
@@ -300,6 +378,12 @@ pass residual $\mathbf{x}_n$; and (2) the synthesis network (or
 Laplacian pyramid is an **overcomplete representation** (more
 coefficients than pixels); the dimensionality of the representation is
 higher than the dimensionality of the input. 
+
+:::{.column-margin}
+
+**Encoder** and **decoder** networks are also common building blocks of deep neural networks. The Laplacian pyramid can be considered as a special type of deep neural net.
+
+:::
 
 Note that the reconstruction property of the Laplacian pyramid does not
 depend on the filters used for subsampling and upsampling. Even if we
@@ -316,9 +400,13 @@ is used to select which pixels come from each of the two images in order
 to create the composite image. For example, let's blend two images using
 the mask as shown in @fig-orange_apple_mask.
 
-![](figures/pyramids/orange.jpg){width="30%"}  
-![](figures/pyramids/apple.jpg){width="30%"}  
-![](figures/pyramids/mask10_b.jpg){width="30%"}
+:::{#fig-orange_apple_mask}
+![](figures/pyramids/orange.jpg){width="30%"}  
+![](figures/pyramids/apple.jpg){width="30%"}  
+![](figures/pyramids/mask10_b.jpg){width="30%"}  
+
+Two images to be blended and the blending mask.
+:::
 
 In this example, the mask indicates that the blended image will combine
 the half-left of the first image with the right-half of the second
@@ -326,7 +414,12 @@ image. One naive solution to this problem will be to define blending as
 $\boldsymbol\ell_{\texttt{out}}= \boldsymbol\ell^A * \mathbf{m} + \boldsymbol\ell^B * (1-\mathbf{m})$,
 giving as result the image in @fig-orange_apple_mask_bad_result.
 
+:::{#fig-orange_apple_mask_bad_result}
 ![](figures/pyramids/apple_orange_mask_8levels.jpg){width="30%"}
+
+Resulting blended image from @fig-orange_apple_mask. This result is not very pleasing.
+:::
+
 
 The result in @fig-orange_apple_mask_bad_result is not very pleasing as
 there is a sharp transition from one image to another (see the straight
@@ -343,13 +436,22 @@ build the Laplacian pyramid for the two input images; in this example we
 use seven levels and we also keep the last low-pass residual as shown in
 @fig-blending_pyrs.
 
+:::{#fig-blending_pyrs}
 ![](figures/pyramids/blending_pyrs.png){width="90%"}
+
+Laplacian pyramids (seven levels and Gaussian residual) for both input images.
+:::
 
 The second step is to build the Gaussian pyramid of the mask as shown in
 @fig-blending_pyrs_mask (note that we use eight levels, one level more
 than for the Laplacian pyramid).
 
+:::{#fig-blending_pyrs_mask}
 ![](figures/pyramids/blending_pyrs_mask.png){width="90%"}
+
+Gaussian pyramid of the mask.
+:::
+
 
 In the third step, we combine the three pyramids to compute the
 Laplacian pyramid of the blended image. The Laplacian pyramid of the
@@ -361,7 +463,11 @@ Finally, the fourth step consists in collapsing (i.e., decoding) the
 resulting pyramid to produce the blended image shown in
 @fig-appleorange.
 
+:::{#fig-appleorange}
 ![](figures/pyramids/apple_orange_laplacian_8levels.jpg){width="35%"}
+
+Image compositing with the Laplacian pyramid. Example inspired by @{Burt83}.
+:::
 
 The result in @fig-appleorange has a smooth transition between the two
 sides and produces a pleasing blending. The mask does no need to be
@@ -400,8 +506,11 @@ component into angular and low-pass frequency components. Pyramid
 subsampling steps are preceded by sufficient low-pass filtering to
 remove aliasing.
 
+:::{#fig-steerable_pyr_sp3Filters}
 ![](figures/pyramids/steerable_pyr_sp3Filters.png){width="80%"}
 
+Oriented filters and the low-pass kernel used in the steerable pyramid.
+:::
 
 
 To ensure that the image can be reconstructed from the steerable filter
@@ -420,13 +529,23 @@ $r=\left[ b_{0,0},...,b_{0,n}, b_{1,0},...b_{1,n},...,b_{k-1,0},...b_{k-1,n} \ri
 and the low pass residual $g_{k-1}$; and (2) the synthesis network (or
 decoder) that reconstructs the input from the representation $r$.
 
+:::{#fig-steerable_pyr_architecture}
+![](figures/pyramids/steerable_pyr_sp3Filters.png){width="80%"}
+
+Steerable pyramid architecture.
+:::
+
+
 @fig-steerable_pyr_clock shows an example of an image and its steerable
 pyramid decomposition using four orientations and three scales. The
 steerable pyramid is a self-inverting overcomplete representation (more
 coefficients than pixels).
 
+:::{#fig-steerable_pyr_clock}
 ![](figures/pyramids/steerable_pyr_clock.png){width="100%"}
 
+Steerable pyramid representation (three levels and four orientations). Why is it that each orientation subband seems to indicate a different time?
+:::
 ## A Pictorial Summary
 
 @fig-pictorialsummary_pyr shows a pictorial summary of the different
@@ -435,11 +554,9 @@ shows the projection matrices $\mathbf{P}$ for each transformation, both
 in the 1D case and 2D case. Each projection matrix formed by stacking
 the projection matrices of each pyramid level.
 
-Figures
-[\[fig:pictorialsummary_pyr\]](#fig-pictorialsummary_pyr){reference-type="ref"
-reference="fig:pictorialsummary_pyr"}(a-c) start with a 1D input signal
+@fig-pictorialsummary_pyr (a-c) start with a 1D input signal
 of length 16. For instance, for a three-level Gaussian pyramid,
-@fig-pictorialsummary_pyrb shows the following projection matrix:
+@fig-pictorialsummary_pyr (b) shows the following projection matrix:
 $$\mathbf{P} =  
     \begin{bmatrix}
     \mathbf{I} \\
@@ -467,25 +584,9 @@ wide. The Laplacian pyramid is a band-passed image representation,
 except for the low-pass residual layer, shown in the bottom rows. For
 this matrix, zero is plotted as gray.
 
-Figures [\[fig:pictorialsummary_pyr\]](#fig-pictorialsummary_pyr){reference-type="ref"
-reference="fig:pictorialsummary_pyr"}(d-h) show the projection matrices
-when the input is a 2D image of size $16\times16$ pixels. First, the
-image is represented as a column vector of length $256=16\times16$
-values. @fig-pictorialsummary_pyrd shows the projection matrix of the
-2D Fourier transform, a square matrix of size $256\times256$, composed
-of small blocks of size $16\times16$ that look like 1D Fourier
-transforms.
-Figures [\[fig:pictorialsummary_pyr\]](#fig-pictorialsummary_pyr){reference-type="ref"
-reference="fig:pictorialsummary_pyr"}(e and f) show the Gaussian and
-Laplacian pyramids, respectively.
+Figures @fig-pictorialsummary_pyr (d-h) show the projection matrices when the input is a 2D image of size 16×16 pixels. First, the image is represented as a column vector of length 256=16×16 values. @fig-pictorialsummary_pyr (d) shows the projection matrix of the 2D Fourier transform, a square matrix of size 256×256, composed of small blocks of size 16×16 that look like 1D Fourier transforms. Figures @fig-pictorialsummary_pyr (e and f) show the Gaussian and Laplacian pyramids, respectively.
 
-Figures [\[fig:pictorialsummary_pyr\]](#fig-pictorialsummary_pyr){reference-type="ref"
-reference="fig:pictorialsummary_pyr"}(g-h) show the steerable pyramid
-representation, depending on the number of orientations
-(@fig-pictorialsummary_pyr\[g\] is a pyramid with two orientations and
-@fig-pictorialsummary_pyr\[h\] has four orientations per scale). The
-steerable pyramid representation can be very overcomplete (the matrix is
-much taller than wide).
+Figures @fig-pictorialsummary_pyr (g-h) show the steerable pyramid representation, depending on the number of orientations (@fig-pictorialsummary_pyr g is a pyramid with two orientations and @fig-pictorialsummary_pyr h has four orientations per scale). The steerable pyramid representation can be very overcomplete (the matrix is much taller than wide).
 
 The steerable pyramid is an overcomplete, multiorientation
 representation. We only show the stererable pyramid for 2D images as in
@@ -494,7 +595,7 @@ non-aliased subbands cause the representation to be very overcomplete,
 much taller than it is wide. The last block of the steerable pyramid
 projection matrices computes the low-pass residual.
 
-![](figures/pyramids/visualizations_pyr2.png){width="100%"}
+![Visual comparison of linear transform image representations discussed in this chapter. All the transforms are visualized as a matrix where the number of rows is the size of the input, and the number of columns is the size of the output. All the transforms, except for the Fourier transform, are convolutional, revealed by the diagonal banding in the matrices.](figures/pyramids/visualizations_pyr2.png){width="100%" #fig-pictorialsummary_pyr}
 
 ## Concluding Remarks
 
@@ -531,6 +632,10 @@ without artifacts. So if you alter one band without altering the
 corresponding other ones, you can easily introduce artifacts (although
 artifacts will also appear in overcompleted representations).
 
-[^1]: Downsampling is discussed in detail in chapter
-    [\[sec-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
-    reference="sec-downsampling_and_upsampling"}.
+:::{.column-margin}
+Another important framework for multiscale image analysis, not presented in this book, is **scale space**.
+\index{Scale space}
+For an in-depth presentation of this topic, we direct the reader to @Lindeberg1994.
+:::
+
+[^1]: Downsampling is discussed in detail in @sec-downsampling_and_upsampling.
