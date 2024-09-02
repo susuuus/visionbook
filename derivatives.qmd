@@ -24,37 +24,37 @@ Image derivatives. (left) Input image, (middle) its $x$-derivative, and (right) 
 
 ## Discretizing Image Derivatives
 
-If we had access to the continuous image, then image derivatives could be computed as: $\partial \img (x,y) / \partial x$, which is defined as:
+If we had access to the continuous image, then image derivatives could be computed as: $\partial \ell (x,y) / \partial x$, which is defined as:
 
 $$
-\frac{\partial \img(x,y)} {\partial x} = \lim_{\epsilon \to 0} \frac{ \img(x+\epsilon,y) -\img(x,y)} {\epsilon}
+\frac{\partial \ell(x,y)} {\partial x} = \lim_{\epsilon \to 0} \frac{ \ell(x+\epsilon,y) -\ell(x,y)} {\epsilon}
 $$
 
 However, there are several reasons why we might not be able to apply this definition:
 
-- We only have access to a sampled version of the input image, $\img \left[n,m\right]$, and we cannot compute the limit when $\epsilon$ goes to zero.
+- We only have access to a sampled version of the input image, $\ell \left[n,m\right]$, and we cannot compute the limit when $\epsilon$ goes to zero.
 - The image could contain many non-derivable points, and the gradient would not be defined. We will see how to address this issue later when we study Gaussian derivatives.
 - In the presence of noise, the image derivative might not be meaningful as it might just be dominated by the noise and not by the image content.
 
 For now, let's focus on the problem of approximating the continuous derivative with discrete operators. As the derivative is a linear operator, it can be approximated by a discrete linear filter. There are several ways in which image derivatives can be approximated.
 
-Let's start with a simple approximation to the derivative operator that we have already played with $d_0  = \left[1, -1 \right]$. In one dimension (1D), convolving a signal $\img \left[n \right]$ with this filter results in:
+Let's start with a simple approximation to the derivative operator that we have already played with $d_0  = \left[1, -1 \right]$. In one dimension (1D), convolving a signal $\ell \left[n \right]$ with this filter results in:
 $$
-\img \circ d_0 = \img \left[n \right] - \img \left[n-1 \right]
+\ell \circ d_0 = \ell \left[n \right] - \ell \left[n-1 \right]
 $$
 This approximates the derivative by the difference between consecutive values, which is obtained when $\epsilon=1$. @fig-discretederivative (c) shows the result of filtering a 1D signal (@fig-discretederivative [a]) convolved with $d_0 \left[n\right]$ (@fig-discretederivative [b]). The output is zero wherever the input signal is constant, and it is large in the places where there are variations in the input values. However, note that the output is not perfectly aligned with the input. In fact, there is half a sample displacement to the right. This is due to the fact that $d_0 \left[n\right]$ is not centered around the origin.
 
-This can be addressed with a different approximation to the spatial derivative $d_1  = \left[1, 0, -1 \right]/2$. In one dimension, convolving a signal $\img \left[n \right]$ with $d_1 \left[n\right]$ results in:
+This can be addressed with a different approximation to the spatial derivative $d_1  = \left[1, 0, -1 \right]/2$. In one dimension, convolving a signal $\ell \left[n \right]$ with $d_1 \left[n\right]$ results in:
 $$
-\img \circ d_1 = \frac{\img \left[n+1 \right] - \img \left[n-1 \right]}{2}
+\ell \circ d_1 = \frac{\ell \left[n+1 \right] - \ell \left[n-1 \right]}{2}
 $$
 @fig-discretederivative (e) shows the result of filtering the 1D signal (@fig-discretederivative [a]) convolved with $d_1 \left[n\right]$ (@fig-discretederivative [d]). Now the output shows the highest magnitude output in the midpoint where there is variation in the input signal.
 
-![(a) Input signal, $\img [n]$. (b) Convolutional kernel $d_0 [n]$, defined as $d_0 [0]=1$ and $d_0 [1]=-1$ and zero everywhere else. (c) Output of the convolution between $\img [n]$ and $d_0 [n]$. (d) Kernel $d_1 [n]$, defined as $d_1 [-1]=1$ and $d_1 [1]=-1$ and zero everywhere else. (e) Output of the convolution between $\img [n]$ and $d_1 [n]$.](figures/derivatives/discretederivative.png){#fig-discretederivative}
+![(a) Input signal, $\ell [n]$. (b) Convolutional kernel $d_0 [n]$, defined as $d_0 [0]=1$ and $d_0 [1]=-1$ and zero everywhere else. (c) Output of the convolution between $\ell [n]$ and $d_0 [n]$. (d) Kernel $d_1 [n]$, defined as $d_1 [-1]=1$ and $d_1 [1]=-1$ and zero everywhere else. (e) Output of the convolution between $\ell [n]$ and $d_1 [n]$.](figures/derivatives/discretederivative.png){#fig-discretederivative}
 
 It is also interesting to see the behavior of the derivative and its discrete approximations in the Fourier domain. In the continuous domain, the relationship between the Fourier transform on a function and the Fourier transform of its derivative is:
 $$
-\frac{\partial \img (x)}{\partial x}  
+\frac{\partial \ell (x)}{\partial x}  
 \xrightarrow{\mathscr{F}} 
 j w \capitalimg (w)
 $$
@@ -221,18 +221,18 @@ Derivatives of a noisy image. (a) Input image with noise, (b) its $x$-derivative
 
 As shown in @fig-derivativesnoisystop, the input is an image corrupted with Gaussian noise. The result of convolving the input noisy image with the kernel $[1, -1]$ results in an output with increased noise. This is because the noise at each pixel is independent of the other, so when computing the difference between two adjacent pixels we get increased noise (the difference between two Gaussian random variables with variance $\sigma^2$ is a new Gaussian with variance $2\sigma^2$). On the other hand, the values of the pixels of the original image are very similar and the difference is a small number (except at the object boundaries). As a consequence, the output is dominated by noise as shown in @fig-derivativesnoisystop-b.
 
-There are also situations in which the derivative of an image is not defined. For instance, consider an image in the continuous domain with the form $\img (x,y) = 0$ if $x<0$ and 1 otherwise. If we try to compute $\partial \img (x,y) / \partial x$, we will get 0 everywhere, but around $x=0$ the value of the derivative is not defined. We avoided this issue in the previous section because for discrete images the approximation of the derivative is always defined. 
+There are also situations in which the derivative of an image is not defined. For instance, consider an image in the continuous domain with the form $\ell (x,y) = 0$ if $x<0$ and 1 otherwise. If we try to compute $\partial \ell (x,y) / \partial x$, we will get 0 everywhere, but around $x=0$ the value of the derivative is not defined. We avoided this issue in the previous section because for discrete images the approximation of the derivative is always defined. 
 
 :::{.column-margin}
 Gaussian derivatives address these two issues. They were popularized by Koenderink and Van Doorm @Koenderink87 as a model of neurons in the visual system.
 :::
 
-Let's start with the following observation. For two functions defined in the continuous domain $\img(x,y)$ and $g(x,y)$, the convolution and the derivative are commutative:
+Let's start with the following observation. For two functions defined in the continuous domain $\ell(x,y)$ and $g(x,y)$, the convolution and the derivative are commutative:
 $$
-\frac {\partial \img(x,y)}{\partial x} \circ g(x,y) = \img(x,y) \circ \frac {\partial g(x,y)}{\partial x} 
+\frac {\partial \ell(x,y)}{\partial x} \circ g(x,y) = \ell(x,y) \circ \frac {\partial g(x,y)}{\partial x} 
 $$
 
-This equality is easy to prove in the Fourier domain. If our goal is to compute image derivatives and then blur the output using a differentiable low-pass filter, $g(x,y)$, then instead of computing the derivative of the image we can compute the derivatives of the filter kernel and convolve it with the image. Even if the derivative of $\img(x,y)$ is not defined in some locations (e.g., step boundaries), we can always compute the result of this convolution.
+This equality is easy to prove in the Fourier domain. If our goal is to compute image derivatives and then blur the output using a differentiable low-pass filter, $g(x,y)$, then instead of computing the derivative of the image we can compute the derivatives of the filter kernel and convolve it with the image. Even if the derivative of $\ell(x,y)$ is not defined in some locations (e.g., step boundaries), we can always compute the result of this convolution.
 
 If $g(x,y)$ is a blurring kernel, it will smooth the derivatives, reducing the output noise at the expense of a loss in spatial resolution ([Figure 1](#fig-derivativesnoisystop-c)). A common smoothing kernel for computing derivatives is the Gaussian kernel. The Gaussian has nice smoothing properties as we discussed in the previous chapter, and it is infinitely differentiable. 
 
