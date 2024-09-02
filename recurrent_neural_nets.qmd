@@ -2,18 +2,18 @@
 
 ## Introduction
 
-RNNs are a neural net architecture for modeling sequences---they perform
-*sequential* computation (rather than parallel computation).
+RNNs are a neural net architecture for modeling sequences---they perform *sequential* computation (rather than parallel computation).
 
 So far we have seen **feedforward** neural net architectures. These
 architectures can be represented by directed acyclical computation
-graphs. (**RNNs**), are neural nets with feedback connections. Their
-computation graphs have cycles. That means that the outputs of one layer
-can send a message back to earlier in the computational pipeline. To
-make this well-defined, RNNs introduce the notion of **timestep**. One
-timestep of running an RNN corresponds to one functional call to each
-layer (or computation node) in the RNN, mapping that layer's inputs to
-its outputs.
+graphs. (**RNNs**), are neural nets with feedback connections. 
+
+
+:::{.column-margin}
+A feedback connection defines a **recurrence** in the computational graph.
+:::
+
+Their computation graphs have cycles. That means that the outputs of one layer can send a message back to earlier in the computational pipeline. To make this well-defined, RNNs introduce the notion of **timestep**. One timestep of running an RNN corresponds to one functional call to each layer (or computation node) in the RNN, mapping that layer's inputs to its outputs.
 
 RNNs are all about adaptation. They solve the following problem: What if
 we want our computations in the past to influence our computations in
@@ -23,6 +23,9 @@ adapting its behavior based on what outputs it previously produced.
 To motivate RNNs, we will first consider a deficiency of convolutional
 neural nets (CNNs). Consider that we are processing a temporal signal
 with a CNN, like so:
+
+![A CNN processing a video, with two example frames shown.](figures/recurrent_neural_nets/cnn_video.png){width=80% #fig-cnn_video}
+
 
 The filter $\mathbf{w}$ slides over the input signal and produces
 outputs. In this example, imagine the input is a video of your cat,
@@ -53,10 +56,16 @@ little computer. They can do anything a computer can do.
 
 Here's how RNNs arrange their connections to perform this propagation:
 
+![Basic RNN with one hidden layer.](figures/recurrent_neural_nets/rnn.png){width=50% #fig-rnn}
+
 The key idea of an RNN is that there are lateral connections, between
 hidden units, through time. The inputs, outputs, and hidden units may be
-multidimensional tensors; to denote this we will use , as was reserved
-for denoting a single (scalar) neuron. Here is a simple 1-layer RNN:
+multidimensional tensors; to denote this we will use ![](figures/recurrent_neural_nets/square.png){height=1.2em}, as ![](figures/recurrent_neural_nets/circle.png){height=1.2em} was reserved
+for denoting a single (scalar) neuron. 
+
+Here is a simple 1-layer RNN:
+
+![RNN with multidimensional inputs, hidden states, and outputs.](figures/recurrent_neural_nets/rnn_unrolled.png){width=100% #fig-rnn_unrolled}
 
 To the left, is the **unrolled computation graph**. To the right, is the
 computation graph rolled up, with a feedback connection. Typically we
@@ -70,13 +79,22 @@ RNN's theoretical computation graph.
 
 ## Recurrent Layer
 
-A is defined by the following equations: $$\begin{aligned}
+A is defined by the following equations: 
+$$\begin{aligned}
     \mathbf{h}_t &= f(\mathbf{h}_{t-1}, \mathbf{x}_{\texttt{in}}[t]) &\triangleleft \quad\quad \text{update state based on input and previous state}\\
     \mathbf{x}_{\texttt{out}}[t]&= g(\mathbf{h}_t) &\triangleleft \quad\quad \text{produce output based on state}
-\end{aligned}$$ This is a layer that includes a state variable,
+\end{aligned}$$ 
+
+This is a layer that includes a state variable,
 $\mathbf{h}$. The operation of the layer depends on its state. The layer
 also updates its state every time it is called, therefore the state is a
 kind of memory. 
+
+
+
+:::{.column-margin}
+The idea of a *time* in an RNN does not necessarily mean time as it is measured on a clock. Time just refers to *sequential computation*; the timestep $t$ is an index into the sequence. The sequential computation could progress over a spatial dimension (processing an image pixel by pixel) or over the temporal dimension (processing a video frame by frame), or even over more abstracted computational modules.
+:::
 
 The $f$ and $g$ can be arbitrary functions, and we can imagine a wide
 variety of recurrent layers defined by different choices for the form of
@@ -86,14 +104,15 @@ One common kind of recurrent layer is the (**SRN**), which was defined
 by Elman in "Finding Structure in Time" @elman1990finding. For this
 layer, $f$ is a linear layer followed by a pointwise nonlinearity, and
 $g$ is another linear layer. The full computation is defined by the
-following equations: $$\begin{aligned}
+following equations: 
+$$\begin{aligned}
     \mathbf{h}_t &= \sigma_1(\mathbf{W}\mathbf{h}_{t-1} + \mathbf{U}\mathbf{x}_{\texttt{in}}[t]+ \mathbf{b})\\
     \mathbf{x}_{\texttt{out}}[t]&= \sigma_2(\mathbf{V}\mathbf{h}_t + \mathbf{c})
 \end{aligned}$$ where $\sigma_1$ and $\sigma_2$ are pointwise
 nonlinearities. In SRNs, tanh is the common choice for the nonlinearity,
 but relus and other choices may also be used.
 
-## Backpropagation through Time {#sec-recurrent_neural_nets:bptt}
+## Backpropagation through Time {#sec-recurrent_neural_nets-bptt}
 
 Backpropagation is only defined for DAGs and RNNs are not DAGs. To apply
 backpropagation to RNNs, we unroll the net for $T$ timesteps, which
@@ -108,12 +127,13 @@ computation graph greater than length $T$.
 
 As an example of BPTT, suppose we want to compute the gradient of an
 output neuron at timestep five with respect to an input at timestep
-zero, that is,
-$\frac{\partial \mathbf{x}_{\texttt{out}}[5]}{\partial \mathbf{x}_{\texttt{in}}[0]}$.
+zero, that is, $\frac{\partial \mathbf{x}_{\texttt{out}}[5]}{\partial \mathbf{x}_{\texttt{in}}[0]}$.
 The forward pass (black arrows) and backward pass (red arrows) are shown
 in @fig-recurrent_neural_nets:bptt1, where we have only drawn arrows
 for the subpart of the computation graph that is relevant to the
 calculation of this particular gradient.
+
+![Backpropagation through time in an RNN.](figures/recurrent_neural_nets/bptt1.png){width=100% #fig-recurrent_neural_nets-bptt1}
 
 What about the gradient of the total cost with respect to the
 parameters,
@@ -125,22 +145,30 @@ $\mathbf{x}_{\texttt{out}}[t]$. The total cost is simply the summation
 of the losses at each timestep: $$\begin{aligned}
     \frac{\partial J}{\partial [\mathbf{W}, \mathbf{U}, \mathbf{V}]} = \sum_{t=0}^T \frac{\partial \mathcal{L}(\mathbf{x}_{\texttt{out}}[t], \mathbf{y}_t)}{\partial [\mathbf{W}, \mathbf{U}, \mathbf{V}]}
 \end{aligned}$$ The graph for backpropagation, shown in
-@fig-recurrent_neural_networks:bptt_J, has a branching structure, which
-we saw how to deal with in chapter
-[\[chapter-backpropagation\]](#sec-backpropagation){reference-type="ref"
-reference="chapter-backpropagation"}: gradients (red arrows) summate
+@fig-recurrent_neural_networks-bptt_J, has a branching structure, which
+we saw how to deal with in @sec-backpropagation: gradients (red arrows) summate
 wherever the forward pass (black arrows) branches.
 
-### The Problem of Exploding and Vanishing Gradients {#sec-recurrent_neural_networks:bptt}
+
+
+### The Problem of Exploding and Vanishing Gradients {#sec-recurrent_neural_networks-bptt}
+
+
+![Backpropagation through time in an RNN with a loss at each timestep.](figures/recurrent_neural_nets/bptt_J.png){width=100% #fig-recurrent_neural_networks-bptt_J}
+
 
 Notice that the we can get very large computation graphs when we run an
 RNN for many timesteps. The gradient computation involves a series of
 matrix multiplies that is $\mathcal{O}(T)$ in length. For example, to
 compute our gradient
 $\frac{\partial \mathbf{x}_{\texttt{out}}[5]}{\partial \mathbf{x}_{\texttt{in}}[0]}$
-in the example above involves the following product: $$\begin{aligned}
+in the example above involves the following product: 
+
+$$\begin{aligned}
 \frac{\partial \mathbf{x}_{\texttt{out}}[t]}{\partial \mathbf{x}_{\texttt{in}}[0]} = \frac{\partial \mathbf{x}_{\texttt{out}}[t]}{\partial \mathbf{h}_T} \frac{\partial \mathbf{h}_T}{\partial \mathbf{h}_{T-1}} \cdots \frac{\partial \mathbf{h}_1}{\partial \mathbf{h}_0} \frac{\partial \mathbf{h}_0}{\partial \mathbf{x}_{\texttt{in}}[0]}
-\end{aligned}$$ Suppose we use an RNN with relu nonlinearities. Then
+\end{aligned}$$ 
+
+Suppose we use an RNN with relu nonlinearities. Then
 each term $\frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_{t-1}}$
 equals $\mathbf{R}\mathbf{W}$, where $\mathbf{R}$ is a diagonal matrix
 with zeros or ones on the $i$-th diagonal element depending on whether
@@ -154,13 +182,15 @@ If values in $\mathbf{W}$ are large, the gradient will explode. If they
 are small, the gradient will vanish---basically, this system is not
 numerically well-behaved. One solution to this problem is to use RNN
 units that have better numerics, an example of which we will give in
-section [1.5](#sec-recurrent_neural_networks:LSTMS){reference-type="ref"
-reference="sec-recurrent_neural_networks:LSTMS"} subsequently.
+@sec-recurrent_neural_networks-LSTMS subsequently.
 
 ## Stacking Recurrent Layers
 
 A deep RNN can be constructed by stacking recurrent layers. Here is an
 example:
+
+
+![A deep RNN with multiple hidden layers.](figures/recurrent_neural_nets/deep_rnn.png){width=100% #fig-deep_rnn}
 
 To emphasize that the parameters are shared, we only show them once.
 
@@ -191,12 +221,15 @@ We set the bias to be "False" for $\mathbf{U}_1$ and $\mathbf{U}_2$
 since the recurrent layer already gets a bias term from $\mathbf{W}_1$
 and $\mathbf{W}_2$.
 
-## Long Short-Term Memory {#sec-recurrent_neural_networks:LSTMS}
+## Long Short-Term Memory {#sec-recurrent_neural_networks-LSTMS}
 
 (**LSTMs**) are a special kind of recurrent module, that is designed to
-avoid the vanishing and exploding gradients problem described in section
-[1.3.1](#sec-recurrent_neural_networks:bptt){reference-type="ref"
-reference="sec-recurrent_neural_networks:bptt"}  @hochreiter1997long.
+avoid the vanishing and exploding gradients problem described in @sec-recurrent_neural_networks-bptt  @hochreiter1997long.
+
+
+:::{.column-margin}
+The presentation of LSTMs in this section draws inspiration from a great blog post by Chris Olah \cite{olah_lstms}.
+:::
 
 An LSTM is like a little memory controller. It has a **cell state**,
 $\mathbf{c}$, which is a vector it can read from and write to. The cell
@@ -249,9 +282,7 @@ forget. The cell state controls what is remembered. It gets modulated,
 but $\mathbf{f}_t$ can learn to be all ones so that information
 propagates forward through an identity connection from the previous cell
 state to the subsequent cell state. This idea is similar to the idea of
-skip connections and residual connections in U-Nets and ResNets (chapter
-[\[chapter-convolutional_neural_nets\]](#sec-convolutional_neural_nets){reference-type="ref"
-reference="chapter-convolutional_neural_nets"}).
+skip connections and residual connections in U-Nets and ResNets @sec-convolutional_neural_nets.
 
 ## Concluding Remarks
 
