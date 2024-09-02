@@ -2,22 +2,18 @@
 
 ## Introduction
 
-The neural nets we saw in chapter
-[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
-reference="chapter-neural_nets"} are designed to process generic data.
-But in many domains the data has special structure, and we can design
-neural net architectures that are better suited to exploiting that
-structure. , also called **convnets** or **CNNs**, are a neural net
-architecture especially suited to the structure in visual signals.
+The neural nets we saw in \@sec-neural_nets are designed to process generic data. But in many domains, the data has special structure, and we can design neural net architectures that are better suited to exploiting that structure. **Convolutional neural nets**, also called **convnets** or **CNNs**, are a neural net architecture especially suited to the structure in visual signals.
 
 The key idea of CNNs is to chop up the input image into little patches,
 and then process each patch *independently* and *identically*. The gist
 of this is captured in
-@fig-convolutional_neural_nets:CNNs_as_patch_processing:
+@fig-convolutional_neural_nets-CNNs_as_patch_processing:
 
-![](./figures/convolutional_neural_nets/CNNs_as_patch_processing.png){width="95%"}
+:::{#fig-convolutional_neural_nets-CNNs_as_patch_processing}
+![](figures/convolutional_neural_nets/CNNs_as_patch_processing.png){width="95%"}
 
-
+CNNs as patch processing. *Photo source*: Fredo Durand.
+:::
 
 :::{.column-margin}
 CNNs are also well suited to processing many other
@@ -32,23 +28,25 @@ Essentially, this neural net scans across the patches in the input and
 classifies each. The output is a label *for each patch in the input
 image*. If we rearrange these predictions back into the shape of the
 input image and color code them, we get the below input-output mapping
-(@fig-convolutional_neural_nets:CNN_example_coarse):
+(@fig-convolutional_neural_nets-CNN_example_coarse):
 
-![](./figures/convolutional_neural_nets/CNN_example_coarse.png){width="95%"}
+:::{#fig-convolutional_neural_nets-CNN_example_coarse}
+![](figures/convolutional_neural_nets/CNN_example_coarse.png){width="95%"}
 
-Notice that this is quite different than the neural nets we saw in
-chapter
-[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
-reference="chapter-neural_nets"}, which output a single prediction an
-the entire image; CNNs output a two-dimensional (2D) *array* of
-predictions.
+Input-output mapping of a CNN.
+:::
 
+Notice that this is quite different than the neural nets we saw in @sec-neural_nets, which output a single prediction on the entire image; CNNs output a two-dimensional (2D) *array* of predictions.
 We may also chop up the image into *overlapping* patches. If we do this
 densely, such that each patch is one pixel offset from the last, we get
 a full resolution image of predictions
-(@fig-convolutional_neural_nets:CNN_example_fine):
+(@fig-convolutional_neural_nets-CNN_example_fine):
 
+:::{#fig-convolutional_neural_nets-CNN_example_fine}
 ![](./figures/convolutional_neural_nets/CNN_example_fine.png){width="95%"}
+
+Dense input-output mapping.
+:::
 
 Now that looks impressive! This CNN solved a task known as **semantic
 segmentation**, which is the task of assigning a class label to each
@@ -69,38 +67,35 @@ CNNs are neural networks that are composed of . A convolutional layer
 transforms inputs $\mathbf{x}_{\texttt{in}}$ to outputs
 $\mathbf{x}_{\texttt{out}}$ by convolving $\mathbf{x}_{\texttt{in}}$
 with one or more filters $\mathbf{w}$. A convolutional layer with a
-single filter looks like this: $$\begin{aligned}\mathbf{x}_{\texttt{out}}= \mathbf{w} \star \mathbf{x}_{\texttt{in}}+ b & \quad\quad \triangleleft \quad \texttt{conv}:convolutional_filter
-\end{aligned}$${#eq-convolutional_neural_nets} where $\mathbf{w}$ is the kernel and $b$ is the bias;
-$\theta = [\mathbf{w}, b]$ are the parameters of this layer. 
+single filter looks like this: 
+$$\begin{aligned}\mathbf{x}_{\texttt{out}}= \mathbf{w} \star \mathbf{x}_{\texttt{in}}+ b & \quad\quad \triangleleft \quad \texttt{conv}:convolutional_filter
+\end{aligned}
+$${#eq-convolutional_neural_nets}
+where $\mathbf{w}$ is the kernel and $b$ is the bias; $\theta = [\mathbf{w}, b]$ are the parameters of this layer. 
 
-Recalling the definition of the operator $\star$ from chapter
-[\[chapter-linear_image_filtering\]](#sec-linear_image_filtering){reference-type="ref"
-reference="chapter-linear_image_filtering"}, we give here an example of
+:::{.column-margin}
+In this chapter, we deviate slightly from our usual notation and use lowercase for convolutional filter $\mathbf{w}$, regardless of whether the kernel is a 1D array, a 2D array, or an ND array.
+:::
+
+
+Recalling the definition of the operator $\star$ from @sec-linear_image_filtering, we give here an example of
 a convolutional layer over a 2D array $\mathbf{x}_{\texttt{in}}$, using
-a square kernel of size $K \times K$: $$\begin{aligned}x_{\texttt{out}}[n,m] =
-b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] x_{\texttt{in}}[n+k_1,m+k_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(expanded)}:convolutional_filter_expanded
-\end{aligned}$${#eq-convolutional_neural_nets} 
+a square kernel of size $K \times K$: 
 
-As discussed in chapter
-[\[chapter-linear_image_filtering\]](#sec-linear_image_filtering){reference-type="ref"
-reference="chapter-linear_image_filtering"}, convolution is just a
-special kind of linear transform. Similarly, a convolutional layer is
-just a special kind of linear layer. It is a linear layer whose matrix
-$\mathbf{W}$ is Toeplitz. We can view it either as a matrix or as a
-neural net, as shown in
-@fig-convolutional_neural_nets:conv_matrix_vs_net, which shows the case
-of a one-dimensional (1D) convolution over a 1D signal
-$\mathbf{x}_{\texttt{in}}$, with zero bias.
+$$\begin{aligned}x_{\texttt{out}}[n,m] =
+b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] x_{\texttt{in}}[n+k_1,m+k_2] & \quad\quad \\
+\triangleleft \quad \texttt{conv}\quad \text{(expanded)}
+\end{aligned}$${#eq-convolutional_neural_nets-convolutional_filter_expanded} 
 
-We already saw that convolutional filters are useful for image
-processing in parts
-[\[part:image_processing\]](#part:image_processing){reference-type="ref"
-reference="part:image_processing"} and
-[\[part:linear_filters\]](#part:linear_filters){reference-type="ref"
-reference="part:linear_filters"}. In those parts, we introduced a
-variety of hand-designed filter banks with useful properties. A CNN
-instead *learns* an effective filter bank.
+:::{.column-margin}
+"Convolutional" layers in deep nets are typically actually defined as cross-correlations ($\star$) and we stick to that convention in this book. We need not worry about the misnomer because whether you implement the layers with convolution or cross-correlation usually makes no difference for learning. This is because both *span an identical hypothesis space* (any cross-correlation can be converted to an equivalent convolution by flipping the filter horizontally and vertically).
+:::
 
+As discussed in @sec-linear_image_filtering, convolution is just a special kind of linear transform. Similarly, a convolutional layer is just a special kind of linear layer. It is a linear layer whose matrix $\mathbf{W}$ is Toeplitz. We can view it either as a matrix or as a neural net, as shown in @fig-convolutional_neural_nets:conv_matrix_vs_net, which shows the case of a one-dimensional (1D) convolution over a 1D signal $\xin$, with zero bias.
+
+![Two equivalent visualizations of a convolutional layer.](figures/convolutional_neural_nets/conv_matrix_vs_net.png){width="100%" #fig-convolutional_neural_nets-conv_matrix_vs_net}
+
+We already saw that convolutional filters are useful for image processing in @sec-image_processing and @sec-linear_filters. In those sections, we introduced a variety of hand-designed filter banks with useful properties. A CNN instead *learns* an effective filter bank.
 ### Multi-Input, Multi-Output Convolutional Layers
 
 In image processing, convolution usually refers to filtering a 1-channel
@@ -118,7 +113,8 @@ $\mathbf{x}_{\texttt{in}}\in \mathbb{R}^{3 \times N \times M}$. To apply
 a convolutional layer to such a multichannel image we simply use a
 multichannel filter $\mathbf{w} \in \mathbb{R}^{C \times K \times K}$,
 and filter each input channel with the corresponding filter channel,
-then sum the responses: $$\begin{aligned}    \mathbf{x}_{\texttt{out}}= \sum_{c} \mathbf{w}[c,:,:] \star \mathbf{x}_{\texttt{in}}[c,:,:] + b[c] & \quad \triangleleft \quad\texttt{conv}\quad \text{(multichannel in)}
+then sum the responses: 
+$$\begin{aligned}    \mathbf{x}_{\texttt{out}}= \sum_{c} \mathbf{w}[c,:,:] \star \mathbf{x}_{\texttt{in}}[c,:,:] + b[c] & \quad \triangleleft \quad\texttt{conv}\quad \text{(multichannel in)}
 \end{aligned}$$
 
 ##### Multichannel outputs {#multichannel-outputs .unnumbered}
@@ -128,13 +124,14 @@ commonly each convolutional layer in a neural network will apply a set
 of filters, i.e. a **filter bank**. If we have a bank of $C$
 filters $\mathbf{w}_0, \ldots, \mathbf{w}_{C-1}$, and apply them to a
 grayscale input image
-$\mathbf{x}_{\texttt{in}}\in \mathbb{R}^{N \times M}$, we get $C$ output
-images: $$\begin{aligned}
+$\mathbf{x}_{\texttt{in}}\in \mathbb{R}^{N \times M}$, we get $C$ output images: 
+$$\begin{aligned}
     \mathbf{x}_{\texttt{out}}[0,:,:] &= \mathbf{w}[0,:,:] \star \mathbf{x}_{\texttt{in}}+ b[0]\\
     &\vdots \nonumber\\
     \mathbf{x}_{\texttt{out}}[C,:,:] &= \mathbf{w}[C-1,:,:] \star \mathbf{x}_{\texttt{in}}+ b[C-1]
-:convolutional_layer_filter_bank
-\end{aligned}$${#eq-convolutional_neural_nets} Now $\mathbf{x}_{\texttt{out}}$ is an image with $C$
+\end{aligned}$${#eq-convolutional_neural_nets0-convolutional_layer_filter_bank} 
+
+Now $\mathbf{x}_{\texttt{out}}$ is an image with $C$
 channels. Each channel is the response of the input image to one of the
 filters.
 
@@ -156,12 +153,16 @@ channels to a signal with $C_{\texttt{out}}$ output channels. Here is
 what this looks like for an image
 $\mathbf{x}_{\texttt{in}}\in \mathbb{R}^{C_{\texttt{in}}\times N \times M}$,
 where $c_2$ indexes the output channel, with
-$c_2 \in \{0, \ldots, C_{\texttt{out}}-1\}$: $$\begin{aligned}\mathbf{x}_{\texttt{out}}[c_{\texttt{2}},:,:] = \sum_{c_{\texttt{1}}=1}^{C_{\texttt{in}}} \mathbf{w}[c_{\texttt{1}},c_{\texttt{2}},:,:] \star \mathbf{x}_{\texttt{in}}[c_{\texttt{1}},:,:] + b[c_{\texttt{2}}] & \quad \triangleleft \quad\texttt{conv}\quad \text{(multi-in-out)}
-:convolutional_layer_multichannel
-\end{aligned}$${#eq-convolutional_neural_nets} Notation for multichannel convolutions can get hard to
+$c_2 \in \{0, \ldots, C_{\texttt{out}}-1\}$: 
+
+$$\begin{aligned}\mathbf{x}_{\texttt{out}}[c_{\texttt{2}},:,:] = \sum_{c_{\texttt{1}}=1}^{C_{\texttt{in}}} \mathbf{w}[c_{\texttt{1}},c_{\texttt{2}},:,:] \star \mathbf{x}_{\texttt{in}}[c_{\texttt{1}},:,:] + b[c_{\texttt{2}}] & \quad \triangleleft \quad\texttt{conv}\quad \text{(multi-in-out)}
+\end{aligned}
+$${#eq-convolutional_neural_nets-convolutional_layer_multichannel}
+
+Notation for multichannel convolutions can get hard to
 keep track of, so let's spell out a few of the pieces here, which are
 also visualized in
-@fig-convolutional_neural_networks:multichannel_conv:
+@fig-convolutional_neural_networks-multichannel_conv:
 
 -   $\mathbf{x}_{\texttt{in}}[c_{\texttt{1}},:,:]$ is the
     $c_{\texttt{1}}$-th channel of the input signal.
@@ -180,6 +181,8 @@ also visualized in
     $\mathbf{w} \in \mathbb{R}^{C_{\texttt{in}}\times C_{\texttt{out}}\times K \times K}$,
     where $K$ is the (spatial, square) kernel size.
 
+![Multichannel convolution.](figures/convolutional_neural_networks/multichannel_conv_diagram.png){width="65%" #fig-convolutional_neural_networks-multichannel_conv}
+
 It's important to get comfortable with the shapes of the data and
 parameter tensors that get processed through different neural
 architectures. This is essential when designing and building these
@@ -190,9 +193,9 @@ $128 \times 128$ pixels. We will pass it through a convoluational layer
 that applies a bank of $3 \times 3$ filters (this refers to the spatial
 extent of the filters). We omit the bias terms for simplicity. The
 output ends up being a $96 \times 128 \times 128$ tensor, as shown in
-@fig-convolutional_neural_nets:multichannel_conv_diagram.
+@fig-convolutional_neural_nets-multichannel_conv_diagram.
 
-![](./figures/convolutional_neural_nets/multichannel_conv_diagram.png){width="65%"}
+![A convolutional layer that applies a bank of $3 \times 3$ filters. How many parameters does each filter have? How many filters are in the filter bank? *Source*: created by Jonas Wulff.](figures/convolutional_neural_nets/multichannel_conv_diagram.png){width="65%" #fig-convolutional_neural_nets-multichannel_conv_diagram}
 
 To check your understanding, you should be able to answer the following
 questions:
@@ -210,20 +213,24 @@ The answers are given in the footnote.[^1]
 Convolutional layers, as defined previously, maintain the spatial
 resolution of the signal they process. However, commonly it is
 sufficient, or even desirable, to output a lower resolution. This can be
-achieved with strided convolution: $$\begin{aligned}x_{\texttt{out}}[n,m] =
-b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] x_{\texttt{in}}[s_n n-k_1,s_m m-k_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(strided)}:convolutional_filter_strided
-\end{aligned}$${#eq-convolutional_neural_nets} where $s_n$ and $s_m$ are the strides in the vertical
-and horizontal directions, respectively. 
+achieved with strided convolution: 
+
+$$\begin{aligned}x_{\texttt{out}}[n,m] =
+b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] x_{\texttt{in}}[s_n n-k_1,s_m m-k_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(strided)}
+\end{aligned}
+$${#eq-convolutional_neural_nets-convolutional_filter_strided} 
+where $s_n$ and $s_m$ are the strides in the vertical and horizontal directions, respectively. 
 
 :::{.column-margin}
-Here and
-below, we define operations for the simplest case of convolution of a
+Here and below, we define operations for the simplest case of convolution of a
 single square filter with a single channel 2D signal. All these
 operations can be straightforwardly extended for the multichannel in,
 multichannel out case, and for ND signals, and for non-square kernels.
 We leave it as an exercise for the reader to write out these variations
 as needed.
-:::Commonly we use the same stride $s_n = s_m = s$. A convolution layer
+:::
+
+Commonly we use the same stride $s_n = s_m = s$. A convolution layer
 with these strides performs a mapping
 $\mathbb{R}^{M \times N} \rightarrow \mathbb{R}^{N/s_n \times M/s_m}$.
 In order to make this mapping well-defined, we require that $N$ or $M$
@@ -231,42 +238,39 @@ are divisible by $s_n$ and $s_m$, respectively; if they are not, we may
 may pad (or crop) the input until they are.
 
 Strided convolution looks like this
-(@fig-convolutional_neural_networks:strided_conv_diagram):
+(@fig-convolutional_neural_networks-strided_conv_diagram):
 
-Strided convolutions can significantly reduce the computational cost and
-memory requirements when a neural network is large. However, strided
+![Strided convolution.](figures/convolutional_neural_nets/strided_conv_diagram.png){width="100%" #fig-convolutional_neural_networks-strided_conv_diagram}
+
+
+Strided convolutions can significantly reduce the computational cost and memory requirements when a neural network is large. However, strided
 convolution can decrease the quality of the convolution. Let's look at
 one concrete example where the kernel is the 2D Laplacian:
 $$\mathbf{w} =\begin{bmatrix}
   0 ~& -1 ~& 0 \\
   -1 ~& 4 ~& -1\\
   0~& -1 ~& 0
-\end{bmatrix}$$ As we saw in chapter
-[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
-reference="chapter-image_derivatives"}, this filter detects boundaries
-on images. @fig-convolutional_neural_nets:strided_conv_results shows an
+\end{bmatrix}$$ 
+
+As we saw in @sec-image_derivatives, this filter detects boundaries on images. @fig-convolutional_neural_nets-strided_conv_results shows an
 input image, and the result of strided convolution with the Laplacian
 kernel with strides 1, 2, and 4. The second row shows the magnitude of
 the discrete Fourier transforms (DFT).
 
-$\begin{array}{cccc}
-\text{Input}~ & \text{Stride 1} & \text{Stride 2} & \text{Stride 4} \\
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_0.jpg}~
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_1.jpg}
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_2.jpg}
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_4.jpg}
-\\
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_0_DFT.jpg}~
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_1_DFT.jpg}
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_2_DFT.jpg}
-&
-\includegraphics[width=.22\linewidth]{figures/convolutional_neural_nets/aliasing_stride_4_DFT.jpg}
-\end{array}$
+
+:::{#fig-convolutional_neural_nets-strided_conv_results layout-ncol=4}
+![](figures/convolutional_neural_nets/aliasing_stride_0.jpg)
+![](figures/convolutional_neural_nets/aliasing_stride_1.jpg)
+![](figures/convolutional_neural_nets/aliasing_stride_2.jpg)
+![](figures/convolutional_neural_nets/aliasing_stride_4.jpg)
+
+![](figures/convolutional_neural_nets/aliasing_stride_0_DFT.jpg)
+![](figures/convolutional_neural_nets/aliasing_stride_1_DFT.jpg)
+![](figures/convolutional_neural_nets/aliasing_stride_2_DFT.jpg)
+![](figures/convolutional_neural_nets/aliasing_stride_4_DFT.jpg)
+
+Strided convolution results and their Fourier transforms.
+:::
 
 The result with stride 1 looks fine, and it is the output we would
 expect. However, stride 2 starts showing some artifacts on the
@@ -286,12 +290,13 @@ the learning might not succeed in removing all the artifacts.
 
 ### Dilated Convolution
 
-Dilated convolution is similar to strided convolution but spaces out the
-*filter* itself rather than spacing out where the filter is applied to
-the image: $$\begin{aligned}
+Dilated convolution is similar to strided convolution but spaces out the *filter* itself rather than spacing out where the filter is applied to the image: 
+$$\begin{aligned}
 x_{\texttt{out}}[n,m] =
-b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] x_{\texttt{in}}[n-d_kk_1,m-d_kk_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(dilated)}:convolutional_filter_dilated
-\end{aligned}$${#eq-convolutional_neural_nets} 
+b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] x_{\texttt{in}}[n-d_kk_1,m-d_kk_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(dilated)}
+\end{aligned}
+$${#eq-convolutional_neural_nets-convolutional_filter_dilated}
+
 
 :::{.column-margin}
 Here we dilate by factor $d_k$ in
@@ -300,45 +305,50 @@ dimension. Or, we could even dilate in the channel dimension, if we were
 using a multichannel convolution, but this is uncommon.
 :::
 
- An
-example of a dilated filter is visually shown in
-@fig-convolutional_neural_networks:dilated_conv_diagram:
+An example of a dilated filter is visually shown in
+@fig-convolutional_neural_networks-dilated_conv_diagram:
+
+![Dialated convolution. Dark gray cells have value 0.](figures/convolutional_neural_nets/dilated_conv_diagram.png){width="100%" #fig-convolutional_neural_networks-dilated_conv_diagram}
 
 As can be seen in the visualization, dilation is a way to achieve a
-filter with large kernel while only requiring a small number of weights.
-The weights are just spaced out so that a few will cover a bigger region
-of the image.
+filter with large kernel while only requiring a small number of weights. The weights are just spaced out so that a few will cover a bigger region of the image.
 
 As was the case with strided convolution, dilation can also introduce
 artifacts. Let's look at one example in detail that illustrates the
 effect of dilation on a filter. Let's consider the blur kernel,
-$b_{2,2}$: $$\mathbf{w} = \frac{1}{16}\begin{bmatrix}
+$b_{2,2}$: 
+
+$$\mathbf{w} = \frac{1}{16}\begin{bmatrix}
   1 ~& 2 ~& 1 \\
   2 ~& 4 ~& 2\\
   1~& 2 ~& 1
-\end{bmatrix}$$ This filter blurs the input image by computing the
+\end{bmatrix}$$ 
+
+This filter blurs the input image by computing the
 weighted average of pixel intensities around each pixel location. But,
 dilation transforms this filter in ways that change the behavior of the
-filter, which does not behave as a blur filter any longer.:::{.column-margin}
+filter, which does not behave as a blur filter any longer.
+
+
+:::{.column-margin}
 We saw that the 1D signal $[-1, 1, -1, ...]$
 convolved with $[1,2,1]$ outputs zero. However, check what happens when
 we convolve the input with the dilated kernel
 $[1, 0, 2, 0, 1]$.
 :::
 
- The next figure shows the kernel with
-dilations $d_k=1$, $d_k=2$, and $d_k=4$ together with the magnitude of
-the DFT of the three resulting kernels
-(@fig-convolutional_neural_nets:aliasing_dilated_kernel_binomial).
+The next figure shows the kernel with dilations $d_k=1$, $d_k=2$, and $d_k=4$ together with the magnitude of the DFT of the three resulting kernels \(@fig-convolutional_neural_nets-aliasing_dilated_kernel_binomial\).
 
-![](./figures/convolutional_neural_nets/aliasing_dilated_kernel_binomial.png){width="100%"}
+![Dialed filters and their Fourier transforms.](figures/convolutional_neural_nets/aliasing_dilated_kernel_binomial.png){width="100%" #fig-convolutional_neural_nets-aliasing_dilated_kernel_binomial}
+
+When using the original binomial filter (which corresponds to $d_k=1$) the DFT shows that the filter is a low-pass filter. When applying dilation ($d_k=2$) the DFT changes and it is not unimodal anymore. It has now eight additional local maximum in high spatial frequencies. With $d_k=4$, the DFT reveals an even more complex frequency behavior. @fig-convolutional_neural_nets-dilated_blur_mit_dome_example shows one input image and the result of the dilated convolutions with the blur kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$.
 
 When using the original binomial filter (which corresponds to $d_k=1$)
 the DFT shows that the filter is a low-pass filter. When applying
 dilation ($d_k=2$) the DFT changes and it is not unimodal anymore. It
 has now eight additional local maximum in high spatial frequencies. With
 $d_k=4$, the DFT reveals an even more complex frequency behavior.
-@fig-convolutional_neural_nets:dilated_blur_mit_dome_example shows one
+@fig-convolutional_neural_nets-dilated_blur_mit_dome_example shows one
 input image and the result of the dilated convolutions with the blur
 kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$.
 
@@ -361,84 +371,83 @@ $\begin{array}{cccc}
 \includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_4_DFT.jpg}
 \end{array}$
 
-In summary, using dilation increases the size of the convolution kernels
-without increasing the computations (which is the original desired
-property) but it reduces the space of useful kernels (which is an
-undesired property).
+
+
+![Result of the dilated convolutions with the blur kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$.](figures/convolutional_neural_nets/dilated_blur_mit_dome_example.png){width="100%" #fig-convolutional_neural_nets-dilated_blur_mit_dome_example}
+
+
+In summary, using dilation increases the size of the convolution kernels without increasing the computations (which is the original desired property) but it reduces the space of useful kernels (which is an undesired property).
 
 There are ways in which dilation can be used to increase the family of
 useful filters. For instance, by composing three convolutions with
 $d_k=1$, $d_k=2$, and $d_k=4$ together
-(@fig-convolutional_neural_networks:dilated_conv_cascade), one can
+(@fig-convolutional_neural_networks-dilated_conv_cascade), one can
 create a kernel that can switch during learning between high and low
 spatial frequencies and small and large kernels.
+
+![Convolving dilated filters creates a new filter that can measure effects at a mixture of frequencies.](figures/convolutional_neural_nets/dilated_conv_cascade.png){width="100%" #fig-convolutional_neural_networks-dilated_conv_cascade}
+
 
 This results in a kernel with a size of $9 \times 9$ (81 values) defined
 by 27 values. The relative computational efficiency increases when we
 cascade more filters with higher levels of dilation.
-@fig-convolutional_neural_nets:kernels_resulting_from_dilated_filters
+@fig-convolutional_neural_nets-kernels_resulting_from_dilated_filters
 shows several multiscale kernels that can be obtained by the
 convolutions of three dilated kernels. Can you guess which kernels were
 used?
 
-![](./figures/convolutional_neural_nets/dilated_examples.png){width="100%"}
+
+
+![Example kernels that each result from convolving three filters.](figures/convolutional_neural_nets/dilated_examples.png){width="100%" #fig-convolutional_neural_nets-kernels_resulting_from_dilated_filters}
 
 As the figure shows, the cascade of three dilated convolutions can
 generate a large family of filters with different scales, orientations,
 shifts, and also other patterns such as corner detectors, long edge
 detectors, and curved edge detectors. The last four kernels shows the
 result of convolving three random kernels, which provides further
-illustration of the diversity of kernels one can build. Each kernel is a
-$3 \times 3$ array sampled from a Gaussian distribution.
+illustration of the diversity of kernels one can build. Each kernel is a $3 \times 3$ array sampled from a Gaussian distribution.
 
 ### Low-Rank Filters
 
-Dilation is one way to create a big filter that is parameterized by just
-a small number of weights, that is, a low-rank filter. This trick can be
-useful in many contexts where we know that good filters have low-rank
+Dilation is one way to create a big filter that is parameterized by just a small number of weights, that is, a low-rank filter. This trick can be useful in many contexts where we know that good filters have low-rank
 structure. Dilation uses this trick to make big kernels, which can
 capture long-range dependences.
 
-Separable filters are another kind of low-rank filter that is useful in
-many applications (see chapter
-[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
-reference="chapter-fourier_analysis"}). We can create a convolutional
-layer with separable filters by simply stacking two convolutional layers
-in sequence, with no other layers in between. The first layer is a
-filter bank with $K \times 1$ kernels and the second uses $1 \times K$
-kernels. The composition of these layers is equivalent to a single
-convolutional layer with $K \times K$ separable filters. Two examples of
-such separable filters are given below
-(@fig-convolutional_neural_nets:kernels_separable_aprox):
 
+Separable filters are another kind of low-rank filter that is useful in many applications (see @sec-fourier_analysis). We can create a convolutional layer with separable filters by simply stacking two convolutional layers in sequence, with no other layers in between. The first layer is a filter bank with $K \times 1$ kernels and the second uses $1 \times K$ kernels. The composition of these layers is equivalent to a single convolutional layer with $K \times K$ separable filters. Two examples of such separable filters are given below @fig-convolutional_neural_nets-kernels_separable_aprox):
 
+:::{.column-margin}
+When convolving one row and one column vector, $\mathbf{w} = \mathbf{u}^\mathsf{T} \circ \mathbf{v}$, the result is the outer product: $w \left[n,m \right] = u\left[n \right] v\left[m \right]$.
+:::
 
-![](./figures/convolutional_neural_nets/kernels_separable_aprox.png){width=".6"}
+![Two examples of separable filters.](figures/convolutional_neural_nets/kernels_separable_aprox.png){width="100%" #fig-convolutional_neural_nets-kernels_separable_aprox}
+
 
 Some important kernels are nonseparable but can be approximated by a
 linear combination of a small number of separable filters. For instance,
 the Gaussian Laplacian is nonseparable but can be approximated by a
 separable filter as shown here
-(@fig-convolutional_neural_nets:laplacian_separable_aprox):
+(@fig-convolutional_neural_nets-laplacian_separable_aprox):
 
-![](./figures/convolutional_neural_nets/laplacian_separable_aprox.png){width=".6"}
+![Approximating a Gaussian Laplacian filter as the outer product of two 1D filters.](figures/convolutional_neural_nets/laplacian_separable_aprox.png){width="100%" #fig-convolutional_neural_nets-laplacian_separable_aprox}
 
 The diagonal Gaussian derivative is another nonseparable kernel. When
-using a $3 \times 3$ kernel to approximate it we have: $$\mathbf{w} = 
+using a $3 \times 3$ kernel to approximate it we have: 
+
+$$\mathbf{w} = 
 \begin{bmatrix}
   0 ~& -2 ~& -2 \\
   2 ~& 0 ~& -2\\
   2~& 2 ~& 0
-\end{bmatrix}$$ But we know from chapter
-[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
-reference="chapter-image_derivatives"} that this kernel can be written
+\end{bmatrix}$$ 
+
+But we know from @sec-image_derivatives that this kernel can be written
 as a linear combination of two separable kernels:
 $\mathbf{w} = \text{Sobel}_x + \text{Sobel}_y$, as defined in equation
 (@eq-sobel_kernels). In general, any $M \times N$ filter can be
 decomposed as a linear sum of $min(N,M)$ separable filters. The
 separable filters can be obtained by applying the singular value
-decomposition (SVD) to the kernel array $\mathbf{w}$. The SVD results in
-three matrices, $\mathbf{U}$, $\mathbf{S}$ and $\mathbf{V}$, so that
+decomposition (SVD) to the kernel array $\mathbf{w}$. The SVD results in three matrices, $\mathbf{U}$, $\mathbf{S}$ and $\mathbf{V}$, so that
 $\mathbf{w} = \mathbf{U} \mathbf{S} \mathbf{V}^\mathsf{T}$, where the
 columns of $\mathbf{U}$ and $\mathbf{V}$ are the separable 1D filters
 and the diagonal values of the diagonal matrix $\mathbf{S}$ are the
@@ -450,9 +459,7 @@ nonseparable kernels.
 
 ### Downsampling and Upsampling Layers
 
-In chapter
-[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
-reference="chapter-image_pyramids"} we saw image pyramids and showed how
+In @sec-image_pyramids we saw image pyramids and showed how
 they can be used for analysis and synthesis. CNNs can also be structured
 as analysis and synthesis pyramids, and this is a very powerful tool. To
 create a pyramid we just need to introduce a way of downsampling the
@@ -465,9 +472,7 @@ $\mathbb{R}^{N \times M} \rightarrow \mathbb{R}^{N/s_n \times M/s_m}$.
 We already saw one kind of downsampling layer, strided convolution,
 which is equivalent to convolution followed by subsampling. Another
 common kind of downsampling layer is , which we will encounter in
-section
-[1.3.1](#sec-convolutional_neural_nets:pooling_layers){reference-type="ref"
-reference="sec-convolutional_neural_nets:pooling_layers"}.
+@sec-convolutional_neural_nets-pooling_layers.
 
 Upsampling layers perform the opposite transformation, outputting a
 tensor that is larger in the spatial dimensions than the input:
@@ -479,9 +484,13 @@ with a blank image of zeros, $\mathbf{h} = \mathbf{0}$, we set:
 $$\begin{aligned}
     h[ns_n, ms_m] &= x_{\texttt{in}}[n, m] & \quad\quad \triangleleft \quad \texttt{dilation}:dilation\\
     \mathbf{x}_{\texttt{out}}&= \mathbf{w} \star \mathbf{h} + b & \quad\quad \triangleleft \quad \texttt{conv}
-\end{aligned}$${#eq-convolutional_neural_nets}  Sometimes the combination of these two layers
-is called an UpConv layer or a deconvolution layer (but note that
-deconvolution has a different meaning in signal processing).
+\end{aligned}$${#eq-convolutional_neural_nets}  
+
+:::{.column-margin}
+This equation applies for all integer values of $n \in \{1,\ldots,N\}$ and $m \in \{1,\ldots,M\}$.
+:::
+
+Sometimes the combination of these two layers is called an UpConv layer or a deconvolution layer (but note that deconvolution has a different meaning in signal processing).
 
 ## Nonlinear Filtering Layers
 
@@ -491,14 +500,21 @@ filters, these filters slide across the input tensor and process each
 window identically and independently, but the operation they perform is
 a nonlinear function of the local window.
 
-### Pooling Layers {#sec-convolutional_neural_nets:pooling_layers}
+### Pooling Layers {#sec-convolutional_neural_nets-pooling_layers}
 
 **Pooling layers** are downsampling layers that summarize the
 information in a patch using some aggregate statistic, such as the
 patch's mean value, called , or its max value, called , defined as
-follows: $$\begin{aligned}    x_{\texttt{out}}[i]= \max_{i \in \mathcal{N}(i)} x_{\texttt{in}}[i]& \quad\quad \triangleleft \quad \texttt{max pooling}:max_pooling\\
-    x_{\texttt{out}}[i]= \frac{1}{|\mathcal{N}|} \sum_{i \in \mathcal{N}(i)} x_{\texttt{in}}[i]& \quad\quad \triangleleft \quad \texttt{mean pooling}#eq-convolutional_neural_nets:mean_pooling
-\end{aligned}$${#eq-convolutional_neural_nets} 
+follows: 
+
+$$\begin{aligned}    x_{\texttt{out}}[i]= \max_{i \in \mathcal{N}(i)} x_{\texttt{in}}[i]& \quad\quad \triangleleft \quad \texttt{max pooling}:max_pooling\\
+    x_{\texttt{out}}[i]= \frac{1}{|\mathcal{N}|} \sum_{i \in \mathcal{N}(i)} x_{\texttt{in}}[i]& \quad\quad \triangleleft \quad \texttt{mean pooling}#eq-convolutional_neural_nets-mean_pooling
+\end{aligned}$${#eq-convolutional_neural_nets-mean_pooling} 
+
+
+:::{.column-margin}
+The $\mathcal{N}(i)$ indicates the set of indices in the same patch as index $i$.
+:::
 
 Like all downsampling layers, pooling layers can be used to reduce the
 resolution of the input tensor, removing high-frequency information in
@@ -567,11 +583,9 @@ the sum of squares of the activations in a window of adjacent
 Although local normalization is a common structure within the brain, it
 is not very frequently used in current neural networks, which more often
 use global normalization layers like batchnorm or layernorm (which we
-saw in chapter
-[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
-reference="chapter-neural_nets"}).
+saw in @-neural_nets.
 
-## A Simple CNN Classifier {#sec-convolutional_neural_nets:simple_CNN}
+## A Simple CNN Classifier {#sec-convolutional_neural_nets-simple_CNN}
 
 CNNs are deep nets that stack convolutional layers in a series,
 interleaved with nonlinearities. CNNs also frequently use downsampling
@@ -580,36 +594,38 @@ described above.
 
 CNNs come in a large variety of architectures, each suited to a
 different kind of problem. We will see some of these architectures in
-section
-[1.11](#sec-convolutional_neural_nets:popular_architectures){reference-type="ref"
-reference="sec-convolutional_neural_nets:popular_architectures"}. For
+@sec-convolutional_neural_nets-popular_architectures. For
 now we will focus on just one simple architecture that is suited to
 image classification. This architecture progressively downsamples the
-image until the last layer makes a single global prediction of the image
-label (@fig-convolutional_neural_nets:convnet_motif):
+image until the last layer makes a single global prediction of the image label (@fig-convolutional_neural_nets-convnet_motif):
 
-![](./figures/convolutional_neural_nets/convnet_motif.png){width="100%"}
+
+![A CNN architecture for image classification.](figures/convolutional_neural_nets/convnet_motif.png){width="100%" #fig-convolutional_neural_nets-convnet_motif}
 
 We will now walk through an example of such a classifier. Let
 $\mathbf{x} \in \mathbb{R}^{M \times N}$ be a black and white image. To
 process this image, we could use a simple CNN with two convolutional
 layers, defined as follows:
 
-$$\begin{aligned}
+$$\begin{align}
     \mathbf{z}_1[c,:,:] &= \mathbf{w}[c,:,:] \star \mathbf{x} + b[c] &\triangleleft \quad \texttt{conv}: [M \times N] \rightarrow [C \times M \times N]\\
     h[c,n,m] &= \max(z_1[c,n,m],0) &\triangleleft \quad \texttt{relu}: [C \times M \times N] \rightarrow [C \times M \times N]\\
     z_2[c] &= \frac{1}{NM} \sum_{n,m} h[c,n,m]  &\triangleleft \quad \texttt{gap}: [C \times M \times N] \rightarrow [C]\\
     \mathbf{z}_{3} &= \mathbf{W} \mathbf{z}_{2} + \mathbf{c} &\triangleleft \quad \texttt{fc}: [C] \rightarrow [K]\\
     y[k] &= \frac{e^{-\tau z_3[k]}}{\sum_{l=1}^K e^{-\tau z_3[l]}} &\triangleleft \quad \texttt{softmax}: [K] \rightarrow [K]
-\end{aligned}$$ 
+\end{align}$$
 
-This network has one convolutional layer with $C$ channels followed by a
-relu layer. The next layer performs spatial global average pooling
+
+
+:::{.column-margin}
+Note that these equations apply for all $c \in \{0,\ldots,C-1\}$, $n \in \{0,\ldots,N-1\}$ and $m \in \{0,\ldots,M-1\}$.
+:::
+
+This network has one convolutional layer with $C$ channels followed by a relu layer. The next layer performs spatial global average pooling
 (`gap`), and each channel gets projected into a single number that
 contains the sum of the outputs of the relu. This results in a
 representation given by a vector of length $C$. This vector is then
-processed by a **fully connected layer** (`fc`). A fully connected layer
-is simply another name for a linear layer that is full rank, that is,
+processed by a **fully connected layer** (`fc`). A fully connected layer is simply another name for a linear layer that is full rank, that is,
 every output neuron is connected to every input neuron, and the mapping
 is described by a $K \times C$ matrix (plus a bias).
 
@@ -637,9 +653,7 @@ y = nn.softmax(z3)
 
 ## A Worked Example
 
-In this section, we will analyze the simple network described in section
-[1.4](#sec-convolutional_neural_nets:simple_CNN){reference-type="ref"
-reference="sec-convolutional_neural_nets:simple_CNN"}, trained to
+In this section, we will analyze the simple network described in @sec-convolutional_neural_nets-simple_CNN, trained to
 discriminate between horizontal and vertical lines. Each subsection will
 tackle one aspect of the analysis that should be part of training any
 large system: (1) training and evaluation, (2) visualize and understand
@@ -656,18 +670,18 @@ We want to design a CNN that will classify the image according to the
 orientation of the lines that it contains. We define the two output
 classes as: $0$ (vertical) and $1$ (horizontal). A few samples from the
 training set are shown in
-@fig-convolutional_neural_nets:oriented_bars_cnn_trainingset.
+@fig-convolutional_neural_nets-oriented_bars_cnn_trainingset.
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_trainingset.png){width="100%"}
+![A sample of images from the training set. The training set defines the concept we want to learn. In this case we look for lines. But images of lines might not be enough to describe the concept of a line. What is a line? This lack of a precise definition will haunt us later.](figures/convolutional_neural_nets/oriented_bars_cnn_trainingset.png){width="100%" #fig-convolutional_neural_nets-oriented_bars_cnn_trainingset}
 
 To solve this problem we use the CNN defined before with two
 convolutional channels $C=2$ in the first layer. Once we train the
 network, we can see that it has solve the task perfectly and that the
 output on the test set is 100 percent correct (there are only three
 errors out of 10,000 test images). Example images from the test set are
-shown in @fig-convolutional_neural_nets:oriented_bars_cnn_testset.
+shown in @fig-convolutional_neural_nets-oriented_bars_cnn_testset.
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_testset.png){width="100%"}
+![A sample of images from the test set. The predicted label is shown at the top.](figures/convolutional_neural_nets/oriented_bars_cnn_testset.png){width="100%" #fig-convolutional_neural_nets-oriented_bars_cnn_testset}
 
 ### Network Visualization
 
@@ -676,16 +690,16 @@ important part of developing a system is to have tools to prove,
 understand, and debug it.
 
 To understand the network it is useful to **visualize** the kernels.
-@fig-convolutional_neural_nets:oriented_bars_cnn_kernels shows the two
+@fig-convolutional_neural_nets-oriented_bars_cnn_kernels shows the two
 learned $9 \times 9$ kernels. The first one looks like an horizontal
-derivative of a Gaussian filter (as we saw in chapter
-[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
-reference="chapter-image_derivatives"}) and the second one looks like a
+derivative of a Gaussian filter (as we saw in @sec-image_derivatives and the second one looks like a
 vertical derivative of a Gaussian (maybe closer to a second derivative).
 In fact, the DFT of each kernel shows that they are quite selective to a
 particular band on frequency content in the image.
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_kernels.png){width="100%"}
+![Visualization of the learned kernels.](figures/convolutional_neural_nets/oriented_bars_cnn_kernels.png){width="100%" #fig-convolutional_neural_nets-oriented_bars_cnn_kernels}
+
+
 
 The fully connected layer has learnt the weights: $$\mathbf{W} =  
 \left[
@@ -693,9 +707,7 @@ The fully connected layer has learnt the weights: $$\mathbf{W} =
 2.83 & -2.36  \\
 -0.60 & 1.14  
 \end{array}
-\right]$$ This corresponds to two channel oppositions: the first feature
-is the vertical output minus the horizontal output, and the second
-feature computes the horizontal output minus the vertical one.
+\right]$$ This corresponds to two channel oppositions: the first feature is the vertical output minus the horizontal output, and the second feature computes the horizontal output minus the vertical one.
 
 ### Out-of-Domain Generalization
 
@@ -709,11 +721,12 @@ perform well in classifying whether the image contains vertical or
 horizontal structures even if they are not lines. We can test this
 hypothesis by generating images that match our idea of orientation. The
 following test images
-(@fig-ref:convolutional_neural_nets:oriented_bars_cnn_generalization)
+(@fig-ref:convolutional_neural_nets-oriented_bars_cnn_generalization)
 contain different oriented structures but no lines, and still captures
 our notion of what should be the correct generalization of the behavior.
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_generalization.png){width="100%"}
+![Out-of-domain test examples. The predicted label is shown at the top.](figures/convolutional_neural_nets/oriented_bars_cnn_generalization.png){width="100%" #fig-convolutional_neural_nets-oriented_bars_cnn_generalization}
+
 
 In fact, the network seems to perform correctly even with these new
 images that come from a distribution different from the training set.
@@ -732,29 +745,33 @@ We saw that the output of the first layer does not really look for
 *lines*, instead it looks at where the energy is in the Fourier domain.
 So, we could fool the classifier by creating lines that for us look like
 vertical lines, but that have the energy content in the wrong side of
-the Fourier domain. We saw one trick to do this in chapter
-[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
-reference="chapter-fourier_analysis"}: modulation. If we multiply an
+the Fourier domain. We saw one trick to do this in @sec-fourier_analysis: modulation. If we multiply an
 image containing horizontal lines, by a sinusoidal wave,
 $\cos (\pi n / 3)$, we can move the spectral content horizontally as
 shown in
-@fig-convolutional_neural_nets:oriented_bars_cnn_test_adversarial_creation1.
+@fig-convolutional_neural_nets-oriented_bars_cnn_test_adversarial_creation1.
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial_creation1.png){width="100%"}
+
+![Creating a new out-of-domain test image obtained by multiplying an in-domain test image with horizontal lines (left image its DFT) with a sinusoidal wave. The resulting image and its DFT are shown on the right).](figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial_creation1.png){width="100%" #fig-convolutional_neural_nets-oriented_bars_cnn_test_adversarial_creation1}
 
 The lines still look horizontal to us, but their spectral content now is
 higher in the region that overlaps with the vertical line detector
 learned by the network. Indeed, when the network processes images that
 have lines with this *sinusoidal texture*, it produces the wrong
 classification results for all the images
-(@fig-convolutional_neural_nets:oriented_bars_cnn_test_adversarial)!
+(@fig-convolutional_neural_nets-oriented_bars_cnn_test_adversarial)!
 
-![](./figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial.png){width="100%"}
+
+![Classification results on out-of-domain test images created by modulation.](figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial.png){width="100%" #fig-convolutional_neural_nets-oriented_bars_cnn_test_adversarial}
 
 We have just designed an manually! The question then could be as
 follows: If it is not detecting line orientations, what is it really
 detecting? Our analysis of the learned kernels had the answer.
 
+
+:::{.column-margin}
+For complex architectures, **adversarial examples** are obtained as an optimization problem: What is the minimal perturbation of an input that will produce the wrong output in the network?
+:::
 
 One way of avoiding this would be to introduce these types of images in
 the training set and to repeat the whole process.
@@ -769,10 +786,10 @@ data and the features are arranged in a *map* -- an array that matches
 the shape of the input data. For images, feature maps are 2D spatial
 arrays, for videos they are 3D space-time arrays, and so forth.
 
-@fig-convolutional_neural_nets:feature_maps_schematic shows the
+@fig-convolutional_neural_nets-feature_maps_schematic shows the
 interplay between feature maps and filter banks in a CNN:
 
-![](./figures/convolutional_neural_nets/feature_maps_schematic.png){width="100%"}
+![The interplay between feature maps and filters banks in a CNN. You can think of the input image itself as an R, G, B feature map and the output logits as a 1x1 resolution feature map with class logits as the channels.](figures/convolutional_neural_nets/feature_maps_schematic.png){width="100%" #fig-convolutional_neural_nets-feature_maps_schematic}
 
 The input to the network is an image and the output is a vector of
 logits. We can actually think of these inputs and outputs as feature
@@ -782,10 +799,10 @@ logits as the channels.
 
 Now let's look at the feature maps in a real network,
 AlexNet @krizhevsky2012imagenet.
-@fig-convolutional_neural_nets:alexnet_feature_maps shows what these
+@fig-convolutional_neural_nets-alexnet_feature_maps shows what these
 look like after the first and second convolutional layer of the network:
 
-![](./figures/convolutional_neural_nets/alexnet_feature_maps.png){width="100%"}
+![A selection of feature maps and filters in AlexNet. The layer 1 filter with the orange dashed border slides over the input image and produces the layer 1 feature map with the orange dashed border. The layer 2 filter with the green dashed border slides over the layer 1 feature maps and produces the layer 2 feature map with the green dashed border.]
 
 There are a few things to notice in this figure. First, the spatial
 resolution of the feature maps get lower as we go deeper into the
@@ -799,43 +816,33 @@ basic image features and channels in the deeper layers increasingly
 correspond to class semantics (e.g., one channel might be a heatmap of
 where the "bird" pixels are).
 
-@fig-convolutional_neural_nets:feature_maps_pca_viz shows one more way
+@fig-convolutional_neural_nets-feature_maps_pca_viz shows one more way
 to visualize feature maps. Rather than plotting the channels as a column
 of grayscale images, we run PCA to reduce the channel dimensionality to
 3. Then we can directly render each feature map as a color image, with
 red showing the first priniciple component of each layer's feature map,
-green the second, and blue the third. We show this for 5 layers in three
-common networks, AlexNet, VGG16 @vgg16, and ResNet18 @he2016deep.
+green the second, and blue the third. We show this for 5 layers in three common networks, AlexNet, VGG16 @vgg16, and ResNet18 @he2016deep.
 
-![](figures/convolutional_neural_nets/feature_maps_pca_viz.png){width="100%"}
+![PCA visualization of feature maps in three convolutional networks. Because each of these networks has a different number of layers, we select 5 that are evenly spaced from the first to last convolutional feature map.](figures/convolutional_neural_nets/feature_maps_pca_viz.png){width="100%" #fig-convolutional_neural_nets-feature_maps_pca_viz}
 
-## Receptive Fields {#sec-convolutional_neural_nets:receptive_fields}
+
+## Receptive Fields {#sec-convolutional_neural_nets-receptive_fields}
 
 **Receptive fields** are another important concept when working with
-CNNs. In chapter
-[\[sec-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
-reference="sec-challenge_of_vision"}, we learned about history of
+CNNs. In @sec-challenge_of_vision need about history of
 receptive fields in neuroscience. As a reminder, the receptive field of
 a neuron is the region of the input signal that the neuron is sensitive
-to, i.e. its support. In multilayer perceptrons (MLPs, chapter
-[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
-reference="chapter-neural_nets"}), the receptive field of each neuron is
+to, i.e. its support. In multilayer perceptrons (MLPs, @sec-neural_nets, the receptive field of each neuron is
 the entire input vector since MLPs use *fully* connected layers. In
 CNNs, on the other hand, each neuron only sees a portion of the input,
 since each output neuron on a conv layer is only connected to a subset
-of inputs to the conv layer, determined by the kernel size of the filter
-that produces that output.
+of inputs to the conv layer, determined by the kernel size of the filter that produces that output.
 
 The receptive fields of two example neurons in a CNN are shown below
-(@fig-convolutional_neural_networks:RFs):
+(@fig-convolutional_neural_networks-RFs):
 
-Notice that the receptive field grows the deeper we go into the network.
-To understand why, consider a CNN without nonlinearities. Then the
-$l+1$-th layer is the composition of $l$ convolutional filters. As we
-saw in section
-[\[sec-linear_image_filtering:properties_of_the_convolution\]](#sec:linear_image_filtering:properties_of_the_convolution){reference-type="ref"
-reference="sec-linear_image_filtering:properties_of_the_convolution"},
-composing filters results in a new filter with larger support (kernel
+Notice that the receptive field grows the deeper we go into the network. To understand why, consider a CNN without nonlinearities. Then the $l+1$-th layer is the composition of $l$ convolutional filters. As we
+saw in @sec-linear_image_filtering-properties_of_the_convolution composing filters results in a new filter with larger support (kernel
 size). The same happens in a CNN with pointwise nonlinearities, since
 pointwise operations do not affect receptive field (the outputs have the
 same receptive fields as the inputs). Further, whenever we have a
@@ -850,9 +857,7 @@ covers the entire input.
 
 ## Spatial Outputs {#sec-convolutional_neural_networks:spatial_outputs}
 
-In section
-[1.4](#sec-convolutional_neural_nets:simple_CNN){reference-type="ref"
-reference="sec-convolutional_neural_nets:simple_CNN"} we saw a CNN that
+In @sec-convolutional_neural_nets-simple_CNN we saw a CNN that
 outputs a single class probability vector for an image. What if we want
 to output a spatially varying map of predictions, like we discussed in
 the intro to this chapter? To achieve this, we can simply downsample
@@ -860,7 +865,9 @@ less, so that the final layer of the CNN is a feature map that maintains
 higher spatial resolution. It is also important to remove any global
 pooling layers.
 
-An example is given below: $$\begin{aligned}
+An example is given below: 
+
+$$\begin{aligned}
     \mathbf{z}_1[c_1,:,:] &= \sum_{c=0}^2 \mathbf{w}_1[c,c_1,:,:] \star \mathbf{x} + b_1[c_1]  &\triangleleft \quad \texttt{conv}\\
     &&[3 \times N \times M] \rightarrow [C_1 \times N \times M]\nonumber\\
     h[c_1,n,m] &= \max(z_1[c_1,n,m],0) &\triangleleft \quad \texttt{relu}\\
@@ -871,9 +878,10 @@ An example is given below: $$\begin{aligned}
     &&[K \times N \times M] \rightarrow [K \times N \times M]\nonumber
 \end{aligned}$$
 
-In @fig-convolutional_neural_networks:image_to_image_arch we visualize
+In @fig-convolutional_neural_networks-image_to_image_arch we visualize
 this CNN (showing only a 1D slice of this 2D CNN):
 
+![A 1D slice of a CNN that maps an image to an image. The input is the photo of size $3 \times N \times M$ and the output is a class probability map of size $K \times N \times M$; we visualize the corresponding label map on the right (per-pixel argmax over output probabilities). The blue arrows are the learnable parameters. The gray arrows share the weights of the blue arrows.](figures/convolutional_neural_networks/image_to_image_arch.png){width="100%" #fig-convolutional_neural_networks-image_to_image_arch}
 
 :::{.column-margin}
 Notation reminder: nodes that are squares indicate
@@ -909,8 +917,12 @@ the input:
 $\mathbf{x}_L[:,j] = F(\mathbf{x}_{\texttt{in}}[:,\texttt{RF}(j)])$.
 
 This is easiest to understand with a visual proof, which we give in
-@fig-convolutional_neural_networks:CNN_as_filter (pointwise
+@fig-convolutional_neural_networks-CNN_as_filter (pointwise
 nonlinearities are omitted for clarity):
+
+
+![A CNN is a non-linear filter. Edge colors indicate shared weights; two edges with the same color have the same weight. The colors demonstrate that the same function $F$ is applied to each patch of input nodes.](figures/convolutional_neural_networks/CNN_as_filter.png){width="100%" #fig-convolutional_neural_networks-CNN_as_filter}
+
 
 To understand this property, first imagine the CNN has no pointwise
 nonlinearities. Then the entire CNN is just the composition of a
@@ -937,11 +949,15 @@ same "classifier" function to each patch.
 
 
 
-## Why Process Images Patch by Patch? {#sec-convolutional_neural_nets:key_properties}
+## Why Process Images Patch by Patch? {#sec-convolutional_neural_nets-key_properties}
 
 As we have seen above, a fully convoutional CNN can be thought of a
 function that processes each patch of the input independently and
 identically. 
+
+:::{.column-margin}
+A CNN is a non-linear filter. Edge colors indicate shared weights; two edges with the same color have the same weight. The colors demonstrate that the same function $F$ is applied to each patch of input nodes.
+:::
 
 In this section we will discuss why these two propties are useful for
 image processing.
@@ -978,7 +994,7 @@ invariant.
 
 Typically, objects can appear anywhere in an image and look the same,
 like the birds in the photo from
-@fig-convolutional_neural_nets:CNNs_as_patch_processing. This is
+@fig-convolutional_neural_nets-CNNs_as_patch_processing. This is
 because as the birds fly across the frame their position changes but
 their identity and appearance does not. More generally, as a camera pans
 across a scene, the content shifts in position but is otherwise
@@ -993,11 +1009,13 @@ using the same function $f$. Some texts instead use the term to describe
 convolutions. This places emphasis on the fact that if we shift the
 input signal by some translation, then the output signal will get
 shifted by the same amount. That is, if $f$ is a convolution, we have
-the property: $$\begin{aligned}
+the property: 
+
+$$\begin{aligned}
     f(\texttt{translate}(\mathbf{x})) = \texttt{translate}(f(\mathbf{x}))
 \end{aligned}$$
 
-## Popular CNN Architectures {#sec-convolutional_neural_nets:popular_architectures}
+## Popular CNN Architectures {#sec-convolutional_neural_nets-popular_architectures}
 
 We have now seen all the essential building blocks of CNNs. In this
 section we will treat these blocks like LEGOs and show how to piece them
@@ -1005,9 +1023,7 @@ together to make a variety of useful architectures.
 
 ### Encoder and Decoders
 
-In chapter
-[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
-reference="chapter-image_pyramids"}, we encountered image pyramids that
+In @sec-image_pyramids), we encountered image pyramids that
 include both an analysis pipeline, which converts an image into a
 multiscale representation of filter responses, and a synthesis pipeline,
 which reconstructs the image from the filter responses. Deep networks
@@ -1026,37 +1042,32 @@ until producing a much lower-dimensional feature map as output. A
 decoder is the opposite, taking a set of low-dimensional features as
 input, then upsampling them, layer by layer, until producing an image as
 the final output. An example of an encoder is an image classifier and an
-example of a decoder is an image generator (covered in chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}). These two architectural
+example of a decoder is an image generator (covered in @sec-generative_model. These two architectural
 patterns are shown in
-@fig-convolutional_neural_nets:encoders_and_decoders.
+@fig-convolutional_neural_nets-encoders_and_decoders.
 
-![](./figures/convolutional_neural_nets/encoders_and_decoders.png){width="75%"}
+
+![A convolutional encoder (top) and a convolutional decoder (bottom). The exact ordering of the operations (e.g., downsample before or after the non-linearity) is just an example and may vary in different encoder and decoder models. The $\mathbf{z}$ is a feature map or vector of neural activations, and is sometimes called an **embedding** (see @chapter:representation_learning)](/figures/convolutional_neural_nets/encoders_and_decoders.){width="100%" #fig-convolutional_neural_nets-encoders_and_decoders}
 
 One powerful thing you can do with encoders and decoders is to put them
 together, forming an **encoder-decoder**. Such an architecture first
 encodes the input image into a low-dimensional representation, then
 decodes the representation back into an image output. This is therefore
 a suitable architecture for image-to-image problems, and it has a few
-advantages over the image-to-image CNNs we saw in section
-[1.8](#sec-convolutional_neural_networks:spatial_outputs){reference-type="ref"
-reference="sec-convolutional_neural_networks:spatial_outputs"}: 1) by
+advantages over the image-to-image CNNs we saw in @sec-convolutional_neural_networks:spatial_outputs: 1) by
 downsampling, the internal feature maps are smaller, using less memory
 and computation, 2) encoder-decoders introduce an **information
 bottleneck** -- i.e. the representation between the encoder and decoder
 is low-dimensional and can only transmit so much information -- and this
 forces abstraction. This latter concept is one we will study in much
-greater detail in chapter
-[\[chapter-representation_learning\]](#sec-representation_learning){reference-type="ref"
-reference="chapter-representation_learning"}, where we will see several
+greater detail in @sec-representation_learning, where we will see several
 benefits of compressing a signal. A schematic of the encoder-decoder
 architecture is shown in
-@fig-convolutional_neural_nets:encoder_decoders.
+@fig-convolutional_neural_nets-encoder_decoders.
 
-![](./figures/convolutional_neural_nets/encoder_decoder_arch.png){width="100%"}
+![Encoder-decoder architecture. In this example, the input is an image and the output is a segmentation map.](figures/convolutional_neural_nets/encoder_decoders.png){width="100%" #fig-convolutional_neural_nets-encoder_decoders}
 
-### U-Nets {#sec-convolutional_neural_nets:unet}
+### U-Nets {#sec-convolutional_neural_nets-unet}
 
 Encoder-decoders force the signal to pass through a bottleneck, and
 although this can be a good thing (as discussed above), it also makes
@@ -1081,17 +1092,13 @@ maintain the information-bottleneck of the encoder-decoder, with its
 incumbent benefits in terms of memory and compute efficiency and forced
 abstraction, while also allowing residual information to flow through
 the skip connections, thereby not sacrificing the ability to output
-high-frequency spatial predictions. U-Nets look a lot like the steerable
-pyramids from chapter
-[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
-reference="chapter-image_pyramids"}, which also consistent of a
-downsampling *analysis* path followed by an upsampling *synthesis* path,
-with skip connections in between mirror image stages in the pathways.
+high-frequency spatial predictions. U-Nets look a lot like the steerable pyramids from @sec-image_pyramids, which also consistent of a
+downsampling *analysis* path followed by an upsampling *synthesis* path, with skip connections in between mirror image stages in the pathways.
 The main difference is that the U-Net has *learned filters* and
 *nonlinearities*. A schematic of a U-net is given in
-@fig-convolutional_neural_nets:unet.
+@fig-convolutional_neural_nets-unet.
 
-![](./figures/convolutional_neural_nets/unet.png){width="85%"}
+![U-net architecture. Each block contains a series of layers. The skip connections concatenate activations.](./figures/convolutional_neural_nets/unet.png){width="100%" #fig-convolutional_neural_nets-unet}
 
 ### ResNets
 
@@ -1116,32 +1123,20 @@ only a subset of them. If we set the number of stacked residual blocks
 to be very large then the net can essentially learn how deep to make
 itself, using as many blocks as necessary to solve the task. ResNets
 often exploit this fact by being very deep; for example, they may be
-hundreds of blocks deep. @fig-convolutional_neural_nets:resnet depicts
+hundreds of blocks deep. @fig-convolutional_neural_nets-resnet depicts
 a 5 block deep ResNet.
 
-![](./figures/convolutional_neural_nets/resnet.png){width="85%"}
+
+![ResNet architecture. Each block contains a series of layers. The skip connections add activations from one block to the next.](/figures/convolutional_neural_nets/resnet.png){width="85%" #fig-convolutional_neural_nets-resnet}
 
 ## Concluding Remarks
 
 We will see in later chapters that several new kinds of models are
 recently supplanting CNNs as the most successful architectures for
-vision problems. One such architecture is the **transformer** (chapter
-[\[chapter-transformers\]](#sec-transformers){reference-type="ref"
-reference="chapter-transformers"}). It may be tempting to think, "Why
-did we bother learning about CNNs then, if transformers are better!" The
-reason we cover CNNs is not because the exact architecture presented
-here will last, but because the underlying principles it embodies are
-ubiquitous in sensory processing. The two key properties mentioned in
-section
-[1.10](#sec-convolutional_neural_nets:key_properties){reference-type="ref"
-reference="sec-convolutional_neural_nets:key_properties"} are in fact
+vision problems. One such architecture is the **transformer** @sec-transformers. It may be tempting to think, "Why
+did we bother learning about CNNs then, if transformers are better!" The reason we cover CNNs is not because the exact architecture presented here will last, but because the underlying principles it embodies are ubiquitous in sensory processing. The two key properties mentioned in @sec-convolutional_neural_nets-key_properties are in fact
 present in transformers and many other architectures beyond CNNs:
-transformers also include stages that process each patch identically and
-independently, but they interleave these stages with other stages that
-globalize information across patches. It comes down to preferences
-whether you want to call these newer architectures convolutional or not,
-and there is currently some debate about it in the community. For us it
-doesn't matter, because if we learn the principles we can recognize them
-in all the systems we encounter and need not get hung up on names.
+transformers also include stages that process each patch identically and independently, but they interleave these stages with other stages that globalize information across patches. It comes down to preferences
+whether you want to call these newer architectures convolutional or not, and there is currently some debate about it in the community. For us it doesn't matter, because if we learn the principles we can recognize them in all the systems we encounter and need not get hung up on names.
 
 [^1]: The answers are 1-B, 2-C.
