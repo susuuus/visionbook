@@ -472,15 +472,22 @@ This last function in equation (@eq-discrete_sinc_function) gets the
 special name of **discrete sinc** function. 
 
 In summary, we get that The DFT of the box function is the discrete sinc
-function: $$\text{box}_{L} \left[n \right]\xrightarrow{\mathscr{F}} 
-\frac{\sin \pi u (2L+1)/N}{\sin \pi u/N}$$ We will denote the DFT of the
-box function, $\text{box}_{L} \left[n \right]$, capitalizing the first
+function: 
+$$\text{box}_{L} \left[n \right]\xrightarrow{\mathscr{F}} 
+\frac{\sin \pi u (2L+1)/N}{\sin \pi u/N}
+$$ 
+
+We will denote the DFT of the box function, $\text{box}_{L} \left[n \right]$, capitalizing the first
 letter, $\text{Box}_{L} \left[u \right]$. This function has its maximum
 value at $u=0$. The DFT, $\text{Box}_{L} \left[u \right]$, is a
 symmetric real function. The following plot (@fig-boxfilterdft) shows
 the DFT of the box with $L=5$, and $N=32$. One period of the DFT is
 contained in the interval $\left[ -16, 15 \right]$ and the rest is a
 periodic extension.
+
+![DFT of the box filter with $L=5$, and $N=32$.](figures/Image_processing_fourier/boxfilterdft.png){width="100%" #fig-boxfilterdft}
+
+
 
 Now that we know how to compute the DFT of the 1D box, we can easily
 extend it to the 2D case. A 2D box is a separable function and can be

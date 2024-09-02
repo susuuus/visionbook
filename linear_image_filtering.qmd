@@ -68,8 +68,7 @@ signal shown in @fig-contdiscsignal (a) once every second
 @fig-contdiscsignal (b).
 
 
-![Fig (a) A continuous signal, and (b) a discrete signal obtained by sampling the continuous signal at the times $t=n$.](figures/linear_image_filtering/contdiscsignal.png)
-{#fig-contdiscsignal}
+![Fig (a) A continuous signal, and (b) a discrete signal obtained by sampling the continuous signal at the times $t=n$.](figures/linear_image_filtering/contdiscsignal.png){#fig-contdiscsignal}
 
 The signal in @fig-contdiscsignal (b) is a function that takes on the
 values $\ell\left[0\right] = 3$, $\ell\left[1\right] = 2$,
@@ -499,18 +498,18 @@ The impulse function is:
 ### Some Examples
 
 @fig-convExamps shows several simple convolution examples (each color
-channel is convolved with the same kernel). @fig-convExampsa shows a
+channel is convolved with the same kernel). @fig-convExamps (a) shows a
 kernel with a single central non-zero element,
 $\delta \left[n,m\right]$, convolved with any image, gives back that
-same image. @fig-convExampsb shows a kernel,
+same image. @fig-convExamps (b) shows a kernel,
 $\delta \left[n,m-2\right]$, that produces a two pixel shift toward the
 right of the input image. The black line that appears on the left is due
 to the zero-boundary conditions (to be discussed in the next section)
-and it has a width of two pixels. @fig-convExampsc shows the result of
+and it has a width of two pixels. @fig-convExamps (c) shows the result of
 convolving the image with a kernel
 $0.5 \delta \left[n-2,m-2\right]+ 0.5 \delta \left[n+2,m+2\right]$. This
 results in two superimposed copies of the same image shifted diagonally
-in opposite directions. And finally, @fig-convExampsd shows the result
+in opposite directions. And finally, @fig-convExamps (d) shows the result
 of convolving the image with a uniform kernel of all $1/25$.
 
 ![Fig a) An impulse convolved with the input image gives no
@@ -681,16 +680,16 @@ $$\ell_{\texttt{out}}\left[n,m\right] = \ell_{\texttt{in}}\circ h = \sum_{k,l=-N
 @fig-corrvsconv illustrates the difference between the correlation and
 the convolution. In these examples, the kernel $h[n,m]$ is a triangle
 pointing up (the center of the triangle is $n=0$ and $m=0$) as shown in
-@fig-corrvsconva. When the input image is black (all zeros) with only
-four bright pixels, @fig-corrvsconvb, this is the convolution of the
+@fig-corrvsconv (a). When the input image is black (all zeros) with only
+four bright pixels, @fig-corrvsconv (b), this is the convolution of the
 triangle with four impulses, which results in four triangles pointing up
 (@fig-corrvsconv\[c\]). However, the cross-correlation looks different;
 it still results in four copies of the triangles centered on each point,
 but the triangles are pointing downward (@fig-corrvsconv\[d\]).
 
 For the input image containing triangles pointing up and down,
-@fig-corrvsconve, the convolution will have its maximum output on the
-triangles points down, @fig-corrvsconvf, while the correlation will
+@fig-corrvsconv (e), the convolution will have its maximum output on the
+triangles points down, @fig-corrvsconv (f), while the correlation will
 output the maximum values in the center of the triangles pointing up
 (@fig-corrvsconv\[g\]).
 
@@ -709,7 +708,7 @@ outputs are identical when the kernel $h$ has central symmetry.
 The goal of template matching is to find a small image patch within a
 larger image. @fig-normcorr shows how to use template matching to
 detect all the occurrences of the letter "a" with an image of text,
-shown in @fig-normcorrb. @fig-normcorra shows the template of the
+shown in @fig-normcorr (b). @fig-normcorr (a) shows the template of the
 letter "a".
 
 ![Fig (a) Template. (b) Input image. (c) Correlation between input (b) and template (a). (d) Normalized correlation. e) Locations with cross-correlation above 75 percent of its maximum value.](figures/linear_image_filtering/normcorr.png){width="100%" #fig-normcorr}

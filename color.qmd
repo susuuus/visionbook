@@ -400,10 +400,13 @@ reproduction system are summarized below:
 
 $$\begin{aligned}
 \mathbf{C} & = & \mathbf{R} \mathbf{C}_{\mbox{eye}} 
- \\
-\mathbf{M} & = & (\mathbf{C P})^{-1},
 \end{aligned}
 $${#eq-conditionsA} 
+
+$$\begin{aligned}
+\mathbf{M} & = & (\mathbf{C P})^{-1},
+\end{aligned}
+$${#eq-conditions} 
 
 where $\mathbf{C}_{\mbox{eye}}$ are the human photoreceptor sensitivities and $\mathbf{R}$ is a full-rank $3 \times 3$ matrix.
 

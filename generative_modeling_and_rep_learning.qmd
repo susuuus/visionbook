@@ -1,4 +1,4 @@
-# Generative Modeling Meets Representation Learning {#sec-generative_modeling_and_representation_learning}
+# Generative Modeling Meets Representation Learning {#sec-generative_models_and_representation_learning}
 
 ## Introduction
 

@@ -297,9 +297,7 @@ We have several tools at our disposal to help us pinpoint the location
 of the needle, and in this section we will focus on the following three:
 *data*, *priors*, and *hypotheses*.
 
-The first tool, *data*, was the topic of chapter
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"}. In vision, the data is
+The first tool, *data*, was the topic of @sec-intro_to_learning. In vision, the data is
 observations of the world like photos and videos. Finding explanations
 consistent with the observed data is the centerpiece of learning-based
 vision.

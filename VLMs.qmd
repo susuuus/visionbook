@@ -1,4 +1,4 @@
-# Vision and Language {#sec-VLMs}
+# Vision and Language {#sec-VLMs-CLIP}
 
 ## Introduction
 

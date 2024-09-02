@@ -50,7 +50,9 @@ incoming and outgoing ray directions, the wavelength, a scalar surface
 reflectance, and the incoming light power:
 $$%I_{\mbox{out}} = F_{L}(I_{\mbox{in}} (\lambda), \mathbf{n}, \mathbf{p})  = a I_{\mbox{in}}(\lambda) \cos(\mathbf{n} \cdot \mathbf{p}),
 \ell_{\texttt{out}} = F_{L} \left( \ell_{\texttt{in}} (\lambda), \mathbf{n}, \mathbf{p} \right)  = a \ell_{\texttt{in}}(\lambda) \left( \mathbf{n} \cdot \mathbf{p} \right),
-\label{eq:lambert}$$ where $a$ is the surface **reflectance**, or
+$${#eq-lambert}
+
+where $a$ is the surface **reflectance**, or
 **albedo**, $\mathbf{n}$ is the surface normal vector, and $\mathbf{p}$
 points toward the source of the incident light. Note that the brightness
 of the outgoing light ray depends on the orientation of the surface

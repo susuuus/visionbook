@@ -1034,7 +1034,7 @@ patterns are shown in
 @fig-convolutional_neural_nets-encoders_and_decoders.
 
 
-![A convolutional encoder (top) and a convolutional decoder (bottom). The exact ordering of the operations (e.g., downsample before or after the non-linearity) is just an example and may vary in different encoder and decoder models. The $\mathbf{z}$ is a feature map or vector of neural activations, and is sometimes called an **embedding** (see @chapter:representation_learning)](/figures/convolutional_neural_nets/encoders_and_decoders.){width="100%" #fig-convolutional_neural_nets-encoders_and_decoders}
+![A convolutional encoder (top) and a convolutional decoder (bottom). The exact ordering of the operations (e.g., downsample before or after the non-linearity) is just an example and may vary in different encoder and decoder models. The $\mathbf{z}$ is a feature map or vector of neural activations, and is sometimes called an **embedding** (see @sec-representation_learning)](/figures/convolutional_neural_nets/encoders_and_decoders.){width="100%" #fig-convolutional_neural_nets-encoders_and_decoders}
 
 One powerful thing you can do with encoders and decoders is to put them
 together, forming an **encoder-decoder**. Such an architecture first

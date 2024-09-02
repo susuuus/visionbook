@@ -96,7 +96,7 @@ $$
   1 & -1
 \end{bmatrix}
 $$
-The problem with this discretization of the image derivatives is that the outputs are spatially misaligned because a filter of length 2 shifts the output image by half a pixel as we discussed earlier. The spatial misalignment can be removed by using a slightly different version of the same operator: we can use a rotated reference frame as it is done in the **Roberts cross** operator, introduced in 1963 @cite(Roberts63) in a time when reading an image of $256 \times 256$ pixels into memory took several minutes:
+The problem with this discretization of the image derivatives is that the outputs are spatially misaligned because a filter of length 2 shifts the output image by half a pixel as we discussed earlier. The spatial misalignment can be removed by using a slightly different version of the same operator: we can use a rotated reference frame as it is done in the **Roberts cross** operator, introduced in 1963 @Roberts63 in a time when reading an image of $256 \times 256$ pixels into memory took several minutes:
 
 $$
 \begin{bmatrix}

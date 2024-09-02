@@ -83,7 +83,7 @@ two consecutive input values. The output is nearly identical to the input signal
 
 ## More General Imagers
 
-Many different optical systems can form cameras and the linear analysis described before can be used to characterize the imaging process. Even a simple edge will do. @fig-amats3shows two non traditional imaging systems that we will analyze in this section. 
+Many different optical systems can form cameras and the linear analysis described before can be used to characterize the imaging process. Even a simple edge will do. @fig-amats3 shows two non traditional imaging systems that we will analyze in this section. 
 
 ![Fig (a) Schematic drawing of an edge camera, and (b) its imaging matrices. (c) A pinspeck camera (an occluder that blocks two of the values on the scene), and (d) its imaging matrices.](figures/imaging/nontraditional_pinholes_2-2.png){#fig-amats3}
 
