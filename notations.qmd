@@ -61,7 +61,7 @@ We will use notes inside boxes to bring attention to important concepts, or to a
 
 :::{.column-margin}
 A 3D tensor that could represent a $C \times H \times W$ color image: 
-![](figures/neural_nets/3D_tensor_example-0.png){width=150}
+![](figures/neural_nets/3D_tensor_example.png){width=150}
 :::
 
 

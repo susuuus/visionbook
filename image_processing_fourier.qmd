@@ -114,7 +114,7 @@ $$s\left(t\right) = A \sin\left(w ~t - \theta \right)$$ where $A$ is the
 The wave signal is periodic with a period $T=2 \pi / w$.
 
 :::{.column-margin}
-![](figures/Image_processing_fourier/amplitudeandperiod-0.png)
+![](figures/Image_processing_fourier/amplitudeandperiod.png)
 :::
 
 In discrete time, the **discrete time sine wave** is as follows

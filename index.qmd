@@ -30,7 +30,7 @@ data first. shows the number of pages written as a function of time
 since we mentioned the idea to MIT press for the first time on November
 24, 2010.
 
-![Evolution of the number of pages written as a function of time.](figures/preface/book_evolution_final-0.png){#fig-evolution_pages}
+![Evolution of the number of pages written as a function of time.](figures/preface/book_evolution_final.png){#fig-evolution_pages}
 
 ::: {.column-margin}
 Starting to write this book was like entering this cave. 

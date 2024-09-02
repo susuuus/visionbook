@@ -527,7 +527,7 @@ find it useful to visualize tensors in 3D, as shown in
 @fig-neural_nets-3D_tensor_example.
 
 
-![A 3D tensor that could represent an $C \times H \times W$ color image.](figures/neural_nets/3D_tensor_example-0.png){#fig-neural_nets-3D_tensor_example width=30%}
+![A 3D tensor that could represent an $C \times H \times W$ color image.](figures/neural_nets/3D_tensor_example.png){#fig-neural_nets-3D_tensor_example width=30%}
 
 This is closer to the actual ND tensors vision systems work with, and
 many concepts can be adequately captured just by thinking in 3D. We will

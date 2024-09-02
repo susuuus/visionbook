@@ -18,7 +18,7 @@ cameras work and it will allow us think about new types of cameras.
 For the simplicity of visualization, let's consider one dimensional (1D)
 imaging systems. As shown in the sensor is 1D and the scene lives in flatland.
 
-![A one dimensional imaging system in flatland. As in , we have reversed the direction of the sensor coordinates.](figures/imaging/flatland_camera_linear-0.png){#fig-flatland_camera_linear width="70%"}
+![A one dimensional imaging system in flatland. As in , we have reversed the direction of the sensor coordinates.](figures/imaging/flatland_camera_linear.png){#fig-flatland_camera_linear width="70%"}
 
 Let the light intensities in the world be represented by a column vector, $\boldsymbol\ell_{\texttt{w}}$. The value of the $n$-th component of $\boldsymbol\ell_{\texttt{w}}$ gives the intensity of the light at position $n$, heading in the direction of the camera. There are a few more things to notice in @fig-flatland_camera_linear. The first one is that the axis in the camera sensor is reversed, consistent with @fig-pinholeGeometry. The value $n$ corresponds to image coordinates and the units are pixels. The second is that we are modeling the scene as being a line with varying albedos at a fixed depth from the camera. If the scene had a more complex spatial structure we would have to use the **light field** in order to use the same linear algebra that we will use in this chapter to model cameras. We will use light fields in @sec-nerfs.
 
@@ -42,7 +42,7 @@ $$ {#eq-posterior}
 
 The regularization parameter, $\lambda$, determines the trade-off between explaining the observations and satisfying the regularization term. 
 
-![Figure: (a) Schematic drawing of a small-hole 1D pinhole camera, and (b) the visualization of its imaging matrices $\mathbf{A}$, $\mathbf{A}^{-1}$, and the regularized inverse $\mathbf{B}$. For the small-pinhole imager, all three matrices are identity matrices. Also shown is (c) a large-hole 1D pinhole camera, and (d) the visualization of its imaging matrices.](figures/imaging/traditional_pinholes_2-0.png){#fig-amats1}
+![Figure: (a) Schematic drawing of a small-hole 1D pinhole camera, and (b) the visualization of its imaging matrices $\mathbf{A}$, $\mathbf{A}^{-1}$, and the regularized inverse $\mathbf{B}$. For the small-pinhole imager, all three matrices are identity matrices. Also shown is (c) a large-hole 1D pinhole camera, and (d) the visualization of its imaging matrices.](figures/imaging/traditional_pinholes_2.png){#fig-amats1}
 
 Setting the derivative of @eq-posterior of the vector $\boldsymbol\ell_{\texttt{w}}$ equal to zero, we have 
 $$

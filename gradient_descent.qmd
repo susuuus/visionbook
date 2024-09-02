@@ -33,6 +33,28 @@ Higher-order optimization methods observe higher-order derivatives of the loss, 
 
 The simplest version of gradient descent just takes a step in the gradient direction of length proportional to the gradient magnitude. This algorithm is described in @alg-gradient_descent-basic_gradient_descent.
 
+::: {.algorithm}
+**Algorithm 1:** Example Algorithm
+
+```{.algorithmic}
+\REQUIRE $n \geq 0$ \\
+\ENSURE $y = x^n$ \\
+\STATE $y \leftarrow 1$
+\STATE $X \leftarrow x$
+\STATE $N \leftarrow n$
+\WHILE{$N \neq 0$}
+    \IF{$N$ is even}
+        \STATE $X \leftarrow X \times X$
+        \STATE $N \leftarrow N / 2$
+    \ELSE
+        \STATE $y \leftarrow y \times X$
+        \STATE $N \leftarrow N - 1$
+    \ENDIF
+\ENDWHILE
+
+```
+:::
+
 ```alg
 {\bf Input:} objective function $J$, initial parameter vector $\theta^0$, learning rate $\eta$, number of steps $K$\
 {\bf Output:} trained parameter vector $\theta^* = \theta^K$\

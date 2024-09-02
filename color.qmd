@@ -92,7 +92,7 @@ Why does the sky look blue? And why does it look orange during a sunset?
 
 :::{#fig-sources layout-ncol="2"}
 
-![](figures/color/Spectrum_of_blue_sky-0.png){width="80%"}
+![](figures/color/Spectrum_of_blue_sky.png){width="80%"}
 
 
 ![](figures/color/IMG_0122.jpg){width="15%"}

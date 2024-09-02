@@ -532,11 +532,11 @@ giving the impression that there is continuous motion between them
 :::{.column-margin}
 Frame 1
 
-![](figures/taxonomy/phi_phenomenon_1-0.png)
+![](figures/taxonomy/phi_phenomenon_1.png)
 
 Frame 2
 
-![](figures/taxonomy/phi_phenomenon_2-0.png)
+![](figures/taxonomy/phi_phenomenon_2.png)
 :::
 
 Wertheimer, together with Kurt Koffka and Wolfgang Köhler,
@@ -604,11 +604,11 @@ are equally strong. Some of the most important laws are as follows:
 :::{.column-margin}
 Law of good continuation. The following shape:
 
-![](figures/taxonomy/grounding_gc_1-0.png)
+![](figures/taxonomy/grounding_gc_1.png)
 
 has two possible groupings:
 
-![](figures/taxonomy/grounding_gc_2-0.png)
+![](figures/taxonomy/grounding_gc_2.png)
 
 The law of good continuation says that the one on the left is 
 the one an observer perceives (although we just see an X and not two lines crossing each other...)
