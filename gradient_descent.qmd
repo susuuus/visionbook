@@ -158,7 +158,7 @@ What about @fig-gradient_descent-grad_descent_simple_examples (e), where the gra
 {\bf Output:} trained parameter vector $\theta^* = \theta^K$\
 \For{\upshape $k= 0, \dots, K-1$}{
     $\mathbf{v} = \nabla_{\theta} J(\theta^k)$\
-    $\theta^{k+1} \leftarrow \theta^{k} - \eta [\texttt{clip}(v_1, -m, m), \ldots, \texttt{clip}(v_M, -m, m)]^\transpose$\
+    $\theta^{k+1} \leftarrow \theta^{k} - \eta [\texttt{clip}(v_1, -m, m), \ldots, \texttt{clip}(v_M, -m, m)]^\mathsf{T}$\
 }
 ```
 
