@@ -240,7 +240,7 @@ If $g$ is a Gaussian, then the first-order derivative is
 $$
 g_x(x,y; \sigma) = \frac {\partial g(x,y; \sigma)}{\partial x}= \frac{-x}{2 \pi \sigma^4} \exp{-\frac{x^2 +
    y^2}{2 \sigma^2}} = \frac{-x}{\sigma^2} g(x,y; \sigma)
-$${eq-derivate1gauss2dcont}
+$${#eq-derivate1gauss2dcont}
 
 The next plots show the 2D Gaussian with $\sigma=1$, and its $x$-derivative:
 
@@ -407,7 +407,7 @@ The angle is shown only where the magnitude is $>0$. The derivative output along
 
 ## Image Gradient and Directional Derivatives
 
-As we saw in @chap-simplesystem, an important image representation is given by the image gradient. From the image derivatives, we can also define the image gradient as the vector:
+As we saw in @sec-simplesystem, an important image representation is given by the image gradient. From the image derivatives, we can also define the image gradient as the vector:
 $$
 \nabla \text{img} (x,y) = \left( \frac{\partial \text{img}(x,y)}{\partial x}, \frac{\partial \text{img}(x,y)}{\partial y} \right)
 $$
@@ -544,7 +544,7 @@ The discrete approximation also provides a better intuition of how it works than
 Comparison between the output of a first-order derivative and the Laplacian of 1D signal. (a) Input signal. (b) Kernel $d_1$. (c) Output of the derivative, that is, convolution of (a) and (b). (d) Discrete approximation of the Laplacian. (e) Output of convolving the signal (a) with the Laplacian kernel (d).
 :::
 
-Marr and Hildreth [@Marr80] used zero-crossings of the Laplacian output to compute edges, but this method is not used nowadays for edge detection. Instead, the Laplacian filter is widely used in a number of other image representations. It is used to build image pyramids (multiscale representations, see Chapter @chap-image_pyramids), and to detect points of interest in images (it is the basic operator used to detect keypoints to compute SIFT descriptors [@Lowe04]).
+Marr and Hildreth [@Marr80] used zero-crossings of the Laplacian output to compute edges, but this method is not used nowadays for edge detection. Instead, the Laplacian filter is widely used in a number of other image representations. It is used to build image pyramids (multiscale representations, see Chapter @sec-image_pyramids), and to detect points of interest in images (it is the basic operator used to detect keypoints to compute SIFT descriptors [@Lowe04]).
 
 ## A Simple Model of the Early Visual System
 

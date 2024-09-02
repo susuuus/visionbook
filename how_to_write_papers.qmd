@@ -19,7 +19,7 @@ its impact on one's career. Only the really good papers matter for your
 career. So it makes sense to learn how to write the best possible paper
 from any given piece of research work.
 
-![](figures/papers/impact.jpg){width="60%"}
+![Plot of conjectured data showing the impact of a paper on one's career, as a function of paper quality.](figures/papers/impact.jpg){width="60%" #fig-impact}
 
 ## Organization
 
@@ -88,7 +88,8 @@ paper: as the signal translates, the signal representation energy moves
 to different frequency bands and changes form within the mid-frequency
 band.
 
-![](figures/papers/wavelet2.png){width="65%"}
+
+![Effect of translation on the wavelet representation of a signal  (caption and figure after @Simoncelli92.  (a) An input signal.  (b-d) The high-, mid-, and low-frequency coefficients within a wavelet subband decomposition.  (e) The same input signal, translated one sample to the right.  (f–h) The decomposition of the shifted signal into the same three bands.  Note the drastic change in the transform coefficients induced by the shift.](figures/papers/wavelet2.png){width="65%" #fig-wavelet}
 
 ### Experimental Results
 
@@ -102,7 +103,7 @@ previous benchmarks, you should still compare with an algorithm that
 solves a related task, noting that the algorithm was designed for a
 different task.
 
-![](figures/papers/resultTable.png){width="75%"}
+![prototypical table of results, from \cite{Owens2016}  Rows are different algorithms, or ablations of a favored algorithm. Columns are datasets or tasks, and the numbers indicate performance, with the best performances given in bold.](figures/papers/resultTable.png){width="75%" #fig-resultTable}
 
 ### How to End the Paper
 
@@ -184,8 +185,7 @@ meaning.
 
 
 :::{.column-margin}
-Rewritten text conveying the same information: 88
-words
+Rewritten text conveying the same information: 88 words
 :::
 
 
@@ -203,7 +203,7 @@ current era of many published papers, most of your readers will probably
 only skim your paper. We suspect that the engagement of readers with
 your paper will look something as shown in @fig-engagement.
 
-![](figures/papers/readership.png){width="50%"}
+![The conjectured readership of a computer science paper (conjectured relative amounts).  Many people will read the title, but far fewer will read the abstract or look at the figures.  Fewer still will read every word of the paper.  You should allow readers to access your paper at each level of engagement.](figures/papers/readership.png){width="50%" #fig-engagement}
 
 If only because that is where most of your readership lies, you should
 write your paper so that readers will learn from it, even at those
@@ -226,7 +226,7 @@ self-contained*. They should point out what readers are supposed to
 notice about the figure, to help both the full-paper reader and the
 figures-only reader. @fig-shapetime shows an example.
 
-![](figures/papers/shapetimeFig.jpg){width="55%"}
+![Figure and caption from \cite{FreemanShapetime}. The caption should be understandable by itself, and should point to what the reader should take away from the figure.](figures/papers/shapetimeFig.jpg){width="55%" #fig-shapetime}
 
 Equations interposed with text can pose a challenge to the reader. Does
 the reader stop to work through each equation, or continue reading as
@@ -331,15 +331,16 @@ cycle with a paper like this, to remove the easy to spot flaw. Then the
 paper might receive an oral presentation at a subsequent conference
 submission cycle.
 
-  -----------------------------------------------------
-   ![](figures/papers/cockroach.jpg){width="23%"}
-                     \(a\) Cockroach
-  -----------------------------------------------------
 
-  --------------------------------------------------
-   ![](figures/papers/puppy6.jpg){width="40%"}
-              \(b\) Puppy with six toes
-  --------------------------------------------------
+
+::: {#fig-areachair}
+| (a) Cockroach | (b) Puppy with six toes |
+|---------------|-------------------------|
+| ![Cockroach](figures/papers/cockroach.jpg){width=100%} | ![Puppy with six toes](figures/papers/puppy6.jpg){width=100%} |
+
+**Table Caption**: Borderline papers from an area chair's perspective. (a) The cockroach represents a mundane, hard-to-reject paper with no glaring issues [@cockroach]. (b) The six-toed puppy represents a delightful paper with some minor, easily spotted flaw, leading to potential rejection [@puppy].
+:::
+
 
 ## Concluding Remarks
 

@@ -352,28 +352,14 @@ $d_k=4$, the DFT reveals an even more complex frequency behavior.
 input image and the result of the dilated convolutions with the blur
 kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$.
 
-$\begin{array}{cccc}
-\text{input}~ & d_k=1 & d_k=2 & d_k=4 \\
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_1.jpg}~
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_2.jpg}
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_3.jpg}
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_4.jpg}
-\\
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_1_DFT.jpg}~
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_2_DFT.jpg}
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_3_DFT.jpg}
-&
-\includegraphics[width=.2\linewidth]{figures/convolutional_neural_nets/aliasing_dilated_4_DFT.jpg}
-\end{array}$
+::: {#fig-convolutional_neural_nets-dilated_blur_mit_dome_example}
+| Input        | d_k = 1                                                       | d_k = 2                                                       | d_k = 4                                                       |
+|--------------|---------------------------------------------------------------|---------------------------------------------------------------|---------------------------------------------------------------|
+| ![](figures/convolutional_neural_nets/aliasing_dilated_1.jpg){width=100%}     | ![](figures/convolutional_neural_nets/aliasing_dilated_2.jpg){width=100%}     | ![](figures/convolutional_neural_nets/aliasing_dilated_3.jpg){width=100%}     | ![](figures/convolutional_neural_nets/aliasing_dilated_4.jpg){width=100%}     |
+| ![](figures/convolutional_neural_nets/aliasing_dilated_1_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_dilated_2_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_dilated_3_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_dilated_4_DFT.jpg){width=100%} |
 
-
-
-![Result of the dilated convolutions with the blur kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$.](figures/convolutional_neural_nets/dilated_blur_mit_dome_example.png){width="100%" #fig-convolutional_neural_nets-dilated_blur_mit_dome_example}
+: Result of the dilated convolutions with the blur kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$.
+:::
 
 
 In summary, using dilation increases the size of the convolution kernels without increasing the computations (which is the original desired property) but it reduces the space of useful kernels (which is an undesired property).
@@ -507,8 +493,9 @@ information in a patch using some aggregate statistic, such as the
 patch's mean value, called , or its max value, called , defined as
 follows: 
 
-$$\begin{aligned}    x_{\texttt{out}}[i]= \max_{i \in \mathcal{N}(i)} x_{\texttt{in}}[i]& \quad\quad \triangleleft \quad \texttt{max pooling}:max_pooling\\
-    x_{\texttt{out}}[i]= \frac{1}{|\mathcal{N}|} \sum_{i \in \mathcal{N}(i)} x_{\texttt{in}}[i]& \quad\quad \triangleleft \quad \texttt{mean pooling}#eq-convolutional_neural_nets-mean_pooling
+$$\begin{aligned}    
+x_{\texttt{out}}[i]= \max_{i \in \mathcal{N}(i)} x_{\texttt{in}}[i]& \quad\quad \triangleleft \quad \texttt{max pooling}\\
+    x_{\texttt{out}}[i]= \frac{1}{|\mathcal{N}|} \sum_{i \in \mathcal{N}(i)} x_{\texttt{in}}[i]& \quad\quad \triangleleft \quad \texttt{mean pooling}
 \end{aligned}$${#eq-convolutional_neural_nets-mean_pooling} 
 
 
