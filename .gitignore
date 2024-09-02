@@ -593,7 +593,7 @@ dist
 .pnp.*
 
 /.quarto/
-_extensions/
+
 
 # General
 .DS_Store
