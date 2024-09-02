@@ -161,28 +161,19 @@ excited about something!
 
 ### People Like to See a Good Fight
 
-As described by Adelson @Adelson95, the audience loves to watch a good
-fight. You can set up a fight between two competing conjectures. For
-example, you might say, "The flat earth theory predicts that ships will
-appear on the horizon as small versions of the complete ship. Under that
-theory, you'd expect approaching ships to appear as in @fig-boatsa.
-Conversely, the round earth theory predicts that the top of the sails
-will appear first, then gradually the rest of the ship below it,
-resulting in approaching ships looking as in @fig-boatsb. The audience
-waits with anticipation as you show them the result from your
-experiment, @fig-boatsc, thus revealing the winning theory.
+As described by @Adelson95, the audience loves to watch a good fight. You can set up a fight between two competing conjectures. For example, you might say, "The flat earth theory predicts that ships will appear on the horizon as small versions of the complete ship. Under that theory, you’d expect approaching ships to appear as in Figure @fig-boats-a. Conversely, the round earth theory predicts that the top of the sails will appear first, then gradually the rest of the ship below it, resulting in approaching ships looking as in Figure @fig-boats-b. The audience waits with anticipation as you show them the result from your experiment, Figure @fig-boats-c, thus revealing the winning theory."
 
-  -------
-   \(a\)
-  -------
+::: {#fig-boats layout-ncol=3}
 
-  -------
-   \(b\)
-  -------
+![The appearance of ships approaching a port, from the flat-earth theory.](figures/how_to_give_talks/boatsflat.jpg){#fig-boats-a width=100%}
 
-  -------
-   \(c\)
-  -------
+![Their appearance as predicted by the round-earth theory.](figures/how_to_give_talks/boatsround.jpg){#fig-boats-b width=100%}
+
+![The experimental evidence: a photograph of ships approaching a port.](figures/how_to_give_talks/boatsphoto.jpg){#fig-boats-c width=100%}
+
+Fig (a) The appearance of ships approaching a port, from the flat-earth theory. (b) Their appearance as predicted by the round-earth theory. (c) The experimental evidence: a photograph of ships approaching a port [@mnsomero]
+
+:::
 
 ## Show Yourself to the Audience
 
