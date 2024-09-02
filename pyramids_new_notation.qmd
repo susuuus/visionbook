@@ -123,7 +123,7 @@ This transform also has a multiscale version that is also self-inverting:
   \frac{1}{2} & \frac{1}{2} & -\frac{1}{2} & -\frac{1}{2} 
  \end{bmatrix}
 \]
-You can check that in both cases $\mathbf{Q} = \left( \mathbf{P^\transpose} \right) ^{-1} = \mathbf{P^\transpose}$.
+You can check that in both cases $\mathbf{Q} = \left( \mathbf{P^\mathsf{T}} \right) ^{-1} = \mathbf{P^\mathsf{T}}$.
 These transforms can be extended to 2D.
 :::
 
@@ -179,10 +179,7 @@ operator for level $k$.
 
 ::: {.column-margin}
 One **block** of the Gaussian pyramid computation.
-
-\centerline{
-![](path_to_image.png)
-}
+![](figures/pyramids/gaussian_block.png)
 :::
 
 We call the sequence of images
@@ -530,7 +527,7 @@ and the low pass residual $g_{k-1}$; and (2) the synthesis network (or
 decoder) that reconstructs the input from the representation $r$.
 
 :::{#fig-steerable_pyr_architecture}
-![](figures/pyramids/steerable_pyr_sp3Filters.png){width="80%"}
+![](figures/pyramids/steerable_pyr_architecture.png){width="80%"}
 
 Steerable pyramid architecture.
 :::
