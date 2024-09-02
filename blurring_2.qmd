@@ -58,12 +58,12 @@ coordinates {
 \end{center}
 :::
 
-Filtering an input image, $\imgin$, with a box filter results in the following:
+Filtering an input image, $\ell_{\text{in}}$, with a box filter results in the following:
 
 $$
-\imgout \left[n,m\right] = \text{box}_{N,M} \left[n,m\right] \circ \imgin \left[n,m\right] 
-=  \sum_{k,l} \imgin \left[n-k,m-l \right] \text{box}_{N,M} \left[k,l \right]
-=  \sum_{k=-N}^N \sum_{l=-M}^M \imgin \left[n-k,m-l \right]
+\ell_{\text{out}} \left[n,m\right] = \text{box}_{N,M} \left[n,m\right] \circ \ell_{\text{in}} \left[n,m\right] 
+=  \sum_{k,l} \ell_{\text{in}} \left[n-k,m-l \right] \text{box}_{N,M} \left[k,l \right]
+=  \sum_{k=-N}^N \sum_{l=-M}^M \ell_{\text{in}} \left[n-k,m-l \right]
 $$
 
 That is, the output value on each location $(n,m)$ is the sum of the input pixels within the rectangle around that location.  
@@ -88,10 +88,10 @@ The box filter is a low-pass filter. That is, it attenuates the high spatial-fre
 
 As we already mentioned in @sec-box_function, the two-dimensional (2D) box filter is separable as it can be written as the convolution of two 1D kernels: $\text{box}_{N,M} \left[n,m \right]  = \text{box}_{N,0} \circ \text{box}_{0,M}$. When the box is large, it can be implemented efficiently using the integral image [@Viola01].
 
-One important property of a low-pass filter is the **DC gain**, that is, the gain it has for a constant value input (i.e., the lowest possible input frequency). If the input signal is a constant, i.e., $\img[n,m] = a$, where $a$ is a real number, the result of convolving the image with the box filter $h_{N,M}$ is also a constant:
+One important property of a low-pass filter is the **DC gain**, that is, the gain it has for a constant value input (i.e., the lowest possible input frequency). If the input signal is a constant, i.e., $\ell[n,m] = a$, where $a$ is a real number, the result of convolving the image with the box filter $h_{N,M}$ is also a constant:
 
 $$
-\imgout \left[n,m\right] = \sum_{k,l} a \text{box}_{N,M} \left[k,l \right] = a \sum_{k,l} \text{box}_{N,M} \left[k,l \right]  = a (2N+1)(2M+1)
+\ell_{\text{out}} \left[n,m\right] = \sum_{k,l} a \text{box}_{N,M} \left[k,l \right] = a \sum_{k,l} \text{box}_{N,M} \left[k,l \right]  = a (2N+1)(2M+1)
 $$
 
 In general, the DC gain of an arbitrary filter $h [n,m]$ is the sum of its kernel values:
@@ -251,15 +251,15 @@ An image filtered with three Gaussians with standard deviations: (a) $\sigma=2$,
 The $n$-dimensional Gaussian filter has the additional computational advantage that it can be applied as a concatenation of $n$ 1D Gaussian filters. This can be seen by writing the 2D Gaussian, Equation @eq-gauss2dcont, in the convolution equation, @eq-2dconv. Letting $g^x$ and $g^y$ be the 1D Gaussian convolution kernels in the horizontal and vertical directions (i.e., $g^x [n]=g[n,0]$, and $g^y[m]=g[0,m]$), we have:
 
 $$
-g \left[n,m \right] \circ \img \left[n,m\right] 
-= \sum_{k,l} g \left[n-k,m-l \right] \img \left[k,l \right] 
-= \sum_{k,l} \exp{ \left( -\frac{(n-k)^2 + (m-l)^2}{2 \sigma^2} \right) } \circ \img \left[n,m \right]
+g \left[n,m \right] \circ \ell \left[n,m\right] 
+= \sum_{k,l} g \left[n-k,m-l \right] \ell \left[k,l \right] 
+= \sum_{k,l} \exp{ \left( -\frac{(n-k)^2 + (m-l)^2}{2 \sigma^2} \right) } \circ \ell \left[n,m \right]
 $$
 
 $$
 = \sum_{k} \exp{ \left( -\frac{(n-k)^2}{2 \sigma^2} \right) }
-\left( \sum_{l} \exp{ \left( -\frac{(m-l)^2}{2 \sigma^2} \right) } \img \left[k,l \right] \right)
-= g^x \circ (g^y \circ \img \left[n,m \right])
+\left( \sum_{l} \exp{ \left( -\frac{(m-l)^2}{2 \sigma^2} \right) } \ell \left[k,l \right] \right)
+= g^x \circ (g^y \circ \ell \left[n,m \right])
 $$ {#eq-2dgauss}
 
 This can save quite a bit in computation time when applying the convolution of Equation @eq-2dgauss. If the 2D convolution kernel is $N \times N$ samples, then a direct convolution of that 2D kernel scales in proportion to $N^2$, since Equation @eq-2dgauss requires one multiplication per image position per kernel sample. Using the cascade of two 1D kernels, resulting in an equivalent 2D filter of the same size, scales in proportion to $2N$.

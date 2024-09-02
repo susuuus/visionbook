@@ -11,21 +11,21 @@ Understanding how information is transformed when we convert a continuous signal
 - Maximize the amount of available information. This requires as many samples as possible.
 - Minimize the computational cost and memory requirements. This implies that we want to minimize the number of samples we collect.
 
-Let's consider a one-dimensional (1D) continuous time signal $\img (t)$ and its sampled version $\img [n] = \img(n T_s)$, where $T_s$ is the **sampling period**. Intuitively, it is clear that in this sampling process, some information will get lost. If no information was lost, then we should be able to recover the continuous signal $\img (t)$ from its sampled version $\img [n]$ by doing some kind of interpolation. One way of ensuring that information is not lost is to decrease $T_s$, which will result in a more accurate approximation of the continuous signal $\img (t)$ at the expense of the amount of memory needed to store $\img [n]$. Decreasing $T_s$ will also result in an increase in the computational cost of processing the signal $\img [n]$. Therefore, it is important to choose the appropriate $T_s$. Understanding the sampling process and how to reconstruct the continuous signal is necessary as it will allow us to find the optimal sampling parameters.
+Let's consider a one-dimensional (1D) continuous time signal $\ell (t)$ and its sampled version $\ell [n] = \ell(n T_s)$, where $T_s$ is the **sampling period**. Intuitively, it is clear that in this sampling process, some information will get lost. If no information was lost, then we should be able to recover the continuous signal $\ell (t)$ from its sampled version $\ell [n]$ by doing some kind of interpolation. One way of ensuring that information is not lost is to decrease $T_s$, which will result in a more accurate approximation of the continuous signal $\ell (t)$ at the expense of the amount of memory needed to store $\ell [n]$. Decreasing $T_s$ will also result in an increase in the computational cost of processing the signal $\ell [n]$. Therefore, it is important to choose the appropriate $T_s$. Understanding the sampling process and how to reconstruct the continuous signal is necessary as it will allow us to find the optimal sampling parameters.
 
 > In this chapter, we will be dealing with continuous and discrete signals and their corresponding Fourier transforms.
 
 ## Aliasing
 
-Let's first look at one example to get a sense of the type of issues that might arise when discretizing a signal. Consider the continuous signal with the form $\img (t)=\cos (wt)$ with $w=18\pi$, shown in @fig-cosine_wave_before_sampling. The period of this signal is $T=2 \pi / w = 1/9$ (there are nine periods in the interval $t \in \left[0, 1 \right]$).
+Let's first look at one example to get a sense of the type of issues that might arise when discretizing a signal. Consider the continuous signal with the form $\ell (t)=\cos (wt)$ with $w=18\pi$, shown in @fig-cosine_wave_before_sampling. The period of this signal is $T=2 \pi / w = 1/9$ (there are nine periods in the interval $t \in \left[0, 1 \right]$).
 
-![Continuous cosine wave, $\img (t)=\cos (wt)$, with frequency $w=18\pi$.](figures/Image_processing_sampling/cosine_wave_before_sampling.png){#fig-cosine_wave_before_sampling}
+![Continuous cosine wave, $\ell (t)=\cos (wt)$, with frequency $w=18\pi$.](figures/Image_processing_sampling/cosine_wave_before_sampling.png){#fig-cosine_wave_before_sampling}
 
-We now build a discrete signal by sampling with a period of $T_s=1/11$, which results in the discrete signal $\img [n] = \img(n T_s)$ (there are 11 samples in the same interval $t \in \left[0, 1 \right]$). This could seem enough because there are more samples than periods. However, the samples of the discrete signal, $\img [n]$, are shown here (@fig-cosine_wave_after_sampling):
+We now build a discrete signal by sampling with a period of $T_s=1/11$, which results in the discrete signal $\ell [n] = \ell(n T_s)$ (there are 11 samples in the same interval $t \in \left[0, 1 \right]$). This could seem enough because there are more samples than periods. However, the samples of the discrete signal, $\ell [n]$, are shown here (@fig-cosine_wave_after_sampling):
 
 ![Sampling the cosine wave with a sampling period of $T_s=1/11$.](figures/Image_processing_sampling/cosine_wave_after_sampling.png){#fig-cosine_wave_after_sampling}
 
-If we now want to reconstruct the original continuous signal from its samples $\img [n]$, there are many possibilities because the samples do not constrain what happens between samples. Therefore, we will need to make some assumptions about the continuous signal. In the absence of any other prior information, we will assume that the most likely signal is the slowest and smoothest signal (we will make this assumption more precise later). Therefore, our preferred interpolation will be the one shown in red in the following plot:
+If we now want to reconstruct the original continuous signal from its samples $\ell [n]$, there are many possibilities because the samples do not constrain what happens between samples. Therefore, we will need to make some assumptions about the continuous signal. In the absence of any other prior information, we will assume that the most likely signal is the slowest and smoothest signal (we will make this assumption more precise later). Therefore, our preferred interpolation will be the one shown in red in the following plot:
 
 ![There are infinite waves (only two shown) that perfectly pass by all the samples.](figures/Image_processing_sampling/sampling_reconstruction1.png){#fig-sampling_reconstruction1}
 
@@ -33,9 +33,9 @@ The plot above shows the superposition of the original signal before sampling an
 
 It is important to mention that there is nothing special about how the parameters have been chosen for this example. Many different parameter choices would have yielded the same qualitative behavior. This confusion of frequencies is called **aliasing**.
 
-Let's now look at an example in two dimensions (2D). As a concrete example, let's consider the 2D signal shown in @fig-aliasing-a. This 2D signal is a continuous function in the spatial domain defined as $\img (x,y) = \cos (w (x+2y))$ and with a frequency, $w$, which also varies with location following $w = x+2y$. That is $\img (x,y) = \cos \left( (x+2y)^2 \right)$. The image shows a set of diagonal waves with a changing frequency starting slow at the bottom left and becoming faster and faster as we approach the top-right corner.
+Let's now look at an example in two dimensions (2D). As a concrete example, let's consider the 2D signal shown in @fig-aliasing-a. This 2D signal is a continuous function in the spatial domain defined as $\ell (x,y) = \cos (w (x+2y))$ and with a frequency, $w$, which also varies with location following $w = x+2y$. That is $\ell (x,y) = \cos \left( (x+2y)^2 \right)$. The image shows a set of diagonal waves with a changing frequency starting slow at the bottom left and becoming faster and faster as we approach the top-right corner.
 
-In order to store this continuous image on a computer, we need to sample it and convert it into a discrete image, $\img [ n,m ]$. @fig-aliasing-b shows the resulting sampled image when the sampling rate is chosen so that it results in an image size $52 \times 52$ pixels. The first thing to note is that the resulting image keeps very little similarity to the original signal. Only the bottom-left corner of the image looks anything like the continuous signal. As we move toward the right, the image changes the dominant orientation and the frequency becomes slow again.
+In order to store this continuous image on a computer, we need to sample it and convert it into a discrete image, $\ell [ n,m ]$. @fig-aliasing-b shows the resulting sampled image when the sampling rate is chosen so that it results in an image size $52 \times 52$ pixels. The first thing to note is that the resulting image keeps very little similarity to the original signal. Only the bottom-left corner of the image looks anything like the continuous signal. As we move toward the right, the image changes the dominant orientation and the frequency becomes slow again.
 
 ![A continuous image (here shown by sampling very finely). Its heavily sampled version resulting in an image with size $52 \times 52$.](figures/Image_processing_sampling/aliasing.png){#fig-aliasing}
 
@@ -43,7 +43,7 @@ In order to store this continuous image on a computer, we need to sample it and 
 
 ## Sampling Theorem
 
-Let's start by considering a band-limited signal $\img(t)$.
+Let's start by considering a band-limited signal $\ell(t)$.
 
 A band-limited signal is a signal with no spectral content above a frequency $w_{max}$. An example of a band-limited signal is a signal with the following Fourier transform:
 
@@ -63,7 +63,7 @@ One way of characterizing the sampling process is achieved by analyzing the rela
 
 ### Modeling the Sampling Process
 
-First, let's use the following notation. Let's denote as $\img(t)$ the continuous signal and $\img_s [ n ] = f(nT_s)$ the discrete signal obtained by sampling the continuous signal. We are interested in knowing how the Fourier transform of $\img_s [ n ]$ is related to the Fourier transform of $\img(t)$.
+First, let's use the following notation. Let's denote as $\ell(t)$ the continuous signal and $\ell_s [ n ] = f(nT_s)$ the discrete signal obtained by sampling the continuous signal. We are interested in knowing how the Fourier transform of $\ell_s [ n ]$ is related to the Fourier transform of $\ell(t)$.
 
 Let's start writing a model of the sampling process by defining a very special signal: the **delta train** distribution (also known as the **impulse train** or **Dirac comb**). The delta train, $\delta_{T_s}(t)$, is a periodic signal, with period $T_s$, composed of delta impulses centered at times $nT_s$. It is defined as:
 
@@ -75,34 +75,34 @@ When $T_s = 1$, the delta train has the following shape:
 
 ![Delta train with period $T_s=1$. The arrows show when the train's value is infinite. The height of each impulse represents its area.](figures/Image_processing_sampling/delta_train.png){#fig-delta_train}
 
-The delta train can be used to model the sampling process. Remember the sampling property of the delta distribution $\img (t) \delta (t-a) = \img(a)$. If we multiply a function, $\img(t)$, by the delta train, $\delta_{T_s}(t)$, we obtain its sampled version at times $nT_s$, which we will denote as $\img_{\delta} 
+The delta train can be used to model the sampling process. Remember the sampling property of the delta distribution $\ell (t) \delta (t-a) = \ell(a)$. If we multiply a function, $\ell(t)$, by the delta train, $\delta_{T_s}(t)$, we obtain its sampled version at times $nT_s$, which we will denote as $\ell_{\delta} 
 
  (t)$:
 
 $$
-\img_{\delta}  (t) = \img(t) \delta_{T_s}(t) = \img(t) \sum_{n=-\infty}^{\infty} \delta(t-n T_s)  =  \sum_{n=-\infty}^{\infty} \img_s [ n ] \delta(t-n T_s)
+\ell_{\delta}  (t) = \ell(t) \delta_{T_s}(t) = \ell(t) \sum_{n=-\infty}^{\infty} \delta(t-n T_s)  =  \sum_{n=-\infty}^{\infty} \ell_s [ n ] \delta(t-n T_s)
 $$
 
 The two plots in @fig-sampling_signal_using_train show a continuous function and its sampled version using the delta train.
 
 ![Sampling a signal using the delta train.](figures/Image_processing_sampling/sampling_signal_using_train.png){#fig-sampling_signal_using_train}
 
-The delta-sampled function $\img_{\delta} (t)$ is a very special function that contains the same amount of information as the discrete signal $\img_s  [ n ]$ but that is defined over the continuous domain $t$. In fact, the Fourier transform of $\img_{\delta} (t)$ and $\img_s  [ n ]$ are closely related as we will show next.
+The delta-sampled function $\ell_{\delta} (t)$ is a very special function that contains the same amount of information as the discrete signal $\ell_s  [ n ]$ but that is defined over the continuous domain $t$. In fact, the Fourier transform of $\ell_{\delta} (t)$ and $\ell_s  [ n ]$ are closely related as we will show next.
 
-As $\img_s  [ n ]$ is an infinite-length discrete signal, its discrete Fourier transform (DFT) is:
-
-$$
-\capitalimg_s(w) = \sum_{n=-\infty}^{\infty} \img_s  [ n ] \exp{(-jwn)}
-$$
-
-and the continuous Fourier transform of $\img_{\delta} (t)$, an infinite-length continuous signal, is:
+As $\ell_s  [ n ]$ is an infinite-length discrete signal, its discrete Fourier transform (DFT) is:
 
 $$
-\capitalimg_{\delta} (w) = \int_{n=-\infty}^{\infty} \img_{\delta} (t) \exp{(-jwt)} dt = \int_{n=-\infty}^{\infty} \img(t) \sum_{n=-\infty}^{\infty} \delta(t-n T_s) \exp{(-jwt)} dt
+\capitalimg_s(w) = \sum_{n=-\infty}^{\infty} \ell_s  [ n ] \exp{(-jwn)}
+$$
+
+and the continuous Fourier transform of $\ell_{\delta} (t)$, an infinite-length continuous signal, is:
+
+$$
+\capitalimg_{\delta} (w) = \int_{n=-\infty}^{\infty} \ell_{\delta} (t) \exp{(-jwt)} dt = \int_{n=-\infty}^{\infty} \ell(t) \sum_{n=-\infty}^{\infty} \delta(t-n T_s) \exp{(-jwt)} dt
 $$
 
 $$
-= \sum_{n=-\infty}^{\infty} \int_{n=-\infty}^{\infty} \img(t) \delta(t-n T_s) \exp{(-jwt)} dt = \sum_{n=-\infty}^{\infty} \img(n T_s) \exp{(-j w n T_s)}
+= \sum_{n=-\infty}^{\infty} \int_{n=-\infty}^{\infty} \ell(t) \delta(t-n T_s) \exp{(-jwt)} dt = \sum_{n=-\infty}^{\infty} \ell(n T_s) \exp{(-j w n T_s)}
 $$
 
 Comparing the equations, we see that both Fourier transforms are identical up to a scaling factor:
@@ -111,11 +111,11 @@ $$
 \capitalimg_s(w) = \capitalimg_{\delta} \left( \frac{w}{T_s} \right)
 $$
 
-In practice, we will never directly work with the signal $\img_{\delta} (t)$, but it is a convenient construction to understand how information is transformed during the sampling process. Understanding how the sampling rate $T_s$ affects $\img_{\delta} (t)$ is equivalent to understanding the effect that the sampling rate has on $\img_s  [ n ]$.
+In practice, we will never directly work with the signal $\ell_{\delta} (t)$, but it is a convenient construction to understand how information is transformed during the sampling process. Understanding how the sampling rate $T_s$ affects $\ell_{\delta} (t)$ is equivalent to understanding the effect that the sampling rate has on $\ell_s  [ n ]$.
 
 ### Sampling in the Fourier Domain
 
-Now that we have seen that $\img_{\delta} (t)$ and the discrete signal $\img_s  [ n ]$ have similar Fourier transforms, let's compute the Fourier transform of $\img_{\delta} (t)$. Note that $\img_{\delta} (t)$ is the product of two continuous signals. The first term is the continuous signal $\img(t)$, and the second term is a function composed of impulses placed at regular time instants $\delta(t-n T_s)$. We can compute the continuous Fourier transform of $\img_{\delta} (t)$ as the convolution of the Fourier transforms of $\img(t)$ and $\delta_{T_s}(t)$.
+Now that we have seen that $\ell_{\delta} (t)$ and the discrete signal $\ell_s  [ n ]$ have similar Fourier transforms, let's compute the Fourier transform of $\ell_{\delta} (t)$. Note that $\ell_{\delta} (t)$ is the product of two continuous signals. The first term is the continuous signal $\ell(t)$, and the second term is a function composed of impulses placed at regular time instants $\delta(t-n T_s)$. We can compute the continuous Fourier transform of $\ell_{\delta} (t)$ as the convolution of the Fourier transforms of $\ell(t)$ and $\delta_{T_s}(t)$.
 
 The Fourier transform of a delta comb is:
 
@@ -143,13 +143,13 @@ $$
 > 
 > ![Fourier transform of delta train.](figures/Image_processing_sampling/fourier_delta_train.png)
 
-Therefore, the continuous Fourier transform of $\img_{\delta} (t)$ can be written as:
+Therefore, the continuous Fourier transform of $\ell_{\delta} (t)$ can be written as:
 
 $$
 \capitalimg_{\delta} (w) = \capitalimg(w) \circ \frac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} \delta \left(w-k \frac{2 \pi}{T_s} \right) = \frac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} \capitalimg \left(w-k \frac{2 \pi}{T_s} \right)
 $$
 
-where $\capitalimg(w)$ is the Fourier transform of $\img(t)$. This equation shows that $\capitalimg_{\delta} (w)$ is built as an infinite sum of translated copies of $\capitalimg(w)$, as shown in @fig-sketch_aliasing-a. Each copy is centered on $k \frac{2 \pi}{T_s}$. If $T_s$ is small (i.e., if we sample very fast), then those copies will be far away from each other (@fig-sketch_aliasing-a). But if we have few samples and $T_s$ is large, those copies will get very close and will start mixing with each other (@fig-sketch_aliasing-b). High-frequency content in $\capitalimg(w)$ will affect the low-frequency content of $\capitalimg_{\delta} (w)$, and this is exactly what produces aliasing.
+where $\capitalimg(w)$ is the Fourier transform of $\ell(t)$. This equation shows that $\capitalimg_{\delta} (w)$ is built as an infinite sum of translated copies of $\capitalimg(w)$, as shown in @fig-sketch_aliasing-a. Each copy is centered on $k \frac{2 \pi}{T_s}$. If $T_s$ is small (i.e., if we sample very fast), then those copies will be far away from each other (@fig-sketch_aliasing-a). But if we have few samples and $T_s$ is large, those copies will get very close and will start mixing with each other (@fig-sketch_aliasing-b). High-frequency content in $\capitalimg(w)$ will affect the low-frequency content of $\capitalimg_{\delta} (w)$, and this is exactly what produces aliasing.
 
 ![Sketch to illustrate aliasing. Example of a band-limited signal, with frequency content only inside the interval $(-w_{max}, w_{max})$. (a) Sampled with a sampling period such a that $T_s < \pi/w_{max}$. (b) Sampled with a period $T_s > \pi/w_{max}$. Aliasing is due to the overlap between the translated copies of the signal Fourier transform, $\capitalimg(w)$.](figures/Image_processing_sampling/sketch_aliasing.png){#fig-sketch_aliasing}
 
@@ -181,22 +181,22 @@ The sinc function (@fig-sinc_function) is an infinite-length continuous signal t
 
 ![Sinc function. This signal is a modulated sine signal with an amplitude decay of $1/t$. The frequency is normalized so that the zero crossings happen at integer values.](figures/Image_processing_sampling/sinc_function.png){#fig-sinc_function}
 
-When no other prior information is available about the function $\img(t)$, and under the slow and smooth prior, this is the optimal reconstruction in terms of the L2 norm:
+When no other prior information is available about the function $\ell(t)$, and under the slow and smooth prior, this is the optimal reconstruction in terms of the L2 norm:
 
 $$
-\text{sinc} (t/T_s) = \argmin_{h(t)} \int \left( \img(t) - \img_{\delta} (
+\text{sinc} (t/T_s) = \argmin_{h(t)} \int \left( \ell(t) - \ell_{\delta} (
 
 t) \circ h(t) \right)^2 dt = 
 \argmin_{h(t)} \int \left( \capitalimg(w) - \capitalimg_{\delta} (w) H(w) \right) ^2 dw
 $$
 
-Then the function, $\img_{\delta} (t)$, that best approximates the input signal from its samples is:
+Then the function, $\ell_{\delta} (t)$, that best approximates the input signal from its samples is:
 
 $$
-\widetilde \img(t) =  \img_{\delta} (t) \circ \text{sinc} (t) = \sum_{n=-\infty}^{\infty} \img_s[n] \text{sinc} \left(\frac{t-nT_s}{T_s} \right)
+\widetilde \ell(t) =  \ell_{\delta} (t) \circ \text{sinc} (t) = \sum_{n=-\infty}^{\infty} \ell_s[n] \text{sinc} \left(\frac{t-nT_s}{T_s} \right)
 $$
 
-where $\widetilde \img(t)$ is the reconstructed signal from the samples $\img_s[n]$. The plot in @fig-sampling_reconstruction2 shows how the linear superposition of all the scaled and shifted sincs produces a smooth interpolation of the sampled function. Note how the zero crossings of each sinc coincide with the sample locations.
+where $\widetilde \ell(t)$ is the reconstructed signal from the samples $\ell_s[n]$. The plot in @fig-sampling_reconstruction2 shows how the linear superposition of all the scaled and shifted sincs produces a smooth interpolation of the sampled function. Note how the zero crossings of each sinc coincide with the sample locations.
 
 ![Smooth interpolation of the sampled function using sinc functions.](figures/Image_processing_sampling/sampling_reconstruction2.png){#fig-sampling_reconstruction2}
 
@@ -218,7 +218,7 @@ We will discuss the 2D case a bit more in detail later as sampling images opens 
 
 ### Approximate Reconstruction with Local Kernels
 
-One disadvantage of the ideal reconstruction is that the $\text{sinc}$ function has infinite support, which means that to interpolate each instant, we need to linearly combine all the samples $\img [n]$. Sometimes it is better to have a local reconstruction that only depends on the nearby samples.
+One disadvantage of the ideal reconstruction is that the $\text{sinc}$ function has infinite support, which means that to interpolate each instant, we need to linearly combine all the samples $\ell [n]$. Sometimes it is better to have a local reconstruction that only depends on the nearby samples.
 
 Indeed, there are other possible reconstructions that are not optimal in terms of the L2 norm, but that only require local computations.
 
@@ -228,16 +228,16 @@ All of them can be written as a linear convolution with a kernel $h(t)$ as shown
 
 ![(top) Nearest interpolation. (bottom) Linear interpolation. Both interpolation methods can be modeled by a convolution with the kernel shown in the middle (a box and a triangle).](figures/Image_processing_sampling/sampling_reconstruction3.png){#fig-sampling_reconstruction3}
 
-The nearest neighbor interpolation is the result of the convolution of $\img_\delta (t)$ with a box of width $T_s$. In the linear interpolation, the interpolation kernel $h(t)$ is a triangle of width $2T_s$.[^1] Lanczos-1 interpolation consists of using as kernel only the central lobe of the sinc function. This provides an interpolation that is smooth using only a local neighborhood. Other interpolation methods such as cubic interpolation can also be written as convolutions.
+The nearest neighbor interpolation is the result of the convolution of $\ell_\delta (t)$ with a box of width $T_s$. In the linear interpolation, the interpolation kernel $h(t)$ is a triangle of width $2T_s$.[^1] Lanczos-1 interpolation consists of using as kernel only the central lobe of the sinc function. This provides an interpolation that is smooth using only a local neighborhood. Other interpolation methods such as cubic interpolation can also be written as convolutions.
 
 [^1]: The convolution of two box filters of width $T_s/2$ is a triangle of length $T_s$.
 
 ## A Family of 2D Spatial Samplings
 
-Let's now analyze what happens when sampling 2D signals to form discrete images. In 2D, things get more interesting. If we have a continuous image $\img (x,y)$ we can sample it using a rectangular grid as $\img_s [n,m] = \img (nT_x, mT_y)$. We can do a very similar analysis to the one we just did for the 1D case. But in 2D, we can have more interesting sampling patterns. For instance, we could define the discrete image as:
+Let's now analyze what happens when sampling 2D signals to form discrete images. In 2D, things get more interesting. If we have a continuous image $\ell (x,y)$ we can sample it using a rectangular grid as $\ell_s [n,m] = \ell (nT_x, mT_y)$. We can do a very similar analysis to the one we just did for the 1D case. But in 2D, we can have more interesting sampling patterns. For instance, we could define the discrete image as:
 
 $$
-\img_s [n,m] = \img (an+bm, cn+dm)
+\ell_s [n,m] = \ell (an+bm, cn+dm)
 $$
 
 where $a,b,c,d$ are constants. For instance, if $a=T,b=0,c=0,d=T$, then we will have a regular **rectangular sampling**. But we could have other patterns. For instance, if we set $a=T_1,b=-T_2 / 2,c=0,d=T_2$, then we obtain a **hexagonal sampling**. We can also place the samples at random locations (**irregular sampling**). @fig-sampling_grids shows different sampling patterns.
@@ -249,7 +249,7 @@ Now we can ask the following question: What is the optimal 2D sample arrangement
 We model sampling by multiplying the continuous image by a delta train in 2D:
 
 $$
-\img_{\delta} (x,y) = \img (x,y) \sum_{n=-\infty}^{\infty} \sum_{m=-\infty}^{\infty} \delta (x- an-bm, y - cn-dm)
+\ell_{\delta} (x,y) = \ell (x,y) \sum_{n=-\infty}^{\infty} \sum_{m=-\infty}^{\infty} \delta (x- an-bm, y - cn-dm)
 $$
 
 We can simplify the notation by encoding the position as vectors, $\mathbf{x} = (x,y)^T$,  $\mathbf{n} = (n,m)^T$, and $\mathbf{A}$ is the matrix:
@@ -275,7 +275,7 @@ $$
 \Delta_{A} (\mathbf{w}) = \frac{(2 \pi)^2}{|\mathbf{A}|} \sum_{\mathbf{k} \in \mathbb{Z}^2} \delta \left( \mathbf{w} - 2 \pi \mathbf{A}^{-1} \mathbf{k} \right)
 $$
 
-Therefore, the Fourier transform of the sampled signal $\img_{\delta} (x,y)$ is:
+Therefore, the Fourier transform of the sampled signal $\ell_{\delta} (x,y)$ is:
 
 $$
 \capitalimg_{\delta} (\mathbf{w}) =  \frac{(2 \pi)^2}{|\mathbf{A}|} \sum_{\mathbf{k} \in \mathbb{Z}^2} \capitalimg \left( \mathbf{w} - 2 \pi \mathbf{A}^{-1} \mathbf{k} \right)
@@ -327,7 +327,7 @@ The images in Figure @fig-aliasingFTzebra-a show the effects of aliasing. The st
 ::: {#fig-aliasingFTzebra}
 ![](figures/Image_processing_sampling/aliasing_ft_abc1.png){width=100%}
 
-Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking like a cow. (b) Fourier transform of the continuous signal $\img(x,y)$ multiplied by delta trains: $\img_{\delta}(x,y)$. (c) Discrete Fourier transform of the corresponding sampled signals, $\img\left[n,m\right]$. (d) Fourier transform of the reconstructed signal with aliasing. (e) Sampled image after processing it with an anti-aliasing filter. (f) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\img\left[n,m\right]$. Note that now the central part of the Fourier transform is not changing.
+Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking like a cow. (b) Fourier transform of the continuous signal $\ell(x,y)$ multiplied by delta trains: $\ell_{\delta}(x,y)$. (c) Discrete Fourier transform of the corresponding sampled signals, $\ell\left[n,m\right]$. (d) Fourier transform of the reconstructed signal with aliasing. (e) Sampled image after processing it with an anti-aliasing filter. (f) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\ell\left[n,m\right]$. Note that now the central part of the Fourier transform is not changing.
 :::
 
 In order to reduce aliasing artifacts, we need to filter the continuous signal with a low-pass filter to make it band-limited. Then we will be able to sample it, avoiding high-spatial frequencies that interfere with the low-frequency content of the image. The anti-aliasing filter will not prevent the loss of information contained in the high spatial frequencies. @fig-aliasingFTzebra2-a shows the reconstructed images at different resolutions when an anti-aliasing filter is applied before sampling. Each resolution requires a different filter. The anti-aliasing filter can be a box filter like in Equation @eq-boxfilterFT with the support equal to the green region in @fig-aliasingFTzebra-b.
@@ -335,7 +335,7 @@ In order to reduce aliasing artifacts, we need to filter the continuous signal w
 ::: {#fig-aliasingFTzebra2}
 ![](figures/Image_processing_sampling/aliasing_ft_abc2.png){width=100%}
 
-Subsampling with anti-aliasing filter. (a) Sampled image after processing it with an anti-aliasing filter. (b) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\img\left[n,m\right]$. Note that now the central part of the Fourier transform is almost not changing.
+Subsampling with anti-aliasing filter. (a) Sampled image after processing it with an anti-aliasing filter. (b) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\ell\left[n,m\right]$. Note that now the central part of the Fourier transform is almost not changing.
 :::
 
 ## Spatiotemporal Sampling

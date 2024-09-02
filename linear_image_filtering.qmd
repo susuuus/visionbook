@@ -390,7 +390,7 @@ $$\begin{bmatrix}
 This operation is much easier to understand if we draw it as a
 **convolutional layer** of a neural network as shown in @fig-conv_filter2_nn.
 
-![ convolution represented as a layer in a neural network. Each output unit $i$, $\imgout \left[i \right]$, is a linear combination of the input signal values around location $i$ always using the same set of weights given by $\mathbf{h}$.](figures/linear_image_filtering/conv_filter2.png){width="50%" #fig-conv_filter2_nn}
+![ convolution represented as a layer in a neural network. Each output unit $i$, $\ellout \left[i \right]$, is a linear combination of the input signal values around location $i$ always using the same set of weights given by $\mathbf{h}$.](figures/linear_image_filtering/conv_filter2.png){width="50%" #fig-conv_filter2_nn}
 
 In two dimensions, the processing is analogous: the input filter is
 flipped vertically and horizontally, then slid over the image to record
@@ -485,7 +485,7 @@ properties.
 :::{.column-margin}
 Given the signal:
 
-The signal $\img \left[n - n_0\right]$ is a shifted version of $\img \left[n\right]$. With $n_0 = 2$ this is \\
+The signal $\ell \left[n - n_0\right]$ is a shifted version of $\ell \left[n\right]$. With $n_0 = 2$ this is \\
 
 :::
 
