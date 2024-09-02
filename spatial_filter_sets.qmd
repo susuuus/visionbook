@@ -20,7 +20,7 @@ In @sec-fourier_analysis we discussed several useful image representations: repr
 
 @fig-1D_gabor_function (a) shows a one-dimensional (1D) sine function. This function has infinite support. When used as a representation, the Fourier coefficients are obtained as the scalar product between the sine wave and the input image. Each Fourier coefficient involves a point-wise multiplication between the wave and the input image and then the sum of the result. As a consequence of the infinite support of the wave, one single Fourier coefficient does not tell us anything about what happens locally inside the analyzed image.
 
-A good start for a localized image analysis is to restrict the spatial support of a sinusoidal basis function. One function that has a local support (a lot of nice properties as we discussed in @sec-blur_filters) is the Gaussian function (@fig-1D_gabor_function [b]). The product of the Gaussian and the sine wave (or a cosine wave) gives the function with the profile shown in @fig-1D_gabor_function (c) called a Gabor filter. Gabor functions were introduced by Dennis Gabor in 1946 @cite(Gabor1946TheoryOC).
+A good start for a localized image analysis is to restrict the spatial support of a sinusoidal basis function. One function that has a local support (a lot of nice properties as we discussed in @sec-blur_filters) is the Gaussian function (@fig-1D_gabor_function [b]). The product of the Gaussian and the sine wave (or a cosine wave) gives the function with the profile shown in @fig-1D_gabor_function (c) called a Gabor filter. Gabor functions were introduced by Dennis Gabor in 1946 @Gabor1946TheoryOC.
 
 
 ![Construction of a Gabor function. (a) Sine function. (b) Gaussian function. (c) Gabor function obtained as the product of (a) and (b).](figures/spatial_filter_sets/gabor_1D.png){#fig-1D_gabor_function width="100%"}
@@ -271,12 +271,12 @@ selective to a different spatial frequency so that they cover the full
 space of spatial frequencies.
 
 @fig-gabor_rectandpolar_tiles shows two different arrangements of Gabor
-filters. @fig-gabor_rectandpolar_tilesa shows a set of Gabor filters
+filters. @fig-gabor_rectandpolar_tiles (a) shows a set of Gabor filters
 sampling the frequency domain using a rectangular grid.
-@fig-gabor_rectandpolar_tilesc shows the corresponding (cosine) Gabor
+@fig-gabor_rectandpolar_tiles (c) shows the corresponding (cosine) Gabor
 kernels. All the functions have the same $\sigma$.
-@fig-gabor_rectandpolar_tilesb shows a polar arrangement of Gabor
-functions, and @fig-gabor_rectandpolar_tilesd the spatial kernels.
+@fig-gabor_rectandpolar_tiles (b) shows a polar arrangement of Gabor
+functions, and @fig-gabor_rectandpolar_tiles (d) the spatial kernels.
 Here, the Gaussian width $\sigma$ is proportional to the distance
 between the central frequency and the origin. This produces filters that
 are rotated and scaled versions of each other.
@@ -585,20 +585,20 @@ neural networks.
 
 Just as we did with Gaussian derivatives, extending Gabor filter for
 motion analysis is a direct generalization of the $x-y$ 2D Gabor
-function to a $x-y-t$ 3D Gabor function. @fig-spacetimefiltsa shows a
+function to a $x-y-t$ 3D Gabor function. @fig-spacetimefilts (a) shows a
 $x-t$ (cosine and sine) Gabor function in one spatial dimension, and
-@fig-spacetimefiltsb shows a sketch of its Fourier transform. This
+@fig-spacetimefilts (b) shows a sketch of its Fourier transform. This
 function is selective to signals translating to the right with a speed
-$v=1$, i.e. $\ell(x-t)$. The red line in @fig-spacetimefiltsb shows
+$v=1$, i.e. $\ell(x-t)$. The red line in @fig-spacetimefilts (b) shows
 Dirac line that contains the energy of the moving signal.
 
-In two spatial dimensions, @fig-spacetimefiltsc shows the sketch of the
+In two spatial dimensions, @fig-spacetimefilts (c) shows the sketch of the
 Gabor transfer function. Note that the $x-y-t$ Gabor filter is not
 selective to velocity. If we have a 2D moving signal
 $\ell(x-v_xt, y-v_yt)$, the Fourier transform is contained inside a
 Dirac plane. Therefore, there are an infinite number of planes that will
 pass by the frequencies of the Gabor filter. All those planes intersect
-the red line shown in @fig-spacetimefiltsc. A single Gabor filter
+the red line shown in @fig-spacetimefilts (c). A single Gabor filter
 cannot disambiguate the input velocity.
 
 :::{#fig-spacetimefilts}
@@ -613,14 +613,14 @@ How can we measure input velocity? There are many different approaches in the co
 
 We can use quadrature pairs of oriented filters in space-time to find
 motion speed and direction in the video signal. We just need to find the
-space-time orientation of strongest response. @fig-spacetimetiles2a
+space-time orientation of strongest response. @fig-spacetimetiles2 (a)
 shows a set of Gabor filters sampling the space-time frequency domain.
 When the input contains a moving signal, we can use a set of filters to
 identify the plane in the Fourier domain that contains the input energy.
-@fig-spacetimetiles2b shows the subset of filters that have the
+@fig-spacetimetiles2 (b) shows the subset of filters that have the
 strongest output for a particular input motion.
 
-![](figures/temporal_filters/gabor_spacetime_tiles.png){width="100%"}
+![](figures/temporal_filters/gabor_spacetime_tiles.png){width="100%" #fig-spacetimetiles2}
 
 As an illustration, @fig-MT_velocity_tuned shows one possible
 architecture to create velocity-selective units. The first layer is

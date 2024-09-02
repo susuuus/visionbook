@@ -1,4 +1,4 @@
-# Understanding Motion {#sec-understanding-motion}
+# Understanding Motion {#sec-understanding_motion}
 
 Images are observed by a moving camera recording a dynamic world, but we have devoted little space to discuss the analysis of image sequences. We will focus on understanding motion in this set of chapters. This part is composed of four chapters:
 

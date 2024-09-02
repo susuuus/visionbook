@@ -14,7 +14,8 @@ Sequences will be represented as functions $f (x,y,t)$, where $x,y$ are the spat
 One special sequence is when the image has a global motion with constant velocity $(v_x,v_y)$. In such a case, we can write:
 $$
 f (x,y,t) = f_0 (x-v_xt,y-v_yt)
-$$
+$${#eq-globaly_moving_image}
+
 where $f_0(x,y)= f (x,y,0)$ is the image being translated, and $v_x$ and $v_y$ are constants. At time $t$ the image $\text{img}_0(x,y)$ is translated by the vector $(v_x t, v_y t)$ as described by Equation @eq-globaly_moving_image. The pixel value at location $(x=0, y=0)$ at time $t=0$ will appear at time $T$ in location $(x=v_x T, y=v_y T)$.
 This is what we see in Figure @fig-motion (c) where the bands are created by moving pixels.
 
@@ -96,8 +97,8 @@ Let's now describe some spatio-temporal filters.
 As with the spatial case, we can define the same low-pass filters: the box filter, triangular filters, etc.  As an example, let's focus on the Gaussian filter. The spatio-temporal Gaussian is a trivial extension of the spatial Gaussian filter we have seen in \@sec-spt_gaussian:
 $$
 g(x,y,t; \sigma_x,\sigma_t) = \frac{1}{(2 \pi)^{3/2} \sigma_x^2\sigma_t} \exp{-\frac{x^2 + y^2}{2 \sigma_x^2}} \exp{-\frac{t^2}{2 \sigma_t^2}}
-\label{eq-gauss3dcont}
-$$
+$${#eq-gauss3dcont}
+
 Where $\sigma_x$ is the width of the Gaussian along the two spatial dimensions, and $\sigma_t$ is the width in the temporal domain. As the units for $t$ and $x,y$ are unrelated, it does not make sense to set all the $\sigma$s to have the same value.
 
 We can discretize the continuous Gaussian by taking samples and building a 3D convolutional kernel. We can also use the binomial approximation. The 3D Gaussian is separable, so it can be implemented efficiently as a convolutional cascade of 3 one-dimensional kernels. @fig-seq_filtered_kernel (a) shows a spatio-temporal Gaussian. The temporal Gaussian is a non-causal filter; therefore, it is not physically realizable. This is not a problem when processing a video stored in memory. However, if we are processing a streamed video, we will have to bound and shift the filter to make it causal, which will result in a delay in the output.
@@ -134,7 +135,7 @@ $$
 where $g(x,y,t)$ is the Gaussian as written in @eq-gauss3dcont. We can compute the spatio-temporal gradient of a Gaussian:
 $$
 \nabla  g = \left( g_x(x,y,t), g_y(x,y,t), g_t(x,y,t) \right) =  \left(-x/\sigma^2, -y/\sigma^2, -t/\sigma_t^2 \right) g(x,y,t)
-$${#eq-gauss3dcont}
+$${#eq-spt_gradient_gaussian}
 We can use the analytic form of the spatiotemporal Gaussian derivatives from @eq-spt_gradient_gaussian to discretize the filter, by taking samples at discrete locations in space and time, and use the resulting discrete spatiotemporal kernel to filter an input discrete sequence. These filters can be used for many applications. Let's look at one practical example: What should we do if we want to remove only the objects moving at a particular velocity?
 
 To answer that question, we will first assume the sequence contains a single object moving at a constant velocity. We will then compute the  derivatives along $x$, $y$, and $t$ of the sequence and we will find out what particular linear combination of those derivatives makes the output go to zero only when the input sequence moves at a target velocity.
@@ -142,8 +143,8 @@ To answer that question, we will first assume the sequence contains a single obj
 In the case of a moving image with velocity $(v_x, v_y)$, the sequence is $f (x,y,t) = f_0 (x-v_xt,y-v_yt)$, we can compute the temporal derivative of $f(x,y,t)$ as:
 $$
 \frac{\partial f}{\partial t} = \frac{\partial f_0}{\partial t} = -v_x \frac{\partial f_0}{\partial x} - v_y \frac{\partial f_0}{\partial y}
-\label{eq-brightnessconstancy}
-$$
+$${#eq-brightnessconstancy}
+
 This result is interesting because it shows that for a moving image there is a relationship between the temporal derivative of the sequence and the spatial derivatives a long the direction of motion. We can use this relationship to find a linear combination of the temporal and spatial derivatives so that the output is zero. 
 
 In fact, if we compute the gradient of the Gaussian along the vector $\left[1,v_x,v_y\right]$:
