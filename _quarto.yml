@@ -172,3 +172,9 @@ format:
 # latex-auto-install: true
 comments:
   hypothesis: true
+
+filters:
+  - pseudocode
+  - tikz
+tikz:
+  cache: true
