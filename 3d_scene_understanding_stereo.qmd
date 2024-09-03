@@ -194,7 +194,7 @@ for the projection in both cameras will be equal, $y_L=y_R$. Therefore,
 we can look at the top view of the setting as shown in @fig-stereob. We
 consider the depth estimate within a single image row.
 
-![Simple stereo. (a) Two cameras, of identical focal length, $f$, and separated by an offset, $T$, image the point $P$ onto the two-dimensional (2D) points $[x_L,y_L]^\transpose$ and $[x_R,y_R]^\transpose$ at each camera.  (b) The similarity of the two triangles in leads to \eqn{\ref{eq:depthFromDisparity](figures/3d_scene_understanding/triangularization_stereo.png){width="100%" #fig-stereo}
+![Simple stereo. (a) Two cameras, of identical focal length, $f$, and separated by an offset, $T$, image the point $P$ onto the two-dimensional (2D) points $[x_L,y_L]^\mathsf{T}$ and $[x_R,y_R]^\mathsf{T}$ at each camera.  (b) The similarity of the two triangles in leads to \eqn{\ref{eq:depthFromDisparity](figures/3d_scene_understanding/triangularization_stereo.png){width="100%" #fig-stereo}
 
 The point $\mathbf{P}$, for which we want to estimate the depth, $Z$,
 appears in the left camera at position $x_L$ and in the right camera at

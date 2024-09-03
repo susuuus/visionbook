@@ -56,7 +56,7 @@ It is also interesting to see the behavior of the derivative and its discrete ap
 $$
 \frac{\partial \ell (x)}{\partial x}  
 \xrightarrow{\mathscr{F}} 
-j w \capitalimg (w)
+j w \mathscr{L} (w)
 $$
 In the continuous Fourier domain, derivation is equivalent to multiplying by $jw$. In the discrete domain, the DFT of a signal derivative will depend on the approximation used. Let's study now the DFT of the two approximations that we have discussed here, $d_0$ and $d_1$.
 
@@ -155,15 +155,15 @@ $$
 Let's consider the next 1D input signal:
 
 $$
-\boldimg = \left[1, 1, 2, 2, 0\right]
+\boldsymbol\ell = \left[1, 1, 2, 2, 0\right]
 $$
 
 Then, the output of the derivative operator is:
 
 $$
-\mathbf{r}=\mathbf{D_0} \boldimg=\left[0, -1, 0, 2\right]
+\mathbf{r}=\mathbf{D_0} \boldsymbol\ell=\left[0, -1, 0, 2\right]
 $$
-Note that this vector has one sample less than the input. To recover the input $\boldimg$ we cannot invert $\mathbf{D_0}$ as it is not a square matrix, but we can compute the pseudoinverse, which turns out to be:
+Note that this vector has one sample less than the input. To recover the input $\boldsymbol\ell$ we cannot invert $\mathbf{D_0}$ as it is not a square matrix, but we can compute the pseudoinverse, which turns out to be:
 
 $$
 \mathbf{D_0}^{+} = \frac{1}{5}
@@ -178,10 +178,10 @@ $$
 The pseudoinverse has an interesting structure, and it is easy to see how it can be written in the general form for signals of length $N$. Also, note that $\mathbf{D_0}^{+}$ cannot be written as a convolution. Another important thing is that the inversion process is trying to recover more samples than there are observations. The trade-off is that the signal that it will recover will have zero mean (so it loses one degree of freedom that cannot be estimated). In this example, the reconstructed input is:
 
 $$
-\hat{\boldimg} = \mathbf{D_0}^{+} \mathbf{r} =
+\hat{\boldsymbol\ell} = \mathbf{D_0}^{+} \mathbf{r} =
 \left[-0.2, -0.2, 0.8, 0.8, -1.2 \right]
 $$
-Note that $\hat{\boldimg}$ is a zero mean vector. In fact, the recovered input is a shifted version of the original input, $\hat{\boldimg} = \boldimg - 1.2$, where 1.2 is the mean value of samples on $\boldimg$. Then, you still can recover the input signal up to the DC component (mean signal value).
+Note that $\hat{\boldsymbol\ell}$ is a zero mean vector. In fact, the recovered input is a shifted version of the original input, $\hat{\boldsymbol\ell} = \boldsymbol\ell - 1.2$, where 1.2 is the mean value of samples on $\boldsymbol\ell$. Then, you still can recover the input signal up to the DC component (mean signal value).
 
 ## Image Editing in the Gradient Domain {#sec-editinggradientdomain}
 
@@ -198,7 +198,7 @@ $$
 \mathbf{D_y} 
 \end{array}
 \right] 
-\boldimg 
+\boldsymbol\ell 
 $$
 The resulting representation, $\mathbf{r}$, contains the concatenation of the output of both derivative operators. $\mathbf{r}$ will have high values in the image regions that contain changes in pixel intensities and colors and will be near zero in regions with small variations. This representation can be **decoded** back into the input image by using the pseudoinverse as we did in the 1D case. The pseudoinverse can be efficiently computed in the Fourier domain @Weiss01derivingintrinsic.
 

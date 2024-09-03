@@ -92,13 +92,13 @@ The delta-sampled function $\ell_{\delta} (t)$ is a very special function that c
 As $\ell_s  [ n ]$ is an infinite-length discrete signal, its discrete Fourier transform (DFT) is:
 
 $$
-\capitalimg_s(w) = \sum_{n=-\infty}^{\infty} \ell_s  [ n ] \exp{(-jwn)}
+\mathscr{L}_s(w) = \sum_{n=-\infty}^{\infty} \ell_s  [ n ] \exp{(-jwn)}
 $$
 
 and the continuous Fourier transform of $\ell_{\delta} (t)$, an infinite-length continuous signal, is:
 
 $$
-\capitalimg_{\delta} (w) = \int_{n=-\infty}^{\infty} \ell_{\delta} (t) \exp{(-jwt)} dt = \int_{n=-\infty}^{\infty} \ell(t) \sum_{n=-\infty}^{\infty} \delta(t-n T_s) \exp{(-jwt)} dt
+\mathscr{L}_{\delta} (w) = \int_{n=-\infty}^{\infty} \ell_{\delta} (t) \exp{(-jwt)} dt = \int_{n=-\infty}^{\infty} \ell(t) \sum_{n=-\infty}^{\infty} \delta(t-n T_s) \exp{(-jwt)} dt
 $$
 
 $$
@@ -108,7 +108,7 @@ $$
 Comparing the equations, we see that both Fourier transforms are identical up to a scaling factor:
 
 $$
-\capitalimg_s(w) = \capitalimg_{\delta} \left( \frac{w}{T_s} \right)
+\mathscr{L}_s(w) = \mathscr{L}_{\delta} \left( \frac{w}{T_s} \right)
 $$
 
 In practice, we will never directly work with the signal $\ell_{\delta} (t)$, but it is a convenient construction to understand how information is transformed during the sampling process. Understanding how the sampling rate $T_s$ affects $\ell_{\delta} (t)$ is equivalent to understanding the effect that the sampling rate has on $\ell_s  [ n ]$.
@@ -146,14 +146,14 @@ $$
 Therefore, the continuous Fourier transform of $\ell_{\delta} (t)$ can be written as:
 
 $$
-\capitalimg_{\delta} (w) = \capitalimg(w) \circ \frac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} \delta \left(w-k \frac{2 \pi}{T_s} \right) = \frac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} \capitalimg \left(w-k \frac{2 \pi}{T_s} \right)
+\mathscr{L}_{\delta} (w) = \mathscr{L}(w) \circ \frac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} \delta \left(w-k \frac{2 \pi}{T_s} \right) = \frac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} \mathscr{L} \left(w-k \frac{2 \pi}{T_s} \right)
 $$
 
-where $\capitalimg(w)$ is the Fourier transform of $\ell(t)$. This equation shows that $\capitalimg_{\delta} (w)$ is built as an infinite sum of translated copies of $\capitalimg(w)$, as shown in @fig-sketch_aliasing-a. Each copy is centered on $k \frac{2 \pi}{T_s}$. If $T_s$ is small (i.e., if we sample very fast), then those copies will be far away from each other (@fig-sketch_aliasing-a). But if we have few samples and $T_s$ is large, those copies will get very close and will start mixing with each other (@fig-sketch_aliasing-b). High-frequency content in $\capitalimg(w)$ will affect the low-frequency content of $\capitalimg_{\delta} (w)$, and this is exactly what produces aliasing.
+where $\mathscr{L}(w)$ is the Fourier transform of $\ell(t)$. This equation shows that $\mathscr{L}_{\delta} (w)$ is built as an infinite sum of translated copies of $\mathscr{L}(w)$, as shown in @fig-sketch_aliasing-a. Each copy is centered on $k \frac{2 \pi}{T_s}$. If $T_s$ is small (i.e., if we sample very fast), then those copies will be far away from each other (@fig-sketch_aliasing-a). But if we have few samples and $T_s$ is large, those copies will get very close and will start mixing with each other (@fig-sketch_aliasing-b). High-frequency content in $\mathscr{L}(w)$ will affect the low-frequency content of $\mathscr{L}_{\delta} (w)$, and this is exactly what produces aliasing.
 
-![Sketch to illustrate aliasing. Example of a band-limited signal, with frequency content only inside the interval $(-w_{max}, w_{max})$. (a) Sampled with a sampling period such a that $T_s < \pi/w_{max}$. (b) Sampled with a period $T_s > \pi/w_{max}$. Aliasing is due to the overlap between the translated copies of the signal Fourier transform, $\capitalimg(w)$.](figures/Image_processing_sampling/sketch_aliasing.png){#fig-sketch_aliasing}
+![Sketch to illustrate aliasing. Example of a band-limited signal, with frequency content only inside the interval $(-w_{max}, w_{max})$. (a) Sampled with a sampling period such a that $T_s < \pi/w_{max}$. (b) Sampled with a period $T_s > \pi/w_{max}$. Aliasing is due to the overlap between the translated copies of the signal Fourier transform, $\mathscr{L}(w)$.](figures/Image_processing_sampling/sketch_aliasing.png){#fig-sketch_aliasing}
 
-The Nyquist limit is reached when the maximum frequency, $w_{max}$, with spectral content in $\capitalimg (w)$ overlaps with its translated copy. This overlap occurs when the sampling period, $T_s$, is $T_s > \pi/w_{max}$. To avoid aliasing, the sampling period has to be shorter than $\pi/w_{max}$.
+The Nyquist limit is reached when the maximum frequency, $w_{max}$, with spectral content in $\mathscr{L} (w)$ overlaps with its translated copy. This overlap occurs when the sampling period, $T_s$, is $T_s > \pi/w_{max}$. To avoid aliasing, the sampling period has to be shorter than $\pi/w_{max}$.
 
 ## Reconstruction
 
@@ -187,7 +187,7 @@ $$
 \text{sinc} (t/T_s) = \argmin_{h(t)} \int \left( \ell(t) - \ell_{\delta} (
 
 t) \circ h(t) \right)^2 dt = 
-\argmin_{h(t)} \int \left( \capitalimg(w) - \capitalimg_{\delta} (w) H(w) \right) ^2 dw
+\argmin_{h(t)} \int \left( \mathscr{L}(w) - \mathscr{L}_{\delta} (w) H(w) \right) ^2 dw
 $$
 
 Then the function, $\ell_{\delta} (t)$, that best approximates the input signal from its samples is:
@@ -200,7 +200,7 @@ where $\widetilde \ell(t)$ is the reconstructed signal from the samples $\ell_s[
 
 ![Smooth interpolation of the sampled function using sinc functions.](figures/Image_processing_sampling/sampling_reconstruction2.png){#fig-sampling_reconstruction2}
 
-@fig-alias1d illustrates how the reconstruction degrades as a function of the sampling rate. In this example, there is one band-limited input signal (i.e., there is a frequency, $w_{max}$, for which the magnitude of the Fourier transform is zero for all frequencies above $w_{max}$). When we sample this signal with a sampling period of $T_s = 4$ s, in its FT we see replicates of the $\capitalimg(w)$ centered around $\pi/2$. With $T_s=8$ s, the replicates appear centered around $\pi/4$ and they start touching. Note that $T_s=8$ is slightly above the Nyquist's limit and some aliasing will exist. For $T_s=16$, aliasing is severe and information will be lost, making it impossible (without any additional prior information) to reconstruct the continuous function from its samples.
+@fig-alias1d illustrates how the reconstruction degrades as a function of the sampling rate. In this example, there is one band-limited input signal (i.e., there is a frequency, $w_{max}$, for which the magnitude of the Fourier transform is zero for all frequencies above $w_{max}$). When we sample this signal with a sampling period of $T_s = 4$ s, in its FT we see replicates of the $\mathscr{L}(w)$ centered around $\pi/2$. With $T_s=8$ s, the replicates appear centered around $\pi/4$ and they start touching. Note that $T_s=8$ is slightly above the Nyquist's limit and some aliasing will exist. For $T_s=16$, aliasing is severe and information will be lost, making it impossible (without any additional prior information) to reconstruct the continuous function from its samples.
 
 ![(left column)  Spatial sampling pattern.  (middle column)  Fourier transform of that spatial pattern, revealing replication locations of the Fourier transform spectrum of the subsampled signal.  (right column) Subsampled signal.  Zeroing out all but the central replication of the image spectrum yields the interpolated signal shown in red.](figures/Image_processing_sampling/aliasing1d.png){#fig-alias1d}
 
@@ -278,8 +278,8 @@ $$
 Therefore, the Fourier transform of the sampled signal $\ell_{\delta} (x,y)$ is:
 
 $$
-\capitalimg_{\delta} (\mathbf{w}) =  \frac{(2 \pi)^2}{|\mathbf{A}|} \sum_{\mathbf{k} \in \mathbb{Z}^2} \capitalimg \left( \mathbf{w} - 2 \pi \mathbf{A}^{-1} \mathbf{k} \right)
-$$
+\mathscr{L}_{\delta} (\mathbf{w}) =  \frac{(2 \pi)^2}{|\mathbf{A}|} \sum_{\mathbf{k} \in \mathbb{Z}^2} \mathscr{L} \left( \mathbf{w} - 2 \pi \mathbf{A}^{-1} \mathbf{k} \right)
+$${#eq-genericsampling}
 
 Remember that for $2\times2$ matrices, the inverse is easy to write:
 
@@ -295,7 +295,7 @@ $$
 We can now check what happens with different sampling strategies. For instance, the 2D rectangular sampling simplifies to:
 
 $$
-\capitalimg_{\delta} \left(w_x, w_y \right) =  \frac{(2 \pi)^2}{T^2} \sum_{k_1=-\infty}^{\infty} \sum_{k_2=-\infty}^{\infty} \capitalimg \left(w_x - \frac{2\pi}{T}k_1, w_y - \frac{2\pi}{T}k_2 \right)
+\mathscr{L}_{\delta} \left(w_x, w_y \right) =  \frac{(2 \pi)^2}{T^2} \sum_{k_1=-\infty}^{\infty} \sum_{k_2=-\infty}^{\infty} \mathscr{L} \left(w_x - \frac{2\pi}{T}k_1, w_y - \frac{2\pi}{T}k_2 \right)
 $$
 
 This is similar to the 1D case. We leave it to the reader to write down the form of the hexagonal sampling.
@@ -325,7 +325,7 @@ Sampling with the wrong frequency has interesting effects in 2D. Figure @fig-ali
 The images in Figure @fig-aliasingFTzebra-a show the effects of aliasing. The stripes on the zebra's body change orientation as we downsample them. And for the lowest resolution image, it is even hard to recognize the animal as being a zebra. Figure @fig-aliasingFTzebra-b shows what happens with the image Fourier transform when we multiply the image with the delta train, with one every four samples along each dimension (second column of Figure @fig-aliasingFTzebra-b). Figure @fig-aliasingFTzebra-c shows the magnitude of the DFT of the sampled image (it corresponds to the region inside the green square in Figure @fig-aliasingFTzebra-b). The DFT changes substantially, due to aliasing, from one resolution to the next one.
 
 ::: {#fig-aliasingFTzebra}
-![Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking like a cow. (b) Fourier transform of the continuous signal $\img(x,y)$ multiplied by delta trains: $\img_{\delta](figures/Image_processing_sampling/aliasing_ft_abc1.png){width=100% #fig-aliasingFTzebra}
+![Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking like a cow. (b) Fourier transform of the continuous signal $\ell(x,y)$ multiplied by delta trains: $\ell_{\delta](figures/Image_processing_sampling/aliasing_ft_abc1.png){width=100% #fig-aliasingFTzebra}
 
 Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking like a cow. (b) Fourier transform of the continuous signal $\ell(x,y)$ multiplied by delta trains: $\ell_{\delta}(x,y)$. (c) Discrete Fourier transform of the corresponding sampled signals, $\ell\left[n,m\right]$. (d) Fourier transform of the reconstructed signal with aliasing. (e) Sampled image after processing it with an anti-aliasing filter. (f) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\ell\left[n,m\right]$. Note that now the central part of the Fourier transform is not changing.
 :::
@@ -333,7 +333,7 @@ Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking li
 In order to reduce aliasing artifacts, we need to filter the continuous signal with a low-pass filter to make it band-limited. Then we will be able to sample it, avoiding high-spatial frequencies that interfere with the low-frequency content of the image. The anti-aliasing filter will not prevent the loss of information contained in the high spatial frequencies. @fig-aliasingFTzebra2-a shows the reconstructed images at different resolutions when an anti-aliasing filter is applied before sampling. Each resolution requires a different filter. The anti-aliasing filter can be a box filter like in Equation @eq-boxfilterFT with the support equal to the green region in @fig-aliasingFTzebra-b.
 
 ::: {#fig-aliasingFTzebra2}
-![Subsampling with anti-aliasing filter. (a) Sampled image after processing it with an anti-aliasing filter. (b) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\img\left[n,m\right]$. Note that now the central part of the Fourier transform is almost not changing.](figures/Image_processing_sampling/aliasing_ft_abc2.png){width=100% #fig-aliasingFTzebra2}
+![Subsampling with anti-aliasing filter. (a) Sampled image after processing it with an anti-aliasing filter. (b) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\ell\left[n,m\right]$. Note that now the central part of the Fourier transform is almost not changing.](figures/Image_processing_sampling/aliasing_ft_abc2.png){width=100% #fig-aliasingFTzebra2}
 
 Subsampling with anti-aliasing filter. (a) Sampled image after processing it with an anti-aliasing filter. (b) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\ell\left[n,m\right]$. Note that now the central part of the Fourier transform is almost not changing.
 :::

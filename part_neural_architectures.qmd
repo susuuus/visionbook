@@ -14,7 +14,7 @@ Building on the concepts introduced in the previous set of chapters, we will des
 
 - In this part we will study architectures that can work on both images and other kinds of data. Because of this, we will denote inputs as $\mathbf{x}$ rather than $\ell$, even when the input is an image.
 
-- Some of the architectures we will encounter can operate over input tensors with variable shapes. For this reason, we will sometimes treat the input signal as a lower-case bolded variable regardless of its dimensionality: $\xin$ can represent a 1D signal, a 2D image, 3D volumetric data, etc.
+- Some of the architectures we will encounter can operate over input tensors with variable shapes. For this reason, we will sometimes treat the input signal as a lower-case bolded variable regardless of its dimensionality: $\mathbf{x}_{\texttt{in}}$ can represent a 1D signal, a 2D image, 3D volumetric data, etc.
 
 - For signals with multiple channels, including neural feature maps with multiple features at each coordinate, the first dimension of the tensor indexes over the channel. For example, in $\mathbf{x} \in \mathbb{R}^{C \times N \times M \times \ldots}$, where $C$ is the number of channels of the signal.
 
