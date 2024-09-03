@@ -79,12 +79,12 @@ predict disparity (inverse depth up to scale and shift). This means that
 we can not directly use the output. We need to convert it first into
 world coordinates.
 
-### Adapting the Output {#sec-simple_system_revisited:adapting_the_output}
+### Adapting the Output {#sec-simple_system_revisited-adapting_the_output}
 
 MiDaS returns disparity values, up to an unknown constant ($d_0$), but
 what we need are world coordinates ($X,Y,Z$) for each pixel. To perform
 this transformation, we will use what we learned in chapter
-[\[sec-camera_parameters\]](#sec:camera_parameters){reference-type="ref"
+[\[sec-camera_parameters\]](#sec-camera_parameters){reference-type="ref"
 reference="sec-camera_parameters"}. We will need to know the intrinsic
 and extrinsic camera parameters and also decide the value of $d_0$.
 

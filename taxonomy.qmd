@@ -1297,7 +1297,7 @@ replicates these exemplar mappings from input to output.
 ![Two ways of programming an algorithm. Left: traditional way, Right:
 the machine learning way. You will learn about the machine learning
 "compiler", called Stochastic Gradient Descent (SGD), in
-.](figures/taxonomy/programming_vs_learning.png){#fig-taxonomy:programming_vs_learning
+.](figures/taxonomy/programming_vs_learning.png){#fig-taxonomy-programming_vs_learning
 width="100%"}
 
 Learning algorithms have been a part of computer vision since the
@@ -1327,7 +1327,7 @@ algorithms was high.
 
 ![Enthusiasm for neural nets has gone up and down over time, with a
 period of roughly 25 years. What will happen
-next?](figures/taxonomy/neural_net_enthusiasm.png){#fig-taxonomy:neural_net_enthusiam
+next?](figures/taxonomy/neural_net_enthusiasm.png){#fig-taxonomy-neural_net_enthusiam
 width="70%"}
 
 In 1969, Marvin Minsky and Seymour Papert published a book titled

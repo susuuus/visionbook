@@ -26,7 +26,7 @@ notation we will be using throughout this chapter.
 The goal of representation learning is to learn to map from datapoints,
 $\mathbf{x} \in \mathcal{X}$, to abstract representations,
 $\mathbf{z} \in \mathcal{Z}$, as schematized in
-@fig-representation_learning:rep_learning_schematic:
+@fig-representation_learning-rep_learning_schematic:
 
 ![](figures/representation_learning/rep_learning_schematic.png){width=".52"}
 
@@ -43,7 +43,7 @@ is, the representation should be
 **disentangled** @bengio2013representation. In this way $\mathcal{Z}$ is
 a simpler, more abstracted, or better organized representational space
 than $\mathcal{X}$, as reflected in the shapes in
-@fig-representation_learning:rep_learning_schematic.
+@fig-representation_learning-rep_learning_schematic.
 
 ## What Makes for a Good Representation?
 
@@ -75,8 +75,8 @@ representations are desirable.
     autoencoders). Such representations explain the data in the formal
     sense that they assign high likelihood to the data. This is the same
     sense to which the idea of Bayesian Occam's razor applies (section
-    [\[sec-problem_of_generalization:star_problem_revisited\]](#sec:problem_of_generalization:star_problem_revisited){reference-type="ref"
-    reference="sec-problem_of_generalization:star_problem_revisited"});
+    [\[sec-problem_of_generalization-star_problem_revisited\]](#sec:problem_of_generalization:star_problem_revisited){reference-type="ref"
+    reference="sec-problem_of_generalization-star_problem_revisited"});
     see @mackay2003information for a mathematical treatment of this
     idea. Therefore, we can state Occam's razor for representation
     learning: among two representations that fit the data equally well,
@@ -151,13 +151,13 @@ reference="tab:representation_learning:types_of_representation_learners"}.
 []{#tab:representation_learning:types_of_representation_learners
 label="tab:representation_learning:types_of_representation_learners"}
 
-## Autoencoders {#sec-representation_learning:autoencoders}
+## Autoencoders {#sec-representation_learning-autoencoders}
 
 are one of the oldest and most common kinds of representation
 learners @rumelhart1985learning, @ballard1987modular. An autoencoder is
 a function that maps data back to itself (hence the "auto"), but via a
 low-dimensional representational **bottleneck**, as shown in
-@fig-representation_learning:autoencoder_diagram:
+@fig-representation_learning-autoencoder_diagram:
 
 ![](figures/representation_learning/autoencoder_diagram.png){width="100%"}
 
@@ -227,11 +227,11 @@ Of course the answer to this question depends on what we will use the
 representation for. Let's explore how autoencoders work on a simple data
 domain, consisting just of colored circles, triangles, and squares. The
 data consists of 64,000 images, samples of which are shown in
-@fig-representation_learning:shapes_dataset_random_samples.
+@fig-representation_learning-shapes_dataset_random_samples.
 
 ![](figures/representation_learning/shapes_dataset_random_samples.png){width="27.5%"}
 
-[]{#fig-representation_learning:shapes_dataset_random_samples
+[]{#fig-representation_learning-shapes_dataset_random_samples
 label="fig:representation_learning:shapes_dataset_random_samples"}
 
 Each shape has a randomized size, position, and rotation. Each shape's
@@ -255,7 +255,7 @@ We can test this in two ways: (1) for a given query, visualize the
 images in the dataset whose embeddings are nearest neighbors to the
 query's embedding, and (2) measure the accuracy of a
 one-nearest-neighbor classifier in embedding space. Below, in
-@fig-representation_learning:AE_results_shapes_dataset, we show both
+@fig-representation_learning-AE_results_shapes_dataset, we show both
 these analyses.
 
 (a) ![](figures/representation_learning/AE_NN_viz.png){width="38%"}
@@ -320,11 +320,11 @@ different. Rather than obtaining a good classifier at the end, our goal
 is instead to obtain a good image encoding (which is predictive of
 semantics) @donahue2014decafUSEdecafcitation. These three examples are
 visualized below
-(@fig-representation_learning:predictive_learning_examples).
+(@fig-representation_learning-predictive_learning_examples).
 
 ![](figures/representation_learning/predictive_learning_examples.png){width="95%"}
 
-[]{#fig-representation_learning:predictive_learning_examples
+[]{#fig-representation_learning-predictive_learning_examples
 label="fig:representation_learning:predictive_learning_examples"}
 
 
@@ -375,7 +375,7 @@ fired selectively whenever the input image was of a specific object
 class. For example, one particular neuron would fire when the input was
 a staircase, and another neuron would fire predominantly for inputs that
 were rafts. The subsequent images
-(@fig-representation_learning:obj_detectors_emerge) show four of the top
+(@fig-representation_learning-obj_detectors_emerge) show four of the top
 images that activate these two particular neurons. These particular
 neurons are on convolutional layers, so really each is a filter
 response; the highlighted regions indicate where the feature map for
@@ -418,25 +418,25 @@ is a special case of self-supervised learning, where the prediction
 targets are missing elements of the input data. For example, predicting
 missing pixels is an imputation problem, as is colorizing a black and
 white photo (i.e., predicting missing color channels).
-@fig-representation_learning:imputation_examples gives several examples
+@fig-representation_learning-imputation_examples gives several examples
 of these imputation tasks.
 
 ![](figures/representation_learning/imputation_examples.png){width="100%"}
-[]{#fig-representation_learning:imputation_examples
+[]{#fig-representation_learning-imputation_examples
 label="fig:representation_learning:imputation_examples"}
 
 Imputation---whether over spatial masks or missing channels---can result
 in effective visual
 representations @vincent2008extracting, @pathak2016context, @he2022masked, @zhang2016colorful, @larsson2016learning, @zhang2017split.
 Notice that predicting future frames and next pixels (our examples from
-@fig-representation_learning:predictive_learning_examples) are also
+@fig-representation_learning-predictive_learning_examples) are also
 imputation problems. Above we described how object detectors emerge as a
 byproduct of training a net to perform scene classification. What do you
 think emerges as a byproduct of training a net to perform colorization?
 
 It may surprise you to find that the answer is object detectors once
 again! This certainly surprised us when we saw the results in
-@fig-representation_learning:obj_detectors_in_colorization, which are
+@fig-representation_learning-obj_detectors_in_colorization, which are
 taken from @zhang2016colorful.
 
 In fact, object detectors emerge in CNNs for just about any reasonable
@@ -472,7 +472,7 @@ $f: \{\mathbf{x}^{(i)}\}_{i=1}^N \rightarrow \{1,\dots,k\}$, that is, a
 mapping from the members of a dataset $\{\mathbf{x}^{(i)}\}_{i=1}^N$ to
 $k$ integer classes ($k$ can potentially be unbounded). Representing
 integers with one-hot codes, clustering is shown in
-@fig-representation_learning:clustering_f_diagram.
+@fig-representation_learning-clustering_f_diagram.
 
 ![](figures/representation_learning/clustering_f_diagram.png){width="40%"}
 
@@ -572,7 +572,7 @@ $\{\mathbf{z}_j\}_{j=1}^k$. So, we need to derive update rules that find
 the minimizer of the $k$-means objective with respect to each block. It
 turns out there are simple solutions for both: $$\begin{aligned}
     a_i &\leftarrow \mathop{\mathrm{arg\,min}}_{j \in \{1,\ldots,k\}} \left\lVert\mathbf{z}_j - \mathbf{x}^{(i)}\right\rVert_2^2 \quad\quad \triangleleft\quad\text{Assign datapoint to nearest cluster}:kmeans_update_assignments\\
-    \mathbf{z}_j &\leftarrow \frac{1}{N}\sum_{i=1}^N \mathbb{1}(a_i = j)\mathbf{x}^{(i)} \quad\quad \triangleleft\quad\text{Set code vector to cluster center}#eq-representation_learning:kmeans_update_means
+    \mathbf{z}_j &\leftarrow \frac{1}{N}\sum_{i=1}^N \mathbb{1}(a_i = j)\mathbf{x}^{(i)} \quad\quad \triangleleft\quad\text{Set code vector to cluster center}#eq-representation_learning-kmeans_update_means
 \end{aligned}$${#eq-representation_learning}
 
 These steps are repeated until a fixed point is reached, which occurs
@@ -592,7 +592,7 @@ Equation
 reference="eqn:representation_learning:kmeans_update_means"}) is
 slightly trickier. It finds the optimal codes $\{\mathbf{z}_j\}_{j=1}^k$
 given the current set of assignments $\{a_i\}_{i=1}^N$. To see why
-@eq-representation_learning:kmeans_update_means is optimal, first
+@eq-representation_learning-kmeans_update_means is optimal, first
 rewrite the $k$-means objective as follows: $$\begin{aligned}    J_{\texttt{kmeans}} &= \sum_{i=1}^N \left\lVert\mathbf{z}_{a_i} - \mathbf{x}^{(i)}\right\rVert^2_2\\
     &= \sum_{j=1}^k \sum_{i=1}^N \mathbb{1}(a_i = j) \left\lVert\mathbf{z}_j - \mathbf{x}^{(i)}\right\rVert^2_2
 \end{aligned}$$ Looking at one code vector (the $j$-th) in isolation, we
@@ -601,7 +601,7 @@ are seeking: $$\begin{aligned}
 \end{aligned}$$ where $i^{\prime}$ enumerates all the datapoints for
 which $a_{i^\prime} = j$. Recall that the point that minimizes the sum
 of squared distances from a dataset is the mean of the dataset. This
-yields our update in @eq-representation_learning:kmeans_update_means:
+yields our update in @eq-representation_learning-kmeans_update_means:
 just set each code to be the mean of all datapoints assigned to that
 code's cluster.
 
@@ -611,7 +611,7 @@ the cluster means given current data assignments; reassign each
 datapoint to nearest cluster mean; recompute the means; and so on until
 convergence. An example of applying this algorithm to a simple dataset
 of two-dimensional (2D) points is given in
-@fig-representation_learning:kmeans_ex.
+@fig-representation_learning-kmeans_ex.
 
 ![(a)](figures/representation_learning/kmeans_ex_step1.jpg){width=""}
 
@@ -664,7 +664,7 @@ that form a line, an object is a group of parts that form a cohesive,
 nameable whole, and so on. Algorithms like $k$-means, in a suitable
 feature space, can discover them.
 
-## Contrastive Learning {#sec-representation_learning:contrastive_learning}
+## Contrastive Learning {#sec-representation_learning-contrastive_learning}
 
 Dimensionality reduction and clustering algorithms learn compressed
 representations by creating an , that is, by constraining the number of
@@ -713,7 +713,7 @@ $\mathbf{x} \sim p_{\texttt{data}}(\mathbf{x})$ and
 $\mathbf{x}^{-} \sim p_{\texttt{data}}(\mathbf{x})$. Given such data
 pairings, the objective is to pull together the positive pairs and push
 apart the negative pairs, as illustrated in
-@fig-representation_learning:contrastive_learning_diagram.
+@fig-representation_learning-contrastive_learning_diagram.
 
 ![](figures/representation_learning/contrastive_learning_diagram.png){width="75%"}
 
@@ -731,11 +731,11 @@ our colorization example, we can learn an image representation where the
 embedding of the grayscale channels matches the embedding of the color
 channels. In both these cases we are learning to align co-occurring
 sensory signals. This kind of contrastive learning is schematized in
-@fig-representation_learning:contrastive_learning_colorization.
+@fig-representation_learning-contrastive_learning_colorization.
 
 ![](figures/representation_learning/contrastive_learning_colorization.png){width="53%"}
 
-In @fig-representation_learning:contrastive_learning_colorization, we
+In @fig-representation_learning-contrastive_learning_colorization, we
 refer to the two co-occurring signals---color and grayscale---as two
 different **views** of the total data tensor $\mathbf{X}$, just like we
 did in the previous sections: $\mathbf{x} = V_1(\mathbf{X})$,
@@ -824,11 +824,11 @@ the following forms: $$\begin{aligned}
 pairs and $\alpha$, $t$, and $\lambda$ are hyperparameters of the
 losses.
 
-### Experiment: Designing Embeddings with Contrastive Learning {#sec-representation_learning:expt_designing_embeddings_with_contrastive_learning}
+### Experiment: Designing Embeddings with Contrastive Learning {#sec-representation_learning-expt_designing_embeddings_with_contrastive_learning}
 
 Using the alignment and uniformity objective defined previously, we will
 now illustrate how one can design embeddings with desired invariances.
-We will use the shape dataset described in @sec-representation_learning:autoencoders, and will use the
+We will use the shape dataset described in @sec-representation_learning-autoencoders, and will use the
 same encoder architecture and optimizer as from that section (a CNN with
 six layers, Adam optimizer, 20,000 iterations of stochastic gradient
 descent, batch size of 128). In contrast to the autoencoder experiment,
@@ -848,7 +848,7 @@ the CNN to pick up on and use for solving the contrastive problem). The
 result of contrastive learning, using
 $L_{\texttt{align}} + L_{\texttt{unif}}$ on data generated from
 $T_{\texttt{c}}$ is shown on the top row of
-@fig-representation_learning:align_unif_results_shapes_dataset. Notice
+@fig-representation_learning-align_unif_results_shapes_dataset. Notice
 that the trained $f$ maps colors to be clustered into the color classes
 of this toy data, and that these classes become spread out more or less
 uniformly across the surface of a circle in embedding space (a
@@ -861,7 +861,7 @@ use the same transformation as for $T_{\texttt{c}}$ (i.e., cropping)
 plus add a random shift in hue, brightness, and saturation. Training on
 views generated from $T_{\texttt{s}}$ results in the embeddings on the
 bottom row of
-@fig-representation_learning:align_unif_results_shapes_dataset. Now the
+@fig-representation_learning-align_unif_results_shapes_dataset. Now the
 embeddings become invariant to color but cluster shapes and spread out
 the three shape types to be roughly uniformly spaced around the
 hypersphere.

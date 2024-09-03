@@ -26,7 +26,7 @@ ordering is the direction in which deep generative networks work. This
 perspective puts the spotlight on generative modeling: deep learning is
 just generative modeling! Indeed both modeling directions are valid, and
 the full picture looks like this
-(@fig-generative_modeling_and_representation_learning:rep_gen_schematic):
+(@fig-generative_modeling_and_representation_learning-rep_gen_schematic):
 
 ![](./figures/generative_modeling_and_representation_learning/rep_gen_schematic.png){width="35%"}
 
@@ -72,12 +72,12 @@ $f$ being a deterministic encoder: $$\begin{aligned}    &\mathbf{x} \sim p_{\tex
 $g \approx f^{-1}$, which means that
 $\hat{\mathbf{x}} \approx \mathbf{x}$ and
 $\hat{\mathbf{z}} \approx \mathbf{z}$. In
-@fig-representation_learning:rep_learning_schematic, we sketched how
+@fig-representation_learning-rep_learning_schematic, we sketched how
 representation learning maps from a data domain to a simple embedding
 space. We can now put that diagram side by side with the equivalent
 diagram for generative modeling. Notice again how they are just the same
 thing in opposite directions
-(@fig-generative_modeling_and_representation_learning:genrep_schematic):
+(@fig-generative_modeling_and_representation_learning-genrep_schematic):
 
 ![](./figures/generative_modeling_and_representation_learning/genrep_schematic.png){width="100%"}
 
@@ -109,12 +109,12 @@ that is, just place a unit Gaussian distribution over $X$ centered on
 $g(\mathbf{z})$.
 
 The integral in
-@eq-generative_modeling_and_representation_learning:marginal_likelihood_p
+@eq-generative_modeling_and_representation_learning-marginal_likelihood_p
 is expensive so most generative models either sidestep the need to
 explicitly calculate it, or approximate it. We will examine one such
 strategy next.
 
-## Variational Autoencoders {#sec-generative_modeling_and_representation_learning:VAEs}
+## Variational Autoencoders {#sec-generative_modeling_and_representation_learning-VAEs}
 
 In the next sections we will examine the **variational autoencoder**
 (**VAE**) @kingma2013auto, @kingma2019introduction, which is a model
@@ -132,7 +132,7 @@ the decoder of an autoencoder looks just like a generator. It is a
 mapping from a representation of the data, $\mathbf{z}$, back to the
 data itself, $\mathbf{x}$. Given a $\mathbf{z}$, we can synthesize an
 image by passing it through the decoder of the autoencoder
-(@fig-generative_modeling_and_representation_learning:autoencoder_to_generative_model):
+(@fig-generative_modeling_and_representation_learning-autoencoder_to_generative_model):
 
 ![](./figures/generative_modeling_and_representation_learning/autoencoder_to_generative_model.png){width="80%"}
 
@@ -152,7 +152,7 @@ out-of-distribution input.
 
 In general, the embedding space of an autoencoder might be just as
 complicated to model as the data space we started with, as indicated in
-@fig-generative_modeling_and_representation_learning:autoencoder_complicated_latent_space:
+@fig-generative_modeling_and_representation_learning-autoencoder_complicated_latent_space:
 
 ![](./figures/generative_modeling_and_representation_learning/autoencoder_complicated_latent_space.png){width="60%"}
 
@@ -174,7 +174,7 @@ derivation.
 
 VAEs are max likelihood generative models, which maximize the likelihood
 function $L$ in
-@eq-generative_modeling_and_representation_learning:marginal_likelihood_p.
+@eq-generative_modeling_and_representation_learning-marginal_likelihood_p.
 What distinguishes them from other max likelihood models is their
 particular hypothesis space and optimization algorithm. We will first
 describe the hypothesis space.
@@ -215,7 +215,7 @@ $$\begin{aligned}
 \end{aligned}$$ Notice that this equation---an infinite mixture of
 Gaussians parameterized by a function $g_{\theta}$---has exactly the
 same form as the marginal likelihood in
-@eq-generative_modeling_and_representation_learning:marginal_likelihood_p.
+@eq-generative_modeling_and_representation_learning-marginal_likelihood_p.
 What we have done is model an infinite mixture as an integral that
 marginalizes over a continuous latent variable.
 
@@ -225,7 +225,7 @@ deterministic mapping $g_{\theta}$ and then putting a blip of Gaussian
 probability around each point in the range of this mapping. If you
 sample a few of the Gaussians in this infinite mixture, they might look
 like this
-(@fig-generative_modeling_and_representation_learning:gmm_vs_vae):
+(@fig-generative_modeling_and_representation_learning-gmm_vs_vae):
 
 ![](./figures/generative_modeling_and_representation_learning/gmm_vs_vae.png){width="90%"}
 
@@ -257,7 +257,7 @@ function. Therefore, we need to approximate this integral numerically.
 The first trick we will use is a *Monte Carlo estimate* of this
 integral: $$\begin{aligned}    p_{\theta}(\mathbf{x}) &= \int_{\mathbf{z}} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})p_{\mathbf{z}}(\mathbf{z})d\mathbf{z} :vae_likelihood\\
     &= \mathbb{E}_{\mathbf{z}\sim p_{\mathbf{z}}(\mathbf{z})}[p_{\theta}(\mathbf{x} \bigm | \mathbf{z})]\\
-    &\approx \frac{1}{M} \sum_{j=1}^M p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(j)}), \quad \mathbf{z}^{(j)} \sim p_{\mathbf{z}} #eq-generative_models_and_representation_learning:vae_likelihood_monte_carlo_estimate
+    &\approx \frac{1}{M} \sum_{j=1}^M p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(j)}), \quad \mathbf{z}^{(j)} \sim p_{\mathbf{z}} #eq-generative_models_and_representation_learning-vae_likelihood_monte_carlo_estimate
 \end{aligned}$${#eq-generative_models_and_representation_learning} We could stop here, as the learning problem is now
 written in a closed differentiable form: $$\begin{aligned}    \theta^* &= \mathop{\mathrm{arg\,max}}_{\theta} \frac{1}{M} \sum_{i=1}^N \log \sum_{j=1}^M \overbrace{\mathcal{N}(\mathbf{x}^{(i)}; g^{\mu}_{\theta}(\mathbf{z}^{(j)}), g^{\Sigma}_{\theta}(\mathbf{z}^{(j)}))}^{p_{\theta}(\mathbf{x}^{(i)} \shortgiven \mathbf{z}^{(j)})}:vae_learning_problem1
 \end{aligned}$${#eq-generative_modeling_and_representation_learning} As long as $g_{\theta}$ is a differentiable neural net,
@@ -274,7 +274,7 @@ probabilities, we would run a backward pass to update the parameters
 $\theta$.
 
 In
-@fig-generative_modeling_and_representation_learning:IGMM_training_iters
+@fig-generative_modeling_and_representation_learning-IGMM_training_iters
 we show what this process looks like at three checkpoints during
 training. Here we use an isotropic Gaussian model, that is, we
 parameterize the covariance as $\Sigma = \sigma\mathbf{I}$, where
@@ -292,14 +292,14 @@ $p_{\mathbf{z}}$, and the higher the dimensionality of $\mathbf{z}$, the
 more samples we will typically need.
 
 Can we come up with a more efficient way of approximating the integral
-in @eq-generative_models_and_representation_learning:vae_likelihood?
+in @eq-generative_models_and_representation_learning-vae_likelihood?
 Let's start by writing out the sum from
-@eq-generative_models_and_representation_learning:vae_likelihood_monte_carlo_estimate
+@eq-generative_models_and_representation_learning-vae_likelihood_monte_carlo_estimate
 more explicitly: $$\begin{aligned}    p_{\theta}(\mathbf{x}) &\approx \frac{1}{M} (p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(1)}) + p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(2)}) + p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(3)}) + \ldots)
 \end{aligned}$$ In general, some of the terms
 $p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(j)})$ will be larger than
 others. In fact, in our example in
-@fig-generative_modeling_and_representation_learning:IGMM_training_iters,
+@fig-generative_modeling_and_representation_learning-IGMM_training_iters,
 *most* of these terms are near zero. This is because, to maximize
 likelihood, the model spread out the Gaussians so that each places high
 density on a different part of the data distribution. A datapoint
@@ -307,7 +307,7 @@ $\mathbf{x}$ will only have substantial probability under the Gaussians
 whose means are near $\mathbf{x}$.
 
 Consider the example in
-@fig-generative_modeling_and_representation_learning:vae_importance_sampling1,
+@fig-generative_modeling_and_representation_learning-vae_importance_sampling1,
 where we are trying to esimate the probability of the point $\mathbf{x}$
 (blue circle).
 
@@ -357,7 +357,7 @@ $p_{\mathbf{z}}$ and wasting samples on regions that place nearly zero
 likelihood on the data, we focus our sampling on just the region that
 places high likelihood on the data, and we can get then away with far
 fewer samples to well approximate the data likelihood, as indicated
-@fig-generative_modeling_and_representation_learning:vae_importance_sampling2.
+@fig-generative_modeling_and_representation_learning-vae_importance_sampling2.
 
 ![](./figures/generative_modeling_and_representation_learning/vae_importance_sampling2.png){width="50%"}
 
@@ -381,7 +381,7 @@ $q_{\psi} = \mathcal{N}(f_{\psi}^{\mu}(\mathbf{x}), f_{\psi}^{\Sigma}(\mathbf{x}
 The $f_{\psi}$ is a function that maps from $\mathbf{x}$ to parameters
 of a distribution over $\mathbf{z}$; in other words, $f_{\psi}$ is a
 probabilistic encoder! This function is shown next in
-@fig-generative_modeling_and_representation_learning:VAE_encoder:
+@fig-generative_modeling_and_representation_learning-VAE_encoder:
 
 ![](./figures/generative_modeling_and_representation_learning/VAE_encoder.png){width="55%"}
 
@@ -414,7 +414,7 @@ yielding: $$\begin{aligned}
     &= \mathop{\mathrm{arg\,max}}_{\psi} \frac{1}{N}\sum_{i=1}^N \underbrace{\mathbb{E}_{\mathbf{z} \sim q_{\psi}(Z \bigm | \mathbf{x}^{(i)})}[ -\log q_{\psi}(\mathbf{z} \bigm | \mathbf{x}^{(i)}) + \log p_{\theta}(\mathbf{x}^{(i)} \bigm | \mathbf{z}) + \log p_{\mathbf{z}}(\mathbf{z})]}_{J} :J_q
 \end{aligned}$${#eq-generative_modeling_and_representation_learning} Here we have defined a new cost function, $J$ (the term
 inside the sum in
-@eq-generative_modeling_and_representation_learning:J_q), whose
+@eq-generative_modeling_and_representation_learning-J_q), whose
 maximizer with respect to $\psi$ is the same as the maximizer for $J_q$.
 
 Now, let us now recall our learning problem for $p_{\theta}$, which is
@@ -431,7 +431,7 @@ and $\theta$; the objective for $\psi$ is expressed as an expectation
 and can be optimized by taking a Monte Carlo sample from that
 expectation. We *could* also try using Monte Carlo to approximate the
 objective for $\theta$, but this would yield a biased estimator of
-$\theta$, since @eq-generative_modeling_and_representation_learning:J_p
+$\theta$, since @eq-generative_modeling_and_representation_learning-J_p
 has the log outside the expectation.  That might be okay (as
 the number of samples $N$ goes to infinity, the bias goes to zero), but
 we can do better. To get around this issue, VAEs adopt the following
@@ -440,7 +440,7 @@ they maximize a lower-bound to $J_p$, which is expressed purely as an
 expectation and yields unbiased Monte Carlo estimates. The particular
 lower-bound used is in fact $J$: the same objective we used for
 optimizing $\psi$ in
-@eq-generative_modeling_and_representation_learning:J_q!
+@eq-generative_modeling_and_representation_learning-J_q!
 
 The fact that $J$ is a lower-bound on $J_p$ follows from Jensen's
 inequality: $$\begin{aligned}    J_p &= \log p_{\theta}(\mathbf{x})\\
@@ -494,7 +494,7 @@ follows: $$\begin{aligned}
 \end{aligned}$$
 
 As shown in
-@eq-generative_modeling_meets_representation_learning:vae_objective_form2,
+@eq-generative_modeling_meets_representation_learning-vae_objective_form2,
 the VAE learning problem seeks to maximize the following objective:
 $$\begin{aligned}
     \frac{1}{N}\sum_{i=1}^N \Big( \underbrace{\mathbb{E}_{z\sim q_{\psi}(Z \bigm | x^{(i)})}\Big[ \log p_{\theta}(x^{(i)} \bigm | z) \Big]}_{\text{likelihood term}} - \underbrace{\texttt{KL}\KLdivx{q_{\psi}(Z \bigm | x^{(i)})}{p_{z}}}_{\text{KL term}} \Big)
@@ -527,7 +527,7 @@ $$\begin{aligned}
 \end{aligned}$${#eq-generative_modeling_meets_representation_learning} In other words, we encode, then decode, then measure the
 **reconstruction error** between our original input and the output of
 the decoder; this looks just like an autoencoder, as shown in
-@fig-generative_modeling_and_representation_learning:VAE_as_autoencoder!
+@fig-generative_modeling_and_representation_learning-VAE_as_autoencoder!
 
 ![](./figures/generative_modeling_and_representation_learning/VAE_as_autoencoder.png){width="80%"}
 
@@ -539,7 +539,7 @@ previously.
 
 Difference #1 is worth remarking on. To train the VAE, we need to
 backpropagate through the sampling step in
-@eq-generative_modeling_meets_representation_learning:sampling_z_step.
+@eq-generative_modeling_meets_representation_learning-sampling_z_step.
 How can we backpropagate through the sampling operation? The way to do
 this turns out to be quite simple: we reparameterize sampling from
 $\mathcal{N}(\mu_z, \sigma^2_z)$ as follows: $$\begin{aligned}
@@ -574,12 +574,12 @@ $x^{(i)}$ that they encode. The tension between these two terms is what
 causes the VAE to work. While a standard autoencoder may produce an
 arbitrary latent distribution, with gaps and tendrils of density (as we
 saw in
-@fig-generative_modeling_and_representation_learning:autoencoder_complicated_latent_space),
+@fig-generative_modeling_and_representation_learning-autoencoder_complicated_latent_space),
 a VAE produces a tightly packed latent space which can be densely
 sampled from.
 
 These effects can be seen in
-@fig-generative_modeling_and_representation_learning:VAE_training_iters,
+@fig-generative_modeling_and_representation_learning-VAE_training_iters,
 where we show three checkpoints of optimizing a VAE. As in the infinite
 mixture of Gaussians example shown previously, we again assume an
 isotropic Gaussian model for the decoder, and here also assume that
@@ -626,12 +626,12 @@ reference="chapter-generative_models"} ). The script takes in random
 values that control the attributes of the scene (the grass color, the
 heading of the river, the number of trees, etc.) and generates an image
 with these attributes, as shown in
-@fig-generative_modeling_and_representation_learning:rivers_dataset.
+@fig-generative_modeling_and_representation_learning-rivers_dataset.
 
 ![](./figures/generative_modeling_and_representation_learning/rivers_dataset.png){width="80%"}
 
 Training a VAE on this data
-(@fig-generative_modeling_and_representation_learning:vae_rivers_samples)
+(@fig-generative_modeling_and_representation_learning-vae_rivers_samples)
 learns to recreate the generative process with a *neural net* (rather
 than a Python script) and maps zero-mean unit-variance *Gaussian noise*
 to images (rather than taking as input the noise types the script uses).
@@ -643,7 +643,7 @@ that is, did it recover latent dimensions corresponding to the attribute
 values that were the inputs to the Python script? We can examine this by
 generating a set of images that walk along two latent dimensions of the
 VAE's $z$-space, shown in
-@fig-generative_modeling_and_representation_learning:vae_rivers_latent_walk.
+@fig-generative_modeling_and_representation_learning-vae_rivers_latent_walk.
 
 ![](./figures/generative_modeling_and_representation_learning/vae_rivers_latent_walk.png){width="75%"}
 
@@ -690,7 +690,7 @@ generative model, but this time with GANs. Here we will use a powerful
 GAN, called BigGAN @brock2018large, that has been trained on the
 ImageNet dataset @russakovsky2015imagenet. Here are images generated by
 walking along two latent dimensions of this GAN
-(@fig-generative_modeling_and_representation_learning:biggan_latent_walk):
+(@fig-generative_modeling_and_representation_learning-biggan_latent_walk):
 
 ![](./figures/generative_modeling_and_representation_learning/biggan_latent_walk.png){width="60%"}
 

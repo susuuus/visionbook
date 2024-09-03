@@ -134,7 +134,7 @@ not based on learning. Motion estimation equations will be derived from
 first principles and will rely on some simple assumptions.
 
 In section
-[\[sec-matching_based_motion\]](#sec:matching_based_motion){reference-type="ref"
+[\[sec-matching_based_motion\]](#sec-matching_based_motion){reference-type="ref"
 reference="sec-matching_based_motion"} we discussed matching-based
 optical flow estimation. We will discuss now gradient-based methods.
 These approaches rely on the brightness constancy assumption and use the
@@ -314,7 +314,7 @@ We can see that the result seems to be wrong for the motion estimated
 near the center of the side of each square. The inverse can only be
 computed in image regions with sufficient texture variations (i.e., near
 the corners). As in the Harris corner detector (see section
-[\[sec-finding_image_features\]](#sec:finding_image_features){reference-type="ref"
+[\[sec-finding_image_features\]](#sec-finding_image_features){reference-type="ref"
 reference="sec-finding_image_features"}), the eigenvector with the
 smallest eigenvalue indicates the direction in which the image has the
 smallest possible change under translations. Regions with a small

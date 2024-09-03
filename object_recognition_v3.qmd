@@ -208,7 +208,7 @@ The goal is to answer the following, seemingly simple, question: Is
 object class $c$ present anywhere in the image ${\bf x}$? We also
 covered image classification as a case study of machine learning in
 section
-[\[sec-intro_to_learning-image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
+[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
 reference="sec-intro_to_learning-image_classification"}. Even though we
 will use the same words now, and even the same sentences, you should
 read them in a different way. The same words will mean something
@@ -280,15 +280,15 @@ using a neural net, the vector $\hat{\mathbf{y}}$ is usually computed as
 the output of a softmax layer.
 
 This yields the softmax regression model we saw previously in section
-[\[sec-intro_to_learning-image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
+[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
 reference="sec-intro_to_learning-image_classification"}. Given the
-constraint of @eq-object_recognition:sum_to_one_constraint, the output
+constraint of @eq-object_recognition-sum_to_one_constraint, the output
 of $f_{\theta}$ can be interpreted as a probability mass function over
 $K$ classes: $$\begin{aligned}
     p_{\theta}(Y \bigm | \mathbf{x}) &= \hat{\mathbf{y}} = f_{\theta}(\mathbf{x})
 \end{aligned}$$ where $Y$ is the random variable indicating the single
 class per image. This relates to our previous model in
-@eq-object_recognition:classification_probability_model as:
+@eq-object_recognition-classification_probability_model as:
 $$\begin{aligned}
     p(Y_c=1 \bigm | \mathbf{x}) &= p_{\theta}(Y=c \bigm | \mathbf{x})
 \end{aligned}$$
@@ -853,7 +853,7 @@ that do not have well-defined boundaries (@fig-segmenting_trees). It is
 useful to differentiate between **stuff** and **objects**. Stuff refers
 to things that do not have well-defined boundaries such as grass, water,
 and sky (we already discussed this in chapter
-[\[sec-textures\]](#chap:textures){reference-type="ref"
+[\[sec-textures\]](#chap-textures){reference-type="ref"
 reference="sec-textures"}). But the distinction between stuff and
 objects is not very sharp. In some images, object instances might be
 easy to separate like the two trees in the left image below, or become a

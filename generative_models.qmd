@@ -561,7 +561,7 @@ $\mathbf{x_1}$ is the first pixel and $\mathbf{x_2}$ is the second.
 Treating $\mathbf{x}_2$ as a categorical variable (just like
 $\mathbf{x_1}$), we can simply use a softmax regression, which we saw in
 section
-[\[sec-intro_to_learning-image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
+[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
 reference="sec-intro_to_learning-image_classification"}. In that section
 we were modeling a $K$-way categorical distribution over $K$ object
 classes, conditioned on an input image. Now we can use exactly the same
@@ -649,14 +649,14 @@ can be reused for predicting the next item over, that is,
 $\mathbf{x}_{n+1}$ from $\mathbf{x}_2, \dots, \mathbf{x}_n$. As a
 concrete example, this is the case in transformers with causal attention
 (section
-[\[sec-transformers:masked_attention\]](#sec:transformers:masked_attention){reference-type="ref"
-reference="sec-transformers:masked_attention"}), which have the property
+[\[sec-transformers-masked_attention\]](#sec:transformers:masked_attention){reference-type="ref"
+reference="sec-transformers-masked_attention"}), which have the property
 that the representation of item $\mathbf{x}_{n}$ only depends on the
 items that preceded it in the sequence. What this allows us to do is
 *share computation between all our overlapping predictions*, and this is
 why it makes sense to use type 2 training batches. Notice these are the
 same kind of batches we described in the causal attention section (see
-@eq-transformers:causal_training_batches).
+@eq-transformers-causal_training_batches).
 
 ### Sampling from Autoregressive Models
 
@@ -874,7 +874,7 @@ practice, setting $K=1$ is often sufficient.
 GANs are related to the image and texture models we saw in chapters
 [\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
 reference="chapter-stat_image_models"} and
-[\[sec-textures\]](#chap:textures){reference-type="ref"
+[\[sec-textures\]](#chap-textures){reference-type="ref"
 reference="sec-textures"}. For example, in the Heeger-Bergen model
 (section
 [\[section:Heeger_Bergen\]](#section:Heeger_Bergen){reference-type="ref"

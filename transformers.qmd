@@ -159,7 +159,7 @@ based on them. The first operation we will define is how to take a
 A linear combination of tokens is not the same as a fully connected
 layer in a neural net. Instead of taking a weighted sum of scalar
 neurons, it takes a weighted sum of vector-valued tokens
-(@fig-transformers-lin_bomb_neurons_vs_tokens):The general form of these equations for multiple input and output
+(@fig-transformers-lin_bomb_neurons_vs_tokens)-The general form of these equations for multiple input and output
 neurons/tokens is: 
 
 $$\begin{aligned}
@@ -187,7 +187,7 @@ $$\begin{aligned}
     \mathbf{T}_{\texttt{out}}&= \mathbf{W}\mathbf{T}_{\texttt{in}}+ \mathbf{b} \quad\quad &\triangleleft \quad \text{fc layer over tokens}
 \end{aligned}$${#eq-transformers}
 
-### Modifying Tokens {#sec-transformers:modifying_tokens}
+### Modifying Tokens {#sec-transformers-modifying_tokens}
 
 Linear combinations only let us linearly mix and recombine tokens, and
 stacking linear functions can only result in another linear function. In
@@ -244,7 +244,7 @@ convolutional layers, etc.) and layers that apply a pointwise
 nonlinearity to each node (e.g., relus, per-token MLPs). Of course,
 since tokens are simply groups of neurons, every token net is itself
 also a neural net, just viewed differently---it is a net of subnets. In
-@fig-transformers:neural_nets_vs_token_nets, we show a standard neural
+@fig-transformers-neural_nets_vs_token_nets, we show a standard neural
 net and a token net side by side, to emphasize the similarities in their
 operations.
 
@@ -259,7 +259,7 @@ difference between $\mathbf{A}$ and $\mathbf{W}$ is that $\mathbf{A}$ is
 data input to the network. In addition, $\mathbf{A}$ typically only
 contains non-negative values, consistent with thinking of it as a matrix
 that allocates how much (non-negative) attention we pay to each input
-token. In the diagram below (@fig-transformers:fc_vs_attn), we indicate
+token. In the diagram below (@fig-transformers-fc_vs_attn), we indicate
 the data-dependency with the function labeled $f$, and we color the
 attention matrix red to indicate that it is constructed from
 *transformed data* rather than being free parameters (for which we use
@@ -541,7 +541,7 @@ across spatially distant tokens; note that
 $\mathbf{T}_{\texttt{out}}[0,:]$ does not necessarily represent the same
 spatial region in the image as $\mathbf{T}_{\texttt{in}}[0,:]$.
 
-@fig-transformers:transformers_attn_ex gives an example of what
+@fig-transformers-transformers_attn_ex gives an example of what
 self-attention maps can look like on the safari image. In this example,
 we are simply using patch color as the query and key features. Each
 attention map shows one row of $\mathbf{A}$ reshaped into the size of
@@ -597,7 +597,7 @@ query, key, and value projections for each of the $k$ attention heads.
 Notice that here, unlike in the single-headed
 self-attention layers presented previously, the value vectors need not
 have the same dimensionality as the token code vectors, since we are
-applying the projection @eq-transformers:MSA_merge.
+applying the projection @eq-transformers-MSA_merge.
 
 :::
 
@@ -610,23 +610,23 @@ good thing, why not just add more of them? We can add more *sequential*
 self-attention layers by building deeper transformers, or we can add
 more *parallel* self-attention layers by using MSA.
 
-## The Full Transformer Architecture {#sec-transformers:ViT_arch}
+## The Full Transformer Architecture {#sec-transformers-ViT_arch}
 
 A full transformer architecture is a stack of self-attention layers
 interleaved with tokenwise nonlinearities. These two steps are analogous
 to linear layers interleaved with neuronwise nonlinearities in an MLP,
-as shown below (@fig-transformers:transformer_vs_MLP):
+as shown below (@fig-transformers-transformer_vs_MLP):
 
 Beyond this basic template, there are many variations that can be added,
 resulting in different particular architectures within the transformer
 family. Some common additions are normalization layers and residual
-connections. In @fig-transformers:ViT_arch we plot the ViT architecture
+connections. In @fig-transformers-ViT_arch we plot the ViT architecture
 from @dosovitskiy2020vit, showing where these additional pieces enter
 the picture.
 
 This architecture uses layer normalization (section
-[\[sec-neural_nets:normalization_layers\]](#sec-neural_nets:normalization_layers){reference-type="ref"
-reference="sec-neural_nets:normalization_layers"}) before each attention
+[\[sec-neural_nets-normalization_layers\]](#sec-neural_nets:normalization_layers){reference-type="ref"
+reference="sec-neural_nets-normalization_layers"}) before each attention
 layer and before each token-wise MLP layer. The normalization is done
 *within* each token (the token code vector is treated as a akin to a
 layer; each dimension of this vector is standardized by the mean and
@@ -671,8 +671,8 @@ classification (section
 [\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning-image_classification){reference-type="ref"
 reference="sec-intro_to_learning-image_classification"}), or in the
 format of an image for image-to-image tasks (section
-[\[sec-conditional_generative_models:im2im\]](#sec-conditional_generative_models:im2im){reference-type="ref"
-reference="sec-conditional_generative_models:im2im"}). To handle these
+[\[sec-conditional_generative_models-im2im\]](#sec-conditional_generative_models:im2im){reference-type="ref"
+reference="sec-conditional_generative_models-im2im"}). To handle these
 cases, we typically define a task-specific output layer that takes
 $\mathbf{T}_{\texttt{out}}$ as input and produces the desired format as
 output. For example, to produce a vector of logit predictions we could
@@ -719,7 +719,7 @@ equivariance makes sense because, roughly, a bird is a bird no matter
 where it appears in an image. Permutation equivariance might also make
 sense, for that same reason, but only to an extent: if you break up an
 image into small patches and scramble them, this could disrupt spatial
-layout that is important for recognition. We will see in @sec-transformers:positional_encodings how transformers use
+layout that is important for recognition. We will see in @sec-transformers-positional_encodings how transformers use
 something called positional codes to reinsert useful information about
 spatial layout.
 
@@ -854,7 +854,7 @@ combination of tokens that results is not a mixing operation found in
 CNNs and addresses the limitation of CNNs being myopic, with each filter
 only seeing information in its receptive field.
 
-## Masked Attention {#sec-transformers:masked_attention}
+## Masked Attention {#sec-transformers-masked_attention}
 
 Sometimes we want to restrict which tokens can attend to which. This can
 be done by *masking* the attention matrix, which just means fixing some
@@ -899,7 +899,7 @@ $\mathbf{T}_{1:n}$) are supervised at the same time.
 
 This also works for transformers with more than one layer, where the
 masking strategy looks like shown in
-@fig-transformers:multilayer_masked_attention.
+@fig-transformers-multilayer_masked_attention.
 
 Notice that the output tokens on every layer $l$ have the property that
 $\mathbf{t}^l_n$ only depends on $\mathbf{T}^0_{1:n-1}$, where
@@ -912,10 +912,10 @@ that predict each previous token. That is, there is sharing of
 computation between all the prediction problems. We will see a more
 concrete application of this strategy when we get to autoregressive
 models in section
-[\[sec-generative_models:autoregressive\]](#sec-generative_models:autoregressive){reference-type="ref"
-reference="sec-generative_models:autoregressive"}.
+[\[sec-generative_models-autoregressive\]](#sec-generative_models:autoregressive){reference-type="ref"
+reference="sec-generative_models-autoregressive"}.
 
-## Positional Encodings {#sec-transformers:positional_encodings}
+## Positional Encodings {#sec-transformers-positional_encodings}
 
 Another idea associated with transformers is . Operations over tokens in
 a transformer are permutation equivariant, which means that we can
@@ -939,7 +939,7 @@ sinusoidal waves take on at each position: $$\begin{aligned}
         \mathbf{p}_y
     \end{bmatrix}
 \end{aligned}$${#eq-transformers} where $x$ and $y$ are the coordinates of the token. This
-representation is visualized in @fig-transformers:positional_codes:
+representation is visualized in @fig-transformers-positional_codes:
 
 Another strategy is to simply let the positional codes be *learned* by
 the model, which could potentially result in a better representation of

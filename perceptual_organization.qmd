@@ -14,7 +14,7 @@ to find them, and how they are related to the representation learning
 algorithms from the last chapter.
 
 First, what is a perceptual group? Look at the photo in
-@fig-perceptual_organization:perc_org_teaser and consider what you see.
+@fig-perceptual_organization-perc_org_teaser and consider what you see.
 Not what raw pixel values you see, but what structures you see. What are
 some structures you can name?
 
@@ -73,7 +73,7 @@ Although the analogy to text makes clear why perceptual organization is
 important, perceptual groups can also go beyond the limits of language.
 Some structures we see are hard to name but still clearly represent a
 coherent group in our heads. Consider, for example, the image in
-@fig-perceptual_organization:perc_org_nonsemantic_example below.
+@fig-perceptual_organization-perc_org_nonsemantic_example below.
 
 ![](./figures/perceptual_organization/perc_org_nonsemantic_example.png){width="35%"}
 
@@ -89,7 +89,7 @@ definition of what is a coherent entity and it will vary depending on
 the task; a segment could correspond to a nameable object, or a image
 region made of a single material, or a physically distinct piece of
 geometry (see
-@fig-perceptual_organization:ambiguous_segmentation_example).
+@fig-perceptual_organization-ambiguous_segmentation_example).
 
 Segmentation can be framed as a clustering problem: assign each pixel in
 an image to one of $k$ clusters. We will explore two approaches to
@@ -113,7 +113,7 @@ and the pixel's color be its feature vector. For ease of visualization,
 we will use the $ab$ color value as the two-dimensional (2D) feature per
 pixel. An image represented this way can be plotted as a scatter plot
 and you can think of it as samples from a distribution over $ab$ colors,
-as shown in @fig-perceptual_organization:scatter_ab_fruits2.
+as shown in @fig-perceptual_organization-scatter_ab_fruits2.
 
 ![](./figures/perceptual_organization/scatter_ab_fruits2.png){width="75%"}
 
@@ -124,22 +124,22 @@ distribution from which these pixels were sampled). We can segment via
 $k$-means by simply assigning each pixel to the cluster assignment of
 its color value. Below we color each pixel in each cluster by the mean
 color of all pixels assigned to that cluster
-(@fig-perceptual_organization:kmeans_ab_fruits2).
+(@fig-perceptual_organization-kmeans_ab_fruits2).
 
 ![](./figures/perceptual_organization/kmeans_ab_fruits2.png){width="100%"}
 
 Naturally, $k$-means on $ab$-values finds segments that correspond to
 regions of roughly a constant color. This simple approach can be
 surprisingly effective. notice how it segments a zebra from the
-background in @fig-perceptual_organization:kmeans_ab_zebra_and_beach
+background in @fig-perceptual_organization-kmeans_ab_zebra_and_beach
 (because the black and white stripes have roughly the same $ab$-values).
 However, it fails to group more complex patterns that are not defined by
 color similarity, as in the beach photo in
-@fig-perceptual_organization:kmeans_ab_zebra_and_beach.
+@fig-perceptual_organization-kmeans_ab_zebra_and_beach.
 
 ![](./figures/perceptual_organization/kmeans_ab_zebra_and_beach.png){width="100%"}
 
-### Affinity-Based Segmentation {#sec-perceptual_organization:affinity_based_segmentation}
+### Affinity-Based Segmentation {#sec-perceptual_organization-affinity_based_segmentation}
 
 Other clustering methods are based on the idea of **affinity**, where we
 try to model a distance metric (the affinity) that tells us whether two
@@ -163,8 +163,8 @@ We do not have time to cover all these methods and in fact they are no
 longer commonly used. Instead we will focus on a method you have seen
 earlier in the book that actually is in common use: contrastive learning
 (which was covered in section
-[\[sec-representation_learning:contrastive_learning\]](#sec:representation_learning:contrastive_learning){reference-type="ref"
-reference="sec-representation_learning:contrastive_learning"}).
+[\[sec-representation_learning-contrastive_learning\]](#sec:representation_learning:contrastive_learning){reference-type="ref"
+reference="sec-representation_learning-contrastive_learning"}).
 Contrastive learning is a perfect fit for affinity-based segmentation
 because contrastive methods learn from similarities (positive pairs) and
 differences (negative pairs), and this is what an affinity metric gives
@@ -211,7 +211,7 @@ patch co-occurrences, then used that affinity metric to obtain a feature
 map that reveals the coherent regions of an image. If we apply $k$-means
 to the pixels in this feature map, we can obtain an effective
 segmentation. This entire pipeline is shown in
-@fig-perceptual_organization:kmeans_dino, using DINO @caron2021emerging
+@fig-perceptual_organization-kmeans_dino, using DINO @caron2021emerging
 as the particular contrastive embedding.
 
 ![](./figures/perceptual_organization/kmeans_dino.png){width="100%"}
@@ -276,7 +276,7 @@ geometric structure that is *not* well-represented by depth. Consider a
 pile of papers on your desk. The depth difference between one page and
 the next might only be a millimeter---too small to show up on standard
 depth sensing cameras. But the layer structure is obvious. Look back at
-@fig-perceptual_organization:perc_org_nonsemantic_example: the depth
+@fig-perceptual_organization-perc_org_nonsemantic_example: the depth
 *order* is obvious even though you might have no idea how far apart
 these objects are in metric space. Layers capture **ordinal** structure
 and often this is the structure we care about; for example, if we want
@@ -292,7 +292,7 @@ organization is absent from current systems. These systems still see the
 world in terms of objects, contours, layers, and so forth, but those
 structures are emergent in their hidden layers rather than made explicit
 by human design. For example, in
-@fig-representation_learning:obj_detectors_in_colorization we observed
+@fig-representation_learning-obj_detectors_in_colorization we observed
 object detectors inside a neural net trained to do colorization.
 
 ## Concluding Remarks

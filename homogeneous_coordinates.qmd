@@ -585,7 +585,7 @@ in the target image (@fig-warping_sketch). As coordinates might result
 in non-integer values, we can simply round the result to the closest
 pixel coordinate (i.e., nearest neighbor interpolation as we discussed
 in section
-[\[sec-interpolation\]](#sec:interpolation){reference-type="ref"
+[\[sec-interpolation\]](#sec-interpolation){reference-type="ref"
 reference="sec-interpolation"}). This algorithm is called **forward
 mapping**. It is an intuitive way of warping an image but it is really
 not a good idea. We will have all sorts of artifacts such as missing
@@ -601,9 +601,9 @@ The best approach is to use what is called **backward mapping** which
 consists of looping over all the pixels of the target image and applying
 the inverse geometric transform, $\mathbf{M}^{-1}$; we then use
 interpolation (as described in section
-[\[sec-interpolation\]](#sec:interpolation){reference-type="ref"
+[\[sec-interpolation\]](#sec-interpolation){reference-type="ref"
 reference="sec-interpolation"} in chapter
-[\[sec-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
+[\[sec-downsampling_and_upsampling\]](#chap-downsampling_and_upsampling){reference-type="ref"
 reference="sec-downsampling_and_upsampling"}) to get the correct color
 value (@fig-warping_sketch). This process guarantees that there will be
 no missing values (unless the coordinates go outside the frame of the

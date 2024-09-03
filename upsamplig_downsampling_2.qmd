@@ -496,11 +496,11 @@ $$\ell_{\texttt{out}}(a,b) = \ell_{\texttt{in}}[ n, m ]$$ where
 $n-0.5<a<n+0.5$ and $m-0.5<b<m+0.5$. Note that here we are treating
 $\ell_{\texttt{out}}(a,b)$ as a continuous image. Nearest neighbor
 interpolation results in an image that is piecewise-constant.
-@fig-upsampling_and_downsampling:nn_interp shows the nearest neighbor
+@fig-upsampling_and_downsampling-nn_interp shows the nearest neighbor
 interpolation process graphically.
 
 
-![Nearest neighbor interpolation in 1D and 2D.](figures/upsamplig_downsampling/nearest_interp2.png){#fig-upsampling_and_downsampling:nn_interp width=100%}
+![Nearest neighbor interpolation in 1D and 2D.](figures/upsamplig_downsampling/nearest_interp2.png){#fig-upsampling_and_downsampling-nn_interp width=100%}
 
 
 ### Linear and Bilinear Interpolation {#sec-bilinearinterpolation}

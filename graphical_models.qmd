@@ -526,7 +526,7 @@ red rectangles, shown in
 figures [\[fig:canoe1\]](#fig-canoe1){reference-type="ref"
 reference="fig:canoe1"}(c and d). Assume that the two images have been
 rectified, as described in chapter
-[\[sec-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
+[\[sec-stereo_vision\]](#chap-stereo_vision){reference-type="ref"
 reference="sec-stereo_vision"}, and consider the common scanline,
 marked in figures [\[fig:canoe1\]](#fig-canoe1){reference-type="ref"
 reference="fig:canoe1"}(c and d) with a black horizontal line. The
@@ -569,7 +569,7 @@ images, in this example, the left camera image in @fig-canoe1c. The
 open circles mean that the depth of each pixels is an unobserved
 variable. Often, we represent the depth as the **disparity** between the
 left and right camera images, see chapter
-[\[sec-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
+[\[sec-stereo_vision\]](#chap-stereo_vision){reference-type="ref"
 reference="sec-stereo_vision"}.
 
 The intensity values of the left and right camera scan lines can be used

@@ -51,13 +51,13 @@ Transfer learning algorithms involve two parts:
 In our example, the pretraining phase was training the wheat versus corn
 classifier, and the adaptation phase is updating that classifier to
 instead recognize wheat versus soybeans. This is visualized below in
-@fig-transfer_learning:finetuning_basic.
+@fig-transfer_learning-finetuning_basic.
 
 ![](./figures/transfer_learning/pretraining_and_adaptation.png){width="85%"}
 
 In the next sections we will describe specific kinds of transfer
 learning algorithms, which handle each of these stages in different
-ways. Then, in @sec-transfer_learning:combinatorial_catalog, we will
+ways. Then, in @sec-transfer_learning-combinatorial_catalog, we will
 reflect on the landscape of choices we have made, and we will see that
 transfer learning is better understood as a collection of tools, which
 can be combined in innumerable ways, rather than as a set of specific
@@ -119,7 +119,7 @@ To handle this it is common to cut off the last layer of the network and
 replace it with a new final layer that outputs the correct
 dimensionality. If the input dimensionality changes, you can do the same
 with the first layer of the network. Both these changes are shown next,
-in @fig-transfer_learning:finetuning_stages.
+in @fig-transfer_learning-finetuning_stages.
 
 To be precise, let $f: \mathcal{X} \rightarrow \mathcal{Y}$ decompose as
 $f= f_1 \circ f_2 \circ f_3$, with
@@ -140,7 +140,7 @@ these from scratch).
 
 ### Finetuning Subparts of a Network
 
-@fig-transfer_learning:finetuning_stages shows that you don't have to
+@fig-transfer_learning-finetuning_stages shows that you don't have to
 finetune all layers in your network but can selectively finetune some
 and initialize others from scratch. In fact this strategy can be applied
 quite generally, where we initialize some parts of a computation graph
@@ -153,14 +153,14 @@ want to *freeze* certain layers to prevent them from forgetting their
 prior knowledge @zhang2023adding.
 
 An example of both these use cases is given in
-@fig-transfer_learning:finetuning_certain_modules_example. In this
+@fig-transfer_learning-finetuning_certain_modules_example. In this
 example we imagine we are making a system to detect cars in street
 images. We have four modules that work together to achieve this. The
 `featurize` module converts the input image $\mathbf{x}$ into a feature
 map (for example, this could be DINO @caron2021emerging, which we saw in
 section
-[\[sec-perceptual_organization:affinity_based_segmentation\]](#sec:perceptual_organization:affinity_based_segmentation){reference-type="ref"
-reference="sec-perceptual_organization:affinity_based_segmentation"}).
+[\[sec-perceptual_organization-affinity_based_segmentation\]](#sec:perceptual_organization:affinity_based_segmentation){reference-type="ref"
+reference="sec-perceptual_organization-affinity_based_segmentation"}).
 This module is pretrained and frozen; the idea is we have a good generic
 feature extractor that will work for many problems, and we do not need
 to update it for each new problem we encounter. Next we have two modules
@@ -247,7 +247,7 @@ learning a classifier from a teacher. We assume that the teacher is a
 well-trained classifier that outputs a $K-1$-dimensional probability
 mass function (pmf), $t: \mathcal{X} \rightarrow \vartriangle^{K-1}$
 (see section
-[\[sec-intro_to_learning-image_classification\]](#sec:intro_to_learning:image_classification){reference-type="ref"
+[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
 reference="sec-intro_to_learning-image_classification"}). The student, a
 model $f_{\theta}: \mathcal{X} \rightarrow \vartriangle^{K-1}$, simply
 tries to imitate the teacher's output pmf: for each input $x$ that the
@@ -263,7 +263,7 @@ outputs for $x$. The full algorithm is given in the diagram below.
 
 Notice that this learning problem is very similar to softmax regression
 on labeled data, and a diagram comparing the two is given in
-@fig-transfer_learning:KD_diagram. The difference is that in knowledge
+@fig-transfer_learning-KD_diagram. The difference is that in knowledge
 distillation the targets are not one-hot (like in standard label
 prediction problems) but rather are more *graded*. The teacher outputs a
 probability vector that reflect the teacher's belief as to the class of
@@ -298,8 +298,8 @@ whatever the model would have responded to when queried with `X`.
 The same can be done for vision systems. First, prompting methods from
 NLP can be directly used for prompting the text inputs to
 vision-language models @radford2021learning (section
-[\[sec-VLMs:CLIP\]](#sec:VLMs:CLIP){reference-type="ref"
-reference="sec-VLMs:CLIP"}). Second, prompting can also be applied to
+[\[sec-VLMs-CLIP\]](#sec:VLMs:CLIP){reference-type="ref"
+reference="sec-VLMs-CLIP"}). Second, prompting can also be applied to
 visual inputs. Just like we can prepend a textual input with text, we
 can prepend a visual input with visual data, yielding a method that may
 be called **visual
@@ -311,7 +311,7 @@ convolutional neural nets (CNNs), recurrent neural nets (RNNs), and
 transformers. Or, we can combine the visual prompt with the input query
 in other ways, such as by addition.
 
-Prompting is visualized in @fig-transfer_learning:prompting, where
+Prompting is visualized in @fig-transfer_learning-prompting, where
 $\oplus$ represents concatenation, addition, or potentially other ways
 of mixing prompts and input signals.
 
@@ -319,7 +319,7 @@ of mixing prompts and input signals.
 
 Let's now look at several concrete ways of prompting a vision system.
 One simple way is to directly edit the input pixels, and this approach
-is shown in @fig-transfer_learning:pixel_prompt:
+is shown in @fig-transfer_learning-pixel_prompt:
 
 ![](./figures/transfer_learning/vp_hyojin.png){width="100%"}
 
@@ -330,8 +330,8 @@ optimized to make the model predict the dog's species and the bottom
 prompt was optimized to make the model predict the dog's expression.
 Mathematically, this kind of prompting is very similar to the
 adversarial noise we covered in section
-[\[sec-bias_and_shift:adversarial_attacks\]](#sec:bias_and_shift:adversarial_attacks){reference-type="ref"
-reference="sec-bias_and_shift:adversarial_attacks"}.  However,
+[\[sec-bias_and_shift-adversarial_attacks\]](#sec:bias_and_shift:adversarial_attacks){reference-type="ref"
+reference="sec-bias_and_shift-adversarial_attacks"}.  However,
 here we are not adding noise that *hurts* performance but instead adding
 noise that *improves* performance on a new task of interest. Given a set
 of $M$ training examples that we would like to adapt to,
@@ -350,7 +350,7 @@ the prompt for a vision transformer architecture @dosovitskiy2020vit
 reference="chapter-transformers"} for details on transformers). This new
 token is concatenated to the input of the transformer, which is a set of
 tokens representing image patches
-(@fig-transformers:prompting_a_transformer):
+(@fig-transformers-prompting_a_transformer):
 
 The token is a $d$-dimensional code vector and this vector is optimized
 to change the behavior of the transformer to achieve a desired result,
@@ -498,7 +498,7 @@ common to *adapt* modules like these (they are usually just pretrained
 and then held fixed), but in principle there is no reason why you can't.
 Maybe you, reader, can figure out a good way to do so.
 
-## A Combinatorial Catalog of Transfer Learning Methods {#sec-transfer_learning:combinatorial_catalog}
+## A Combinatorial Catalog of Transfer Learning Methods {#sec-transfer_learning-combinatorial_catalog}
 
 Many of the methods we introduced previously follow a similar format:
 
@@ -580,4 +580,4 @@ problem zero-shot, adaptation will remain an important topic of study.
     adapt to perform a task with a different output dimensionality then
     we can add a learned projection layer $f^{\prime}$ after the
     pretrained $f$, just like we did in
-    @fig-transfer_learning:finetuning_stages.
+    @fig-transfer_learning-finetuning_stages.

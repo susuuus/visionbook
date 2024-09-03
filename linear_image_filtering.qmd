@@ -433,7 +433,7 @@ operation.
 ![Fig (a) Defocusing an image can be written as a convolution. (b) Rotation can't be written as a convolution.](figures/linear_image_filtering/whichoneislinear2.png){width="100%" #fig-transformationsquizz2}
 
 
-### Properties of the Convolution {#sec-linear_image_filtering:properties_of_the_convolution}
+### Properties of the Convolution {#sec-linear_image_filtering-properties_of_the_convolution}
 
 The convolution is a linear operation that will be extensively used
 thorough the book and it is important to be familiar with some of its

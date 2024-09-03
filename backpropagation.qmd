@@ -206,8 +206,8 @@ sum of the gradients of each term.
 the loss for a single datapoint $\mathbf{x}^{(i)}$. Therefore, to
 compute a gradient update for an algorithm like stochastic gradient
 descent (section
-[\[sec-gradient_descent:SGD\]](#sec:gradient_descent:SGD){reference-type="ref"
-reference="sec-gradient_descent:SGD"}), we apply backpropagation in
+[\[sec-gradient_descent-SGD\]](#sec:gradient_descent:SGD){reference-type="ref"
+reference="sec-gradient_descent-SGD"}), we apply backpropagation in
 batch mode, that is, we run it over each datapoint in our batch (which
 can be done in parallel) and then average the results.
 
@@ -513,7 +513,7 @@ intuitively, you can think of each Jacobian as being a locally linear
 approximation to the loss surface; hence each can be represented with a
 linear layer.
 
-## Backpropagation through DAGs: Branch and Merge {#sec-backpropagation:branch_and_merge}
+## Backpropagation through DAGs: Branch and Merge {#sec-backpropagation-branch_and_merge}
 
 So far we have only seen chain-like graphs,
 --\[\]--\[\]--\[\]$\rightarrow$. Can backprop handle other graphs? It

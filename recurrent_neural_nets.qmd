@@ -129,7 +129,7 @@ As an example of BPTT, suppose we want to compute the gradient of an
 output neuron at timestep five with respect to an input at timestep
 zero, that is, $\frac{\partial \mathbf{x}_{\texttt{out}}[5]}{\partial \mathbf{x}_{\texttt{in}}[0]}$.
 The forward pass (black arrows) and backward pass (red arrows) are shown
-in @fig-recurrent_neural_nets:bptt1, where we have only drawn arrows
+in @fig-recurrent_neural_nets-bptt1, where we have only drawn arrows
 for the subpart of the computation graph that is relevant to the
 calculation of this particular gradient.
 

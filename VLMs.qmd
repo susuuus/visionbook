@@ -72,13 +72,13 @@ text, like "th" or "ing." This strategy is popular in language models
 like the **generative pretrained transformer** (**GPT**)
 series @brown2020language and the **contrastive language-image
 pretraining** (**CLIP**) model @radford2021learning that we will learn
-about in @sec-VLMs:CLIP.
+about in @sec-VLMs-CLIP.
 
 Once we have converted text into a sequence of one-hot codes, the next
 step is to convert these into tokens via a projection,
 $\mathbf{W}_{\texttt{tokenize}}$, from the one-hot dimensionality ($K$)
 to a target dimensionality for token code vectors ($d$).
-@fig-VLMs:tokenizing_text shows these steps for converting an input
+@fig-VLMs-tokenizing_text shows these steps for converting an input
 string to tokens. For simplicity, we show word-level one-hot encoding
 rather than byte-pair encoding.
 
@@ -89,9 +89,9 @@ autoregressive model that predicts each next item in our vocabulary
 (word/character/byte-pair) given the sequence generated so far. Each
 prediction step can be modeled as a softmax over all $K$ possible items
 in our vocabulary. We will see a specific architecture that does this in
-@sec-VLMs:im2text.
+@sec-VLMs-im2text.
 
-## Learning Visual Representations from Language Supervision {#sec-VLMs:CLIP}
+## Learning Visual Representations from Language Supervision {#sec-VLMs-CLIP}
 
 In chapter
 [\[chapter-representation_learning\]](#sec-representation_learning){reference-type="ref"
@@ -120,8 +120,8 @@ vision system that associates images with free-form natural language.
 This is the idea of the highly popular CLIP
 system @radford2021learning.[^1] CLIP is a contrastive method (see
 section
-[\[sec-representation_learning:contrastive_learning\]](#sec:representation_learning:contrastive_learning){reference-type="ref"
-reference="sec-representation_learning:contrastive_learning"}) in which
+[\[sec-representation_learning-contrastive_learning\]](#sec:representation_learning:contrastive_learning){reference-type="ref"
+reference="sec-representation_learning-contrastive_learning"}) in which
 one data view is the image and the other is a caption describing the
 image. Specifically, CLIP is a form of contrastive learning from
 co-occurring visual and linguistic views that is formulated as follows:
@@ -137,13 +137,13 @@ encoder, image inputs are represented as $[3 \times N \times M]$ pixel
 arrays, text inputs are represented as $d_t$ dimensional tokens, and
 $d_z$ is the embedding dimensionality. Notice that the objective is a
 symmetric version of the InfoNCE loss defined in
-@eq-representation_learning:infonce. Also notice that $f_\ell$ and
+@eq-representation_learning-infonce. Also notice that $f_\ell$ and
 $f_t$ both output unit vectors (which is achieved using
 $L_2$-normalization before computing the objective); this ensures that
 the denominator cannot dominate by pushing negative pairs infinitely far
 apart.
 
-@fig-vision_and_language:clip_training visually depicts how CLIP is
+@fig-vision_and_language-clip_training visually depicts how CLIP is
 trained. First we sample a batch of $N$ language-image pairs,
 $\{\mathbf{t}^{(i)}, \boldsymbol\ell^{(i)}\}_{i=1}^N$ ($N=6$ in the
 figure). Next we embed measure the dot product between all these text
@@ -172,15 +172,15 @@ vectors.
 :::
 
 
-@fig-vision_and_language:clip_mapping_diagram_two_branch shows how a
+@fig-vision_and_language-clip_mapping_diagram_two_branch shows how a
 trained CLIP model maps data to embeddings. This figure is generated in
-the same way as @fig-neural_nets:vit_mapping_plot: for each encoder we
+the same way as @fig-neural_nets-vit_mapping_plot: for each encoder we
 reduce dimensionality for visualization using **t-distributed Stochastic
 Neighbor Embedding** (**t-SNE**) @tsne. For the image encoder, we show
 the visual content using icons to reflect the color and shape depicted
 in the image (we previously used the same visualization in section
-[\[sec-representation_learning:expt_designing_embeddings_with_contrastive_learning\]](#sec:representation_learning:expt_designing_embeddings_with_contrastive_learning){reference-type="ref"
-reference="sec-representation_learning:expt_designing_embeddings_with_contrastive_learning"}).
+[\[sec-representation_learning-expt_designing_embeddings_with_contrastive_learning\]](#sec:representation_learning:expt_designing_embeddings_with_contrastive_learning){reference-type="ref"
+reference="sec-representation_learning-expt_designing_embeddings_with_contrastive_learning"}).
 It's a bit hard to see, but one thing you can notice here is that for
 the image encoder, the early layers group images by color and the later
 layers group more by shape. The opposite is true for the text encoder.
@@ -193,7 +193,7 @@ easy to group sentences by.
 
 After passing the data through these two encoders, the final stage is to
 normalize the outputs and compute the alignment between the image and
-text embeddings. @fig-vision_and_language:clip_shared_embedding shows
+text embeddings. @fig-vision_and_language-clip_shared_embedding shows
 this last step. After normalization, all the embeddings line on the
 surface of a hypersphere (the circle in the figure). Notice that the
 text descriptions are embedded near the image embeddings (icons) that
@@ -234,14 +234,14 @@ classes $a$, $b$, and so on,
 3.  See which sentence embedding is closest to your image embedding;
     that's the predicted class.
 
-These steps are visualized in @fig-vision_and_language:clip_inference.
+These steps are visualized in @fig-vision_and_language-clip_inference.
 The green outlined dot product is the highest, indicating that the query
 image will be classified as class $a$, which is defined as "striped red
 circles."
 
 ![](figures/vision_and_language/clip_inference_fig.png){width="75%"}
 
-@fig-vision_and_language:clip_clocks gives more examples of creating
+@fig-vision_and_language-clip_clocks gives more examples of creating
 custom binary classifiers in this way. The two classes are described by
 two text strings ("triangle" versus "cricle"; "purple" versus "teal";
 and "arrowhead" versus "ball"). The embeddings of the text descriptions
@@ -314,7 +314,7 @@ saw in chapter
 [\[chapter-conditional_generative_models\]](#sec-conditional_generative_models){reference-type="ref"
 reference="chapter-conditional_generative_models"}. We simply have to
 find an effective way to use text as the conditioning information to
-these models. @fig-vision_and_language:text2im_schematic_mapping shows
+these models. @fig-vision_and_language-text2im_schematic_mapping shows
 how this problem looks as a mapping from the space of text to the space
 of images:
 
@@ -325,23 +325,23 @@ $\mathbf{t}$ to an output image $\hat{\boldsymbol\ell}$ that matches
 what the text describes. Recall the similar diagrams in the chapters on
 representation learning and generative modeling and think about how they
 relate (see and
-[\[fig:generative_modeling_and_representation_learning:genrep_schematic\]](#fig-generative_modeling_and_representation_learning:genrep_schematic){reference-type="ref"
+[\[fig:generative_modeling_and_representation_learning:genrep_schematic\]](#fig-generative_modeling_and_representation_learning-genrep_schematic){reference-type="ref"
 reference="fig:generative_modeling_and_representation_learning:genrep_schematic"}).
 This new problem is not so different from what we have seen before!
 
 Now let's build some concrete architectures to solve this mapping. We
 will start with a conditional variational autoencoder (cVAE; section
-[\[sec-conditional_generative_models:cVAE\]](#sec:conditional_generative_models:cVAE){reference-type="ref"
-reference="sec-conditional_generative_models:cVAE"}). This was the
+[\[sec-conditional_generative_models-cVAE\]](#sec:conditional_generative_models:cVAE){reference-type="ref"
+reference="sec-conditional_generative_models-cVAE"}). This was the
 architecture used by the DALL-E 1 model @dalle1, which was one of the
 first text-to-image models that caught the public's imagination.
 
 A cVAE for text-to-image can be trained just like a regular cVAE; the
 special thing is just that the encoder is a text encoder, that is, a
 neural net that maps from text to a vector embedding.
-@fig-vision_and_language:text2im_VAE_training shows what the training
+@fig-vision_and_language-text2im_VAE_training shows what the training
 looks like; it's conceptually the same as
-@fig-conditional_generative_models:cVAE_ball_bouncing_example_nets,
+@fig-conditional_generative_models-cVAE_ball_bouncing_example_nets,
 which we saw previously.
 
 ![](./figures/vision_and_language/text2im_VAE_training.png){width="100%"}
@@ -349,7 +349,7 @@ which we saw previously.
 After training this model, we can sample from it by simply discarding
 the image encoder and instead inputting a random Gaussian vector to the
 decoder, in addition to providing the decoder with the text embedding.
-@fig-vision_and_language:text2im_VAE_sampling shows how to sample an
+@fig-vision_and_language-text2im_VAE_sampling shows how to sample an
 image in this way.
 
 This is how text-to-image generation can be done with a cVAE. We could
@@ -360,7 +360,7 @@ by the second version of the DALL-E system, DALL-E
 described in @rombach2022high. The difficulty we will focus on here is
 as follows: how do you most effectively insert the text embeddings into
 the the decoder, so that it can make best use of this information?
-@fig-vision_and_language:text2im_diffusion_model shows one way to do
+@fig-vision_and_language-text2im_diffusion_model shows one way to do
 this, which is roughly how it is done in @rombach2022high: we insert
 text embedding vectors into each denoising U-Net, and even into multiple
 layers of each U-Net. This makes it very easy for the diffusion model to
@@ -370,8 +370,8 @@ condition all of its decisions on the text information.
 
 ![](./figures/vision_and_language/text2im_diffusion_model.png){width="100%"}
 
-Notice that @fig-vision_and_language:text2im_diffusion_model is
-actually very similar to @fig-vision_and_language:text2im_VAE_sampling.
+Notice that @fig-vision_and_language-text2im_diffusion_model is
+actually very similar to @fig-vision_and_language-text2im_VAE_sampling.
 A conditional diffusion model is in fact very similar to a cVAE. At
 sampling time, both take as input text and Gaussian noise. The VAE uses
 a network that directly maps these inputs to an image, in a single
@@ -380,7 +380,7 @@ chain of denoising steps, each of which is a forward pass through a
 neural network. See @NEURIPS2021_b578f2a5 for a discussion of the
 connection between diffusion models and VAEs.
 
-### Image-to-Text {#sec-VLMs:im2text}
+### Image-to-Text {#sec-VLMs-im2text}
 
 Naturally, we can also translate in the opposite direction. We just need
 to use an *image encoder* (rather than a text encoder) and a *text
@@ -396,7 +396,7 @@ As an example of an image-to-text system, we will use a transformer to
 map the input image to a set of tokens, and we will then feed these
 tokens as input to an autoregressive text decoder, which is also
 implemented with a transformer. See @li2023blip2 for an example of a
-system that uses this general approach. @fig-VLMs:im2text shows this
+system that uses this general approach. @fig-VLMs-im2text shows this
 architecture.
 
 There is one special layer to point out, the **cross-attention** layer
@@ -426,11 +426,11 @@ $w_{\texttt{cross}}$ and $w_{\texttt{self}}$ are optional learnable
 weights.
 
 The text decoder is an autoregressive model (section
-[\[sec-generative_models:autoregressive\]](#sec:generative_models:autoregressive){reference-type="ref"
-reference="sec-generative_models:autoregressive"}) that uses causal
+[\[sec-generative_models-autoregressive\]](#sec:generative_models:autoregressive){reference-type="ref"
+reference="sec-generative_models-autoregressive"}) that uses causal
 attention (section
-[\[sec-transformers:masked_attention\]](#sec:transformers:masked_attention){reference-type="ref"
-reference="sec-transformers:masked_attention"}) to predict the next word
+[\[sec-transformers-masked_attention\]](#sec:transformers:masked_attention){reference-type="ref"
+reference="sec-transformers-masked_attention"}) to predict the next word
 in the sentence given the previous words generated so far. In this
 strategy, the input to the text decoder is the tokens representing the
 previous words in the training data caption that describes the image. At
@@ -449,7 +449,7 @@ semantics and geometry (scene understanding), or its feature embeddings
 (DINO @caron2021emerging, CLIP @radford2021learning, and others), we can
 also represent it in terms of a textual description of its content.
 
-In @fig-vision_and_language:different_visual_representations we show an
+In @fig-vision_and_language-different_visual_representations we show an
 image represented in several ways (the depth map is produced by
 MiDaS @Ranftl2022 and the text is produced by BLIP2 @li2023blip2):
 
@@ -471,7 +471,7 @@ about an image. This is akin to a Turing test @turing2009computing for
 visual intelligence. **Visual question answering** (**VQA**) is one
 formulation of this goal @antol2015vqa. The problem statement in VQA is
 to make a system that maps an image and a textual question to a textual
-answer, as shown in @fig-vision_and_language:VQA_examples.
+answer, as shown in @fig-vision_and_language-VQA_examples.
 
 ![](figures/vision_and_language/VQA_examples.png){width="100%"}
 

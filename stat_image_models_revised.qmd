@@ -657,7 +657,7 @@ you condition on a large enough region of nearby pixels around a center
 pixel, that effectively determines the value of the central pixel. We
 will study this algorithm in more detail in the next chapter devoted to
 texture analysis and synthesis (chapter
-[\[sec-textures\]](#chap:textures){reference-type="ref"
+[\[sec-textures\]](#chap-textures){reference-type="ref"
 reference="sec-textures"}). We will focus here on a similar algorithm
 for the problem of image denoising.
 

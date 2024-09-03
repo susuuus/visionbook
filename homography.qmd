@@ -14,7 +14,7 @@ more general geometric image transformation that opens the door to many
 applications: the homography.
 
 As we discussed in the previous chapter
-[\[sec-stereo_vision\]](#chap:stereo_vision){reference-type="ref"
+[\[sec-stereo_vision\]](#chap-stereo_vision){reference-type="ref"
 reference="sec-stereo_vision"}, if we capture a scene with two cameras
 from different viewpoints, corresponding points across both images are
 constrained by the epipolar constrain. In general, there is not a simple
@@ -371,7 +371,7 @@ cameras, we can compute the homography relating the locations of imaged
 points within the two cameras. To estimate the homography we can use the
 direct linear transform (DLT) algorithm, as we did for the camera
 calibration problem in section
-[\[sec-camera_calibration\]](#sec:camera_calibration){reference-type="ref"
+[\[sec-camera_calibration\]](#sec-camera_calibration){reference-type="ref"
 reference="sec-camera_calibration"}. This will give us a linear set of
 equations for the parameters of the homography matrix with the form:
 $$\mathbf{A} \mathbf{h} = \mathbf{0}$$ where $\mathbf{A}$ is a$2N \times 9$ matrix, when given $N$ corresponding pairs. The vector

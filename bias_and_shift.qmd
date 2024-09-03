@@ -18,7 +18,7 @@ As a case study we will look at the paper "Colorful Image
 Colorization" @zhang2016colorful, which one of the authors of this book
 co-authored in 2016, so we don't feel too bad pointing out its flaws. In
 that paper, we trained a CNN to colorize black and white photos, and the
-results looked amazing (@fig-bias_and_shift:CIC_teaser).
+results looked amazing (@fig-bias_and_shift-CIC_teaser).
 
 ![](./figures/bias_and_shift/CIC_teaser_v5.jpg){width="100%"}
 
@@ -28,7 +28,7 @@ perfect, right? Well that's what people must have thought, because
 shortly after releasing our code, a user of the website Reddit[^1]
 turned it into a bot called ColorizeBot[^2] that would colorize black
 and white photos posted on Reddit @colorizebot_blog. In
-@fig-bias_and_shift:colorizebot_examples are two of the more popular
+@fig-bias_and_shift-colorizebot_examples are two of the more popular
 results.
 
 ![](./figures/bias_and_shift/colorizebot_examples.png){width="70%"}
@@ -47,7 +47,7 @@ many photos of scenes, and especially underrepresents humans, compared
 to how often people take photos of humans. In fact, a large percent of
 ImageNet photos are just dogs (around 12 percent). You can get an idea
 of the degree of the bias by looking at how our net colorizes the dogs
-in @fig-bias_and_shift:dogs_with_tongues.
+in @fig-bias_and_shift-dogs_with_tongues.
 
 ![](./figures/bias_and_shift/dogs_with_tongues.png){width="90%"}
 
@@ -68,7 +68,7 @@ photographic grain and covered in dust and scratches.
 ## Out-of-Distribution Generalization
 
 To formalize what's going on, we will return to a simple regression
-problem, shown below (@fig-bias_and_shift:regression_example).
+problem, shown below (@fig-bias_and_shift-regression_example).
 
 ![](./figures/bias_and_shift/regression_example.png){width="100%"}
 
@@ -83,7 +83,7 @@ The same thing is happening in the colorization example: the training
 data is sampled from one part of the total data space and the test data
 is sampled from another part. There is a between the training
 distribution and test distribution, which we indicate with the red
-arrows in @fig-bias_and_shift:colorization_domain_gap.
+arrows in @fig-bias_and_shift-colorization_domain_gap.
 
 ![](./figures/bias_and_shift/colorization_domain_gap.png){width="100%"}
 
@@ -130,14 +130,14 @@ Learning is done by optimizing the loss over the corresponding training
 set:
 $$J(\theta; \{x^{(i)}, y^{(i)}\}^N_{i=1}) = \frac{1}{N}\sum_i \left\lVert f_{\theta}(x^{(i)}) - y^{(i)}\right\rVert_2^2 + \lambda \left\lVert\theta\right\rVert_2^2 \quad\quad \triangleleft \quad\text{objective}$$
 
-@fig-bias_and_shift:training_test_sets shows training and test examples
+@fig-bias_and_shift-training_test_sets shows training and test examples
 from both datasets and illustrates the effect of training on one dataset
 and testing on another. Each plot shows the training samples (circles),
 used to fit the model, and test samples (triangles) used to measure the
 generalization error. The diagonal plots show the training and test set
 corresponding to distribution A,
-@fig-bias_and_shift:training_test_sets(top-left), and distribution B,
-@fig-bias_and_shift:training_test_sets(bottom-right). In each case, the
+@fig-bias_and_shift-training_test_sets(top-left), and distribution B,
+@fig-bias_and_shift-training_test_sets(bottom-right). In each case, the
 fitted model is shown as a dashed line.
 
 ![](figures/bias_and_shift/toy_example/training_test_sets.png){width="100%"}
@@ -150,7 +150,7 @@ Table
 [\[table:bias_and_shift:training_test_sets\]](#table:bias_and_shift:training_test_sets){reference-type="ref"
 reference="table:bias_and_shift:training_test_sets"} shows the
 generalization error made with different combinations of training and
-set sets as shown in @fig-bias_and_shift:training_test_sets.
+set sets as shown in @fig-bias_and_shift-training_test_sets.
 
 ::: center
                           Test set  
@@ -180,7 +180,7 @@ training and testing on different datasets? Or does it saturate? The
 answer will depend on the form of the data distributions and the
 hypothesis space. But we can check what happens in this toy example.
 
-@fig-bias_and_shift:test_as_function_of_data plots the generalization
+@fig-bias_and_shift-test_as_function_of_data plots the generalization
 error (vertical axis) when evaluating on dataset A as a function of the
 amount of training data (horizontal axis).
 
@@ -213,7 +213,7 @@ different computer vision datasets offer a different, and biased, sample
 of that world.
 
 In the paper @Torralba2011, the authors propose a game that we reproduce
-in @fig-bias_and_shift:datasetsJeopardy. The name of the game is *Name
+in @fig-bias_and_shift-datasetsJeopardy. The name of the game is *Name
 That Dataset!* The figure shows three random images from 12 famous
 computer vision datasets and the goal of the game is to match the images
 with each dataset name. The point of the game is to show that it is easy
@@ -280,7 +280,7 @@ time and accuracy were a measured for each of the
 measure of how easy is to recognize an object under a particular
 viewpoint. The study showed that people recognized objects better when
 presented in a canonical orientation.
-@fig-bias_and_shift:palmer_1981enhanced shows the preferred viewpoint
+@fig-bias_and_shift-palmer_1981enhanced shows the preferred viewpoint
 for the 12 objects studied.
 
 ![](figures/bias_and_shift/palmer_1981enhanced.jpg){width="100%"}
@@ -319,7 +319,7 @@ from a moving vehicle, etc. The potential biases from each data source
 can be quite significant, and it's often straightforward to identify the
 capture technique merely by examining the images in a dataset.
 
-@fig-bias_and_shift:mugs shows the first 22 images returned by Google
+@fig-bias_and_shift-mugs shows the first 22 images returned by Google
 for the query "mug." It looks far from a diverse and unbiased collection
 of images. As you can appreciate these pictures of mugs look very
 different from the visual settings in which one usually encounters mugs
@@ -340,9 +340,9 @@ protocol used to collect images. In this case, images on the internet
 have a particular type of bias (at least of the ones that get returned
 under specific searches).
 
-@fig-bias_and_shift:horses shows images returned when looking for
+@fig-bias_and_shift-horses shows images returned when looking for
 "horse." Interestingly many of the pictures are similar to the horse
-canonical orientation shown in @fig-bias_and_shift:palmer_1981enhanced.
+canonical orientation shown in @fig-bias_and_shift-palmer_1981enhanced.
 
 ![](figures/bias_and_shift/horses.png){width="100%"}
 
@@ -411,7 +411,7 @@ animal trying to eat us (evolution), or a trader trying to outperform us
 on the stock market (finance). Worse still, the neural nets we have seen
 in this book are very easy to fool by an adversary.
 
-### Adversarial Attacks {#sec-bias_and_shift:adversarial_attacks}
+### Adversarial Attacks {#sec-bias_and_shift-adversarial_attacks}
 
 This was famously demonstrated by @szegedy2014intriguing, who showed
 that one can add imperceptible noise to an image that fools neural net
@@ -424,7 +424,7 @@ by simply optimizing the noise pattern to cause the network to make a
 particular output, while restricting the noise to be very subtle (within
 an small $r$-radius ball around the original image). For example, to
 cause an image classifier $f$ to think the cat in
-@fig-bias_and_shift:adversarial_perturbation is an ostrich, the
+@fig-bias_and_shift-adversarial_perturbation is an ostrich, the
 attacker could find the noise pattern via the following optimization:
 $$\begin{aligned}
     \mathop{\mathrm{arg\,max}}_{\mathbf{\epsilon}} H(\mathbf{y}_{\texttt{ostrich}}, f(\mathbf{x} + \mathbf{\epsilon})), \quad\quad \text{subject to} \quad\quad \left\lVert\mathbf{\epsilon}\right\rVert < r
@@ -445,7 +445,7 @@ reference="chapter-neural_nets"} we described a simple neural network
 for line classification and showed how, by accessing the architecture
 and the learned filters, we could manually design input examples that
 would get wrongly classified. Similarly, in chapter
-[\[sec-downsampling_and_upsampling\]](#chap:downsampling_and_upsampling){reference-type="ref"
+[\[sec-downsampling_and_upsampling\]](#chap-downsampling_and_upsampling){reference-type="ref"
 reference="sec-downsampling_and_upsampling"} we showed how aliasing
 could also create vulnerabilities in a network. For large systems,
 adversarial attacks are not manually designed, instead they are the

@@ -324,7 +324,7 @@ Vanishing points can be extracted automatically from images by first
 detecting image edges and their orientations (like we did in chapter
 [\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"}) and then using RANSAC (section
-[\[sec-RANSAC\]](#sec:RANSAC){reference-type="ref"
+[\[sec-RANSAC\]](#sec-RANSAC){reference-type="ref"
 reference="sec-RANSAC"}) to group the edges: every pair of edges will
 vote for a vanishing point and the point with the largest support will
 be considered a vanishing point.
@@ -753,13 +753,13 @@ get the following solution for $\mathbf{K}$: $$\mathbf{K} =
 
 We can now compare this result with the one we obtained when we (1) used
 the physical camera parameters (section
-[\[sec-simple_unreliable_calibration_method\]](#sec:simple_unreliable_calibration_method){reference-type="ref"
+[\[sec-simple_unreliable_calibration_method\]](#sec-simple_unreliable_calibration_method){reference-type="ref"
 reference="sec-simple_unreliable_calibration_method"}); (2) used a
 calibration pattern (section
-[\[sec-simple_unreliable_calibration_method\]](#sec:simple_unreliable_calibration_method){reference-type="ref"
+[\[sec-simple_unreliable_calibration_method\]](#sec-simple_unreliable_calibration_method){reference-type="ref"
 reference="sec-simple_unreliable_calibration_method"}); and (3) used a
 collection of 3D points and the corresponding image locations (section
-[\[sec-a_toy_example\]](#sec:a_toy_example){reference-type="ref"
+[\[sec-a_toy_example\]](#sec-a_toy_example){reference-type="ref"
 reference="sec-a_toy_example"}). We can see that in all cases we get
 similar results, although, not identical.
 

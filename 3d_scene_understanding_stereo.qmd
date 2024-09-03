@@ -685,7 +685,7 @@ to the other, if necessary. The resulting image pair will thus satisfy
 the two requirements above for image rectification. Image rectification
 uses image warping with bilinear (or other) interpolation as described
 in section
-[\[sec-bilinearinterpolation\]](#sec:bilinearinterpolation){reference-type="ref"
+[\[sec-bilinearinterpolation\]](#sec-bilinearinterpolation){reference-type="ref"
 reference="sec-bilinearinterpolation"}.
 
 Other algorithms are optimized to minimize image distortions @Zhang2003

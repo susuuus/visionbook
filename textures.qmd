@@ -190,8 +190,8 @@ Texture synthesis is usually an iterative image synthesis procedure that
 begins with a random noise image and uses the parameters $\theta$ to
 produce a new improved image as shown in @fig-heeger_bergen_iterations.
 We will describe a similar algorithm in section
-[\[sec-generative_models:diffusion_models\]](#sec:generative_models:diffusion_models){reference-type="ref"
-reference="sec-generative_models:diffusion_models"} when talking about
+[\[sec-generative_models-diffusion_models\]](#sec:generative_models:diffusion_models){reference-type="ref"
+reference="sec-generative_models-diffusion_models"} when talking about
 **diffusion models**.
 
 ![](figures/heeger_bergen/heeger_bergen_iterations.png){width="100%"}
@@ -272,8 +272,8 @@ makes the images look worse.
 
 Texture models using statistics of filter outputs are a precursor to
 diffusion models (section
-[\[sec-generative_models:diffusion_models\]](#sec:generative_models:diffusion_models){reference-type="ref"
-reference="sec-generative_models:diffusion_models"}) and share a number
+[\[sec-generative_models-diffusion_models\]](#sec:generative_models:diffusion_models){reference-type="ref"
+reference="sec-generative_models-diffusion_models"}) and share a number
 of architectural features.
 
 The Heeger and Bergen model was one of the first successful approaches
@@ -386,8 +386,8 @@ However, they have strong similarities to the texture synthesis models
 we saw in this chapter. A few of connections are as follows:
 
 -   The Efros-Leung algorithm is an **autoregressive model**. Section
-    [\[sec-generative_models:autoregressive\]](#sec:generative_models:autoregressive){reference-type="ref"
-    reference="sec-generative_models:autoregressive"} covers this class
+    [\[sec-generative_models-autoregressive\]](#sec:generative_models:autoregressive){reference-type="ref"
+    reference="sec-generative_models-autoregressive"} covers this class
     of models in more generality, and shows how to use them in
     conjunction with deep nets.
 
@@ -395,15 +395,15 @@ we saw in this chapter. A few of connections are as follows:
     of denoising process: it starts with a noise image and little by
     little transforms it into an image of a texture. This general idea
     reappears in section
-    [\[sec-generative_models:diffusion_models\]](#sec:generative_models:diffusion_models){reference-type="ref"
-    reference="sec-generative_models:diffusion_models"} on **diffusion
+    [\[sec-generative_models-diffusion_models\]](#sec:generative_models:diffusion_models){reference-type="ref"
+    reference="sec-generative_models-diffusion_models"} on **diffusion
     models**, which follow this same strategy.
 
 -   The Heeger-Bergen algorithm is also connected to **generative
     adversarial networks** (**GANs**), which we will encounter in
     section
-    [\[sec-generative_models:GANs\]](#sec:generative_models:GANs){reference-type="ref"
-    reference="sec-generative_models:GANs"}. The objective of
+    [\[sec-generative_models-GANs\]](#sec:generative_models:GANs){reference-type="ref"
+    reference="sec-generative_models-GANs"}. The objective of
     Heeger-Bergen is to make a texture that has the same histogram
     statistics as an exemplar. A GAN also makes images that have the
     same statistics as a set of exemplars; however, the statistics we

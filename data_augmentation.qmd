@@ -16,7 +16,7 @@ doing this.
 
 augments a dataset by adding random transformations of each datapoint.
 For example, below we show some common data augmentations applied to an
-example image (@fig-data_augmentation:data_aug_examples):
+example image (@fig-data_augmentation-data_aug_examples):
 
 
 
@@ -100,7 +100,7 @@ lighting conditions).
 Why does data augmentation work? It *broadens* the distribution of
 training data, and this can reduce the gap between the training data and
 the test data. This effect is illustrated in
-@fig-data_augmentation:data_aug_real_example. In this example, we have
+@fig-data_augmentation-data_aug_real_example. In this example, we have
 training image from one dataset (Caltech256 @griffin2007caltech) and
 test images from a different dataset (CIFAR100 @cifar100). The test
 images look quite a bit different from the training data; they are lower
@@ -145,7 +145,7 @@ augmented copy of $\mathbf{x}$ as, $$\begin{aligned}
 variable $\mathbf{z}$.  If we do this for a variety of
 settings of $\mathbf{w}$, then we will get a set of output images that
 are all slight variations of one another, just like we saw previously in
-@fig-generative_modeling_and_representation_learning:biggan_latent_walk.
+@fig-generative_modeling_and_representation_learning-biggan_latent_walk.
 One simple approach is to just use Gaussian perturbations in latent
 space, that is, $\mathbf{w} \sim \mathcal{N}(0,\sigma^2)$ for some
 perturbation scale given by $\sigma$. Algorithm
@@ -214,7 +214,7 @@ can increase the robustness of the learned function $f$ to perturbations
 that may occur at test time (like those we saw in the previous chapter).
 
 In the context of adversarial robustness, one form of
-@eq-data_augmentation:adversarial_training is to set $T$ to be an
+@eq-data_augmentation-adversarial_training is to set $T$ to be an
 epsilon-ball attack, that is,
 $T(\mathbf{x}) = \mathbf{x}+\mathbf{\epsilon}$: $$\begin{aligned}    \mathop{\mathrm{arg\,min}}_f \mathbb{E}_{\mathbf{x},\mathbf{y}} [\max_{\mathbf{\epsilon} \, s.t. \left\lVert\mathbf{\epsilon}\right\rVert < r}[\mathcal{L}(f(\mathbf{x}+\mathbf{\epsilon}),\mathbf{y})]] :eps_robust_training
 \end{aligned}$${#eq-data_augmentation} This can increase robustness against the kinds of

@@ -242,13 +242,13 @@ Despite this, other groupings are also possible.\
 up a lot in computer vision. But it turns out that in most photographs
 it's easy to find accidents. This is because photos contain so many
 things, thousands of tiny images, and there are so many coincidences
-that could occur. @fig-visionscience:migrant_mother shows a famous
+that could occur. @fig-visionscience-migrant_mother shows a famous
 photo and we will look for some coincidences in it. The coincidences are
 of a specific variety: generically, if you see smooth, continuous line
 segments you assume that they lie on a single object because it's quite
 a coincidence for two objects to line up just so their contours
 perfectly align. The gestalt psychologists called this the **principle
-of continuity**. The insets for @fig-visionscience:migrant_mother show
+of continuity**. The insets for @fig-visionscience-migrant_mother show
 several locations in the photo "Migrant Mother" by Dorothea Lange where
 exactly this happens. Can you find more?
 
@@ -257,7 +257,7 @@ four examples of coincidences that violate the Gestalt principle of
 continuity. From top-left clockwise: finger boundary aligns with lip
 contour, cloth aligns with eye, creases align on two different shirts,
 sleeve boundary is tangent to line on a different
-shirt.](figures/visionscience/accidents_migrant_mother.jpg){#fig-visionscience:migrant_mother
+shirt.](figures/visionscience/accidents_migrant_mother.jpg){#fig-visionscience-migrant_mother
 width="100%"}
 
 You have to be careful about this when developing vision algorithms. If

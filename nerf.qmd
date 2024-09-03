@@ -4,7 +4,7 @@
 
 In this chapter we will come full circle. Starting from the Greek's
 model of optics (chapter
-[\[sec-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
+[\[sec-challenge_of_vision\]](#chap-challenge_of_vision){reference-type="ref"
 reference="sec-challenge_of_vision"}) that postulated that light is
 emitted by the eyes and travels in straight lines, touching objects in
 order to produce the sensation of sight (extramission theory), radiance
@@ -19,7 +19,7 @@ represent a portion of the plenoptic function.
 
 We first discussed the plenoptic function when we introduced the
 challenge of vision in chapter
-[\[sec-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
+[\[sec-challenge_of_vision\]](#chap-challenge_of_vision){reference-type="ref"
 reference="sec-challenge_of_vision"}.
 
 As stated in the work by Adelson and Bergen @Adelson91, the plenoptic
@@ -28,7 +28,7 @@ what can potentially be seen. What information about the world is
 contained in the light filling a region of space?"
 
 Given a scene, the plenoptic function is a full description of all the
-light rays that travel across the space (@fig-nerfs:plenoptic_function).
+light rays that travel across the space (@fig-nerfs-plenoptic_function).
 The plenoptic function tells us the light intensity of a light ray
 passing through the three-dimensional (3D) point $(X, Y, Z)$ from the
 direction given by the angles $(\psi, \phi)$, with wavelength $\lambda$,
@@ -41,14 +41,14 @@ be adapted to represent each scene.
 
 An image gets formed by summing all the light rays that reach each
 sensor on the camera (that is, we sum over a section of the plenoptic
-function). @fig-nerfs:plenoptic_function shows an illustration of the
+function). @fig-nerfs-plenoptic_function shows an illustration of the
 plenoptic function at four points, two of them are inside a pinhole
 camera and are used to form an image of what is outside. The plenoptic
 function inside the pinhole camera has most of the values set to zero
 and only specific directions at each location have non-zero values.
 
 In chapter
-[\[sec-challenge_of_vision\]](#chap:challenge_of_vision){reference-type="ref"
+[\[sec-challenge_of_vision\]](#chap-challenge_of_vision){reference-type="ref"
 reference="sec-challenge_of_vision"} we discarded the plenoptic
 function by simply saying, "Although recovering the entire plenoptic
 function would have many applications, fortunately, the goal of vision
@@ -74,7 +74,7 @@ A radiance field is a representation of part of the plenoptic function,
 based on the idea that the optical content of a scene can be modeled as
 a cloud of colorful particles with different levels of transparency.
 Such a representation can be rendered into images using volume
-rendering, which we will learn about in @sec-nerfs:volume_rendering. Radiance fields come in a
+rendering, which we will learn about in @sec-nerfs-volume_rendering. Radiance fields come in a
 variety of configurations but we will stick with the definition from
 Mildenhall et al. @mildenhall2020nerf, which popularized this
 representation. We will presently define a radiance field $L$ as a
@@ -103,7 +103,7 @@ fields in 3D are the same thing just with one more dimension. This 2D
 world is like the one in *Flatland*, which is a book by Edwin
 Abbott @abbott2009flatland where the characters are triangles, squares,
 and other simple shapes that inhabit a 2D plane. Here is what their
-world looks like (@fig-nerfs:flatland_cameras_and_images):
+world looks like (@fig-nerfs-flatland_cameras_and_images):
 
 ![](figures/nerfs/flatland_cameras_and_images.png){width="65%"}
 
@@ -115,7 +115,7 @@ seen on the right. These show what our Flatland citizens would see if
 they look at the scene from different angles.
 
 A radiance field for this scene is given in
-@fig-nerfs:flatland_implicit_to_explicit. This figure shows how each
+@fig-nerfs-flatland_implicit_to_explicit. This figure shows how each
 possible input coordinate $(X,Y)$ gets mapped to a corresponding output
 color $L^c$ and density $L^{\sigma}$.
 
@@ -184,7 +184,7 @@ values of the field at all coordinates. Instead we just record a
 *finite* set of parameters of a function that can tell us the value of
 the field at any coordinate. Recall that we learned about implicit image
 representations in section
-[\[sec-implicit_image_representations\]](#sec:implicit_image_representations){reference-type="ref"
+[\[sec-implicit_image_representations\]](#sec-implicit_image_representations){reference-type="ref"
 reference="sec-implicit_image_representations"}. 
 
 There are many different parameterized functions $L_{\theta}$ that could
@@ -197,13 +197,13 @@ gradient-based optimization to find a setting of the parameters that
 yields a desirable field (we will use this property when we fit a
 radiance field to images). Whatever function family we use, it will take
 as input coordinates and produce colors and densities as output
-(@fig-nerfs:nerf_module). Because we will use differentiable functions
+(@fig-nerfs-nerf_module). Because we will use differentiable functions
 for this, we can think of it just like a module in a differentiable
-computation graph (@fig-nerfs:nerf_module). Later we will put together
+computation graph (@fig-nerfs-nerf_module). Later we will put together
 multiple such modules and use backpropagation to optimize the whole
 system to fit the field to a set of images.
 
-### Neural Radiance Fields (NeRFs) {#sec-nerfs:nerf_section}
+### Neural Radiance Fields (NeRFs) {#sec-nerfs-nerf_section}
 
 We will focus our attention on one very popular way of parameterizing
 $L_{\theta}$: **Neural radiance fields**
@@ -222,7 +222,7 @@ field's values at a grid of coordinates, we can query the field on this
 grid. In this usage, the NeRF $L_{\theta}$ looks like a convolutional
 neural network (CNN) with 1x1 filters, as this is the architecture that
 results from applying an MLP to each position in a grid of inputs. We
-show this usage below, in @fig-nerfs:image_to_image_arch.
+show this usage below, in @fig-nerfs-image_to_image_arch.
 
 As in the original NeRF @mildenhall2020nerf, the output layer is
 $\texttt{relu}$ for producing $\sigma$ (which needs to be nonnegative)
@@ -232,9 +232,9 @@ range $[0,1]$).
 NeRF also includes a positional encoding layer to transform the raw
 coordinates into a Fourier representation. In fact, we use the same
 positional encoding scheme as is used in transformers (see section
-[\[sec-transformers:positional_encodings\]](#sec:transformers:positional_encodings){reference-type="ref"
-reference="sec-transformers:positional_encodings"}).
-@fig-nerfs:flatland_positional_encoding shows how this scheme
+[\[sec-transformers-positional_encodings\]](#sec:transformers:positional_encodings){reference-type="ref"
+reference="sec-transformers-positional_encodings"}).
+@fig-nerfs-flatland_positional_encoding shows how this scheme
 translates the $XY$-coordinate field of Flatland to positional
 encodings:
 
@@ -269,14 +269,14 @@ semi-transparent ellipsoid of some color $\mathbf{c}$ and some density
 $\sigma$. When many such Gaussians overlap, their sum can approximate
 scene content very well.
 
-## Rendering Radiance Fields {#sec-nerfs:volume_rendering}
+## Rendering Radiance Fields {#sec-nerfs-volume_rendering}
 
 Radiance fields can be useful for many tasks in scene modeling, as they
 represent both appearance and geometry (density) of content in 3D.
 However, the main purpose they were introduced for is . This is the
 problem of rendering what a scene looks like from different camera
 viewpoints. In our Flatland example from
-@fig-nerfs:flatland_cameras_and_images, this is the problem of
+@fig-nerfs-flatland_cameras_and_images, this is the problem of
 rendering the set of 1D images, $\{\boldsymbol\ell^{(i)}\}_{i=1}^N$,
 shown on the left of that figure. In this section, we will see how you
 can solve view synthesis once you have a radiance field for a scene.
@@ -289,8 +289,8 @@ camera ray. Think of it like we are looking into a hazy volume of
 colored dust. The integral adds up all the color values along the camera
 ray, weighted by a value related to the density of the dust. A cartoon
 visualization of the process is given in
-@fig-nerfs:flatland_volume_rendering, and several real results of
-rendering radiance fields are shown in @fig-nerfs:flatland_training.
+@fig-nerfs-flatland_volume_rendering, and several real results of
+rendering radiance fields are shown in @fig-nerfs-flatland_training.
 But before we get to those, let us go step by step through the math of
 volume rendering.
 
@@ -317,7 +317,7 @@ $L^\sigma$, which represents the differential probability of hitting a
 particle as we move along the ray. The chance that we have not hit a
 particle all the way up to distance $t$ is then given by $\alpha$, which
 is a cumulative integral of the densities along the ray. The integral in
-@eq-nerfs:vol_rendering_integral averages over the colors of all the
+@eq-nerfs-vol_rendering_integral averages over the colors of all the
 particles we might hit along the ray, weighted by the probability of
 hitting them.
 
@@ -337,7 +337,7 @@ This is all to say that volume rendering is a simple generalization of
 ray casting. One advantage it has is that it can model translucency, and
 media like gases, fluids, and thin films that let some photons pass
 through and reflect back others. We will see an even bigger advantage in
-@sec-nerfs:fitting, where we will find that volume rendering
+@sec-nerfs-fitting, where we will find that volume rendering
 gives good gradients for fitting radiance fields to images.
 
 ### Computing the Volume Rendering Integral
@@ -347,7 +347,7 @@ on the function $L$, which may be arbitrarily complex; think about how
 complex this function will have to be to represent all the objects
 around you, including their geometry, colors, and material properties.
 Because of this, we must use numerical methods to approximate
-@eq-nerfs:vol_rendering_integral.
+@eq-nerfs-vol_rendering_integral.
 
 One way to do this is to approximate the integral as a discrete sum. A
 particularly effective approximation is the following, which is called a
@@ -356,12 +356,12 @@ of this choice of approximation): $$\begin{aligned}    \ell(r) &\approx \sum_{i=
     &\alpha_i = \exp\Big(-\sum_{j=1}^{i-1} L^\sigma(\mathbf{R}_j)\delta_j\Big)\\
     &\delta_i = t_{i+1} - t_i
 \end{aligned}$$ where we have now replaced our continuous radiance field
-from @eq-nerfs:vol_rendering_integral with a discrete vector of samples
+from @eq-nerfs-vol_rendering_integral with a discrete vector of samples
 from the radiance field, $\{\mathbf{R}_1, \ldots, \mathbf{R}_T\}$, where
 $\mathbf{R}_t = r(t)$ is the world coordinate of a point distance $t$
 along the ray $r$.
 
-@fig-nerfs:flatland_volume_rendering visualizes this procedure:
+@fig-nerfs-flatland_volume_rendering visualizes this procedure:
 
 ![](figures/nerfs/flatland_volume_rendering.png){width="75%"}
 
@@ -384,7 +384,7 @@ chopping the ray into $T$ evenly spaced intervals, then sampling one
 point at uniform within each of these intervals. The effect of this is
 that all continuous coordinates will get sampled with some probability,
 and therefore if we run the approximation over and over again (like we
-will when using it in an optimization loop; see @sec-nerfs:nerf_section) we will eventually take into
+will when using it in an optimization loop; see @sec-nerfs-nerf_section) we will eventually take into
 account every point in the continuous space (they will all be supervised
 during fitting a radiance field to explain a scene).
 
@@ -407,30 +407,30 @@ is to find the ray (origin $\mathbf{O}$ and direction $\mathbf{D}$) that
 passes through this pixel. This can be done using the methods we have
 encountered in this book for modeling camera optics and geometry, which
 we will not repeat here (see section
-[\[sec-pixel_to_rays\]](#sec:pixel_to_rays){reference-type="ref"
+[\[sec-pixel_to_rays\]](#sec-pixel_to_rays){reference-type="ref"
 reference="sec-pixel_to_rays"}). The key pieces of information we need
 to solve this task are the camera origin, $\mathbf{O}_{\texttt{cam}}$,
 and the camera matrix, $\mathbf{K}_{\texttt{cam}}$, that describes the
 mapping between pixel coordinates and world coordinates (steps for
 constructing $\mathbf{K}_{\texttt{cam}}$ are given in section
-[\[sec-simple_system_revisited:adapting_the_output\]](#sec:simple_system_revisited:adapting_the_output){reference-type="ref"
-reference="sec-simple_system_revisited:adapting_the_output"}). We apply
+[\[sec-simple_system_revisited-adapting_the_output\]](#sec:simple_system_revisited:adapting_the_output){reference-type="ref"
+reference="sec-simple_system_revisited-adapting_the_output"}). We apply
 this mapping, then compute the unit vector from the origin to the pixel
-to get the direction $\mathbf{D}$ (@fig-nerfs:pixel2ray):
+to get the direction $\mathbf{D}$ (@fig-nerfs-pixel2ray):
 
 Next we sample world coordinates along the ray, as described previously
-(@fig-nerfs:ray2coords):
+(@fig-nerfs-ray2coords):
 
 Finally, we use the volume rendering integral (using the quadrature rule
 approximation given previously) to compute the color of the pixel
-(@fig-nerfs:vrender):
+(@fig-nerfs-vrender):
 
 This pipeline gives a mapping from pixel coordinates to color values:
 $n,m \rightarrow r,g,b$. Our task in the next section will be to explain
 a set of images as being the result of volume rendering of a radiance
 field, that is, we want to infer the radiance field from the photos.
 
-## Fitting a Radiance Field to Explain a Scene {#sec-nerfs:fitting}
+## Fitting a Radiance Field to Explain a Scene {#sec-nerfs-fitting}
 
 In this section our goal is to find a radiance field that can explain a
 set of observed images. This is the task our denizens of Flatland have
@@ -455,7 +455,7 @@ as possible.
 
 Given $L_{\theta}$, we will render an image simply using volume
 rendering as described previously. The entire computation graph is shown
-in @fig-nerfs:full_nerf_pipeline. Notice that all the modules are
+in @fig-nerfs-full_nerf_pipeline. Notice that all the modules are
 differentiable, which will be critical for our next step, fitting the
 parameters to data.### Optimizing the Parameters of this Computation Graph
 
@@ -501,7 +501,7 @@ In fact, there are two products you can get out of a fit radiance field,
 one for the graphics community and one for the vision community. The
 graphics product is a system that can render a scene from novel
 viewpoints. This works by just applying $\texttt{render}_{\theta}$
-(@fig-nerfs:full_nerf_pipeline) to new cameras with new viewpoints. The
+(@fig-nerfs-full_nerf_pipeline) to new cameras with new viewpoints. The
 second product is an inferred radiance field, which tells us something
 about what is where in the scene. For example, the density of this
 radiance field can tell us the geometry of the scene, as we will see in
@@ -509,7 +509,7 @@ the following example of fitting a radiance field to our Flatland scene.
 
 ![](figures/nerfs/flatland_training.jpg){width=".9"}
 
-In @fig-nerfs:flatland_training, we show several iterations of the
+In @fig-nerfs-flatland_training, we show several iterations of the
 fitting process. The top row shows the radiance field as seen from
 above. This is a perspective our Flatlanders cannot directly see but can
 infer, just like we on Earth cannot directly see the full shape of a 3D
@@ -590,7 +590,7 @@ In words of Kajiya, "The equation states that the transport intensity of
 light from one surface point to another is simply the sum of the emitted
 light and the total light intensity which is scattered toward
 $\mathbf{x}$ from all other surface points." Integrating equation
-(@eq-nerf:Kajiya_rendering_equation) can be done using numeric methods
+(@eq-nerf-Kajiya_rendering_equation) can be done using numeric methods
 and has been the focus of numerous studies in computer graphics.
 
 While this rendering model is more powerful than the one radiance fields

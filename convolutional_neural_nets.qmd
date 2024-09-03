@@ -91,7 +91,7 @@ b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] x_{\texttt{in}}[n+k_1,m+k_2] & \quad\quad \\
 "Convolutional" layers in deep nets are typically actually defined as cross-correlations ($\star$) and we stick to that convention in this book. We need not worry about the misnomer because whether you implement the layers with convolution or cross-correlation usually makes no difference for learning. This is because both *span an identical hypothesis space* (any cross-correlation can be converted to an equivalent convolution by flipping the filter horizontally and vertically).
 :::
 
-As discussed in @sec-linear_image_filtering, convolution is just a special kind of linear transform. Similarly, a convolutional layer is just a special kind of linear layer. It is a linear layer whose matrix $\mathbf{W}$ is Toeplitz. We can view it either as a matrix or as a neural net, as shown in @fig-convolutional_neural_nets:conv_matrix_vs_net, which shows the case of a one-dimensional (1D) convolution over a 1D signal $\xin$, with zero bias.
+As discussed in @sec-linear_image_filtering, convolution is just a special kind of linear transform. Similarly, a convolutional layer is just a special kind of linear layer. It is a linear layer whose matrix $\mathbf{W}$ is Toeplitz. We can view it either as a matrix or as a neural net, as shown in @fig-convolutional_neural_nets-conv_matrix_vs_net, which shows the case of a one-dimensional (1D) convolution over a 1D signal $\xin$, with zero bias.
 
 ![Two equivalent visualizations of a convolutional layer.](figures/convolutional_neural_nets/conv_matrix_vs_net.png){width="100%" #fig-convolutional_neural_nets-conv_matrix_vs_net}
 
@@ -708,7 +708,7 @@ perform well in classifying whether the image contains vertical or
 horizontal structures even if they are not lines. We can test this
 hypothesis by generating images that match our idea of orientation. The
 following test images
-(@fig-ref:convolutional_neural_nets-oriented_bars_cnn_generalization)
+(@fig-ref-convolutional_neural_nets-oriented_bars_cnn_generalization)
 contain different oriented structures but no lines, and still captures
 our notion of what should be the correct generalization of the behavior.
 
@@ -842,7 +842,7 @@ sensitive to *all* pixels in the input. This can be achieved with a
 `gap` layer, whose output will always have a receptive field size that
 covers the entire input.
 
-## Spatial Outputs {#sec-convolutional_neural_networks:spatial_outputs}
+## Spatial Outputs {#sec-convolutional_neural_networks-spatial_outputs}
 
 In @sec-convolutional_neural_nets-simple_CNN we saw a CNN that
 outputs a single class probability vector for an image. What if we want
@@ -914,7 +914,7 @@ nonlinearities are omitted for clarity):
 To understand this property, first imagine the CNN has no pointwise
 nonlinearities. Then the entire CNN is just the composition of a
 sequence of convolutions, which itself is a convolution (by
-@eq-linear_image_filtering:conv_associative_property, convolving a
+@eq-linear_image_filtering-conv_associative_property, convolving a
 signal with multiple filters in a row is equivalent to convolving the
 signal with a single equivalent filter). Therefore, a CNN with no
 nonlinearities is itself just a single big convolutional filter. The key
@@ -1041,7 +1041,7 @@ together, forming an **encoder-decoder**. Such an architecture first
 encodes the input image into a low-dimensional representation, then
 decodes the representation back into an image output. This is therefore
 a suitable architecture for image-to-image problems, and it has a few
-advantages over the image-to-image CNNs we saw in @sec-convolutional_neural_networks:spatial_outputs: 1) by
+advantages over the image-to-image CNNs we saw in @sec-convolutional_neural_networks-spatial_outputs: 1) by
 downsampling, the internal feature maps are smaller, using less memory
 and computation, 2) encoder-decoders introduce an **information
 bottleneck** -- i.e. the representation between the encoder and decoder
