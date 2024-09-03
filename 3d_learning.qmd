@@ -38,9 +38,7 @@ in surface orientation. The amount of light reflected in the direction
 of the viewer by a surface illuminated by a directional light source is
 a function of the surface albedo, the light intensity, and the relative
 angle between the light direction and the surface normal orientation, as
-we discussed in section
-[\[sec-light_interacting_with_surfaces\]](#sec:light_interacting_with_surfaces){reference-type="ref"
-reference="sec-light_interacting_with_surfaces"}. **Shape from shading**
+we discussed in @sec-light_interacting_with_surfaces. **Shape from shading**
 @Barron2015ShapeIA, @Freeman90d, @Horn89a, @Pentland90 studies how to
 recover shape by inverting the rendering equations.
 
@@ -52,9 +50,7 @@ get a coarse estimate of the 3D scene structure (see
 have been proposed over time @Witkin81.
 
 Another source of information about the 3D scene structure are shadows
-and interreflections. We saw in chapter
-[\[sec-looking_at_images\]](#chap:looking_at_images){reference-type="ref"
-reference="sec-looking_at_images"}, @fig-cues_for_suppport an example
+and interreflections. We saw in @sec-looking_at_images, @fig-cues_for_suppport an example
 of how interreflections can inform us about the location of a ball. The
 use of shadows and interreflections by the human visual system has been
 the focus of lots of studies @Knill97, @Madison2001. There are also
@@ -86,9 +82,7 @@ before can only give relative depth measurements. One example of using
 object sizes to reason about 3D geometry is @Hoiem2008.
 
 And finally, **linear perspective** provides strong cues for 3D
-reconstruction as we already studied in chapter
-[\[chapter-3D_single_view\]](#sec-3D_single_view){reference-type="ref"
-reference="chapter-3D_single_view"}.
+reconstruction as we already studied in @sec-3D_single_view.
 
 ## 3D Representations
 

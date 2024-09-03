@@ -516,7 +516,7 @@ properties.
 | $\cos \left(2 \pi u_0 \frac{n}{N}\right)$ | $\frac{1}{2}\left(\delta\left[u-u_0\right]+\delta\left[u+u_0\right]\right)$ |
 | $\sin \left(2 \pi u_0 \frac{n}{N}\right)$ | $\frac{1}{2 j}\left(\delta\left[u-u_0\right]-\delta\left[u+u_0\right]\right)$ |
 | $\operatorname{box}_L[n]$ | $\frac{\sin \pi u(2 L+1) / N}{\sin \pi u / N}$ |
-:{#tbl-dft}
+: DFT properties {#tbl-dft}
 
 ### Linearity
 
@@ -623,9 +623,7 @@ Note that the autocorrelation function does not have
 this property.
 :::
 
- We will discuss this in more detail in section
-[1.10](#sect:transfer_function){reference-type="ref"
-reference="sect:transfer_function"}.
+We will discuss this in more detail in @sec-transfer_function.
 
 ### Dual Convolution {#section:dualconv}
 

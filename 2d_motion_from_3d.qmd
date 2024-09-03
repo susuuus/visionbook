@@ -588,15 +588,11 @@ motion field even when there is no motion in the scene.
 
 ## Concluding Remarks
 
-As we did in chapter
-[\[chapter-imaging\]](#sec-imaging){reference-type="ref"
-reference="chapter-imaging"}, in this chapter we have focused on
+As we did in @sec-imaging, in this chapter we have focused on
 formulating the problem of image formation: How does the 3D motion in
 the world appear once it is projected on the image plane?
 
 But the goal of vision is to inverse this projection and recover the 3D
 scene structure. In the upcoming chapters, we will proceed on the path
-begun in chapter
-[\[chapter-motion_estimation\]](#sec-motion_estimation){reference-type="ref"
-reference="chapter-motion_estimation"}, and we will study how to
+begun in @sec-motion_estimation, and we will study how to
 estimate motion from pixels.
