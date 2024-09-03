@@ -72,8 +72,7 @@ text, like "th" or "ing." This strategy is popular in language models
 like the **generative pretrained transformer** (**GPT**)
 series @brown2020language and the **contrastive language-image
 pretraining** (**CLIP**) model @radford2021learning that we will learn
-about in section [1.3](#sec-VLMs:CLIP){reference-type="ref"
-reference="sec-VLMs:CLIP"}.
+about in @sec-VLMs:CLIP.
 
 Once we have converted text into a sequence of one-hot codes, the next
 step is to convert these into tokens via a projection,
@@ -90,8 +89,7 @@ autoregressive model that predicts each next item in our vocabulary
 (word/character/byte-pair) given the sequence generated so far. Each
 prediction step can be modeled as a softmax over all $K$ possible items
 in our vocabulary. We will see a specific architecture that does this in
-section [1.4.2](#sec-VLMs:im2text){reference-type="ref"
-reference="sec-VLMs:im2text"}.
+@sec-VLMs:im2text.
 
 ## Learning Visual Representations from Language Supervision {#sec-VLMs:CLIP}
 

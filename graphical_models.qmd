@@ -642,9 +642,7 @@ belief propagation algorithm**:
 2.  Initialize all messages to all ones, or to random values between 0
     and 1.
 
-3.  Run the belief propagation update rules of section
-    [1.6.1](#sect:bpRules){reference-type="ref"
-    reference="sect:bpRules"} until convergence.
+3.  Run the belief propagation update rules of -sect:bpRules until convergence.
 
 One can show that, in networks with loops, fixed points of the belief
 propagation algorithm (message configurations where the messages don't

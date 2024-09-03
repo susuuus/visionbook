@@ -254,9 +254,7 @@ Remember that a probability density function (pdf) is a function
 $p_{\theta}: \mathcal{X} \rightarrow [0,\infty)$ with
 $\int_{\mathbf{x}} p_{\theta}(\mathbf{x})d\mathbf{x} = 1$ (i.e. it's
 normalized). To learn a pdf, we will typically learn the parameters of a
-family of pdfs. For example, in section
-[1.6](#sec-generative_models-gaussian_density_models){reference-type="ref"
-reference="sec-generative_models-gaussian_density_models"}, we will
+family of pdfs. For example, in @sec-generative_models-gaussian_density_models, we will
 cover learning the parameters of the Gaussian family of pdfs. All
 members of such a the family are normalized nonnegative functions; this
 way we do not need to add an explicit constraint that the learned

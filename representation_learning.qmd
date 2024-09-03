@@ -828,9 +828,7 @@ losses.
 
 Using the alignment and uniformity objective defined previously, we will
 now illustrate how one can design embeddings with desired invariances.
-We will use the shape dataset described in section
-[1.4](#sec-representation_learning:autoencoders){reference-type="ref"
-reference="sec-representation_learning:autoencoders"}, and will use the
+We will use the shape dataset described in @sec-representation_learning:autoencoders, and will use the
 same encoder architecture and optimizer as from that section (a CNN with
 six layers, Adam optimizer, 20,000 iterations of stochastic gradient
 descent, batch size of 128). In contrast to the autoencoder experiment,

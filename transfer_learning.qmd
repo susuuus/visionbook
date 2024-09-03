@@ -57,9 +57,7 @@ instead recognize wheat versus soybeans. This is visualized below in
 
 In the next sections we will describe specific kinds of transfer
 learning algorithms, which handle each of these stages in different
-ways. Then, in section
-[1.9](#sec-transfer_learning:combinatorial_catalog){reference-type="ref"
-reference="sec-transfer_learning:combinatorial_catalog"}, we will
+ways. Then, in @sec-transfer_learning:combinatorial_catalog, we will
 reflect on the landscape of choices we have made, and we will see that
 transfer learning is better understood as a collection of tools, which
 can be combined in innumerable ways, rather than as a set of specific

@@ -719,9 +719,7 @@ equivariance makes sense because, roughly, a bird is a bird no matter
 where it appears in an image. Permutation equivariance might also make
 sense, for that same reason, but only to an extent: if you break up an
 image into small patches and scramble them, this could disrupt spatial
-layout that is important for recognition. We will see in section
-[1.11](#sec-transformers:positional_encodings){reference-type="ref"
-reference="sec-transformers:positional_encodings"} how transformers use
+layout that is important for recognition. We will see in @sec-transformers:positional_encodings how transformers use
 something called positional codes to reinsert useful information about
 spatial layout.
 

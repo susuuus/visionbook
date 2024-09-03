@@ -904,8 +904,7 @@ Another formulation consists of implementing a window-scanning approach
 where the function $f$ scans the image and takes as input an image patch
 and it outputs the class of the central pixel of each patch. This is
 like a convolutional extension of the image classifier that we discussed
-in section [1.3](#sec-image_classification){reference-type="ref"
-reference="sec-image_classification"} and several architectures are
+in @sec-image_classification and several architectures are
 variations over this same theme.
 
 Training this function requires access to a dataset of segmented images.

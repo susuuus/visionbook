@@ -285,8 +285,7 @@ capable of generating higher quality textures @Portilla2000.
 
 These models, usually called **parametric texture models**, stayed
 popular until 2000. After that, **nonparametric texture models** became
-dominant (section [1.4](#sect:Efros-Leung_texture){reference-type="ref"
-reference="sect:Efros-Leung_texture"}) until generative models with
+dominant (-sect:Efros-Leung_texture) until generative models with
 neural networks emerged around 2014.
 
 ## Efros-Leung Texture Analysis and Synthesis Model {#sect:Efros-Leung_texture}

@@ -297,9 +297,7 @@ images despite their very distinct appearance.
 ![](figures/statistical_image_models/FT_power_law_angular2.png){width="100%"}
 
 We will now use this observation to build a better statistical model of
-images than using pixel histograms as we described in section
-[1.3](#sec-independent_pixels){reference-type="ref"
-reference="sec-independent_pixels"}.
+images than using pixel histograms as we described in @sec-independent_pixels.
 
 ## The Gaussian Model
 
@@ -731,7 +729,5 @@ reference="chapter-generative_models"}.
 
 [^1]: Additive stationary noise is noise with statistical properties
     independent of location that is added to an observation. Check
-    section
-    [1.5.2](#sec-image_denoising_gaussian_model){reference-type="ref"
-    reference="sec-image_denoising_gaussian_model"} for a more precise
+    @sec-image_denoising_gaussian_model for a more precise
     definition.

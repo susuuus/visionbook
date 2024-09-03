@@ -74,9 +74,7 @@ A radiance field is a representation of part of the plenoptic function,
 based on the idea that the optical content of a scene can be modeled as
 a cloud of colorful particles with different levels of transparency.
 Such a representation can be rendered into images using volume
-rendering, which we will learn about in section
-[1.4](#sec-nerfs:volume_rendering){reference-type="ref"
-reference="sec-nerfs:volume_rendering"}. Radiance fields come in a
+rendering, which we will learn about in @sec-nerfs:volume_rendering. Radiance fields come in a
 variety of configurations but we will stick with the definition from
 Mildenhall et al. @mildenhall2020nerf, which popularized this
 representation. We will presently define a radiance field $L$ as a
@@ -339,8 +337,7 @@ This is all to say that volume rendering is a simple generalization of
 ray casting. One advantage it has is that it can model translucency, and
 media like gases, fluids, and thin films that let some photons pass
 through and reflect back others. We will see an even bigger advantage in
-section [1.5](#sec-nerfs:fitting){reference-type="ref"
-reference="sec-nerfs:fitting"}, where we will find that volume rendering
+@sec-nerfs:fitting, where we will find that volume rendering
 gives good gradients for fitting radiance fields to images.
 
 ### Computing the Volume Rendering Integral
@@ -387,9 +384,7 @@ chopping the ray into $T$ evenly spaced intervals, then sampling one
 point at uniform within each of these intervals. The effect of this is
 that all continuous coordinates will get sampled with some probability,
 and therefore if we run the approximation over and over again (like we
-will when using it in an optimization loop; see section
-[1.3.1](#sec-nerfs:nerf_section){reference-type="ref"
-reference="sec-nerfs:nerf_section"}) we will eventually take into
+will when using it in an optimization loop; see @sec-nerfs:nerf_section) we will eventually take into
 account every point in the continuous space (they will all be supervised
 during fitting a radiance field to explain a scene).
 

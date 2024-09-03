@@ -315,9 +315,7 @@ Representing rotations in homogeneous coordinates has no benefit with
 respect to heterogeneous coordinates. But the advantage is that now both
 rotation and translation are written in the same way! They are both
 products of a matrix times a vector, so that they can be combined as we
-will discuss in section
-[1.3.5](#sec-chaining_transformations){reference-type="ref"
-reference="sec-chaining_transformations"}.
+will discuss in @sec-chaining_transformations.
 
 If the angle of rotation is very small, then we can approximate the
 rotation matrix by its Taylor development (for small $x$,

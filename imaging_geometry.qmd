@@ -299,9 +299,7 @@ Let's start by describing a simple and intuitive method for camera
 calibration illustrated in @fig-simple_calibration. The method we will
 describe is not very accurate, but it provides be a good sanity check
 before doing more precise camera calibrations. We will describe a more
-accurate method in section
-[1.7](#sec-camera_calibration){reference-type="ref"
-reference="sec-camera_calibration"}.
+accurate method in @sec-camera_calibration.
 
   -------------------------------------------------------------------------------------
    ![](figures/imaging_geometry/simple_calibration_1.jpg){width=".62"}
@@ -1024,9 +1022,7 @@ method requires that not all of the $N$ points lie in a single plane
 
 The term $\|\mathbf{A} \mathbf{m} \|^2$ doesn't have any particular
 physical meaning, but minimizing it provides a good first guess that can
-be improved by other methods as we will discuss in section
-[1.7.4](#sec-cam_cal_minimizing_reprojection_error){reference-type="ref"
-reference="sec-cam_cal_minimizing_reprojection_error"}.
+be improved by other methods as we will discuss in @sec-cam_cal_minimizing_reprojection_error.
 
 ### Recovering Intrinsic and Extrinsic Camera Parameters {#sec-recovering_intrinsic_and_extrinsic}
 
@@ -1134,9 +1130,7 @@ measured in the world and use them to calibrate the camera.
 ![](figures/imaging_geometry/office_with_measures_2.jpg){width="100%"}
 
 We took a picture, @fig-office_measurements, with the same iPhone we
-used in section
-[1.3.3](#sec-simple_unreliable_calibration_method){reference-type="ref"
-reference="sec-simple_unreliable_calibration_method"}, holding the
+used in @sec-simple_unreliable_calibration_method, holding the
 camera at eye height (which is around 67 in, or 170 cm above the
 ground). The camera was looking downward at an angle of around 15
 degrees with respect to the vertical. Would we be able to recover these
@@ -1196,9 +1190,7 @@ when thinking about privacy.
 
 
 Let's now see if we can recover the camera angle and the intrinsics.
-Using the QR decomposition as described in section
-[1.7.2](#sec-recovering_intrinsic_and_extrinsic){reference-type="ref"
-reference="sec-recovering_intrinsic_and_extrinsic"}, we get
+Using the QR decomposition as described in @sec-recovering_intrinsic_and_extrinsic, we get
 $$\mathbf{K} = 
     \begin{bmatrix}
     2{,}960    &      -24.9    &     1{,}979.7\\
