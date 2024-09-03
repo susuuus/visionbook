@@ -18,9 +18,15 @@ find "$directory" -name "*.qmd" | while read -r file; do
   original_file="$file.original"
   cp "$file" "$original_file"
 
-  # Use perl to perform the substitutions
-  perl -0777 -i -pe 's/section\s*\[[^\]]*\]\(#([^\)]+)\)\s*\{reference-type="ref"\s*reference="([^\"]+)"\}/@sec-\2/g' "$file"
-  perl -0777 -i -pe 's/chapter\s*\[[^\]]*\]\(#([^\)]+)\)\s*\{reference-type="ref"\s*reference="([^\"]+)"\}/@sec-\2/g' "$file"
+  # Use perl to replace the phrase after "in" with the @reference, handling potential newlines after "in"
+  perl -0777 -i -pe '
+    s/
+    \bin\b\s*               # Match the word "in" followed by any whitespace (including newlines)
+    (.*?)                   # Non-greedy match of any characters (including newlines)
+    \{reference-type="ref"  # Match the reference-type attribute
+    \s*reference="([^"]+)"\}   # Match the reference attribute and capture "whatever"
+    /in \@\2/gx             # Replace the whole phrase with "@whatever"
+  ' "$file"
 
   # Check if the file has changed
   if ! cmp -s "$file" "$original_file"; then

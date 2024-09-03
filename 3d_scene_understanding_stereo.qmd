@@ -110,9 +110,7 @@ ability to compute the displacements between the two images and perceive
 Stereo cameras generally are built by having two cameras mounted on a
 rigid rig so that the camera parameters do not change over time.
 
-We can also build a **stereo pinhole camera**. As we discussed in
-chapter [\[chapter-imaging\]](#sec-imaging){reference-type="ref"
-reference="chapter-imaging"}, a pinhole camera is formed by a dark
+We can also build a **stereo pinhole camera**. As we discussed in @chapter-imaging, a pinhole camera is formed by a dark
 chamber with a single hole in one extreme that lets light in. The light
 gets projected into the opposite wall, forming an image. One interesting
 aspect of pinhole cameras is that you can build different types of

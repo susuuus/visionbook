@@ -829,9 +829,7 @@ weight for each complex exponential and the phase
 $\theta \left[u,v \right]$ translates the complex exponential. The phase
 carries the information of where the image contours are by specifying
 how the phases of the sinusoids must line up in order to create the
-observed contours and edges. In fact, as shown in
-section [1.7](#section:DFTproperties){reference-type="ref"
-reference="section:DFTproperties"}, translating the image in space only
+observed contours and edges. In fact, as shown in @section:DFTproperties, translating the image in space only
 modifies the phase of its Fourier transform. In short, one can think
 that location information goes into the phase while intensity scaling
 goes into the magnitude.

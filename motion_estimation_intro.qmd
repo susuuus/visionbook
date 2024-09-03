@@ -305,9 +305,7 @@ reference="chapter-temporal_filters"}.
 ![](figures/optical_flow/ted_demo_motion_1.png){width="100%"}
 
 The signals, and magnitudes of their space-time Fourier transforms, are
-developed in
-figures [\[fig:motionIllusion1\]](#fig-motionIllusion1){reference-type="ref"
-reference="fig:motionIllusion1"} and
+developed in @fig:motionIllusion1 and
 [\[fig:motionIllusion2\]](#fig-motionIllusion2){reference-type="ref"
 reference="fig:motionIllusion2"}, building-up from simpler signals. The
 three rows of @fig-motionIllusion1 show a stationary sinusoid, a moving

@@ -311,9 +311,7 @@ filter that will blur the image before downsampling. Blurring removes
 high-spatial frequencies in the image.
 
 The ideal anti-aliasing filter is a box in the Fourier domain with a
-cut-off frequency of $L=N/(2k)$ (using the notation introduced in
-chapter [\[chapter-sampling\]](#sec-sampling){reference-type="ref"
-reference="chapter-sampling"}). The inverse Fourier transform of a box
+cut-off frequency of $L=N/(2k)$ (using the notation introduced in @chapter-sampling). The inverse Fourier transform of a box
 in the frequency domain, with width $2L+1=N/k+1$, is the **discrete
 sinc** function of length $N$ in the spatial domain:
 $$\frac{1}{N} \frac 
