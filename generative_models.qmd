@@ -37,7 +37,7 @@ sample $\mathbf{z}$ from a prior $p(Z)$, then deterministically generate
 an image based on $\mathbf{z}$ and $\mathbf{y}$: $$\begin{aligned}    \mathbf{z} \sim p(Z)\\
     \mathbf{x} = g(\mathbf{z},\mathbf{y})
 \end{aligned}$$  This procedure is shown in
-@fig-generative_models:image_generation_with_z:
+@fig-generative_models-image_generation_with_z:
 
 ![](./figures/generative_models/image_generation_with_z_birds.png){width="70%"}
 
@@ -89,8 +89,8 @@ flip a coin to decide whether to turn left or right, repeat."
 Here is that program in pseudocode:
 
 ::: algorithm
-[]{#alg:generative_models:simple_rivers_script
-label="alg:generative_models:simple_rivers_script"} **Input:** Random
+[]{#alg:generative_models-simple_rivers_script
+label="alg:generative_models-simple_rivers_script"} **Input:** Random
 vector of coin flips $\mathbf{z} = [z_1, \ldots, z_{n}]$ with each
 $z_i \in \{0,1\}$ **Output:** Picture of a river
 `start drawing at origin with heading = `$90^\circ$
@@ -99,7 +99,7 @@ $z_i \in \{0,1\}$ **Output:** Picture of a river
 :::
 
 Here are a few rivers this program draws
-(@fig-generative_models:rivers1):
+(@fig-generative_models-rivers1):
 
 ![](./figures/generative_models/G4_river.png){width="80%"}
 
@@ -108,7 +108,7 @@ the river. In other words, the program took a randomized vector (noise)
 as input, and converted this vector into an image of the path of the
 river. It's exactly the same idea as we described previously for
 generating images of birds, just this time the generator is a program
-that makes rivers (@fig-generative_models:gen_model_of_rivers_diagram):
+that makes rivers (@fig-generative_models-gen_model_of_rivers_diagram):
 
 ![](./figures/generative_models/gen_model_of_rivers_diagram.png){width="75%"}
 
@@ -126,7 +126,7 @@ null set. We feed these examples to a learner, which spits out a
 generator function. Later, we may query the generator with new,
 randomized $\mathbf{z}$-vectors to produce novel outputs, a process
 called **sampling** from the model. This two-stage procedure is shown in
-@fig-generative_models:gen_model_training_vs_sampling:
+@fig-generative_models-gen_model_training_vs_sampling:
 
 ![](./figures/generative_models/gen_model_training_vs_sampling.png){width="90%"}
 
@@ -187,7 +187,7 @@ There are two general approaches to forming data generators:
 
  So far in this chapter we have focused on the direct approach,
 and it is schematized in
-@fig-generative_models:gen_model_training_vs_sampling. Interestingly,
+@fig-generative_models-gen_model_training_vs_sampling. Interestingly,
 the direct approach only became popular recently, with models like
 **generative adversarial networks** (**GANs**) and **diffusion models**,
 which we will see later in this chapter. The indirect approach is more
@@ -196,7 +196,7 @@ classical, and describes many of the methods we saw in chapter
 reference="chapter-stat_image_models"}. Indirect approaches come in two
 general flavors, density models and energy models, which we will
 describe next. Both follow the schematic given in
-@fig-generative_models:gen_model_training_vs_sampling_indirect:
+@fig-generative_models-gen_model_training_vs_sampling_indirect:
 
 ![](./figures/generative_models/gen_model_training_vs_sampling_indirect.png){width="100%"}
 
@@ -215,7 +215,7 @@ be drawn from $p_{\theta}$ using a sampling algorithm, such as **Markov
 Chain Monte Carlo** (**MCMC**), that takes a density as input and
 produce samples from it as output. This is a form of the indirect
 approach to synthesizing data that we mentioned above
-(@fig-generative_models:gen_model_training_vs_sampling_indirect).
+(@fig-generative_models-gen_model_training_vs_sampling_indirect).
 
 ### Learning Density Models
 
@@ -241,8 +241,8 @@ follows: $$\begin{aligned}
 \end{aligned}$${#eq-generative_models} where the final line is an empirical estimate of the
 expectation by sampling over the training dataset
 $\{\mathbf{x}^{(i)}\}_{i=1}^N$. Equation
-([\[eqn:generative_models:max_likelihood\]](#eqn:generative_models:max_likelihood){reference-type="ref"
-reference="eqn:generative_models:max_likelihood"}) is the *expected log
+([\[eqn:generative_models-max_likelihood\]](#eqn:generative_models-max_likelihood){reference-type="ref"
+reference="eqn:generative_models-max_likelihood"}) is the *expected log
 likelihood of the training data under the model's density function*.
 Maximizing this objective is therefore a form of . Pictorially we can
 visualize the max likelihood objective as trying to push up the density
@@ -255,8 +255,8 @@ $p_{\theta}: \mathcal{X} \rightarrow [0,\infty)$ with
 $\int_{\mathbf{x}} p_{\theta}(\mathbf{x})d\mathbf{x} = 1$ (i.e. it's
 normalized). To learn a pdf, we will typically learn the parameters of a
 family of pdfs. For example, in section
-[1.6](#sec-generative_models:gaussian_density_models){reference-type="ref"
-reference="sec-generative_models:gaussian_density_models"}, we will
+[1.6](#sec-generative_models-gaussian_density_models){reference-type="ref"
+reference="sec-generative_models-gaussian_density_models"}, we will
 cover learning the parameters of the Gaussian family of pdfs. All
 members of such a the family are normalized nonnegative functions; this
 way we do not need to add an explicit constraint that the learned
@@ -265,7 +265,7 @@ functions *all of which* have these properties. This means that whenever
 we push up density over datapoints, we are forced to sacrifice density
 over other regions, so implicitly we are removing density from places
 where there is no data, as indicated by the red regions in
-@fig-generative_models:max_likelihood_density.
+@fig-generative_models-max_likelihood_density.
 
 In the next section we will see an alternative approach where the
 parametric family we search over need not be normalized.
@@ -338,7 +338,7 @@ this method modifies the energy function to decrease the energy assigned
 to samples from the data (positive term) and to increase the energy
 assigned to samples from the model (i.e., samples from the energy
 function itself; negative term), as shown in
-@fig-generative_models:contrastive_divergence:
+@fig-generative_models-contrastive_divergence:
 
 ![](./figures/generative_models/contrastive_divergence.png){width="100%"}
 
@@ -365,9 +365,9 @@ $$\begin{aligned}    \nabla_{\theta} \log Z(\theta) &= \frac{1}{Z(\theta)}\nabla
     &= \frac{1}{Z(\theta)} -\int_x e^{-E_{\theta}(\mathbf{x})} \nabla_{\theta} E_{\theta}(\mathbf{x})d\mathbf{x}\\
     &= -\int_x \frac{e^{-E_{\theta}(\mathbf{x})}}{Z(\theta)} \nabla_{\theta} E_{\theta}(\mathbf{x})d\mathbf{x}\\
     &= -\int_x p_{\theta}(\mathbf{x}) \nabla_{\theta} E_{\theta}(\mathbf{x})d\mathbf{x} &&\quad\quad \triangleleft \quad \text{definition of $p_{\theta}$}\\
-    &= -\mathbb{E}_{\mathbf{x} \sim p_{\theta}}[\nabla_{\theta} E_{\theta}(\mathbf{x})] &&\quad\quad \triangleleft \quad \text{definition of expectation}#eq-generative_models:cd_neg
-\end{aligned}$${#eq-generative_models} Plugging @eq-generative_models:cd_neg back into
-@eq-generative_models:cd, we arrive at: $$\begin{aligned}    \nabla_{\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\log p_{\theta}(\mathbf{x})] &= -\mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\nabla_{\theta}E_{\theta(\mathbf{x})}] + \mathbb{E}_{\mathbf{x} \sim p_{\theta}}[\nabla_{\theta} E_{\theta}(\mathbf{x})]
+    &= -\mathbb{E}_{\mathbf{x} \sim p_{\theta}}[\nabla_{\theta} E_{\theta}(\mathbf{x})] &&\quad\quad \triangleleft \quad \text{definition of expectation}#eq-generative_models-cd_neg
+\end{aligned}$${#eq-generative_models} Plugging @eq-generative_models-cd_neg back into
+@eq-generative_models-cd, we arrive at: $$\begin{aligned}    \nabla_{\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\log p_{\theta}(\mathbf{x})] &= -\mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\nabla_{\theta}E_{\theta(\mathbf{x})}] + \mathbb{E}_{\mathbf{x} \sim p_{\theta}}[\nabla_{\theta} E_{\theta}(\mathbf{x})]
 \end{aligned}$$ Both expectations can be approximated via sampling:
 defining $\mathbf{x}^{(i)} \sim p_{\texttt{data}}$ and
 $\hat{\mathbf{x}}^{(i)} \sim p_{\theta}$, and taking $N$ such samples,
@@ -411,8 +411,8 @@ unusual events, or can be optimized to synthesize higher quality data.
 
 Some of the generative models we will describe in this chapter and the
 next are categorized along these dimensions in table
-[\[tab:generative_models:types_of_gen_model\]](#tab:generative_models:types_of_gen_model){reference-type="ref"
-reference="tab:generative_models:types_of_gen_model"}. Note that this is
+[\[tab:generative_models-types_of_gen_model\]](#tab:generative_models-types_of_gen_model){reference-type="ref"
+reference="tab:generative_models-types_of_gen_model"}. Note that this is
 a rough categorization, meant to reflect the most straightforward usage
 of these models. With additional effort some of the 's can be converted
 to 's; for example, one can do additional inference to sample from a
@@ -439,7 +439,7 @@ algorithm.
 In the next sections, and in the next chapter, we will dive into the
 details of exactly how each of these models works.
 
-## Gaussian Density Models {#sec-generative_models:gaussian_density_models}
+## Gaussian Density Models {#sec-generative_models-gaussian_density_models}
 
 One of the simplest and most useful density models is the Gaussian
 distribution, which in one dimension (1D) is: $$\begin{aligned}
@@ -503,7 +503,7 @@ density modeling, with a clear objective, a parameterized hypothesis
 space, and an optimizer that finds the parameters that maximize the
 objective.
 
-## Autoregressive Density Models {#sec-generative_models:autoregressive}
+## Autoregressive Density Models {#sec-generative_models-autoregressive}
 
 A single Gaussian is a very limited model, and the real utility of
 Gaussians only shows up when they are part of a larger modeling
@@ -518,7 +518,7 @@ problem: given a sequence of observed pixels, predict the color of the
 next one. We use the same learned function $f_{\theta}$ to make each
 subsequent prediction.
 
-@fig-generative_models:autoregressive_prediction_schematic shows this
+@fig-generative_models-autoregressive_prediction_schematic shows this
 setup. We predict each next pixel from the partial image already
 completed. The red bordered region is the **context** the prediction is
 based on. This context could be the entire image synthesized so far or
@@ -577,7 +577,7 @@ modeling each next pixel in the sequence is a softmax regression problem
 that models
 $p(\mathbf{x}_n \bigm | \mathbf{x}_1, \ldots, \mathbf{x}_{n-1})$. We
 show how the cross-entropy loss can be computed in
-@fig-generative_models:autoregressive_softmax_regression. Notice that
+@fig-generative_models-autoregressive_softmax_regression. Notice that
 it looks almost identical to @fig-softmax_regression_diagram from
 chapter
 [\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
@@ -622,7 +622,7 @@ model of pixels, that means extracting sequences of pixels
 $\mathbf{x}_1, \ldots, \mathbf{x}_{n-1}$ and corresponding observed next
 pixel $\mathbf{x}_n$. These can be extracted by traversing training
 images in raster order. The full training and testing setup looks like
-this (@fig-generative_models:autoregressive_train_predict):
+this (@fig-generative_models-autoregressive_train_predict):
 
 ![](./figures/generative_models/autoregressive_train_predict.png){width="100%"}
 
@@ -663,7 +663,7 @@ same kind of batches we described in the causal attention section (see
 ### Sampling from Autoregressive Models
 
 Autogressive models give us an explicit density function,
-@eq-generative_models:autoregressive_likelihood. To sample from this
+@eq-generative_models-autoregressive_likelihood. To sample from this
 density we use , which is the process described previously, of sampling
 the first pixel from $p(\mathbf{x}_1)$, then, conditioned on this pixel,
 sampling the second from $p(\mathbf{x}_2 \bigm | \mathbf{x}_1)$ an so
@@ -674,7 +674,7 @@ uniform random draw along this line falls. Autogressive models do not
 have latent variables $\mathbf{z}$, which makes them incompatible with
 applications that involve extracting or manipulating latent variables.
 
-## Diffusion Models {#sec-generative_models:diffusion_models}
+## Diffusion Models {#sec-generative_models-diffusion_models}
 
 The strategy of autoregressive models is to break a hard problem into
 lots of simple pieces. **Diffusion models** are another class of model
@@ -682,7 +682,7 @@ that uses this same strategy @sohl2015deep. They can be easy to
 understand if we start by looking at what autoregressive models do in
 the *reverse* direction: starting with a complete image, they remove one
 pixel, then the next, and the next
-(@fig-generative_models:reverse_autoregressive_sequence):
+(@fig-generative_models-reverse_autoregressive_sequence):
 
 ![](./figures/generative_models/reverse_autoregressive_sequence.png){width="100%"}
 
@@ -694,7 +694,7 @@ they add noise $\mathbf{\epsilon}_0$ to this image, resulting in a noisy
 version of the image, $\mathbf{x}_1$. Then they repeat this process,
 adding noise $\mathbf{\epsilon}_1$ to produce an even noisier signal
 $\mathbf{x}_2$, and so on. Most commonly, the noise is isotropic
-Gaussian noise. @fig-generative_models:forward_diffusion_process shows
+Gaussian noise. @fig-generative_models-forward_diffusion_process shows
 what that looks like:
 
 ![](./figures/generative_models/forward_diffusion_process.png){width="100%"}
@@ -715,7 +715,7 @@ Now, just like autoregressive models, diffusion models train a neural
 net, $f_{\theta}$, to *reverse* this process. It can be trained via
 supervised learning on examples sequences of different images getting
 noisier and noisier. For example, as shown below in
-@fig-generative_models:reverse_diffusion_process, the sequence of
+@fig-generative_models-reverse_diffusion_process, the sequence of
 images of the bird getting noisier and noisier can be flipped in time
 and thereby provide a sequence of *training examples* of the mapping
 $\mathbf{x}_t \rightarrow \mathbf{x}_{t-1}$, and these examples can be
@@ -743,13 +743,13 @@ a scene where the actual physical structure is full of chaotic, rough
 textures that happen to look like noise (if $t$ is small this is more
 likely, because for small $t$ we haven't added much noise to the scene
 yet). Algorithm
-[\[alg:generative_models:diffusion_model\]](#alg:generative_models:diffusion_model){reference-type="ref"
-reference="alg:generative_models:diffusion_model"} presents these steps
+[\[alg:generative_models-diffusion_model\]](#alg:generative_models-diffusion_model){reference-type="ref"
+reference="alg:generative_models-diffusion_model"} presents these steps
 in more formal detail.
 
 ::: algorithm
-[]{#alg:generative_models:diffusion_model
-label="alg:generative_models:diffusion_model"} **Input:** training data
+[]{#alg:generative_models-diffusion_model
+label="alg:generative_models-diffusion_model"} **Input:** training data
 $\{\mathbf{x}^{(i)}\}^N_{i=1}$ **Output:** trained model $f_{\theta}$
 **Generate training sequences via diffusion:**
 $\epsilon_t \sim \mathcal{N}(\mathbf{0},\mathbf{I})$
@@ -760,8 +760,8 @@ $\theta^* = \mathop{\mathrm{arg\,min}}_{\theta} \sum^N_{i=1} \sum^T_{t=1} \mathc
 :::
 
 In algorithm
-[\[alg:generative_models:diffusion_model\]](#alg:generative_models:diffusion_model){reference-type="ref"
-reference="alg:generative_models:diffusion_model"} we train the denoiser
+[\[alg:generative_models-diffusion_model\]](#alg:generative_models-diffusion_model){reference-type="ref"
+reference="alg:generative_models-diffusion_model"} we train the denoiser
 using a loss $\mathcal{L}$, which could be the $L_2$ distance. In many
 diffusion models, $f_{\theta}$ is instead trained to output the
 parameters (mean and variance) as a Gaussian density model fit to the
@@ -789,7 +789,7 @@ it is easy to do the reverse, turning data into noise. So diffusion
 models turn images into noise in order to *create the training
 sequences* for a process that turns noise into data.
 
-## Generative Adversarial Networks {#sec-generative_models:GANs}
+## Generative Adversarial Networks {#sec-generative_models-GANs}
 
 Autoregressive models and diffusion models sample simple distributions
 step by step to build up a complex distribution. Could we instead create
@@ -823,7 +823,7 @@ Schematically, the generator synthesizes images that are then fed as
 input to the discriminator. The discriminator tries to assign a high
 score to generated images (classifying them as synthetic) and a low
 score to real images from some training set (classifying them as real),
-as shown in @fig-generative_models:generative_models:gan_schematic.
+as shown in @fig-generative_models-generative_models-gan_schematic.
 
 ![](./figures/generative_models/gan_schematic.png){width="100%"}
 
@@ -864,10 +864,10 @@ Now, because the optimal discriminator $d_{\phi}^*$ depends on the
 current behavior of $g_{\theta}$, as soon as we *change* $g_{\theta}$,
 updating it to better fool $d_{\phi}^*$, then $d_{\phi}^*$ no longer is
 the optimal discriminator and we need to again solve problem in
-@eq-generative_models:GAN_optimal_D. To optimize a GAN, we simply
+@eq-generative_models-GAN_optimal_D. To optimize a GAN, we simply
 alternate between taking one gradient step on the objective in
-@eq-generative_models:GAN_optimal_G and then $K$ gradient steps on the
-objective in @eq-generative_models:GAN_optimal_D, where the larger the
+@eq-generative_models-GAN_optimal_G and then $K$ gradient steps on the
+objective in @eq-generative_models-GAN_optimal_D, where the larger the
 $K$, the closer we are to approximating the true $d_{\theta}^*$. In
 practice, setting $K=1$ is often sufficient.
 

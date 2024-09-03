@@ -8,4 +8,4 @@ In this part, we will focus on the semantics of visual processing; that is, the 
 
 - **Chapter {@sec-object_recognition}** describes how to learn to recognize and localize objects in images, assigning words to them.
 
-- **Chapter {@sec-VLMs}** explores the role of language as a representation of the visual world and its connection with vision systems.
+- **Chapter {@sec-VLMs-CLIP}** explores the role of language as a representation of the visual world and its connection with vision systems.

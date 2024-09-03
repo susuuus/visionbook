@@ -111,7 +111,7 @@ $$
 $$
 Now, both outputs are spatially aligned because they are shifted in the same way. Another discretization is the Sobel operator, based on the $[-1,0,1]$ kernel, and will be discussed in @sec-derivatives_binomial_filters.
 
-While newer algorithms for edge extraction have been developed since the creation of these operators, they still hold value in cases where efficiency is important. These simple operators continue to be used as fundamental components in modern computer vision descriptors, including the Scale-invariant feature transform (SIFT) @cite(Lowe04) and the histogram of oriented gradients (HOG) @cite(Dalal2005).
+While newer algorithms for edge extraction have been developed since the creation of these operators, they still hold value in cases where efficiency is important. These simple operators continue to be used as fundamental components in modern computer vision descriptors, including the Scale-invariant feature transform (SIFT) @Lowe04 and the histogram of oriented gradients (HOG) @Dalal2005.
 
 ## Gradient-Based Image Representation
 
