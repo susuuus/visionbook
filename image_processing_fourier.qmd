@@ -721,7 +721,7 @@ property in image analysis and we will see its use later.
 by multiplying by diagonal wave. The bottom row shows the corresponding
 Fourier transforms.
 
-![](figures/Image_processing_fourier/modulation.png){width="100%"}
+![Modulation in space. Multiplying an image by a cosine wave results in a new image with a Fourier transform with two copies of the Fourier transform of the original image. Only the magnitude of the Fourier transforms are shown.](figures/Image_processing_fourier/modulation.png){width="100%" #fig-modulation}
 
 Note that a shift and a modulation are equivalent operations in
 different domains. A shift in space is a modulation in the frequency
@@ -840,7 +840,7 @@ the image, the magnitude of the Fourier transform, or its phase.
 consists of computing the Fourier transform for two images and building
 two new images by swapping their phases @Oppenheim1981.
 
-![](figures/Image_processing_fourier/amp_phase_swap_color.png){width="100%"}
+![Swapping the amplitude and the phase of the Fourier Transform of two images. Each color channel is processed in the same way.](figures/Image_processing_fourier/amp_phase_swap_color.png){width="100%" #fig-phaseoramp}
 
 The first output image is the inverse Fourier transform of the amplitude
 of the first input image and the phase of the DFT of the second input
@@ -873,7 +873,8 @@ reference="chapter-stat_image_models"}. This typical structure of the
 DFT magnitude of natural images has been used as a prior for many tasks
 such as image denoising.
 
-![](figures/Image_processing_fourier/dft_random_phaseandamplitude.png){width="100%"}
+![The relative importance of phase and amplitude depends on the image. Each row shows one image, its Fourier transform (amplitude and phase), and the resulting images obtained by applying the inverse Fourier transform to a signal with the original amplitude and randomized phase, and a signal with the original phase and a generic fixed $1/f$ amplitude. Note that for the first image, the phase seems to be the most important component. 
+%However, as we move down, the relative importance between the two components changes. And for the bottom image (showing a pseudo-periodic threat texture) the amplitude is the most important component.](figures/Image_processing_fourier/dft_random_phaseandamplitude.png){width="100%" #fig-phasevsamp}
 
 However, this does not mean that all the information of the image is
 contained inside the phase only. The amplitude contains very useful
@@ -906,7 +907,7 @@ This observation has been the basis for many image descriptors
 elements in the scene). However the phase is a complex signal that does
 not seem to make explicit any information about the image.
 
-![](figures/Image_processing_fourier/FTgame.png){width="100%"}
+![The Fourier transform matching game: Match each image (a-h) with its corresponding Fourier transform magnitude (1-8).](figures/Image_processing_fourier/FTgame.png){width="100%" #fig-quiz}
 
 Take the following quiz: match the Fourier transform magnitudes with the
 corresponding images in @fig-quiz[^1]. Some image patterns are easily
@@ -977,7 +978,7 @@ block or let pass certain frequencies. Filters are many times classified
 according to the frequencies that they let pass through the filter (low,
 medium, or high frequencies) as shown in @fig-typestypes.
 
-![](figures/Image_processing_fourier/filter-types.png){width=".9"}
+![Sketch of the frequency responses of low-pass, band-pass, and high-pass filters.](figures/Image_processing_fourier/filter-types.png){width=".9" #fig-typestypes}
 
 When filtering images, low-pass filters will output a blurry picture
 encoding the **coarse** elements of the image. A band-pass filter will
@@ -1028,7 +1029,10 @@ resulting image where the columns are almost gone while the rest of the
 image is little affected. @fig-filteringFTe shows the complementary
 image (in fact, $a=c+e$) and its DFT in @fig-filteringFTf.
 
-![](figures/Image_processing_fourier/mit_columns.png){width="100%"}
+![Simple filtering in the Fourier domain.  (a) The repeated columns of the
+  building of the MIT dome generate harmonics along a horizontal line
+  in the Fourier domain shown in (b). By zeroing out those Fourier
+  components, as done in (d), the columns of the building are substantially removed (c). We can also the complementary operation keeping only those harmonics, shown in (f), which results in keeping only the columns (e).](figures/Image_processing_fourier/mit_columns.png){width="100%" #fig-filteringFT}
 
 ### Example 2: The Human Visual System and the Contrast Sensitivity Function
 

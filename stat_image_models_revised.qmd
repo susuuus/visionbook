@@ -23,7 +23,7 @@ on typical example from the set of all images. A typical sample from the
 set of all images is $32\times32$ pixels independently sampled from a
 uniform distribution.
 
-![](figures/statistical_image_models/spaces_real_images.png){width=".8"}
+![The space of natural images is just very small part of the space of all possible images. In the case of color images with $32\times32$ pixels, most of the space is filled with images that look like noise.](figures/statistical_image_models/spaces_real_images.png){width=".8" #fig-spaces_real_images}
 
 As natural images are quite complex, researchers have used simple visual
 worlds that retain some of the important properties of natural images
@@ -43,7 +43,7 @@ worlds look like nothing we normally see when walking around. Explaining
 what makes images in the set of real images (@fig-worlds\[h\]) different
 to images in the other sets is not a simple task.
 
-![](figures/statistical_image_models/worlds.png){width="100%"}
+![Different visual worlds, some real, some synthetic. (a) White noise. (b) Gabor patches. (c) Mondrian. (d) Stars. (e) Clouds. (f) Line drawing. (g) Computer graphic imagery (CGI). (h) A real street.  All these worlds have different visual properties. There is even something that makes CGI images distinct from pictures of true scenes.](figures/statistical_image_models/worlds.png){width="100%" #fig-worlds}
 
 In this chapter we will talk, in some way or another, about all these
 visual worlds. The goal is to present a set of models that can be used
@@ -54,7 +54,7 @@ noise from images, to predict the missing high-frequencies in blurry
 images, to fill in regions of missing image information due to
 occlusions, etc.
 
-![](figures/statistical_image_models/noiseInTheWorld.png){width="100%"}
+![Telling noise from surface texture. Which one is which?](figures/statistical_image_models/noiseInTheWorld.png){width="100%" #fig-noiseInTheWorld}
 
 ## How Do We Tell Noise from Texture?
 
@@ -123,7 +123,7 @@ we described in the introduction, and then estimate the model
 $p_{\theta}\left(\ell[n,m] \right)$, as illustrated in
 @fig-model_training_vs_sampling.
 
-![](figures/statistical_image_models/model_training_vs_sampling.png){width=".75"}
+![Fitting a statistical image model to a set of training images. Once the model is learned we can use the model to sample new images.](figures/statistical_image_models/model_training_vs_sampling.png){width=".75" #fig-model_training_vs_sampling}
 
 In the case of discrete gray-scale images with 256 gray levels, we can
 represent the distribution $p_{\theta}$ as vector of 256 values
@@ -147,7 +147,7 @@ the process starts by computing the average color histogram for the four
 images. Then, we sample a new image by sampling every pixel from the
 multinomial defined by the $p_{\theta}$. 
 
-![](figures/statistical_image_models/model_hist_example2.png){width="100%"}
+![Estimation of the image model parameters using one image, and then sampling a new image by sampling pixels independently using the histogram of the training image.](figures/statistical_image_models/model_hist_example2.png){width="100%" #fig-model_hist_example}
 
 @fig-histMatch shows four pairs of images with matched color
 histograms. We can see that this simplistic model is somewhat
@@ -158,7 +158,7 @@ failure of color histograms as a generative model of images should not
 be surprising as treating pixels as independent observations is clearly
 not how images work.
 
-![](figures/statistical_image_models/4_examples_images.png){width="100%"}
+![Examples of images and corresponding random samples with the same distribution of pixel intensities. Only the image with stars (a) has some visual similarity with the randomly sampled image.](figures/statistical_image_models/4_examples_images.png){width="100%" #fig-histMatch}
 
 As a generative model of images, this model is very poor. However, this
 does not mean that image histograms are not important. Manipulating
@@ -188,7 +188,7 @@ different sense of gloss in the sphere images. Note how by simply
 modifying the image histograms within the pixels of the sphere, the
 sphere seems to be made by a different type of material.
 
-![](figures/statistical_image_models/illuminationHistograms.png){width="100%"}
+![Perceptual importance of simple histogram manipulations. Figure from \cite{Fleming2001](figures/statistical_image_models/illuminationHistograms.png){width="100%" #fig-illumination}
 
 Image histograms carry useful information, but the histogram alone fails
 in capturing what makes images unique. We will need to build a more
@@ -209,7 +209,7 @@ $$C(\Delta n, \Delta m) = \rho \left( \ell[n+\Delta n,m+ \Delta m], \ell[n,m] \r
 $$\rho \left( a, b \right) = \frac{E \left( a-\bar{a}, b- \bar{b} \right)}{\sigma_a \sigma_b},$$where $\sigma_a$ is the standard deviation of the variable $a$, and
 $\bar{a}$ is the mean of $a$.
 
-![](figures/statistical_image_models/correlation.png){width="100%"}
+![(center) Scatter plots of pairs of pixels intensities as a function of distance and (right) cross-correlation as a function for vertical (green) and horizontal (red) displacements for the street scene image.](figures/statistical_image_models/correlation.png){width="100%" #fig-correlation}
 
 The behavior of this correlation function when computed on natural
 images is very different from the one we would observe if the
@@ -225,7 +225,8 @@ described by a procedure. An image is modeled as a set of shapes (dead
 leaves) that fall on a flat surface generating a random superposition
 (e.g., @fig-deadleaves).
 
-![](figures/statistical_image_models/dead_leaves_squares_and_circles.png){width="100%"}
+![Images sampled from the dead leaves model, for different shapes of dead leaves. (a) Circles, and (b) Squares.
+%BUILD SOME CUSTOM MADE IMAGES THAT CORRESPOND TO SOME INTERESTING VARIANTS.  For example: additive, occlusions, scale invariant and plot the measured correlation functions.](figures/statistical_image_models/dead_leaves_squares_and_circles.png){width="100%" #fig-deadleaves}
 
 The dead leaves model produces very simple images that do not look
 realistic, but it is useful in explaining the distribution of albedos in
@@ -294,7 +295,7 @@ but the decay along the radial frequency roughly follows a $1/w^{1.5}$
 decay in these examples. And these property is shared across the four
 images despite their very distinct appearance.
 
-![](figures/statistical_image_models/FT_power_law_angular2.png){width="100%"}
+![(top) Three natural images with size 512$\times$512 pixels, and one random image. (middle) The magnitude of their Fourier transforms (FT), images are transformed to grayscale by averaging the three color channels. (bottom) Plot of the angular average of radial sections of the FT, compared with the curves that correspond to $1/w$, $1/w^{1.5](figures/statistical_image_models/FT_power_law_angular2.png){width="100%" #fig-FT_angular_averages}
 
 We will now use this observation to build a better statistical model of
 images than using pixel histograms as we described in @sec-independent_pixels.
@@ -339,7 +340,7 @@ $1/(1+w ^\alpha)$ with $\alpha=1.5$. We add 1 to the denominator term to
 avoid division by zero. The bottom row of @fig-figure_samples_1_over_f
 generates color images by sampling each color channel independently.
 
-![](figures/statistical_image_models/figure_samples_1_over_f.png){width="100%"}
+![(top) Images are generated by making an image with a random phase and with a magnitude of the power spectrum following $1/ (1+w ^\alpha)$ with $\alpha=1.5$. (bottom) Same generative process applied to each color channel independently. The generated images look like clouds.](figures/statistical_image_models/figure_samples_1_over_f.png){width="100%" #fig-figure_samples_1_over_f}
 
 We can also sample new images by matching the parameter of individual
 natural images. @fig-magFTMatch shows four examples. To process color
@@ -354,7 +355,7 @@ the inverse of the PCA matrix in order to return to the original color
 space. This results in images that keep a similar color distribution
 than the inputs.
 
-![](figures/statistical_image_models/4_examples_images_color_FT.png){width="100%"}
+![Examples of images and random samples with the same magnitude of the FT of the corresponding image. We use PCA in color space to find decorrelated color components. Then, each decorrelated color channel is sampled independently and the final image is created by returning to the original color space. Only the image with clouds (b) has some visual similarity with the randomly sampled image.](figures/statistical_image_models/4_examples_images_color_FT.png){width="100%" #fig-magFTMatch}
 
 As shown in @fig-magFTMatch, when fitting the Gaussian model to
 different real images, and then sampling from it, the result is always
@@ -372,7 +373,7 @@ structure can be captured by the magnitude of the Fourier transform of
 the image.
 
   -------------------------------------------------------------------
-   ![](figures/statistical_image_models/hair1.png){width="40%"}
+   ![(a) Photograph of hair.  (b) Random draw of Gaussian image model using covariance matrix fit from (a).  For this unusual image, the model works well, but this is an exception for the Gaussian image model.](figures/statistical_image_models/hair1.png){width="40%" #fig-hair}
                                  \(a\)
   -------------------------------------------------------------------
 
@@ -430,7 +431,7 @@ noise reduction, the result is far from satisfactory. The Gaussian image
 model fails to capture the properties that make a natural image look
 real.
 
-![](figures/statistical_image_models/denoisingGaussianModel.png){width="100%"}
+![(Top row) Ground truth decomposition of image into Gaussian white noise and the image, uncorrupted by noise.  (bottom row) Gaussian image model denoising results.  Note that the estimated noise image shows residual spatial structure from the original image.](figures/statistical_image_models/denoisingGaussianModel.png){width="100%" #fig-denoisingGaussianModel}
 
 ## The Wavelet Marginal Model
 
@@ -458,7 +459,7 @@ distribution @Daugman1989, @Field1987. @fig-derivativeshist shows the
 histogram of the input image and the histogram of the output of applying
 the filters $\left[-1,1\right]$ and $\left[-1,1\right]^\mathsf{T}$.
 
-![](figures/statistical_image_models/figure_histograms_derivatives_street.png){width="100%"}
+![(a) Input image.  (b) Horizontal and (c) vertical derivatives of the input image.  (d) Histogram of pixel intensities of the input image.  (e and f) Histograms of the two derivatives of the original image. Note that both histograms have non-Gaussian distributions, a characteristic of natural images.](figures/statistical_image_models/figure_histograms_derivatives_street.png){width="100%" #fig-derivativeshist}
 
 First, the histogram of an unfiltered image is already non-Gaussian.
 However, the image histogram does not have any interesting structure and
@@ -477,7 +478,7 @@ band-pass filtered images (an image containing Gaussian noise, and two
 natural images). Note that the image subband histograms are
 significantly different than Gaussian.
 
-![](figures/statistical_image_models/examplesderivativedistributions.png){width="100%"}
+![Comparison of histograms of images from different visual worlds, and band-pass filtered versions of those images. (top row) Gaussian noise.  Band-pass filtered Gaussian noise is still Gaussian distributed.  (middle and bottom rows) Two very different looking images, when band-pass filtered, have similar looking non-Gaussian, narrowly peaked histogram distributions. The black line shows the best Gaussian fit, a poor fit to the spiky histograms.](figures/statistical_image_models/examplesderivativedistributions.png){width="100%" #fig-derivativesdistributions}
 
 The distribution of intensity values in the image filtered by a
 band-pass filter $h$,
@@ -501,7 +502,7 @@ When $r \to \infty$ the distribution converges to a uniform distribution
 in the range $\left[-s, s\right]$. And when $r \to 0$, the distribution
 converges to a delta function.
 
-![](figures/statistical_image_models/shapes_generalized_laplacian.png){width="100%"}
+![Generalized Laplacian distribution with $s=1$ and (a) $r=0.1$, (b) $r=1$, (c) $r=2$, and (d) $r=10$. %Changing the exponent $r$ changes the shape of the distribution, generating some special case probability distributions (Gaussian, uniform, Laplacian).](figures/statistical_image_models/shapes_generalized_laplacian.png){width="100%" #fig-generalizedgaussian}
 
 Now that we have seen that image derivatives follow a special
 distribution for natural images, let's define a statistical image model
@@ -565,7 +566,7 @@ Therefore, only the second factor is important for this analysis.
 places where the function reaches a local maximum as a function of $a$
 for every value of $r$.
 
-![](figures/statistical_image_models/best_a_s1.png){width=".6"}
+![Best values of $a$, as a function of $r$, that maximize the probability of the 1D image $\left[1,1,1,1,1,a,0,0,0,0,0 \right]$ under the wavelet prior model. The optimal $a$ changes when crossing the $r=1$ value.](figures/statistical_image_models/best_a_s1.png){width=".6" #fig-surface_best_a}
 
 For $r=2$ the best value of $a$ is $a=0.5$, and this solution is the
 best for any value of $r>1$. For $r=1$, any value
@@ -616,7 +617,7 @@ but the posterior still has a peak at zero. And in @fig-waveletBayesc
 an observed coefficient value of 1.22 yields a maximum posterior
 probability estimate of 0.9.
 
-![](figures/statistical_image_models/wavelet_denoising.png){width=".9"}
+![Showing the likelihood, prior, and posterior terms for the estimation of a subband coefficient from several noisy observations.  (a)  A zero subband coefficient is observed. (b)  An observation of 0.26 shifts the likelihood term, but the posterior still has a peak at zero. (c) an observed coefficient value of 1.22 yields a maximum posterior probability estimate of 0.9.](figures/statistical_image_models/wavelet_denoising.png){width=".9" #fig-waveletBayes}
 
 @fig-bayeslut shows the resulting look-up table to modify the noisy
 observation to the MAP estimate for the denoised coefficient value. Note
@@ -624,7 +625,7 @@ that this implements a **coring function** @Simoncelli96: if a
 coefficient value is observed near zero, it is set to zero, based on the
 very high prior probability of zero coefficient values.
 
-![](figures/statistical_image_models/waveletlut.png){width="40%"}
+![Input/output coring curve for maximum posterior denoising for the example of \fig{\ref{fig:waveletBayes](figures/statistical_image_models/waveletlut.png){width="40%" #fig-bayeslut}
 
 For a more detailed analysis and examples of denoising using the
 Laplacian image prior, we refer the reader to the work of Eero
@@ -722,7 +723,7 @@ model that can be used to sample new images. As illustrated in
 @fig-spaces_real_images_final the sequence of models we have studied in
 this chapter, only help in reducing a bit the space of possible images.
 
-![](figures/statistical_image_models/spaces_real_images_and_models_final.png){width="100%"}
+![The space of natural images is just very small part of the space of all possible images. In the case of color images with $32\times32$ pixels, most of the space is filled with images that look like noise.](figures/statistical_image_models/spaces_real_images_and_models_final.png){width="100%" #fig-spaces_real_images_final}
 
 We will see stronger generative image models in chapter
 [\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"

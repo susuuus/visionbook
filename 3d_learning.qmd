@@ -116,7 +116,7 @@ intrinsic camera parameters, $\mathbf{K}$, of the sensor.
 @fig-kinect2 illustrates how the depth map translates into a point
 cloud where each pixel is mapped to a 3D point.
 
-![](figures/learning_3d/from_depthmap_2_pointcloud.png){width="100%"}
+![Translating the depth map into a point cloud. This requires a calibrated camera (i.e., knowing the intrinsic camera parameters). The sketch shows how one pixel $(n,m)$ is mapped into a 3D point, $\mathbf{P](figures/learning_3d/from_depthmap_2_pointcloud.png){width="100%" #fig-kinect2}
 
 Using homogeneous coordinates, the equation translating a depth map into
 a 3D point cloud is (for each pixel):
@@ -235,7 +235,7 @@ planar shapes, or introducing other structural priors. However, must
 current approaches will use a fairly generic architecture and let the
 data and the loss decide what the best function is.
 
-![](figures/learning_3d/encoder_decoder_arch.png){width="100%"}
+![Typical architecture for depth estimation from a single image\cite{Xian2018](figures/learning_3d/encoder_decoder_arch.png){width="100%" #fig-encoder_decoder_arch_depth}
 
 Existing methods rely on training on massive amounts of data to achieve
 good generalization across a wide set of images. @fig-office_midas
@@ -308,7 +308,7 @@ and $\mathbf{T}$) between the two frames, as shown in
 \left[ \hat{\mathbf{R}},\hat{\mathbf{T}} \right] &=& f_2(\boldsymbol\ell_1,\boldsymbol\ell_2)
 \end{aligned}$$
 
-![](figures/learning_3d/unsupervised_depth.png){width="100%"}
+![System for unsupervised learning of camera motion and depth \cite{Tinghui2017](figures/learning_3d/unsupervised_depth.png){width="100%" #fig-unsupervised_depth_system}
 
 If the estimations of the depth and camera motion were correct, then we
 could warp the pixels in $\boldsymbol\ell_1$ into the pixels of
@@ -358,7 +358,7 @@ geometric interpretation of all the steps):
 -   The resulting coordinates $\mathbf{p}'$ are translated back into
     heterogeneous coordinates.
 
-![](figures/learning_3d/geometry_reconstruction_12.png){width=".6"}
+![Geometry between two images captured by a moving camera. The coordinates of corresponding points between the two frames are constrained by the 3D world coordinates of the point the relative camera motion.](figures/learning_3d/geometry_reconstruction_12.png){width=".6" #fig-geometry_reconstruction}
 
 Putting all these steps together, ignoring the transformations between
 homogeneous and heterogeneous coordinates, the reconstruction of

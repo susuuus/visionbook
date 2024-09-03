@@ -22,7 +22,7 @@ $\mathbf{p}(t) = (x(t),y(t))$ and its projection will move with the 2D
 instantaneous velocity $\dot{\mathbf{p}} = (\dot{x}(t), \dot{y}(t))$,
 where all the derivatives are done with respect to time, $t$.
 
-![](figures/optical_flow/basic_motion_point.png){width=".5"}
+![A 3D point, $\mathbf{P](figures/optical_flow/basic_motion_point.png){width=".5" #fig-optical_flow_basic_motion_point}
 
 Using the equations of perspective projection $x=f X/Z$ and $y=f Y/Z$
 (assuming that the camera is at the origin of the world-coordinate
@@ -95,7 +95,7 @@ to the optical axis of the camera
 (@fig-examples_3d_moving_points\[right\]). The arrows at the image plane
 show the imaged scene velocities.
 
-![](figures/optical_flow/examples_3d_moving_points.png){width="100%"}
+![(left) Geometry of the projection of 3D motion into the camera for points moving parallel to the camera plane, and (right) parallel to the optical axis of the camera.](figures/optical_flow/examples_3d_moving_points.png){width="100%" #fig-examples_3d_moving_points}
 
 Let's examine a few scenarios in a bit more detail to gain some
 familiarity with the relationship between 3D motion and the projected 2D
@@ -125,7 +125,7 @@ the camera the bird gets smaller as it flies away until it disappears at
 the vanishing point. In this drawing the vanishing point is within the
 view of the camera.
 
-![](figures/optical_flow/flying_bird.png){width="100%"}
+![Projection onto the camera plane of the sequence produced by a bird flying away. The bird will vanish at the {\bf vanishing point](figures/optical_flow/flying_bird.png){width="100%" #fig-flying_bird}
 
 The vanishing point is the location
 $\mathbf{p}_{\infty}=(x_{\infty}, y_{\infty})^\mathsf{T}$ where the
@@ -203,7 +203,7 @@ Consider a camera translating laterally, as shown in
 through a side window of a car at the scene passing by. In this case,
 the forward velocity is zero, $V_Z=0$.
 
-![](figures/optical_flow/camera_lateral_translation.png){width="100%"}
+![Lateral camera motion parallel to the camera plane.](figures/optical_flow/camera_lateral_translation.png){width="100%" #fig-camera_lateral_translation}
 
 Under lateral camera motion, using equation (@eq-parallelmotion), we
 have the following relationship between the velocity of a 3D point and
@@ -229,7 +229,7 @@ that are very far will appear as not moving. This parallax effect is the
 same one used in stereo vision to recover depth. The 2D motion in the
 image place is in the opposite direction to the camera motion.
 
-![](figures/optical_flow/camera_lateral_translation_flow.png){width="100%"}
+![Sketch of the motion field under lateral camera motion. Objects close to the camera will appear to be moving faster than objects farther away. Objects that are very far (like the cloud) will appear to be nearly stationary.](figures/optical_flow/camera_lateral_translation_flow.png){width="100%" #fig-camera_lateral_translation_flow}
 
 #### Camera forward motion and focus of expansion
 
@@ -237,7 +237,7 @@ For a camera moving forward, as illustrated in
 @fig-camera_forward_translation, note that $V_X = V_Y = 0$. In this
 case, the motion is only along the $Z$-axis, $V_Z \neq 0$.
 
-![](figures/optical_flow/camera_forward_translation.png){width="100%"}
+![Camera moving forward, along the camera axis.](figures/optical_flow/camera_forward_translation.png){width="100%" #fig-camera_forward_translation}
 
 Using equation (@eq-forward_objects), we get:
 
@@ -288,7 +288,7 @@ center (which will be the point of impact) appear stationary, while
 points in the periphery appear to move faster and away from the center.
 The whole wall expands over time.
 
-![](figures/optical_flow/camera_forward_translation_flow.png){width="100%"}
+![Sketch of the motion field when the camera approaches a planar surface. The motion field indicates the rate of expansion of the image, and it is a function of the time to contact. In this example, the focus of expansion is on the center.](figures/optical_flow/camera_forward_translation_flow.png){width="100%" #fig-camera_forward_translation_flow}
 
 ### Camera Rotation
 
@@ -311,7 +311,7 @@ To derive the rotation, we consider the **Euler angles**
 (@fig-yaw_pitch_roll) and decompose the rotation using rotations along
 the three axes (yaw, pitch, roll):
 
-![](figures/optical_flow/yaw_pitch_roll.png){width=".4"}
+![Rotation expressed by Euler angles (yaw, pitch, roll).](figures/optical_flow/yaw_pitch_roll.png){width=".4" #fig-yaw_pitch_roll}
 
 Each angle measures the rotation along the camera-coordinate axes. Using
 this representation of the rotation, the rotation matrix can be written
@@ -500,7 +500,7 @@ in the orthogonal direction to the vector that connects that point with
 the origin (@fig-motion_wz). The motion field does not depend on the
 focal length, $f$.
 
-![](figures/optical_flow/motion_wz.png){width=".4"}
+![Motion field for a rotating camera around the optical axis, $W_X=W_Y=0$.](figures/optical_flow/motion_wz.png){width=".4" #fig-motion_wz}
 
 If $W_Z=0$, then the rotation along $W_X$ or $W_Y$ will produce similar
 2D motion fields, so let's consider $W_X=0$. We have: $$\begin{aligned}
@@ -525,7 +525,9 @@ produced by a homography and it will be very different to a lateral
 camera motion. The flows shown in @fig-motion_wy_f03_f1_f3 correspond
 to $f=1/3$, $f=1$, and $f=3$.
 
-![](figures/optical_flow/camera_motion_field_rotation_three_f.png){width="100%"}
+![Motion flows corresponding to a rotation around the 
+$Y$-axis. (left) $f = 1/3$. (middle) $f = 1$.
+(right) $f = 3$.](figures/optical_flow/camera_motion_field_rotation_three_f.png){width="100%" #fig-motion_wy_f03_f1_f3}
 
 Camera rotation around the $Y$-axis does not inform about the scene
 structure, but it informs about the camera parameters. The magnitude of

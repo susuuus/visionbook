@@ -78,7 +78,7 @@ The Gabor filter is an oriented band-pass filter.
 @fig-gabor_ft shows the magnitude of the Fourier transform of the Gabor filters. @fig-gabor_ft (a) shows the cosine phase Gabor function, $\psi_r(x,y;u_0,v_0)$, and @fig-gabor_ft (b) shows the sine phase Gabor function, $\psi_i(x,y;u_0,v_0)$. @fig-gabor_ft (c) shows the Fourier transform of the cosine phase Gabor function, $\Psi_r(u,v;u_0,v_0)$, and @fig-gabor_ft (d) shows the Fourier transform of the complex Gabor function, $\Psi(u,v;u_0,v_0)$.
 
 :::{#fig-gabor_ft}
-![](figures/spatial_filter_sets/gabor_FT.png){width=100%}
+![(a) Cosine and (b) sine Gabor functions. (c) Magnitude of the Fourier transform of both the cosine and sine Gabor functions (their FT only differs in the phase). (d) FT of the complex Gabor function, which is asymmetrical with a single lobe.](figures/spatial_filter_sets/gabor_FT.png){width=100% #fig-gabor_ft}
 
 (a) Cosine and (b) sine Gabor functions. (c) Magnitude of the Fourier transform of both the cosine and sine Gabor functions (their FT only differs in the phase). (d) FT of the complex Gabor function, which is asymmetrical with a single lobe.
 :::
@@ -93,7 +93,7 @@ behavior. Analyzing the image with a set of Gabor functions with a large
 $\sigma$ is like computing the Fourier transform of the image.
 
 :::{#fig-gabor_ex_ft}
-![](figures/spatial_filter_sets/gabor_examples_FT.png){width=100%}
+![Cosine phase Gabor functions tuned to different widths, frequencies, and orientations, and their corresponding Fourier transforms (only the magnitude is shown).](figures/spatial_filter_sets/gabor_examples_FT.png){width=100% #fig-gabor_ex_ft}
 
 Cosine phase Gabor functions tuned to different widths, frequencies, and orientations, and their corresponding Fourier transforms (only the magnitude is shown).
 :::
@@ -123,7 +123,7 @@ edge phase structures in images. But they have many other benefits when
 we combine them together in quadrature pairs.
 
 :::{#fig-gabor_zebra}
-![](figures/spatial_filter_sets/gabor_zebra.png){width=100%}
+![Zebra picture filtered by cosine and sine Gabor functions at three scales with $\sigma = 2,4,8$ and $u_0 = 1/(2\sigma)$, $v_0=0$. Each row shows one scale. (a) Cosine and sine Gabor filters. (b) Cosine and sine outputs. (c) Magnitude and phase of the output of the complex Gabor filter.](figures/spatial_filter_sets/gabor_zebra.png){width=100% #fig-gabor_zebra}
 
 Zebra picture filtered by cosine and sine Gabor functions at three scales with $\sigma = 2,4,8$ and $u_0 = 1/(2\sigma)$, $v_0=0$. Each row shows one scale. (a) Cosine and sine Gabor filters. (b) Cosine and sine outputs. (c) Magnitude and phase of the output of the complex Gabor filter.
 :::
@@ -235,7 +235,7 @@ The amplitude of the delta function is the Gaussian envelope of the Gabor functi
 The sign invariance property is especially useful when using the local amplitude to localize edges in images. @fig-quad3 (d) shows an image composed of several squares. Each square is defined by different polarities with respect to the background. Two of the squares are solid while the other two are only defined by lines. The local amplitude, @fig-quad3 (f), provides a detector for the square boundaries that is invariant to all those changes. The differences between all the squares are encoded in the local phase image as we will discuss in the following section. @fig-gabor_zebra shows the local amplitude signal computed on real images.
 
 :::{#fig-quad3}
-![](figures/spatial_filter_sets/gabor_quad_examples.png){width=100%}
+![Examples of Gabor outputs to illustrate the contrast invariances present in the local amplitude. In these examples the Gabor filters are centered along the horizontal frequency axis ($v_0=0$) therefore detecting only vertical edges.](figures/spatial_filter_sets/gabor_quad_examples.png){width=100% #fig-quad3}
 
 Examples of Gabor outputs to illustrate the contrast invariances present in the local amplitude. In these examples, the Gabor filters are centered along the horizontal frequency axis ($v_0=0$) therefore detecting only vertical edges.
 :::
@@ -282,7 +282,7 @@ between the central frequency and the origin. This produces filters that
 are rotated and scaled versions of each other.
 
 :::{#fig-gabor_rectandpolar_tiles}
-![](figures/spatial_filter_sets/gabor_rectandpolar_tiles.png){width=100%}
+![Examples of Gabor sets. Two different ways of tiling the frequency domain.](figures/spatial_filter_sets/gabor_rectandpolar_tiles.png){width=100% #fig-gabor_rectandpolar_tiles}
 
 Examples of Gabor sets. Two different ways of tiling the frequency domain.
 :::
@@ -360,7 +360,9 @@ due to the positive direction of $\theta$ to be counter-clockwise.
 derivatives.
 
 :::{#fig-steer1}
-![](figures/spatial_filter_sets/steer1.png){width=100%}
+![The simplest steerable filters: a first-order derivative filter of any
+  orientation can be synthesized from a linear combination of two
+  basis filter derivatives. The second-order derivative needs three basis.](figures/spatial_filter_sets/steer1.png){width=100% #fig-steer1}
 
 The simplest steerable filters: a first-order derivative filter of any
 orientation can be synthesized from a linear combination of two
@@ -377,7 +379,7 @@ filters to allow the input filter to be steered to the desired
 orientations at each position.
 
 :::{#fig-steer1arc}
-![](figures/spatial_filter_sets/steer_architecture.png){width=60%}
+![Architecture for steerable filters. This architecture computes the second-order image derivative along orientation $\theta$.](figures/spatial_filter_sets/steer_architecture.png){width=60% #fig-steer1arc}
 
 Architecture for steerable filters. This architecture computes the second-order image derivative along orientation $\theta$.
 :::
@@ -501,7 +503,7 @@ of the analytic filter $g_{xx}+jh_{xx}$. It has double amplitude, and
 the content for negative frequencies is close to zero.
 
 :::{#fig-steerg2h2}
-![](figures/spatial_filter_sets/steer_quad_aprox_a.png){width=100%}
+![Quadrature pair, $g_{xx](figures/spatial_filter_sets/steer_quad_aprox_a.png){width=100% #fig-steerg2h2}
 
 Quadrature pair, $g_{xx} \left[n,m \right]$ and $h_{xx} \left[n,m \right]$. The filters are sampled in space and cropped into a window of $13\times13$ pixels.
 :::
@@ -519,7 +521,8 @@ h_4(x,y) &= -0.9780 (-2.254 y+y^3) \exp \left(-(x^2+y^2) \right)
 These functions have been optimized in order to be $x-y$ separable. The basis function for steerability are not unique. For instance, figures @fig-steer_quad_basis (a and c) show two basis functions that span all rotations of $g_{xx}$. @fig-steer_quad_basis (a) has separable filters corresponding to $g_{xx}$, $g_{xy}$ and $g_{yy}$, and @fig-steer_quad_basis (c) shows three rotated versions of $g_{xx}$ at 0, 60, and 120 degrees. @fig-steer_quad_basis (c) is a non-separable basis spanning the same space as the filters of @fig-steer_quad_basis (a). Figures @fig-steer_quad_basis (b and d) show two basis functions that span all rotations on $h_{xx}$ spanning the same space as the filters of @fig-steer_quad_basis (b). Spatial scaling of the filters will result in changing $\sigma$.
 
 :::{#fig-steer_quad_basis}
-![](figures/spatial_filter_sets/steer_quad_basis.png){width=100%}
+![(a) Second derivative of Gaussian, $x-y$
+separable steerable basis set. b) Approximation to Hilbert transform of second derivative of  Gaussian, $x-y$ steerable basis set. (c)  Nonseparable basis equivalent to (a). (d) Nonseparable basis set equivalent to (b).](figures/spatial_filter_sets/steer_quad_basis.png){width=100% #fig-steer_quad_basis}
 
 (a) Second derivative of Gaussian, $x-y$ separable steerable basis set. (b) Approximation to Hilbert transform of second derivative of Gaussian, $x-y$ steerable basis set. (c) Nonseparable basis equivalent to (a). (d) Nonseparable basis set equivalent to (b).
 :::
@@ -565,7 +568,8 @@ $g_{xx}$, $h_{xx}$ filters in the junctions, @fig-multiorifloretsb.
 each pixel, the polar plots reveal the local image structure.
 
 :::{#fig-multioriflorets_examples}
-![](figures/spatial_filter_sets/steer_quad_polarplot_zebra_cube.png){width=100%}
+![Polar plots of orientation energy as a
+  function of angle, computed using $g_{xx](figures/spatial_filter_sets/steer_quad_polarplot_zebra_cube.png){width=100% #fig-multioriflorets_examples}
 
 Polar plots of orientation energy as a function of angle, computed using $g_{xx}$, $h_{xx}$ filters in two images.
 :::
@@ -602,7 +606,7 @@ the red line shown in @fig-spacetimefilts (c). A single Gabor filter
 cannot disambiguate the input velocity.
 
 :::{#fig-spacetimefilts}
-![](figures/temporal_filters/gabor_spacetime_FT.png){width=100%}
+![Space-time Gabor filters. (a) Cosine and sine $x$-$t$ Gabor filter, and (b) the sketch of its transfer function. (c) Sketch of the transfer function of a spatiotemporal Gabor filter in two spatial dimensions ($x$-$y$-$t$). The two planes show examples of spatiotemporal planes that intersect the Gabor filter in the same way.](figures/temporal_filters/gabor_spacetime_FT.png){width=100% #fig-spacetimefilts}
 
 Space-time Gabor filters. (a) Cosine and sine $x$-$t$ Gabor filter, and (b) the sketch of its transfer function. (c) Sketch of the transfer function of a spatiotemporal Gabor filter in two spatial dimensions ($x$-$y$-$t$). The two planes show examples of spatiotemporal planes that intersect the Gabor filter in the same way.
 :::

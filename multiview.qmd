@@ -61,7 +61,7 @@ seeing any single frame (as shown in @fig-demos_motivation_sfm\[a\]) it
 is hard to see the cylinders or even to say which points are attached to
 the same surface.
 
-![](figures/sfm/demos_motivation.png){width=".7"}
+![Early illustrations on the perceptual power of motion. (a) Nested cylinders by Shimon Ullman, 1979, illustrated how rigid motion elicits a strong 3D interpretation. (b) One frame from the point-light walker by Gunnar Johansson, as an early illustration of biological motion perception from few moving keypoints.](figures/sfm/demos_motivation.png){width=".7" #fig-demos_motivation_sfm}
 
 One of the first algorithms for structure from motion for rigid bodies
 was introduced by Tomasi and Kanade @Tomasi92. For simplicity, their
@@ -325,7 +325,7 @@ together with the transformed images as new ground truth to train a more
 robust classifier. This is the approach proposed by SuperPoint
 @DeTone2018.
 
-![](figures/sfm/toy_keypoint_detector.png){width="100%"}
+![Keypoint detector formulated as a patch classification problem. The classifier labels the patch as containing a keypoint in the center or not.](figures/sfm/toy_keypoint_detector.png){width="100%" #fig-sfm-toy_keypoint_detector}
 
 ![All the detected keypoints in three views from the sugar bowl. But the images look rather textureless; what is the keypoint detector finding interesting in these images?](figures/sfm/sugar/keypoints_8_3_examples.png){width="100%" #fig-sfm-keypoints_sugar}
 
@@ -345,7 +345,7 @@ keypoints, such as window corners, bricks, and other building details,
 than the ones detected on the sugar bowl.
 
   -------------------------------------------------------------------------------
-    ![](figures/sfm/sugar/sugar_keypoints_examples_many.png){width="100%"}
+    ![Each patch shows a $65 \times 65$ image crop centered on a detected keypoint. The keypoint detector finds image regions with strong spatial changes. Those regions are also likely to be found on images of the same object but under different viewpoints. (a) Sugar bowl, \fig{\ref{fig:sfm:sugar](figures/sfm/sugar/sugar_keypoints_examples_many.png){width="100%" #fig-sfm-sugar_keypoints_examples_many}
                                        \(a\)
   -------------------------------------------------------------------------------
 
@@ -378,7 +378,7 @@ Mikolajczyk and Cordelia Schmid @Mikolajczyk2005.
 bowl and the three associated descriptors. In this example, each
 descriptor is a vector of length 256.
 
-![](figures/sfm/sugar/point_cloud_key_points_figure.png){width="100%"}
+![Examples of descriptors for three keypoints. For each keypoint, the figure shows the corresponding image patch and the computed descriptor. Each descriptor has a length of 256 values.](figures/sfm/sugar/point_cloud_key_points_figure.png){width="100%" #fig-sfm-descriptors_sugar}
 
 As shown in @fig-sfm-palma_keypoint_matching_figure, the keypoint
 detector and descriptor finds image regions and its matches even under
@@ -393,7 +393,7 @@ scene. In this case the keypoint detects the same window corner across
 multiple views.
 
   --------------------------------------------------------------------------------
-    ![](figures/sfm/sugar/sugar_keypoint_matching_figure.png){width="100%"}
+    ![Matching keypoints across different viewpoints. For each subfigure, the top row shows the location of a matching keypoint across several views. The bottom row shows crops of size $129 \times 129$ pixels around each the keypoint.](figures/sfm/sugar/sugar_keypoint_matching_figure.png){width="100%" #fig-sfm-palma_keypoint_matching_figure}
                                        \(a\)
   --------------------------------------------------------------------------------
 
@@ -441,7 +441,7 @@ recovered camera locations for the two sets of images that we have used
 in this chapter.
 
   ---------------------------------------------------------------------------------
-   ![](figures/sfm/sugar/point_cloud_sugar_view1.png){width=".46"}
+   ![3D reconstruction of the sugar bowl. The figure shows two different viewpoints and the recovered camera locations. (a) Bird's view. (b) Side view.](figures/sfm/sugar/point_cloud_sugar_view1.png){width=".46" #fig-sfm-3dsugar}
                                         \(a\)
   ---------------------------------------------------------------------------------
 
@@ -451,7 +451,7 @@ in this chapter.
   ---------------------------------------------------------------------------------
 
   ------------------------------------------------------------------------
-   ![](figures/sfm/palma/3d_palma_view2.png){width=".46"}
+   ![3D reconstruction of the plaza. The figure shows two different viewpoints and the recovered camera locations. (a) Bird's view.  (b) Arbitrary view.](figures/sfm/palma/3d_palma_view2.png){width=".46" #fig-sfm-3dpalma}
                                    \(a\)
   ------------------------------------------------------------------------
 

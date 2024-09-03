@@ -341,7 +341,7 @@ can be used to predict the $y$ value of future observations of $x$
 We can now summarize the entire linear least-squares learning problem as
 follows:
 
-![](./figures/intro_to_learning/ols_summary.png){#fig-ols_summary}
+![Linear regression finds a line that predicts the training data's $y$-values from its $x$-values.](./figures/intro_to_learning/ols_summary.png){#fig-ols_summary #fig-intro_to_learning-ols_system_diagram}
 
 :::{.column-margin}
 In these diagrams, we will sometimes describe the objective just in terms of $\mathcal{L}$, in which case it should be understood that this implies $J(\theta) = \sum_{i=1}^N \mathcal{L}(f_{\theta}(x^{(i)}), y^{(i)})$.
@@ -488,7 +488,7 @@ classification problem. We could have made other choices for how to map
 input data to class labels.
 :::
 
-![](./figures/intro_to_learning/softmax_regression_learning_problem.png){#fig-softmax_regression_learning_problem}
+![Learning is a meta-algorithm, an algorithm that outputs algorithms; metalearning is just learning applied to learning, and therefore it is a meta-meta-algorithm.](./figures/intro_to_learning/softmax_regression_learning_problem.png){#fig-softmax_regression_learning_problem #fig-intro_to_learning-meta_learning_diagram}
 
 Notice that we have left the hypothesis space only partially specified,
 and we left the optimizer unspecified. This is because softmax

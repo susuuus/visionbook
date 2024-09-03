@@ -53,7 +53,7 @@ classifier, and the adaptation phase is updating that classifier to
 instead recognize wheat versus soybeans. This is visualized below in
 @fig-transfer_learning-finetuning_basic.
 
-![](./figures/transfer_learning/pretraining_and_adaptation.png){width="85%"}
+![Transfer learning consists of two phases: first we pretrain a model on one task and then we adapt that model to perform a new task.](./figures/transfer_learning/pretraining_and_adaptation.png){width="85%" #fig-transfer_learning-finetuning_basic}
 
 In the next sections we will describe specific kinds of transfer
 learning algorithms, which handle each of these stages in different
@@ -175,7 +175,7 @@ given the depth and class predictions, we have a final module,
 semantics of a car. This module outputs a bounding box $\mathbf{y}$
 indicating where it thinks the car is. 
 
-![](./figures/transfer_learning/finetuning_certain_modules_example.png){width="70%"}
+![Finetuning certain subsets of a computation graph. Here we show some modules that have been pretrained (those with a shaded background) and one that is trained from scratch at finetuning time.](./figures/transfer_learning/finetuning_certain_modules_example.png){width="70%" #fig-transfer_learning-finetuning_certain_modules_example}
 
 Within a single layer, it is also possible to update just a subspace of
 the full weight matrix. This can be an effective way to save memory
@@ -259,7 +259,7 @@ outputs for $x$. The full algorithm is given in the diagram below.
 
 
 
-![](./figures/transfer_learning/KD_diagram.png){width="100%"}
+![Comparing knowledge distillation to supervised learning from labels.](./figures/transfer_learning/KD_diagram.png){width="100%" #fig-transfer_learning-KD_diagram}
 
 Notice that this learning problem is very similar to softmax regression
 on labeled data, and a diagram comparing the two is given in
@@ -315,13 +315,13 @@ Prompting is visualized in @fig-transfer_learning-prompting, where
 $\oplus$ represents concatenation, addition, or potentially other ways
 of mixing prompts and input signals.
 
-![](./figures/transfer_learning/prompting.png){width="35%"}
+![Prompting: a prompt $\mathbf{p](./figures/transfer_learning/prompting.png){width="35%" #fig-transfer_learning-prompting}
 
 Let's now look at several concrete ways of prompting a vision system.
 One simple way is to directly edit the input pixels, and this approach
 is shown in @fig-transfer_learning-pixel_prompt:
 
-![](./figures/transfer_learning/vp_hyojin.png){width="100%"}
+![A prompt can be made out of pixels: a prompt image (which looks like a border of noise here) is added to the input image in order to change the model's behavior. Three different prompts are shown, one that adapts the model to perform scene classification, a second for aesthetics classification, and a third for object classification. Modified from \cite{bahng2022exploring](./figures/transfer_learning/vp_hyojin.png){width="100%" #fig-transfer_learning-pixel_prompt}
 
 Here, the prompt is an image $\mathbf{p}$ that is added to the input
 image $\mathbf{x}$. The prompt looks like noise, but it is actually an

@@ -18,7 +18,7 @@ First, what is a perceptual group? Look at the photo in
 Not what raw pixel values you see, but what structures you see. What are
 some structures you can name?
 
-![](./figures/perceptual_organization/perc_org_teaser.png){width="100%"}
+![A few kinds of perceptual organization in the human visual system.](./figures/perceptual_organization/perc_org_teaser.png){width="100%" #fig-perceptual_organization-perc_org_teaser}
 
 What a camera sees is the raw RGB pixel values of the photo. But what
 your mind sees is rather different. You see contours and surfaces,
@@ -75,7 +75,7 @@ Some structures we see are hard to name but still clearly represent a
 coherent group in our heads. Consider, for example, the image in
 @fig-perceptual_organization-perc_org_nonsemantic_example below.
 
-![](./figures/perceptual_organization/perc_org_nonsemantic_example.png){width="35%"}
+![How many objects do you see?](./figures/perceptual_organization/perc_org_nonsemantic_example.png){width="35%" #fig-perceptual_organization-perc_org_nonsemantic_example}
 
 There are clearly two separate objects, but we don't have names for
 them. The next sections will cover a few different kinds of perceptual
@@ -97,7 +97,7 @@ solving this clustering problem: (1) assign similar pixels to the same
 cluster, (2) assign two pixels to the same cluster if there is no
 boundary between them. We will start with the first.
 
-![](./figures/perceptual_organization/ambiguous_segmentation_example.png){width="100%"}
+![There are multiple ways you might segment any given image, and each way will highlight different world properties. This cactus branch could be viewed as (a) a single segment (the ``branch''), (b) two segments (the ``leaf" and the ``flower''), or (c) four segments (the main ``leaf,'' two ``buds,'' and the ``flower'').](./figures/perceptual_organization/ambiguous_segmentation_example.png){width="100%" #fig-perceptual_organization-ambiguous_segmentation_example}
 
 ### $K$-Means Segmentation
 
@@ -115,7 +115,7 @@ pixel. An image represented this way can be plotted as a scatter plot
 and you can think of it as samples from a distribution over $ab$ colors,
 as shown in @fig-perceptual_organization-scatter_ab_fruits2.
 
-![](./figures/perceptual_organization/scatter_ab_fruits2.png){width="75%"}
+![Different regions of coherent color in the image correspond to clusters in the scatter plot of all the $ab$-values of the image's pixels. In general, segmentation can be reduced to the problem of \textit{clustering pixels](./figures/perceptual_organization/scatter_ab_fruits2.png){width="75%" #fig-perceptual_organization-scatter_ab_fruits2}
 
 $K$-means tries to find clusters in this scatter plot (and, if you
 prefer a probabilistic interpretation, it can be thought of as fitting a
@@ -126,7 +126,7 @@ its color value. Below we color each pixel in each cluster by the mean
 color of all pixels assigned to that cluster
 (@fig-perceptual_organization-kmeans_ab_fruits2).
 
-![](./figures/perceptual_organization/kmeans_ab_fruits2.png){width="100%"}
+![$K$-means segmentation on the fruits example.](./figures/perceptual_organization/kmeans_ab_fruits2.png){width="100%" #fig-perceptual_organization-kmeans_ab_fruits2}
 
 Naturally, $k$-means on $ab$-values finds segments that correspond to
 regions of roughly a constant color. This simple approach can be
@@ -137,7 +137,7 @@ However, it fails to group more complex patterns that are not defined by
 color similarity, as in the beach photo in
 @fig-perceptual_organization-kmeans_ab_zebra_and_beach.
 
-![](./figures/perceptual_organization/kmeans_ab_zebra_and_beach.png){width="100%"}
+![(top row): $k$-means segmentation succeeds on a seemingly hard image. \textit{Photo source](./figures/perceptual_organization/kmeans_ab_zebra_and_beach.png){width="100%" #fig-perceptual_organization-kmeans_ab_zebra_and_beach}
 
 ### Affinity-Based Segmentation {#sec-perceptual_organization-affinity_based_segmentation}
 
@@ -214,7 +214,7 @@ segmentation. This entire pipeline is shown in
 @fig-perceptual_organization-kmeans_dino, using DINO @caron2021emerging
 as the particular contrastive embedding.
 
-![](./figures/perceptual_organization/kmeans_dino.png){width="100%"}
+![Image segmentation using $k$-means over DINO~\cite{caron2021emerging](./figures/perceptual_organization/kmeans_dino.png){width="100%" #fig-perceptual_organization-kmeans_dino}
 
 ## Edges, Boundaries, and Contours
 

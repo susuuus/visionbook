@@ -155,7 +155,7 @@ that passes through the origin translates into the same point in
 heterogeneous coordinates). We can already see that this is closely
 related to the operation performed by perspective projection.
 
-![](figures/imaging_geometry/homogeneousAndHeteregeneous_VS3.png){width="70%"}
+![Transformation rule between heterogeneous and homogeneous coordinates in 2D. All the points along the dotted line correspond to the same point in heterogeneous coordinates. Note that the points $(x,y)$ and $(x,y,1)$ live in different spaces.](figures/imaging_geometry/homogeneousAndHeteregeneous_VS3.png){width="70%" #fig-homogeneousAndHeteregeneous}
 
 It is important to mention that while you can add two points in
 heterogeneous coordinates, you can not do the same in homogeneous
@@ -173,7 +173,9 @@ simple when using homogeneous coordinates, and they will become the
 basis for more complex operations such as 3D perspective projection and
 camera calibration as we will see in later sections.
 
-![](figures/imaging_geometry/2d_transformations.png){width="100%"}
+![2D geometric transformations. 
+%On the left we see the original image. The next four transformations correspond to translation, rotation, scaling and shear. Those four transformations can be easily described with matrices. 
+The final transformation is an arbitrary warping with a more complex deformation field.](figures/imaging_geometry/2d_transformations.png){width="100%" #fig-2dtransformations_clock}
 
 We'll explore the use of homogeneous coordinates for describing 2D
 geometric transformations first, then see how they can easily represent
@@ -230,7 +232,7 @@ To cascade two translation operations $\mathbf{t}$ and $\mathbf{s}$, in
 heterogeneous coordinates, we have
 $$\mathbf{p}' = \mathbf{p} + \mathbf{t}  + \mathbf{s}$$
 
-![](figures/imaging_geometry/translations.png){width=".7"}
+![(left) Translation. (right) Composition of two consecutive translations.](figures/imaging_geometry/translations.png){width=".7" #fig-translations}
 
 In homogeneous coordinates, we cascade the corresponding translation
 matrices: $$\mathbf{p}' = \mathbf{S} \mathbf{T} \mathbf{p},$$ where the
@@ -277,7 +279,7 @@ coordinates, $$\mathbf{S} =
 
 The scaling matrix is a diagonal matrix.
 
-![](figures/imaging_geometry/scaling.png){width=".6"}
+![Non-uniform or anisotropic scaling. In this example the $y$-axis is compressed and the $x$-axis is expanded.](figures/imaging_geometry/scaling.png){width=".6" #fig-scaling}
 
 Uniform scaling is obtained when $s_x=s_y$, otherwise the scaling is
 nonuniform or anisotropic. After uniform scaling, all of the angles are
@@ -294,7 +296,7 @@ matrix in homogeneous coordinates: $$\mathbf{R} =
     0 & 0 & 1
     \end{bmatrix}$$
 
-![](figures/imaging_geometry/rotation.png){width=".6"}
+![Rotation by an angle $\theta$ counterclockwise around the origin.](figures/imaging_geometry/rotation.png){width=".6" #fig-rotation}
 
 As in the case of the translation, a rotation in homogeneous coordinates
 is a product $$\mathbf{p}' = \mathbf{R} \mathbf{p},$$ Also, as we should
@@ -347,7 +349,7 @@ shown in the matrix, $\mathbf{Q}$: $$\mathbf{Q} =
 @fig-shear shows examples with an horizontal shear ($qx=1, q_y=0$), a
 vertical shear ($q_x=0, q_y=1$), and an arbitrary shear.
 
-![](figures/imaging_geometry/shear.png){width="100%"}
+![Three examples of shear transformation.](figures/imaging_geometry/shear.png){width="100%" #fig-shear}
 
 In the example of the horizontal shear, the points are displaced along
 horizontal lines by displacement proportional to the $y$ coordinate,
@@ -389,7 +391,7 @@ an addition breaking the homogeneity of this equation. The
 transformations described in this section are summarized in
 @fig-2dtransformations.
 
-![](figures/imaging_geometry/2d_transforms.png){width="100%"}
+![Summary of 2D geometric transformations and their formulation in homogeneous coordinates.](figures/imaging_geometry/2d_transforms.png){width="100%" #fig-2dtransformations}
 
 As matrix operation are noncommutative, the order in which operations
 are done is important (i.e., it is not the same to rotate with respect
@@ -478,7 +480,7 @@ we discussed before can be implemented as one-dimensional (1D)
 convolutions over the locations as shown in the diagram in
 @fig-rotation_as_convolution.
 
-![](figures/imaging_geometry/rotation_as_convolution.png){width=".6"}
+![Geometric transformation as a convolution. The input and output signals are represented as pixel sets with explicit geometry. The convolution kernels are $w_x$ and $w_y$, corresponding to one dimensional convolutions as they only mix input features within the same input vector. The output intensity values are the same as the input.](figures/imaging_geometry/rotation_as_convolution.png){width=".6" #fig-rotation_as_convolution}
 
 In the diagram (@fig-rotation_as_convolution), each input element is a
 vector $(x_i,y_i,\ell_i)$ where $x_i$, $y_i$ are the pixel location, and

@@ -90,7 +90,7 @@ identical length might have different lengths after a homography.
 @fig-illustration_homography2 shows how a planar grid gets transformed
 after applying a homography.
 
-![](figures/homography/example_homography.png){width=".7"}
+![Homography. Colinear points remain colinear after transformation. Angles between lines are not preserved.](figures/homography/example_homography.png){width=".7" #fig-illustration_homography2}
 
 Let's start discussing in which scenarios the coordinates of points
 between to images are related by a homography.
@@ -116,7 +116,7 @@ cameras differing only in their 3D orientation, as shown in
 their 2D positions written in homogeneous coordinates, that is, a
 homography.
 
-![](figures/homography/rotation_homography_vs3.png){width="100%"}
+![Camera rotation generates two images related by a homography.](figures/homography/rotation_homography_vs3.png){width="100%" #fig-rotation_homography}
 
 We start by setting the world coordinate system aligned with the
 coordinate system of camera 1, as shown in @fig-rotation_homography.
@@ -263,7 +263,7 @@ plane is defined by $Z=0$ as shown in the
 @fig-homography_plane_geometry. Note that the origin can be placed at
 any arbitrary location in the world.
 
-![](figures/homography/homography_plane_geometry2.png){width="70%"}
+![Geometry of a the projection of a planar scene. The origin of the world-coordinates system is placed inside the plane and the $Z$-axis is perpendicular to it.](figures/homography/homography_plane_geometry2.png){width="70%" #fig-homography_plane_geometry}
 
 The proof is similar to what we did in the previous section. We start
 writing the projection equation $$\lambda 
@@ -362,7 +362,7 @@ pair of images as shown in @fig-fig_matching_two_images. The
 correspondences in this example are computer using **speeded up robust
 features** (SURF) @Bay2008346.
 
-![](figures/homography/fig_matching_two_images3.png){width="100%"}
+![Two overlapping images and some found correspondences using SURF descriptors. A random set of four correspondences are highlighted.](figures/homography/fig_matching_two_images3.png){width="100%" #fig-fig_matching_two_images}
 
 ### Direct Linear Transform Algorithm
 
@@ -424,7 +424,7 @@ desired number of samplings, $S$, have been drawn. The output model is
 fitted from all the inlier datapoints corresponding to the model that
 led to the most inlier datapoints.
 
-![](figures/homography/ransac_algo.png){width="100%"}
+![RANSAC applied to robust estimation of line parameters. (a) Datapoints for which robust line estimation is sought. (b) Two points (in blue) are selected at random, sufficient to estimate line model parameters. The number of inliers is computed for this model. (c - e) Repeat $k$ times. (f) Finally, select the model with the maximum number of inliers.](figures/homography/ransac_algo.png){width="100%" #fig-ransac}
 
 The paper @Fischler1981 derives a heuristic for the number of samples,
 $S$, required to be assured a good model fit. Let $n$ be the number of

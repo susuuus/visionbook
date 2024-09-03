@@ -37,7 +37,7 @@ the continuous wavelength. We can represent the plenoptic function with
 the parametric form $L_{\theta}$ where the parameters $\theta$ have to
 be adapted to represent each scene.
 
-![](figures/nerfs/plenoptic_function.png){width="100%"}
+![Plenoptic function \cite{Adelson91](figures/nerfs/plenoptic_function.png){width="100%" #fig-nerfs-plenoptic_function}
 
 An image gets formed by summing all the light rays that reach each
 sensor on the camera (that is, we sum over a section of the plenoptic
@@ -105,7 +105,7 @@ Abbott @abbott2009flatland where the characters are triangles, squares,
 and other simple shapes that inhabit a 2D plane. Here is what their
 world looks like (@fig-nerfs-flatland_cameras_and_images):
 
-![](figures/nerfs/flatland_cameras_and_images.png){width="65%"}
+![The scene we are modeling. The circle of black triangles on the left are the cameras. The 1D images they see are shown on the right.](figures/nerfs/flatland_cameras_and_images.png){width="65%" #fig-nerfs-flatland_cameras_and_images}
 
 On the left is a top-down image of the world, but inhabitants of
 Flatland cannot see this. Instead they see the images on the right,
@@ -119,7 +119,7 @@ A radiance field for this scene is given in
 possible input coordinate $(X,Y)$ gets mapped to a corresponding output
 color $L^c$ and density $L^{\sigma}$.
 
-![](figures/nerfs/flatland_implicit_to_explicit_v2.png){width="100%"}
+![How a radiance field maps coordinates to colors/densities. (left) Input $(X,Y)$ coordinates, visualized with $X$-values in the green channel and $Y$-values in the blue channel. (right) Radiance field components $\lightfield^c$ (colors) and $\lightfield^\sigma$ (densities) rendered at each of these coordinates.](figures/nerfs/flatland_implicit_to_explicit_v2.png){width="100%" #fig-nerfs-flatland_implicit_to_explicit}
 
 ### Aside: Representing Scenes with Fields
 
@@ -238,7 +238,7 @@ reference="sec-transformers-positional_encodings"}).
 translates the $XY$-coordinate field of Flatland to positional
 encodings:
 
-![](figures/nerfs/flatland_positional_encoding.png){width="70%"}
+![The first layer of NeRF applies positional encoding to the input coordinate values. Here we show the resulting positional codes for all possible input coordinate values $(X,Y)$ within some range.](figures/nerfs/flatland_positional_encoding.png){width="70%" #fig-nerfs-flatland_positional_encoding}
 
 Fourier positional encodings are very effective for NeRFs because they
 help the network to model high frequencies variations, which are
@@ -363,7 +363,7 @@ along the ray $r$.
 
 @fig-nerfs-flatland_volume_rendering visualizes this procedure:
 
-![](figures/nerfs/flatland_volume_rendering.png){width="75%"}
+![Volume rendering of our Flatland radiance field.](figures/nerfs/flatland_volume_rendering.png){width="75%" #fig-nerfs-flatland_volume_rendering}
 
 Here we have a 2D radiance field of our Flatland scene, and we are
 looking at it from above. We show how two cameras (gray triangles in

@@ -114,7 +114,7 @@ illusion, using very simple elements to produce the illusion. The effect
 becomes more intense as we move our eyes to explore different parts of
 the bicycle.
 
-![](figures/optical_flow/moving_bike.png){width="100%"}
+![Motion-induced visual illusion, after \cite{Murakami2010](figures/optical_flow/moving_bike.png){width="100%" #fig-motion_illusion}
 
 The opposite visual illusion can also be achieved: perceiving no motion
 when there is movement. By creating sequences with isoluminant and
@@ -238,14 +238,14 @@ detecting the same logo, is not identical to the input patch. This
 discrepancy can be attributed to factors such as nondiscrete motion and
 the slight enlargement of the logo as the car approaches the camera.
 
-![](figures/optical_flow/matching_cost_figure.png){width="100%"}
+![Two frames and best match for an input patch from frame 1 within frame 2. Search is done only within a small neighborhood.](figures/optical_flow/matching_cost_figure.png){width="100%" #fig-matching_cost_figure}
 
 The patch size used to represent each pixel is the most important
 parameter in this algorithm.
 @fig-matching_optical_flow_patch_size_effect shows the effect of the
 choice of the parameter $s$ on the estimated optical flow.
 
-![](figures/optical_flow/matching_optical_flow_patch_size_effect.png){width=".8"}
+![Effect of the choice of the patch size parameter, $s$, on the estimated optical flow. When the patch size is just one pixel ($s=0$), the approach fails as there are many similar pixels that correspond to different parts of the scene. Only when the patches are large enough, the image matches correspond to the same scene elements. Large patch sizes are necessary. But too large patches lead to oversmoothing.](figures/optical_flow/matching_optical_flow_patch_size_effect.png){width=".8" #fig-matching_optical_flow_patch_size_effect}
 
 When using single pixels to represent each location, the matching fails
 in detecting true correspondences and the estimated motion field is very
@@ -302,7 +302,10 @@ reference="chapter-sampling"} and
 [\[chapter-temporal_filters\]](#sec-temporal_filters){reference-type="ref"
 reference="chapter-temporal_filters"}.
 
-![](figures/optical_flow/ted_demo_motion_1.png){width="100%"}
+![Space-time signals, building toward the fluted square-wave motion illusion. The first row shows a stationary sine wave. (a) Movie of a motionless sine wave. (b) Space-time plot shows only vertical structure. (c) Spatiotemporal Fourier transform shows all energy on the zero temporal frequency axis because nothing is moving. (d) The second row shows a moving sine wave. (e) In the space-time plot, speed corresponds to
+local orientation. (f) The Fourier transform energy is sheared according to
+the sine wave’s speed. (g–i) The third row shows a moving square wave. The additional harmonics required to form a square wave are visible in (i) the spatiotemporal Fourier transform.   
+%First row: stationary sine wave, (a) Movie of a motionless sine wave. (b) The space-time plot shows only vertical structure. (c) spatio-temporal Fourier transform has all energy on the zero temporal frequency axis, since nothing is moving. Second row:  (d) moving sine wave. (e) In the space-time plot, speed corresponds to local orientation. (f) The Fourier transform energy is sheared according to the sine wave's speed.   Third row:  Moving square wave.  The additional harmonics required to form a square wave are visible in the spatio-temporal Fourier transform, (i).](figures/optical_flow/ted_demo_motion_1.png){width="100%" #fig-motionIllusion1}
 
 The signals, and magnitudes of their space-time Fourier transforms, are
 developed in @fig-motionIllusion1 and
@@ -335,7 +338,7 @@ temporal frequencies, and multiplied by a sinc function over temporal
 frequency. The resulting Fourier transform magnitude is shown in
 @fig-motionIllusion2c.
 
-![](figures/optical_flow/ted_demo_motion_2.png){width="100%"}
+![Derivation of the fluted square-wave motion illusion, continued from \fig{\ref{fig:motionIllusion1](figures/optical_flow/ted_demo_motion_2.png){width="100%" #fig-motionIllusion2}
 
 Because orientation in space-time tells motion direction (section
 [\[sect:modelingSequences\]](#sect:modelingSequences){reference-type="ref"

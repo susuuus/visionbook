@@ -29,8 +29,8 @@ def extract_qmd_figures(qmd_content):
 
 def update_qmd_with_labels_captions(latex_figures, qmd_content):
     for label, details in latex_figures.items():
-        image_name = details["image_path"].split("/")[-1]
-        image_pattern = re.compile(rf'!\[\]\((.*?/{image_name})\)\{{(.*?)\}}')
+        image_name_base = details["image_path"].split("/")[-1].rsplit('.', 1)[0]  # Get the base name without extension
+        image_pattern = re.compile(rf'!\[\]\((.*?/{image_name_base}\.(?:png|jpg|jpeg|pdf))\)\{{(.*?)\}}')
         match = image_pattern.search(qmd_content)
         if match:
             image_line = match.group(0)

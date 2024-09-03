@@ -158,7 +158,7 @@ loss); terms for which $i == j$ are the positive pairs and we seek to
 maximize these dot product (they appear in both the numerator and
 denominator of the loss).
 
-![](figures/vision_and_language/clip_training_fig.png){width="85%"}
+![CLIP training for one batch of six language-image training examples. Green boxes are positive pairings (we seek to increase their value); these are the six training pairs. Red boxes are negative pairings (we seek to decrease their value); these are all other possible pairings within the batch. Inspired by figure 1 of \cite{radford2021learning](figures/vision_and_language/clip_training_fig.png){width="85%" #fig-vision_and_language-clip_training}
 
 After training, we have a text encoder $f_t$ and an image encoder
 $f_\ell$ that map to the same embedding space. In this space, the angle
@@ -189,7 +189,7 @@ feature in pixel-space while shape requires processing to extract, but
 in text-space, color words and shape words are equally superficial and
 easy to group sentences by.
 
-![](figures/vision_and_language/clip_mapping_diagram_two_branch.png){width="100%"}
+![CLIP~\cite{radford2021learning](figures/vision_and_language/clip_mapping_diagram_two_branch.png){width="100%" #fig-vision_and_language-clip_mapping_diagram_two_branch}
 
 After passing the data through these two encoders, the final stage is to
 normalize the outputs and compute the alignment between the image and
@@ -205,7 +205,7 @@ embeddings, with a cosine kernel, and remove the first principle
 component as that component codes for a global offset between the image
 embeddings and text embeddings.
 
-![](figures/vision_and_language/clip_shared_embedding.png){width="80%"}
+![CLIP~\cite{radford2021learning](figures/vision_and_language/clip_shared_embedding.png){width="80%" #fig-vision_and_language-clip_shared_embedding}
 
 Using language as one of the views may seem like a minor variation on
 the contrastive methods we saw previously, but it's a change that opens
@@ -239,7 +239,7 @@ The green outlined dot product is the highest, indicating that the query
 image will be classified as class $a$, which is defined as "striped red
 circles."
 
-![](figures/vision_and_language/clip_inference_fig.png){width="75%"}
+![Making a ``striped red circles'' (class $a$) versus ``polka dotted green square'' (class $b$) classifier using a trained CLIP. The CLIP model parameters are frozen and not updated. Instead the classifier is constructed by embedding the text describing to the two classes and seeing which is closer to the embedding of the query image. Inspired by figure 1 of \cite{radford2021learning](figures/vision_and_language/clip_inference_fig.png){width="75%" #fig-vision_and_language-clip_inference}
 
 @fig-vision_and_language-clip_clocks gives more examples of creating
 custom binary classifiers in this way. The two classes are described by
@@ -318,7 +318,7 @@ these models. @fig-vision_and_language-text2im_schematic_mapping shows
 how this problem looks as a mapping from the space of text to the space
 of images:
 
-![](figures/vision_and_language/text2im_schematic_mapping.png){width="100%"}
+![Text-to-image.](figures/vision_and_language/text2im_schematic_mapping.png){width="100%" #fig-vision_and_language-text2im_schematic_mapping}
 
 On the right is an example of such a system translating input text
 $\mathbf{t}$ to an output image $\hat{\boldsymbol\ell}$ that matches
@@ -344,7 +344,7 @@ looks like; it's conceptually the same as
 @fig-conditional_generative_models-cVAE_ball_bouncing_example_nets,
 which we saw previously.
 
-![](./figures/vision_and_language/text2im_VAE_training.png){width="100%"}
+![Training a cVAE to perform text-to-image. The dotted lines indicate that the image encoder is only used during training; at test time, usage follows the solid path. In this cartoon we draw the output as slightly distorted to reflect that the autoencoder path might not be able to perfectly reconstruct the input.](./figures/vision_and_language/text2im_VAE_training.png){width="100%" #fig-vision_and_language-text2im_VAE_training}
 
 After training this model, we can sample from it by simply discarding
 the image encoder and instead inputting a random Gaussian vector to the
@@ -366,9 +366,9 @@ text embedding vectors into each denoising U-Net, and even into multiple
 layers of each U-Net. This makes it very easy for the diffusion model to
 condition all of its decisions on the text information.
 
-![](./figures/vision_and_language/text2im_VAE_sampling.png){width="100%"}
+![Sampling from a trained cVAE.](./figures/vision_and_language/text2im_VAE_sampling.png){width="100%" #fig-vision_and_language-text2im_VAE_sampling}
 
-![](./figures/vision_and_language/text2im_diffusion_model.png){width="100%"}
+![A text-to-image diffusion model.](./figures/vision_and_language/text2im_diffusion_model.png){width="100%" #fig-vision_and_language-text2im_diffusion_model}
 
 Notice that @fig-vision_and_language-text2im_diffusion_model is
 actually very similar to @fig-vision_and_language-text2im_VAE_sampling.
@@ -453,7 +453,7 @@ In @fig-vision_and_language-different_visual_representations we show an
 image represented in several ways (the depth map is produced by
 MiDaS @Ranftl2022 and the text is produced by BLIP2 @li2023blip2):
 
-![](figures/vision_and_language/different_visual_representations.png){width="100%"}
+![Four representations computed from the input on the left. The input image itself (its pixel values) is in fact a fifth representation of the scene.](figures/vision_and_language/different_visual_representations.png){width="100%" #fig-vision_and_language-different_visual_representations}
 
 Think about the relative merits of each of these representations, and
 what advantages or disadvantages text might have over these other kinds
@@ -473,7 +473,7 @@ formulation of this goal @antol2015vqa. The problem statement in VQA is
 to make a system that maps an image and a textual question to a textual
 answer, as shown in @fig-vision_and_language-VQA_examples.
 
-![](figures/vision_and_language/VQA_examples.png){width="100%"}
+![An example VQA system.](figures/vision_and_language/VQA_examples.png){width="100%" #fig-vision_and_language-VQA_examples}
 
 
 

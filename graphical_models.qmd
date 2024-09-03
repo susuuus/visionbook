@@ -28,7 +28,7 @@ set of examples.
 
 Here is the simplest probabilistic graphical model:
 
-![](figures/graphical_models/x1.png){width="8%"}
+![A graphical model with only one node.](figures/graphical_models/x1.png){width="8%" #graph-3node}
 
 This **graph** is just a single node for the variable $x_1$. There is no
 restriction imposed by the graph on the functional form of its
@@ -76,7 +76,7 @@ other function $g(x_3)$, revealing the conditional independence of $x_1$
 and $x_3$. Graphically, we denote the conditioning on the variable $x_2$
 with a filled circle for that node:
 
-![](figures/graphical_models/3node.png){width="26%"}
+![Conditioning on the variable $x_2$ is indicated by the filled circle.](figures/graphical_models/3node.png){width="26%" #graph-3node2}
 
 We will exploit that structure of the joint probability to perform
 inference efficiently using an algorithm called belief propagation (BP).
@@ -90,7 +90,8 @@ cliques** of the graph. Here we define the terms.
 A **clique** is any set of nodes where each node is connected to every
 other node in the clique. These graphs illustrate the clique property:
 
-![](figures/graphical_models/cliques1.png){width="50%"}
+![A clique is any set of nodes where each node is connected to
+every other node in the same clique.](figures/graphical_models/cliques1.png){width="50%" #fig-chain}
 
 A **maximal clique** is a clique that can't include more nodes of the
 graph without losing the clique property. The sets of nodes below form
@@ -136,7 +137,7 @@ describe events over time.
 To capture relationships over space, a two-dimensional (2D) structure is
 useful, called a **Markov random field** (MRF) @Blake2011:
 
-![](figures/graphical_models/mrf.png){width="48%"}
+![Two-dimensional Markov random field.](figures/graphical_models/mrf.png){width="48%" #fig-leafs}
 
 Then the joint probability over all the variables factorizes into this
 product: $$p(\mathbf{x} \bigm | \mathbf{y}) = 
@@ -171,7 +172,7 @@ contributes a well-specified factor in the joint probability: the
 probability of its variable, conditioned all the variables originating
 arrows pointing into it. So this graph
 
-![](figures/graphical_models/directed.png){width="20%"}
+![A directed graphical model with three variables.](figures/graphical_models/directed.png){width="20%" #eq-directedjoint}
 
 denotes the joint probability,
 $$p(x_1, x_2, x_3) = p(x_2)  p(x_1 \bigm | x_2) p(x_3 \bigm | x_2) 
@@ -349,7 +350,7 @@ factorization above with an automatic procedure for identifying the
 computations needed for marginalizations and to cache them efficiently.
 BP does that by identifying those reusable sums, that is, the messages.
 
-![](figures/graphical_models/3bpc2.png){width="50%"}
+![Summary of the messages (partial sums) for a simple belief propagation example.](figures/graphical_models/3bpc2.png){width="50%" #fig-3bpc}
 
 ### Derivation of Message-Passing Rule {#sect:bpRules}
 
@@ -431,7 +432,9 @@ sense if one has teenaged children.)
 
 ### Marginal Probability
 
-![](figures/graphical_models/bpi.png){width="48%"}
+![To compute the marginal probability at node $i$, we multiply
+ together all the incoming messages at that node:  
+$p_{i](figures/graphical_models/bpi.png){width="48%" #fig-bpi}
 
 The marginal probability at a node $i$, equation
 (@eq-discreteMarginalization), is the sum over the joint probabilities
@@ -482,7 +485,7 @@ to calculate the incoming messages for the marginal probability at a
 single node.
 
   ----------------------------------------------------------
-   ![](figures/graphical_models/man1.png){width="20%"}
+   ![{\bf Synchronous parallel update schedule](figures/graphical_models/man1.png){width="20%" #fig-men}
                             \(a\)
   ----------------------------------------------------------
 
@@ -497,7 +500,7 @@ single node.
   ----------------------------------------------------------
 
   --------------------------------------------------------------
-   ![](figures/graphical_models/rootman1.png){width="20%"}
+   ![{\bf Depth-first BP message passing schedule](figures/graphical_models/rootman1.png){width="20%" #fig-men2}
                               \(a\)
   --------------------------------------------------------------
 
@@ -583,7 +586,7 @@ local evidence matrix, for each of the four depth states, at each left
 camera spatial position, is displayed in @fig-canoe4c. The intensities
 in each column in the third-row image add up to one.
 
-![](figures/graphical_models/bpcanoes5.png){width=".8"}
+![Belief propagation applied to graphical model, \fig{\ref{fig:canoe3](figures/graphical_models/bpcanoes5.png){width=".8" #fig-canoe4}
 
 The prior probability of any configuration of pixel disparity states is
 described by setting the compatibility matrices,
@@ -663,7 +666,7 @@ the arithmetic easy, we'll solve for the marginal probabilities in the
 graphical model of two-state (0 and 1) random variables shown in
 @fig-numerical.
 
-![](figures/graphical_models/numerical2.png){width="48%"}
+![Undirected graphical model used in belief propagation example.](figures/graphical_models/numerical2.png){width="48%" #fig-numerical}
 
 That graphical model has three hidden variables, and one variable
 observed to be in state 0. The compatibility matrices are given in the

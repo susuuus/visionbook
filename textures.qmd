@@ -27,7 +27,7 @@ works and how to modify textures to create new ones. It will also not
 help us in understanding what representation can be useful to measure
 similarity between textures.
 
-![](figures/heeger_bergen/infinite_texture.png){width="100%"}
+![The infinite texture generation algorithm. If we had access to a very large image of the texture we want to generate, we could just crop pieces from it to create new images.](figures/heeger_bergen/infinite_texture.png){width="100%" #fig-infinite_texture}
 
 Before we dive into computational approaches to texture analysis, let's
 first build some intuitions about what might be plausible
@@ -52,7 +52,7 @@ four elements, we are equally fast at reporting that number (figures
 [\[fig-parallel_counting\]](#fig-parallel_counting){reference-type="ref"
 reference="fig-parallel_counting"}\[a, b and c\]).
 
-![](figures/heeger_bergen/parallel_counting.png){width="100%"}
+![When looking at these images, we can count the number of circles at a glance if there are less than five circles. When an image has more than five items, we have to count them one by one.](figures/heeger_bergen/parallel_counting.png){width="100%" #fig-parallel_counting}
 
 But something interesting happens when images are composed of more than
 five similarly looking elements. If we want to count them we need to
@@ -75,7 +75,7 @@ psychophysics @Ariely2001.
 central cross and try to read the letter on the left and right without
 moving your eyes.
 
-![](figures/heeger_bergen/crowding.png){width="100%"}
+![Crowding. If you look at the central cross, the letter R on the right can be recognized, however the letter B on the left is hard to read.](figures/heeger_bergen/crowding.png){width="100%" #fig-crowding}
 
 You will notice that the letter R on the right can be recognized easily
 while the letter B on the left is hard to read. The reason cannot be due
@@ -111,7 +111,7 @@ texture in order to decide what those fundamental units were and his
 models were restricted to binary images formed by simple elements as
 shown in @fig-julez_texture.
 
-![](figures/heeger_bergen/julez.png){width=".9"}
+![Texture discrimination using textons.](figures/heeger_bergen/julez.png){width=".9" #fig-julez_texture}
 
 One interesting observation about @fig-julez_texture is that it seems
 easy to see the boundary between the two textures in the image.
@@ -148,7 +148,8 @@ new random samples of the same texture, as shown in
 computer graphics applications, and also as way of studying what
 representations of a texture can be useful for visual recognition.
 
-![](figures/heeger_bergen/analysis_heeger_bergen.png){width=".8"}
+![A reference texture image is transformed into a representation using a texture analysis (encoder). Then the texture synthesis procedure takes as input  a random noise image of the size of the desired output texture and the parameters of the reference image $\theta$.
+%Texture analysis (encoder) using a steerable pyramid with 4 orientations and 3 scales. The output representation is the concatenation of the 12 subband histograms, the low-pass residual histogram and the input image histogram.](figures/heeger_bergen/analysis_heeger_bergen.png){width=".8" #fig-analysis_heeger_bergen}
 
 An influential wavelet-based image synthesis algorithm is the
 Heeger-Bergen texture synthesis method published in 1995, with the
@@ -194,7 +195,7 @@ We will describe a similar algorithm in section
 reference="sec-generative_models-diffusion_models"} when talking about
 **diffusion models**.
 
-![](figures/heeger_bergen/heeger_bergen_iterations.png){width="100%"}
+![The steps of the Heeger-Bergen texture synthesis algorithm. The process starts with white noise input image. Each step takes as input the previous output, and it is modified by a function $f_{\theta](figures/heeger_bergen/heeger_bergen_iterations.png){width="100%" #fig-heeger_bergen_iterations}
 
 @fig-heegersubbands shows the main idea behind the approach proposed by
 Heeger and Bergen to implement the analysis and synthesis functions.
@@ -243,7 +244,7 @@ After histogram matching, the noise subband looks sparser, with many
 values set to zero. The same operation is done for all the subbands in
 the steerable pyramid.
 
-![](figures/heeger_bergen/heeger_bergen_one_subband_tmp.png){width="100%"}
+![Histogram matching for one of the subbands. The same operation is done for all the subbands independently.](figures/heeger_bergen/heeger_bergen_one_subband_tmp.png){width="100%" #fig-heegersubbands_histmatch}
 
 @fig-heegersubbandsb shows the result of applying this to all the
 subbands and then collapsing the pyramid to reconstruct an image. Then
@@ -268,7 +269,7 @@ into the original color space. For the results in @fig-two_examples,
 the algorithm is run only for 15 iterations. Adding more iterations
 makes the images look worse.
 
-![](figures/heeger_bergen/two_examples.png){width="100%"}
+![Two examples of synthesized textures. Inputs have a size of 256$\times$256 pixels, outputs are 512$\times$512. In these examples, the algorithm runs for 15 iterations, using a pyramid of six orientation and four scales.](figures/heeger_bergen/two_examples.png){width="100%" #fig-two_examples}
 
 Texture models using statistics of filter outputs are a precursor to
 diffusion models (section
@@ -305,7 +306,7 @@ algorithm @Efros99 is an example of the texture to be synthesized, and
 the output is an image of more of that texture. It is an iterative
 algorithm as shown in @fig-sampling_efros_leung.
 
-![](figures/heeger_bergen/sampling_efros_leung.png){width="100%"}
+![In the Efros-Leung algorithm \cite{Efros99](figures/heeger_bergen/sampling_efros_leung.png){width="100%" #fig-sampling_efros_leung}
 
 At each iteration, we have synthesized pixels in the neighborhood of the
 pixel to be synthesized. We look through the input image for examples of
@@ -367,7 +368,7 @@ Also, we can see that some elements of the reference texture might
 appear multiple times in the output texture. Removing repetitions
 requires decreasing the neighborhood size.
 
-![](figures/heeger_bergen/two_examples_efros_leung.png){width="100%"}
+![Image synthesis results from the Efros-Leung algorithm.  The small crops are used to synthesize the larger texture regions. Input images are 128$\times$128 pixels, and the outputs are 256$\times$256 pixels. The neighbourhood size is 17$\times$17 pixels.](figures/heeger_bergen/two_examples_efros_leung.png){width="100%" #fig-efrosresult}
 
 Embellishments have been developed that account for structures over
 scale @DeBonet98 or which are more efficient by operating on patches

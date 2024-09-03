@@ -8,11 +8,11 @@ the image classifier from chapter
 reference="chapter-intro_to_learning"}, shown again below
 (@fig-gen_models_image_classification):
 
-![](./figures/generative_models/image_classification_bird.png){width="70%"}
+![A classifier maps images to labels.](./figures/generative_models/image_classification_bird.png){width="70%" #fig-gen_models_image_classification}
 
 A generative model does the opposite (@fig-gen_models_image_generation):
 
-![](./figures/generative_models/image_generation_bird.png){width="70%"}
+![A generator maps labels (or other descriptions) to images.](./figures/generative_models/image_generation_bird.png){width="70%" #fig-gen_models_image_generation}
 
 Whereas an image classifier is a function
 $f: \mathcal{X} \rightarrow \mathcal{Y}$, a generative model is a
@@ -39,7 +39,7 @@ an image based on $\mathbf{z}$ and $\mathbf{y}$: $$\begin{aligned}    \mathbf{z}
 \end{aligned}$$  This procedure is shown in
 @fig-generative_models-image_generation_with_z:
 
-![](./figures/generative_models/image_generation_with_z_birds.png){width="70%"}
+![Making a generator stochastic by conditioning on a random variable.](./figures/generative_models/image_generation_with_z_birds.png){width="70%" #fig-generative_models-image_generation_with_z}
 
 Usually we draw $\mathbf{z}$ from a simple distribution such as Gaussian
 noise, that is, $p(Z) = \mathcal{N}(\mathbf{0},\mathbf{1})$. The way to
@@ -101,7 +101,7 @@ $z_i \in \{0,1\}$ **Output:** Picture of a river
 Here are a few rivers this program draws
 (@fig-generative_models-rivers1):
 
-![](./figures/generative_models/G4_river.png){width="80%"}
+![Procedurally generated rivers.](./figures/generative_models/G4_river.png){width="80%" #fig-generative_models-rivers1}
 
 This program relies on a sequence of coin flips to generate the path of
 the river. In other words, the program took a randomized vector (noise)
@@ -110,7 +110,7 @@ river. It's exactly the same idea as we described previously for
 generating images of birds, just this time the generator is a program
 that makes rivers (@fig-generative_models-gen_model_of_rivers_diagram):
 
-![](./figures/generative_models/gen_model_of_rivers_diagram.png){width="75%"}
+![A generator that makes procedural rivers.](./figures/generative_models/gen_model_of_rivers_diagram.png){width="75%" #fig-generative_models-gen_model_of_rivers_diagram}
 
 This generator was written by hand. Next we will see generative models
 that *learn* the program that synthesizes data.
@@ -128,7 +128,7 @@ randomized $\mathbf{z}$-vectors to produce novel outputs, a process
 called **sampling** from the model. This two-stage procedure is shown in
 @fig-generative_models-gen_model_training_vs_sampling:
 
-![](./figures/generative_models/gen_model_training_vs_sampling.png){width="90%"}
+![Learning and using a generator.](./figures/generative_models/gen_model_training_vs_sampling.png){width="90%" #fig-generative_models-gen_model_training_vs_sampling}
 
 ### What's the Objective of Generative Modeling?
 
@@ -198,7 +198,7 @@ general flavors, density models and energy models, which we will
 describe next. Both follow the schematic given in
 @fig-generative_models-gen_model_training_vs_sampling_indirect:
 
-![](./figures/generative_models/gen_model_training_vs_sampling_indirect.png){width="100%"}
+![The indirect approach to generative modeling. The scoring function can be either a probability density or an energy function. The models we learned about in \chap{\ref{chapter:stat_image_models](./figures/generative_models/gen_model_training_vs_sampling_indirect.png){width="100%" #fig-generative_models-gen_model_training_vs_sampling_indirect}
 
 ## Density Models
 
@@ -338,7 +338,7 @@ assigned to samples from the model (i.e., samples from the energy
 function itself; negative term), as shown in
 @fig-generative_models-contrastive_divergence:
 
-![](./figures/generative_models/contrastive_divergence.png){width="100%"}
+![Fitting a max likelihood energy function to data, using contrastive divergence~\cite{hinton2002training](./figures/generative_models/contrastive_divergence.png){width="100%" #fig-generative_models-contrastive_divergence}
 
 Once the energy function perfectly adheres to the data, samples from the
 model are identical to samples from the data and the positive and
@@ -581,7 +581,7 @@ chapter
 [\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
 reference="chapter-intro_to_learning"}.
 
-![](./figures/generative_models/autoregressive_softmax_regression.png){width="100%"}
+![Autoregressive prediction as next-pixel-classification.](./figures/generative_models/autoregressive_softmax_regression.png){width="100%" #fig-generative_models-autoregressive_softmax_regression}
 
 If we have color images we need to predict three values per-pixel, one
 for each of the red, green, and blue channels. One way to do this is to
@@ -622,7 +622,7 @@ pixel $\mathbf{x}_n$. These can be extracted by traversing training
 images in raster order. The full training and testing setup looks like
 this (@fig-generative_models-autoregressive_train_predict):
 
-![](./figures/generative_models/autoregressive_train_predict.png){width="100%"}
+![Training an autoregressive model, then sampling images from it.](./figures/generative_models/autoregressive_train_predict.png){width="100%" #fig-generative_models-autoregressive_train_predict}
 
 It's worth noting here two different ways of setting up the training
 batches, one of which is much more efficient than the other. The first
@@ -682,7 +682,7 @@ the *reverse* direction: starting with a complete image, they remove one
 pixel, then the next, and the next
 (@fig-generative_models-reverse_autoregressive_sequence):
 
-![](./figures/generative_models/reverse_autoregressive_sequence.png){width="100%"}
+![An autoregressive sequence in reverse is a corruption process that removes one pixel at a time.](./figures/generative_models/reverse_autoregressive_sequence.png){width="100%" #fig-generative_models-reverse_autoregressive_sequence}
 
 This is a *signal corruption* process. The idea of diffusion models is
 that this is not the only corruption process we could have used, and
@@ -695,7 +695,7 @@ $\mathbf{x}_2$, and so on. Most commonly, the noise is isotropic
 Gaussian noise. @fig-generative_models-forward_diffusion_process shows
 what that looks like:
 
-![](./figures/generative_models/forward_diffusion_process.png){width="100%"}
+![Forward diffusion process.](./figures/generative_models/forward_diffusion_process.png){width="100%" #fig-generative_models-forward_diffusion_process}
 
 After $T$ steps of this process, the image $\mathbf{x}_T$ looks like
 pure noise, if $T$ is large enough. In fact, if we use the following
@@ -719,7 +719,7 @@ and thereby provide a sequence of *training examples* of the mapping
 $\mathbf{x}_t \rightarrow \mathbf{x}_{t-1}$, and these examples can be
 fit by a predictor $f_{\theta}$.
 
-![](./figures/generative_models/reverse_diffusion_process.png){width="100%"}We call $f_{\theta}$ a **denoiser**; it learns to remove a little bit of
+![Reverse diffusion process. The forward process creates supervision to train the reverse process.](./figures/generative_models/reverse_diffusion_process.png){width="100%" #fig-generative_models-reverse_diffusion_process}We call $f_{\theta}$ a **denoiser**; it learns to remove a little bit of
 noise from an image. If we apply this denoiser over and over, starting
 with pure noise, the process should coalesce on a noise-less image that
 looks like one of our training examples. The steps to train a diffusion
@@ -823,7 +823,7 @@ score to generated images (classifying them as synthetic) and a low
 score to real images from some training set (classifying them as real),
 as shown in @fig-generative_models-generative_models-gan_schematic.
 
-![](./figures/generative_models/gan_schematic.png){width="100%"}
+![Architecture of a GAN being trained to generate images of flamingos. The synthetic image in this example is generated by BigGAN~\cite{brock2018large](./figures/generative_models/gan_schematic.png){width="100%" #fig-generative_models-generative_models-gan_schematic}
 
 Although we call this an adversarial game, the discriminator is in fact
 helping the generator to perform better and better, by pointing out its

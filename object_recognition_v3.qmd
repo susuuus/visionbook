@@ -103,7 +103,7 @@ performing a **mental rotation** in order to compare both views. Whether
 humans actually perform mental rotations or not still remains
 controversial.
 
-![](figures/object_recognition/mental_rotation.png){width="60%"}
+![Two figures related by a 3D rotation. Modified from \cite{Shepard1971aa](figures/object_recognition/mental_rotation.png){width="60%" #fig-mental_rotation}
 
 Michael Tarr and Steven Pinker @Tarr1989MentalRA showed that similar
 results where obtained on a learning task. When observers learn to
@@ -231,7 +231,7 @@ function that maps the input image ${\bf x}$ into an output vector
 $\hat {\bf y}$: $$\hat {\bf y} = f({\bf x})$$ The output,$\hat {\bf y}$, of the function will be a binary response: $1=yes$, the
 object is present; and $0=no$, the object is not present.
 
-![](figures/object_recognition/image_classification.png){width="50%"}
+![Image classification: Is there a car in this image?](figures/object_recognition/image_classification.png){width="50%" #fig-classification_training_set}
 
 In general we want to classify an image according to multiple classes.
 We can do this by having as output a vector $\hat {\bf y}$ of length
@@ -307,7 +307,7 @@ interpreted as the probability
 $\hat{y}_c = p_\theta(Y_c=1 \bigm | \mathbf{x})$, but without the
 constraint that the sum across classes is 1.
 
-![](figures/object_recognition/class_architecture.png){width="70%"}
+![Multilabel image classification system.](figures/object_recognition/class_architecture.png){width="70%" #fig-class_architecture}
 
 ### Classification Loss
 
@@ -522,7 +522,7 @@ image ${\bf x}$ into a list of bounding boxes $\hat {\bf b}_i$ and the
 associated classes to each bounding box encoded by a vector
 $\hat {\bf y}_i$, as illustrated in @fig-object_detection_bb.
 
-![](figures/object_recognition/object_detection_bb.png){width="40%"}
+![Car localization using bounding boxes. Each instance is shown with a different color.](figures/object_recognition/object_detection_bb.png){width="40%" #fig-object_detection_bb}
 
 The class vector, $\hat {\bf y}_i$, has the same structure as in the
 image classification task but now it is applied to describe each
@@ -550,7 +550,7 @@ turned into a detector by sliding it across the image (or image
 pyramid), and classifying each local window as shown in
 @fig-scanningWindow2.
 
-![](figures/object_recognition/scanningWindow2.png){width="100%"}
+![Window scanning approach using a multiscale image pyramid.](figures/object_recognition/scanningWindow2.png){width="100%" #fig-scanningWindow2}
 
 The window scanning algorithm is the following:
 
@@ -625,7 +625,7 @@ Each step can be implemented in several different ways, giving rise to
 different approaches. The whole pipeline is summarized in
 @fig-selective_search_pipeline.
 
-![](figures/object_recognition/selective_search.png){width="100%"}
+![A first classifier selects candidate bounding boxes. A second, stronger, classifier makes the final detections (e.g., cars). Nonmaximum suppression (NMS) removes overlapping detections.](figures/object_recognition/selective_search.png){width="100%" #fig-selective_search_pipeline}
 
 Bounding box proposal (represented as $f_0$ in
 @fig-selective_search_architecture) can be implemented in several ways
@@ -634,7 +634,7 @@ Bounding box proposal (represented as $f_0$ in
 classification and bounding box refinement, $f_1$, can be implemented by
 a classifier and a regression function.
 
-![](figures/object_recognition/selective_search_architecture.png){width=".4"}
+![Sketch of the selective search architecture. The image is first broken into candidate regions. Then each region is processed individually using a classifier and a regression.](figures/object_recognition/selective_search_architecture.png){width=".4" #fig-selective_search_architecture}
 
 #### Cascade of classifiers
 
@@ -681,7 +681,7 @@ classifier allocates computing power in the image when trained to detect
 faces. The intensity shown in the heat map is proportional to the number
 of levels in the cascade applied to each location.
 
-![](figures/object_recognition/cascade.png){width=".8"}
+![(left) Input image with the output of a face detector from 1999. (right) The heat map reports the computational cost at each location. Most of the computation was allocated into the wrong detections in the top left corner. Figure from \cite{Fleuret2001](figures/object_recognition/cascade.png){width=".8" #fig-iou_l2_comparison}
 
 It is interesting to point out that the scanning window approach
 ($Levels = 1$) and the selective search procedure ($Levels = 2$) are
@@ -834,7 +834,7 @@ values of precision and recall correspond to high performance. The next
 graph (@fig-example_precision_recall) shows the precision-recall curve
 as a function of $\beta$ (decision threshold).
 
-![](figures/object_recognition/example_precision_recall.png){width=".45"}
+![Example of a precision-recall curve. This is a standard plot to evaluate detection algorithms. It is usually summarized by the area under the curve. In this example, note that recall stops around 0.5. This is because this algorithm fails to detect the other 50 percent of the test examples for all thresholds $\beta$.](figures/object_recognition/example_precision_recall.png){width=".45" #fig-example_precision_recall}
 
 The precision-recall curve is non-monotonic. The average precision (AP)
 summarizes the entire curve with one number. The AP is the area under
@@ -886,7 +886,7 @@ Per-pixel classification of object labels, illustrated in
 @fig-semantic_class_segmentation, is referred to as **semantic
 segmentation**.
 
-![](figures/object_recognition/semantic.png){width="60%"}
+![Semantic segmentation. Every pixel is annotated with a semantic tag (red = car, blue = building, green = road, yellow = sidewalk, and cyan = sign).](figures/object_recognition/semantic.png){width="60%" #fig-semantic_class_segmentation}
 
 In the most generic formulation, semantic segmentation takes an image as
 input, $\mathbf{x}(n,m)$, and it outputs a classification vector at each
@@ -898,7 +898,7 @@ Generally the function $f$ is a neural network with an encoder-decoder
 structure (@fig-segmentation_architecture), first introduced in
 @Badrinarayanan2015.
 
-![](figures/object_recognition/segmentation_architecture.png){width="30%"}
+![Sketch of the encoder-decoder architecture for semantic segmentation.](figures/object_recognition/segmentation_architecture.png){width="30%" #fig-segmentation_architecture}
 
 Another formulation consists of implementing a window-scanning approach
 where the function $f$ scans the image and takes as input an image patch
@@ -950,7 +950,7 @@ set of localized objects, but rather than representing them as bounding
 boxes we represent them as pixel-level masks as shown in
 @fig-instance_segmentation.
 
-![](figures/object_recognition/instance_segmentation.png){width="60%"}
+![Instance segmentation. Each instance of the class car is assigned to a different color.](figures/object_recognition/instance_segmentation.png){width="60%" #fig-instance_segmentation}
 
 The difference from semantic segmentation is that if there are $K$
 objects of the same type, we will output $K$ masks; conversely, semantic
@@ -968,7 +968,7 @@ way we get an instance mask for each box. Such an approach was
 introduced in @he2017. The architecture is illustrated in
 @fig-instance_segmentation_architecture.
 
-![](figures/object_recognition/instance_segmentation_architecture.png){width="50%"}
+![Architecture for instance segmentation. This architecture combines several of the components we have seen previously. The image is first broken into overlapping regions, and then class segmentation is applied to each region individually.](figures/object_recognition/instance_segmentation_architecture.png){width="50%" #fig-instance_segmentation_architecture}
 
 As before, $f_0$ is a low-cost detector that proposes regions likely to
 contain instances of the target object. The function $f_1$ performs
@@ -1021,7 +1021,7 @@ four different approaches we have described use a common set of building
 blocks: image classifiers, region proposals, pixelwise classifiers, and
 bounding box regression.
 
-![](figures/object_recognition/model_cards_v2.png){width="100%"}
+![A family of object recognition definitions.](figures/object_recognition/model_cards_v2.png){width="100%" #fig-pictorialsummary}
 
 However, the representations we have described in this chapter feel very
 incomplete. If you are building a robot or an autonomous vehicle, such

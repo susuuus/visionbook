@@ -172,7 +172,7 @@ Figure @fig-gaussian_xyt_section shows a different visualization of the same fil
 Such a filter $h$ will cancel any objects moving at the velocity $(v_x,v_y)$. By using different filters, each one computing derivatives along different space-time orientations, we can create output sequences where specific objects disappear, as shown in Figure @fig-tunedfilter. This filter is called a **nulling filter** [@Darrell93].
 
 ::: {#fig-tunedfilter}
-![](figures/temporal_filters/seq_filtered_der.png){width=100%}
+![(a) Input sequence. (b) Output to $h$ with $v_x=v_y=0$. (c) $v_x=1$ pixels/frame. (d) $v_x=-1$ pixel/frame.](figures/temporal_filters/seq_filtered_der.png){width=100% #fig-tunedfilter}
 
 (a) Input sequence. (b) Output to $h$ with $v_x=v_y=0$. (c) $v_x=1$ pixels/frame. (d) $v_x=-1$ pixel/frame.
 :::

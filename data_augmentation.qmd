@@ -112,7 +112,7 @@ in-distribution, compared to the training data. If we apply enough data
 augmentation, then the test data will look just like more random samples
 from the training distribution!
 
-![](./figures/data_augmentation/data_aug_real_example.png){width="100%"}
+![Data augmentation broadens the training distribution so that it might better cover the test cases. (a) Training data are from Caltech256~\cite{griffin2007caltech](./figures/data_augmentation/data_aug_real_example.png){width="100%" #fig-data_augmentation-data_aug_real_example}
 
 ### Learned Data Augmentation
 

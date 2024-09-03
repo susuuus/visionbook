@@ -491,7 +491,7 @@ multiply (`matmul`) for each layer of the layer of the backward network.
 The full network, for a three-layer MLP, is shown in
 @fig-backpropagation-backprop_as_neural_net.
 
-![](./figures/backpropagation/backprop_as_neural_net.png){width="100%"}
+![The computation graph for backpropagation through a three-layer MLP. It's just another neural net! Solid lines are involved in computing data/activation gradients and dotted lines are involved in computing parameter gradients.\\ \hfill \break\raisebox{0.5mm](./figures/backpropagation/backprop_as_neural_net.png){width="100%" #fig-backpropagation-backprop_as_neural_net}
 
 There are a few interesting things about this forward-backward network.
 One is that *activations* from the `relu` layers get transformed to
@@ -608,7 +608,7 @@ simply inserting these layers wherever we want a layer to have multiple
 inputs or multiple outputs. An example is given in
 @fig-backpropagation-backprop_DAG.
 
-![](./figures/backpropagation/DAG.png){width="25%"}
+![An example of a DAG computation graph that we can construct, and do backpropagation through, with the tools defined previously.](./figures/backpropagation/DAG.png){width="25%" #fig-backpropagation-backprop_DAG}
 
 ## Parameter Sharing
 

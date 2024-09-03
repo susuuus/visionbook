@@ -53,7 +53,7 @@ h_\theta \left( \boldsymbol\ell_1, \boldsymbol\ell_2 \right)$$ One of
 the first approaches to use this formulation with neural networks was
 FlowNet @Dosovitskiy2015. The architecture is simple.
 
-![](figures/optical_flow/supervised_estimation.png){width=".8"}
+![In FlowNet the direct approach estimates optical flow directly from a pair of frames.](figures/optical_flow/supervised_estimation.png){width=".8" #fig-supervised_estimation}
 
 The direct approach depicted in @fig-supervised_estimation learns to
 estimate optical flow directly from a pair of frames. This architecture
@@ -84,7 +84,14 @@ follows the same steps as traditional approaches:
     the optical flow to warp the features and the next finer level of
     the pyramid.
 
-![](figures/optical_flow/supervised_estimation_modular.png){width=".8"}
+![Motion estimation. (1) Extract
+features from each image;
+(2) compute a 3D cost volume;
+and (3) aggregate the
+cost volume in order to
+estimate the best optical
+flow for each pixel.
+%Motion estimation by: 1) Extract features from each image, 2) compute a 3D cost volume, and 3) aggregate the cost volume in order to estimate the best optical flow for each pixel.](figures/optical_flow/supervised_estimation_modular.png){width=".8" #fig-supervised_estimation_modular}
 
 Other variations over this architecture incorporate some of the concepts
 we studied before, such as coarse-to-fine refinement, matching, and

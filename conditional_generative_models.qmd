@@ -164,7 +164,7 @@ Nonetheless, we can still do this using a reasonable number of classes,
 and it might look like as shown in
 @fig-conditional_generative_models-color_quantization.
 
-![](./figures/conditional_generative_models/color_quantization.png){width="80%"}
+![The funny shape of the $lab$ color gamut is because not every $ab$ value maps to a valid pixel color. When working with predictions over $lab$ color space, we may map $ab$ values that fall outside the gamut (valid range) to the nearest in-gamut value.](./figures/conditional_generative_models/color_quantization.png){width="80%" #fig-conditional_generative_models-color_quantization}
 
 The real problem comes about when predicting more than one pixel. To
 quantize the $ab$-values of $N$ pixels requires $k^{2N}$ classes, again
@@ -231,7 +231,7 @@ transitions from predicting pink (where $p(\text{teal}) < 0.5$) and teal
 flipping is shown in
 @fig-conditional_generative_models-cgen_tshirt_color_inconsistency.
 
-![](./figures/conditional_generative_models/cgen_tshirt_color_inconsistency.png){width="100%"}## Conditional Generative Models Solve Multimodal Structured Prediction
+![Color flipping can arise from a smooth underlying predictive distribution, on top of which independent choices are made.](./figures/conditional_generative_models/cgen_tshirt_color_inconsistency.png){width="100%" #fig-conditional_generative_models-cgen_tshirt_color_inconsistency}## Conditional Generative Models Solve Multimodal Structured Prediction
 
 In the previous section, we learned that standard approaches to
 prediction are insufficient for making the kinds of predictions we
@@ -347,7 +347,7 @@ happen in practice).
 @fig-conditional_generative_models-cVAE_ball_bouncing_example shows
 this scenario.
 
-![](./figures/conditional_generative_models/cVAE_ball_bouncing_example.png){width="60%"}
+![A scenario where a yellow ball is moving across a plane. The observation, $\mathbf{x](./figures/conditional_generative_models/cVAE_ball_bouncing_example.png){width="60%" #fig-conditional_generative_models-cVAE_ball_bouncing_example}
 
 Just like regular VAEs, cVAEs also have an encoder, which acts to
 predict the optimal importance sampling distribution
@@ -360,7 +360,7 @@ addition to $\mathbf{y}$), and the decoder also takes in $\mathbf{x}$
 reference="fig-conditional_generative_models-cVAE_ball_bouncing_example_nets"}
 depicts this setting.
 
-![](./figures/conditional_generative_models/cVAE_ball_bouncing_example_nets.png){width="90%"}
+![cVAE architecture. The dotted lines indicate that the \textit{target encoder](./figures/conditional_generative_models/cVAE_ball_bouncing_example_nets.png){width="90%" #fig-conditional_generative_models-cVAE_ball_bouncing_example_nets}
 
 ### Conditional Autoregressive Models
 
@@ -404,7 +404,7 @@ reference="chapter-VLMs"} we will describe in more detail a particular
 neural architecture for text-to-image synthesis, which is based on this
 intuition.
 
-![](./figures/conditional_generative_models/text_conditional_diffusion_model.png){width="100%"}
+![Text-conditional diffusion model.](./figures/conditional_generative_models/text_conditional_diffusion_model.png){width="100%" #fig-conditional_generative_models-text_conditional_diffusion_model}
 
 ## Structured Prediction in Vision
 
@@ -466,7 +466,7 @@ discriminator we will use a regular CNN (just like the ones used for
 image classification). Here is the full architecture
 (@fig-conditional_generative_models-pix2pix_facades_arch):
 
-![](./figures/conditional_generative_models/pix2pix_facades_arch.png){width="90%"}
+![The pix2pix~\cite{pix2pix2017](./figures/conditional_generative_models/pix2pix_facades_arch.png){width="90%" #fig-conditional_generative_models-pix2pix_facades_arch}
 
 Notice that we have omitted the noise inputs here; instead the generator
 only takes as input the image $\mathbf{x}$. It turns out that in this
@@ -482,7 +482,7 @@ with a *learned loss function* $d_{
 \phi}$, a view shown in
 @fig-conditional_generative_models-cGAN_as_learned_loss.
 
-![](./figures/conditional_generative_models/cGAN_as_learned_loss.png){width="90%"}
+![The discriminator of a GAN as a learned loss function.](./figures/conditional_generative_models/cGAN_as_learned_loss.png){width="90%" #fig-conditional_generative_models-cGAN_as_learned_loss}
 
 This loss function adapts to the structure of the data and the behavior
 of the generator to penalize just the relevant errors the generator is
@@ -523,7 +523,7 @@ different discriminator patch sizes and observing the results. We show
 this in
 @fig-conditional_generative_models-patchgan_patch_size_variations.
 
-![](./figures/conditional_generative_models/patchgan_patch_size_variations.png){width="100%"}
+![Varying the receptive field (patch size) of the convolutional discriminator affects what kinds of structure the discriminator enforces. These results are from \cite{pix2pix2017](./figures/conditional_generative_models/patchgan_patch_size_variations.png){width="100%" #fig-conditional_generative_models-patchgan_patch_size_variations}
 
 . []{#fig-conditional_generative_models-patchgan_patch_size_variations
 label="fig-conditional_generative_models-patchgan_patch_size_variations"}
@@ -550,7 +550,7 @@ paired training data is hard to obtain. For example, consider the task
 of translating a photo into a Cezanne painting
 (@fig-conditional_generative_models-cyclegan_teaser):
 
-![](./figures/conditional_generative_models/cyclegan_teaser.png){width="60%"}
+![A style transfer example from the CycleGAN paper~\cite{CycleGAN2017](./figures/conditional_generative_models/cyclegan_teaser.png){width="60%" #fig-conditional_generative_models-cyclegan_teaser}
 
 The task depicted here is to predict: What would it have looked like if
 Cezanne had stood at this riverbank and painted it?
@@ -572,7 +572,7 @@ can give a machine this same ability. We call this setting the
 translation** as indicated in
 @fig-conditional_generative_models-paired_vs_unpaired.
 
-![](./figures/conditional_generative_models/paired_vs_unpaired.png){width="70%"}
+![(left) An example of paired image-to-image translation (colorization) versus (right) unpaired translation (photo to Cezanne). Figure adapted from \cite{CycleGAN2017](./figures/conditional_generative_models/paired_vs_unpaired.png){width="70%" #fig-conditional_generative_models-paired_vs_unpaired}
 
 It turns out that GANs have a very useful property that makes them
 well-suited to solving this task. GANs train a mapping from a noise
@@ -652,7 +652,7 @@ back should arrive where it started (and, again, vice versa). A diagram
 for this whole process is given in
 @fig-conditional_generative_models-cyclegan_schematic:
 
-![](./figures/conditional_generative_models/cyclegan_schematic.png){width="100%"}
+![CycleGAN schematic. Figure derived from \cite{CycleGAN2017](./figures/conditional_generative_models/cyclegan_schematic.png){width="100%" #fig-conditional_generative_models-cyclegan_schematic}
 
 The cycle-consistency losses encourage that the translation is a
 one-to-one function, and thereby reduce the number of valid solutions.

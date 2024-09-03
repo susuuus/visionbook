@@ -28,7 +28,7 @@ $\mathbf{x} \in \mathcal{X}$, to abstract representations,
 $\mathbf{z} \in \mathcal{Z}$, as schematized in
 @fig-representation_learning-rep_learning_schematic:
 
-![](figures/representation_learning/rep_learning_schematic.png){width=".52"}
+![The goal in this chapter is to learn to map from datapoints to abstract representations, which are typically simpler and more useful than the raw data.](figures/representation_learning/rep_learning_schematic.png){width=".52" #fig-representation_learning-rep_learning_schematic}
 
 We call this mapping an **encoding** and learn an function
 $f: \mathcal{X} \rightarrow \mathcal{Z}$. Typically both $\mathbf{x}$
@@ -159,7 +159,7 @@ a function that maps data back to itself (hence the "auto"), but via a
 low-dimensional representational **bottleneck**, as shown in
 @fig-representation_learning-autoencoder_diagram:
 
-![](figures/representation_learning/autoencoder_diagram.png){width="100%"}
+![{\small (left) An autoencoder maps from points in data space, to points in representation space, and back. (right) An example of running an autoencoder on an input image of a bird.](figures/representation_learning/autoencoder_diagram.png){width="100%" #fig-representation_learning-autoencoder_diagram}
 
 On the right of this figure is an example of an autoencoder applied to
 an image. At first glance this might not seem very useful: the output is
@@ -229,7 +229,7 @@ domain, consisting just of colored circles, triangles, and squares. The
 data consists of 64,000 images, samples of which are shown in
 @fig-representation_learning-shapes_dataset_random_samples.
 
-![](figures/representation_learning/shapes_dataset_random_samples.png){width="27.5%"}
+![A sample from the toy dataset we will work with in this chapter.](figures/representation_learning/shapes_dataset_random_samples.png){width="27.5%" #fig-representation_learning-shapes_dataset_random_samples}
 
 []{#fig-representation_learning-shapes_dataset_random_samples
 label="fig-representation_learning-shapes_dataset_random_samples"}
@@ -258,7 +258,7 @@ one-nearest-neighbor classifier in embedding space. Below, in
 @fig-representation_learning-AE_results_shapes_dataset, we show both
 these analyses.
 
-(a) ![](figures/representation_learning/AE_NN_viz.png){width="38%"}
+(a) ![(a) Nearest neighbors, in autoencoder embedding space, to a set of query images. (b) Classification accurracy of a one-nearest-neighbor classifier of color and shape using the embeddings at each layer of the autoencoder's encoder.](figures/representation_learning/AE_NN_viz.png){width="38%" #fig-representation_learning-AE_results_shapes_dataset}
 (b)
 ![](figures/representation_learning/AE_NN_probe.png){width="40%"}
 
@@ -322,7 +322,7 @@ semantics) @donahue2014decafUSEdecafcitation. These three examples are
 visualized below
 (@fig-representation_learning-predictive_learning_examples).
 
-![](figures/representation_learning/predictive_learning_examples.png){width="95%"}
+![Examples of different pretext tasks.](figures/representation_learning/predictive_learning_examples.png){width="95%" #fig-representation_learning-predictive_learning_examples}
 
 []{#fig-representation_learning-predictive_learning_examples
 label="fig-representation_learning-predictive_learning_examples"}
@@ -421,7 +421,7 @@ white photo (i.e., predicting missing color channels).
 @fig-representation_learning-imputation_examples gives several examples
 of these imputation tasks.
 
-![](figures/representation_learning/imputation_examples.png){width="100%"}
+![Many common pretext tasks are special cases of imputation on missing values in the data tensor.](figures/representation_learning/imputation_examples.png){width="100%" #fig-representation_learning-imputation_examples}
 []{#fig-representation_learning-imputation_examples
 label="fig-representation_learning-imputation_examples"}
 
@@ -474,7 +474,7 @@ $k$ integer classes ($k$ can potentially be unbounded). Representing
 integers with one-hot codes, clustering is shown in
 @fig-representation_learning-clustering_f_diagram.
 
-![](figures/representation_learning/clustering_f_diagram.png){width="40%"}
+![You can think of clustering as being just like image labeling, except that that labels are self-discovered rather than being predefined.](figures/representation_learning/clustering_f_diagram.png){width="40%" #fig-representation_learning-clustering_f_diagram}
 
 Clustering follows from the principle of compression: if we can well
 summarize a signal with just a discrete category label, then this
@@ -715,7 +715,7 @@ pairings, the objective is to pull together the positive pairs and push
 apart the negative pairs, as illustrated in
 @fig-representation_learning-contrastive_learning_diagram.
 
-![](figures/representation_learning/contrastive_learning_diagram.png){width="75%"}
+![Contrastive learning.](figures/representation_learning/contrastive_learning_diagram.png){width="75%" #fig-representation_learning-contrastive_learning_diagram}
 
 This kind of contrastive learning results in an embedding that is
 invariant to a transformation $T$. Extending this to achieve invariance
@@ -733,7 +733,7 @@ channels. In both these cases we are learning to align co-occurring
 sensory signals. This kind of contrastive learning is schematized in
 @fig-representation_learning-contrastive_learning_colorization.
 
-![](figures/representation_learning/contrastive_learning_colorization.png){width="53%"}
+![Contrastive learning from multiple views of the data. Figure inspired by \cite{tian2020contrastive](figures/representation_learning/contrastive_learning_colorization.png){width="53%" #fig-representation_learning-contrastive_learning_colorization}
 
 In @fig-representation_learning-contrastive_learning_colorization, we
 refer to the two co-occurring signals---color and grayscale---as two
@@ -835,7 +835,7 @@ descent, batch size of 128). In contrast to the autoencoder experiment,
 however, we will set the dimensionality of the embedding to $M=2$, so
 that we can visualize it in a 2D plot.
 
-![](figures/representation_learning/align_unif_results_shapes_dataset.png){width="100%"}
+![Contrastive learning on colored shapes using two different transformations for creating positive pairs. The choice of transformation controls which features the embedding becomes sensitive to and which it becomes invariant to.](figures/representation_learning/align_unif_results_shapes_dataset.png){width="100%" #fig-representation_learning-align_unif_results_shapes_dataset}
 
 Suppose we wish to obtain an embedding that is sensitive to color and
 invariant to shape. Then we should choose a view transformation

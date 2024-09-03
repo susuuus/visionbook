@@ -68,7 +68,7 @@ not matter, or may even serve as extra degrees of freedom that can be
 used to make the attack less noticeable.
 
 :::{#fig-simple-network}
-![](figures/upsamplig_downsampling/toy_example_book2.png){width=80%}
+![Analytic aliasing-based attack of a toy system that computes the horizontal image gradient~\cite{rodríguezmuñoz2022aliasing](figures/upsamplig_downsampling/toy_example_book2.png){width=80% #figure-simple-network}
 
 Analytic aliasing-based attack of a toy system that computes the horizontal image gradient @rodríguezmuñoz2022aliasing. Input image, $\ell_{\text{in}}$, and output image of $\ell_{\text{out}}=\max(0, \ell_{\text{in}} \circ_2 [1, -1])$, where $\circ_2$ denotes convolution with a stride of 2. As this simple system has aliasing, an attacker can inject a high frequency pattern, $z$, to change the output. Attacked image, $\ell_{\text{in}}+z$, and the output after attack. It doesn't even look like a derivative!
 :::

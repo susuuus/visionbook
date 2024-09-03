@@ -42,7 +42,9 @@ in a **multiscale image pyramid**.
 In this example, the original image has a resolution of 848 $\times$ 643 pixels. Each image in the pyramid is obtained by scaling down the image from the previous level by reducing the number of pixels by a factor of $25$ percent (that is, each image in the pyramid has 3/4 of the size of the precedent image)^[Downsampling is discussed in detail in @sec-downsampling_and_upsampling.].
 
 :::{#fig-birds_multiscale_processing}
-![](figures/pyramids/multiscale_birds_boxes.png){width=80%}
+![Multiscale image pyramid. Each image is 25 percent smaller than the previous one. The red box indicates the size of a template used for detecting birds. As the size of the template is fixed; it will only be able to detect the birds that tightly fit inside the box. %Birds that are smaller or larger will not be detected.
+%within a single scale. 
+By running the same template across many levels in this pyramid, different instances of birds are detected at different scales.](figures/pyramids/multiscale_birds_boxes.png){width=80% #fig-birds_multiscale_processing}
 
 Multiscale image pyramid. Each image is 25 percent smaller than the previous one. The red box indicates the size of a template used for detecting birds. As the size of the template is fixed; it will only be able to detect the birds that tightly fit inside the box. By running the same template across many levels in this pyramid, different instances of birds are detected at different scales.
 :::
@@ -271,7 +273,9 @@ level of this pyramid is the smallest level of the Gaussian pyramid used
 to compute the Laplacian pyramid and is called the low-pass residual.
 
 ::: {#fig-laplacpyr layout-ncol=6}
-![](figures/pyramids/laplacianPyr_1.jpg){width="0.48\linewidth"}
+![Laplacian pyramid, including the tiny low-pass residual as the last image.  
+The Laplacian pyramid is built for each color channel independently.  
+%For visualization, we add 128 to all the images. Therefore, the average gray level corresponds to the zero intensity value.](figures/pyramids/laplacianPyr_1.jpg){width="0.48\linewidth" #fig-laplacpyr}
 
 ![](figures/pyramids/laplacianPyr_2.jpg){width="0.24\linewidth"}
 
@@ -412,7 +416,7 @@ $\boldsymbol\ell_{\texttt{out}}= \boldsymbol\ell^A * \mathbf{m} + \boldsymbol\el
 giving as result the image in @fig-orange_apple_mask_bad_result.
 
 :::{#fig-orange_apple_mask_bad_result}
-![](figures/pyramids/apple_orange_mask_8levels.jpg){width="30%"}
+![Resulting blended image from \fig{\ref{fig:orange_apple_mask](figures/pyramids/apple_orange_mask_8levels.jpg){width="30%" #fig-orange_apple_mask_bad_result}
 
 Resulting blended image from @fig-orange_apple_mask. This result is not very pleasing.
 :::
@@ -434,7 +438,7 @@ use seven levels and we also keep the last low-pass residual as shown in
 @fig-blending_pyrs.
 
 :::{#fig-blending_pyrs}
-![](figures/pyramids/blending_pyrs.png){width="90%"}
+![Laplacian pyramids (seven levels and Gaussian residual) for both input images.](figures/pyramids/blending_pyrs.png){width="90%" #fig-blending_pyrs}
 
 Laplacian pyramids (seven levels and Gaussian residual) for both input images.
 :::
@@ -444,7 +448,7 @@ The second step is to build the Gaussian pyramid of the mask as shown in
 than for the Laplacian pyramid).
 
 :::{#fig-blending_pyrs_mask}
-![](figures/pyramids/blending_pyrs_mask.png){width="90%"}
+![Gaussian pyramid of the mask.](figures/pyramids/blending_pyrs_mask.png){width="90%" #fig-blending_pyrs_mask}
 
 Gaussian pyramid of the mask.
 :::
@@ -504,7 +508,7 @@ subsampling steps are preceded by sufficient low-pass filtering to
 remove aliasing.
 
 :::{#fig-steerable_pyr_sp3Filters}
-![](figures/pyramids/steerable_pyr_sp3Filters.png){width="80%"}
+![Oriented filters and the low-pass kernel used in the steerable pyramid.](figures/pyramids/steerable_pyr_sp3Filters.png){width="80%" #fig-steerable_pyr_sp3Filters}
 
 Oriented filters and the low-pass kernel used in the steerable pyramid.
 :::
@@ -539,7 +543,7 @@ steerable pyramid is a self-inverting overcomplete representation (more
 coefficients than pixels).
 
 :::{#fig-steerable_pyr_clock}
-![](figures/pyramids/steerable_pyr_clock.png){width="100%"}
+![Steerable pyramid representation (three levels and four orientations). Why is that each orientation subband seems to indicate a different time?](figures/pyramids/steerable_pyr_clock.png){width="100%" #fig-steerable_pyr_clock}
 
 Steerable pyramid representation (three levels and four orientations). Why is it that each orientation subband seems to indicate a different time?
 :::

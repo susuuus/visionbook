@@ -199,7 +199,7 @@ algorithm we defined in chapter
 [\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
 reference="chapter-simplesystem"}:
 
-![](figures/simplesystem/views.png){width="100%"}
+![3D reconstruction using the simple visual system from \chap{\ref{chapter:simplesystem](figures/simplesystem/views.png){width="100%" #fig-chatgpt_blockworld}
 
 However, while the learned-based model may have lost accuracy in this
 example that fits our simple world assumptions, it has gained in
@@ -245,7 +245,7 @@ it is likely that this particular example will be fixed, but there will
 be other failures. And some of those failures will give clues to what is
 the next fundamental question that will need to be addressed.
 
-![](figures/simplesystem_revisited/chatgpt_blockworld_2.png){width=".5"}
+![Output by ChatGPT when asked to render a new image with the same elements as in \fig{\ref{fig:chatgpt_blockworld](figures/simplesystem_revisited/chatgpt_blockworld_2.png){width=".5" #fig-chatgpt_blockworld2}
 
 ## Unsolved Solved Computer Vision Problems
 

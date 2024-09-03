@@ -28,7 +28,7 @@ just generative modeling! Indeed both modeling directions are valid, and
 the full picture looks like this
 (@fig-generative_modeling_and_representation_learning-rep_gen_schematic):
 
-![](./figures/generative_modeling_and_representation_learning/rep_gen_schematic.png){width="35%"}
+![The relationship between representation learning and generative modeling. Here we label one side as ``Data'' and the other as ``Embedding''; but what's the precise difference between these two things? Why is an RGB image data while a 100-dimensional vector of neural activations is an embedding? This is a question for you to think about; there is no correct answer.](./figures/generative_modeling_and_representation_learning/rep_gen_schematic.png){width="35%" #fig-generative_modeling_and_representation_learning-rep_gen_schematic}
 
 
 
@@ -79,7 +79,7 @@ diagram for generative modeling. Notice again how they are just the same
 thing in opposite directions
 (@fig-generative_modeling_and_representation_learning-genrep_schematic):
 
-![](./figures/generative_modeling_and_representation_learning/genrep_schematic.png){width="100%"}
+![Generative modeling performs the opposite mapping from representation learning.](./figures/generative_modeling_and_representation_learning/genrep_schematic.png){width="100%" #fig-generative_modeling_and_representation_learning-genrep_schematic}
 
 The critical thing in most generative models, which is not necessarily
 true for representation learning models, is that we assume we know the
@@ -134,7 +134,7 @@ data itself, $\mathbf{x}$. Given a $\mathbf{z}$, we can synthesize an
 image by passing it through the decoder of the autoencoder
 (@fig-generative_modeling_and_representation_learning-autoencoder_to_generative_model):
 
-![](./figures/generative_modeling_and_representation_learning/autoencoder_to_generative_model.png){width="80%"}
+![The relationship between an autoencoder and a generative model.](./figures/generative_modeling_and_representation_learning/autoencoder_to_generative_model.png){width="80%" #fig-generative_modeling_and_representation_learning-autoencoder_to_generative_model}
 
 But how do we get this $\mathbf{z}$? One goal of generative modeling is
 to be able to make up random images from scratch. So we need a
@@ -154,7 +154,7 @@ In general, the embedding space of an autoencoder might be just as
 complicated to model as the data space we started with, as indicated in
 @fig-generative_modeling_and_representation_learning-autoencoder_complicated_latent_space:
 
-![](./figures/generative_modeling_and_representation_learning/autoencoder_complicated_latent_space.png){width="60%"}
+![The latent space of an autoencoder can be just as complex as the data space.](./figures/generative_modeling_and_representation_learning/autoencoder_complicated_latent_space.png){width="60%" #fig-generative_modeling_and_representation_learning-autoencoder_complicated_latent_space}
 
 VAEs are a way to turn an autoencoder into a proper generative model,
 which can be sampled from and which maximizes data likelihood under a
@@ -227,7 +227,7 @@ sample a few of the Gaussians in this infinite mixture, they might look
 like this
 (@fig-generative_modeling_and_representation_learning-gmm_vs_vae):
 
-![](./figures/generative_modeling_and_representation_learning/gmm_vs_vae.png){width="90%"}
+![From a finite mixture of Gaussians to an infinite mixture.](./figures/generative_modeling_and_representation_learning/gmm_vs_vae.png){width="90%" #fig-generative_modeling_and_representation_learning-gmm_vs_vae}
 
 While we have chosen Gaussians for
 $p_{\theta}(\mathbf{x} \bigm | \mathbf{z})$ and
@@ -280,7 +280,7 @@ training. Here we use an isotropic Gaussian model, that is, we
 parameterize the covariance as $\Sigma = \sigma\mathbf{I}$, where
 $\sigma = g^{\sigma}_{\theta}(\mathbf{z})$ is a scalar.
 
-![](./figures/generative_modeling_and_representation_learning/IGMM_training_iters.png){width="70%"}
+![Fitting an infinite mixture of Gaussians whose means and variances are parameterized by a generator function $g_{\theta](./figures/generative_modeling_and_representation_learning/IGMM_training_iters.png){width="70%" #fig-generative_modeling_and_representation_learning-IGMM_training_iters}
 
 #### Trick 2: Efficient approximation via importance sampling
 
@@ -311,7 +311,7 @@ Consider the example in
 where we are trying to esimate the probability of the point $\mathbf{x}$
 (blue circle).
 
-![](./figures/generative_modeling_and_representation_learning/vae_importance_sampling1.png){width="50%"}
+![To estimate $p_{\theta](./figures/generative_modeling_and_representation_learning/vae_importance_sampling1.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling1}
 
 The mixture components are shaded according to the probability they
 assign to $\mathbf{x}$. Almost all are so far from $\mathbf{x}$ that we
@@ -359,7 +359,7 @@ places high likelihood on the data, and we can get then away with far
 fewer samples to well approximate the data likelihood, as indicated
 @fig-generative_modeling_and_representation_learning-vae_importance_sampling2.
 
-![](./figures/generative_modeling_and_representation_learning/vae_importance_sampling2.png){width="50%"}
+![Optimal importance sampling estimates $p_{\theta](./figures/generative_modeling_and_representation_learning/vae_importance_sampling2.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling2}
 
 #### Trick 3: Variational inference to approximate the sampling distribution
 
@@ -383,7 +383,7 @@ of a distribution over $\mathbf{z}$; in other words, $f_{\psi}$ is a
 probabilistic encoder! This function is shown next in
 @fig-generative_modeling_and_representation_learning-VAE_encoder:
 
-![](./figures/generative_modeling_and_representation_learning/VAE_encoder.png){width="55%"}
+![A VAE's encoder, $f_{\psi](./figures/generative_modeling_and_representation_learning/VAE_encoder.png){width="55%" #fig-generative_modeling_and_representation_learning-VAE_encoder}
 
 It will turn out that $f$ indeed plays the role of the encoder in the
 VAE, while $g$ plays the role of the decoder.
@@ -529,7 +529,7 @@ $$\begin{aligned}
 the decoder; this looks just like an autoencoder, as shown in
 @fig-generative_modeling_and_representation_learning-VAE_as_autoencoder!
 
-![](./figures/generative_modeling_and_representation_learning/VAE_as_autoencoder.png){width="80%"}
+![To evaluate the likelihood a VAE places on a datapoint $x$, we encode $x$ into $z$-space and then decode back and compute the reconstruction error. This corresponds to one importance sample for approximating the likelihood function.](./figures/generative_modeling_and_representation_learning/VAE_as_autoencoder.png){width="80%" #fig-generative_modeling_and_representation_learning-VAE_as_autoencoder}
 
 The only differences from an autoencoder are that 1) we sample a
 stochastic $z$ from the output of the encoder, 2) the reconstruction
@@ -585,7 +585,7 @@ mixture of Gaussians example shown previously, we again assume an
 isotropic Gaussian model for the decoder, and here also assume that
 model for the encoder.
 
-![](./figures/generative_modeling_and_representation_learning/VAE_training_iters.png){width="100%"}
+![Training a VAE to model the blue distribution. The Gaussian components spread out to tile both the embedding space and the data space.](./figures/generative_modeling_and_representation_learning/VAE_training_iters.png){width="100%" #fig-generative_modeling_and_representation_learning-VAE_training_iters}
 
 ## Do VAEs Learn Good Representations?
 
@@ -628,7 +628,7 @@ heading of the river, the number of trees, etc.) and generates an image
 with these attributes, as shown in
 @fig-generative_modeling_and_representation_learning-rivers_dataset.
 
-![](./figures/generative_modeling_and_representation_learning/rivers_dataset.png){width="80%"}
+![A toy generative model hand-coded in Python.](./figures/generative_modeling_and_representation_learning/rivers_dataset.png){width="80%" #fig-generative_modeling_and_representation_learning-rivers_dataset}
 
 Training a VAE on this data
 (@fig-generative_modeling_and_representation_learning-vae_rivers_samples)
@@ -636,7 +636,7 @@ learns to recreate the generative process with a *neural net* (rather
 than a Python script) and maps zero-mean unit-variance *Gaussian noise*
 to images (rather than taking as input the noise types the script uses).
 
-![](./figures/generative_modeling_and_representation_learning/vae_rivers_samples.png){width="100%"}
+![Fitting a VAE to the rivers dataset](./figures/generative_modeling_and_representation_learning/vae_rivers_samples.png){width="100%" #fig-generative_modeling_and_representation_learning-vae_rivers_samples}
 
 Did the VAE uncover the *true* latent variables that generated the data,
 that is, did it recover latent dimensions corresponding to the attribute
@@ -645,7 +645,7 @@ generating a set of images that walk along two latent dimensions of the
 VAE's $z$-space, shown in
 @fig-generative_modeling_and_representation_learning-vae_rivers_latent_walk.
 
-![](./figures/generative_modeling_and_representation_learning/vae_rivers_latent_walk.png){width="75%"}
+![Walking along two axes of latent space generates images that show variation in two distinct attributes, demonstrating that this model is, to a degree, disentangled.](./figures/generative_modeling_and_representation_learning/vae_rivers_latent_walk.png){width="75%" #fig-generative_modeling_and_representation_learning-vae_rivers_latent_walk}
 
 One of the latent dimensions seems to control the grass color, and
 another controls the river curvature! These two latent dimensions are
@@ -692,7 +692,7 @@ ImageNet dataset @russakovsky2015imagenet. Here are images generated by
 walking along two latent dimensions of this GAN
 (@fig-generative_modeling_and_representation_learning-biggan_latent_walk):
 
-![](./figures/generative_modeling_and_representation_learning/biggan_latent_walk.png){width="60%"}
+![Walking in in two orthogonal directions in BigGAN~\cite{brock2018large](./figures/generative_modeling_and_representation_learning/biggan_latent_walk.png){width="60%" #fig-generative_modeling_and_representation_learning-biggan_latent_walk}
 
 Just like with the VAE trained on cartoon rivers, the GAN has also
 discovered disentangled latent variables; in this case they seem to
