@@ -532,7 +532,7 @@ vision, we will consider the stereo vision problem while considering
 only one scanline pair at a time.
 
   ---------------------------------------------------------------
-   ![](figures/graphical_models/lcanoebig.jpg){width="40%"}
+   ![(a) Left and (b) right camera images. (c and d): insets showing areas of analysis.](figures/graphical_models/lcanoebig.jpg){width="40%" #fig-canoe1}
                                \(a\)
   ---------------------------------------------------------------
 
@@ -554,7 +554,7 @@ only one scanline pair at a time.
 The graphical model that describes this stereo depth reconstruction for
 a single scanline is shown in @fig-canoe3.
 
-![](figures/graphical_models/stereomodel2.jpg){width="80%"}
+![Graphical model for the posterior probability for stereo disparity offset between the left and right camera views from a stereo rig.](figures/graphical_models/stereomodel2.jpg){width="80%" #fig-canoe3}
 
 Each unfilled circle in the graphical model (@fig-canoe3) represents the
 unknown depth of each pixel in the scan line of one of the stereo

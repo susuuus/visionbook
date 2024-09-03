@@ -120,7 +120,7 @@ around the object. @fig-sfm-palma shows eight images taken inside a
 plaza. Both sets of images represent very different scenarios that will
 be reconstructed with the same set of techniques.
 
-![](figures/sfm/sugar/IMG_1489.jpeg){width=".24"}
+![Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have $3,024 \times 4,032$ pixels.](figures/sfm/sugar/IMG_1489.jpeg){width=".24" #fig-sfm-sugar}
 ![](figures/sfm/sugar/IMG_1490.jpeg){width=".24"}
 ![](figures/sfm/sugar/IMG_1491.jpeg){width=".24"}
 ![](figures/sfm/sugar/IMG_1492.jpeg){width=".24"}
@@ -133,7 +133,7 @@ be reconstructed with the same set of techniques.
 ![](figures/sfm/sugar/IMG_1499.jpeg){width=".24"}
 ![](figures/sfm/sugar/IMG_1500.jpeg){width=".24"}
 
-![](figures/sfm/palma/IMG_1643.jpeg){width=".24"}
+![Eight pictures taken in a plaza in Palma de Mallorca, Spain. The images have $3,024 \times 4,032$ pixels.](figures/sfm/palma/IMG_1643.jpeg){width=".24" #fig-sfm-palma}
 ![](figures/sfm/palma/IMG_1644.jpeg){width=".24"}
 ![](figures/sfm/palma/IMG_1646.jpeg){width=".24"}
 ![](figures/sfm/palma/IMG_1647.jpeg){width=".24"}
@@ -327,7 +327,7 @@ robust classifier. This is the approach proposed by SuperPoint
 
 ![](figures/sfm/toy_keypoint_detector.png){width="100%"}
 
-![](figures/sfm/sugar/keypoints_8_3_examples.png){width="100%"}
+![All the detected keypoints in three views from the sugar bowl. But the images look rather textureless; what is the keypoint detector finding interesting in these images?](figures/sfm/sugar/keypoints_8_3_examples.png){width="100%" #fig-sfm-keypoints_sugar}
 
 @fig-sfm-keypoints_sugar shows the resulting detected keypoints by
 SuperPoint on three viewpoints of the sugar bowl. The images shown in

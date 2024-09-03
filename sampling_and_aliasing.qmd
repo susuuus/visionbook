@@ -310,7 +310,7 @@ The optimal sampling strategy is the regular hexagonal sampling. This is not the
 Working with convolutional filters defined over a hexagonal grid is more efficient, and it can achieve better radial symmetry [@Mersereau79; @Simoncelli90subbandimage].
 
 ::: {#fig-samplingfovea}
-![](figures/Image_processing_sampling/sampling_fovea.jpg){width=60%}
+![Distributions of cones in the fovea of a Monkey  \cite{Curcio1990](figures/Image_processing_sampling/sampling_fovea.jpg){width=60% #fig-samplingfovea}
 
 Distributions of cones in the fovea of a Monkey [@Curcio1990]. The image shows a cross-section of the retina at the level of the photoreceptors. *Source:* [@Curcio1990].
 :::

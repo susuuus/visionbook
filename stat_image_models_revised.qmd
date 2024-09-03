@@ -690,7 +690,8 @@ and b) the sampling at image regions with similar local structure as the
 image position to be denoised.
 
   -------------------------------------------------------------------
-   ![](figures/statistical_image_models/nlm1a.jpg){width="48%"}
+   ![Regions of support for the nonlocal means denoising algorithm. 
+{\em Source:](figures/statistical_image_models/nlm1a.jpg){width="48%" #fig-nlm1}
                                  \(a\)
   -------------------------------------------------------------------
 
@@ -704,7 +705,7 @@ image. The middle image is with additive Gaussian noise added, that is,
 $\sigma=15$ for 0--255 image scale. On the right is the result, showing
 the image with nonlocal means noise removed.
 
-![](figures/statistical_image_models/nlmresult.jpg){width="100%"}
+![Nonlocal means denoising algorithm results. (left) Original image without noise. (middle) Noisy image. (right) Denoised image. {\em Source:](figures/statistical_image_models/nlmresult.jpg){width="100%" #fig-nlm2}
 
 ## Concluding Remarks
 

@@ -986,7 +986,7 @@ will show the **fine** details of the image. The three images in
 @fig-sketchresponses show the output image processed by three filters
 corresponding to the frequency responses of @fig-typestypes.
 
-![](figures/linear_image_filtering/sketch_coarse.jpg){width=".3"}
+![An image filtered by (left) low-pass, (middle) band-pass, and (right) high-pass filters.](figures/linear_image_filtering/sketch_coarse.jpg){width=".3" #fig-sketchresponses}
  ![](figures/linear_image_filtering/sketch_middle.jpg){width=".3"}
  ![](figures/linear_image_filtering/sketch_fine.jpg){width=".3"}
 
@@ -1080,7 +1080,7 @@ It appears to an observer as a signal with a wave that oscillates slow
 at the left and faster toward the right and that has high contrast a the
 bottom and loses contrast towards the top becoming invisible.
 
-![](figures/spatial_filters/csf.jpg){width="100%"}
+![Contrast sensitivity function shown by the Campbell and Robson chart. The image shows a sine wave of increasing frequency from left to right, and increasing amplitude from top to bottom. Can you trace a curve over the chart to indicate where the sine wave becomes invisible?](figures/spatial_filters/csf.jpg){width="100%" #fig-csfchart}
 
 The first sign that our visual system is nonlinear is that we do not
 perceive the amplitude as changing exponentially fast from top to

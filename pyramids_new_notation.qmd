@@ -5,7 +5,7 @@
 In @sec-linear_image_filtering we motivated translation invariant linear filters as a way of accounting for the fact that objects in images might appear at any location. Therefore, a reasonable way of processing an image is by manipulating pixel neighborhoods in the same way independently on the image location. In addition to translation invariance, scale invariance is another fundamental property of images. Due to perspective projection, objects at different distances will appear with different sizes as shown in @fig-birds_multiscale. Therefore, if we want to locate all the bird instances in this image, we will have to apply an operator that is invariant in translation and in scale. Image pyramids provide an efficient representation for space-scale invariant processing.
 
 :::{#fig-birds_multiscale}
-![](figures/pyramids/birds_multiscale.jpg){width=80%}
+![Objects in images appear at arbitrary locations and with arbitrary image sizes.% (Image source: Antonio Torralba?).](figures/pyramids/birds_multiscale.jpg){width=80% #fig-birds_multiscale}
 
 Objects in images appear at arbitrary locations and with arbitrary image sizes.
 :::
@@ -151,7 +151,7 @@ processing.
 Each level has half the resolution of the previous level.
 
 :::{#fig-gausspyr layout-ncol=6}
-![](figures/pyramids/gaussianPyr_1.jpg){width="0.5%"}
+![Gaussian pyramid with six levels. The first level, $\mathbf{g](figures/pyramids/gaussianPyr_1.jpg){width="0.5%" #fig-gausspyr}
 
 ![](figures/pyramids/gaussianPyr_2.jpg){width="0.25%"}
 
@@ -398,7 +398,7 @@ to create the composite image. For example, let's blend two images using
 the mask as shown in @fig-orange_apple_mask.
 
 :::{#fig-orange_apple_mask}
-![](figures/pyramids/orange.jpg){width="30%"}  
+![Two images to be blended and the blending mask.](figures/pyramids/orange.jpg){width="30%" #fig-orange_apple_mask}  
 ![](figures/pyramids/apple.jpg){width="30%"}  
 ![](figures/pyramids/mask10_b.jpg){width="30%"}  
 

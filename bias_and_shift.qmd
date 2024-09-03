@@ -20,7 +20,7 @@ co-authored in 2016, so we don't feel too bad pointing out its flaws. In
 that paper, we trained a CNN to colorize black and white photos, and the
 results looked amazing (@fig-bias_and_shift-CIC_teaser).
 
-![](./figures/bias_and_shift/CIC_teaser_v5.jpg){width="100%"}
+![Each pair of images shows the grayscale input image and, to its right, the output of the automatic colorization system. Source: \cite{zhang2016colorful](./figures/bias_and_shift/CIC_teaser_v5.jpg){width="100%" #fig-bias_and_shift-CIC_teaser}
 
 This was the teaser figure from our paper, showing sixteen examples of
 grayscale input images and the output of our system. Looks almost
@@ -283,7 +283,7 @@ presented in a canonical orientation.
 @fig-bias_and_shift-palmer_1981enhanced shows the preferred viewpoint
 for the 12 objects studied.
 
-![](figures/bias_and_shift/palmer_1981enhanced.jpg){width="100%"}
+![Cannonical viewpoints for 12 objects. Figure from \cite{Palmer1981](figures/bias_and_shift/palmer_1981enhanced.jpg){width="100%" #fig-bias_and_shift-palmer_1981enhanced}
 
 The views that are recognized faster also match the viewpoints that are
 preferred when taking a picture of those objects @Palmer1981. Such

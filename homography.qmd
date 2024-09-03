@@ -32,7 +32,7 @@ by a rotation (@fig-rotation_homography). In those two cases the
 coordinates of corresponding points across the two images are related by
 a **homography**.
 
-![](figures/homography/IMG_7801_crop.jpg){width=".455"}
+![These two images are (approximately) related by an homography.](figures/homography/IMG_7801_crop.jpg){width=".455" #fig-illustration_homography}
   
 ![](figures/homography/IMG_7802_crop.jpg){width=".49"}
 
@@ -99,7 +99,7 @@ between to images are related by a homography.
 
 Consider the following three images shown in @fig-example_three_images.
 
-![](figures/homography/3_IMG_7883_small.jpg){width="44.5%"}
+![Three pictures taken by rotating the camera while trying to keep the camera center fixed.](figures/homography/3_IMG_7883_small.jpg){width="44.5%" #fig-example_three_images}
   ![](figures/homography/2_IMG_7884_small.jpg){width="25%"}
   ![](figures/homography/1_IMG_7885_small.jpg){width="25%"}
 
@@ -249,7 +249,7 @@ that case, the coordinates of corresponding points across the two camera
 views, for points inside the plane, are related by a homography
 (@fig-example_two_images_facade).
 
-![](figures/homography/IMG_7127_crop.jpg){width="45%"}
+![Two pictures of a building facade taken from different positions. The coordinates of corresponding points on the planar facade are related by a homography.](figures/homography/IMG_7127_crop.jpg){width="45%" #fig-example_two_images_facade}
   ![](figures/homography/IMG_7126.jpg){width="45%"}
 
 To prove this, we can first show that the coordinates inside a plane
@@ -464,7 +464,7 @@ this example we pick the middle image as a reference). We can use the
 estimated homographies to warp all of the images into a single camera
 view as shown in @fig-panorama.
 
-![](figures/homography/panorama.jpg){width="100%"}
+![Panoramic image composed by the three overlapping images from \fig{\ref{fig:example_three_images](figures/homography/panorama.jpg){width="100%" #fig-panorama}
 
 ## Concluding Remarks
 

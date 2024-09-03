@@ -23,7 +23,7 @@ complex shapes. Even in front of a static image, we form a
 representation of the dynamics of an object, as shown in the photograph
 in @fig-050822_172806\_\_MG_5366.
 
-![](figures/optical_flow/050822_172806__MG_5366.jpg){width=".7"}
+![Even from a static picture we form a rich representation of the dynamics of the scene. {\em Source](figures/optical_flow/050822_172806__MG_5366.jpg){width=".7" #fig-050822_172806__MG_5366}
 
 Looking at the power of that static image to convey motion, one wonders
 if seeing movies is really necessary. From the notes you took about what
@@ -157,7 +157,7 @@ in a video. Let's consider two frames of a video sequence that contains
 a few moving objects, as shown in @fig-two_frames_from_palma_street.
 
   --------------------------------------------------------
-   ![](figures/optical_flow/frame1.jpg){width="48%"}
+   ![Two frames of a video sequence captured from a moving car driving along a busy street in Palma de Mallorca (Spain).](figures/optical_flow/frame1.jpg){width="48%" #fig-two_frames_from_palma_street}
                          (Frame 1)
   --------------------------------------------------------
 

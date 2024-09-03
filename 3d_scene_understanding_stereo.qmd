@@ -128,7 +128,7 @@ look at the picture by placing the same color filters in front of our
 eyes. In order to do this, we used color glasses with blue and red
 filters.
 
-![](figures/3d_scene_understanding/anaglyph_camera.png){width="100%"}
+![One way of playing with pinhole cameras is to build an anaglyph pinhole camera. The anaglyph pinhole camera captures stereo images by projecting an anaglyph image on the projection plane.](figures/3d_scene_understanding/anaglyph_camera.png){width="100%" #fig-anaglyph}
 
 We used one of the anaglyph glasses to get the filters and placed them
 in front of the two pinholes. @fig-anaglyph shows two pictures of the
@@ -240,7 +240,7 @@ on the visual similarity of the local image region. To do this
 automatically is the crux of the stereo problem.
 
   --------------------------------------------------------
-   ![](figures/stereo/officeLeft.jpg){width="47.5%"}
+   ![Two cameras, displaced from each other laterally, photograph the same scene, resulting in images (a) and (b).  Colored rectangles show some identifiable features in image (a), and where those features appear in image (b).  Arrows show the corresponding displacements, which reveal depth through \eqn{\ref{eq:depthFromDisparity](figures/stereo/officeLeft.jpg){width="47.5%" #fig-stereomatch}
                            \(a\)
   --------------------------------------------------------
 
@@ -274,7 +274,9 @@ filter @Hosni2013. The best-matched disparities are plotted in red, and
 compare well with the ground truth disparities (@fig-stereolamp\[f\]),
 as labeled in the dataset @Scharstein2002.
 
-![](figures/stereo/stereolamp.jpg){width="100%"}
+![Issues with intensity-based stereo matching.
+%(a) One line of one image, (c), of stereo pair. (b) Intensity matching error for different disparities, plotted vertically, as a function of horizontal position.  Red shows disparities of best intensity match. (d) Smoothed matching errors, with best matches shown in red, and resulting depth image, (e).  (f) Ground truth matches and depth (g).  
+Dataset from \cite{Scharstein2002](figures/stereo/stereolamp.jpg){width="100%" #fig-stereolamp}
 
 The task of finding disparity at each point is often broken into two
 parts: (1) finding features, and matching the features across images,
@@ -352,7 +354,7 @@ reference="fig-stereopoints"}(a and b) show the result of the Harris
 feature detector to the images of @fig-stereomatch.
 
   ------------------------------------------------------
-   ![](figures/stereo/pointsLeft.jpg){width="31%"}
+   ![The feature-based stereo approach, illustrated for the stereo pair of \fig{\ref{fig:stereomatch](figures/stereo/pointsLeft.jpg){width="31%" #fig-stereopoints}
                           \(a\)
   ------------------------------------------------------
 
@@ -399,7 +401,7 @@ over local spatial regions further allow for image descriptors to be
 robust to small image translations @Freeman98c, @Lowe04.
 
   -------------------------------------------------
-   ![](figures/stereo/hands.jpg){width="40%"}
+   ![Orientation-based image descriptors.  (a) Oriented features. Reprinted from \cite{Freeman98c](figures/stereo/hands.jpg){width="40%" #fig-SIFT}
                         \(a\)
   -------------------------------------------------
 
@@ -784,7 +786,7 @@ is the following:
     nonneural-network approaches, such as SGM @Hirschmuller2007, but the
     performance is better for the neural network approaches.
 
-![](figures/stereo/stereocnn.jpg){width="100%"}
+![Block diagram of CNN stereo processing, abstracted from the block diagrams of \cite{Chang2018,Zhang2019GANet,Kendall2017](figures/stereo/stereocnn.jpg){width="100%" #fig-stereoblock}
 
 The performance of methods following the block diagram of
 @fig-stereoblock surpassed that of methods with handcrafted features.

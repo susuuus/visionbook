@@ -7,7 +7,7 @@ recovering three-dimensional (3D) information about the scene from a
 single image like the picture of the office we used before
 (@fig-finding_depth_office).
 
-![](figures/single_view_3d/inverse_office_measurements.jpg){width=".8"}
+![Is it possible to recover three-dimensional (3D) scene information from a single two-dimensional (2D) image? How tall is the desk? How wide is the bookshelf? What do we need to know about the scene in order to be able to answer those questions?](figures/single_view_3d/inverse_office_measurements.jpg){width=".8" #fig-finding_depth_office}
 
 Single view metrology relies on understanding the geometry of the image
 formation process, the rules of perspective, and other visual cues
@@ -196,7 +196,7 @@ interprets that the towers should have different 3D orientations. This
 process is automatic and we can not shut it down despite the fact that
 we know both images are identical.
 
-![](figures/single_view_3d/LeaningTower1.jpg){width="100%"}
+![The {\em leaning tower illusion](figures/single_view_3d/LeaningTower1.jpg){width="100%" #fig-LeaningTower1}
 
 Homogeneous coordinates offer an alternative way of working with
 vanishing points. Let's start by writing the parametric vector form of a
@@ -401,7 +401,7 @@ The same cross-ratio is obtained if we measure the positions of the four
 points using image coordinates and measuring distances in the image
 plane.
 
-![](figures/single_view_3d/cross-ratio.png){width="100%"}
+![Empirical demonstration of the cross-ratio invariant. You can check that measuring distances between the three dots on each image and computing the cross-ratio results in the value 1.6 for the three images.](figures/single_view_3d/cross-ratio.png){width="100%" #fig-cross_ratio_rulers}
 
 ### Measuring the Height of an Object
 

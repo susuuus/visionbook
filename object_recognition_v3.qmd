@@ -183,7 +183,7 @@ meaning. The same thing happens with visual objects as illustrated in
 @fig-box_table.
 
   ------------------------------------------------------------------
-   ![](figures/object_recognition/box_box2.jpg){width="47.5%"}
+   ![The same object can have different occasion meanings depending on the context. (a) A box. (b) A box used as a table.](figures/object_recognition/box_box2.jpg){width="47.5%" #fig-box_table}
                                 \(a\)
   ------------------------------------------------------------------
 
@@ -447,7 +447,7 @@ boundaries are soft? Even in cases were we believe that the boundaries
 might be well defined, it is east to find images that will challenge our
 assumption, as shown in @fig-whatisacar.
 
-![](figures/object_recognition/IMG_1260.jpeg){width="32%"}
+![Which of these images contains a car? This is a simple question that does not have a simple answer.](figures/object_recognition/IMG_1260.jpeg){width="32%" #fig-whatisacar}
 ![](figures/object_recognition/IMG_7095.jpeg){width="32%"}
 ![](figures/object_recognition/IMG_9933.jpeg){width="32%"}
 ![](figures/object_recognition/tesla.jpg){width="32%"}
@@ -471,7 +471,7 @@ plays a big role in object classification. The objects in
 ask the question \"Is there a fruit in this picture?,\" the answer is a
 bit more complex than it might appear at first glance.
 
-![](figures/object_recognition/pepper.jpg){width="32%"}
+![A pepper is a fruit according to botanics, and it is a vegetable according to the culinary classification.](figures/object_recognition/pepper.jpg){width="32%" #fig-object_recognition_pepper}
 
 What if the object is present in the scene but invisible in the image?
 What if there are infinite classes? In our formulation, $\hat {\bf y}$
@@ -862,7 +862,7 @@ right image). In cases with lots of instances, bounding boxes might not
 appropriate and it is better to represent the region as "trees" than to
 try to detect each instance.
 
-![](figures/object_recognition/segmenting_trees.png){width="100%"}
+![Bounding boxes are not an appropriate representation of the location of trees. This is true for many object classes with extended shapes that are hard to approximate with a box.](figures/object_recognition/segmenting_trees.png){width="100%" #fig-segmenting_trees}
 
 Even when there are few instances, bounding boxes can provide an
 ambiguous localization when two objects overlap because it might not be

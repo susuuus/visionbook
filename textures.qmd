@@ -339,7 +339,7 @@ of their spacing; and @fig-efros1d shows how a still larger context
 region enforces all the spatial regularities of the input texture.
 
   ---------------------------------------------------------------------
-   ![](figures/statistical_image_models/efros1a.jpg){width="10%"}
+   ![Synthesized texture from the Efros-Leung algorithm \cite{Efros99](figures/statistical_image_models/efros1a.jpg){width="10%" #fig-efros1}
                                   \(a\)
   ---------------------------------------------------------------------
 

@@ -66,7 +66,7 @@ perspective** or atmospheric perspective. One example using haze to
 infer depth is in @Kaiming2009.
 
   ---------------------------------------------------------------------
-   ![](figures/learning_3d/IMG_0508.JPG){width=".53"}
+   ![(a) This image contains multiple 3D cues: shading effects (bump shapes), texture gradients (relative size between bumps), and linear perspective (due to the regular arrangement of the bumps). (b) Aerial perspective. Objects far in the background have lower contrast than objects closer to the camera.](figures/learning_3d/IMG_0508.JPG){width=".53" #fig-aerial_perspective}
                                   \(a\)
   ---------------------------------------------------------------------
 
@@ -104,7 +104,7 @@ map, we can translate the depth into a 3D point cloud if we know the
 intrinsic camera parameters, $\mathbf{K}$, of the sensor.
 
   ----------------------------------------------------------------
-   ![](figures/learning_3d/rgb.jpg){width=".475"}
+   ![Image and depth captured by an Azure Kinect sensor. (a) RGB image; and (b) corresponding dense depth map. Both images have the same size of 1280 $\times$ 720 pixels.](figures/learning_3d/rgb.jpg){width=".475" #fig-kinect}
                                \(a\)
   ----------------------------------------------------------------
 
@@ -243,7 +243,7 @@ shows the result of applying the method from @Ranftl2022 on the office
 scene from @fig-finding_depth_office in the previous chapter.
 
   ---------------------------------------------------------------------------
-   ![](figures/learning_3d/IMG_6186_small.jpg){width=".35"}
+   ![(a) Office scene. (b) Estimated $Z$ component by the approach from \cite{Ranftl2021,Ranftl2022](figures/learning_3d/IMG_6186_small.jpg){width=".35" #fig-office_midas}
                                      \(a\)
   ---------------------------------------------------------------------------
 
@@ -264,7 +264,7 @@ Points near depth discontinuities are often wrong and have depth values
 that are the average of the values on each side of the discontinuity.
 
   -----------------------------------------------------------------------------
-   ![](figures/learning_3d/view1_pointcloud.png){width=".44"}
+   ![Reconstructed point cloud of the office scene with two different view points. Results are good, but not great.](figures/learning_3d/view1_pointcloud.png){width=".44" #fig-office_midas_point_cloud}
                                       \(a\)
   -----------------------------------------------------------------------------
 

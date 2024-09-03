@@ -302,7 +302,7 @@ before doing more precise camera calibrations. We will describe a more
 accurate method in @sec-camera_calibration.
 
   -------------------------------------------------------------------------------------
-   ![](figures/imaging_geometry/simple_calibration_1.jpg){width=".62"}
+   ![A simple calibration setting.](figures/imaging_geometry/simple_calibration_1.jpg){width=".62" #fig-simple_calibration}
                                           \(a\)
   -------------------------------------------------------------------------------------
 
@@ -681,7 +681,7 @@ regardless of how far away they are. This is illustrated in
 $Z \rightarrow \infty$, which are also at $y=0$ (we will talk more about
 the horizon line in the following chapter).
 
-![](figures/imaging_geometry/horizon_heads.jpg){width=".6"}
+![If you hold the camera parallel to the ground at the height of your eyes and take a picture of a person standing in front of you with a similar height, their eyes will project near the middle portion of the vertical axis of the picture.](figures/imaging_geometry/horizon_heads.jpg){width=".6" #fig-horizon_heads}
 
 . Let's now consider that the camera is tilted by looking downward with
 an angle $\theta$, as shown in @fig-camera_calibration_scenariosc. The
@@ -777,7 +777,7 @@ The horizontal red lines show the approximate location of the horizon
 line in each image and coincides also with the vertical location where
 the heads of the people walking appear on the picture.
 
-![](figures/imaging_geometry/low_horizon_vp.jpg){width=".48"}
+![The two pictures taken with two different camera angles. The red line indicates the position of the horizon line estimated as the horizontal location in which the two vanishing lines (blue) intersect.](figures/imaging_geometry/low_horizon_vp.jpg){width=".48" #fig-low_and_high_horizon}
  
 ![](figures/imaging_geometry/high_horizon_vp.jpg){width=".48"}
 
@@ -1127,7 +1127,7 @@ picture of one office and measure some distances as shown in
 @fig-office_measurements. The goal is to get real 3D coordinates
 measured in the world and use them to calibrate the camera.
 
-![](figures/imaging_geometry/office_with_measures_2.jpg){width="100%"}
+![Office picture and real distances between a sparse set of points measured in centimeters.](figures/imaging_geometry/office_with_measures_2.jpg){width="100%" #fig-office_measurements}
 
 We took a picture, @fig-office_measurements, with the same iPhone we
 used in @sec-simple_unreliable_calibration_method, holding the
