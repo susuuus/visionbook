@@ -232,7 +232,7 @@ data consists of 64,000 images, samples of which are shown in
 ![](figures/representation_learning/shapes_dataset_random_samples.png){width="27.5%"}
 
 []{#fig-representation_learning-shapes_dataset_random_samples
-label="fig:representation_learning:shapes_dataset_random_samples"}
+label="fig-representation_learning-shapes_dataset_random_samples"}
 
 Each shape has a randomized size, position, and rotation. Each shape's
 color is sampled from one of eight color classes (orange, green, purple,
@@ -325,7 +325,7 @@ visualized below
 ![](figures/representation_learning/predictive_learning_examples.png){width="95%"}
 
 []{#fig-representation_learning-predictive_learning_examples
-label="fig:representation_learning:predictive_learning_examples"}
+label="fig-representation_learning-predictive_learning_examples"}
 
 
 
@@ -423,7 +423,7 @@ of these imputation tasks.
 
 ![](figures/representation_learning/imputation_examples.png){width="100%"}
 []{#fig-representation_learning-imputation_examples
-label="fig:representation_learning:imputation_examples"}
+label="fig-representation_learning-imputation_examples"}
 
 Imputation---whether over spatial masks or missing channels---can result
 in effective visual

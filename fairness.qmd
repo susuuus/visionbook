@@ -97,7 +97,7 @@ first-world households @DeVries2019, possibly due to a better
 representation of imagery from such households in the training datasets
 of the image recognition systems.
 
-<figure id="fig:soap">
+<figure id="fig-soap">
 
 <figcaption>Images of household items, and their recognized classes by
 five object recognition systems . The systems tend to perform worse for
@@ -142,7 +142,7 @@ distributions observed within the training data, assuming that the
 training data has the desired distribution. See also @Wang2020 for a
 benchmark and comparison of techniques for dataset bias mitigation.
 
-<figure id="fig:augmentation">
+<figure id="fig-augmentation">
 
 <figcaption>In this example “wears hat” is deemed to be a protected
 attribute, but it is correlated with another attribute, which in this
@@ -170,7 +170,7 @@ one face variable is modified. The variation in an algorithm's
 classification results along the images of the transect to provide a
 clean assessment of any bias related to the variable being modified.
 
-<figure id="fig:transect">
+<figure id="fig-transect">
 
 <figcaption> A GAN creates sequences of faces, called
 <span><strong>transects</strong></span>, where only one attribute

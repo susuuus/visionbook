@@ -519,13 +519,13 @@ single node.
 ### Example Belief Propagation Application: Stereo
 
 Assume that we want to compute the depth from a stereo image pair, such
-as the pair shown in @fig:canoe1(a and b) and with their insets marked with the
-red rectangles, shown in @fig:canoe1(c and d). Assume that the two images have been
+as the pair shown in @fig-canoe1(a and b) and with their insets marked with the
+red rectangles, shown in @fig-canoe1(c and d). Assume that the two images have been
 rectified, as described in chapter
 [\[sec-stereo_vision\]](#chap-stereo_vision){reference-type="ref"
 reference="sec-stereo_vision"}, and consider the common scanline,
-marked in @fig:canoe1(c and d) with a black horizontal line. The
-luminance intensities of each scanline are plotted in @fig:canoe1(e and f). Most computer vision stereo algorithms
+marked in @fig-canoe1(c and d) with a black horizontal line. The
+luminance intensities of each scanline are plotted in @fig-canoe1(e and f). Most computer vision stereo algorithms
 @Scharstein2002 examine multiple scanlines to compute the depth at every
 pixel, but to illustrate a simple example of belief propagation in
 vision, we will consider the stereo vision problem while considering

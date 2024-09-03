@@ -55,7 +55,7 @@ weights be $w_1 = 2$, $w_2 = 1$, and $b=0$. The values of $z$ and $y$,
 as a function of $x_1$ and $x_2$, are shown in @fig-neural_nets-perceptron_as_classifier.
 
 \caption{Value of hidden unit ($z$) and output unit ($y$) in a perceptron, as a function of the input data.}
-\label{fig:neural_nets:perceptron_as_classifier}
+\label{fig-neural_nets-perceptron_as_classifier}
 
 ![Value of hidden unit ($z$) and output unit ($y$) in a perceptron, as a function of the input data.](figures/neural_nets/perceptron_as_classifier.png){#fig-neural_nets-perceptron_as_classifier}
 
@@ -80,7 +80,7 @@ boundary**, until you find a line that separates data labeled as $y = 0$
 from data labeled as $y = 1$.
 
 \caption{Different possible decision surfaces of a perceptron.}
-\label{fig:neural_nets:fitting_a_perceptron}
+\label{fig-neural_nets-fitting_a_perceptron}
 
 ![Different possible decision surfaces of a perceptron.](figures/neural_nets/fitting_a_perceptron.png){#fig-neural_nets-fitting_a_perceptron}
 
@@ -289,7 +289,7 @@ We visualize the values that the neurons take on as a function of $x_1$
 and $x_2$ in @fig-neural_nets-simple_MLP_network_values.
 
 
-![Values of hidden units and output unit for the MLP shown in \fig{\ref{fig:neural_nets:simple_MLP_network}}.](figures/neural_nets/simple_MLP_network_values.png){#fig-neural_nets-simple_MLP_network_values}
+![Values of hidden units and output unit for the MLP shown in \fig{\ref{fig-neural_nets-simple_MLP_network}}.](figures/neural_nets/simple_MLP_network_values.png){#fig-neural_nets-simple_MLP_network_values}
 
 
 As can be seen in the rightmost plot, at the output $y$, this neural net

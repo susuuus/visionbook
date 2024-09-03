@@ -334,7 +334,7 @@ The Gaussian derivatives share many of the properties of the Gaussian. The convo
 ## Derivatives using Binomial Filters {#sec-derivatives_binomial_filters}
 When processing images we have to use discrete approximations for the Gaussian derivatives. After discretization, many of the properties of the continuous Gaussian will not hold exactly. 
 
-There are many discrete approximations. For instance, we can take samples of the continuous functions. In practice it is common to use the discrete approximation given by the binomial filters. \Fig{\ref{fig:derivativepascaltriangle}} shows the result of convolving the binomial coefficients, $b_n$, with  $\left[1, -1\right]$.
+There are many discrete approximations. For instance, we can take samples of the continuous functions. In practice it is common to use the discrete approximation given by the binomial filters. \Fig{\ref{fig-derivativepascaltriangle}} shows the result of convolving the binomial coefficients, $b_n$, with  $\left[1, -1\right]$.
 
 :::{#fig-derivativepascaltriangle}
 \begin{array}{ccccccccccccccccccccl} 

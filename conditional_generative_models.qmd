@@ -56,8 +56,8 @@ a poor inference in this case, since a point estimate can only predict
 one of the multiple possible solutions.
 
 Figure
-[\[fig:conditional_generative_models:tshirts\]](#fig-conditional_generative_models-tshirts){reference-type="ref"
-reference="fig:conditional_generative_models:tshirts"} shows several
+[\[fig-conditional_generative_models-tshirts\]](#fig-conditional_generative_models-tshirts){reference-type="ref"
+reference="fig-conditional_generative_models-tshirts"} shows several
 kinds of predictions one could make given an observation of a grayscale
 t-shirt. The question is straightforward: What is the color of the
 shirt? To unify different kinds of prediction models, we will represent
@@ -356,8 +356,8 @@ that a cVAE can be trained just like a regular VAE except that the
 encoder takes the conditioning information, $\mathbf{x}$, as input (in
 addition to $\mathbf{y}$), and the decoder also takes in $\mathbf{x}$
 (in addition to $\mathbf{z}$). Figure
-[\[fig:conditional_generative_models:cVAE_ball_bouncing_example_nets\]](#fig-conditional_generative_models-cVAE_ball_bouncing_example_nets){reference-type="ref"
-reference="fig:conditional_generative_models:cVAE_ball_bouncing_example_nets"}
+[\[fig-conditional_generative_models-cVAE_ball_bouncing_example_nets\]](#fig-conditional_generative_models-cVAE_ball_bouncing_example_nets){reference-type="ref"
+reference="fig-conditional_generative_models-cVAE_ball_bouncing_example_nets"}
 depicts this setting.
 
 ![](./figures/conditional_generative_models/cVAE_ball_bouncing_example_nets.png){width="90%"}
@@ -526,7 +526,7 @@ this in
 ![](./figures/conditional_generative_models/patchgan_patch_size_variations.png){width="100%"}
 
 . []{#fig-conditional_generative_models-patchgan_patch_size_variations
-label="fig:conditional_generative_models:patchgan_patch_size_variations"}
+label="fig-conditional_generative_models-patchgan_patch_size_variations"}
 
 A $1\times1$ discriminator can only observe a single pixel at a time and
 cannot penalize errors in joint pixel statistics such as edge structure,

@@ -18,8 +18,11 @@ find "$directory" -name "*.qmd" | while read -r file; do
   original_file="$file.original"
   cp "$file" "$original_file"
 
-  # Replace fig-something:something, eq-something:something, and sec-something:something with hyphen instead of colon
-  perl -0777 -i -pe 's/(fig|eq|sec)-([^\s:]+):([^\s]+)/\1-\2-\3/g' "$file"
+  # Replace colons with hyphens in the specified patterns only (fig:sth:sth, eq:sth:sth)
+  perl -0777 -i -pe '
+    s/\b(fig|eq):([^\s:]+):([^\s]+)/\1-\2-\3/g;  # Replace fig:sth:sth and eq:sth:sth with fig-sth-sth or eq-sth-sth
+    s/\b(fig|eq):([^\s:]+)\b/\1-\2/g;            # Replace fig:sth or eq:sth with fig-sth or eq-sth
+  ' "$file"
 
   # Check if the file has changed
   if ! cmp -s "$file" "$original_file"; then

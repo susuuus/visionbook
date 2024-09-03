@@ -508,8 +508,8 @@ think through the intuition of what self-attention might be doing.
 
 Consider that we are processing the safari image, and our task is
 semantic segmentation (label each patch with an object class). Figure
-[\[fig:attention_layer_cartoon\]](#fig:attention_layer_cartoon){reference-type="ref"
-reference="fig:attention_layer_cartoon"} illustrates this scenario. We
+[\[fig-attention_layer_cartoon\]](#fig-attention_layer_cartoon){reference-type="ref"
+reference="fig-attention_layer_cartoon"} illustrates this scenario. We
 start by tokenizing the image so that each patch is represented by a
 token. Now we have a token, $\mathbf{t}_2$, that represents the patch of
 pixels around the torso of the impala. We wish to update this token via

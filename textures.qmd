@@ -49,8 +49,8 @@ or four elements, very quickly and the time it takes for us to say how
 many elements are in the display does not depend on the number of
 elements in the image. That is, if a display has only one element or
 four elements, we are equally fast at reporting that number (figures
-[\[fig:parallel_counting\]](#fig-parallel_counting){reference-type="ref"
-reference="fig:parallel_counting"}\[a, b and c\]).
+[\[fig-parallel_counting\]](#fig-parallel_counting){reference-type="ref"
+reference="fig-parallel_counting"}\[a, b and c\]).
 
 ![](figures/heeger_bergen/parallel_counting.png){width="100%"}
 

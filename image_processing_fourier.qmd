@@ -302,7 +302,7 @@ properties and symmetries can be observed from inspecting that matrix.
  with the key in the bottom left.  In the vector at the right, black
  values indicate zero.
 } 
-\label{fig:colorDFT}
+\label{fig-colorDFT}
 
 ![Visualization of the discrete Fourier transform as a matrix.  The signal to be
  transformed forms the entries of the column vector at right.  The

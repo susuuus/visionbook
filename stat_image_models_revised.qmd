@@ -670,22 +670,22 @@ weighted by the similarity of the local neighborhoods of each pair of
 pixels. More formally,
 $$\ell_{\mbox{NLM}}[n,m] = \sum_{k,l} w_{n,m}[k,l] \ell[k,l]$$ where
 $$w_{n,m}[k,l] = \frac{1}{Z_{n,m}} \exp{\frac{- \left| \ell[N_{k,l}] - \ell[N_{n,m}] \right| ^2}{h^2}},
-    \label{fig:mask}$$ where $N_{i, j}$ denotes an $h \times h$ region
+    \label{fig-mask}$$ where $N_{i, j}$ denotes an $h \times h$ region
 of pixels centered at $i, j$, and $Z_{n,m}$ is set so that the weights
 over the image sum to one, that is $\sum_{kl} w_{n,m}[k,l] = 1$.
 
 @fig-nlm1 shows the weighting functions for two images. The parameter
 $h$ is typically set to $10 \sigma$, where $\sigma$ is the estimated
 image noise standard deviation. Within figures
-[\[fig:nlm1\]](#fig-nlm1){reference-type="ref" reference="fig:nlm1"}(a
+[\[fig-nlm1\]](#fig-nlm1){reference-type="ref" reference="fig-nlm1"}(a
 and b) at left is a grayscale image where the center position of
 interest to be denoised is marked with a white star. The right side of
 the figures shows for some value of $h$ in equation
-([\[fig:mask\]](#fig-mask){reference-type="ref" reference="fig:mask"})
+([\[fig-mask\]](#fig-mask){reference-type="ref" reference="fig-mask"})
 the weighting function $w_{n,m}[k,l]$ indicating which pixels are
 averaged together to yield the nonlocal mean value placed at the starred
 location in the denoised image. Note, for both figures
-[\[fig:nlm1\]](#fig-nlm1){reference-type="ref" reference="fig:nlm1"}(a
+[\[fig-nlm1\]](#fig-nlm1){reference-type="ref" reference="fig-nlm1"}(a
 and b) the sampling at image regions with similar local structure as the
 image position to be denoised.
 

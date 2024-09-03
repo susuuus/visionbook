@@ -325,8 +325,8 @@ $\mathbf{t}$ to an output image $\hat{\boldsymbol\ell}$ that matches
 what the text describes. Recall the similar diagrams in the chapters on
 representation learning and generative modeling and think about how they
 relate (see and
-[\[fig:generative_modeling_and_representation_learning:genrep_schematic\]](#fig-generative_modeling_and_representation_learning-genrep_schematic){reference-type="ref"
-reference="fig:generative_modeling_and_representation_learning:genrep_schematic"}).
+[\[fig-generative_modeling_and_representation_learning-genrep_schematic\]](#fig-generative_modeling_and_representation_learning-genrep_schematic){reference-type="ref"
+reference="fig-generative_modeling_and_representation_learning-genrep_schematic"}).
 This new problem is not so different from what we have seen before!
 
 Now let's build some concrete architectures to solve this mapping. We

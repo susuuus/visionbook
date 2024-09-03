@@ -347,8 +347,8 @@ Harris corner detector has been widely used for identifying features to
 match across images, although they were later supplanted by the
 scale-invariant feature transform (SIFT) @Lowe04, based on maxima over a
 scale of Laplacian filter outputs. Figures
-[\[fig:stereopoints\]](#fig-stereopoints){reference-type="ref"
-reference="fig:stereopoints"}(a and b) show the result of the Harris
+[\[fig-stereopoints\]](#fig-stereopoints){reference-type="ref"
+reference="fig-stereopoints"}(a and b) show the result of the Harris
 feature detector to the images of @fig-stereomatch.
 
   ------------------------------------------------------
@@ -366,14 +366,14 @@ feature detector to the images of @fig-stereomatch.
                            \(c\)
   -------------------------------------------------------
 
-Figures [\[fig:stereopoints\]](#fig-stereopoints){reference-type="ref"
-reference="fig:stereopoints"}(a and b) reveal the challenges of the
+Figures [\[fig-stereopoints\]](#fig-stereopoints){reference-type="ref"
+reference="fig-stereopoints"}(a and b) reveal the challenges of the
 feature matching task: (1) not every feature is marked across both
 images, and (2) we need to decide which pairs of image features go
 together. Feature points are found, independently, in each of the stereo
 pair images (figures
-[\[fig:stereopoints\]](#fig-stereopoints){reference-type="ref"
-reference="fig:stereopoints"}\[a and b\]). Detected Harris feature
+[\[fig-stereopoints\]](#fig-stereopoints){reference-type="ref"
+reference="fig-stereopoints"}\[a and b\]). Detected Harris feature
 points @Harris88 are shown as green dots. It is especially visible
 within the marked ellipses that not the same set of feature points is
 marked in each image. @fig-stereopointsc shows a depth image resulting

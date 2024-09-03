@@ -80,7 +80,7 @@ shows the ambient, Lambertian, and Phong shading components of a sphere
 under two-source illumination, and a comparison with a real sphere under
 similar real illumination.
 
-<figure id="fig:rendering">
+<figure id="fig-rendering">
 
 <figcaption>(a and b) Two different renderings of a sphere. (c) Note the
 many extra details required of a photorealistic rendering.</figcaption>
@@ -155,7 +155,7 @@ The needed elements are an aperture to let light through, mechanisms to
 block stray light, a projection screen, and some method to view or
 record the image on the projection screen.
 
-<figure id="fig:pinhole2">
+<figure id="fig-pinhole2">
 <embed src="figures/imaging/pinholeBag.png" style="width:100.0%" />
 <embed src="figures/imaging/pinholeBag2.png" />
 <figcaption>A pinhole camera made from paper bags. Following steps 1–4,
@@ -182,7 +182,7 @@ bottom part of the world outside the window. As a consequence, most
 walls will appear as having a faint blue tone on the bottom because they
 reflect the sky, as shown in .
 
-<figure id="fig:accidental">
+<figure id="fig-accidental">
 
 <figcaption>(a) A wall might contain a picture of the world after all.
 (b) Turning the room into a pinhole camera by closing most of the window
@@ -270,7 +270,7 @@ relationship between camera coordinates and image coordinates is
 $$\begin{aligned}
 n & = & - a x + n_0\\
 m & = & a y + m_0
-\label{eq:cameratoimagecoordinates}
+\label{eq-cameratoimagecoordinates}
 \end{aligned}$$ where $a$ is a constant, and $(n_0, m_0)$ is the image
 coordinates of the camera optical axis. Note that this is different than
 what we introduced a simple projection model in in the framework of the
@@ -297,7 +297,7 @@ the size of objects is independent of the distance to the camera. The
 projection equations are generally written as follows: $$\begin{aligned}
 x & = & k X \nonumber \\
 y & = & k Y
-\label{eq:orthographicProj}
+\label{eq-orthographicProj}
 \end{aligned}$$ where the constant scaling factor $k$ accounts for
 change of units and is a fixed global image scaling.
 

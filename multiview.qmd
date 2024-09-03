@@ -111,10 +111,10 @@ Let's start defining the notation and the formulation of the problem we
 want to solve; given a set of $M$ images with overlapping content, we
 want to recover the 3D structure of the scene and the location of the
 camera for each image. Figures
-[\[fig:sfm:sugar\]](#fig-sfm-sugar){reference-type="ref"
-reference="fig:sfm:sugar"} and
-[\[fig:sfm:palma\]](#fig-sfm-palma){reference-type="ref"
-reference="fig:sfm:palma"} show two examples of sets of images.
+[\[fig-sfm-sugar\]](#fig-sfm-sugar){reference-type="ref"
+reference="fig-sfm-sugar"} and
+[\[fig-sfm-palma\]](#fig-sfm-palma){reference-type="ref"
+reference="fig-sfm-palma"} show two examples of sets of images.
 @fig-sfm-sugar shows 12 images of an object taken by a camera moving
 around the object. @fig-sfm-palma shows eight images taken inside a
 plaza. Both sets of images represent very different scenarios that will
@@ -433,10 +433,10 @@ locations of the keypoints are then further refined by bundle adjustment
 loss is usually rewritten using a robust cost function (typically the
 Huber kernel).
 
-Figures [\[fig:sfm:3dsugar\]](#fig-sfm-3dsugar){reference-type="ref"
-reference="fig:sfm:3dsugar"} and
-[\[fig:sfm:3dpalma\]](#fig-sfm-3dpalma){reference-type="ref"
-reference="fig:sfm:3dpalma"} show the final 3D reconstructions and
+Figures [\[fig-sfm-3dsugar\]](#fig-sfm-3dsugar){reference-type="ref"
+reference="fig-sfm-3dsugar"} and
+[\[fig-sfm-3dpalma\]](#fig-sfm-3dpalma){reference-type="ref"
+reference="fig-sfm-3dpalma"} show the final 3D reconstructions and
 recovered camera locations for the two sets of images that we have used
 in this chapter.
 

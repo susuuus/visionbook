@@ -590,10 +590,10 @@ reference="sec-interpolation"}). This algorithm is called **forward
 mapping**. It is an intuitive way of warping an image but it is really
 not a good idea. We will have all sorts of artifacts such as missing
 values and aliasing as shown in figures
-[\[fig:warping_sketch\]](#fig-warping_sketch){reference-type="ref"
-reference="fig:warping_sketch"} and
-[\[fig:warping_forward_backward\]](#fig-warping_forward_backward){reference-type="ref"
-reference="fig:warping_forward_backward"}.
+[\[fig-warping_sketch\]](#fig-warping_sketch){reference-type="ref"
+reference="fig-warping_sketch"} and
+[\[fig-warping_forward_backward\]](#fig-warping_forward_backward){reference-type="ref"
+reference="fig-warping_forward_backward"}.
 
 ![](figures/imaging_geometry/warping_sketch.png){width="100%"}
 
@@ -611,10 +611,10 @@ input image) and there will be no aliasing if the interpolation is done
 correctly. To avoid aliasing, blurring of the input image might be
 necessary if the density of pixels in the target image is lower than in
 the input image. Figures
-[\[fig:warping_sketch\]](#fig-warping_sketch){reference-type="ref"
-reference="fig:warping_sketch"} and
-[\[fig:warping_forward_backward\]](#fig-warping_forward_backward){reference-type="ref"
-reference="fig:warping_forward_backward"} compare forward and backward
+[\[fig-warping_sketch\]](#fig-warping_sketch){reference-type="ref"
+reference="fig-warping_sketch"} and
+[\[fig-warping_forward_backward\]](#fig-warping_forward_backward){reference-type="ref"
+reference="fig-warping_forward_backward"} compare forward and backward
 mapping.
 
 ![](figures/imaging_geometry/warping_forward_backward.png){width="100%"}
