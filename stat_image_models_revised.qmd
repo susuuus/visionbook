@@ -625,7 +625,7 @@ that this implements a **coring function** @Simoncelli96: if a
 coefficient value is observed near zero, it is set to zero, based on the
 very high prior probability of zero coefficient values.
 
-![Input/output coring curve for maximum posterior denoising for the example of \fig{\ref{fig:waveletBayes](figures/statistical_image_models/waveletlut.png){width="40%" #fig-bayeslut}
+![Input/output coring curve for maximum posterior denoising for the example of \fig{\ref{fig-waveletBayes](figures/statistical_image_models/waveletlut.png){width="40%" #fig-bayeslut}
 
 For a more detailed analysis and examples of denoising using the
 Laplacian image prior, we refer the reader to the work of Eero

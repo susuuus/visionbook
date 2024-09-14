@@ -586,7 +586,7 @@ local evidence matrix, for each of the four depth states, at each left
 camera spatial position, is displayed in @fig-canoe4c. The intensities
 in each column in the third-row image add up to one.
 
-![Belief propagation applied to graphical model, \fig{\ref{fig:canoe3](figures/graphical_models/bpcanoes5.png){width=".8" #fig-canoe4}
+![Belief propagation applied to graphical model, \fig{\ref{fig-canoe3](figures/graphical_models/bpcanoes5.png){width=".8" #fig-canoe4}
 
 The prior probability of any configuration of pixel disparity states is
 described by setting the compatibility matrices,

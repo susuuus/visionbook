@@ -338,7 +338,7 @@ temporal frequencies, and multiplied by a sinc function over temporal
 frequency. The resulting Fourier transform magnitude is shown in
 @fig-motionIllusion2c.
 
-![Derivation of the fluted square-wave motion illusion, continued from \fig{\ref{fig:motionIllusion1](figures/optical_flow/ted_demo_motion_2.png){width="100%" #fig-motionIllusion2}
+![Derivation of the fluted square-wave motion illusion, continued from \fig{\ref{fig-motionIllusion1](figures/optical_flow/ted_demo_motion_2.png){width="100%" #fig-motionIllusion2}
 
 Because orientation in space-time tells motion direction (section
 [\[sect:modelingSequences\]](#sect:modelingSequences){reference-type="ref"

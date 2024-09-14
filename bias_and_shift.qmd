@@ -184,7 +184,7 @@ hypothesis space. But we can check what happens in this toy example.
 error (vertical axis) when evaluating on dataset A as a function of the
 amount of training data (horizontal axis).
 
-![Generalization error as a function of number of training examples. Test set is dataset A. Each curve shows the performance when training with dataset A and with dataset B (same distributions as in \fig{\ref{fig:bias_and_shift:training_test_sets](figures/bias_and_shift/toy_example/test_as_function_of_data.png){width="60%" #fig-bias_and_shift-test_as_function_of_data}
+![Generalization error as a function of number of training examples. Test set is dataset A. Each curve shows the performance when training with dataset A and with dataset B (same distributions as in \fig{\ref{fig-bias_and_shift-training_test_sets](figures/bias_and_shift/toy_example/test_as_function_of_data.png){width="60%" #fig-bias_and_shift-test_as_function_of_data}
 
 Interestingly, both training sets (A and B) succeed in reducing the
 generalization error on the test set of dataset A when more training

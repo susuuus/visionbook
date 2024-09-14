@@ -493,7 +493,7 @@ points correspond to the 3D locations given by the top of the bookshelf,
 desk height, ground and infinity (which is the location of the vertical
 vanishing point in 3D).
 
-![Sketch of the setting from \fig{\ref{fig:office_measuring_desk](figures/single_view_3d/office_measuring_desk_sketch.png){width="70%" #fig-office_measuring_desk_sketch}
+![Sketch of the setting from \fig{\ref{fig-office_measuring_desk](figures/single_view_3d/office_measuring_desk_sketch.png){width="70%" #fig-office_measuring_desk_sketch}
 
 The rest of calculations requires computing distances between points,
 which only works when using heterogeneous coordinates (or homogeneous

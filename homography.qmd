@@ -464,7 +464,7 @@ this example we pick the middle image as a reference). We can use the
 estimated homographies to warp all of the images into a single camera
 view as shown in @fig-panorama.
 
-![Panoramic image composed by the three overlapping images from \fig{\ref{fig:example_three_images](figures/homography/panorama.jpg){width="100%" #fig-panorama}
+![Panoramic image composed by the three overlapping images from \fig{\ref{fig-example_three_images](figures/homography/panorama.jpg){width="100%" #fig-panorama}
 
 ## Concluding Remarks
 

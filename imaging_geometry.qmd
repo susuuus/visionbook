@@ -44,7 +44,7 @@ But before we move into the material, we are sure you would like to see
 the picture that the standing character from the previous sketch took.
 Here it is:
 
-![The picture taken by the standing character from \fig{\ref{fig:world_and_camera_coordinates](figures/imaging_geometry/the_picture.png){width=".25" #fig-pinholeGeometry2bis}
+![The picture taken by the standing character from \fig{\ref{fig-world_and_camera_coordinates](figures/imaging_geometry/the_picture.png){width=".25" #fig-pinholeGeometry2bis}
 
 ## 3D Camera Projections in Homogeneous Coordinates
 
@@ -590,7 +590,7 @@ build models for different camera types such as orthographic cameras,
 weak-perspective model, affine cameras, and so on.
 @fig-summary_camera_projection summarizes this section.
 
-![Projection of a point into the image plane. This summary puts together \fig{\ref{fig:pinholeGeometry2bis](figures/imaging_geometry/summary_camera_model.png){width="80%" #fig-summary_camera_projection}
+![Projection of a point into the image plane. This summary puts together \fig{\ref{fig-pinholeGeometry2bis](figures/imaging_geometry/summary_camera_model.png){width="80%" #fig-summary_camera_projection}
 
 In the rest, we will usually refer to the camera projection matrix,
 which includes both intrinsic as extrinsic parameters as:
@@ -1148,7 +1148,7 @@ points and their corresponding image coordinates. The image coordinates
 are approximated also and are collected manually. We use Adobe Photoshop
 to read the pixel coordinates.
 
-![Office picture and a table with the 3D world coordinates of 12 points, extracted using the measurements from \fig{\ref{fig:office_measurements](figures/imaging_geometry/correspondences_img.png){width="100%" #fig-office_correspondences_img}
+![Office picture and a table with the 3D world coordinates of 12 points, extracted using the measurements from \fig{\ref{fig-office_measurements](figures/imaging_geometry/correspondences_img.png){width="100%" #fig-office_correspondences_img}
 
 Photoshop has the image coordinates origin on the top left. Our
 convention has been to put the origin on the bottom and the $x$-axis

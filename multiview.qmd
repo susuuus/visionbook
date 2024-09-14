@@ -345,7 +345,7 @@ keypoints, such as window corners, bricks, and other building details,
 than the ones detected on the sugar bowl.
 
   -------------------------------------------------------------------------------
-    ![Each patch shows a $65 \times 65$ image crop centered on a detected keypoint. The keypoint detector finds image regions with strong spatial changes. Those regions are also likely to be found on images of the same object but under different viewpoints. (a) Sugar bowl, \fig{\ref{fig:sfm:sugar](figures/sfm/sugar/sugar_keypoints_examples_many.png){width="100%" #fig-sfm-sugar_keypoints_examples_many}
+    ![Each patch shows a $65 \times 65$ image crop centered on a detected keypoint. The keypoint detector finds image regions with strong spatial changes. Those regions are also likely to be found on images of the same object but under different viewpoints. (a) Sugar bowl, \fig{\ref{fig-sfm-sugar](figures/sfm/sugar/sugar_keypoints_examples_many.png){width="100%" #fig-sfm-sugar_keypoints_examples_many}
                                        \(a\)
   -------------------------------------------------------------------------------
 

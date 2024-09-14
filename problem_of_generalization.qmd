@@ -156,7 +156,7 @@ not well characterize modern learners like deep neural networks. Deep
 networks, which we will see in chapter @sec-neural_nets can indeed either underfit or overfit, but it is not the case that there is a simple relationship between the
 number of parameters the net has and whether that leads to underfitting
 versus overfitting. In fact, bigger deep nets with more parameters may
-overfit less than smaller nets. We discuss this further in @sec-problem_of_generalization_rethinking_generalization.
+overfit less than smaller nets. We discuss this further in @sec-problem_of_generalization-rethinking_generalization.
 
 ## Regularization
 
@@ -174,7 +174,7 @@ principle of **Occam's razor**.
 The general form of a regularized objective is:
 $$\begin{aligned}
     J(\theta) = \overbrace{\frac{1}{N} \sum^N_{i=1} \mathcal{L}(f_{\theta}(x)^{(i)}, y^{(i)})}^\text{data fit loss} + \underbrace{\lambda R(\theta)}_\text{regularizer} \quad\quad\triangleleft \quad\text{regularized objective function}
-\end{aligned}$${#eq-problem_of_generalization_regularized_objective} 
+\end{aligned}$${#eq-problem_of_generalization-regularized_objective} 
 where $\lambda$ is a hyperparameter that controls the strength of the regularization.
 
 One of the most common regularizers is to penalize the $L_p$ norm of the
@@ -212,9 +212,9 @@ the posterior $p(\theta \bigm | \{x^{(i)}, y^{(i)}\}^N_{i=1})$ is
 proportional to the product of the prior and the likelihood. The log
 posterior is then the *sum* of the log likelihood and the log prior,
 plus a constant. Hence we arrive at the form of
-@eq-problem_of_generalization_regularized_objective.
+@eq-problem_of_generalization-regularized_objective.
 
-### Revisiting the $\star$ Problem {#sec-problem_of_generalization_star_problem_revisited}
+### Revisiting the $\star$ Problem {#sec-problem_of_generalization-star_problem_revisited}
 
 Remember the $\star$ problem from @sec-intro_to_learning
 
@@ -226,9 +226,9 @@ $$\begin{aligned}
 \end{aligned}$$ 
 
 You may have figured out that $x \star y = (xy)^2$. We said that is the correct answer. But hold on, couldn't it be that $x \star y =  94.5x - 9.5x^2 + 4y^2 - 151$? That also perfectly explains these four examples (trust us, we checked). Or maybe $\star$ is the
-following Python program @fig-problem_of_generalization_python_star_solution.
+following Python program @fig-problem_of_generalization-python_star_solution.
 
-::: {#fig-problem_of_generalization_python_star_solution}
+::: {#fig-problem_of_generalization-python_star_solution}
 ``` {.python xleftmargin="0.33" xrightmargin="0.33" fontsize="\\fontsize{8.5}{9}" frame="single" framesep="2.5pt" baselinestretch="1.05"}
 def star(x,y):
     if x==2 && y==3:
@@ -265,7 +265,7 @@ probability of all possible hypotheses in the hypothesis space must sum
 to 1) @jefferys1992ockham, @mackay2003information. This is why,
 probabilistically, simpler hypotheses are more likely to be true.
 
-## Rethinking Generalization {#sec-problem_of_generalization_rethinking_generalization}
+## Rethinking Generalization {#sec-problem_of_generalization-rethinking_generalization}
 
 A recent empirical finding is that some seemingly complex hypothesis
 spaces, such as deep nets (which we will see in later chapters), tend
@@ -316,7 +316,7 @@ looking there," a cop asks. "Because this is where the light is."
 
 Together these three tools allow us to pinpoint one (or a few) good
 solutions in the space of all possibilities, as depicted in the cartoon
-in @fig-problem_of_generalization_search_space_tools.
+in @fig-problem_of_generalization-search_space_tools.
 
 In this cartoon, we are learning a mapping from some domain
 $\mathcal{X}$ to another domain $\mathcal{Y}$. The hypothesis space,
@@ -327,7 +327,7 @@ preferred over which others, and the data (green ellipse) also places a
 soft constraint on the space, preferring mappings that well fit the
 data.
 
-![A cartoon of the tools for honing in on the truth.](./figures/problem_of_generalization/search_space_tools.png){#fig-problem_of_generalization_search_space_tools}
+![A cartoon of the tools for honing in on the truth.](./figures/problem_of_generalization/search_space_tools.png){#fig-problem_of_generalization-search_space_tools}
 
 Approximation error is low within the green region. If we didn't care
 about generalization, then it would be sufficient just to select any
@@ -353,14 +353,14 @@ look at how data shapes the objective function $J$ for the following
 empirical risk minimization problem: $$\begin{aligned}
     J(\theta; \{x^{(i)}, y^{(i)}\}^N_{i=1}) &= \frac{1}{N}\sum_i \lvert f_{\theta}(x^{(i)}) - y^{(i)}\rvert^{0.25} \quad\quad \triangleleft \quad\text{objective}:error_fn_1\\
     f_{\theta}(x) &= \theta_0 x + \theta_1 \sin(x)  \quad\quad \triangleleft \quad\text{hypothesis space}
-\end{aligned}$${#eq-problem_of_generalization_error_fn_1} 
+\end{aligned}$${#eq-problem_of_generalization-error_fn_1} 
 
 
 :::{.column-margin}
-We use the exponent $0.25$, rather than the more common squared error, just so that the plots in @fig-problem_of_generalization_more_data_more_constraints show more clearly the linear constraints (the dark lines) added by each datapoint to the objective $J$.
+We use the exponent $0.25$, rather than the more common squared error, just so that the plots in @fig-problem_of_generalization-more_data_more_constraints show more clearly the linear constraints (the dark lines) added by each datapoint to the objective $J$.
 :::
 
-In @fig-problem_of_generalization_more_data_more_constraints, bottom row,
+In @fig-problem_of_generalization-more_data_more_constraints, bottom row,
 we plot $J$ as a heatmap over the values obtained for different settings
 of $\theta$. On the top row we plot the data being fit,
 $\{x^{(i)}, y^{(i)}\}^N_{i=1}$, along with the function $f_{\theta}$
@@ -369,7 +369,7 @@ achieve within 0.1 of the cost of the best fit. Each column corresponds
 to some amount of training data $N$. Moving to the right, we increase
 $N$.
 
-![More data, more (soft) constraints.](./figures/problem_of_generalization/more_data_more_constraints.png){#fig-problem_of_generalization_more_data_more_constraints}
+![More data, more (soft) constraints.](./figures/problem_of_generalization/more_data_more_constraints.png){#fig-problem_of_generalization-more_data_more_constraints}
 
 :::{.column-margin}
 The heatmaps here are reminiscent of a classic computer vision algorithm called the Hough transform @hough1959machine, @duda1972use. This transform can be used to find geometric primitives that fit feature points in images. In fact, the bottom row is \textit{exactly} the generalized Hough transform~\cite{duda1972use} of the data points in the top row, using $\theta_0 x + \theta_1 \sin(x)$ as the family of geometric primitives we are fitting.
@@ -427,7 +427,7 @@ objective function, namely $$\begin{aligned}
 We will look at the effect of the ridge regularizer
 $\left\lVert\theta\right\rVert_2^2$. We plot the energy landscape and
 function fit for this problem in
-@fig-problem_of_generalization_more_regularizer_more_constraints,
+@fig-problem_of_generalization-more_regularizer_more_constraints,
 fitting to a single datapoint. The ridge regularizer prefers solutions
 with small parameter norm, so its contribution to the energy landscape
 is to place a quadratic bowl around the origin. As we increase $\lambda$
@@ -435,7 +435,7 @@ is to place a quadratic bowl around the origin. As we increase $\lambda$
 becomes stronger and pulls the learned solution closer and closer to the
 origin.
 
-![More regularization, more (soft) constraints.](./figures/problem_of_generalization/more_regularizer_more_constraints.png){#fig-problem_of_generalization_more_regularizer_more_constraints}
+![More regularization, more (soft) constraints.](./figures/problem_of_generalization/more_regularizer_more_constraints.png){#fig-problem_of_generalization-more_regularizer_more_constraints}
 
 In this example, the true solution lies near the origin, so adding some
 regularization gets us closer to the truth. But using too strong a
@@ -459,17 +459,17 @@ You can take away a few lessons from this example:
 
 Now we turn to the last of our tools: the hypothesis space itself. For
 this experiment, we will use the same objective as in
-@eq-problem_of_generalization_error_fn_1 and we will consider the
+@eq-problem_of_generalization-error_fn_1 and we will consider the
 following three hypothesis spaces: $$\begin{aligned}
     f_{\theta}(x) &= \theta_0 x + \theta_1 x^2 &\triangleleft \quad\texttt{quadratic}\\
     f_{\theta}(x) &= \theta_0 x &\triangleleft \quad\texttt{linear}\\
     f_{\theta}(x) &= 0 &\triangleleft \quad\texttt{constant}
 \end{aligned}$$ Our experiment on these three spaces is shown in
-@fig-problem_of_generalization_fewer_hypotheses_more_constraints. We
+@fig-problem_of_generalization-fewer_hypotheses_more_constraints. We
 show the hypothesis spaces in order of decreasing size moving to the
 right.
 
-![Fewer hypotheses, more (hard) constraints](./figures/problem_of_generalization/fewer_hypotheses_more_constraints.png){#fig-problem_of_generalization_fewer_hypotheses_more_constraints}
+![Fewer hypotheses, more (hard) constraints](./figures/problem_of_generalization/fewer_hypotheses_more_constraints.png){#fig-problem_of_generalization-fewer_hypotheses_more_constraints}
 
 The true function is linear, and because of that both the `quadratic`
 and `linear` hypothesis spaces contain the true solution. However, the
@@ -477,7 +477,7 @@ linear hypothesis space is *much* smaller than the quadratic space. For
 the linear hypothesis space, searching for the solution (i.e., learning)
 only considers the slice of parameter space where $\theta_1=0$; all the
 gray region in
-@fig-problem_of_generalization_fewer_hypotheses_more_constraints can be
+@fig-problem_of_generalization-fewer_hypotheses_more_constraints can be
 ignored. Using a smaller hypothesis space can potentially accelerate our
 search.
 

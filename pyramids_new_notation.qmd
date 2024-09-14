@@ -416,7 +416,7 @@ $\boldsymbol\ell_{\texttt{out}}= \boldsymbol\ell^A * \mathbf{m} + \boldsymbol\el
 giving as result the image in @fig-orange_apple_mask_bad_result.
 
 :::{#fig-orange_apple_mask_bad_result}
-![Resulting blended image from \fig{\ref{fig:orange_apple_mask](figures/pyramids/apple_orange_mask_8levels.jpg){width="30%" #fig-orange_apple_mask_bad_result}
+![Resulting blended image from \fig{\ref{fig-orange_apple_mask](figures/pyramids/apple_orange_mask_8levels.jpg){width="30%" #fig-orange_apple_mask_bad_result}
 
 Resulting blended image from @fig-orange_apple_mask. This result is not very pleasing.
 :::

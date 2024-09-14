@@ -184,7 +184,7 @@ reference="chapter-simplesystem"}, to show that the algorithm for 3D
 interpretation gives reasonable results, we can re-render the inferred
 3D structure from different viewpoints.
 
-![3D reconstruction using a pretrained model. The images show multiple view points of the reconstructed 3D scene from \fig{\ref{fig:simplesystem_revisited_img1](figures/simplesystem_revisited/views_midas.jpg){width="100%" #fig-views_midas}
+![3D reconstruction using a pretrained model. The images show multiple view points of the reconstructed 3D scene from \fig{\ref{fig-simplesystem_revisited_img1](figures/simplesystem_revisited/views_midas.jpg){width="100%" #fig-views_midas}
 
 It is quite remarkable that it works somewhat well even though this
 system has been trained with natural images, which are quite dissimilar
@@ -245,7 +245,7 @@ it is likely that this particular example will be fixed, but there will
 be other failures. And some of those failures will give clues to what is
 the next fundamental question that will need to be addressed.
 
-![Output by ChatGPT when asked to render a new image with the same elements as in \fig{\ref{fig:chatgpt_blockworld](figures/simplesystem_revisited/chatgpt_blockworld_2.png){width=".5" #fig-chatgpt_blockworld2}
+![Output by ChatGPT when asked to render a new image with the same elements as in \fig{\ref{fig-chatgpt_blockworld](figures/simplesystem_revisited/chatgpt_blockworld_2.png){width=".5" #fig-chatgpt_blockworld2}
 
 ## Unsolved Solved Computer Vision Problems
 
