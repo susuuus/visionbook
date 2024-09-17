@@ -1,22 +1,15 @@
 #!/bin/bash
 
-# Directory to start from
-start_dir="$1"
+# Start directory is grandparent/figures
+start_dir="$(dirname "$(dirname "$PWD")")/figures"
 
-# Check if the start directory is provided
-if [ -z "$start_dir" ]; then
-    echo "Usage: $0 <directory>"
-    exit 1
-fi
-
-# Find and convert all .pdf files to .png
+# Find and convert all .pdf files to .png with high resolution
 find "$start_dir" -type f -name '*.pdf' -exec sh -c '
 for file; do
     # Replace the file extension from .pdf to .png
     png="${file%.pdf}.png"
-    
-    # Convert the file
-    echo "Converting $file to $png"
-    convert "$file" "$png"
+    echo "Converting $file to $png with high resolution and trimming transparent background"
+    convert -density 300 "$file" -quality 100 -trim "$png"
+
 done
 ' sh {} +
