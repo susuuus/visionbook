@@ -1010,9 +1010,7 @@ magnocellural, and koniocellular (not shown). Those channels project
 into the primary visual cortex following a very regular architecture
 organized along hypercolumns. The koniocellular pathway projects into
 the color blobs in the upper layer of the visual cortex. Figure modified
-from
-@kandel:neural.](figures/taxonomy/visual_pathways_aina.png){#fig-visual_pathways
-width="80%"}
+from @kandel:neural.](figures/taxonomy/visual_pathways_aina.png){#fig-visual_pathways width="70%"}
 
 
 
@@ -1320,18 +1318,16 @@ of the AI field in its origins.
 
 
 Interest in neural nets has since gone through a series of ebbs and
-flows (). Note that these cycles have partially lined up with interest
+flows @fig-taxonomy-neural_net_enthusiam. Note that these cycles have partially lined up with interest
 in learning algorithms more generally, but there have also been phases
 where interest in neural nets was low but interest in other learning
 algorithms was high.
 
 ![Enthusiasm for neural nets has gone up and down over time, with a
 period of roughly 25 years. What will happen
-next?](figures/taxonomy/neural_net_enthusiasm.png){#fig-taxonomy-neural_net_enthusiam
-width="70%"}
+next?](figures/taxonomy/neural_net_enthusiasm.png){#fig-taxonomy-neural_net_enthusiam width="70%"}
 
-In 1969, Marvin Minsky and Seymour Papert published a book titled
- @marvin1969perceptrons. You might think this would be a book that would
+In 1969, @marvin1969perceptrons published a book titled Perceptrons. You might think this would be a book that would
 increase the excitement around perceptrons, but in fact it largely
 killed it. Minsky and Papert showed that perceptrons are incapable of
 learning basic logical operations. Clearly then, perceptrons could not

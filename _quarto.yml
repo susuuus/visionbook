@@ -118,6 +118,7 @@ bibliography:
 
 format:
   html:
+    css: colors.css
     anchor-sections: true
     fontsize: "16px"
     linestretch: 1.6

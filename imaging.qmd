@@ -157,7 +157,7 @@ record the image on the projection screen.
 
 <figure id="fig-pinhole2">
 <embed src="figures/imaging/pinholeBag.png" style="width:100.0%" />
-<embed src="figures/imaging/pinholeBag2.png" />
+<embed src="figures/imaging/pinholeBag2.png" style="width:100%" />
 <figcaption>A pinhole camera made from paper bags. Following steps 1–4,
 you can turn a paper bag into a light-tight pinhole camera, with the
 viewer inside. Newspapers can be added between two layers of paper bags

@@ -71,8 +71,8 @@ will adjust the weights $\mathbf{w}$ and the bias $b$, in order to
 minimize a classification loss, $\mathcal{L}$, that scores number of
 misclassifications: 
 
-$$\begin{aligned}    \mathbf{w}^*, b^* = \mathop{\mathrm{arg\,min}}_{\mathbf{w}, b} \frac{1}{N}\sum_{i=1}^N \mathcal{L}(\mathbf{w}^\mathsf{T}\mathbf{x}^{(i)} + b, y^{(i)}):perceptron_learning_problem
-\end{aligned}$${#eq-neural_nets} 
+$$\begin{aligned}    \mathbf{w}^*, b^* = \mathop{\mathrm{arg\,min}}_{\mathbf{w}, b} \frac{1}{N}\sum_{i=1}^N \mathcal{L}(\mathbf{w}^\mathsf{T}\mathbf{x}^{(i)} + b, y^{(i)})
+\end{aligned}$${#eq-neural_nets-perceptron_learning_problem} 
 
 In @fig-neural_nets-fitting_a_perceptron, this
 optimization process corresponds to shifting and rotating the **decision
@@ -124,7 +124,7 @@ More commonly we might have many hidden units in stack, which we call a
 ![Mutilayer perceptron.](figures/neural_nets/MLP1.png){#fig-neural_nets-MLP1 width=30%}
 
 :::{.column-margin}
-How many layers does this net have? Some texts will say two [$\mathbf{W}_1$, $\mathbf{W}_2$], others three [$\mathbf{x}$, $\{\mathbf{z}, \mathbf{h}\}$, $\mathbf{y$}], others four [$\mathbf{x}$, $\mathbf{z}$, $\mathbf{h}$, $\mathbf{y$]}. We must get comfortable with the ambiguity.
+How many layers does this net have? Some texts will say two [$\mathbf{W}_1$, $\mathbf{W}_2$], others three [$\mathbf{x}$, $\{\mathbf{z}, \mathbf{h}\}$, $\mathbf{y}$], others four [$\mathbf{x}$, $\mathbf{z}$, $\mathbf{h}$, $\mathbf{y}$]. We must get comfortable with the ambiguity.
 :::
 
 Because this network has multiple layers of neurons, and because each
@@ -305,8 +305,7 @@ but don't worry, in @sec-backpropagation we will see how to speed things up usin
 ### Deep Nets Are Universal Approximators {#sec-neural_nets-universal_approximation}
 
 Not only can deep nets perform nonlinear classification, they can in
-principle perform *any* continuous input-output mapping. The
- @Cybenko1989 states that this is true even for a network with just a
+principle perform *any* continuous input-output mapping. The **universal approximation theorem** @Cybenko1989 states that this is true even for a network with just a
 single hidden layer. The caveat is that the number of neurons in the
 hidden layers will have to be very large in order to fit complicated
 functions.
@@ -352,7 +351,7 @@ $$\begin{align}
 $${#eq-neural_nets_bump_as_relu_net}
 
 :::{.column-margin}
-Here we show how a neural net can represent a function as a sum of basis functions. This idea is also foundational in signal processing, where signals are often represented as a sum of sine waves @sec-fourier_analysis, boxes @fig-upsampling_and_downsampling_nn_interp, or trapezoids @fig-bilinear_interp.
+Here we show how a neural net can represent a function as a sum of basis functions. This idea is also foundational in signal processing, where signals are often represented as a sum of sine waves @sec-fourier_analysis, boxes @fig-upsampling_and_downsampling-nn_interp, or trapezoids @fig-bilinear_interp.
 :::
  
 As $\gamma \rightarrow 0$, this approximation
@@ -416,7 +415,7 @@ research.
 
 ## Deep Learning: Learning with Neural Nets
 
-Using the formalism we defined in @sec-intro_to_learning"}, learning consists of using an *optimizer* to find a function in a *hypothesis space*, that maximizes an *objective*. From this perspective, neural nets are simply a special
+Using the formalism we defined in @sec-intro_to_learning, learning consists of using an *optimizer* to find a function in a *hypothesis space*, that maximizes an *objective*. From this perspective, neural nets are simply a special
 kind of hypothesis space (and a particular parameterization of that
 hypothesis space). **Deep learning** refers to learning algorithms that
 use this parameterized hypothesis space.
@@ -452,8 +451,7 @@ coordination can be achieved in biological brains.
 
 ### Data Structures for Deep Learning: Tensors and Batches
 
-The main data structure that we will encounter in deep learning is the ,
-which is just a multidimensional array. This may seem simple, but it's
+The main data structure that we will encounter in deep learning is the **tensor**, which is just a multidimensional array. This may seem simple, but it's
 important to get comfortable with the conventions of tensor processing.
 
 In general, everything in deep learning is represented as tensors---the
@@ -536,8 +534,8 @@ see some examples in later chapters.
 ## Catalog of Layers
 
 Below, we use the color blue to denote
-[**parameters**]{style="color: param_color_dark"} and the color red to
-denote [**data/activations**]{style="color: data_color_dark"} (inputs
+[**parameters**]{.param_color_dark} and the color red to
+denote [**data/activations**]{.data_color_dark} (inputs
 and outputs to each layer). 
 
 :::{.column-margin}

@@ -165,7 +165,7 @@ should prefer hypotheses (functions $f$) that are sufficiently
 expressive to fit the data, but not so flexible that they can overfit
 the data.
 
-refers to mechanisms that penalize function complexity so that we avoid
+**Regularization** refers to mechanisms that penalize function complexity so that we avoid
 learning too flexible a function that overfits. Typically, regularizers
 are terms we add to the objective that prefer simple functions in the
 hypothesis space, all else being equal. They therefore embody the
