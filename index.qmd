@@ -204,9 +204,8 @@ some of the experiments. Special thanks to Manel Baradad, Sarah
 Schwettmann, Krishna Murthy Jatavallabhula, Wei-Chiu Ma, Kabir Swain,
 Adrian Rodriguez Muñoz, Tongzhou Wang, Jacob Huh, Yen-Chen Lin,
 Pratyusha Sharma, Joanna Materzynska, and Shuang Li. Thanks to Manel
-Baradad for his help on the experiments in , to Krishna Murthy
-Jatavallabhula for helping with the code for , and Aina Torralba for
-help designing the book cover and several figures.
+Baradad for his help on the experiments in  Chapter @sec-simple_system_revisited, to Krishna Murthy
+Jatavallabhula for helping with the code for Chapter @sec-3D_multiview, and Aina Torralba for help designing the book cover and several figures.
 
 Antonio Torralba thanks Juan, Idoia, Ade, Sergio, Aina, Alberto, and
 Agata for all their support over many years.
