@@ -36,7 +36,7 @@ of bias, there are still many ethical concerns regarding the use of
 computer vision technology. In , we pose ethics questions that we
 encourage computer vision researchers to think about.
 
-## Fairness {#sect:fairness}
+## Fairness {#sect-fairness}
 
 Modern computer vision algorithms are trained from data, and thus are
 influenced by the statistical make-up of the training data. Correlations
@@ -97,13 +97,13 @@ first-world households @DeVries2019, possibly due to a better
 representation of imagery from such households in the training datasets
 of the image recognition systems.
 
-<figure id="fig-soap">
-
-<figcaption>Images of household items, and their recognized classes by
+@fig-soap shows images of household items, and their recognized classes by
 five object recognition systems . The systems tend to perform worse for
 non-Western countries and for lower-income households, such as those of
-the right two photographs.</figcaption>
-</figure>
+the right two photographs.
+
+
+![Images of household items, and their recognized classes by five object recognition systems \cite{DeVries2019}. The systems tend to perform worse for non-Western countries and for lower-income households, such as those of the right two photographs.](figures/fairness/soap3.jpg){#fig-soap}
 
 ### Generative Adversarial Networks to Create Unbiased Datasets and Algorithms
 
@@ -142,14 +142,14 @@ distributions observed within the training data, assuming that the
 training data has the desired distribution. See also @Wang2020 for a
 benchmark and comparison of techniques for dataset bias mitigation.
 
-<figure id="fig-augmentation">
 
-<figcaption>In this example “wears hat” is deemed to be a protected
+
+![In this example “wears hat” is deemed to be a protected
 attribute, but it is correlated with another attribute, which in this
-example is “wears glasses” . The GAN-based method generates sets of
+example is “wears glasses” @Ramaswamy2021. The GAN-based method generates sets of
 images where wearing hats is not correlated with wearing
-glasses.</figcaption>
-</figure>
+glasses.](figures/fairness/augmentation.jpg){#fig-augmentation}
+
 
 ### Counterfactuals for Analyzing Algorithmic Biases
 
@@ -170,12 +170,8 @@ one face variable is modified. The variation in an algorithm's
 classification results along the images of the transect to provide a
 clean assessment of any bias related to the variable being modified.
 
-<figure id="fig-transect">
 
-<figcaption> A GAN creates sequences of faces, called
-<span><strong>transects</strong></span>, where only one attribute
-changes . </figcaption>
-</figure>
+![A GAN creates sequences of faces, called **transects**, where only one attribute changes @Balakrishnan2020](figures/fairness/transect.jpg){#fig-transect}
 
 ### Privacy and Differential Privacy
 
@@ -205,6 +201,8 @@ participants of a study that they will not be affected by allowing their
 data to be used in a study or analysis, no matter what other studies,
 datasets, or information sources are available.
 
+**Differential privacy** allows extracting aggregated information about a population from a database without revealing information about any single individual.
+
 Algorithms can be designed for which it can be shown that the guarantee
 of differential privacy is met @Kearns2020, @Dwork2014. One approach is
 to inject enough randomness into each recorded observation to guarantee
@@ -233,7 +231,11 @@ population. The price for this differential privacy is that more data
 must be collected to obtain the same accuracy guarantees in the estimate
 of the true population averages.
 
-## Ethics {#sect:ethics}
+::: {.margin-note}
+There are also risks associated with the wrong use of differential privacy @{Dwork_Kohli_Mulligan_2019}.
+::: 
+
+## Ethics {#sect-ethics}
 
 Many ethical issues are outside of the traditional training and
 education of scientists or engineers, but ethics are important for
