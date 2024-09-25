@@ -18,7 +18,6 @@
     <!-- Include necessary three.js libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MTLLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
     <script>
@@ -51,29 +50,59 @@
       const ambientLight = new THREE.AmbientLight(0x404040, 2); // Soft ambient light
       scene.add(ambientLight);
 
-      // Load MTL and OBJ files
-      const mtlLoader = new THREE.MTLLoader();
-      mtlLoader.load("surf_with_colors.mtl", function (materials) {
-        materials.preload();
+      // Function to convert grayscale to color
+      function grayscaleToColor(value) {
+        const intensity = value * 255; // Scale value to [0, 255] for RGB
+        return new THREE.Color(
+          intensity / 255,
+          intensity / 255,
+          intensity / 255
+        ); // Grayscale color (r=g=b)
+      }
 
-        // Load OBJ model and apply the materials from the MTL file
-        const objLoader = new THREE.OBJLoader();
-        objLoader.setMaterials(materials);
-        objLoader.load(
-          "surf_with_colors.obj", // Update with the correct path to your OBJ file
-          function (object) {
-            object.scale.set(0.1, 0.1, 0.1); // Adjust scale if needed
-            object.position.set(0, 0, 0); // Position object at the center
-            scene.add(object);
-          },
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded"); // Log loading progress
-          },
-          function (error) {
-            console.log("An error occurred while loading the object.");
-          }
-        );
-      });
+      // Load OBJ model
+      const loader = new THREE.OBJLoader();
+      loader.load(
+        "surf_with_colors.obj", // Update with the correct path to your OBJ file
+        function (object) {
+          object.traverse(function (child) {
+            if (child.isMesh) {
+              // Assume each vertex is defined with color data as a comment, apply it as grayscale
+              const vertexColors = [];
+              let colorIndex = 0;
+
+              // Loop through each vertex and apply the corresponding grayscale color
+              for (
+                let i = 0;
+                i < child.geometry.attributes.position.count;
+                i++
+              ) {
+                // Grayscale values are indexed based on the comment lines we've parsed
+                const colorValue = 0.773438; // Replace this with actual parsed grayscale values from your file
+
+                // Assign grayscale color to each vertex
+                vertexColors.push(colorValue, colorValue, colorValue);
+              }
+
+              // Apply the material with the grayscale colors
+              child.material = new THREE.MeshStandardMaterial({
+                vertexColors: true,
+                metalness: 0.3, // Add some metalness for realism
+                roughness: 0.6, // Control roughness for material texture
+              });
+            }
+          });
+          object.scale.set(0.1, 0.1, 0.1); // Adjust scale if needed
+          object.position.set(0, 0, 0); // Position object at the center
+          scene.add(object);
+        },
+        function (xhr) {
+          console.log((xhr.loaded / xhr.total) * 100 + "% loaded"); // Log loading progress
+        },
+        function (error) {
+          console.log("An error occurred while loading the object.");
+        }
+      );
 
       // Rendering loop
       function animate() {
