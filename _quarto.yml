@@ -141,7 +141,8 @@ format:
     cap-location: margin
     mathjax: true
     lightbox: true
-    # mermaid:
+resources:
+  - demos/
   # pdf:
     # see https://pandoc.org/MANUAL.html for all options
     # documentclass: src/DL_class
