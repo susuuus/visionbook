@@ -1,7 +1,3 @@
----
-copy_resources:
-  - demos/simple_sys/cleaned_surf_with_colors.obj
----
 # A Simple Vision System {#sec-simplesystem}
 
 ## Introduction
@@ -564,7 +560,7 @@ has been accurately captured.
 results we can re-render the inferred 3D structure from different
 viewpoints.](figures/simplesystem/views.png){#fig-views width="100%"}
 
-
+You may also try the interactive demo below to see the 3D structure. (The demo supports mouse zoom in and out, pan, and rotate.)
 <iframe src="./demos/simple_sys/surf_with_colors.html" width="100%" height="500px" frameborder="0"></iframe>
 
 
