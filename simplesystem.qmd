@@ -1,3 +1,7 @@
+---
+copy_resources:
+  - demos/simple_sys/cleaned_surf_with_colors.obj
+---
 # A Simple Vision System {#sec-simplesystem}
 
 ## Introduction
@@ -559,6 +563,10 @@ has been accurately captured.
 ![To show that the algorithm for 3D interpretation gives reasonable
 results we can re-render the inferred 3D structure from different
 viewpoints.](figures/simplesystem/views.png){#fig-views width="100%"}
+
+
+<iframe src="./demos/simple_sys/surf_with_colors.html" width="100%" height="500px" frameborder="0"></iframe>
+
 
 ## Generalization
 
