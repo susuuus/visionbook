@@ -31,8 +31,9 @@
         0.1,
         1000
       );
-      camera.position.set(0, 10, 20); // Adjust camera position to view object
 
+      camera.position.set(0, 5, 20); // Adjust camera position to view object
+      // console.log(camera.position);
       const renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
@@ -85,15 +86,17 @@
               }
 
               // Apply the material with the grayscale colors
-              child.material = new THREE.MeshStandardMaterial({
+              child.material = new THREE.MeshBasicMaterial({
                 vertexColors: true,
-                metalness: 0.3, // Add some metalness for realism
-                roughness: 0.6, // Control roughness for material texture
+                metalness: 0,
+                roughness: 1, // Control roughness for material texture
               });
             }
           });
           object.scale.set(0.1, 0.1, 0.1); // Adjust scale if needed
           object.position.set(0, 0, 0); // Position object at the center
+          // Rotate the object to face the opposite direction
+          object.rotation.y = Math.PI; // 180 degrees in radians
           scene.add(object);
         },
         function (xhr) {
