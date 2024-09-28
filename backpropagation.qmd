@@ -8,6 +8,9 @@ can be chained together into a **computation graph**.
 @fig-backpropagation-simple_MLP shows the computation graph for the
 two-layer multilayer perceptron (MLP) from chapter @sec-neural_nets.
 
+![In this chapter we will visualize neural nets as a sequence of layers, which we call a computation graph.](figures/backpropagation/simple_MLP.png){fig-backpropagation-simple_MLP}
+
+
 Each [layer]{style="background-color: comp_graph_node_bcolor"} takes in
 some inputs and transforms them into some outputs. We call this the
 $\texttt{forward}$ pass through the layer. If the layer has parameters,
@@ -15,6 +18,13 @@ we will consider the parameters to be an *input* to a parameter-free
 transformation: $$\begin{aligned}    \mathbf{x}_{\texttt{out}}&= f(\mathbf{x}_{\texttt{in}},\theta)
 \end{aligned}$$ Graphically, we will depict the forward operation of a
 layer like shown below (@fig-backpropagation-mod_block_forward).
+
+![Forward operation of a neural net layer.](figures/backpropagation/mod_block_forward.png){#fig-backpropagation-mod_block_forward width="50%"}
+
+:::{.column-margin}
+We will use the color
+[$\theta$]{style="background-color: comp_graph_param_bcolor"} to indicate *free* parameters, which are set via learning and are not the result of any other processing.
+:::
 
 The learning problem is to find the parameters
 [$\theta$]{style="background-color: comp_graph_param_bcolor"} that
@@ -37,18 +47,25 @@ functions $f_L \circ f_{L-1} \circ \cdots f_2 \circ f_1$, with each
 function $f_l$ parameterized by $\theta_l$.
 
 :::{.column-margin}
-Such a
-computation graph could represent an MLP, for example, which we will see
-in the next section.
+Such a computation graph could represent an MLP, for example, which we will see in the next section.
 :::
 
- We aim to optimize the parameters with
+We aim to optimize the parameters with
 respect to a loss function $\mathcal{L}$. The loss can be treated as
 another node in our computation graph, which takes in $\mathbf{x}_L$
 (the output of $f_L$) and outputs a scalar $J$, the loss. This
 computation graph appears as follows
 (@fig-backpropagation-composed_modules).
 
+
+
+![Basic sequential computation graph.](figures/backpropagation/composed_modulesL.png){#fig-backpropagation-composed_modules width="100%"}
+
+:::{.column-margin}
+This computation graph is a narrow tree; the parameters live on branches of length 1. This can be easier to see when we plot it with data and parameters as nodes and edges as the functions:
+![Computation graph as a tree.](figures/backpropagation/cgraph_tree.png){#fig-backpropagation-cgraph_tree width="80%"}
+The parameters, along with the input training data, are the leaves of the computation graph.
+:::
 
 
 Our goal is to update all the values highlighted in blue: $\theta_1$,
@@ -85,6 +102,11 @@ computation, we will first look at one generic layer in isolation, and
 see what we need in order to update its parameters
 (@fig-backpropagation-generic_layer_g_L).
 
+
+
+![A generic layer in the computation graph. The braces represent the part of the computation graph we need to consider in order to evaluate $\mathbf{g}_{\texttt{out}}$, $\localgrad$, and $\costgradin$.](figures/backpropagation/generic_layer_g_L.png){#fig-backpropagation-generic_layer_g_L width="100%"}
+
+
 Here we have introduced two new shorthands, $\mathbf{L}$ and
 $\mathbf{g}$; these represent arrays of partial derivatives, defined
 below, and they are the key arrays we need to keep track of to do
@@ -95,12 +117,20 @@ backprop. They are defined as:  $$\begin{aligned}
     &\quad\quad \mathbf{L}^{\theta} \triangleq \frac{\partial \mathbf{x}_{\texttt{out}}}{\partial \theta} &&\quad\quad \triangleleft \quad \text{\quad with respect to layer params} \quad [|\mathbf{x}_{\texttt{out}}| \times |\theta|]
 \end{aligned}$$
 
+:::{.column-margin}
+All these arrays represent the gradient *at a single operating point*, namely that of the current value of the data and parameters.
+:::
+
 These arrays give a simple formula for computing the gradient we need,
 that is, $\frac{\partial J}{\partial \theta}$, in order to `update`
 $\theta$ to minimize the cost: $$\begin{aligned}
     \frac{\partial J}{\partial \theta} &= \underbrace{\frac{\partial J}{\partial \mathbf{x}_{\texttt{out}}}}_{\mathbf{g}_{\texttt{out}}} \underbrace{\frac{\partial \mathbf{x}_{\texttt{out}}}{\partial \theta}}_{\mathbf{L}^{\theta}} = \mathbf{g}_{\texttt{out}}\mathbf{L}^{\theta}\\
-    \theta^{i+1} &\leftarrow \theta^{i} - \eta \Big(\frac{\partial J}{\partial \theta}\Big)^\mathsf{T}&&\quad\quad \triangleleft \quad \texttt{update} :djdtheta
-\end{aligned}$${#eq-backpropagation} 
+    \theta^{i+1} &\leftarrow \theta^{i} - \eta \Big(\frac{\partial J}{\partial \theta}\Big)^\mathsf{T}&&\quad\quad \triangleleft \quad \texttt{update}
+\end{aligned}$${#eq-backpropagation-djdtheta} 
+
+:::{.column-margin}
+The transpose is because, by convention, $\theta$ is a column vector while $\frac{\partial J}{\partial \theta}$ is a row vector; see the Notation section prior to chapter @sec-notation.
+:::
 
 The remaining question is clear: how do we get $\mathbf{g}_l$ and
 $\mathbf{L}^{\theta}_l$ for each layer $l$?
@@ -117,11 +147,15 @@ $\mathbf{x}_{\texttt{out}}$ and $J$. However, this can be computed
 iteratively: once we know $\mathbf{g}_l$, computing $\mathbf{g}_{l-1}$
 is just one more matrix multiply! This can be summarized with the
 following recurrence relation: $$\begin{aligned}    \mathbf{g}_{\texttt{in}} &= \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{x}} &&\quad\quad \triangleleft \quad \text{backpropagation of errors}
-    :backward
-\end{aligned}$${#eq-backpropagation} This recurrence is essence of backprop: it sends error
-signals (gradients) backward through the network, starting at the last
+\end{aligned}$${#eq-backpropagation-backward} 
+
+This recurrence is essence of backprop: it sends error signals (gradients) backward through the network, starting at the last
 layer and iteratively applying @eq-backpropagation-backward to compute
 $\mathbf{g}$ for each previous layer. 
+
+:::{.column-margin}
+Deep learning libraries like Pytorch have a \texttt{.grad} field associated with each variable (data, activations, parameters). This field represents $\frac{\partial J}{\partial v}$ for each variable $v$.
+:::
 
 We are finally ready to define the full `backward` function promised at
 the beginning of this chapter! It consists of the following operation,
@@ -129,6 +163,10 @@ shown in @fig-backpropagation-mod_block_backward, which has three
 inputs ($\mathbf{x}_{\texttt{in}}, \theta, \mathbf{g}_{\texttt{out}}$)
 and two outputs ($\mathbf{g}_{\texttt{in}}$ and
 $\frac{\partial J}{\partial \theta}$).
+
+![Backward operation of a neural net layer.](figures/backpropagation/mod_block_backward.png){#fig-backpropagation-mod_block_backward width="50%"}
+
+
 
 ## The Full Algorithm: Forward, Then Backward
 
@@ -152,50 +190,41 @@ produce the sequence $\mathbf{x}_0, \mathbf{x}_1, \ldots, \mathbf{x}_L$.
 @fig-backpropagation-forward_pass shows what the forward pass looks
 like.
 
+![Forward pass.](figures/backpropagation/forward_pass.png){#fig-backpropagation-forward_pass width="100%"}
 
+
+:::{.column-margin}
+We use the color ${\colorbox{{rgb}{0.2,0.9,0.2}}{\makebox(0,0){}}}$ for data/activations being passed forward through the network.
+:::
 
 Next, we compute a **backward pass**, iteratively evaluating the
 $\mathbf{g}$'s and obtaining the sequence
 $\mathbf{g}_L, \mathbf{g}_{L-1}, \ldots$, as well as the parameter
 gradients for each layer (@fig-backpropagation-backward_pass).
 
- The full algorithm is summarized in algorithm
-[\[alg:backpropagation:backprop_for_chains\]](#alg:backpropagation:backprop_for_chains){reference-type="ref"
-reference="alg:backpropagation:backprop_for_chains"}.
+![](figures/backpropagation/backward_pass.png){#fig-backpropagation-backward_pass width="100%"}
 
-::: algorithm
-[]{#alg:backpropagation:backprop_for_chains
-label="alg:backpropagation:backprop_for_chains"} **Input:** parameter
-vector $\theta = \{\theta_l\}_{l=1}^L$, $f_1, \ldots, f_L$,
-$f^{\prime}_1, \ldots, f^{\prime}_L$, training datapoint
-$\{\mathbf{x}_0,\mathbf{y}\}$, Loss function
-$\mathcal{L}: \mathbb{R}^N \rightarrow \mathbb{R}$ **Output:** gradient
-direction
-$\frac{\partial J}{\partial \theta} = \Big\{\frac{\partial J}{\partial \theta_l}\Big\}_{l=1}^L$
-**Forward pass:** $\mathbf{x}_l = f_l(\mathbf{x}_{l-1}, \theta_l)$
-**Backward pass:** $\mathbf{g}_L = \mathcal{L}^{\prime}(\mathbf{x}_L,y)$
-$\mathbf{L}_{l} = f_l^{\prime}(\mathbf{x}_{l-1},\theta_l)$
-$\mathbf{g}_{l-1} = \mathbf{g}_{l}\mathbf{L}^{\mathbf{x}}_{l}$
-$\frac{\partial J}{\partial \theta_l} = \mathbf{g}_{l}\mathbf{L}^{\theta}_{l}$
-:::
+
+The full algorithm is summarized in algorithm @fig-backpropagation-backprop_for_chains.
+
+![](figures/backpropagation/backprop_for_chains.png){#fig-backpropagation-backprop_for_chains width="100%"}
 
 ## Backpropagation Over Data Batches
 
 So far, we have only examined computing the gradient of the loss for a
-single datapoint, $\mathbf{x}$. As you may recall from chapters
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"} and
-[\[chapter-gradient_descent\]](#sec-gradient_descent){reference-type="ref"
-reference="chapter-gradient_descent"}, the total cost function we wish
+single datapoint, $\mathbf{x}$. As you may recall from @sec-intro_to_learning and @sec-gradient_descent, the total cost function we wish
 to minimize will typically be the *average* of the losses over *all* the
-datapoints in a training set, $\{\mathbf{x}^{(i)}\}_{i=1}^N$. However,
+datapoints in a training set, $\{\mathbf{x}^{(i)}\}_{i=1}^N$. 
+
+
+However,
 once we know how to compute the gradient for a single datapoint, we can
 easily compute the gradient for the whole dataset, due to the following
 identity: 
 
 $$\begin{aligned}
-\frac{\partial \frac{1}{N}\sum_{i=1}^N J_i(\theta)}{\partial \theta} = \frac{1}{N} \sum_{i=1}^N \frac{\partial J_i(\theta)}{\partial \theta}:average_of_gradients
-\end{aligned}$${#eq-backpropagation} 
+\frac{\partial \frac{1}{N}\sum_{i=1}^N J_i(\theta)}{\partial \theta} = \frac{1}{N} \sum_{i=1}^N \frac{\partial J_i(\theta)}{\partial \theta}
+\end{aligned}$${#eq-backpropagation-average_of_gradients} 
 
 :::{.column-margin}
 The gradient of a sum of terms is the
@@ -205,9 +234,7 @@ sum of the gradients of each term.
  where $J_i(\theta)$ is
 the loss for a single datapoint $\mathbf{x}^{(i)}$. Therefore, to
 compute a gradient update for an algorithm like stochastic gradient
-descent (section
-[\[sec-gradient_descent-SGD\]](#sec:gradient_descent:SGD){reference-type="ref"
-reference="sec-gradient_descent-SGD"}), we apply backpropagation in
+descent @sec-gradient_descent-SGD, we apply backpropagation in
 batch mode, that is, we run it over each datapoint in our batch (which
 can be done in parallel) and then average the results.
 
