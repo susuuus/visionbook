@@ -8,11 +8,11 @@ So far we have seen that deep nets are stacks of simple functions, which compose
 
 Each layer in a deep net is a mapping from one representation of the data to another: $f: \mathbf{x}_{\text{in}} \rightarrow \mathbf{x}_{\text{out}}$. If $\mathbf{x}_{\text{in}}$ and $\mathbf{x}_{\text{out}}$ are both one-dimensional (1D), then we can plot the mapping as a function with $\mathbf{x}_{\text{in}}$ on the $x$-axis and $\mathbf{x}_{\text{out}}$ on the $y$-axis. 
 
-![The traditional way of plotting the function $\mathbf{x}_{\text{out}} = \mathbf{x}_{\text{in}}$.](figures/neural_nets_as_data_transformations/trad_plot.png){#fig-neural_nets_as_distribution_transformers-trad_plot width=50%}
+![The traditional way of plotting the function $\mathbf{x}_{\text{out}} = \mathbf{x}_{\text{in}}$.](figures/neural_nets_as_data_transformations/trad_plot.png){#fig-neural_nets_as_distribution_transformers-trad_plot width=32%}
 
 Now, we will instead consider a different way of plotting the mapping, where we simply rotate the $y$-axis to be horizontal rather than vertical. 
 
-![An alternative way of plotting a function. Functions are mappings that rearrange the input space. The identity function $\mathbf{x}_{\text{out}}=\mathbf{x}_{\text{in}}$, shown here, means "no rearrangement," so the mapping is straight lines.](figures/neural_nets_as_data_transformations/new_way_plot.png){#fig-neural_nets_as_distribution_transformers-new_way_plot width=50%}
+![An alternative way of plotting a function. Functions are mappings that rearrange the input space. The identity function $\mathbf{x}_{\text{out}}=\mathbf{x}_{\text{in}}$, shown here, means "no rearrangement," so the mapping is straight lines.](figures/neural_nets_as_data_transformations/new_way_plot.png){#fig-neural_nets_as_distribution_transformers-new_way_plot width=100%}
 
 The depiction makes it obvious that the plot $\mathbf{x}_{\text{out}} = \mathbf{x}_{\text{in}}$ is the identity mapping: datapoints get mapped to unchanged positions. 
 
@@ -32,7 +32,7 @@ A deep net stacks these operations; an example is given in @fig-neural_nets_as_d
 
 ![Mapping plot for a \texttt{linear}-\texttt{relu} stack.](figures/neural_nets_as_data_transformations/new_way_plot_two_layer.png){#fig-neural_nets_as_data_transformations-new_way_plot_two_layer width=50%}
 
-The plots above show how a uniform grid of datapoints get mapped from layer to layer in a deep net. We can also use this plotting style to show how a nonuniform distribution of incoming datapoints gets transformed. This is the setting in which deep nets actually operate, and sometimes the real action of the network looks very different when viewed this way. We can think of a deep net as transforming an input data distribution, $\p_{\text {data }}$, into an output data distribution, $\p_{\text {out}}$. Each layer of activations in a network is a different representation or \index{Embedding}{\bf embedding} of the data, and we can consider the distribution of activations on some layer $\ell$ to be $p_{\ell}$. Then, layer by layer, a deep net transforms $\p_{\text {data }}$ into $p_{\texttt{1}}$ into $p_{\texttt{2}}$, and so on until finally transforming the data to the distribution $\p_{\text {out}}$. Most loss functions can also be interpreted from this angle: they penalize the divergence, in one form or another, between the output distribution $\p_{\text {out}}$ and a target distribution $p_{\texttt{target}}$.
+The plots above show how a uniform grid of datapoints get mapped from layer to layer in a deep net. We can also use this plotting style to show how a nonuniform distribution of incoming datapoints gets transformed. This is the setting in which deep nets actually operate, and sometimes the real action of the network looks very different when viewed this way. We can think of a deep net as transforming an input data distribution, $p_{\text {data }}$, into an output data distribution, $p_{\text {out}}$. Each layer of activations in a network is a different representation or \index{Embedding}{\bf embedding} of the data, and we can consider the distribution of activations on some layer $\ell$ to be $p_{\ell}$. Then, layer by layer, a deep net transforms $p_{\text {data }}$ into $p_{\texttt{1}}$ into $p_{\texttt{2}}$, and so on until finally transforming the data to the distribution $p_{\text {out}}$. Most loss functions can also be interpreted from this angle: they penalize the divergence, in one form or another, between the output distribution $p_{\text {out}}$ and a target distribution $p_{\texttt{target}}$.
 
 A nice property of this way of plotting is that it also extends to visualizing two-dimensional (2D)-to-2D mappings (something that conventional $x$-axis/$y$-axis plotting is not well equipped to do). Real deep nets perform $N$-dimensional (ND)-to-ND mappings, but already 2D-to-2D visualizations can give a lot of insight into the general case. In @fig-neural_nets_as_data_transformations-2D_mapping_diagrams, we show how three common neural net layers may act to transform a Gaussian blob of data centered at the origin.
 
@@ -44,7 +44,7 @@ One interesting thing to notice here is that the relu layer maps many points to 
 
 ## Binary Classifier Example
 
-Consider a multilayer perceptron (MLP) that performs binary classification formulated as two-way softmax regression. The input datapoints are each in $\mathbb{R}^2$ and the target outputs are in $\vartriangle^1$, with layer structure \texttt{linear}-\texttt{relu}-\texttt{linear}-\texttt{relu}-\texttt{linear}. This network is drawn below in @fig-neural_nets-simple_MLP_network2.
+Consider a multilayer perceptron (MLP) that performs binary classification formulated as two-way softmax regression. The input datapoints are each in $\mathbb{R}^2$ and the target outputs are in $\vartriangle^1$, with layer structure $\texttt{linear}-\texttt{relu}-\texttt{linear}-\texttt{relu}-\texttt{linear}$. This network is drawn below in @fig-neural_nets-simple_MLP_network2.
 
 
 ![An MLP with three linear layers and two outputs, suitable for performing binary softmax regression.](figures/neural_nets_as_data_transformations/simple_MLP_network2.png){#fig-neural_nets-simple_MLP_network2 width=50%}
