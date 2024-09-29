@@ -8,7 +8,7 @@ can be chained together into a **computation graph**.
 @fig-backpropagation-simple_MLP shows the computation graph for the
 two-layer multilayer perceptron (MLP) from chapter @sec-neural_nets.
 
-![In this chapter we will visualize neural nets as a sequence of layers, which we call a computation graph.](figures/backpropagation/simple_MLP.png){fig-backpropagation-simple_MLP}
+![In this chapter we will visualize neural nets as a sequence of layers, which we call a computation graph.](figures/backpropagation/simple_MLP.png){#fig-backpropagation-simple_MLP}
 
 
 Each [layer]{style="background-color: comp_graph_node_bcolor"} takes in
@@ -448,15 +448,22 @@ As an example, for a `relu` layer we have: $$\begin{aligned}
 \end{aligned}$$ As a matrix multiply, the `backward` operation is shown
 in @fig-backpropagation-pointwise_backward_matices.
 
+
+
+![Matrix multiply for \texttt{backward} of a pointwise layer.](figures/backpropagation/pointwise_backward_matices.png){#fig-backpropagation-pointwise_backward_matices width="20%"}
+
 with $a = h^\prime(x_{\texttt{in}}[0])$,
 $b = h^\prime(x_{\texttt{in}}[1])$, and
 $c = h^\prime(x_{\texttt{in}}[2])$. We can simplify this equation as
 follows: $$\begin{aligned}
-    \mathbf{g}_{\texttt{in}}[i] = \mathbf{g}_{\texttt{out}}[i]h^{\prime}(\mathbf{x}_{\texttt{in}}[i]) \quad \forall i :pointwise_costgrad
-\end{aligned}$${#eq-backpropagation}
+    \mathbf{g}_{\texttt{in}}[i] = \mathbf{g}_{\texttt{out}}[i]h^{\prime}(\mathbf{x}_{\texttt{in}}[i]) \quad \forall i 
+\end{aligned}$${#eq-backpropagation-pointwise_costgrad}
 
 The full set of operations for a pointwise layer is shown next in
 @fig-backpropagation-pointwise_layer_backprop.
+
+![Matrix multiply for \texttt{backward} of a pointwise layer.](figures/backpropagation/pointwise_layer_backprop.png){#fig-backpropagation-pointwise_layer_backprop width="90%"}
+
 
 ### Backpropagation for Loss Layers
 
@@ -480,6 +487,10 @@ per-dimension errors between the prediction and the target.
 This completes our derivation of $\texttt{forward}$ and
 $\texttt{backward}$ for a $L_2$ loss layer, yielding
 @fig-backpropagation-L2_loss_layer_backprop.
+
+
+
+![Matrix multiply for \texttt{backward} of an $L_2$ loss layer.](figures/backpropagation/L2_loss_layer_backprop.png){#fig-backpropagation-L2_loss_layer_backprop width="90%"}
 
 ### Putting It All Together: Backpropagation through an MLP
 
