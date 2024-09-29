@@ -501,6 +501,9 @@ and $\mathbf{z}$ and $\mathbf{h}$ be three-dimensional, and
 $\hat{\mathbf{y}}$ be two-dimensional. The forward pass for this network
 is shown below in @fig-backpropagation-forward_pass_MLP.
 
+
+![Forward pass through an MLP.](figures/backpropagation/forward_pass_MLP.png){#fig-backpropagation-forward_pass_MLP width="100%"}
+
 For the backward pass, we will here make a slight change in convention,
 which will clarify an interesting connection between the forward and
 backward directions. Rather than representing gradients $\mathbf{g}$ as
@@ -514,6 +517,10 @@ $$\begin{aligned}
 
 Now we will draw the backward pass, using these transposed
 $\mathbf{g}$'s, in @fig-backpropagation-backward_pass_MLP.
+
+
+![Backward pass through an MLP.](figures/backpropagation/backward_pass_MLP.png){#fig-backpropagation-backward_pass_MLP width="
+100%"}
 
 This reveals an interesting connection between `forward` and `backward`
 for linear layers: `backward` for a linear layer is the same operation
@@ -583,9 +590,7 @@ linear layer.
 So far we have only seen chain-like graphs,
 --\[\]--\[\]--\[\]$\rightarrow$. Can backprop handle other graphs? It
 turns out the answer is *yes*. Presently we will consider (**DAGs**). In
-chapter
-[\[chapter-recurrent_neural_nets\]](#sec-recurrent_neural_nets){reference-type="ref"
-reference="chapter-recurrent_neural_nets"}, we will see that neural nets
+@sec-recurrent_neural_nets, we will see that neural nets
 can also include cycles and still be trained with variants of backprop
 (e.g., backprop through time).
 
@@ -602,13 +607,14 @@ graphs.
 However, to work with general DAGs, it helps to introduce two new
 special modules, which act to construct the topology of the graph. We
 will call these special operators `merge` and `branch`
-(@fig-backpropagation-branch_and_merge).
+@fig-backpropagation-branch_and_merge.
+
+![The `merge` and `branch` layers.](figures/backpropagation/branch_and_merge.png){#fig-backpropagation-branch_and_merge width="60%"}
+
+
 
 :::{.column-margin}
-We only
-consider binary branching and merging here, but branching and merging
-$N$ ways can be done analogously or by repeating these
-operators.
+We only consider binary branching and merging here, but branching and merging $N$ ways can be done analogously or by repeating these operators.
 :::
 
 
@@ -668,6 +674,10 @@ forward and backward behavior of these layers. The next diagrams
 summarize the behavior
 (@fig-backpropagation-branch_and_merge_layers_backprop_diagram).
 
+
+
+![Merge and branch layers `forward` and `backward`.](figures/backpropagation/branch_and_merge_layers_backprop_diagram.png){#fig-backpropagation-branch_and_merge_layers_backprop_diagram width="90%"}
+
 With `merge` and `branch`, we can construct any DAG computation graph by
 simply inserting these layers wherever we want a layer to have multiple
 inputs or multiple outputs. An example is given in
@@ -680,6 +690,9 @@ inputs or multiple outputs. An example is given in
 **Parameter sharing** consists of a single parameter being sent as input
 to multiple different layers. We can consider this as a branching
 operation, as shown in @fig-backpropagation-parameter_sharing.
+
+
+![Parameter sharing is equivalent to branching a parameter in the computation graph.](figures/backpropagation/parameter_sharing.png){#fig-backpropagation-parameter_sharing width="50%"}
 
 Then, from the previous section, it is clear that gradients summate for
 shared parameters. Let $\{\theta^i\}^N_{i=1}$ be a set of variables that
@@ -707,6 +720,13 @@ $\mathcal{L}(F(\mathbf{x}_0), \mathbf{y}, \theta) \triangleq J(\mathbf{x}_0, \ma
 This function can itself be thought of as a single computation block,
 with inputs and outputs as specified previously
 (@fig-backpropagation-J_forward_backward_blocks). 
+
+
+:::{.column-margin}
+In Pytorch you can only set *input* variables as optimization targets -- these are called the *leaves* of the computation graph since, on the backward pass, they have no children. All the other variables are completely determined by the values of the input variables — they are not *free* variables.
+:::
+
+![Full forward and backward passes for a learning problem $\min J(\mathbf{x}_0,\mathbf{y},\theta)$, collapsed into a single computation block.](figures/backpropagation/J_forward_backward_blocks.png){#fig-backpropagation-J_forward_backward_blocks width="100%"}
 
 From this diagram, it should be clear that data inputs and parameter
 inputs play symmetric roles. Just as we can optimize parameters to
