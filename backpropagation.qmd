@@ -271,9 +271,15 @@ vector.
 Next we need the gradients of this function, with respect to its inputs
 and parameters, that is, $\mathbf{L}$. Matrix algebra typically hides
 the details so we will instead first write out all the individual scalar
-gradients:  $$\begin{aligned}
+gradients:
+
+$$\begin{aligned}
     \mathbf{L}^{\mathbf{x}}[i,j] &= \frac{\partial x_{\texttt{out}}[i]}{\partial x_{\texttt{in}}[j]} = 
-    \frac{\partial \sum_l \mathbf{W}[i,l] x_{\texttt{in}}[l]}{\partial x_{\texttt{in}}[j]} = \mathbf{W}[i,j] \label{lingrad1}\\
+    \frac{\partial \sum_l \mathbf{W}[i,l] x_{\texttt{in}}[l]}{\partial x_{\texttt{in}}[j]} = \mathbf{W}[i,j]
+\end{aligned}$${#eq-lingrad1}
+
+
+$$\begin{aligned}
     \mathbf{L}^{\mathbf{W}}[i,jk] &= \frac{\partial x_{\texttt{out}}[i]}{\partial \mathbf{W}[j,k]} = \frac{\partial \sum_l \mathbf{W}[i,l] x_{\texttt{in}}[l]}{\partial \mathbf{W}[j,k]} = 
     \begin{cases}
         x_{\texttt{in}}[k], &\text{if} \quad i == j\\
@@ -283,12 +289,10 @@ gradients:  $$\begin{aligned}
     \begin{cases}
         1, &\text{if} \quad i == j\\
         0, & \text{otherwise}
-    \end{cases} \label{lingrad3}
-\end{aligned}$$
+    \end{cases} 
+\end{aligned}$${#eq-lingrad3}
 
-Equations ([\[lingrad1\]](#lingrad1){reference-type="ref"
-reference="lingrad1"}) and
-([\[lingrad3\]](#lingrad3){reference-type="ref" reference="lingrad3"})
+@eq-lingrad1 and @eq-lingrad3
 imply: $$\begin{aligned}
     \boxed{\mathbf{L}^{\mathbf{x}} = \mathbf{W}} &\quad\quad \triangleleft \quad [M \times N]\\
     \boxed{\mathbf{L}^{\mathbf{b}} = \mathbf{I}} &\quad\quad \triangleleft \quad [M \times M]
@@ -298,16 +302,19 @@ this point to implement `backward` for a linear layer by plugging our
 computed $\mathbf{L}^\mathbf{x}$ into @eq-backpropagation-backward, and
 $\mathbf{L}^\mathbf{W}$ and $\mathbf{L}^\mathbf{b}$ into
 @eq-backpropagation-djdtheta. $$\begin{aligned}
-    \mathbf{g}_{\texttt{in}} &= \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{x}} = \mathbf{g}_{\texttt{out}}\mathbf{W} :linear_backward_costgrad\\
+    \mathbf{g}_{\texttt{in}} &= \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{x}} = \mathbf{g}_{\texttt{out}}\mathbf{W}\\
     \frac{\partial J}{\partial \mathbf{W}} &=  \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{W}}\\
     \frac{\partial J}{\partial \mathbf{b}} &= \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{b}} = \mathbf{g}_{\texttt{out}}
-\end{aligned}$${#eq-backpropagation} To get an intuition for
+\end{aligned}$${#eq-backpropagation-linear_backward_costgrad} To get an intuition for
 @eq-backpropagation-linear_backward_costgrad, it can help to draw the
 matrices being multiplied. Below, in
 @fig-backpropagation-linear_forward_backward_matrices, on the left we
 have the forward operation of the layer (omitting biases) and on the
 right we have the backward operation in
 @eq-backpropagation-linear_backward_costgrad.
+
+
+![The forward and backward matrix multiples for a linear layer.](figures/backpropagation/linear_forward_backward_matrices.png){#fig-backpropagation-linear_forward_backward_matrices width="100%"}
 
 Unlike the other equations, at first glance
 $\frac{\partial J}{\partial \mathbf{W}}$ does not seem to have a simple
@@ -316,7 +323,9 @@ matrix $\mathbf{L}^{\mathbf{W}}$ (which is $[M \times MN]$, with zeros
 wherever $i \neq k$ in $\mathbf{L}^\mathbf{W}[i,jk]$), then do the
 matrix multiply $\mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{W}}$. We
 can avoid all those multiplications by zero by observing the following
-simplification: $$\begin{aligned}    \frac{\partial J}{\partial \mathbf{W}[i,j]} 
+simplification: 
+
+$$\begin{aligned}    \frac{\partial J}{\partial \mathbf{W}[i,j]} 
         &= \frac{\partial J}{\partial \mathbf{x}_{\texttt{out}}} \frac{\partial \mathbf{x}_{\texttt{out}}}{\partial \mathbf{W}[i,j]} \quad\quad\quad\quad\quad\quad \triangleleft \quad[1 \times M][M \times 1] \rightarrow [1 \times 1]\\
         &= \frac{\partial J}{\partial \mathbf{x}_{\texttt{out}}} \Big[\frac{\partial x_{\texttt{out}}[0]}{\partial \mathbf{W}[i,j]}, \ldots ,\frac{\partial x_{\texttt{out}}[M-1]}{\partial \mathbf{W}[i,j]} \Big]^\mathsf{T}\\
         &= \frac{\partial J}{\partial \mathbf{x}_{\texttt{out}}} \Big[\ldots , 0, \ldots , \frac{\partial x_{\texttt{out}}[i]}{\partial \mathbf{W}[i,j]}, \ldots, 0, \ldots \Big]^\mathsf{T}\\
@@ -363,8 +372,16 @@ the end this gradient has the simple form of an outer product between
 two vectors, $\mathbf{x}_{\texttt{in}}$ and $\mathbf{g}_{\texttt{out}}$
 (@fig-backpropagation-parameter_grad_linear_matrices).
 
+
+![Matrix multiply for parameter gradient of a linear layer.](figures/backpropagation/parameter_grad_linear_matrices.png){#fig-backpropagation-parameter_grad_linear_matrices width="30%"}
+
 We can summarize all these operations in the `forward` and `backward`
 diagram for linear layer in @fig-backpropagation-linear_layer_backprop.
+
+
+
+
+![Linear layer forward and backward.](figures/backpropagation/linear_layer_backprop.png){#fig-backpropagation-linear_layer_backprop width="80%"}
 
 Notice that all these operations are simple expressions, mainly
 involving matrix multiplies. `Forward` and `backward` for a linear layer
@@ -373,8 +390,9 @@ matrix multiplication (`matmul`) as a primitive.
 @fig-backpropagation-backprop_code gives Python pseudocode for this
 layer.
 
-``` {.python xleftmargin="0.2" xrightmargin="0.2" fontsize="\\fontsize{8.5}{9}" frame="single" framesep="2.5pt" baselinestretch="1.05"}
+::: {#fig-backpropagation-backprop_code}
 
+```python
 class linear():
     def __init__(self, W, b, lr):
         self.W = W
@@ -395,6 +413,9 @@ class linear():
         self.W -= self.lr*dJdW.transpose()
         self.b -= self.lr*dJdb
 ```
+Pytorch-like pseudocode for a linear layer with `forward` and `backward`.
+:::
+
 
 ### Backpropagation for a Pointwise Nonlinearity
 
@@ -406,7 +427,13 @@ layer using $h$ as
 $f(\mathbf{x}_{\texttt{in}}) = [h(x_{\texttt{in}}[0]), \ldots, h(x_{\texttt{in}}[N-1])]^\mathsf{T}$.
 Then we have $$\begin{aligned}
     \mathbf{L}^{\mathbf{x}} &= f^{\prime}(\mathbf{x}_{\texttt{in}}) = \texttt{diag}([h^\prime(x_{\texttt{in}}[0]), \ldots, h^\prime(x_{\texttt{in}}[N-1])]^\mathsf{T}) \triangleq \mathbf{H}^\prime
-\end{aligned}$$  There are no parameters to update, so we just
+\end{aligned}$$  
+
+:::{.column-margin}
+The $\texttt{diag}$ operator is the operator that places a vector on the diagonal of a matrix, whose other entries are all zero.
+::: 
+
+There are no parameters to update, so we just
 have to calculate $\mathbf{g}_{\texttt{in}}$ in the `backward`
 operation, using @eq-backpropagation-backward: $$\begin{aligned}
     \mathbf{g}_{\texttt{in}} = \mathbf{g}_{\texttt{out}}\mathbf{H}^\prime
