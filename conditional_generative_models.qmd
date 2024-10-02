@@ -55,9 +55,7 @@ color solutions for any grayscale input. A point estimate is bound to be
 a poor inference in this case, since a point estimate can only predict
 one of the multiple possible solutions.
 
-Figure
-[\[fig-conditional_generative_models-tshirts\]](#fig-conditional_generative_models-tshirts){reference-type="ref"
-reference="fig-conditional_generative_models-tshirts"} shows several
+@fig-conditional_generative_models-tshirts shows several
 kinds of predictions one could make given an observation of a grayscale
 t-shirt. The question is straightforward: What is the color of the
 shirt? To unify different kinds of prediction models, we will represent
@@ -73,13 +71,11 @@ Least-squares regression results in a model that predicts the *mean* of
 the data distribution. Therefore, the point prediction output by a
 least-squares regressor will be that the shirt is gray. The probability
 density associated with this prediction is shown in
-@fig-conditional_generative_models-tshirts(b).
+@fig-conditional_generative_models-tshirts (b).
 
 This prediction is entirely wrong! It splits the difference between the
 two true possibilities and comes out with something that has *zero*
-probability under the data distribution. As discussed in chapter
-[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
-reference="chapter-probabilistic_graphical_models"}, we could have done
+probability under the data distribution. As discussed in @sec-probabilistic_graphical_models, we could have done
 regression with a different loss function (using the $L_1$ loss for
 example, rather than $L_2$), and we would have come up with a different
 solution. But we will never get the correct solution. Because the true
@@ -88,7 +84,7 @@ prediction can only ever represent one mode.
 
 We can do better by predicting a *distribution* rather than a point
 estimate. An example is shown in
-@fig-conditional_generative_models-tshirts(c), where we predict a
+@fig-conditional_generative_models-tshirts (c), where we predict a
 Gaussian distribution. In fact, the least-squares regression model can
 be described as outputting the mean of a max likelihood Gaussian fit to
 $p_{\theta}(A \bigm | l)$. Predicting the distribution then just
@@ -113,7 +109,7 @@ One of the most common choices for an expressive, multimodal family of
 distributions is the categorical distribution, $\texttt{Cat}$. This
 distribution applies only to discrete random variables, so to use it,
 the first thing we have to do is quantize our possible output values.
-@fig-conditional_generative_models-tshirts(d) shows an example, where
+@fig-conditional_generative_models-tshirts (d) shows an example, where
 we have quantized the $a$-value into ten bins. Then the categorical
 distribution is simply a ten-dimensional vector of nonnegative numbers
 that sum to 1 (i.e., a probability mass function). The nice thing about
@@ -125,9 +121,7 @@ predictions with any number of modes (well, up to $k$, the resolution of
 our quantized data).
 
 In fact, we have already seen one super important use of the categorical
-distribution: *softmax regression* (section
-[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning-image_classification"}). Now you might
+distribution: *softmax regression* @sec-intro_to_learning-image_classification. Now you might
 have a better understanding of why classification is such a ubiquitous
 modeling tool: it models a maximally expressive predictive distribution
 over a quantized decision space.
@@ -194,9 +188,7 @@ $$\begin{aligned}
     -\left\lVert\hat{\mathbf{y}} - \mathbf{y}\right\rVert^2_2 &= \sum_i -(\hat{y}_i - y_i)^2\\
     &= \log \prod_i \phi(\hat{y}_i,y_i)
 \end{aligned}$$ The loss factorizes as a product over pairwise
-potentials. Therefore, by the Hammersley-Clifford theorem (chapter
-[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
-reference="chapter-probabilistic_graphical_models"}), the $L_2$ loss
+potentials. Therefore, by the Hammersley-Clifford theorem (@sec-probabilistic_graphical_models), the $L_2$ loss
 implies a probability distribution that treats all true values $y_i$ as
 independent from one another, given all the predictions $\hat{y}_i$. The
 predictions are a function of just the input $\mathbf{x}$, so the
@@ -252,9 +244,7 @@ distribution of possibilities over the joint configuration of outputs.
 
 ### Relationship to Conditional Random Fields
 
-The conditional random fields (CRFs) from chapter
-[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
-reference="chapter-probabilistic_graphical_models"} are one kind of
+The conditional random fields (CRFs) from @sec-probabilistic_graphical_models are one kind of
 model that fits this definition. Now we will see some other ones. The
 big difference is that CRFs make predictions via *thinking
 slow* @kahneman2011thinking: given a query observation, you run belief
@@ -284,9 +274,7 @@ for several popular models:
 
 ### Conditional Generative Adversarial Networks
 
-We can make a generative adversarial network (GAN; section
-[\[sec-generative_models-GANs\]](#sec:generative_models:GANs){reference-type="ref"
-reference="sec-generative_models-GANs"}) conditional simply by adding
+We can make a generative adversarial network (GAN; @sec-generative_models-GANs conditional simply by adding
 $\mathbf{x}$ as an input to both the generator and the discriminator:
 $$\begin{aligned}
     \arg\min_{\theta}\max_{\phi} \mathbb{E}_{\mathbf{z},\mathbf{x},\mathbf{y}} \big[ \log d_{\phi}(\mathbf{x}, g_{\theta}(\mathbf{x},\mathbf{z})) + \log (1 - d_{\phi}(\mathbf{x}, \mathbf{y})) \big]
@@ -309,10 +297,7 @@ $\mathbf{x}$).
 
 ### Conditional Variational Autoencoders {#sec-conditional_generative_models-cVAE}
 
-Recall that a variational autoencoder (VAE; section
-[\[sec-generative_modeling_and_representation_learning-VAEs\]](#sec:generative_modeling_and_representation_learning:VAEs){reference-type="ref"
-reference="sec-generative_modeling_and_representation_learning-VAEs"})
-is an infinite mixture model which makes use of the following identity:
+Recall that a variational autoencoder (VAE; @sec-generative_modeling_and_representation_learning-VAEs is an infinite mixture model which makes use of the following identity:
 $$\begin{aligned}
     p_{\theta}(\mathbf{x}) = \int_{\mathbf{z}} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})p_{\mathbf{z}}(\mathbf{z})d\mathbf{z}
 \end{aligned}$$ Analogously, we can define any conditional distribution
@@ -355,18 +340,13 @@ $p_{\theta}(Z \bigm | \mathbf{x}, \mathbf{y})$. In practice, this means
 that a cVAE can be trained just like a regular VAE except that the
 encoder takes the conditioning information, $\mathbf{x}$, as input (in
 addition to $\mathbf{y}$), and the decoder also takes in $\mathbf{x}$
-(in addition to $\mathbf{z}$). Figure
-[\[fig-conditional_generative_models-cVAE_ball_bouncing_example_nets\]](#fig-conditional_generative_models-cVAE_ball_bouncing_example_nets){reference-type="ref"
-reference="fig-conditional_generative_models-cVAE_ball_bouncing_example_nets"}
-depicts this setting.
+(in addition to $\mathbf{z}$). Figure @fig-conditional_generative_models-cVAE_ball_bouncing_example_nets depicts this setting.
 
 ![cVAE architecture. The dotted lines indicate that the \textit{target encoder](./figures/conditional_generative_models/cVAE_ball_bouncing_example_nets.png){width="90%" #fig-conditional_generative_models-cVAE_ball_bouncing_example_nets}
 
 ### Conditional Autoregressive Models
 
-Autoregressive models (section
-[\[sec-generative_models-autoregressive\]](#sec:generative_models:autoregressive){reference-type="ref"
-reference="sec-generative_models-autoregressive"}) are already modeling
+Autoregressive models @sec-generative_models-autoregressive are already modeling
 a sequence of conditional distributions. So, to condition them on some
 inputs $\mathbf{x}$, we can simply concatenate $\mathbf{x}$ as a prefix
 to the sequence of $y$ values we are modeling, yielding the new
@@ -383,9 +363,7 @@ cases, just depending on whether you prefix the sequence or not.
 
 ### Conditional Diffusion Models {#sec-conditional_generative_models-conditional_diffusion_model}
 
-Diffusion models (section
-[\[sec-generative_models-diffusion_models\]](#sec:generative_models:diffusion_models){reference-type="ref"
-reference="sec-generative_models-diffusion_models"}) are quite similar
+Diffusion models @sec-generative_models-diffusion_models are quite similar
 to autoregressive models and they can be made conditional in a similar
 way. All we need to do is concatenate the conditioning variables,
 $\mathbf{x}$, into the input to the denoising function:
@@ -398,9 +376,7 @@ The intuition is that if we give $f_{\theta}$ a description of the image
 as an additional input, then it can do a better job at solving its
 prediction task. Because of this, $f_{\theta}$ will become sensitive to
 the text command, and if you give different text it will denoise toward
-a different image---an image that matches that text! In chapter
-[\[chapter-VLMs\]](#sec-VLMs){reference-type="ref"
-reference="chapter-VLMs"} we will describe in more detail a particular
+a different image---an image that matches that text! In @sec-VLMs-CLIP we will describe in more detail a particular
 neural architecture for text-to-image synthesis, which is based on this
 intuition.
 
@@ -458,9 +434,7 @@ matching photo. The generator therefore maps an image to an image so we
 will implement it with an image-to-image neural architecture. This could
 be a convolutional neural network (CNN), or a transformer; following the
 pix2pix paper we will use a U-Net (a CNN with accordion-shaped skip
-connections; see section
-[\[sec-convolutional_neural_nets-unet\]](#sec:convolutional_neural_nets:unet){reference-type="ref"
-reference="sec-convolutional_neural_nets-unet"}). The discriminator maps
+connections; see @sec-convolutional_neural_nets-unet. The discriminator maps
 the output image to a real-versus-synthetic score (a scalar), so for the
 discriminator we will use a regular CNN (just like the ones used for
 image classification). Here is the full architecture
@@ -600,9 +574,7 @@ that we permute the mapping: if $\{\mathbf{x}^{(i)}, \mathbf{y}^{(i)}\}$
 is the true mapping then consider we instead recover
 $\{\mathbf{x}^{(i)}, \mathbf{y}^{(i+1)}\}$ after learning (circularly
 shifting at the boundary). This mapping achieves equal loss to the true
-mapping, under the standard GAN objective (equation
-\[[\[eqn:conditional_generative_models:x_to_y_GAN_learning_problem\]](#eqn:conditional_generative_models:x_to_y_GAN_learning_problem){reference-type="ref"
-reference="eqn:conditional_generative_models:x_to_y_GAN_learning_problem"}\]).
+mapping, under the standard GAN objective (@eqn-conditional_generative_models-x_to_y_GAN_learning_problem.
 This is because any permutation in the mapping does not affect the
 output *distribution*, and the GAN objective only cares about the output
 distribution.
