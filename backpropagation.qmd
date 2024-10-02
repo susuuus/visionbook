@@ -519,8 +519,7 @@ Now we will draw the backward pass, using these transposed
 $\mathbf{g}$'s, in @fig-backpropagation-backward_pass_MLP.
 
 
-![Backward pass through an MLP.](figures/backpropagation/backward_pass_MLP.png){#fig-backpropagation-backward_pass_MLP width="
-100%"}
+![Backward pass through an MLP.](figures/backpropagation/backward_pass_MLP.png){#fig-backpropagation-backward_pass_MLP width="100%"}
 
 This reveals an interesting connection between `forward` and `backward`
 for linear layers: `backward` for a linear layer is the same operation
@@ -537,9 +536,7 @@ was nonnegative. This layer acts to mask out gradients for variables on
 the negative side of the $\texttt{relu}$. Notice that this operation is
 a matrix multiply --- in fact, *all* `backward` operations are matrix
 multiplies, no matter what the `forward` operation might be, as you can
-observe in algorithm
-[\[alg:backpropagation:backprop_for_chains\]](#alg:backpropagation:backprop_for_chains){reference-type="ref"
-reference="alg:backpropagation:backprop_for_chains"}.
+observe in algorithm @fig-backpropagation-backprop_for_chains.
 
 In the diagrams above, we have not yet included the computation of the
 parameter gradients. At each step of the backward pass, these are
@@ -563,7 +560,7 @@ multiply (`matmul`) for each layer of the layer of the backward network.
 The full network, for a three-layer MLP, is shown in
 @fig-backpropagation-backprop_as_neural_net.
 
-![The computation graph for backpropagation through a three-layer MLP. It's just another neural net! Solid lines are involved in computing data/activation gradients and dotted lines are involved in computing parameter gradients.\\ \hfill \break\raisebox{0.5mm](./figures/backpropagation/backprop_as_neural_net.png){width="100%" #fig-backpropagation-backprop_as_neural_net}
+![The computation graph for backpropagation through a three-layer MLP. It's just another neural net! Solid lines are involved in computing data/activation gradients and dotted lines are involved in computing parameter gradients.](./figures/backpropagation/backprop_as_neural_net.png){width="100%" #fig-backpropagation-backprop_as_neural_net}
 
 There are a few interesting things about this forward-backward network.
 One is that *activations* from the `relu` layers get transformed to
@@ -748,8 +745,7 @@ cat." Do you see cat-like stuff in the optimized image? What does this
 tell you about how the network is working?
 
 
-![Visualizing the optimal image of a cat according to a particular neural net. The net we used is called Contrastive Language-Image Pre-Training (CLIP)@radford2021learning and here we found the image that maximizes a node in CLIP's computation graph that measures how much the image matches the text ``a photo of a cat.'' In @sec-VLMs we will cover exactly how the CLIP model works in more detail.](./figures/backpropagation/backprop_to_the_data_example.png){#fig-backpropagation-backprop_to_the_data_example
-width="45%"}
+![Visualizing the optimal image of a cat according to a particular neural net. The net we used is called Contrastive Language-Image Pre-Training (CLIP) @radford2021learning and here we found the image that maximizes a node in CLIP's computation graph that measures how much the image matches the text ``a photo of a cat.'' In @sec-VLMs-CLIP we will cover exactly how the CLIP model works in more detail.](./figures/backpropagation/backprop_to_the_data_example.png){#fig-backpropagation-backprop_to_the_data_example width="45%"}
 
 :::{.column-margin}
 Visualizations like this are a useful way to figure out what visual features a given neuron is sensitive to. Researchers often combine this visualization method with a natural image prior in order to find an image that not only strongly activates the neuron in question but also looks like a natural photograph (e.g., @olah2017feature).
@@ -759,5 +755,4 @@ Visualizations like this are a useful way to figure out what visual features a g
 
 Backprop is often presented as a method just for training neural networks, but it is actually a much more general tool than that. Backprop is an efficient way to find partial derivatives in computation graphs. It is general to a large family of computation graphs and can be used not just for learning parameters but also for optimizing data.
 
-[^1]: It is negative so that minimizing the loss maximizes the
-    activation.
+[^1]: It is negative so that minimizing the loss maximizes the activation.
