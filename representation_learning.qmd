@@ -33,7 +33,7 @@ $\mathbf{z} \in \mathcal{Z}$, as schematized in
 We call this mapping an **encoding** and learn an function
 $f: \mathcal{X} \rightarrow \mathcal{Z}$. Typically both $\mathbf{x}$
 and $\mathbf{z}$ are high-dimensional vectors, and $\mathbf{z}$ is
-called a of $\mathbf{x}$. The mapping $f$ is trained so that
+called a **vector embedding** of $\mathbf{x}$. The mapping $f$ is trained so that
 $\mathbf{z}$ has certain desirable properties: common desiderata include
 that $\mathbf{z}$ be lower dimensional than $\mathbf{x}$; that the
 distribution of $\mathbf{z}$ values, that is, $p(\mathbf{z})$, has a
@@ -74,13 +74,17 @@ representations are desirable.
     representations from which you can regenerate the raw data (e.g.,
     autoencoders). Such representations explain the data in the formal
     sense that they assign high likelihood to the data. This is the same
-    sense to which the idea of Bayesian Occam's razor applies (section
-    [\[sec-problem_of_generalization-star_problem_revisited\]](#sec:problem_of_generalization:star_problem_revisited){reference-type="ref"
-    reference="sec-problem_of_generalization-star_problem_revisited"});
+    sense to which the idea of Bayesian Occam's razor applies @sec-problem_of_generalization-star_problem_revisited;
     see @mackay2003information for a mathematical treatment of this
     idea. Therefore, we can state Occam's razor for representation
     learning: among two representations that fit the data equally well,
     give preference to the more compressed.
+
+
+:::{.column-margin}
+This version of Occam's razor is also known as the **minimum description length principle** @grunwald2007minimum.
+:::
+
 
 Many representation learning algorithms capture these goals by
 penalizing or constraining the complexity of the learned representation.
@@ -131,29 +135,27 @@ Representation learning algorithms are mostly differentiated by the
 objective function they optimize, as well as the constraints on their
 hypothesis space. We explore a variety of common objectives in the
 following sections, and summarize how these relate to the core
-principles of compression and prediction in table
-[\[tab:representation_learning:types_of_representation_learners\]](#tab:representation_learning:types_of_representation_learners){reference-type="ref"
-reference="tab:representation_learning:types_of_representation_learners"}.
+principles of compression and prediction in @tbl-representation_learning-types_of_representation_learners.
 
-::: center
-  ------------------- --------------- ---------------------------------------------------
-     **Learning**      **Learning**   
-      **Method**       **Principle**                   **Short Summary**
-     Autoencoding       Compression              Remove redundant information
-      Contrastive       Compression      Achieve invariance to viewing transformations
-      Clustering        Compression    Quantize continuous data into discrete categories
-   Future prediction    Prediction                    Predict the future
-      Imputation        Prediction                   Predict missing data
-     Pretext tasks      Prediction         Predict abstract properties of your data
-  ------------------- --------------- ---------------------------------------------------
+:::{#tbl-representation_learning-types_of_representation_learners}
+
+
+| **Learning Method**  | **Learning Principle** | **Short Summary**                                      |
+|----------------------|------------------------|--------------------------------------------------------|
+| Autoencoding         | Compression            | Remove redundant information                           |
+| Contrastive          | Compression            | Achieve invariance to viewing transformations          |
+| Clustering           | Compression            | Quantize continuous data into discrete categories       |
+| Future prediction    | Prediction             | Predict the future                                     |
+| Imputation           | Prediction             | Predict missing data                                   |
+| Pretext tasks        | Prediction             | Predict abstract properties of your data               |
+
+
+One way to categorize different representation learning methods.
 :::
-
-[]{#tab:representation_learning:types_of_representation_learners
-label="tab:representation_learning:types_of_representation_learners"}
 
 ## Autoencoders {#sec-representation_learning-autoencoders}
 
-are one of the oldest and most common kinds of representation
+**Autoencoders** are one of the oldest and most common kinds of representation
 learners @rumelhart1985learning, @ballard1987modular. An autoencoder is
 a function that maps data back to itself (hence the "auto"), but via a
 low-dimensional representational **bottleneck**, as shown in
@@ -173,7 +175,7 @@ $f$ and a **decoder** $g$, with $F = g \circ f$. The encoder,
 $f: \mathbb{R}^N \rightarrow \mathbb{R}^M$, maps high-dimensional data
 $\mathbf{x} \in \mathbb{R}^N$ to a vector embedding
 $\mathbf{z} \in \mathbb{R}^M$. Typically, the key property is that
-$M < N$, that is, we have performed (although autoencoders can also be
+$M < N$, that is, we have performed **dimensionality reduction** (although autoencoders can also be
 constructed without this property, in which case they are not doing
 dimensionality reduction but instead may place other explicit or
 implicit constraints on $\mathbf{z}$). The decoder,
@@ -183,8 +185,11 @@ Because it may be impossible to perfectly invert $f$, we use a loss
 function to penalize how far we are from perfect inversion, and a
 typical choice is the squared error **reconstruction loss**,
 $\mathcal{L}_{\texttt{recon}}(\hat{\mathbf{x}}, \mathbf{x}) = \left\lVert\hat{\mathbf{x}} - \mathbf{x}\right\rVert_2^2$.
+
 Then the learning problem is:
-$$f^*,g^* = \mathop{\mathrm{arg\,min}}_{f,g} \mathbb{E}_{\mathbf{x}} \left\lVert g(f(\mathbf{x})) - \mathbf{x}\right\rVert_2^2 :autoencoder_learning_problem$${#eq-representation_learning}The idea is to find a lower dimensional representation of the data from
+$$f^*,g^* = \mathop{\mathrm{arg\,min}}_{f,g} \mathbb{E}_{\mathbf{x}} \left\lVert g(f(\mathbf{x})) - \mathbf{x}\right\rVert_2^2 $${#eq-representation_learning-autoencoder_learning_problem}
+
+The idea is to find a lower dimensional representation of the data from
 which we are able to reconstruct the data. An autoencoder is fine with
 throwing away any redundant features of the raw data but is not happy
 with actually losing information. The particular loss function
@@ -205,8 +210,7 @@ and other perceptual structures beyond just pixels @snell2017learning.
 
 The learning diagram for the basic $L_2$ autoencoder looks like this:
 
-::: center
-:::
+![](figures/representation_learning/autoencoder_learning_diagram.png){width="100%"}
 
 The optimizer is arbitrary but a typical choice would be gradient
 descent. The functional form of $f$ and $g$ are typically deep neural
@@ -219,7 +223,14 @@ Closely related to autoencoders are other dimensionality reduction
 algorithms like **principle components ananlysis** (**PCA**). In fact,
 an $L_2$ autoencoder, for which both $f$ and $g$ are linear functions,
 learns an $M$-dimensional embedding that spans the same subspace as a
-PCA projection to $M$-dimensions @bourlard1988auto.### Experiment: Do Autoencoders Learn Useful Representations?
+PCA projection to $M$-dimensions @bourlard1988auto.
+
+
+:::{.column-margin}
+Autoencoders may not seem like much at first glance, but they actually appear all over the place, and many methods in this book can be considered to be special kinds of autoencoders, if you squint. Two examples: the steerable pyramid from @sec-image_pyramids is an autoencoder, and the CycleGAN algorithm from @sec-generative_models is also an autoencoder. See if you can find more examples.
+:::
+
+### Experiment: Do Autoencoders Learn Useful Representations?
 
 It is clear from the above that autoencoders will learn a *compressed*
 representation of the data, but do they learn a *useful* representation?
@@ -230,9 +241,6 @@ data consists of 64,000 images, samples of which are shown in
 @fig-representation_learning-shapes_dataset_random_samples.
 
 ![A sample from the toy dataset we will work with in this chapter.](figures/representation_learning/shapes_dataset_random_samples.png){width="27.5%" #fig-representation_learning-shapes_dataset_random_samples}
-
-[]{#fig-representation_learning-shapes_dataset_random_samples
-label="fig-representation_learning-shapes_dataset_random_samples"}
 
 Each shape has a randomized size, position, and rotation. Each shape's
 color is sampled from one of eight color classes (orange, green, purple,
@@ -258,9 +266,14 @@ one-nearest-neighbor classifier in embedding space. Below, in
 @fig-representation_learning-AE_results_shapes_dataset, we show both
 these analyses.
 
-(a) ![(a) Nearest neighbors, in autoencoder embedding space, to a set of query images. (b) Classification accurracy of a one-nearest-neighbor classifier of color and shape using the embeddings at each layer of the autoencoder's encoder.](figures/representation_learning/AE_NN_viz.png){width="38%" #fig-representation_learning-AE_results_shapes_dataset}
-(b)
-![](figures/representation_learning/AE_NN_probe.png){width="40%"}
+
+:::{#fig-representation_learning-AE_results_shapes_dataset layout-ncol=2}
+![](figures/representation_learning/AE_NN_viz.png){ #fig-representation_learning-AE_results_shapes_dataset-a}
+
+![](figures/representation_learning/AE_NN_probe.png){ #fig-representation_learning-AE_results_shapes_dataset-b}
+
+Fig (a) Nearest neighbors, in autoencoder embedding space, to a set of query images. (b) Classification accurracy of a one-nearest-neighbor classifier of color and shape using the embeddings at each layer of the autoencoder's encoder.
+:::
 
 Recall that every layer of a neural net can be considered as an
 embedding (representation) of the data. On the left we show the nearest
@@ -297,16 +310,11 @@ abstracted compared to the raw data, and therefore for these tasks
 deeper embeddings tend to work better.
 
 ## Predictive Encodings
+We have already seen many kinds of predictive learning, indeed almost any function can be thought of as making a prediction. In predictive representation learning, the goal is not to make predictions per se, but to use prediction as a way to train a useful representation. The way to do this is first encode the data into an embedding $\mathbf{z}$, then map from the embedding to your target prediction. This gives a composition of functions, just like with the autoencoder, that can be trained with a prediction task and yield a good data encoder. The prediction task is a **pretext task** for learning good representations.
 
-We have already seen many kinds of predictive learning, indeed almost
-any function can be thought of as making a prediction. In predictive
-representation learning, the goal is not to make predictions per se, but
-to use prediction as a way to train a useful representation. The way to
-do this is first encode the data into an embedding $\mathbf{z}$, then
-map from the embedding to your target prediction. This gives a
-composition of functions, just like with the autoencoder, that can be
-trained with a prediction task and yield a good data encoder. The
-prediction task is a for learning good representations.
+:::{.column-margin}
+Neuroscientists think the brain also uses prediction to better encode sensory signals, but focus on a different part of the problem. The idea of **predictive coding** states that the sensory cortex only transmits the difference between its predictions and the actual observed signal @huang2011predictive. This chapter presents how to learn a representation that can make good predictions in the first place. Predictive coding focuses on one thing you can do with such a representation: use it to compress future signals by just transmitting the surprises.
+:::
 
 Different kinds of prediction tasks have been proposed for learning good
 representations, and depending on the properties you want in your
@@ -344,8 +352,7 @@ Let us now describe the predictive learning problem more formally. Let
 $\mathbf{y}$ be the prediction target. Then predictive representation
 learning looks like this:
 
-::: center
-:::
+![](figures/representation_learning/predictive_learning_diagram.png){width="100%"}
 
 where $D$ is some distance function, for example, $L_2$. Just like with
 the autoencoder, $f$ and $g$ are usually neural nets but may be any
@@ -381,6 +388,9 @@ neurons are on convolutional layers, so really each is a filter
 response; the highlighted regions indicate where the feature map for
 that filter exceeds a threshold.
 
+
+![Visualizing two neural receptive fields in a scene classifier neural net.](figures/representation_learning/obj_detectors_emerge.png){width="100%" #fig-representation_learning-obj_detectors_emerge}
+
 What this shows is that *object* detectors, that is, neurons that
 selectively fire when they see a particular object class, emerge in the
 hidden layers of a CNN trained only to perform *scene* classification.
@@ -399,8 +409,7 @@ data itself; for example, we could decide that the top right pixel's
 color will be the "label" of the image. This idea is called
 **self-supervision**. It looks like this:
 
-::: center
-:::
+![](figures/representation_learning/self_supervised_learning_diagram.png){width="100%"}
 
 where $V_1$ and $V_2$ are two different functions of the *full data
 tensor* $\mathbf{X}$. For example, $V_1$ might be the left side of the
@@ -414,7 +423,7 @@ pixels in a raster-order sequence.
 
 ## Imputation
 
-is a special case of self-supervised learning, where the prediction
+**Imputation** is a special case of self-supervised learning, where the prediction
 targets are missing elements of the input data. For example, predicting
 missing pixels is an imputation problem, as is colorizing a black and
 white photo (i.e., predicting missing color channels).
@@ -422,15 +431,16 @@ white photo (i.e., predicting missing color channels).
 of these imputation tasks.
 
 ![Many common pretext tasks are special cases of imputation on missing values in the data tensor.](figures/representation_learning/imputation_examples.png){width="100%" #fig-representation_learning-imputation_examples}
-[]{#fig-representation_learning-imputation_examples
-label="fig-representation_learning-imputation_examples"}
+
 
 Imputation---whether over spatial masks or missing channels---can result
 in effective visual
 representations @vincent2008extracting, @pathak2016context, @he2022masked, @zhang2016colorful, @larsson2016learning, @zhang2017split.
 Notice that predicting future frames and next pixels (our examples from
 @fig-representation_learning-predictive_learning_examples) are also
-imputation problems. Above we described how object detectors emerge as a
+imputation problems. 
+
+Above we described how object detectors emerge as a
 byproduct of training a net to perform scene classification. What do you
 think emerges as a byproduct of training a net to perform colorization?
 
@@ -438,6 +448,8 @@ It may surprise you to find that the answer is object detectors once
 again! This certainly surprised us when we saw the results in
 @fig-representation_learning-obj_detectors_in_colorization, which are
 taken from @zhang2016colorful.
+
+![Visualizing two neural receptive fields in the colorization model from \cite{zhang2016colorful}. Images generated by Andrew Owens and Richard Zhang.](figures/representation_learning/obj_detectors_in_colorization.png){width="100%" #fig-representation_learning-obj_detectors_in_colorization}
 
 In fact, object detectors emerge in CNNs for just about any reasonable
 pretext task: scene recognition, colorization, inpainting missing
@@ -489,9 +501,7 @@ clusters! They are mappings from data to integers, and clustering is the
 problem of making up new words for things.
 
 :::{.column-margin}
-Words, of
-course, are given additional structure when used in a language (grammar,
-connotations, etc.) beyond just being a set of clusters. The same kind
+Words, of course, are given additional structure when used in a language (grammar, connotations, etc.) beyond just being a set of clusters. The same kind
 of structure can be added on top of visual clusters.
 :::
 
