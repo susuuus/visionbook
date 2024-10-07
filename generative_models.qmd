@@ -67,10 +67,8 @@ model** because it is model of the unconditional distribution $p(X)$.
 Generally we will refer to unconditional generative models simply as
 generative models and use the term **conditional generative model** for
 a model of any conditional distribution $p(X \bigm | Y)$. Conditional
-generative models will be the focus of chapter
-[\[chapter-conditional_generative_models\]](#sec-conditional_generative_models){reference-type="ref"
-reference="chapter-conditional_generative_models"}; in the present
-chapter we will restrict our attention, from this point on, to
+generative models will be the focus of sec-conditional_generative_models; 
+in the present chapter we will restrict our attention, from this point on, to
 unconditional models.
 
 Why bother with (unconditional) generative models, which make up random
@@ -146,9 +144,7 @@ generative model. Two examples are:
 2.  Synthetic data looks like real data if it has high probability under
     a density model fit to the real data.
 
-The first approach is the one we saw in chapter
-[\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
-reference="chapter-stat_image_models"} on statistical image models,
+The first approach is the one we saw in @sec-stat_image_models on statistical image models,
 where synthetic textures were made that had the same filter response
 statistics as a real training example. This approach works well when we
 only want to match certain properties of the training data. The second
@@ -185,20 +181,17 @@ There are two general approaches to forming data generators:
     finding values for $\mathbf{x}$ that score highly under this
     function.
 
- So far in this chapter we have focused on the direct approach,
-and it is schematized in
-@fig-generative_models-gen_model_training_vs_sampling. Interestingly,
+So far in this chapter we have focused on the direct approach,
+and it is schematized in @fig-generative_models-gen_model_training_vs_sampling. Interestingly,
 the direct approach only became popular recently, with models like
 **generative adversarial networks** (**GANs**) and **diffusion models**,
 which we will see later in this chapter. The indirect approach is more
-classical, and describes many of the methods we saw in chapter
-[\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
-reference="chapter-stat_image_models"}. Indirect approaches come in two
+classical, and describes many of the methods we saw in @sec-stat_image_models. Indirect approaches come in two
 general flavors, density models and energy models, which we will
 describe next. Both follow the schematic given in
 @fig-generative_models-gen_model_training_vs_sampling_indirect:
 
-![The indirect approach to generative modeling. The scoring function can be either a probability density or an energy function. The models we learned about in \chap{\ref{chapter:stat_image_models](./figures/generative_models/gen_model_training_vs_sampling_indirect.png){width="100%" #fig-generative_models-gen_model_training_vs_sampling_indirect}
+![The indirect approach to generative modeling. The scoring function can be either a probability density or an energy function. The models we learned about in @stat_image_models.](./figures/generative_models/gen_model_training_vs_sampling_indirect.png){width="100%" #fig-generative_models-gen_model_training_vs_sampling_indirect}
 
 ## Density Models
 
@@ -230,23 +223,22 @@ $p_{\texttt{data}}$, we only have samples from this function,
 $\mathbf{x} \sim p_{\texttt{data}}$. Therefore, we need a divergence $D$
 that measures the distance[^2] between $p_{\theta}$ and
 $p_{\texttt{data}}$ while only accessing samples from
-$p_{\texttt{data}}$. A common choice is to use the , which is defined as
+$p_{\texttt{data}}$. 
+
+A common choice is to use the , which is defined as
 follows: $$\begin{aligned}
     p_{\theta}^* &= \mathop{\mathrm{arg\,min}}_{p_\theta} \texttt{KL}\texttt{KL}\KLdivxx{p_{\texttt{data}}}{p_{\theta}}\\
     &= \mathop{\mathrm{arg\,min}}_{p_\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\Big[-\log \frac{p_{\theta}(\mathbf{x})}{p_{\texttt{data}}(\mathbf{x})}\Big]\\
     &= \mathop{\mathrm{arg\,max}}_{p_\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\big[\log p_{\theta}(\mathbf{x})\big] - \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\big[\log p_{\texttt{data}}(\mathbf{x})\big]\\
     &= \mathop{\mathrm{arg\,max}}_{p_\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\big[\log p_{\theta}(\mathbf{x})\big] \quad \triangleleft \quad\text{dropped second term since no dependence on $p_{\theta}$}
-    :max_likelihood\\
+    \\
     &\approx \mathop{\mathrm{arg\,max}}_{p_\theta} \frac{1}{N} \sum_{i=1}^N \log p_{\theta}(\mathbf{x}^{(i)})
-\end{aligned}$${#eq-generative_models} where the final line is an empirical estimate of the
+\end{aligned}$${#eq-generative_models-max_likelihood} where the final line is an empirical estimate of the
 expectation by sampling over the training dataset
-$\{\mathbf{x}^{(i)}\}_{i=1}^N$. Equation
-([\[eqn:generative_models-max_likelihood\]](#eqn:generative_models-max_likelihood){reference-type="ref"
-reference="eqn:generative_models-max_likelihood"}) is the *expected log
+$\{\mathbf{x}^{(i)}\}_{i=1}^N$. @eq-generative_models-max_likelihood is the *expected log
 likelihood of the training data under the model's density function*.
-Maximizing this objective is therefore a form of . Pictorially we can
-visualize the max likelihood objective as trying to push up the density
-over each observed datapoint:
+Maximizing this objective is therefore a form of **max likelihood learning**. Pictorially we can
+visualize the max likelihood objective as trying to push up the density over each observed datapoint:
 
 ![](./figures/generative_models/max_likelihood_density.png){width="100%"}
 
@@ -277,19 +269,21 @@ unnormalized function $E_{\theta}$, then convert it to the normalized
 density $p_{\theta} = \frac{e^{-E_{\theta}}}{Z(\theta)}$, where
 $Z(\theta) = \int_{\mathbf{x}} e^{-E_{\theta}(\mathbf{x})}d\mathbf{x}$
 is the normalizing constant. The $Z(\theta)$ can be very expensive to
-compute and often can only be approximated.:::{.column-margin}
+compute and often can only be approximated.:
+
+::{.column-margin}
 Note that low energy $\Rightarrow$ high probability.
 So we minimize energy to maximize probability.
 :::
-
-
 
 **Energy-based models** (**EBM**s) address this by simply skipping the
 step where we normalize the density, and letting the output of the
 learner just be $E_\theta$. Even though it is not a true probability
 density, $E_{\theta}$ can still be used for many of the applications we
 would want a density for. This is because we can compare *relative
-probabilities* with $E_\theta$: $$\begin{aligned}    \frac{p_\theta(\mathbf{x}_1)}{p_\theta(\mathbf{x}_2)} = \frac{e^{-E_\theta(\mathbf{x}_1)}/Z(\theta)}{e^{-E_\theta(\mathbf{x}_2)}/Z(\theta)}
+probabilities* with $E_\theta$: 
+
+$$\begin{aligned}    \frac{p_\theta(\mathbf{x}_1)}{p_\theta(\mathbf{x}_2)} = \frac{e^{-E_\theta(\mathbf{x}_1)}/Z(\theta)}{e^{-E_\theta(\mathbf{x}_2)}/Z(\theta)}
     = \frac{e^{-E_\theta(\mathbf{x}_1)}}{e^{-E_\theta(\mathbf{x}_2)}}
 \end{aligned}$$ Knowing relative probabilities is all that is required
 for sampling (via MCMC), for outlier detection (the relatively lowest
@@ -297,6 +291,8 @@ probability datapoint in a set of datapoints is the outlier), and even
 for optimizing over a space of of data to find the datapoint that is max
 probability (because
 $\mathop{\mathrm{arg\,max}}_{\mathbf{x} \in \mathcal{X}} p_{\theta}(\mathbf{x}) = \mathop{\mathrm{arg\,max}}_{\mathbf{x} \in \mathcal{X}} -E_{\theta}(\mathbf{x})$).
+
+
 To solve such a maximization problem, we might want to find the gradient
 of the log probability density with respect to $\mathbf{x}$; it turns
 out this gradient is identical to the gradient of $-E_{\theta}$ with
@@ -338,7 +334,7 @@ assigned to samples from the model (i.e., samples from the energy
 function itself; negative term), as shown in
 @fig-generative_models-contrastive_divergence:
 
-![Fitting a max likelihood energy function to data, using contrastive divergence~\cite{hinton2002training](./figures/generative_models/contrastive_divergence.png){width="100%" #fig-generative_models-contrastive_divergence}
+![Fitting a max likelihood energy function to data, using contrastive divergence~ @hinton2002training](./figures/generative_models/contrastive_divergence.png){width="100%" #fig-generative_models-contrastive_divergence}
 
 Once the energy function perfectly adheres to the data, samples from the
 model are identical to samples from the data and the positive and
@@ -351,8 +347,10 @@ the gradient of the log likelihood into two terms, which, as we will
 see, will end up playing the role of positive and negative terms:
 $$\begin{aligned}
     \nabla_{\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\log p_{\theta}(\mathbf{x})] &= \nabla_{\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\log \frac{e^{-E_{\theta}(\mathbf{x})}}{Z(\theta)}]\\
-    &= -\mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\nabla_{\theta} E_{\theta}(\mathbf{x})] - \nabla_{\theta} \log Z(\theta):cd
-\end{aligned}$${#eq-generative_models} The first term is the positive term gradient, which
+    &= -\mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\nabla_{\theta} E_{\theta}(\mathbf{x})] - \nabla_{\theta} \log Z(\theta)
+\end{aligned}$${#eq-generative_models-cd} 
+
+The first term is the positive term gradient, which
 tries to modify parameters to decrease the energy placed on data
 samples. The second term is the negative term gradient; here it appears
 as an intractable integral, so our strategy is to rewrite it as an
@@ -363,17 +361,24 @@ $$\begin{aligned}    \nabla_{\theta} \log Z(\theta) &= \frac{1}{Z(\theta)}\nabla
     &= \frac{1}{Z(\theta)} -\int_x e^{-E_{\theta}(\mathbf{x})} \nabla_{\theta} E_{\theta}(\mathbf{x})d\mathbf{x}\\
     &= -\int_x \frac{e^{-E_{\theta}(\mathbf{x})}}{Z(\theta)} \nabla_{\theta} E_{\theta}(\mathbf{x})d\mathbf{x}\\
     &= -\int_x p_{\theta}(\mathbf{x}) \nabla_{\theta} E_{\theta}(\mathbf{x})d\mathbf{x} &&\quad\quad \triangleleft \quad \text{definition of $p_{\theta}$}\\
-    &= -\mathbb{E}_{\mathbf{x} \sim p_{\theta}}[\nabla_{\theta} E_{\theta}(\mathbf{x})] &&\quad\quad \triangleleft \quad \text{definition of expectation}#eq-generative_models-cd_neg
-\end{aligned}$${#eq-generative_models} Plugging @eq-generative_models-cd_neg back into
-@eq-generative_models-cd, we arrive at: $$\begin{aligned}    \nabla_{\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\log p_{\theta}(\mathbf{x})] &= -\mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\nabla_{\theta}E_{\theta(\mathbf{x})}] + \mathbb{E}_{\mathbf{x} \sim p_{\theta}}[\nabla_{\theta} E_{\theta}(\mathbf{x})]
-\end{aligned}$$ Both expectations can be approximated via sampling:
-defining $\mathbf{x}^{(i)} \sim p_{\texttt{data}}$ and
-$\hat{\mathbf{x}}^{(i)} \sim p_{\theta}$, and taking $N$ such samples,
-we have $$\begin{aligned}
+    &= -\mathbb{E}_{\mathbf{x} \sim p_{\theta}}[\nabla_{\theta} E_{\theta}(\mathbf{x})] &&\quad\quad \triangleleft \quad \text{definition of expectation}
+\end{aligned}$${#eq-generative_models-cd_neg} 
+
+Plugging @eq-generative_models-cd_neg back into
+@eq-generative_models-cd, we arrive at: 
+
+$$\begin{aligned}  \nabla_{\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\log p_{\theta}(\mathbf{x})] &= -\mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\nabla_{\theta}E_{\theta(\mathbf{x})}] + \mathbb{E}_{\mathbf{x} \sim p_{\theta}}[\nabla_{\theta} E_{\theta}(\mathbf{x})]
+\end{aligned}$$ 
+
+Both expectations can be approximated via sampling: defining $\mathbf{x}^{(i)} \sim p_{\texttt{data}}$ and
+$\hat{\mathbf{x}}^{(i)} \sim p_{\theta}$, and taking $N$ such samples, we have 
+
+$$\begin{aligned}
     -\mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\nabla_{\theta}E_{\theta(\mathbf{x})}] + \mathbb{E}_{\mathbf{x} \sim p_{\theta}}[\nabla_{\theta} E_{\theta}(\mathbf{x})] &\approx -\frac{1}{N} \sum_{i=1}^N \nabla_{\theta}E_{\theta}(\mathbf{x}^{(i)}) + \frac{1}{N} \sum_{i=1}^N \nabla_{\theta}E_{\theta}(\hat{\mathbf{x}}^{(i)})\\
     &= \frac{1}{N} \nabla_{\theta} \sum_{i=1}^N (-E_{\theta}(\mathbf{x}^{(i)}) + E_{\theta}(\hat{\mathbf{x}}^{(i)}))
-\end{aligned}$$ The last line should make clear the intuition: we
-establish a contrast between data samples and current model samples,
+\end{aligned}$$ 
+
+The last line should make clear the intuition: we establish a contrast between data samples and current model samples,
 then update the model to decrease this contrast, bringing the model
 closer to the data. Once $\mathbf{x}^{(i)}$ and $\hat{\mathbf{x}}^{(i)}$
 are identically distributed, this gradient will be zero (in
@@ -393,9 +398,6 @@ Some generative models give density or energy functions, others give
 generator functions, and still others give both. We can summarize all
 these kinds of models with the following learning diagram:
 
-::: center
-:::
-
 Each of these families of model has its own advantages and
 disadvantages. Generators have latent variables $\mathbf{z}$ that
 control the properties of the generated image. Changing these variables
@@ -408,23 +410,23 @@ These scores (densities or energies) can be used to detect anomalies and
 unusual events, or can be optimized to synthesize higher quality data.
 
 Some of the generative models we will describe in this chapter and the
-next are categorized along these dimensions in table
-[\[tab:generative_models-types_of_gen_model\]](#tab:generative_models-types_of_gen_model){reference-type="ref"
-reference="tab:generative_models-types_of_gen_model"}. Note that this is
-a rough categorization, meant to reflect the most straightforward usage
+next are categorized along these dimensions in @tbl-generative_models-types_of_gen_model. 
+
+Note that this is a rough categorization, meant to reflect the most straightforward usage
 of these models. With additional effort some of the 's can be converted
 to 's; for example, one can do additional inference to sample from a
 density model, or one can extract a lower-bound estimate of density from
 a variational autoencoder (VAE) or diffusion model.
 
-          Method                Latents?        Density/Energy?   Generator?
-  ----------------------- -------------------- ----------------- ------------
-    Energy-based models                          (energy only)   
-         Gaussian                                                
-   Autoregressive models                                            (slow)
-     Diffusion models      (high-dimensional)                       (slow)
-           GANs                                                  
-           VAEs                                                  
+| Method                | Latents?                         | Density/Energy?               | Generator?                 |
+|-----------------------|----------------------------------|-------------------------------|----------------------------|
+| Energy-based models    | ❌                              | ✔ (energy only)               | ❌                          |
+| Gaussian               | ❌                              | ✔                             | ❌                          |
+| Autoregressive models  | ❌                              | ✔                             | ✔ (slow)                   |
+| Diffusion models       | ✔ (high-dimensional)            | ❌                             | ✔ (slow)                   |
+| GANs                   | ✔                              | ❌                             | ✔                          |
+| VAEs                   | ✔                              | ❌                             | ✔                          |
+
 
 Generative models can also be distinguished according to their
 objectives, hypothesis spaces, and optimization algorithms. Some classes
@@ -483,8 +485,6 @@ This fully describes the learning problem, and solution, for a 1D
 Gaussian density model. We can put it all together in the learning
 diagram below:
 
-::: center
-:::
 
 Gaussian density models are just about the simplest density models one
 can come up with. You may be wondering, do we actually use them for
@@ -529,10 +529,10 @@ or we might sample from the predicted distribution so that we get some
 randomness in our completion. Then, to predict the next missing pixel we
 slide the context over by one and repeat.
 
-![](./figures/generative_models/autoregressive_prediction_schematic.png){width="100%"}You might have noticed that this setup looks very similar to the
-Efros-Leung texture synthesis algorithm in section
-[\[sect:Efros-Leung_texture\]](#sect:Efros-Leung_texture){reference-type="ref"
-reference="sect:Efros-Leung_texture"}, and indeed that was also an
+![](./figures/generative_models/autoregressive_prediction_schematic.png){width="100%"}
+
+You might have noticed that this setup looks very similar to the
+Efros-Leung texture synthesis algorithm in @sec-Efros-Leung_texture, and indeed that was also an
 autoregressive model. The Efros-Leung algorithm was a nonparametric
 method that worked by stealing pixels from the matching regions of an
 exemplar texture. Now we will see how to do autoregressive modeling with
@@ -560,9 +560,7 @@ are just trying to model $p(\mathbf{x_2} \bigm | \mathbf{x_1})$ where
 $\mathbf{x_1}$ is the first pixel and $\mathbf{x_2}$ is the second.
 Treating $\mathbf{x}_2$ as a categorical variable (just like
 $\mathbf{x_1}$), we can simply use a softmax regression, which we saw in
-section
-[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning-image_classification"}. In that section
+@sec-intro_to_learning-image_classification. In that section
 we were modeling a $K$-way categorical distribution over $K$ object
 classes, conditioned on an input image. Now we can use exactly the same
 tools to model a $256$-way distribution over a the second pixel in a
@@ -577,9 +575,7 @@ $p(\mathbf{x}_n \bigm | \mathbf{x}_1, \ldots, \mathbf{x}_{n-1})$. We
 show how the cross-entropy loss can be computed in
 @fig-generative_models-autoregressive_softmax_regression. Notice that
 it looks almost identical to @fig-softmax_regression_diagram from
-chapter
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"}.
+@sec-intro_to_learning.
 
 ![Autoregressive prediction as next-pixel-classification.](./figures/generative_models/autoregressive_softmax_regression.png){width="100%" #fig-generative_models-autoregressive_softmax_regression}
 
@@ -607,8 +603,10 @@ according to the **chain rule of probability**. This rule allows us to
 factorize *any* joint distribution into a product of conditionals as
 follows: $$\begin{aligned}
     p(\mathbf{X}) &= p(\mathbf{x_n} \bigm | \mathbf{x_1}, \ldots, \mathbf{x}_{n-1})p(\mathbf{x}_{n-1} \bigm | \mathbf{x}_1, \ldots, \mathbf{x}_{n-2}) \quad \ldots \quad p(\mathbf{x}_2 \bigm | \mathbf{x}_1)p(\mathbf{x}_1)\\
-    p(\mathbf{X}) &= \prod_{i=1}^n p(\mathbf{x}_i \bigm | \mathbf{x}_1, \ldots, \mathbf{x}_{i-1}):autoregressive_likelihood
-\end{aligned}$${#eq-generative_models} This factorization demonstrates that sampling from such
+    p(\mathbf{X}) &= \prod_{i=1}^n p(\mathbf{x}_i \bigm | \mathbf{x}_1, \ldots, \mathbf{x}_{i-1})
+\end{aligned}$${#eq-generative_models-autoregressive_likelihood} 
+
+This factorization demonstrates that sampling from such
 a model can indeed be done in sequence because all the conditional
 distributions are independent of each other.
 
@@ -648,9 +646,7 @@ $\mathbf{x}_1, \dots, \mathbf{x}_{n-1}$, and these same representations
 can be reused for predicting the next item over, that is,
 $\mathbf{x}_{n+1}$ from $\mathbf{x}_2, \dots, \mathbf{x}_n$. As a
 concrete example, this is the case in transformers with causal attention
-(section
-[\[sec-transformers-masked_attention\]](#sec:transformers:masked_attention){reference-type="ref"
-reference="sec-transformers-masked_attention"}), which have the property
+@sec-transformers-masked_attention, which have the property
 that the representation of item $\mathbf{x}_{n}$ only depends on the
 items that preceded it in the sequence. What this allows us to do is
 *share computation between all our overlapping predictions*, and this is
@@ -719,7 +715,9 @@ and thereby provide a sequence of *training examples* of the mapping
 $\mathbf{x}_t \rightarrow \mathbf{x}_{t-1}$, and these examples can be
 fit by a predictor $f_{\theta}$.
 
-![Reverse diffusion process. The forward process creates supervision to train the reverse process.](./figures/generative_models/reverse_diffusion_process.png){width="100%" #fig-generative_models-reverse_diffusion_process}We call $f_{\theta}$ a **denoiser**; it learns to remove a little bit of
+![Reverse diffusion process. The forward process creates supervision to train the reverse process.](./figures/generative_models/reverse_diffusion_process.png){width="100%" #fig-generative_models-reverse_diffusion_process}
+
+We call $f_{\theta}$ a **denoiser**; it learns to remove a little bit of
 noise from an image. If we apply this denoiser over and over, starting
 with pure noise, the process should coalesce on a noise-less image that
 looks like one of our training examples. The steps to train a diffusion
@@ -757,17 +755,13 @@ $\theta^* = \mathop{\mathrm{arg\,min}}_{\theta} \sum^N_{i=1} \sum^T_{t=1} \mathc
 **Return:** $f_{\theta^*}$
 :::
 
-In algorithm
-[\[alg:generative_models-diffusion_model\]](#alg:generative_models-diffusion_model){reference-type="ref"
-reference="alg:generative_models-diffusion_model"} we train the denoiser
+In @fig-generative_models-diffusion_model we train the denoiser
 using a loss $\mathcal{L}$, which could be the $L_2$ distance. In many
 diffusion models, $f_{\theta}$ is instead trained to output the
 parameters (mean and variance) as a Gaussian density model fit to the
 data. This formulation yields useful probabilistic interpretations (in
 fact, such a diffusion model can be framed as a variational autoencoder,
-which we will see in chapter
-[\[chapter-generative_modeling_and_representation_learning\]](#sec-generative_modeling_and_representation_learning){reference-type="ref"
-reference="chapter-generative_modeling_and_representation_learning"}).
+which we will see in @sec-generative_modeling_and_representation_learning).
 However, diffusion models can still work well without these nice
 interpretations, instead using a wide variety of prediction models for
 $f_{\theta}$ @bansal2022cold.
@@ -814,8 +808,8 @@ $g_{\theta}$ tries to become better and better at generating synthetic
 images while $d_{\phi}$ tries to become better and better at detecting
 any errors $g_{\theta}$ is making. The learning problem can be written
 as a minimax game: $$\begin{aligned}
-    \mathop{\mathrm{arg\,min}}_\theta\max_\phi \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\log d_{\phi}(\mathbf{x})] + \mathbb{E}_{\mathbf{z} \sim p_{\mathbf{z}}}[\log (1-d_{\phi}(g_{\theta}(\mathbf{z})))]:GAN_learning_problem
-\end{aligned}$${#eq-generative_models}
+    \mathop{\mathrm{arg\,min}}_\theta\max_\phi \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}[\log d_{\phi}(\mathbf{x})] + \mathbb{E}_{\mathbf{z} \sim p_{\mathbf{z}}}[\log (1-d_{\phi}(g_{\theta}(\mathbf{z})))]
+\end{aligned}$${#eq-generative_models-GAN_learning_problem}
 
 Schematically, the generator synthesizes images that are then fed as
 input to the discriminator. The discriminator tries to assign a high
@@ -871,14 +865,9 @@ practice, setting $K=1$ is often sufficient.
 
 ### GANs are Statistical Image Models
 
-GANs are related to the image and texture models we saw in chapters
-[\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
-reference="chapter-stat_image_models"} and
-[\[sec-textures\]](#chap-textures){reference-type="ref"
-reference="sec-textures"}. For example, in the Heeger-Bergen model
-(section
-[\[section:Heeger_Bergen\]](#section:Heeger_Bergen){reference-type="ref"
-reference="section:Heeger_Bergen"}; @RG:Heeger-Bergen95), we synthesize
+GANs are related to the image and texture models we saw in @sec-stat_image_models. 
+For example, in the Heeger-Bergen model
+(@sec-Heeger_Bergen @RG-Heeger-Bergen95), we synthesize
 images with the same statistics as a source texture. This can be phrased
 as an optimization problem in which we optimize image pixels until
 certain statistics of the images match those same statistics measured on
