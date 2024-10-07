@@ -101,9 +101,7 @@ boundary between them. We will start with the first.
 
 ### $K$-Means Segmentation
 
-$K$-means, which we covered in chapter
-[\[chapter-representation_learning\]](#sec-representation_learning){reference-type="ref"
-reference="chapter-representation_learning"}, is one of the simplest and
+$K$-means, which we covered in @sec-representation_learning, is one of the simplest and
 most useful clustering algorithms, so let's try it for segmentation.
 
 $K$-means operates on a data matrix of $N$ datapoints by $M$ features
@@ -155,16 +153,12 @@ affinity should belong to the same group and pixels with low affinity
 should belong to two different groups. Methods that use this idea
 include those based on graph cuts @shi2000normalized, spectral
 clustering @arbelaez2010contour, and Markov random field (MRF)-based
-clustering (chapter
-[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
-reference="chapter-probabilistic_graphical_models"}).
+clustering @sec-probabilistic_graphical_models.
 
 We do not have time to cover all these methods and in fact they are no
 longer commonly used. Instead we will focus on a method you have seen
 earlier in the book that actually is in common use: contrastive learning
-(which was covered in section
-[\[sec-representation_learning-contrastive_learning\]](#sec:representation_learning:contrastive_learning){reference-type="ref"
-reference="sec-representation_learning-contrastive_learning"}).
+(which was covered in @sec-representation_learning-contrastive_learning.
 Contrastive learning is a perfect fit for affinity-based segmentation
 because contrastive methods learn from similarities (positive pairs) and
 differences (negative pairs), and this is what an affinity metric gives
@@ -231,12 +225,8 @@ different kinds of edge structure and scene geometry; for example, an
 edge that represents an occluding contour indicates that there is a
 depth discontinuity at that location in the scene.
 
-Chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"} described some simple edge detectors
-and showed their use in reconstructing scene geometry. Chapter
-[\[chapter-3D_single_view\]](#sec-3D_single_view){reference-type="ref"
-reference="chapter-3D_single_view"} covers more recent approaches to
+@sec-simplesystem described some simple edge detectors
+and showed their use in reconstructing scene geometry. @sec-3D_single_view covers more recent approaches to
 inferring three-dimensional (3D) scene structure, which have largely
 superseded the methods that explicitly reasoned about edges.
 
