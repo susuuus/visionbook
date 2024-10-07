@@ -555,8 +555,6 @@ bottleneck is discrete integers rather than continuous vectors, and (2)
 the optimizer is slightly different (we will delve into it
 subsequently).
 
-::: center
-:::
 
 To recap, there are two functions we are optimizing over: the encoder
 $f$ and the decoder $g$. The $f$ is parameterized by a set of integers
@@ -589,26 +587,29 @@ These steps are repeated until a fixed point is reached, which occurs
 when all the datapoints that are assigned to each cluster are closest to
 that cluster's code vector.
 
-Why are these the correct updates? Equation
-([\[eqn:representation_learning:kmeans_update_assignments\]](#eqn:representation_learning:kmeans_update_assignments){reference-type="ref"
-reference="eqn:representation_learning:kmeans_update_assignments"}) is
+Why are these the correct updates? @eq-representation_learning:kmeans_update_assignments is
 straightforward: it's just a brute force enumeration of all $k$ possible
 assignments, from which we select the one that minimizes the $k$-means
 objective for that datapoint, given the current set of code vectors
 $\{\mathbf{z}_j\}_{j=1}^k$.
 
-Equation
-([\[eqn:representation_learning:kmeans_update_means\]](#eqn:representation_learning:kmeans_update_means){reference-type="ref"
-reference="eqn:representation_learning:kmeans_update_means"}) is
+@eq-representation_learning:kmeans_update_means is
 slightly trickier. It finds the optimal codes $\{\mathbf{z}_j\}_{j=1}^k$
 given the current set of assignments $\{a_i\}_{i=1}^N$. To see why
 @eq-representation_learning-kmeans_update_means is optimal, first
-rewrite the $k$-means objective as follows: $$\begin{aligned}    J_{\texttt{kmeans}} &= \sum_{i=1}^N \left\lVert\mathbf{z}_{a_i} - \mathbf{x}^{(i)}\right\rVert^2_2\\
+rewrite the $k$-means objective as follows: 
+
+$$\begin{aligned}    J_{\texttt{kmeans}} &= \sum_{i=1}^N \left\lVert\mathbf{z}_{a_i} - \mathbf{x}^{(i)}\right\rVert^2_2\\
     &= \sum_{j=1}^k \sum_{i=1}^N \mathbb{1}(a_i = j) \left\lVert\mathbf{z}_j - \mathbf{x}^{(i)}\right\rVert^2_2
-\end{aligned}$$ Looking at one code vector (the $j$-th) in isolation, we
-are seeking: $$\begin{aligned}
+\end{aligned}$$ 
+
+Looking at one code vector (the $j$-th) in isolation, we are seeking: 
+
+$$\begin{aligned}
     \mathop{\mathrm{arg\,min}}_{\mathbf{z}_j} \sum_{i^{\prime} \text{ s.t. } a_{i^\prime}=j} \left\lVert\mathbf{z}_j - \mathbf{x}^{(i^{\prime})}\right\rVert^2_2
-\end{aligned}$$ where $i^{\prime}$ enumerates all the datapoints for
+\end{aligned}$$ 
+
+where $i^{\prime}$ enumerates all the datapoints for
 which $a_{i^\prime} = j$. Recall that the point that minimizes the sum
 of squared distances from a dataset is the mean of the dataset. This
 yields our update in @eq-representation_learning-kmeans_update_means:
@@ -664,9 +665,7 @@ sometimes it takes a lot of effort to see the connection).
 ### Clustering in Vision
 
 In vision, the problem of clustering is related to the idea of
-**perceptual grouping**, which we cover in detail in chapter
-[\[chapter-perceptual_organization\]](#sec-perceptual_organization){reference-type="ref"
-reference="chapter-perceptual_organization"}. We humans see the world as
+**perceptual grouping**, which we cover in detail in @sec-perceptual_organization. We humans see the world as
 organized into different levels of perceptual structure: contours and
 surfaces, objects and events. These structures are groupings, or
 clusters, of related visual elements: a contour is a group of points
@@ -761,12 +760,6 @@ underlying world.
 Nonetheless, it is often easiest to conceptualize these two approaches
 separately, and next we give learning diagrams for each:
 
-::: center
-:::
-
-::: center
-:::
-
 In these diagrams, $D$ is a distance function. Above we give just one
 simple form for the contrastive objective; many variations have been
 proposed. Three of the most popular are (1) Hadsell et al.'s
@@ -799,9 +792,7 @@ $c \in \{\mathbf{x}^+, \mathbf{x}_1^-, \ldots, \mathbf{x}_N^-\}$; you
 can therefore think of this loss as corresponding to a classification
 problem where the ground truth class is $\mathbf{x}^+$ and the other
 possible classes are $\{\mathbf{x}_1^-, \ldots, \mathbf{x}_N^-\}$ (refer
-to chapter
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"} to revisit softmax
+to @sec-intro_to_learning to revisit softmax
 classification).
 
 ### Alignment and Uniformity
