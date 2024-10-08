@@ -3,9 +3,7 @@
 ## Introduction
 
 Generative models perform (or describe) the synthesis of data. Recall
-the image classifier from chapter
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"}, shown again below
+the image classifier from @sec-intro_to_learning, shown again below
 (@fig-gen_models_image_classification):
 
 ![A classifier maps images to labels.](./figures/generative_models/image_classification_bird.png){width="70%" #fig-gen_models_image_classification}
@@ -59,10 +57,14 @@ image.
 Sometimes we wish to simply make up data from scratch; in fact, this is
 the canonical setting in which generative models are often studied. To
 do so, we can simply drop the dependency on the input $\mathbf{y}$. This
-yields a procedure for making data from scratch: $$\begin{aligned}
+yields a procedure for making data from scratch: 
+
+$$\begin{aligned}
     \mathbf{z} \sim p(Z)\\
     \mathbf{x} = g(\mathbf{z})
-\end{aligned}$$  We call this an **unconditional generative
+\end{aligned}$$  
+
+We call this an **unconditional generative
 model** because it is model of the unconditional distribution $p(X)$.
 Generally we will refer to unconditional generative models simply as
 generative models and use the term **conditional generative model** for
@@ -240,7 +242,7 @@ likelihood of the training data under the model's density function*.
 Maximizing this objective is therefore a form of **max likelihood learning**. Pictorially we can
 visualize the max likelihood objective as trying to push up the density over each observed datapoint:
 
-![](./figures/generative_models/max_likelihood_density.png){width="100%"}
+![](./figures/generative_models/max_likelihood_density.png){#fig-generative_models-max_likelihood_density width="100%"}
 
 Remember that a probability density function (pdf) is a function
 $p_{\theta}: \mathcal{X} \rightarrow [0,\infty)$ with
@@ -271,7 +273,7 @@ $Z(\theta) = \int_{\mathbf{x}} e^{-E_{\theta}(\mathbf{x})}d\mathbf{x}$
 is the normalizing constant. The $Z(\theta)$ can be very expensive to
 compute and often can only be approximated.:
 
-::{.column-margin}
+:::{.column-margin}
 Note that low energy $\Rightarrow$ high probability.
 So we minimize energy to maximize probability.
 :::
@@ -355,7 +357,7 @@ tries to modify parameters to decrease the energy placed on data
 samples. The second term is the negative term gradient; here it appears
 as an intractable integral, so our strategy is to rewrite it as an
 expectation, which can be approximated via sampling: 
-$$\begin{aligned}    \nabla_{\theta} \log Z(\theta) &= \frac{1}{Z(\theta)}\nabla_{\theta}Z(\theta) :grad_log_identity \\
+$$\begin{aligned}    \nabla_{\theta} \log Z(\theta) &= \frac{1}{Z(\theta)}\nabla_{\theta}Z(\theta) \\
     &= \frac{1}{Z(\theta)} \nabla_{\theta} \int_x e^{-E_{\theta}(\mathbf{x})}d\mathbf{x} &&\quad\quad \triangleleft \quad \text{definition of $Z$}\\
     &= \frac{1}{Z(\theta)} \int_x \nabla_{\theta} e^{-E_{\theta}(\mathbf{x})}d\mathbf{x} &&\quad\quad \triangleleft \quad \text{exchange sum and grad}\\
     &= \frac{1}{Z(\theta)} -\int_x e^{-E_{\theta}(\mathbf{x})} \nabla_{\theta} E_{\theta}(\mathbf{x})d\mathbf{x}\\
@@ -418,6 +420,8 @@ to 's; for example, one can do additional inference to sample from a
 density model, or one can extract a lower-bound estimate of density from
 a variational autoencoder (VAE) or diffusion model.
 
+
+:::{#tbl-generative_models-types_of_gen_model}
 | Method                | Latents?                         | Density/Energy?               | Generator?                 |
 |-----------------------|----------------------------------|-------------------------------|----------------------------|
 | Energy-based models    | ❌                              | ✔ (energy only)               | ❌                          |
@@ -426,7 +430,7 @@ a variational autoencoder (VAE) or diffusion model.
 | Diffusion models       | ✔ (high-dimensional)            | ❌                             | ✔ (slow)                   |
 | GANs                   | ✔                              | ❌                             | ✔                          |
 | VAEs                   | ✔                              | ❌                             | ✔                          |
-
+:::
 
 Generative models can also be distinguished according to their
 objectives, hypothesis spaces, and optimization algorithms. Some classes

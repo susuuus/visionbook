@@ -13,9 +13,7 @@ are, essentially, inverses of each other. Many algorithms explicitly
 treat them as inverse problems, where solving the problem in one
 direction can inform the solution in the other direction.
 
-In chapter
-[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
-reference="chapter-neural_nets"}, we described neural nets as being a
+In @sec-neural_nets, we described neural nets as being a
 sequence of mappings from raw data to ever more abstracted
 representations, layer by layer. This perspective puts representation
 learning in the spotlight: deep learning is just representation
@@ -34,9 +32,7 @@ the full picture looks like this
 
 ## Latent Variables as Representations
 
-In chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}, we introduced generative models
+In @sec-generative_models, we introduced generative models
 with latent variables $\mathbf{z}$. In that context, the role of the
 latent variable was to specify all unobserved factors that might affect
 the output of a model. For example, if the model predicts the color of a
@@ -50,9 +46,7 @@ input. In the extreme case of unconditional generative models, all
 properties of the generated images are controlled by the latent
 variables.
 
-What we did not mention in chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}, but will focus on now, is that
+What we did not mention in @sec-generative_models, but will focus on now, is that
 *latent variables are representations of the data*. In the case of an
 unconditional generative model, the latent variables are a *complete*
 representation of the data: all information in the data is represented
@@ -66,7 +60,9 @@ combined with other representation learning algorithms?
 
 We will consider random variables $\mathbf{z}$ and $\mathbf{x}$ related
 as follows, with $g$ being deterministic generator (i.e., decoder) and
-$f$ being a deterministic encoder: $$\begin{aligned}    &\mathbf{x} \sim p_{\texttt{data}} &\mathbf{z} \sim p_{\mathbf{z}} \\
+$f$ being a deterministic encoder: 
+
+$$\begin{aligned}    &\mathbf{x} \sim p_{\texttt{data}} &\mathbf{z} \sim p_{\mathbf{z}} \\
     &\hat{\mathbf{z}} = f(\mathbf{x}) &\hat{\mathbf{x}} = g(\mathbf{z})
 \end{aligned}$$ where $f$ and $g$ will be trained so that
 $g \approx f^{-1}$, which means that
@@ -94,12 +90,16 @@ $$\begin{aligned}
     L(\{\mathbf{x}^{(i)}\}_{i=1}^N, \theta) = \sum_{i=1}^N \log p_{\theta}(\mathbf{x}^{(i)})
 \end{aligned}$$ Many methods use a max likelihood objective, optimizing
 $L$ with respect to $\theta$. To compute the likelihood function, we
-need to compute $p_{\theta}(\mathbf{x})$. One way to express this
+need to compute $p_{\theta}(\mathbf{x})$. 
+
+One way to express this
 function is as the **marginal likelihood** of $\mathbf{x}$,
 marginalizing over all unobserved latent variables $\mathbf{z}$:
 $$\begin{aligned}
-    p_{\theta}(\mathbf{x}) = \int_{\mathbf{z}} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})p_{\mathbf{z}}(\mathbf{z})d\mathbf{z}:marginal_likelihood_p
-\end{aligned}$${#eq-generative_modeling_and_representation_learning} The advantage of expressing $p_{\theta}(\mathbf{x})$ in
+    p_{\theta}(\mathbf{x}) = \int_{\mathbf{z}} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})p_{\mathbf{z}}(\mathbf{z})d\mathbf{z}
+\end{aligned}$${#eq-generative_modeling_and_representation_learning-marginal_likelihood_p} 
+
+The advantage of expressing $p_{\theta}(\mathbf{x})$ in
 this way is that, assuming we know $p_{\mathbf{z}}$, the rest of the
 modeling problem is reduced to learning the conditional distribution
 $p_{\theta}(X \bigm | \mathbf{z})$, which itself can be
@@ -123,9 +123,7 @@ data.
 
 ### The Decoder of an Autoencoder is a Data Generator
 
-In chapter
-[\[chapter-representation_learning\]](#sec-representation_learning){reference-type="ref"
-reference="chapter-representation_learning"} we learned about
+In @sec-representation_learning we learned about
 autoencoders. These are models that learn an embedding that can be
 decoded to reconstruct the input data. You may already have noticed that
 the decoder of an autoencoder looks just like a generator. It is a
@@ -179,14 +177,10 @@ What distinguishes them from other max likelihood models is their
 particular hypothesis space and optimization algorithm. We will first
 describe the hypothesis space.
 
-Remember the Gaussian generative model from chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"} (i.e., fitting a Gaussian to
+Remember the Gaussian generative model from @sec-generative_models (i.e., fitting a Gaussian to
 data)? We stated that this model is too simple for most purposes, but
 can form the basis for more flexible density models, which work by
-combining a lot of simple distributions. We gave one example in chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}: autoregressive models, which
+combining a lot of simple distributions. We gave one example in @sec-generative_models: autoregressive models, which
 model a complicated distribution as a product over many simple
 conditional distributions. VAEs follow a slightly different strategy:
 they model complicated distributions as *sums* of simple distributions.
@@ -194,7 +188,9 @@ they model complicated distributions as *sums* of simple distributions.
 In particular, VAEs are **mixture models**, and the most common kind of
 VAE is a **mixture of Gaussians**. The mixture of Gaussians
 model is in fact classical model that represents a density as a weighted
-sum of Gaussian distributions: $$\begin{aligned}    p_{\theta}(\mathbf{x}) = \sum_{i=1}^k w_i \mathcal{N}(\mathbf{x}; \mathbf{\mu}_i, \mathbf{\Sigma}_i) \quad\quad \triangleleft \quad\text{mixture of Gaussians}
+sum of Gaussian distributions: 
+
+$$\begin{aligned}    p_{\theta}(\mathbf{x}) = \sum_{i=1}^k w_i \mathcal{N}(\mathbf{x}; \mathbf{\mu}_i, \mathbf{\Sigma}_i) \quad\quad \triangleleft \quad\text{mixture of Gaussians}
 \end{aligned}$$ where the parameters are
 $\theta = \{\mathbf{\mu}_i, \mathbf{\Sigma}_i\}_{i=1}^k$, that is, the
 mean and variance of all Gaussians in the mixture. Unlike classical
@@ -234,9 +230,7 @@ $p_{\theta}(\mathbf{x} \bigm | \mathbf{z})$ and
 $p_{\mathbf{z}}(\mathbf{z})$ in this example, VAEs can also be
 constructed using other base distributions, even complicated ones. For
 example, we could make an infinite mixture of the autoregressive
-distributions we saw in chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}. In this sense, mixture models
+distributions we saw in @sec-generative_models. In this sense, mixture models
 are metamodels, and their components can themselves be any of the
 density models we have learned about in this book, including other
 mixture models.
@@ -246,8 +240,8 @@ mixture models.
  With the objective and hypothesis given previously, we can
 now fully define the VAE learning problem: $$\begin{aligned}
     \theta^* &= \mathop{\mathrm{arg\,max}}_{\theta} L(\{\mathbf{x}^{(i)}\}_{i=1}^N, \theta)\\
-    &= \mathop{\mathrm{arg\,max}}_{\theta} \sum_{i=1}^N \log \underbrace{\int_{\mathbf{z}} \overbrace{\mathcal{N}(\mathbf{x}^{(i)}; g^{\mu}_{\theta}(\mathbf{z}), g^{\Sigma}_{\theta}(\mathbf{z}))}^{p_{\theta}(\mathbf{x}^{(i)} \shortgiven \mathbf{z})} \overbrace{\mathcal{N}(\mathbf{z}; \mathbf{0}, \mathbf{I})}^{p_{\mathbf{z}}(\mathbf{z})}d\mathbf{z}}_{p_{\theta}(\mathbf{x}^{(i)})}:vae_learning_problem1
-\end{aligned}$${#eq-generative_modeling_and_representation_learning}
+    &= \mathop{\mathrm{arg\,max}}_{\theta} \sum_{i=1}^N \log \underbrace{\int_{\mathbf{z}} \overbrace{\mathcal{N}(\mathbf{x}^{(i)}; g^{\mu}_{\theta}(\mathbf{z}), g^{\Sigma}_{\theta}(\mathbf{z}))}^{p_{\theta}(\mathbf{x}^{(i)} \shortgiven \mathbf{z})} \overbrace{\mathcal{N}(\mathbf{z}; \mathbf{0}, \mathbf{I})}^{p_{\mathbf{z}}(\mathbf{z})}d\mathbf{z}}_{p_{\theta}(\mathbf{x}^{(i)})}
+\end{aligned}$${#eq-generative_modeling_and_representation_learning-vae_learning_problem1}
 
 #### Trick 1: Approximating the objective via sampling
 
@@ -255,12 +249,21 @@ The integral for $p_{\theta}(\mathbf{x}^{(i)})$ does not necessarily
 have a closed form since $g_{\theta}$ may be an arbitrarily complex
 function. Therefore, we need to approximate this integral numerically.
 The first trick we will use is a *Monte Carlo estimate* of this
-integral: $$\begin{aligned}    p_{\theta}(\mathbf{x}) &= \int_{\mathbf{z}} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})p_{\mathbf{z}}(\mathbf{z})d\mathbf{z} :vae_likelihood\\
+integral: 
+
+$$\begin{aligned}    p_{\theta}(\mathbf{x}) &= \int_{\mathbf{z}} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})p_{\mathbf{z}}(\mathbf{z})d\mathbf{z} :vae_likelihood\\
     &= \mathbb{E}_{\mathbf{z}\sim p_{\mathbf{z}}(\mathbf{z})}[p_{\theta}(\mathbf{x} \bigm | \mathbf{z})]\\
-    &\approx \frac{1}{M} \sum_{j=1}^M p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(j)}), \quad \mathbf{z}^{(j)} \sim p_{\mathbf{z}} #eq-generative_models_and_representation_learning-vae_likelihood_monte_carlo_estimate
-\end{aligned}$${#eq-generative_models_and_representation_learning} We could stop here, as the learning problem is now
-written in a closed differentiable form: $$\begin{aligned}    \theta^* &= \mathop{\mathrm{arg\,max}}_{\theta} \frac{1}{M} \sum_{i=1}^N \log \sum_{j=1}^M \overbrace{\mathcal{N}(\mathbf{x}^{(i)}; g^{\mu}_{\theta}(\mathbf{z}^{(j)}), g^{\Sigma}_{\theta}(\mathbf{z}^{(j)}))}^{p_{\theta}(\mathbf{x}^{(i)} \shortgiven \mathbf{z}^{(j)})}:vae_learning_problem1
-\end{aligned}$${#eq-generative_modeling_and_representation_learning} As long as $g_{\theta}$ is a differentiable neural net,
+    &\approx \frac{1}{M} \sum_{j=1}^M p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(j)}), \quad \mathbf{z}^{(j)} \sim p_{\mathbf{z}}
+\end{aligned}$$
+{#eq-generative_models_and_representation_learning-vae_likelihood_monte_carlo_estimate}
+
+We could stop here, as the learning problem is now
+written in a closed differentiable form: 
+
+$$\begin{aligned}    \theta^* &= \mathop{\mathrm{arg\,max}}_{\theta} \frac{1}{M} \sum_{i=1}^N \log \sum_{j=1}^M \overbrace{\mathcal{N}(\mathbf{x}^{(i)}; g^{\mu}_{\theta}(\mathbf{z}^{(j)}), g^{\Sigma}_{\theta}(\mathbf{z}^{(j)}))}^{p_{\theta}(\mathbf{x}^{(i)} \shortgiven \mathbf{z}^{(j)})}
+\end{aligned}$${#eq-generative_modeling_and_representation_learning-vae_learning_problem1} 
+
+As long as $g_{\theta}$ is a differentiable neural net,
 we can proceed with optimization via backpropagation. In practice, on
 each iteration of backpropagation, we would collect a batch of random
 samples $\{\mathbf{x}^{(i)}\}_{i=1}^{B_1} \sim p_{\texttt{data}}$ from
@@ -280,7 +283,7 @@ training. Here we use an isotropic Gaussian model, that is, we
 parameterize the covariance as $\Sigma = \sigma\mathbf{I}$, where
 $\sigma = g^{\sigma}_{\theta}(\mathbf{z})$ is a scalar.
 
-![Fitting an infinite mixture of Gaussians whose means and variances are parameterized by a generator function $g_{\theta](./figures/generative_modeling_and_representation_learning/IGMM_training_iters.png){width="70%" #fig-generative_modeling_and_representation_learning-IGMM_training_iters}
+![Fitting an infinite mixture of Gaussians whose means and variances are parameterized by a generator function $g_\theta$](./figures/generative_modeling_and_representation_learning/IGMM_training_iters.png){width="70%" #fig-generative_modeling_and_representation_learning-IGMM_training_iters}
 
 #### Trick 2: Efficient approximation via importance sampling
 
@@ -295,8 +298,12 @@ Can we come up with a more efficient way of approximating the integral
 in @eq-generative_models_and_representation_learning-vae_likelihood?
 Let's start by writing out the sum from
 @eq-generative_models_and_representation_learning-vae_likelihood_monte_carlo_estimate
-more explicitly: $$\begin{aligned}    p_{\theta}(\mathbf{x}) &\approx \frac{1}{M} (p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(1)}) + p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(2)}) + p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(3)}) + \ldots)
-\end{aligned}$$ In general, some of the terms
+more explicitly: 
+
+$$\begin{aligned}    p_{\theta}(\mathbf{x}) &\approx \frac{1}{M} (p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(1)}) + p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(2)}) + p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(3)}) + \ldots)
+\end{aligned}$$ 
+
+In general, some of the terms
 $p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(j)})$ will be larger than
 others. In fact, in our example in
 @fig-generative_modeling_and_representation_learning-IGMM_training_iters,
@@ -311,7 +318,7 @@ Consider the example in
 where we are trying to esimate the probability of the point $\mathbf{x}$
 (blue circle).
 
-![To estimate $p_{\theta](./figures/generative_modeling_and_representation_learning/vae_importance_sampling1.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling1}
+![To estimate $p_{\theta}$](./figures/generative_modeling_and_representation_learning/vae_importance_sampling1.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling1}
 
 The mixture components are shaded according to the probability they
 assign to $\mathbf{x}$. Almost all are so far from $\mathbf{x}$ that we
@@ -337,8 +344,10 @@ $$\begin{aligned}
 p_{\theta}(\mathbf{x}) &= \mathbb{E}_{\mathbf{z}\sim p_{\mathbf{z}}}\Big[p_{\theta}(\mathbf{x} \bigm | \mathbf{z})\Big]
 = \int_{\mathbf{z}} p_{\mathbf{z}}(\mathbf{z}) p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) d\mathbf{z}
 = \int_{\mathbf{z}} q_{\mathbf{z}}(\mathbf{z})\frac{p_{\mathbf{z}}(\mathbf{z})}{q_{\mathbf{z}}(\mathbf{z})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) d\mathbf{z}\\
-&= \mathbb{E}_{\mathbf{z}\sim q_{\mathbf{z}}}\Big[\frac{p_{\mathbf{z}}(\mathbf{z})}{q_{\mathbf{z}}(\mathbf{z})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})\Big]:vae_learning_problem2
-\end{aligned}$${#eq-generative_modeling_and_representation_learning} Using the intuition we developed previously, the
+&= \mathbb{E}_{\mathbf{z}\sim q_{\mathbf{z}}}\Big[\frac{p_{\mathbf{z}}(\mathbf{z})}{q_{\mathbf{z}}(\mathbf{z})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})\Big]
+\end{aligned}$${#eq-generative_modeling_and_representation_learning-vae_learning_problem2}
+
+ Using the intuition we developed previously, the
 distribution $q$ we would really like to sample from is the one whose
 samples maximize $p_{\theta}(\mathbf{x} \bigm | \mathbf{z})$. It turns
 out that the optimal distribution is
@@ -352,14 +361,16 @@ $\mathbf{x}$. The optimal importance sampling way to estimate the
 likelihood of a datapoint will therefore look like this:
 $$\begin{aligned}    &p_{\theta}(\mathbf{x}) \approx \frac{1}{M} \sum_{j=1}^M\frac{p_{\mathbf{z}}(\mathbf{z}^{(j)})}{p_{\theta}(\mathbf{z}^{(j)} \bigm | \mathbf{x})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(j)}) \quad\quad \triangleleft \quad\text{Optimal importance sampling}:vae_importance_sampling\\
     &\quad\quad \mathbf{z}^{(j)} \sim p_{\theta}(Z \bigm | \mathbf{x}) \nonumber
-\end{aligned}$${#eq-generative_models_and_representation_learning} Visually, rather than sampling from all over
+\end{aligned}$${#eq-generative_models_and_representation_learning} 
+
+Visually, rather than sampling from all over
 $p_{\mathbf{z}}$ and wasting samples on regions that place nearly zero
 likelihood on the data, we focus our sampling on just the region that
 places high likelihood on the data, and we can get then away with far
 fewer samples to well approximate the data likelihood, as indicated
 @fig-generative_modeling_and_representation_learning-vae_importance_sampling2.
 
-![Optimal importance sampling estimates $p_{\theta](./figures/generative_modeling_and_representation_learning/vae_importance_sampling2.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling2}
+![Optimal importance sampling estimates $p_{\theta}$](./figures/generative_modeling_and_representation_learning/vae_importance_sampling2.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling2}
 
 #### Trick 3: Variational inference to approximate the sampling distribution
 
@@ -383,7 +394,7 @@ of a distribution over $\mathbf{z}$; in other words, $f_{\psi}$ is a
 probabilistic encoder! This function is shown next in
 @fig-generative_modeling_and_representation_learning-VAE_encoder:
 
-![A VAE's encoder, $f_{\psi](./figures/generative_modeling_and_representation_learning/VAE_encoder.png){width="55%" #fig-generative_modeling_and_representation_learning-VAE_encoder}
+![A VAE's encoder, $f_{\psi}$](./figures/generative_modeling_and_representation_learning/VAE_encoder.png){width="55%" #fig-generative_modeling_and_representation_learning-VAE_encoder}
 
 It will turn out that $f$ indeed plays the role of the encoder in the
 VAE, while $g$ plays the role of the decoder.
@@ -411,22 +422,23 @@ parameters $\psi$. Notice that the term $\log p_{\theta}(\mathbf{x})$ is
 constant with respect to these parameters, so we can drop that term,
 yielding: $$\begin{aligned}
     \psi^* &= \mathop{\mathrm{arg\,max}}_{\psi} \frac{1}{N}\sum_{i=1}^N J_q(\mathbf{x}^{(i)}, \psi)\\
-    &= \mathop{\mathrm{arg\,max}}_{\psi} \frac{1}{N}\sum_{i=1}^N \underbrace{\mathbb{E}_{\mathbf{z} \sim q_{\psi}(Z \bigm | \mathbf{x}^{(i)})}[ -\log q_{\psi}(\mathbf{z} \bigm | \mathbf{x}^{(i)}) + \log p_{\theta}(\mathbf{x}^{(i)} \bigm | \mathbf{z}) + \log p_{\mathbf{z}}(\mathbf{z})]}_{J} :J_q
-\end{aligned}$${#eq-generative_modeling_and_representation_learning} Here we have defined a new cost function, $J$ (the term
+    &= \mathop{\mathrm{arg\,max}}_{\psi} \frac{1}{N}\sum_{i=1}^N \underbrace{\mathbb{E}_{\mathbf{z} \sim q_{\psi}(Z \bigm | \mathbf{x}^{(i)})}[ -\log q_{\psi}(\mathbf{z} \bigm | \mathbf{x}^{(i)}) + \log p_{\theta}(\mathbf{x}^{(i)} \bigm | \mathbf{z}) + \log p_{\mathbf{z}}(\mathbf{z})]}_{J}
+\end{aligned}$${#eq-generative_modeling_and_representation_learning-J_q} Here we have defined a new cost function, $J$ (the term
 inside the sum in
 @eq-generative_modeling_and_representation_learning-J_q), whose
 maximizer with respect to $\psi$ is the same as the maximizer for $J_q$.
 
 Now, let us now recall our learning problem for $p_{\theta}$, which is
 to maximize data log likelihood. Using importance sampling to estimate
-data likelihood (equation
-\[[\[eqn:generative_modeling_and_representation_learning:vae_learning_problem2\]](#eqn:generative_modeling_and_representation_learning:vae_learning_problem2){reference-type="ref"
-reference="eqn:generative_modeling_and_representation_learning:vae_learning_problem2"}\]),
-and using $q_{\psi}$ as our sampling distribution, we have that the
+data likelihood (@eq-generative_modeling_and_representation_learning-vae_learning_problem2, and using $q_{\psi}$ as our sampling distribution, we have that the
 objective for $p_{\theta}$ is to maximize the following objective $J_p$
-with respect to $\theta$: $$\begin{aligned}    J_p(\mathbf{x},\theta) &= \log \mathbb{E}_{\mathbf{z}\sim q_{\psi}(Z \bigm | \mathbf{x})}\Big[\frac{p_{\mathbf{z}}(\mathbf{z})}{q_{\psi}(\mathbf{z} \bigm | \mathbf{x})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})\Big] :J_p\\
+with respect to $\theta$: 
+
+$$\begin{aligned}    J_p(\mathbf{x},\theta) &= \log \mathbb{E}_{\mathbf{z}\sim q_{\psi}(Z \bigm | \mathbf{x})}\Big[\frac{p_{\mathbf{z}}(\mathbf{z})}{q_{\psi}(\mathbf{z} \bigm | \mathbf{x})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})\Big]\\
     \theta^* &= \mathop{\mathrm{arg\,max}}_{\theta} \frac{1}{N}\sum_{i=1}^N J_p(\mathbf{x}^{(i)}, \theta)
-\end{aligned}$${#eq-generative_modeling_and_representation_learning} We now have a differentiable objective for both $\psi$
+\end{aligned}$${#eq-generative_modeling_and_representation_learning-J_p} 
+
+We now have a differentiable objective for both $\psi$
 and $\theta$; the objective for $\psi$ is expressed as an expectation
 and can be optimized by taking a Monte Carlo sample from that
 expectation. We *could* also try using Monte Carlo to approximate the
@@ -453,7 +465,9 @@ inequality: $$\begin{aligned}    J_p &= \log p_{\theta}(\mathbf{x})\\
 
 This way our learning problem for both $\theta$ and $\psi$ share the
 same objective (which also saves computation) and can be stated simply
-as: $$\begin{aligned}    \theta^*, \psi^* = \mathop{\mathrm{arg\,max}}_{\theta, \phi} \frac{1}{N}\sum_{i=1}^N J(\mathbf{x}^{(i)}, \theta, \phi)
+as: 
+
+$$\begin{aligned}    \theta^*, \psi^* = \mathop{\mathrm{arg\,max}}_{\theta, \phi} \frac{1}{N}\sum_{i=1}^N J(\mathbf{x}^{(i)}, \theta, \phi)
 \end{aligned}$$
 
 The VAE objective, $J$, is often called the **Evidence Lower Bound** or
@@ -462,8 +476,8 @@ $J_p$, which equals $\log p_{\theta}(\mathbf{x})$).
 
 Using the definition of KL-divergence, we can also rewrite $J$ as
 follows: $$\begin{aligned}
-    J &= \mathbb{E}_{\mathbf{z}\sim q_{\psi}(Z \bigm | \mathbf{x})}\Big[\log p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) \Big] - \texttt{KL}\texttt{KL}\KLdivxx{q_{\psi}(Z \bigm | \mathbf{x})}{p_{\mathbf{z}}} \quad\quad\triangleleft\quad\text{VAE objective}:vae_objective_form2
-\end{aligned}$${#eq-generative_modeling_meets_representation_learning}
+    J &= \mathbb{E}_{\mathbf{z}\sim q_{\psi}(Z \bigm | \mathbf{x})}\Big[\log p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) \Big] - \texttt{KL}\texttt{KL}\KLdivxx{q_{\psi}(Z \bigm | \mathbf{x})}{p_{\mathbf{z}}} \quad\quad\triangleleft\quad\text{VAE objective}
+\end{aligned}$${#eq-generative_modeling_meets_representation_learning-vae_objective_form2}
 
 In this form, the VAE objective is presented as the sum of two terms.
 The first term measures the data log likelihood when the latent
@@ -518,13 +532,21 @@ encode $x$ to parameterize $q_{\psi}(Z \bigm | x)$. Then we sample a $z$
 from $q_{\psi}(Z \bigm | x)$. Finally we decode this $z$ to parameterize
 $p_{\theta}(X \bigm | z)$, and we measure the probability this
 distribution places on our observed input $x$, as shown below:
+
 $$\begin{aligned}
     \mu_z, \sigma^2_z &= f_{\psi}(x) & \quad\quad \triangleleft \quad\text{Encode $x$}\\
-    z &\sim \mathcal{N}(\mu_z, \sigma^2_z) & \quad\quad \triangleleft \quad\text{Sample $z$} :sampling_z_step\\
-    \mu_x, \sigma^2_x &= g_{\theta}(z) & \quad\quad \triangleleft \quad\text{Decode $z$}\\
+    z &\sim \mathcal{N}(\mu_z, \sigma^2_z) 
+    & \quad\quad \triangleleft \quad\text{Sample $z$}
+\end{aligned}$${#eq-generative_modeling_meets_representation_learning-sampling_z_step}
+  
+  
+$$\begin{aligned}  
+    \mu_x, \sigma^2_x &= g_{\theta}(z) & \quad\quad \triangleleft \quad\text{Decode $z$}&\\
     \log p_{\theta}(x | z) &= \log \mathcal{N}(x; \mu_x, \sigma^2_x) &\\
                           &= \log\frac{1}{\sigma_x\sqrt{2\pi}} - \frac{\overbrace{(x - \mu_x)^2}^{\text{reconstruction error}}}{2\sigma_x^2} & \quad\quad \triangleleft \quad\text{Measure likelihood}
-\end{aligned}$${#eq-generative_modeling_meets_representation_learning} In other words, we encode, then decode, then measure the
+\end{aligned}$${#eq-generative_modeling_meets_representation_learning} 
+
+In other words, we encode, then decode, then measure the
 **reconstruction error** between our original input and the output of
 the decoder; this looks just like an autoencoder, as shown in
 @fig-generative_modeling_and_representation_learning-VAE_as_autoencoder!
@@ -542,10 +564,14 @@ backpropagate through the sampling step in
 @eq-generative_modeling_meets_representation_learning-sampling_z_step.
 How can we backpropagate through the sampling operation? The way to do
 this turns out to be quite simple: we reparameterize sampling from
-$\mathcal{N}(\mu_z, \sigma^2_z)$ as follows: $$\begin{aligned}
+$\mathcal{N}(\mu_z, \sigma^2_z)$ as follows: 
+
+$$\begin{aligned}
     \epsilon \sim \mathcal{N}(0,1)\\
     z = \mu_z + \epsilon \sigma_z
-\end{aligned}$$ This step is known as the **reparameterization trick**,
+\end{aligned}$$ 
+
+This step is known as the **reparameterization trick**,
 as it reparameterizes a stochastic function (sampling from a Gaussian
 parameterized by a neural net) to be a deterministic transformation of a
 fixed noise source (the unit Gaussian). To optimize the parameters for
@@ -555,9 +581,13 @@ sidestepped the need to handle backpropagation through a stochastic
 function.
 
 Putting all the terms together, the objective we are maximizing can now
-be written as: $$\begin{aligned}
+be written as: 
+
+$$\begin{aligned}
      \frac{1}{N}\sum_{i=1}^N \Big( \log\frac{1}{\sigma_{x^{(i)}}\sqrt{2\pi}} - \frac{\overbrace{(x^{(i)} - \mu_{x^{(i)}})^2}^{\text{reconstruction error}}}{2\sigma_{x^{(i)}}^2} - \underbrace{\frac{1}{2}(\mu_{z^{(i)}}^2 + \sigma_{z^{(i)}}^2 - \log(\sigma_{z^{(i)}}^2) - 1)}_{\text{KL term}} \Big)
-\end{aligned}$$ The KL term encourages the encodings $z^{(i)}$ to be
+\end{aligned}$$ 
+
+The KL term encourages the encodings $z^{(i)}$ to be
 near a unit Gaussian distribution. To get an intuition for the effect of
 this term, consider the case where we fix $\sigma_{z^{(i)}}$ to be 1;
 this is still a valid model for $q_{\psi}(Z|x)$, just with lower
@@ -618,11 +648,7 @@ identify the underlying latent variables that explain river appearance.
 In this example we will use data for which we know the true data
 generating process, which is simply a Python script that procedurally
 synthesizes cartoon images of rivers given input noise (this is a more
-elaborate version of the script we saw in algorithm
-[\[alg:generative_models:simple_rivers_script\]](#alg:generative_models:simple_rivers_script){reference-type="ref"
-reference="alg:generative_models:simple_rivers_script"} of chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"} ). The script takes in random
+elaborate version of the script we saw in @fig-generative_models-simple_rivers_script of @sec-generative_models. The script takes in random
 values that control the attributes of the scene (the grass color, the
 heading of the river, the number of trees, etc.) and generates an image
 with these attributes, as shown in
@@ -657,11 +683,7 @@ process (the Python script), and the VAE recovered it. However,
 interestingly there was no single input to the script that controls the
 overall river curvature, instead the curves are generating by a vector
 of Bernoulli variables that rotate the heading left and right as the
-river extends (using the same algorithm as in algorithm
-[\[alg:generative_models:simple_rivers_script\]](#alg:generative_models:simple_rivers_script){reference-type="ref"
-reference="alg:generative_models:simple_rivers_script"} of chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}). The VAE has discovered a latent
+river extends (using the same algorithm as in @fig-generative_models-simple_rivers_script.) The VAE has discovered a latent
 dimension that somehow summarizes a more global mode of behavior (i.e.,
 bend left or bend right) than is explicit in the Python script. It is
 important to realize that VAEs, and most representation learning
@@ -678,9 +700,7 @@ have seen that a VAE can be considered two things:
 
 ## Generative Adversarial Networks Are Representation Learners Too
 
-In chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"} we covered generative adversarial
+In @sec-generative_models we covered generative adversarial
 networks (GANs), which, like VAEs, train a mapping from latent variables
 to synthesized data, $g: \mathbf{z} \rightarrow \mathbf{y}$. Do GANs
 also learn meaningful and disentangled latents?
@@ -692,7 +712,7 @@ ImageNet dataset @russakovsky2015imagenet. Here are images generated by
 walking along two latent dimensions of this GAN
 (@fig-generative_modeling_and_representation_learning-biggan_latent_walk):
 
-![Walking in in two orthogonal directions in BigGAN~\cite{brock2018large](./figures/generative_modeling_and_representation_learning/biggan_latent_walk.png){width="60%" #fig-generative_modeling_and_representation_learning-biggan_latent_walk}
+![Walking in in two orthogonal directions in BigGAN @brock2018large](./figures/generative_modeling_and_representation_learning/biggan_latent_walk.png){width="60%" #fig-generative_modeling_and_representation_learning-biggan_latent_walk}
 
 Just like with the VAE trained on cartoon rivers, the GAN has also
 discovered disentangled latent variables; in this case they seem to
