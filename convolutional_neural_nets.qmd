@@ -95,7 +95,7 @@ As discussed in @sec-linear_image_filtering, convolution is just a special kind 
 
 ![Two equivalent visualizations of a convolutional layer.](figures/convolutional_neural_nets/conv_matrix_vs_net.png){width="100%" #fig-convolutional_neural_nets-conv_matrix_vs_net}
 
-We already saw that convolutional filters are useful for image processing in @sec-image_processing and @sec-linear_filters. In those sections, we introduced a variety of hand-designed filter banks with useful properties. A CNN instead *learns* an effective filter bank.
+We already saw that convolutional filters are useful for image processing in @part-image_processing and @sec-linear_filters. In those sections, we introduced a variety of hand-designed filter banks with useful properties. A CNN instead *learns* an effective filter bank.
 
 
 ### Multi-Input, Multi-Output Convolutional Layers
@@ -346,7 +346,7 @@ input image and the result of the dilated convolutions with the blur
 kernel, $b_{2,2}$, with dilations $d_k=1$, $d_k=2$, and $d_k=4$.
 
 ::: {#fig-convolutional_neural_nets-dilated_blur_mit_dome_example}
-| Input        | d_k = 1                                                       | d_k = 2                                                       | d_k = 4                                                       |
+| Input        | $d_k$ = 1                                                       | $d_k$ = 2                                                       | $d_k$ = 4                                                       |
 |--------------|---------------------------------------------------------------|---------------------------------------------------------------|---------------------------------------------------------------|
 | ![](figures/convolutional_neural_nets/aliasing_dilated_1.jpg){width=100%}     | ![](figures/convolutional_neural_nets/aliasing_dilated_2.jpg){width=100%}     | ![](figures/convolutional_neural_nets/aliasing_dilated_3.jpg){width=100%}     | ![](figures/convolutional_neural_nets/aliasing_dilated_4.jpg){width=100%}     |
 | ![](figures/convolutional_neural_nets/aliasing_dilated_1_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_dilated_2_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_dilated_3_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_dilated_4_DFT.jpg){width=100%} |
@@ -424,7 +424,7 @@ But we know from @sec-image_derivatives that this kernel can be written
 as a linear combination of two separable kernels:
 $\mathbf{w} = \text{Sobel}_x + \text{Sobel}_y$, as defined in equation
 (@eq-sobel_kernels). In general, any $M \times N$ filter can be
-decomposed as a linear sum of $min(N,M)$ separable filters. The
+decomposed as a linear sum of $\min(N,M)$ separable filters. The
 separable filters can be obtained by applying the singular value
 decomposition (SVD) to the kernel array $\mathbf{w}$. The SVD results in three matrices, $\mathbf{U}$, $\mathbf{S}$ and $\mathbf{V}$, so that
 $\mathbf{w} = \mathbf{U} \mathbf{S} \mathbf{V}^\mathsf{T}$, where the
@@ -443,20 +443,21 @@ they can be used for analysis and synthesis. CNNs can also be structured
 as analysis and synthesis pyramids, and this is a very powerful tool. To
 create a pyramid we just need to introduce a way of downsampling the
 signal during analysis and upsampling during synthesis. In CNNs this is
-done with .
+done with **downsampling and upsampling layers**.
 
 Downsampling layers transform the input tensor to an output tensor that
 is smaller in the spatial dimensions:
 $\mathbb{R}^{N \times M} \rightarrow \mathbb{R}^{N/s_n \times M/s_m}$.
 We already saw one kind of downsampling layer, strided convolution,
 which is equivalent to convolution followed by subsampling. Another
-common kind of downsampling layer is , which we will encounter in
+common kind of downsampling layer is **pooling**, which we will encounter in
 @sec-convolutional_neural_nets-pooling_layers.
 
 Upsampling layers perform the opposite transformation, outputting a
 tensor that is larger in the spatial dimensions than the input:
-$\mathbb{R}^{N \times M} \rightarrow \mathbb{R}^{Ns_n \times Ms_m}$. One
-kind of upsampling layer can be made as the analogue of strided
+$\mathbb{R}^{N \times M} \rightarrow \mathbb{R}^{Ns_n \times Ms_m}$. 
+
+One kind of upsampling layer can be made as the analogue of strided
 convolution. Strided convolution convolves then subsamples; this
 upsampling layer instead dilates the signal then convolves. Starting
 with a blank image of zeros, $\mathbf{h} = \mathbf{0}$, we set:
@@ -553,8 +554,8 @@ channels, and so on. Each of these choices leads to different kinds of
 normalization filters with different names. One that is historically
 important but no longer frequently used is the **local response normalization**, or **LRN**, filter that
 was introduced in the AlexNet paper @krizhevsky2012imagenet. This filter
-has the following form: $$\begin{aligned}    x_{\texttt{out}}[c,n,m] = x_{\texttt{in}}[c,n,m] / \left( \gamma + \alpha \sum_{i=\max(1,c-l)}^{\max(C,c+l)} x_{\texttt{in}}[i,n,m]^2 \right) ^\beta \quad\quad \triangleleft \quad\texttt{LRN} :LRN
-\end{aligned}$${#eq-convolutional_neural_nets} where $\alpha$, $\beta$, $\gamma$, and $l$ are
+has the following form: $$\begin{aligned}    x_{\texttt{out}}[c,n,m] = x_{\texttt{in}}[c,n,m] / \left( \gamma + \alpha \sum_{i=\max(1,c-l)}^{\max(C,c+l)} x_{\texttt{in}}[i,n,m]^2 \right) ^\beta \quad\quad \triangleleft \quad\texttt{LRN}
+\end{aligned}$${#eq-convolutional_neural_nets-LRN} where $\alpha$, $\beta$, $\gamma$, and $l$ are
 hyperparameters of the layer. This layer normalizes each activation by
 the sum of squares of the activations in a window of adjacent
 *channels*.
@@ -1034,7 +1035,7 @@ until producing a much lower-dimensional feature map as output. A
 decoder is the opposite, taking a set of low-dimensional features as
 input, then upsampling them, layer by layer, until producing an image as
 the final output. An example of an encoder is an image classifier and an
-example of a decoder is an image generator (covered in @sec-generative_model. These two architectural
+example of a decoder is an image generator (covered in @sec-generative_models. These two architectural
 patterns are shown in
 @fig-convolutional_neural_nets-encoders_and_decoders.
 
