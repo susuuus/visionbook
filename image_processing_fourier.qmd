@@ -499,7 +499,7 @@ $$\text{Box}_{L_n, L_m} \left[ u,v \right] = \text{Box}_{L_n} \left[ u\right] \t
 @fig-2ddftexamples shows several DFTs of 2D boxes of different sizes
 and aspect ratios.
 
-## Discrete Fourier Transform Properties {#section:DFTproperties}
+## Discrete Fourier Transform Properties {#sec-DFTproperties}
 
 It is important to be familiar with the properties for the DFT. 
 
@@ -829,7 +829,7 @@ weight for each complex exponential and the phase
 $\theta \left[u,v \right]$ translates the complex exponential. The phase
 carries the information of where the image contours are by specifying
 how the phases of the sinusoids must line up in order to create the
-observed contours and edges. In fact, as shown in @section:DFTproperties, translating the image in space only
+observed contours and edges. In fact, as shown in @sec-DFTproperties, translating the image in space only
 modifies the phase of its Fourier transform. In short, one can think
 that location information goes into the phase while intensity scaling
 goes into the magnitude.

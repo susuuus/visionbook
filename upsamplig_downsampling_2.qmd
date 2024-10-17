@@ -311,7 +311,7 @@ filter that will blur the image before downsampling. Blurring removes
 high-spatial frequencies in the image.
 
 The ideal anti-aliasing filter is a box in the Fourier domain with a
-cut-off frequency of $L=N/(2k)$ (using the notation introduced in @chapter-sampling). The inverse Fourier transform of a box
+cut-off frequency of $L=N/(2k)$ (using the notation introduced in @sec-sampling). The inverse Fourier transform of a box
 in the frequency domain, with width $2L+1=N/k+1$, is the **discrete
 sinc** function of length $N$ in the spatial domain:
 $$\frac{1}{N} \frac 
@@ -322,9 +322,7 @@ box_{N/2k} \left[ u \right]$$
 
 In 2D, the ideal anti-aliasing filter is separable and is obtained by
 two consecutive 1D convolutions along each dimension. The discrete sinc
-is very similar to the continuous sinc described in chapter
-[\[chapter-sampling\]](#sec-sampling){reference-type="ref"
-reference="chapter-sampling"}. The discrete sinc is periodic, with
+is very similar to the continuous sinc described in @sec-sampling. The discrete sinc is periodic, with
 period $N$. The following plot (@fig-discretesinc) shows the
 anti-aliasing sinc for $N=32$ and $k=2$ and the magnitude of its Fourier
 transform:
