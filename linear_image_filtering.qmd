@@ -445,7 +445,7 @@ properties.
     not true for the correlation.
 
 -   **Associative**. Convolutions can be applied in any order:
-    $$\ell_1 \left[n\right] \circ \ell_2 \left[n\right] \circ \ell_3 \left[n\right] = \ell_1\left[n\right] \circ (\ell_2\left[n\right] \circ \ell_3\left[n\right]) = (\ell_1\left[n\right] \circ \ell_2\left[n\right]) \circ \ell_3\left[n\right] :conv_associative_property$${#eq-linear_image_filtering}
+    $$\ell_1 \left[n\right] \circ \ell_2 \left[n\right] \circ \ell_3 \left[n\right] = \ell_1\left[n\right] \circ (\ell_2\left[n\right] \circ \ell_3\left[n\right]) = (\ell_1\left[n\right] \circ \ell_2\left[n\right]) \circ \ell_3\left[n\right]$${#eq-linear_image_filtering-conv_associative_property}
     In practice, for finite length signals, the associative property
     might be affected by how boundary conditions are implemented.
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The neural nets we saw in \@sec-neural_nets are designed to process generic data. But in many domains, the data has special structure, and we can design neural net architectures that are better suited to exploiting that structure. **Convolutional neural nets**, also called **convnets** or **CNNs**, are a neural net architecture especially suited to the structure in visual signals.
+The neural nets we saw in @sec-neural_nets are designed to process generic data. But in many domains, the data has special structure, and we can design neural net architectures that are better suited to exploiting that structure. **Convolutional neural nets**, also called **convnets** or **CNNs**, are a neural net architecture especially suited to the structure in visual signals.
 
 The key idea of CNNs is to chop up the input image into little patches,
 and then process each patch *independently* and *identically*. The gist
@@ -63,14 +63,14 @@ doing, we will now dive into the details of how they work.
 
 ## Convolutional Layers
 
-CNNs are neural networks that are composed of . A convolutional layer
+CNNs are neural networks that are composed of **convolutional layers**. A convolutional layer
 transforms inputs $\mathbf{x}_{\texttt{in}}$ to outputs
 $\mathbf{x}_{\texttt{out}}$ by convolving $\mathbf{x}_{\texttt{in}}$
 with one or more filters $\mathbf{w}$. A convolutional layer with a
 single filter looks like this: 
-$$\begin{aligned}\mathbf{x}_{\texttt{out}}= \mathbf{w} \star \mathbf{x}_{\texttt{in}}+ b & \quad\quad \triangleleft \quad \texttt{conv}:convolutional_filter
+$$\begin{aligned}\mathbf{x}_{\texttt{out}}= \mathbf{w} \star \mathbf{x}_{\texttt{in}}+ b & \quad\quad \triangleleft \quad \texttt{conv}
 \end{aligned}
-$${#eq-convolutional_neural_nets}
+$${#eq-convolutional_neural_nets-convolutional_filter}
 where $\mathbf{w}$ is the kernel and $b$ is the bias; $\theta = [\mathbf{w}, b]$ are the parameters of this layer. 
 
 :::{.column-margin}
@@ -96,6 +96,8 @@ As discussed in @sec-linear_image_filtering, convolution is just a special kind 
 ![Two equivalent visualizations of a convolutional layer.](figures/convolutional_neural_nets/conv_matrix_vs_net.png){width="100%" #fig-convolutional_neural_nets-conv_matrix_vs_net}
 
 We already saw that convolutional filters are useful for image processing in @sec-image_processing and @sec-linear_filters. In those sections, we introduced a variety of hand-designed filter banks with useful properties. A CNN instead *learns* an effective filter bank.
+
+
 ### Multi-Input, Multi-Output Convolutional Layers
 
 In image processing, convolution usually refers to filtering a 1-channel
@@ -141,8 +143,7 @@ array of measurements or features. An image does not have to be a
 conventional photograph.
 :::
 
- We call each of these channels a
-**feature map**, as it shows some features of the input, such as where
+We call each of these channels a **feature map**, as it shows some features of the input, such as where
 the vertical edges are.
 
 ##### Multi-Input, Multi-Output {#multi-input-multi-output .unnumbered}
@@ -181,7 +182,7 @@ also visualized in
     $\mathbf{w} \in \mathbb{R}^{C_{\texttt{in}}\times C_{\texttt{out}}\times K \times K}$,
     where $K$ is the (spatial, square) kernel size.
 
-![Multichannel convolution.](figures/convolutional_neural_networks/multichannel_conv_diagram.png){width="65%" #fig-convolutional_neural_networks-multichannel_conv}
+![Multichannel convolution.](figures/convolutional_neural_nets/multichannel_conv.png){width="65%" #fig-convolutional_neural_networks-multichannel_conv}
 
 It's important to get comfortable with the shapes of the data and
 parameter tensors that get processed through different neural
@@ -210,10 +211,7 @@ The answers are given in the footnote.[^1]
 
 ### Strided Convolution
 
-Convolutional layers, as defined previously, maintain the spatial
-resolution of the signal they process. However, commonly it is
-sufficient, or even desirable, to output a lower resolution. This can be
-achieved with strided convolution: 
+Convolutional layers, as defined previously, maintain the spatial resolution of the signal they process. However, commonly it is sufficient, or even desirable, to output a lower resolution. This can be achieved with strided convolution: 
 
 $$\begin{aligned}x_{\texttt{out}}[n,m] =
 b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] x_{\texttt{in}}[s_n n-k_1,s_m m-k_2] & \quad\quad \triangleleft \quad \texttt{conv}\quad \text{(strided)}
@@ -231,8 +229,7 @@ as needed.
 :::
 
 Commonly we use the same stride $s_n = s_m = s$. A convolution layer
-with these strides performs a mapping
-$\mathbb{R}^{M \times N} \rightarrow \mathbb{R}^{N/s_n \times M/s_m}$.
+with these strides performs a mapping $\mathbb{R}^{M \times N} \rightarrow \mathbb{R}^{N/s_n \times M/s_m}$.
 In order to make this mapping well-defined, we require that $N$ or $M$
 are divisible by $s_n$ and $s_m$, respectively; if they are not, we may
 may pad (or crop) the input until they are.
@@ -257,20 +254,16 @@ input image, and the result of strided convolution with the Laplacian
 kernel with strides 1, 2, and 4. The second row shows the magnitude of
 the discrete Fourier transforms (DFT).
 
+:::{#fig-convolutional_neural_nets-strided_conv_results}
+| Input  | Stride 1 | Stride 2 | Stride 4 |
+|--------|----------|----------|----------|
+| ![](figures/convolutional_neural_nets/aliasing_stride_0.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_1.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_2.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_4.jpg){width=100%} |
+| ![](figures/convolutional_neural_nets/aliasing_stride_0_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_1_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_2_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_4_DFT.jpg){width=100%} |
 
-:::{#fig-convolutional_neural_nets-strided_conv_results layout-ncol=4}
-![](figures/convolutional_neural_nets/aliasing_stride_0.jpg)
-![](figures/convolutional_neural_nets/aliasing_stride_1.jpg)
-![](figures/convolutional_neural_nets/aliasing_stride_2.jpg)
-![](figures/convolutional_neural_nets/aliasing_stride_4.jpg)
-
-![](figures/convolutional_neural_nets/aliasing_stride_0_DFT.jpg)
-![](figures/convolutional_neural_nets/aliasing_stride_1_DFT.jpg)
-![](figures/convolutional_neural_nets/aliasing_stride_2_DFT.jpg)
-![](figures/convolutional_neural_nets/aliasing_stride_4_DFT.jpg)
-
-Strided convolution results and their Fourier transforms.
+**Figure:** Strided convolution results and their Fourier transforms.
 :::
+
+
 
 The result with stride 1 looks fine, and it is the output we would
 expect. However, stride 2 starts showing some artifacts on the
@@ -468,9 +461,9 @@ convolution. Strided convolution convolves then subsamples; this
 upsampling layer instead dilates the signal then convolves. Starting
 with a blank image of zeros, $\mathbf{h} = \mathbf{0}$, we set:
 $$\begin{aligned}
-    h[ns_n, ms_m] &= x_{\texttt{in}}[n, m] & \quad\quad \triangleleft \quad \texttt{dilation}:dilation\\
+    h[ns_n, ms_m] &= x_{\texttt{in}}[n, m] & \quad\quad \triangleleft \quad \texttt{dilation}\\
     \mathbf{x}_{\texttt{out}}&= \mathbf{w} \star \mathbf{h} + b & \quad\quad \triangleleft \quad \texttt{conv}
-\end{aligned}$${#eq-convolutional_neural_nets}  
+\end{aligned}$${#eq-convolutional_neural_nets-dilation}  
 
 :::{.column-margin}
 This equation applies for all integer values of $n \in \{1,\ldots,N\}$ and $m \in \{1,\ldots,M\}$.
@@ -490,8 +483,7 @@ a nonlinear function of the local window.
 
 **Pooling layers** are downsampling layers that summarize the
 information in a patch using some aggregate statistic, such as the
-patch's mean value, called , or its max value, called , defined as
-follows: 
+patch's mean value, called **mean pooling**, or its max value, called **max pooling**, defined as follows: 
 
 $$\begin{aligned}    
 x_{\texttt{out}}[i]= \max_{i \in \mathcal{N}(i)} x_{\texttt{in}}[i]& \quad\quad \triangleleft \quad \texttt{max pooling}\\
@@ -559,7 +551,7 @@ standardization, etc.) and many different choices for the shape of the
 neighborhood, such as a square patch in the spatial dimensions, a set of
 channels, and so on. Each of these choices leads to different kinds of
 normalization filters with different names. One that is historically
-important but no longer frequently used is the , or **LRN**, filter that
+important but no longer frequently used is the **local response normalization**, or **LRN**, filter that
 was introduced in the AlexNet paper @krizhevsky2012imagenet. This filter
 has the following form: $$\begin{aligned}    x_{\texttt{out}}[c,n,m] = x_{\texttt{in}}[c,n,m] / \left( \gamma + \alpha \sum_{i=\max(1,c-l)}^{\max(C,c+l)} x_{\texttt{in}}[i,n,m]^2 \right) ^\beta \quad\quad \triangleleft \quad\texttt{LRN} :LRN
 \end{aligned}$${#eq-convolutional_neural_nets} where $\alpha$, $\beta$, $\gamma$, and $l$ are
@@ -570,7 +562,7 @@ the sum of squares of the activations in a window of adjacent
 Although local normalization is a common structure within the brain, it
 is not very frequently used in current neural networks, which more often
 use global normalization layers like batchnorm or layernorm (which we
-saw in @-neural_nets.
+saw in @sec-neural_nets.
 
 ## A Simple CNN Classifier {#sec-convolutional_neural_nets-simple_CNN}
 
@@ -701,14 +693,19 @@ The fully connected layer has learnt the weights: $$\mathbf{W} =
 What do we learn by analyzing how the trained network works? One
 interesting outcome is that can we predict how the network we defined
 before generalizes beyond the distribution of the training set, to
-**out-of-domain test samples**. 
+**out-of-domain test samples**.
+
+:::{.column-margin}
+Another term for out-of-domain is **out-of-distribution**.
+:::
+
 
 For instance, it seems natural to think that the network should still
 perform well in classifying whether the image contains vertical or
 horizontal structures even if they are not lines. We can test this
 hypothesis by generating images that match our idea of orientation. The
 following test images
-(@fig-ref-convolutional_neural_nets-oriented_bars_cnn_generalization)
+(@fig-convolutional_neural_nets-oriented_bars_cnn_generalization)
 contain different oriented structures but no lines, and still captures
 our notion of what should be the correct generalization of the behavior.
 
@@ -751,7 +748,7 @@ classification results for all the images
 
 ![Classification results on out-of-domain test images created by modulation.](figures/convolutional_neural_nets/oriented_bars_cnn_test_adversarial.png){width="100%" #fig-convolutional_neural_nets-oriented_bars_cnn_test_adversarial}
 
-We have just designed an manually! The question then could be as
+We have just designed an **adversarial example** manually! The question then could be as
 follows: If it is not detecting line orientations, what is it really
 detecting? Our analysis of the learned kernels had the answer.
 
@@ -789,7 +786,7 @@ AlexNet @krizhevsky2012imagenet.
 @fig-convolutional_neural_nets-alexnet_feature_maps shows what these
 look like after the first and second convolutional layer of the network:
 
-![A selection of feature maps and filters in AlexNet. The layer 1 filter with the orange dashed border slides over the input image and produces the layer 1 feature map with the orange dashed border. The layer 2 filter with the green dashed border slides over the layer 1 feature maps and produces the layer 2 feature map with the green dashed border.]
+![A selection of feature maps and filters in AlexNet. The layer 1 filter with the orange dashed border slides over the input image and produces the layer 1 feature map with the orange dashed border. The layer 2 filter with the green dashed border slides over the layer 1 feature maps and produces the layer 2 feature map with the green dashed border.](figures/convolutional_neural_nets/alexnet_feature_maps.png){width="100%" #fig-convolutional_neural_nets-alexnet_feature_maps}
 
 There are a few things to notice in this figure. First, the spatial
 resolution of the feature maps get lower as we go deeper into the
@@ -816,7 +813,7 @@ green the second, and blue the third. We show this for 5 layers in three common 
 ## Receptive Fields {#sec-convolutional_neural_nets-receptive_fields}
 
 **Receptive fields** are another important concept when working with
-CNNs. In @sec-challenge_of_vision need about history of
+CNNs. In @sec-challenge_of_vision we learned about history of
 receptive fields in neuroscience. As a reminder, the receptive field of
 a neuron is the region of the input signal that the neuron is sensitive
 to, i.e. its support. In multilayer perceptrons (MLPs, @sec-neural_nets, the receptive field of each neuron is
@@ -827,6 +824,10 @@ of inputs to the conv layer, determined by the kernel size of the filter that pr
 
 The receptive fields of two example neurons in a CNN are shown below
 (@fig-convolutional_neural_networks-RFs):
+
+
+![Receptive fields in a CNN. The black filled neurons are within the receptive fields of each labeled neuron (left: $x_2[3]$, right: $x_1[5]$).](figures/convolutional_neural_nets/RFs.png){width="100%" #fig-convolutional_neural_networks-RFs}
+
 
 Notice that the receptive field grows the deeper we go into the network. To understand why, consider a CNN without nonlinearities. Then the $l+1$-th layer is the composition of $l$ convolutional filters. As we
 saw in @sec-linear_image_filtering-properties_of_the_convolution composing filters results in a new filter with larger support (kernel
@@ -868,7 +869,7 @@ $$\begin{aligned}
 In @fig-convolutional_neural_networks-image_to_image_arch we visualize
 this CNN (showing only a 1D slice of this 2D CNN):
 
-![A 1D slice of a CNN that maps an image to an image. The input is the photo of size $3 \times N \times M$ and the output is a class probability map of size $K \times N \times M$; we visualize the corresponding label map on the right (per-pixel argmax over output probabilities). The blue arrows are the learnable parameters. The gray arrows share the weights of the blue arrows.](figures/convolutional_neural_networks/image_to_image_arch.png){width="100%" #fig-convolutional_neural_networks-image_to_image_arch}
+![A 1D slice of a CNN that maps an image to an image. The input is the photo of size $3 \times N \times M$ and the output is a class probability map of size $K \times N \times M$; we visualize the corresponding label map on the right (per-pixel argmax over output probabilities). The blue arrows are the learnable parameters. The gray arrows share the weights of the blue arrows.](figures/convolutional_neural_nets/image_to_image_arch.png){width="100%" #fig-convolutional_neural_networks-image_to_image_arch}
 
 :::{.column-margin}
 Notation reminder: nodes that are squares indicate
@@ -882,6 +883,10 @@ Although historically CNNs first became popular as image classifiers,
 this usage hides their real power. Rather than thinking of them as
 image-to-label architectures, think of them as *image-to-image*
 architectures.
+
+:::{.column-margin}
+More generally, CNNs are $\mathcal{X}$-to-$\mathcal{X}$ architectures for any domain $\mathcal{X}$ over which translation can be defined.
+:::
 
 ## CNN as a Sliding Filter
 
@@ -908,7 +913,7 @@ This is easiest to understand with a visual proof, which we give in
 nonlinearities are omitted for clarity):
 
 
-![A CNN is a non-linear filter. Edge colors indicate shared weights; two edges with the same color have the same weight. The colors demonstrate that the same function $F$ is applied to each patch of input nodes.](figures/convolutional_neural_networks/CNN_as_filter.png){width="100%" #fig-convolutional_neural_networks-CNN_as_filter}
+![A CNN is a non-linear filter. Edge colors indicate shared weights; two edges with the same color have the same weight. The colors demonstrate that the same function $F$ is applied to each patch of input nodes.](figures/convolutional_neural_nets/CNN_as_filter.png){width="100%" #fig-convolutional_neural_networks-CNN_as_filter}
 
 
 To understand this property, first imagine the CNN has no pointwise
@@ -1010,7 +1015,7 @@ together to make a variety of useful architectures.
 
 ### Encoder and Decoders
 
-In @sec-image_pyramids), we encountered image pyramids that
+In @sec-image_pyramids, we encountered image pyramids that
 include both an analysis pipeline, which converts an image into a
 multiscale representation of filter responses, and a synthesis pipeline,
 which reconstructs the image from the filter responses. Deep networks
@@ -1034,7 +1039,7 @@ patterns are shown in
 @fig-convolutional_neural_nets-encoders_and_decoders.
 
 
-![A convolutional encoder (top) and a convolutional decoder (bottom). The exact ordering of the operations (e.g., downsample before or after the non-linearity) is just an example and may vary in different encoder and decoder models. The $\mathbf{z}$ is a feature map or vector of neural activations, and is sometimes called an **embedding** (see @sec-representation_learning)](/figures/convolutional_neural_nets/encoders_and_decoders.){width="100%" #fig-convolutional_neural_nets-encoders_and_decoders}
+![A convolutional encoder (top) and a convolutional decoder (bottom). The exact ordering of the operations (e.g., downsample before or after the non-linearity) is just an example and may vary in different encoder and decoder models. The $\mathbf{z}$ is a feature map or vector of neural activations, and is sometimes called an **embedding** (see @sec-representation_learning)](/figures/convolutional_neural_nets/encoders_and_decoders.png){width="100%" #fig-convolutional_neural_nets-encoders_and_decoders}
 
 One powerful thing you can do with encoders and decoders is to put them
 together, forming an **encoder-decoder**. Such an architecture first
@@ -1052,7 +1057,7 @@ benefits of compressing a signal. A schematic of the encoder-decoder
 architecture is shown in
 @fig-convolutional_neural_nets-encoder_decoders.
 
-![Encoder-decoder architecture. In this example, the input is an image and the output is a segmentation map.](figures/convolutional_neural_nets/encoder_decoders.png){width="100%" #fig-convolutional_neural_nets-encoder_decoders}
+![Encoder-decoder architecture. In this example, the input is an image and the output is a segmentation map.](figures/convolutional_neural_nets/encoder_decoder_arch.png){width="100%" #fig-convolutional_neural_nets-encoder_decoders}
 
 ### U-Nets {#sec-convolutional_neural_nets-unet}
 
@@ -1090,12 +1095,18 @@ The main difference is that the U-Net has *learned filters* and
 ### ResNets
 
 Another popular architecture that uses skip connections is called
-**Residual Networks** or **ResNets** @he2016deep. In the
-context of ResNets, skip connections are called . This kind of skip
-connection is *added* to the output of a block of layers $F$:
+**Residual Networks** or **ResNets** @he2016deep. 
+
+:::{.column-margin}
+See also Highway Networks @srivastava2015highway, a related architecture that uses a form of skip connection but controlled by multiplicative gates.
+:::
+
+In the context of ResNets, skip connections are called **residual connections**. This kind of skip connection is *added* to the output of a block of layers $F$:
 $$\begin{aligned}
     \mathbf{x}_{\texttt{out}}= F(\mathbf{x}_{\texttt{in}}) + \mathbf{x}_{\texttt{in}}\quad\quad \triangleleft \quad \texttt{residual block}
-\end{aligned}$$ In a **residual block** like this, you can think of $F$
+\end{aligned}$$ 
+
+In a **residual block** like this, you can think of $F$
 as a *residual* that additively perturbs $\mathbf{x}_{\texttt{in}}$ to
 transform it into an improved $\mathbf{x}_{\texttt{out}}$. If
 $\mathbf{x}_{\texttt{out}}$ does not have the same dimensionality as
