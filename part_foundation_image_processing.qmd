@@ -1,12 +1,12 @@
-# Foundations of Image Processing {#sec-image_processing}
+# Foundations of Image Processing {#part-image_processing}
 
 Many of the techniques in computer vision are rooted in signal processing. The goal of this collection of chapters is to introduce the most important signal processing concepts and tools that any computer vision researcher should have in their toolbox. We will present those concepts from the perspective of images while keeping in mind that the goal of computer vision is to build representations that are useful for downstream tasks. We do not assume any prior knowledge about signal processing.
 
 ## Outline
 
-- **Chapter {@sec-linear_image_filtering}** introduces signal processing, linear image filtering, and convolutions.
+- **Chapter @sec-linear_image_filtering** introduces signal processing, linear image filtering, and convolutions.
 
-- **Chapter {@sec-fourier_analysis}** describes the Fourier transform and some applications.
+- **Chapter @sec-fourier_analysis** describes the Fourier transform and some applications.
 
 ## Notation 
 

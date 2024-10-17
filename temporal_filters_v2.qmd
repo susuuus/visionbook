@@ -1,4 +1,4 @@
-# Temporal filters {#chapter-temporal_filters}
+# Temporal filters {#sec-temporal_filters}
 ## Introduction
 
 Although adding time might seem like a trivial extension from 2D signals to 3D signals, and in many aspects it is, there are some properties of how the world behaves that make sequences different from arbitrary 3D signals. In 2D images, most objects are bounded, occupying compact and well-defined image regions. However, in sequences, objects do not appear and disappear instantaneously unless they get occluded behind other objects or enter or exit the scene through doors or the image boundaries. So, the behavior of objects across time $t$ is very different than their behavior across space $n,m$. In time, objects move and deform, defining continuous trajectories that have no beginning and never end.

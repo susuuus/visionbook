@@ -1,4 +1,4 @@
-# Image Sampling and Aliasing {#chapter-sampling}
+# Image Sampling and Aliasing {#sec-sampling}
 
 ## Introduction
 

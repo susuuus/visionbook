@@ -1,4 +1,4 @@
-# Linear Filters {#sec-linear-filters}
+# Linear Filters {#sec-linear_filters}
 
 In this set of chapters, we will discuss a wide family of linear filters. These filters lay the foundation for most representations for images and sequences. Even learning-based representations end up learning filters that are similar to those we will discuss here.
 

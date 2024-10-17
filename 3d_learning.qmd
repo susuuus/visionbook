@@ -393,8 +393,7 @@ the motion of the camera alone.
 
 Not all camera motions provide enough information to learn about the 3D
 world structure. As we discussed in chapter
-[\[chapter-homography\]](#sec-homography){reference-type="ref"
-reference="chapter-homography"}, if all the videos contain only
+@sec-homography, if all the videos contain only
 sequences captured by a rotating camera, the points are related by a
 homography regardless of the 3D structure. Therefore, to learn depth
 from single images, we need to have complex camera motions inside
