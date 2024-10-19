@@ -308,7 +308,7 @@ their cross-product. Finally, the horizon line is the line that passes
 through both points that can be computed as the cross-product of the
 vanishing points in homogeneous coordinates.
 
-![](figures/imaging_geometry/horizon_line.png){width=".9"}
+![](figures/imaging_geometry/horizon_line.png){width=".9" #fig-horizon_line_cross_products}
 
 ### Detecting Vanishing Points
 
@@ -322,10 +322,7 @@ lines in the scene and finding their intersection.
 
 Vanishing points can be extracted automatically from images by first
 detecting image edges and their orientations (like we did in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"}) and then using RANSAC (section
-[\[sec-RANSAC\]](#sec-RANSAC){reference-type="ref"
-reference="sec-RANSAC"}) to group the edges: every pair of edges will
+@sec-simplesystem) and then using RANSAC (@sec-RANSAC) to group the edges: every pair of edges will
 vote for a vanishing point and the point with the largest support will
 be considered a vanishing point.
 
@@ -366,7 +363,10 @@ $$CR \left( \mathbf{P}_1,\mathbf{P}_2,\mathbf{P}_3,\mathbf{P}_4 \right)
 where $\left| \mathbf{P}_i -\mathbf{P}_j \right|$ is the euclidean
 distance between points $\mathbf{P}_i$ and $\mathbf{P}_j$, using
 heterogeneous coordinates.
-![](figures/single_view_3d/4_colinear_points.png){width=".25"}The cross-ratio is considered the most important projective invariant.
+
+![](figures/single_view_3d/4_colinear_points.png){width=".25"}
+
+The cross-ratio is considered the most important projective invariant.
 Two sets of points $\mathbf{P}$ and $\mathbf{Q}$ related by a projective
 transformation, as shown in @fig-cross_ratio_description, have the same
 cross-ratio (regardless of the choice of origin $\mathbf{O}$ or scale
@@ -479,13 +479,12 @@ As J. J. Gibson pointed out, the ground plane is very
 useful for all kinds of 3D scene measurements.
 :::
 
- In order to
+In order to
 use the cross-ratio invariant we need two sets of four colinear points
 related by a projective geometry. @fig-office_measuring_desk_sketch
 shows a sketch of the setup we have in @fig-office_measuring_desk.
 
-![Projection of desk height onto the bookshelf. We start with the bottom and top image coordinates of points along vertical edges of the bookshelf: 
-$\mathbf{t](figures/single_view_3d/office_measuring_desk.png){width="85%" #fig-office_measuring_desk}
+![Projection of desk height onto the bookshelf. We start with the bottom and top image coordinates of points along vertical edges of the bookshelf: $\mathbf{t}$](figures/single_view_3d/office_measuring_desk.png){width="85%" #fig-office_measuring_desk}
 
 In the image plane, we have the four image points $\mathbf{t}_b$,
 $\mathbf{b}$, $\mathbf{g}_b$ and $\mathbf{v}_3$. Those four 2D image
@@ -493,7 +492,7 @@ points correspond to the 3D locations given by the top of the bookshelf,
 desk height, ground and infinity (which is the location of the vertical
 vanishing point in 3D).
 
-![Sketch of the setting from \fig{\ref{fig-office_measuring_desk](figures/single_view_3d/office_measuring_desk_sketch.png){width="70%" #fig-office_measuring_desk_sketch}
+![Sketch of the setting from @fig-office_measuring_desk](figures/single_view_3d/office_measuring_desk_sketch.png){width="70%" #fig-office_measuring_desk_sketch}
 
 The rest of calculations requires computing distances between points,
 which only works when using heterogeneous coordinates (or homogeneous
@@ -606,11 +605,11 @@ horizon line of a reference plane (i.e. the ground plane), the position
 of the orthogonal vanishing point and the real measure of one object in
 the scene.
 
-As shown in @fig-axis_calibration_procedurea we can use the cross-ratio
+As shown in @fig-axis_calibration_procedure (a) we can use the cross-ratio
 to estimate the location of the points $Y= k \alpha_X$ where $\alpha_X$
-is an arbitrary constant as shown in @fig-axis_calibration_procedureb,
+is an arbitrary constant as shown in @fig-axis_calibration_procedure (b),
 and the corresponding image location $r$, for $k=1$, is chosen
-arbitrarily as shown in @fig-axis_calibration_procedurea. Due to
+arbitrarily as shown in @fig-axis_calibration_procedure (a). Due to
 perspective projection, the image projection of the point
 $Y= k \alpha_X$ will not be evenly spaced in the image. In this
 particular example we chose the orientation of the world axis in image
@@ -754,14 +753,11 @@ get the following solution for $\mathbf{K}$: $$\mathbf{K} =
 
 We can now compare this result with the one we obtained when we (1) used
 the physical camera parameters (section
-[\[sec-simple_unreliable_calibration_method\]](#sec-simple_unreliable_calibration_method){reference-type="ref"
-reference="sec-simple_unreliable_calibration_method"}); (2) used a
+@sec-simple_unreliable_calibration_method); (2) used a
 calibration pattern (section
-[\[sec-simple_unreliable_calibration_method\]](#sec-simple_unreliable_calibration_method){reference-type="ref"
-reference="sec-simple_unreliable_calibration_method"}); and (3) used a
+@sec-simple_unreliable_calibration_metho); and (3) used a
 collection of 3D points and the corresponding image locations (section
-[\[sec-a_toy_example\]](#sec-a_toy_example){reference-type="ref"
-reference="sec-a_toy_example"}). We can see that in all cases we get
+@sec-a_toy_example). We can see that in all cases we get
 similar results, although, not identical.
 
 ## Concluding Remarks
@@ -772,9 +768,7 @@ cross-ratio) to estimate 3D scene properties from a single image.
 However, most of the steps required some manual intervention. All of
 those steps can be performed in a fully automatic way by training
 detectors to localize the full extend of an object as we will discuss in
-chapter
-[\[chapter-object_recognition\]](#sec-object_recognition){reference-type="ref"
-reference="chapter-object_recognition"} and detecting points of contact
+@sec-object_recognition and detecting points of contact
 between objects.
 
 One of the key insights from this chapter is that a single images

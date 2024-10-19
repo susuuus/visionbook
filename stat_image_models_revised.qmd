@@ -30,9 +30,7 @@ worlds that retain some of the important properties of natural images
 while allowing the development of analytic tools to characterize them.
 In the last decade, researchers have developed large neural networks
 that learned generative models of images and we discuss these models
-more in depth in chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}. In this chapter we will focus on
+more in depth in @sec-generative_models. In this chapter we will focus on
 simpler image models as they will serve as motivation for some of the
 concepts that will be used later when describing generative models.
 
@@ -232,9 +230,7 @@ The dead leaves model produces very simple images that do not look
 realistic, but it is useful in explaining the distribution of albedos in
 natural images. This model is used by the Retinex algorithm @Land83 to
 separate an image into illumination and albedo variations, as we saw in
-chapter
-[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
-reference="chapter-image_derivatives"}.
+@sec-image_derivatives.
 
 ### The Power Spectrum of Natural Images
 
@@ -277,9 +273,8 @@ pixel is independently sampled from a uniform distribution. The
 frequency $(0,0)$ lies in the middle of each FT. From the images in the
 middle row, we can see that the largest amplitudes concentrate in the
 low spatial frequencies for the natural images (we already discussed
-this in chapter
-[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
-reference="chapter-fourier_analysis"}). However, the random image has
+this in 
+@sec-fourier_analysis. However, the random image has
 similar spectral content at all frequencies. In order to better
 appreciate the particular decay in the spectral amplitude with
 frequency, we can express the FT using polar coordinates, then calculate
@@ -288,7 +283,7 @@ angular directions. The result is shown in the bottom row of
 @fig-FT_angular_averages. The plot also shows three additional curves
 corresponding to $1/w$, $1/w^{1.5}$, and $1/w^2$. The plots are
 normalized to start at 1. These images have size
-512$\times$`<!-- -->`{=html}512. The frequency ranges used for the plot
+512$\times$512. The frequency ranges used for the plot
 are $w \in [20,256]$. As we can see from the middle row, there are
 differences on how spectral content is organized across orientations,
 but the decay along the radial frequency roughly follows a $1/w^{1.5}$
@@ -321,9 +316,7 @@ the Fourier transform. The eigenvalues of the diagonal matrix correspond
 to the power (squared magnitude) of the frequency components of the
 Fourier transform. This is, the matrix ${\bf C}$ can be written as
 ${\bf C} = {\bf F}{\bf D}{\bf F}^\mathsf{T}$. Where ${\bf F}$ is the
-matrix that contains the Fourier basis, as seen in chapter
-[\[chapter-fourier_analysis\]](#sec-fourier_analysis){reference-type="ref"
-reference="chapter-fourier_analysis"}, and the diagonal matrix ${\bf D}$
+matrix that contains the Fourier basis, as seen in @sec-fourier_analysis, and the diagonal matrix ${\bf D}$
 has, along the diagonal, the values $1/ w  ^\alpha$ for all radial
 frequencies $w$. The value of $\alpha$ can be set to a fix value of 1.5.
 
@@ -625,7 +618,7 @@ that this implements a **coring function** @Simoncelli96: if a
 coefficient value is observed near zero, it is set to zero, based on the
 very high prior probability of zero coefficient values.
 
-![Input/output coring curve for maximum posterior denoising for the example of \fig{\ref{fig-waveletBayes](figures/statistical_image_models/waveletlut.png){width="40%" #fig-bayeslut}
+![Input/output coring curve for maximum posterior denoising for the example of @fig-waveletBayes](figures/statistical_image_models/waveletlut.png){width="40%" #fig-bayeslut}
 
 For a more detailed analysis and examples of denoising using the
 Laplacian image prior, we refer the reader to the work of Eero
@@ -640,16 +633,12 @@ case of the wavelet image prior.
 
 A powerful class of image models is known as **Markov random field**
 (MRF) models. They have a precise mathematical form, which we will
-describe later, in chapter
-[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
-reference="chapter-probabilistic_graphical_models"}. For now, we present
+describe later, in @sec-probabilistic_graphical_models. For now, we present
 the intuition for these models: if the values of enough pixels
 surrounding a given pixel are specified, then the probability
 distribution of the given pixel is independent of the other pixels in
 the image. To fit and sample from the MRF structure requires the
-mathematical tools of graphical models, to be introduced in chapter
-[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
-reference="chapter-probabilistic_graphical_models"}. As we will see in
+mathematical tools of graphical models, to be introduced in @sec-probabilistic_graphical_models. As we will see in
 the following chapter, Efros and Leung @Efros99 introduced an algorithm
 for texture synthesis that exploits intuitions about the Markov
 structure of images to synthesize textures that are visually compelling.
@@ -657,9 +646,7 @@ The intuition of the Efros and Leung texture generation model is that if
 you condition on a large enough region of nearby pixels around a center
 pixel, that effectively determines the value of the central pixel. We
 will study this algorithm in more detail in the next chapter devoted to
-texture analysis and synthesis (chapter
-[\[sec-textures\]](#chap-textures){reference-type="ref"
-reference="sec-textures"}). We will focus here on a similar algorithm
+texture analysis and synthesis @sec-textures. We will focus here on a similar algorithm
 for the problem of image denoising.
 
 ### Denoising Model (Nonlocal Means)
@@ -677,16 +664,14 @@ over the image sum to one, that is $\sum_{kl} w_{n,m}[k,l] = 1$.
 
 @fig-nlm1 shows the weighting functions for two images. The parameter
 $h$ is typically set to $10 \sigma$, where $\sigma$ is the estimated
-image noise standard deviation. Within figures
-[\[fig-nlm1\]](#fig-nlm1){reference-type="ref" reference="fig-nlm1"}(a
+image noise standard deviation. Within @fig-nlm1 (a
 and b) at left is a grayscale image where the center position of
 interest to be denoised is marked with a white star. The right side of
 the figures shows for some value of $h$ in equation
-([\[fig-mask\]](#fig-mask){reference-type="ref" reference="fig-mask"})
+@fig-mask
 the weighting function $w_{n,m}[k,l]$ indicating which pixels are
 averaged together to yield the nonlocal mean value placed at the starred
-location in the denoised image. Note, for both figures
-[\[fig-nlm1\]](#fig-nlm1){reference-type="ref" reference="fig-nlm1"}(a
+location in the denoised image. Note, for both @fig-nlm1 (a
 and b) the sampling at image regions with similar local structure as the
 image position to be denoised.
 
@@ -725,9 +710,7 @@ this chapter, only help in reducing a bit the space of possible images.
 
 ![The space of natural images is just very small part of the space of all possible images. In the case of color images with $32\times32$ pixels, most of the space is filled with images that look like noise.](figures/statistical_image_models/spaces_real_images_and_models_final.png){width="100%" #fig-spaces_real_images_final}
 
-We will see stronger generative image models in chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}.
+We will see stronger generative image models in @sec-generative_models.
 
 [^1]: Additive stationary noise is noise with statistical properties
     independent of location that is added to an observation. Check

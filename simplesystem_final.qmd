@@ -5,9 +5,7 @@
 The goal of this last chapter is to embrace the optimism of the 2020s,
 when we think that large-scale pretrained models can do it all, and use
 a pretrained end-to-end vision system in order to solve the simple
-visual world that we introduced in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"}.
+visual world that we introduced in @sec-simplesystem.
 
 In 2020, a number of big pretrained models (DALL-E @dalle1, GPT, chatGPT
 @openai2023gpt4, AutoPilot) that were solving a wide set of tasks
@@ -24,17 +22,14 @@ vision in the 2020s naively optimistic like in the 1960s? It does not
 seem to be the case, but only time will tell.
 
 In this chapter we will revisit the simple-world problem we analyzed in
-chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"} with a hand-crafted approach by
+@sec-simplesystem with a hand-crafted approach by
 looking for an appropriate high-performing pretrained model and applying
 it out-of-the-box to solve our task.
 
 ## A Simple Neural Network
 
 When we introduced the simple world in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"}, our goal was to recover the
+@sec-simplesystem, our goal was to recover the
 three-dimensional (3D) structure of the scene from a single image
 (@fig-simplesystem_revisited_img1).
 
@@ -84,8 +79,7 @@ world coordinates.
 MiDaS returns disparity values, up to an unknown constant ($d_0$), but
 what we need are world coordinates ($X,Y,Z$) for each pixel. To perform
 this transformation, we will use what we learned in chapter
-[\[sec-camera_parameters\]](#sec-camera_parameters){reference-type="ref"
-reference="sec-camera_parameters"}. We will need to know the intrinsic
+@sec-camera_parameters. We will need to know the intrinsic
 and extrinsic camera parameters and also decide the value of $d_0$.
 
 To translate the returned disparity for a given pixel

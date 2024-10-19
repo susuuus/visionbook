@@ -165,7 +165,7 @@ observed product of illumination and reflectance seen in the dress
 image.
 
 :::{.column-margin}
-Did you perceive the dress, \fig{\ref{fig-thedress}}, to be black on blue, or gold on white?  Can you make the perception change?
+Did you perceive the dress, @fig-thedress, to be black on blue, or gold on white?  Can you make the perception change?
 :::
 
 

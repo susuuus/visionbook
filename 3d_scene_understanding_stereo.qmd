@@ -188,17 +188,19 @@ geometry shown in @fig-stereo reveals the essence of depth estimation
 from the two cameras. Let's assume that there is one point,
 $\mathbf{P}$, in 3D space and we know the locations in which it projects
 on each camera, $[x_L,y_L]^\mathsf{T}$ for the left camera and
-$[x_R,y_R]^\mathsf{T}$ for the right camera, as shown in @fig-stereoa.
+$[x_R,y_R]^\mathsf{T}$ for the right camera, as shown in @fig-stereo a.
 Because the two cameras are aligned horizontally, the $y$-coordinates
 for the projection in both cameras will be equal, $y_L=y_R$. Therefore,
-we can look at the top view of the setting as shown in @fig-stereob. We
+we can look at the top view of the setting as shown in @fig-stereo b. We
 consider the depth estimate within a single image row.
 
-![Simple stereo. (a) Two cameras, of identical focal length, $f$, and separated by an offset, $T$, image the point $P$ onto the two-dimensional (2D) points $[x_L,y_L]^\mathsf{T}$ and $[x_R,y_R]^\mathsf{T}$ at each camera.  (b) The similarity of the two triangles in leads to \eqn{\ref{eq-depthFromDisparity](figures/3d_scene_understanding/triangularization_stereo.png){width="100%" #fig-stereo}
+![Simple stereo. (a) Two cameras, of identical focal length, $f$, and separated by an offset, $T$, image the point $P$ onto the two-dimensional (2D) points $[x_L,y_L]^\mathsf{T}$ and $[x_R,y_R]^\mathsf{T}$ at each camera.  (b) The similarity of the two triangles in leads to @eq-depthFromDisparity](figures/3d_scene_understanding/triangularization_stereo.png){width="100%" #fig-stereo}
 
 The point $\mathbf{P}$, for which we want to estimate the depth, $Z$,
 appears in the left camera at position $x_L$ and in the right camera at
-position $x_R$.:::{.column-margin}
+position $x_R$.
+
+:::{.column-margin}
 To distinguish 2D image coordinates from 3D world
 coordinates, for this chapter, we will denote 2D image coordinates by
 lowercase letters, and 3D world coordinates by uppercase letters.
@@ -231,7 +233,7 @@ requires solving the **stereo matching** problem.
 
 First, let's examine the task visually. @fig-stereomatch shows two
 images of an office, taken approximately 1 m apart. The locations of
-several objects in @fig-stereomatcha are shown in @fig-stereomatchb,
+several objects in @fig-stereomatch (a) are shown in @fig-stereomatch (b),
 revealing some of the disparities that we seek to measure automatically.
 As the reader can appreciate by comparing the stereo images by eye, one
 can compute the disparity by first localizing a feature point in one
@@ -240,7 +242,7 @@ on the visual similarity of the local image region. To do this
 automatically is the crux of the stereo problem.
 
   --------------------------------------------------------
-   ![Two cameras, displaced from each other laterally, photograph the same scene, resulting in images (a) and (b).  Colored rectangles show some identifiable features in image (a), and where those features appear in image (b).  Arrows show the corresponding displacements, which reveal depth through \eqn{\ref{eq-depthFromDisparity](figures/stereo/officeLeft.jpg){width="47.5%" #fig-stereomatch}
+   ![Two cameras, displaced from each other laterally, photograph the same scene, resulting in images (a) and (b).  Colored rectangles show some identifiable features in image (a), and where those features appear in image (b).  Arrows show the corresponding displacements, which reveal depth through @eq-depthFromDisparity](figures/stereo/officeLeft.jpg){width="47.5%" #fig-stereomatch}
                            \(a\)
   --------------------------------------------------------
 
@@ -253,10 +255,10 @@ A naive algorithm for finding the disparity of any pixel in the left
 image is to search for a pixel of the same intensity in the
 corresponding row of the right image. @fig-stereolamp, from @Hosni2013,
 shows why that naive algorithm won't work and why this problem is hard.
-@fig-stereolampa shows the intensities of one row of the right-eye
+@fig-stereolamp (a) shows the intensities of one row of the right-eye
 image of a stereo pair. The squared difference of the intensity
 differences from offset versions of the same row in the rectified
-left-eye image of the stereo pair is shown in @fig-stereolampb, for a
+left-eye image of the stereo pair is shown in @fig-stereolamp (b), for a
 range of disparity offsets, plotted vertically, in a configuration known
 as the **disparity space image** @Scharstein2002. The disparity
 corresponding to the minimum squared error matches are plotted in red.
@@ -276,7 +278,7 @@ as labeled in the dataset @Scharstein2002.
 
 ![Issues with intensity-based stereo matching.
 %(a) One line of one image, (c), of stereo pair. (b) Intensity matching error for different disparities, plotted vertically, as a function of horizontal position.  Red shows disparities of best intensity match. (d) Smoothed matching errors, with best matches shown in red, and resulting depth image, (e).  (f) Ground truth matches and depth (g).  
-Dataset from \cite{Scharstein2002](figures/stereo/stereolamp.jpg){width="100%" #fig-stereolamp}
+Dataset from @Scharstein2002](figures/stereo/stereolamp.jpg){width="100%" #fig-stereolamp}
 
 The task of finding disparity at each point is often broken into two
 parts: (1) finding features, and matching the features across images,
@@ -287,8 +289,7 @@ performed using filtering methods.
 
 We will describe next a classical method to find key points and extract
 image descriptors to find image correspondences. In chapter
-[\[chapter-3D_multiview\]](#sec-3D_multiview){reference-type="ref"
-reference="chapter-3D_multiview"} we will describe other learning-based
+@sec-3D_multiview we will describe other learning-based
 approaches.
 
 #### Finding image features {#sec-finding_image_features}
@@ -306,8 +307,7 @@ image derivatives. Therefore, we will write an image as a continuous
 function on $x$ and $y$. The compute the final quantities in practice we
 will approximate the derivatives using their discrete approximations as
 discussed in chapter
-[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
-reference="chapter-image_derivatives"}. Let the input image be
+@sec-image_derivatives. Let the input image be
 $\ell(x,y)$, and let the small translation be $\Delta x$ in $x$ and
 $\Delta y$ in $y$. Then, the squared intensity difference,
 $E(\Delta x, \Delta y)$, induced by that small translation, summed over
@@ -348,13 +348,12 @@ $\lambda_{\mbox{min}} > \lambda_c$, for some threshold $\lambda_c$. The
 Harris corner detector has been widely used for identifying features to
 match across images, although they were later supplanted by the
 scale-invariant feature transform (SIFT) @Lowe04, based on maxima over a
-scale of Laplacian filter outputs. Figures
-[\[fig-stereopoints\]](#fig-stereopoints){reference-type="ref"
-reference="fig-stereopoints"}(a and b) show the result of the Harris
+scale of Laplacian filter outputs. 
+@fig-stereopoints (a and b) show the result of the Harris
 feature detector to the images of @fig-stereomatch.
 
   ------------------------------------------------------
-   ![The feature-based stereo approach, illustrated for the stereo pair of \fig{\ref{fig-stereomatch](figures/stereo/pointsLeft.jpg){width="31%" #fig-stereopoints}
+   ![The feature-based stereo approach, illustrated for the stereo pair of @fig-stereomatch](figures/stereo/pointsLeft.jpg){width="31%" #fig-stereopoints}
                           \(a\)
   ------------------------------------------------------
 
@@ -368,14 +367,11 @@ feature detector to the images of @fig-stereomatch.
                            \(c\)
   -------------------------------------------------------
 
-Figures [\[fig-stereopoints\]](#fig-stereopoints){reference-type="ref"
-reference="fig-stereopoints"}(a and b) reveal the challenges of the
+@fig-stereopoints (a and b) reveal the challenges of the
 feature matching task: (1) not every feature is marked across both
 images, and (2) we need to decide which pairs of image features go
 together. Feature points are found, independently, in each of the stereo
-pair images (figures
-[\[fig-stereopoints\]](#fig-stereopoints){reference-type="ref"
-reference="fig-stereopoints"}\[a and b\]). Detected Harris feature
+pair images (@fig-stereopoints [a and b]). Detected Harris feature
 points @Harris88 are shown as green dots. It is especially visible
 within the marked ellipses that not the same set of feature points is
 marked in each image. @fig-stereopointsc shows a depth image resulting
@@ -414,9 +410,7 @@ robust to small image translations @Freeman98c, @Lowe04.
 
 Methods to interpolate depth between the depths of matched points
 include probabilistic methods such as belief propagation, discussed in
-chapter
-[\[chapter-probabilistic_graphical_models\]](#sec-probabilistic_graphical_models){reference-type="ref"
-reference="chapter-probabilistic_graphical_models"}. Under assumptions
+@sec-probabilistic_graphical_models. Under assumptions
 about the local spatial relationships between depth values, optimal
 shapes can be inferred provided the spatial structure over which
 inference is performed is a chain or a tree. Note that @Hirschmuller2007
@@ -665,9 +659,7 @@ each camera are coplanar, and if the pixel rows are colinear across the
 two cameras, then the epipolar lines will be along image scanlines,
 simplifying the stereo search.
 
-Using the homography transformations (chapter
-[\[chapter-homography\]](#sec-homography){reference-type="ref"
-reference="chapter-homography"}), we can warp observed stereo camera
+Using the homography transformations (@sec-homography), we can warp observed stereo camera
 images taken under general conditions to synthesize the images that
 would have been recorded had the cameras been aligned to yield epipolar
 lines along scan rows.
@@ -684,9 +676,7 @@ other. Third, uniformly scale one camera's image to be the same size as
 to the other, if necessary. The resulting image pair will thus satisfy
 the two requirements above for image rectification. Image rectification
 uses image warping with bilinear (or other) interpolation as described
-in section
-[\[sec-bilinearinterpolation\]](#sec-bilinearinterpolation){reference-type="ref"
-reference="sec-bilinearinterpolation"}.
+in @sec-bilinearinterpolation.
 
 Other algorithms are optimized to minimize image distortions @Zhang2003
 and may give better performance for stereo algorithms. We assume camera
@@ -701,7 +691,7 @@ As is the case for most other vision tasks, neural network approaches
 now dominate stereo methods. The two stages of a stereo algorithm,
 matching and filtering, can be implemented separately by neural networks
 @Zbontar2015, or together in a single, end-to-end optimization
-(@Zhang2019GANet, @Chang2018, @Mayer2016, @Kendall2017.
+@Zhang2019GANet, @Chang2018, @Mayer2016, @Kendall2017.
 
 ### Output Representation
 
@@ -815,8 +805,7 @@ geometry methods to reconstruct the 3D scene.
 Stereo matching is often also formulated as a problem of estimating the
 image motion between two views captured at different locations. In
 chapter
-[\[chapter-motion_estimation\]](#sec-motion_estimation){reference-type="ref"
-reference="chapter-motion_estimation"} we will discuss motion estimation
+@sec-motion_estimation we will discuss motion estimation
 algorithms.
 
 We have only provided a short introduction to stereo vision, for an in

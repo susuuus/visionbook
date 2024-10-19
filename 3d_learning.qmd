@@ -320,9 +320,8 @@ the depth map, and the relative camera motion matrices and outputs an
 image: $$\boldsymbol\ell_{1 \rightarrow 2} = 
 f_3(\boldsymbol\ell_1, \mathbf{z}, \mathbf{R}, \mathbf{T})$$ The
 function $f_3$ is built with the tools we have studied in the previous
-chapters. In section
-[\[sect:image_warping\]](#sect:image_warping){reference-type="ref"
-reference="sect:image_warping"} we described the procedure for warping
+chapters. In section @sec-image_wrapping
+we described the procedure for warping
 an image using backward warping. Here we will use the same procedure.
 
 The goal is to warp a **reference frame** into a **target frame**. We

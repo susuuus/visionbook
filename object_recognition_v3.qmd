@@ -86,8 +86,7 @@ However, perception is not completely invariant to those variables.
 
 One well studied property of the human visual system is its invariance
 to image and 3D rotations. As we discussed in chapter
-[\[chapter-bias_and_shift\]](#sec-bias_and_shift){reference-type="ref"
-reference="chapter-bias_and_shift"}, studies in human visual perception
+@sec-bias_and_shift, studies in human visual perception
 have shown that objects are recognized faster when they appear in
 canonical poses. In a landmark study, Roger N. Shepard and Jaqueline
 Metzler @Shepard1971aa showed to participants pairs of drawings of
@@ -208,8 +207,7 @@ The goal is to answer the following, seemingly simple, question: Is
 object class $c$ present anywhere in the image ${\bf x}$? We also
 covered image classification as a case study of machine learning in
 section
-[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning-image_classification"}. Even though we
+@sec-intro_to_learning-image_classification. Even though we
 will use the same words now, and even the same sentences, you should
 read them in a different way. The same words will mean something
 different. Before, we emphasized the problem of learning; now we are
@@ -261,7 +259,10 @@ One common assumption is that only one class, among the $K$ possible
 classes, is present in the image. This is typical in settings where most
 of the images contain a single large object. Multiclass classification
 with exclusive classes results is given in the following constraint:
-$$\sum_{c=1}^K \hat{y}_c=1 :sum_to_one_constraint$${#eq-object_recognition}where $0>\hat{y}_c>1$. In the toy example with three classes shown
+$$\sum_{c=1}^K \hat{y}_c=1 
+$${#eq-object_recognition-sum_to_one_constraint}
+
+where $0>\hat{y}_c>1$. In the toy example with three classes shown
 previously, the valid solutions for
 $\hat{\mathbf{y}}=[\hat{y}_1, \hat{y}_2, \hat{y}_3]^\mathsf{T}$ are
 constrained to lie within a **simplex**.
@@ -280,8 +281,7 @@ using a neural net, the vector $\hat{\mathbf{y}}$ is usually computed as
 the output of a softmax layer.
 
 This yields the softmax regression model we saw previously in section
-[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning-image_classification"}. Given the
+@sec-intro_to_learning-image_classification. Given the
 constraint of @eq-object_recognition-sum_to_one_constraint, the output
 of $f_{\theta}$ can be interpreted as a probability mass function over
 $K$ classes: $$\begin{aligned}
@@ -341,13 +341,10 @@ the first product loops over all $T$ training examples while the second
 product loops over all the classes $K$. We want to find the parameters
 $\theta$ that maximize the likelihood of the ground truth labels for
 whole training image. As we have seen in chapter
-[\[chapter-convolutional_neural_nets\]](#sec-convolutional_neural_nets){reference-type="ref"
-reference="chapter-convolutional_neural_nets"}, maximizing the
+@sec-convolutional_neural_nets, maximizing the
 likelihood corresponds to minimizing the **cross-entropy loss** (which
 we get by just taking the negative log of the equation
-\[[\[eqn:object_recognition:classification_likelihood\]](#eqn:object_recognition:classification_likelihood){reference-type="ref"
-reference="eqn:object_recognition:classification_likelihood"}\]),
-resulting in a total classification loss:
+@eq-object_recognition-classification_likelihood, resulting in a total classification loss:
 $$\mathcal{L}_{cls}(\hat{\mathbf{y}},\mathbf{y})
      = -\sum_{t=1}^{T} \sum_{c=1}^{K} y^{(t)}_c \log(\hat{y}^{(t)}_c)$$
 
@@ -425,9 +422,8 @@ The elements of the confusion matrix are: $$C_{i,j} = 100 \frac{
     }$$ where $C_{i,j}$ measures the percentage of times that true class
 $i$ is classified as class $j$.
 
-In this toy example (table
-[\[table:confusion_matrix\]](#table:confusion_matrix){reference-type="ref"
-reference="table:confusion_matrix"}), we can see that 80 percent of the
+In this toy example (
+@tbl-confusion_matrix), we can see that 80 percent of the
 cat images are correctly classified, while 5 percent of cat images are
 classified as car images, and 15 percent are classified as pictures of
 dogs.
@@ -853,8 +849,7 @@ that do not have well-defined boundaries (@fig-segmenting_trees). It is
 useful to differentiate between **stuff** and **objects**. Stuff refers
 to things that do not have well-defined boundaries such as grass, water,
 and sky (we already discussed this in chapter
-[\[sec-textures\]](#chap-textures){reference-type="ref"
-reference="sec-textures"}). But the distinction between stuff and
+@sec-textures). But the distinction between stuff and
 objects is not very sharp. In some images, object instances might be
 easy to separate like the two trees in the left image below, or become a
 texture where instances cannot be detected individually (as shown in the

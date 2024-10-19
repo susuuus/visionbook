@@ -334,7 +334,7 @@ The Gaussian derivatives share many of the properties of the Gaussian. The convo
 ## Derivatives using Binomial Filters {#sec-derivatives_binomial_filters}
 When processing images we have to use discrete approximations for the Gaussian derivatives. After discretization, many of the properties of the continuous Gaussian will not hold exactly. 
 
-There are many discrete approximations. For instance, we can take samples of the continuous functions. In practice it is common to use the discrete approximation given by the binomial filters. \Fig{\ref{fig-derivativepascaltriangle}} shows the result of convolving the binomial coefficients, $b_n$, with  $\left[1, -1\right]$.
+There are many discrete approximations. For instance, we can take samples of the continuous functions. In practice it is common to use the discrete approximation given by the binomial filters. @fig-derivativepascaltriangle shows the result of convolving the binomial coefficients, $b_n$, with  $\left[1, -1\right]$.
 
 :::{#fig-derivativepascaltriangle}
 \begin{array}{ccccccccccccccccccccl} 
@@ -483,7 +483,7 @@ In the discrete domain, there are several approximations to the Laplacian filter
 :::{#fig-DFTlaplacians}
 ![](figures/spatial_filters/DFTlaplacians.png){width=100%}
 
-Magnitude of the DFT of the Gaussian Laplacian with (a) $\sigma=1/2$; (b) $\sigma=1$; (c) $\sigma=2$; and (d) DFT of the five-point discrete approximation, \eqn{\ref{eq-five_point_laplacian}}.
+Magnitude of the DFT of the Gaussian Laplacian with (a) $\sigma=1/2$; (b) $\sigma=1$; (c) $\sigma=2$; and (d) DFT of the five-point discrete approximation, @eq-five_point_laplacian.
 :::
 
 In one dimension, the Laplacian can be approximated by $[1,-2,1]$, which is the result of the convolution of two 2-tap discrete approximations of the derivative $[1,-1] \circ [1,-1]$. In two dimensions, the most popular approximation is the five-point formula, which consists of convolving the image with the kernel:
@@ -706,7 +706,7 @@ Derivatives classified into reflectance or luminance components.
 :::
 
 
-Then, the image $\log r(x,y)$ is obtained by integrating the gradients, as shown in section \ref{section-editinggradientdomain}, and exponentiating the result. Finally, the illumination can be obtained as $l(x,y) = \text{img}(x,y)/r(x,y)$. The results are shown in Figure @fig-simultaneous3.
+Then, the image $\log r(x,y)$ is obtained by integrating the gradients, as shown in @sec-editinggradientdomain, and exponentiating the result. Finally, the illumination can be obtained as $l(x,y) = \text{img}(x,y)/r(x,y)$. The results are shown in Figure @fig-simultaneous3.
 
 :::{#fig-simultaneous3}
 ![](figures/statistical_image_models/retinex_solution_a.png){width=100%}
