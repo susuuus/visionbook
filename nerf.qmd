@@ -3,9 +3,7 @@
 ## Introduction
 
 In this chapter we will come full circle. Starting from the Greek's
-model of optics (chapter
-[\[sec-challenge_of_vision\]](#chap-challenge_of_vision){reference-type="ref"
-reference="sec-challenge_of_vision"}) that postulated that light is
+model of optics (@sec-challenge_of_vision) that postulated that light is
 emitted by the eyes and travels in straight lines, touching objects in
 order to produce the sensation of sight (extramission theory), radiance
 fields will use that analogy to model scenes from multiple images. Here,
@@ -18,9 +16,7 @@ represent a portion of the plenoptic function.
 ### The Plenoptic Function
 
 We first discussed the plenoptic function when we introduced the
-challenge of vision in chapter
-[\[sec-challenge_of_vision\]](#chap-challenge_of_vision){reference-type="ref"
-reference="sec-challenge_of_vision"}.
+challenge of vision in @sec-challenge_of_vision.
 
 As stated in the work by Adelson and Bergen @Adelson91, the plenoptic
 function tries to answer the following question: "We begin by asking
@@ -47,9 +43,7 @@ camera and are used to form an image of what is outside. The plenoptic
 function inside the pinhole camera has most of the values set to zero
 and only specific directions at each location have non-zero values.
 
-In chapter
-[\[sec-challenge_of_vision\]](#chap-challenge_of_vision){reference-type="ref"
-reference="sec-challenge_of_vision"} we discarded the plenoptic
+In @sec-challenge_of_vision we discarded the plenoptic
 function by simply saying, "Although recovering the entire plenoptic
 function would have many applications, fortunately, the goal of vision
 is not to recover this function." But we did not really give any
@@ -153,9 +147,7 @@ examples are the following:
 
 -   **Optical flow fields**, $f: x, y, t \rightarrow u, v$, measure
     motion in a video in terms of how scene content flows across the
-    image plane. We encountered these fields in chapter
-    [\[chapter-3D_motion_and_its_2D_projection\]](#sec-3D_motion_and_its_2D_projection){reference-type="ref"
-    reference="chapter-3D_motion_and_its_2D_projection"}.
+    image plane. We encountered these fields in @sec-3D_motion_and_its_2D_projection.
 
 -   **Signed distance functions** (**SDFs**) @curless1996volumetric,
     $f: X,Y,Z \rightarrow d$, represent the distance to the closest
@@ -183,9 +175,7 @@ representation** of the field, since we don't explicitly store the
 values of the field at all coordinates. Instead we just record a
 *finite* set of parameters of a function that can tell us the value of
 the field at any coordinate. Recall that we learned about implicit image
-representations in section
-[\[sec-implicit_image_representations\]](#sec-implicit_image_representations){reference-type="ref"
-reference="sec-implicit_image_representations"}. 
+representations in @sec-implicit_image_representations. 
 
 There are many different parameterized functions $L_{\theta}$ that could
 represent our target radiance field $L$. We could use a neural net
@@ -231,9 +221,7 @@ range $[0,1]$).
 
 NeRF also includes a positional encoding layer to transform the raw
 coordinates into a Fourier representation. In fact, we use the same
-positional encoding scheme as is used in transformers (see section
-[\[sec-transformers-positional_encodings\]](#sec:transformers:positional_encodings){reference-type="ref"
-reference="sec-transformers-positional_encodings"}).
+positional encoding scheme as is used in transformers (see @sec-transformers-positional_encodings.
 @fig-nerfs-flatland_positional_encoding shows how this scheme
 translates the $XY$-coordinate field of Flatland to positional
 encodings:
@@ -406,15 +394,11 @@ $\boldsymbol\ell[n,m,:]$[^1], at camera coordinate $n,m$, the first step
 is to find the ray (origin $\mathbf{O}$ and direction $\mathbf{D}$) that
 passes through this pixel. This can be done using the methods we have
 encountered in this book for modeling camera optics and geometry, which
-we will not repeat here (see section
-[\[sec-pixel_to_rays\]](#sec-pixel_to_rays){reference-type="ref"
-reference="sec-pixel_to_rays"}). The key pieces of information we need
+we will not repeat here (see @sec-pixel_to_rays. The key pieces of information we need
 to solve this task are the camera origin, $\mathbf{O}_{\texttt{cam}}$,
 and the camera matrix, $\mathbf{K}_{\texttt{cam}}$, that describes the
 mapping between pixel coordinates and world coordinates (steps for
-constructing $\mathbf{K}_{\texttt{cam}}$ are given in section
-[\[sec-simple_system_revisited-adapting_the_output\]](#sec:simple_system_revisited:adapting_the_output){reference-type="ref"
-reference="sec-simple_system_revisited-adapting_the_output"}). We apply
+constructing $\mathbf{K}_{\texttt{cam}}$ are given in @sec-simple_system_revisited-adapting_the_output). We apply
 this mapping, then compute the unit vector from the origin to the pixel
 to get the direction $\mathbf{D}$ (@fig-nerfs-pixel2ray):
 
@@ -490,8 +474,7 @@ modules like $\texttt{ray2coords}$ or $\texttt{vrender}$. However, such
 an unconstrained approach would be much less sample efficient and would
 require far more data and parameters to learn a good rendering solution
 (refer back to chapter
-[\[chapter-problem_of_generalization\]](#sec-problem_of_generalization){reference-type="ref"
-reference="chapter-problem_of_generalization"} to recall why a more
+@sec-problem_of_generalization) to recall why a more
 constrained hypothesis space can reduce the required amount of training
 data to find a good solution). However, such a solution could also be
 more general purpose, as it could handle optical effects that are not

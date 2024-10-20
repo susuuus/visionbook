@@ -31,15 +31,13 @@ called **natural language processing** (**NLP**). We will present just
 one way, which follows almost exactly the same format as modern computer
 vision systems: tokenize the text, then process it with a transformer.
 In chapter
-[\[chapter-transformers\]](#sec-transformers){reference-type="ref"
-reference="chapter-transformers"} we saw how to apply transformers to
+@sec-transformers we saw how to apply transformers to
 images and now we will see how to apply them to text. 
 
 The amazing thing about transformers is that they work well for a wide
 variety of data types: in fact, the same architectures that we saw in
 chapter
-[\[chapter-transformers\]](#sec-transformers){reference-type="ref"
-reference="chapter-transformers"} also works for text processing. To
+@sec-transformers also works for text processing. To
 apply transformers to a new data modality may require nothing more than
 figuring out how to represent that data as numbers.
 
@@ -94,8 +92,7 @@ in our vocabulary. We will see a specific architecture that does this in
 ## Learning Visual Representations from Language Supervision {#sec-VLMs-CLIP}
 
 In chapter
-[\[chapter-representation_learning\]](#sec-representation_learning){reference-type="ref"
-reference="chapter-representation_learning"}, we saw that one approach
+@sec-representation_learning, we saw that one approach
 of learning visual representations is to set up a pretext task that
 requires arriving at a good representation of the scene. In this section
 we will revisit this idea, using language association as a pretext task
@@ -119,9 +116,7 @@ vision system that associates images with free-form natural language.
 
 This is the idea of the highly popular CLIP
 system @radford2021learning.[^1] CLIP is a contrastive method (see
-section
-[\[sec-representation_learning-contrastive_learning\]](#sec:representation_learning:contrastive_learning){reference-type="ref"
-reference="sec-representation_learning-contrastive_learning"}) in which
+@sec-representation_learning-contrastive_learning) in which
 one data view is the image and the other is a caption describing the
 image. Specifically, CLIP is a form of contrastive learning from
 co-occurring visual and linguistic views that is formulated as follows:
@@ -178,9 +173,8 @@ the same way as @fig-neural_nets-vit_mapping_plot: for each encoder we
 reduce dimensionality for visualization using **t-distributed Stochastic
 Neighbor Embedding** (**t-SNE**) @tsne. For the image encoder, we show
 the visual content using icons to reflect the color and shape depicted
-in the image (we previously used the same visualization in section
-[\[sec-representation_learning-expt_designing_embeddings_with_contrastive_learning\]](#sec:representation_learning:expt_designing_embeddings_with_contrastive_learning){reference-type="ref"
-reference="sec-representation_learning-expt_designing_embeddings_with_contrastive_learning"}).
+in the image (we previously used the same visualization in @sec-representation_learning-expt_designing_embeddings_with_contrastive_learning).
+
 It's a bit hard to see, but one thing you can notice here is that for
 the image encoder, the early layers group images by color and the later
 layers group more by shape. The opposite is true for the text encoder.
@@ -261,8 +255,7 @@ can add more text vectors to partition the space in more ways.
 ## Translating between Images and Text
 
 In chapter
-[\[chapter-conditional_generative_models\]](#sec-conditional_generative_models){reference-type="ref"
-reference="chapter-conditional_generative_models"}, we saw how to
+@sec-conditional_generative_models, we saw how to
 translate between different image domains. Could we be even more
 ambitious and translate between entirely different data *modalities*? It
 turns out that this is indeed possible and is an area of growing
@@ -311,8 +304,7 @@ One amazing ability of modern generative models is to synthesize an
 image just from a text description, a problem called **text-to-image**.
 This can be achieved using any of the conditional generative models we
 saw in chapter
-[\[chapter-conditional_generative_models\]](#sec-conditional_generative_models){reference-type="ref"
-reference="chapter-conditional_generative_models"}. We simply have to
+@sec-conditional_generative_models. We simply have to
 find an effective way to use text as the conditioning information to
 these models. @fig-vision_and_language-text2im_schematic_mapping shows
 how this problem looks as a mapping from the space of text to the space
@@ -325,14 +317,11 @@ $\mathbf{t}$ to an output image $\hat{\boldsymbol\ell}$ that matches
 what the text describes. Recall the similar diagrams in the chapters on
 representation learning and generative modeling and think about how they
 relate (see and
-[\[fig-generative_modeling_and_representation_learning-genrep_schematic\]](#fig-generative_modeling_and_representation_learning-genrep_schematic){reference-type="ref"
-reference="fig-generative_modeling_and_representation_learning-genrep_schematic"}).
+@fig-generative_modeling_and_representation_learning-genrep_schematic.
 This new problem is not so different from what we have seen before!
 
 Now let's build some concrete architectures to solve this mapping. We
-will start with a conditional variational autoencoder (cVAE; section
-[\[sec-conditional_generative_models-cVAE\]](#sec:conditional_generative_models:cVAE){reference-type="ref"
-reference="sec-conditional_generative_models-cVAE"}). This was the
+will start with a conditional variational autoencoder (cVAE; @sec-conditional_generative_models-cVAE). This was the
 architecture used by the DALL-E 1 model @dalle1, which was one of the
 first text-to-image models that caught the public's imagination.
 
@@ -425,12 +414,8 @@ regular self-attention on the input text token $\mathbf{T}_t$, and
 $w_{\texttt{cross}}$ and $w_{\texttt{self}}$ are optional learnable
 weights.
 
-The text decoder is an autoregressive model (section
-[\[sec-generative_models-autoregressive\]](#sec:generative_models:autoregressive){reference-type="ref"
-reference="sec-generative_models-autoregressive"}) that uses causal
-attention (section
-[\[sec-transformers-masked_attention\]](#sec:transformers:masked_attention){reference-type="ref"
-reference="sec-transformers-masked_attention"}) to predict the next word
+The text decoder is an autoregressive model (@sec-generative_models-autoregressive) that uses causal
+attention (@sec-transformers-masked_attention) to predict the next word
 in the sentence given the previous words generated so far. In this
 strategy, the input to the text decoder is the tokens representing the
 previous words in the training data caption that describes the image. At

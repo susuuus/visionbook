@@ -2,9 +2,7 @@
 
 ## Introduction
 
-In chapter
-[\[chapter-geometry_homogeneous\]](#sec-geometry_homogeneous){reference-type="ref"
-reference="chapter-geometry_homogeneous"} we discussed several types of
+In @sec-geometry_homogeneous we discussed several types of
 geometric transformations of two-dimensional (2D) images: translations,
 rotations, skewing, scalings, and we saw that all could be modeled as
 the product between the coordinates of a point in the input image
@@ -13,9 +11,7 @@ that we have discussed camera models, we are well equipped to present a
 more general geometric image transformation that opens the door to many
 applications: the homography.
 
-As we discussed in the previous chapter
-[\[sec-stereo_vision\]](#chap-stereo_vision){reference-type="ref"
-reference="sec-stereo_vision"}, if we capture a scene with two cameras
+As we discussed in the previous @sec-stereo_vision, if we capture a scene with two cameras
 from different viewpoints, corresponding points across both images are
 constrained by the epipolar constrain. In general, there is not a simple
 geometric transformation that maps pixels from one image into the pixels
@@ -370,9 +366,7 @@ Given a set of point locations, and their correspondences across the two
 cameras, we can compute the homography relating the locations of imaged
 points within the two cameras. To estimate the homography we can use the
 direct linear transform (DLT) algorithm, as we did for the camera
-calibration problem in section
-[\[sec-camera_calibration\]](#sec-camera_calibration){reference-type="ref"
-reference="sec-camera_calibration"}. This will give us a linear set of
+calibration problem in @sec-camera_calibration. This will give us a linear set of
 equations for the parameters of the homography matrix with the form:
 $$\mathbf{A} \mathbf{h} = \mathbf{0}$$ where $\mathbf{A}$ is a$2N \times 9$ matrix, when given $N$ corresponding pairs. The vector
 $\mathbf{h}$ contains all the elements of the matrix $\mathbf{H}$

@@ -467,9 +467,7 @@ transformations**.
 
 ### Geometric Transformations as Convolutions
 
-In chapter
-[\[chapter-linear_image_filtering\]](#sec-linear_image_filtering){reference-type="ref"
-reference="chapter-linear_image_filtering"} we showed how certain
+In @sec-linear_image_filtering we showed how certain
 geometric transformations can be written as convolutions (such as the
 translation) while others cannot (such as rotations, scalings, shears,
 etc.). However, things change when adding geometry explicitly to the
@@ -586,37 +584,27 @@ coordinates, and record the pixel color into the resulting coordinates
 in the target image (@fig-warping_sketch). As coordinates might result
 in non-integer values, we can simply round the result to the closest
 pixel coordinate (i.e., nearest neighbor interpolation as we discussed
-in section
-[\[sec-interpolation\]](#sec-interpolation){reference-type="ref"
-reference="sec-interpolation"}). This algorithm is called **forward
+in @sec-interpolation). This algorithm is called **forward
 mapping**. It is an intuitive way of warping an image but it is really
 not a good idea. We will have all sorts of artifacts such as missing
-values and aliasing as shown in figures
-[\[fig-warping_sketch\]](#fig-warping_sketch){reference-type="ref"
-reference="fig-warping_sketch"} and
-[\[fig-warping_forward_backward\]](#fig-warping_forward_backward){reference-type="ref"
-reference="fig-warping_forward_backward"}.
+values and aliasing as shown in @fig-warping_sketch and
+@fig-warping_forward_backward.
 
 ![](figures/imaging_geometry/warping_sketch.png){width="100%"}
 
 The best approach is to use what is called **backward mapping** which
 consists of looping over all the pixels of the target image and applying
 the inverse geometric transform, $\mathbf{M}^{-1}$; we then use
-interpolation (as described in section
-[\[sec-interpolation\]](#sec-interpolation){reference-type="ref"
-reference="sec-interpolation"} in chapter
-[\[sec-downsampling_and_upsampling\]](#chap-downsampling_and_upsampling){reference-type="ref"
-reference="sec-downsampling_and_upsampling"}) to get the correct color
+interpolation (as described in @sec-interpolation in chapter
+@-downsampling_and_upsampling) to get the correct color
 value (@fig-warping_sketch). This process guarantees that there will be
 no missing values (unless the coordinates go outside the frame of the
 input image) and there will be no aliasing if the interpolation is done
 correctly. To avoid aliasing, blurring of the input image might be
 necessary if the density of pixels in the target image is lower than in
 the input image. Figures
-[\[fig-warping_sketch\]](#fig-warping_sketch){reference-type="ref"
-reference="fig-warping_sketch"} and
-[\[fig-warping_forward_backward\]](#fig-warping_forward_backward){reference-type="ref"
-reference="fig-warping_forward_backward"} compare forward and backward
+@fig-warping_sketch and
+@fig-warping_forward_backward compare forward and backward
 mapping.
 
 ![](figures/imaging_geometry/warping_forward_backward.png){width="100%"}
@@ -697,8 +685,7 @@ aliasing would be by sampling the output on a finer grid and then
 blurring and downsampling the result to the desired image size. The
 second observation is that the way the boundary is extended is not like
 any of the methods that we studied in chapter
-[\[chapter-linear_image_filtering\]](#sec-linear_image_filtering){reference-type="ref"
-reference="chapter-linear_image_filtering"}; instead the image is padded
+@sec-linear_image_filtering; instead the image is padded
 by some form of noise that smoothly extends the image without adding
 strong image derivatives.
 

@@ -49,8 +49,7 @@ or four elements, very quickly and the time it takes for us to say how
 many elements are in the display does not depend on the number of
 elements in the image. That is, if a display has only one element or
 four elements, we are equally fast at reporting that number (figures
-[\[fig-parallel_counting\]](#fig-parallel_counting){reference-type="ref"
-reference="fig-parallel_counting"}\[a, b and c\]).
+@fig-parallel_counting\[a, b and c\]).
 
 ![When looking at these images, we can count the number of circles at a glance if there are less than five circles. When an image has more than five items, we have to count them one by one.](figures/heeger_bergen/parallel_counting.png){width="100%" #fig-parallel_counting}
 
@@ -190,10 +189,8 @@ human observers?
 Texture synthesis is usually an iterative image synthesis procedure that
 begins with a random noise image and uses the parameters $\theta$ to
 produce a new improved image as shown in @fig-heeger_bergen_iterations.
-We will describe a similar algorithm in section
-[\[sec-generative_models-diffusion_models\]](#sec:generative_models:diffusion_models){reference-type="ref"
-reference="sec-generative_models-diffusion_models"} when talking about
-**diffusion models**.
+We will describe a similar algorithm in @sec-generative_models-diffusion_models
+when talking about **diffusion models**.
 
 ![The steps of the Heeger-Bergen texture synthesis algorithm. The process starts with white noise input image. Each step takes as input the previous output, and it is modified by a function $f_{\theta](figures/heeger_bergen/heeger_bergen_iterations.png){width="100%" #fig-heeger_bergen_iterations}
 
@@ -206,8 +203,7 @@ image, so that all aspects of a texture can be synthesized, and the
 subbands should not be aliased, to avoid artifacts in the synthesized
 results. In the examples shown here we use a steerable pyramid
 @Simoncelli95 described in chapter
-[\[chapter-image_pyramids\]](#sec-image_pyramids){reference-type="ref"
-reference="chapter-image_pyramids"} with six orientations and three
+@sec-image_pyramids with six orientations and three
 scales. The final texture representation is the concatenation of the 18
 subband histograms, the low-pass residual histogram and the input image
 histogram (@fig-heegersubbands\[a\]).
@@ -272,9 +268,7 @@ makes the images look worse.
 ![Two examples of synthesized textures. Inputs have a size of 256$\times$256 pixels, outputs are 512$\times$512. In these examples, the algorithm runs for 15 iterations, using a pyramid of six orientation and four scales.](figures/heeger_bergen/two_examples.png){width="100%" #fig-two_examples}
 
 Texture models using statistics of filter outputs are a precursor to
-diffusion models (section
-[\[sec-generative_models-diffusion_models\]](#sec:generative_models:diffusion_models){reference-type="ref"
-reference="sec-generative_models-diffusion_models"}) and share a number
+diffusion models (@sec-generative_models-diffusion_models) and share a number
 of architectural features.
 
 The Heeger and Bergen model was one of the first successful approaches
@@ -293,8 +287,7 @@ neural networks emerged around 2014.
 
 Nonparametric Markov random field image models, introduced earlier in
 chapter
-[\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
-reference="chapter-stat_image_models"}, define the probability
+@sec-stat_image_models, define the probability
 distribution of a pixel as dependent of neighborhood around the pixel.
 As we said before, if the values of enough pixels surrounding a given
 pixel are specified, then the probability distribution of the given
@@ -377,34 +370,27 @@ scale @DeBonet98 or which are more efficient by operating on patches
 ## Connection to Deep Generative Models
 
 In chapters
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"} and
-[\[chapter-generative_modeling_and_representation_learning\]](#sec-generative_modeling_and_representation_learning){reference-type="ref"
-reference="chapter-generative_modeling_and_representation_learning"} we
+@sec-generative_models and
+@sec-generative_modeling_and_representation_learning we
 will learn about generative models for image synthesis. These chapters
 cover models that generate images of all kinds, not just textures.
 However, they have strong similarities to the texture synthesis models
 we saw in this chapter. A few of connections are as follows:
 
 -   The Efros-Leung algorithm is an **autoregressive model**. Section
-    [\[sec-generative_models-autoregressive\]](#sec:generative_models:autoregressive){reference-type="ref"
-    reference="sec-generative_models-autoregressive"} covers this class
+    @sec-generative_models-autoregressive covers this class
     of models in more generality, and shows how to use them in
     conjunction with deep nets.
 
 -   The iterative optimization of the Heeger-Bergen algorithm is a type
     of denoising process: it starts with a noise image and little by
     little transforms it into an image of a texture. This general idea
-    reappears in section
-    [\[sec-generative_models-diffusion_models\]](#sec:generative_models:diffusion_models){reference-type="ref"
-    reference="sec-generative_models-diffusion_models"} on **diffusion
+    reappears in @sec-generative_models-diffusion_models on **diffusion
     models**, which follow this same strategy.
 
 -   The Heeger-Bergen algorithm is also connected to **generative
     adversarial networks** (**GANs**), which we will encounter in
-    section
-    [\[sec-generative_models-GANs\]](#sec:generative_models:GANs){reference-type="ref"
-    reference="sec-generative_models-GANs"}. The objective of
+    @sec-generative_models-GANs. The objective of
     Heeger-Bergen is to make a texture that has the same histogram
     statistics as an exemplar. A GAN also makes images that have the
     same statistics as a set of exemplars; however, the statistics we

@@ -133,9 +133,7 @@ Let's now describe a set of approaches for motion estimation that are
 not based on learning. Motion estimation equations will be derived from
 first principles and will rely on some simple assumptions.
 
-In section
-[\[sec-matching_based_motion\]](#sec-matching_based_motion){reference-type="ref"
-reference="sec-matching_based_motion"} we discussed matching-based
+In @sec-matching_based_motion we discussed matching-based
 optical flow estimation. We will discuss now gradient-based methods.
 These approaches rely on the brightness constancy assumption and use the
 reconstruction error as the loss to optimize.
@@ -249,9 +247,8 @@ image structure is 1D inside the region of analysis that will be defined
 by the size of the Gaussian window $g(x,y)$.
 
 In order to implement this approach we can make use of convolutions in
-order to compute all the quantities efficiently in a compact algorithm
-[\[alg:gradient_algorithm\]](#alg:gradient_algorithm){reference-type="ref"
-reference="alg:gradient_algorithm"}:
+order to compute all the quantities efficiently in a compact algorithm @fig-gradient_algorithm
+:
 
 ::: algorithm
 []{#alg:gradient_algorithm label="alg:gradient_algorithm"} **Input:**
@@ -277,9 +274,7 @@ make the motion more visible).
 To apply the gradient-based optical flow algorithm we need to compute
 the gradients along $x$, $y$, and $t$. In practice, the image
 derivatives, $\ell_x$ and $\ell_y$, are computed by convolving the image
-with Gaussian derivatives (see chapter
-[\[chapter-image_derivatives\]](#sec-image_derivatives){reference-type="ref"
-reference="chapter-image_derivatives"}). In the experiments here we
+with Gaussian derivatives (see @sec-image_derivatives). In the experiments here we
 first blur the two input frames with a Gaussian of $\sigma=1$,
 approximated with a five-tap kernel (i.e., a kernel with size
 $5 \times 5$ values). For the spatial derivatives we use the kernel
@@ -313,9 +308,7 @@ image in @fig-square_grandient_based_5.
 We can see that the result seems to be wrong for the motion estimated
 near the center of the side of each square. The inverse can only be
 computed in image regions with sufficient texture variations (i.e., near
-the corners). As in the Harris corner detector (see section
-[\[sec-finding_image_features\]](#sec-finding_image_features){reference-type="ref"
-reference="sec-finding_image_features"}), the eigenvector with the
+the corners). As in the Harris corner detector (see @sec-finding_image_features), the eigenvector with the
 smallest eigenvalue indicates the direction in which the image has the
 smallest possible change under translations. Regions with a small
 minimum eigenvalue are regions with a 1D image structure and will suffer

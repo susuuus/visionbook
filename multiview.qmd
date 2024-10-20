@@ -77,14 +77,10 @@ by Sturm and Triggs @Sturm1996 to handle perspective projection.
 
 One of the key problems in SFM is to find correspondences across
 multiple images. Finding image correspondences is a topic that we have
-already mentioned in multiple places (e.g., chapter
-[\[sec-stereo_vision\]](#chap-stereo_vision){reference-type="ref"
-reference="sec-stereo_vision"} and
-[\[chapter-homography\]](#sec-homography){reference-type="ref"
-reference="chapter-homography"}) and that will be mentioned again
+already mentioned in multiple places (e.g., @sec-stereo_vision and
+@sec-homography and that will be mentioned again
 (chapter
-[\[sec-optical_flow_estimation\]](#chap-optical_flow_estimation){reference-type="ref"
-reference="sec-optical_flow_estimation"}).
+@sec-optical_flow_estimation).
 
 SIFT @Lowe04 made image matching more reliable and structure from motion
 started to work much better under difficult conditions such as where
@@ -111,10 +107,8 @@ Let's start defining the notation and the formulation of the problem we
 want to solve; given a set of $M$ images with overlapping content, we
 want to recover the 3D structure of the scene and the location of the
 camera for each image. Figures
-[\[fig-sfm-sugar\]](#fig-sfm-sugar){reference-type="ref"
-reference="fig-sfm-sugar"} and
-[\[fig-sfm-palma\]](#fig-sfm-palma){reference-type="ref"
-reference="fig-sfm-palma"} show two examples of sets of images.
+@fig-sfm-sugar and
+@fig-sfm-palma show two examples of sets of images.
 @fig-sfm-sugar shows 12 images of an object taken by a camera moving
 around the object. @fig-sfm-palma shows eight images taken inside a
 plaza. Both sets of images represent very different scenarios that will
@@ -210,8 +204,7 @@ reconstruction. This accumulates over time, causing **scale drift**.
 ### Reprojection Error
 
 We already introduced the **reprojection error** in section
-[\[sec-cam_cal_minimizing_reprojection_error\]](#sec-cam_cal_minimizing_reprojection_error){reference-type="ref"
-reference="sec-cam_cal_minimizing_reprojection_error"} when talking
+@sec-cam_cal_minimizing_reprojection_error when talking
 about camera calibration. Here the formulation is similar but we
 optimize over a different set of unknowns. The reprojection error is the
 sum of euclidean distances (in heteregenous coordinates) between the
@@ -276,9 +269,8 @@ minima and to noisy matches.
 
 ### Finding Matches across Images
 
-When describing stereo vision in chapter
-[\[sec-stereo_vision\]](#chap-stereo_vision){reference-type="ref"
-reference="sec-stereo_vision"} we had to find matching points across
+When describing stereo vision in 
+@sec-stereo_vision we had to find matching points across
 two views in order to recover depth, but we did not spend much time on
 the problem of matching points across images. Matching features across
 views in a stereo pair is challenging, but it is easy in comparison with
@@ -367,9 +359,7 @@ run the detector in the set of images we want to match. We need now to
 extract at each location a descriptor that will allow finding the same
 keypoint across the different images.
 
-In chapter
-[\[sec-stereo_vision\]](#chap-stereo_vision){reference-type="ref"
-reference="sec-stereo_vision"} we described SIFT @Lowe04 as a local
+In @sec-stereo_vision we described SIFT @Lowe04 as a local
 image descriptor. Other classical descriptors are SURF @Bay2008346, and
 ORB @Rublee2011. For a review of several hand-engineered descriptors and
 their evaluation, we refer the reader to the work of Krystian
@@ -420,9 +410,7 @@ is to do it incrementally starting with only a pair of images. We use
 the matches between those two images to compute the fundamental and
 essential matrices, while accounting for outliers using RANSAC. We can
 then compute an initial 3D reconstruction of the matched points using
-triangulation as we have already discussed in chapter
-[\[sec-stereo_vision\]](#chap-stereo_vision){reference-type="ref"
-reference="sec-stereo_vision"}. Then, we add another image and we
+triangulation as we have already discussed in @sec-stereo_vision. Then, we add another image and we
 repeat the same process until we have incorporated all the images. This
 process will result in a first set of approximated camera poses and 3D
 locations for a subset of the detected keypoints.
@@ -433,10 +421,8 @@ locations of the keypoints are then further refined by bundle adjustment
 loss is usually rewritten using a robust cost function (typically the
 Huber kernel).
 
-Figures [\[fig-sfm-3dsugar\]](#fig-sfm-3dsugar){reference-type="ref"
-reference="fig-sfm-3dsugar"} and
-[\[fig-sfm-3dpalma\]](#fig-sfm-3dpalma){reference-type="ref"
-reference="fig-sfm-3dpalma"} show the final 3D reconstructions and
+@fig-sfm-3dsugar and
+@fig-sfm-3dpalma show the final 3D reconstructions and
 recovered camera locations for the two sets of images that we have used
 in this chapter.
 
@@ -511,5 +497,4 @@ direction) or the images having a substantially smaller baseline motion
 compared to the range of motions a point feature-based SFM approach can
 handle. We will talk about dense optimization of the photometric error
 when discussing motion estimation in part
-[\[part:understanding_motion\]](#part:understanding_motion){reference-type="ref"
-reference="part:understanding_motion"}.
+@sec-understanding_motion.

@@ -81,8 +81,7 @@ $f: \mathcal{X} \rightarrow \mathcal{Y}$, (2) initialize
 $f^{\prime} = f$, and (3) finetune
 $f^{\prime}: \mathcal{X}^{\prime} \rightarrow \mathcal{Y}^{\prime}$. The
 full algorithm is written in algorithm
-[\[alg:transfer_learning:finetuning\]](#alg:transfer_learning:finetuning){reference-type="ref"
-reference="alg:transfer_learning:finetuning"}, with $f$ and $f^{\prime}$
+@alg-transfer_learning-finetuning, with $f$ and $f^{\prime}$
 indicated as just a continually learning $f_{\theta}$ with different
 iterates of $\theta$ as learning progresses.
 
@@ -158,9 +157,7 @@ example we imagine we are making a system to detect cars in street
 images. We have four modules that work together to achieve this. The
 `featurize` module converts the input image $\mathbf{x}$ into a feature
 map (for example, this could be DINO @caron2021emerging, which we saw in
-section
-[\[sec-perceptual_organization-affinity_based_segmentation\]](#sec:perceptual_organization:affinity_based_segmentation){reference-type="ref"
-reference="sec-perceptual_organization-affinity_based_segmentation"}).
+@sec-perceptual_organization-affinity_based_segmentation).
 This module is pretrained and frozen; the idea is we have a good generic
 feature extractor that will work for many problems, and we do not need
 to update it for each new problem we encounter. Next we have two modules
@@ -204,8 +201,7 @@ represented in some layer of a neural net.
 ## Learning from a Teacher
 
 When we first encountered supervised learning in chapter
-[\[chapter-intro_to_learning\]](#sec-intro_to_learning){reference-type="ref"
-reference="chapter-intro_to_learning"}, we described it as *learning
+@sec-intro_to_learning, we described it as *learning
 from examples*. You are given a dataset of example inputs and their
 corresponding outputs and the task is to infer the relationship that can
 explain these input-output pairs:
@@ -246,9 +242,7 @@ that is, the examples $y$ that match each input $x$.
 learning a classifier from a teacher. We assume that the teacher is a
 well-trained classifier that outputs a $K-1$-dimensional probability
 mass function (pmf), $t: \mathcal{X} \rightarrow \vartriangle^{K-1}$
-(see section
-[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning:image_classification){reference-type="ref"
-reference="sec-intro_to_learning-image_classification"}). The student, a
+(see @sec-intro_to_learning:image_classification. The student, a
 model $f_{\theta}: \mathcal{X} \rightarrow \vartriangle^{K-1}$, simply
 tries to imitate the teacher's output pmf: for each input $x$ that the
 student sees, its goal is to output the same pmf vector as the teacher
@@ -297,9 +291,7 @@ whatever the model would have responded to when queried with `X`.
 
 The same can be done for vision systems. First, prompting methods from
 NLP can be directly used for prompting the text inputs to
-vision-language models @radford2021learning (section
-[\[sec-VLMs-CLIP\]](#sec:VLMs:CLIP){reference-type="ref"
-reference="sec-VLMs-CLIP"}). Second, prompting can also be applied to
+vision-language models @radford2021learning (@sec-VLMs-CLIP). Second, prompting can also be applied to
 visual inputs. Just like we can prepend a textual input with text, we
 can prepend a visual input with visual data, yielding a method that may
 be called **visual
@@ -329,9 +321,7 @@ optimized signal that changes the model's behavior. The top prompt was
 optimized to make the model predict the dog's species and the bottom
 prompt was optimized to make the model predict the dog's expression.
 Mathematically, this kind of prompting is very similar to the
-adversarial noise we covered in section
-[\[sec-bias_and_shift-adversarial_attacks\]](#sec:bias_and_shift:adversarial_attacks){reference-type="ref"
-reference="sec-bias_and_shift-adversarial_attacks"}.  However,
+adversarial noise we covered in @sec-bias_and_shift-adversarial_attacks.  However,
 here we are not adding noise that *hurts* performance but instead adding
 noise that *improves* performance on a new task of interest. Given a set
 of $M$ training examples that we would like to adapt to,
@@ -346,8 +336,7 @@ prompt to an intermediate feature space. Let's look next at one way to
 do this. Jia, Tang, *et al.* @jia2022visual proposed to use a *token* as
 the prompt for a vision transformer architecture @dosovitskiy2020vit
 (see chapter
-[\[chapter-transformers\]](#sec-transformers){reference-type="ref"
-reference="chapter-transformers"} for details on transformers). This new
+@sec-transformers for details on transformers). This new
 token is concatenated to the input of the transformer, which is a set of
 tokens representing image patches
 (@fig-transformers-prompting_a_transformer):
@@ -370,12 +359,10 @@ representative example of both of these use cases can be found in
 in this book: any system that interactively adapts to user inputs can be
 considered a promptable system. In particular, many promptable systems
 use the tools of conditional generative modeling (chapter
-[\[chapter-conditional_generative_models\]](#sec-conditional_generative_models){reference-type="ref"
-reference="chapter-conditional_generative_models"}) to train systems can
+@sec-conditional_generative_models to train systems can
 are conditioned on user text instructions (e.g., @dalle1,
 @rombach2022high, which we cover in chapter
-[\[chapter-VLMs\]](#sec-VLMs){reference-type="ref"
-reference="chapter-VLMs"}).
+@sec-VLMs.
 
 ## Domain Adaptation
 
@@ -402,14 +389,12 @@ domain adaptation**. Here we cannot make use of test labels but we can
 still align the test inputs to look like the training inputs (or vice
 versa). One way to do so is to use a generative adversarial network
 (GAN; chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}) that translates the data in one
+@sec-generative_models that translates the data in one
 domain to look identically distributed as the data in the other domain,
 as has been explored in e.g.,
 @tzeng2017adversarial, @CycleGAN2017, @hoffman2018cycada. A simple
 version of this algorithm is given in algorithm
-[\[alg:transfer_learning:domain_adaptation_by_translation\]](#alg:transfer_learning:domain_adaptation_by_translation){reference-type="ref"
-reference="alg:transfer_learning:domain_adaptation_by_translation"}.
+@fig-transfer_learning-domain_adaptation_by_translation.
 
 
 
@@ -442,8 +427,7 @@ return $F = f \circ g$
 ## Generative Data
 
 Generative models (chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}) produce synthetic data that
+@sec-generative_models) produce synthetic data that
 looks like real data. Could this ability be useful for transfer
 learning? At first glance it may seem like the answer is no: Why use
 fake data if you have access to the real thing?
@@ -454,15 +438,13 @@ generative model) is not just a cheap copy of real data. It can be
 we can draw an unbounded number of samples from a generative model.
 These samples are not just copies of the training datapoints but can
 interpolate and remix the training data in novel ways (chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}). Generative models can also
+@sec-generative_models). Generative models can also
 produce *better* data because the data comes coupled with a procedure
 that generated it, and this procedure has structure that can be
 exploited to understand and manipulate the data distribution.
 
 One such structure is latent variables (chapter
-[\[chapter-generative_modeling_and_representation_learning\]](#sec-generative_modeling_and_representation_learning){reference-type="ref"
-reference="chapter-generative_modeling_and_representation_learning"}).
+@sec-generative_modeling_and_representation_learning).
 Suppose you have generated a training set of outdoor images with a
 latent variable generative model. You want to train an object classifier
 on this data. You notice that the images never show a cow by a beach,
@@ -507,8 +489,7 @@ Many of the methods we introduced previously follow a similar format:
 -   Adapt that component and/or other components.
 
 In table
-[\[tab:generative_models:types_of_gen_model\]](#tab:generative_models:types_of_gen_model){reference-type="ref"
-reference="tab:generative_models:types_of_gen_model"}, we present the
+@tbl-generative_models:types_of_gen_model, we present the
 relationship these methods by framing them all as empirical risk
 minimization with different components optimized during pretraining
 and/or during adaptation.

@@ -160,21 +160,15 @@ of the system.
 ## From 2D Images to 3D
 
 Let's start running the model on the same input image that we used as a
-running example in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"}. We just need to apply the neural
+running example in @sec-simplesystem. We just need to apply the neural
 network to the input image, obtain the output disparity, and finally
 transform the disparity into world coordinates. We do not have to detect
-edges or any of the other features that we computed in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"}. Instead, the neural network has
+edges or any of the other features that we computed in @sec-simplesystem. Instead, the neural network has
 learned to compute whatever features it deems necessary to solve the
 task. We will not retrain the network using images from our simple
 visual world.
 
-Just as we did in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"}, to show that the algorithm for 3D
+Just as we did in @sec-simplesystem, to show that the algorithm for 3D
 interpretation gives reasonable results, we can re-render the inferred
 3D structure from different viewpoints.
 
@@ -189,9 +183,7 @@ concave. The cubes' edges are not straight and the faces are twisted
 instead of flat.
 
 We can compare this result with the 3D images recovered using the
-algorithm we defined in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"}:
+algorithm we defined in @sec-simplesystem:
 
 ![3D reconstruction using the simple visual system from \chap{\ref{chapter:simplesystem](figures/simplesystem/views.png){width="100%" #fig-chatgpt_blockworld}
 
@@ -221,9 +213,7 @@ describe a simple world image.
 
 This method is remarkably accurate, and now you know how it works. At
 one level Gpt4-v is a transformer trained on massive data, using an
-autoregressive modeling objective (chapter
-[\[chapter-transformers\]](#sec-transformers){reference-type="ref"
-reference="chapter-transformers"}). On another level, you can understand
+autoregressive modeling objective (@sec-transformers). On another level, you can understand
 what rules that transformer may have learned: it detects edges in its
 first few layers, uses filters that act like wavelets tiling Fourier
 space, and it reasons about perspective geometry to find vanishing
@@ -268,15 +258,11 @@ and that creativity is a powerful tool.
 
 What have we learned in this chapter? We learned that using a large
 pretrained model kind of works; it is not as clean as the results we had
-in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"}, but it works in situations where our
+in @sec-simplesystem, but it works in situations where our
 simple heuristic method was breaking. And we can expect performances of
 future pretrained models to keep improving.
 
-With the hand-crafted model presented in chapter
-[\[chapter-simplesystem\]](#sec-simplesystem){reference-type="ref"
-reference="chapter-simplesystem"}, we had a comprehensive understanding
+With the hand-crafted model presented in @sec-simplesystem, we had a comprehensive understanding
 of the mechanisms, assumptions, and limitations of our system. Another
 interesting advantage of the hand-crafted model is that it required no
 learning and no training data. Once the model was written down it was

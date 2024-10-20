@@ -589,8 +589,7 @@ The algorithm for selective search only differs from the window scanning
 approach on how the list of candidate bounding boxes is generated. Some
 approaches also add a bounding box refinement step. The overall approach
 is described in algorithm
-[\[alg:selective_search\]](#alg:selective_search){reference-type="ref"
-reference="alg:selective_search"}.
+@fig-selective_search.
 
 ::: algorithm
 []{#alg:selective_search label="alg:selective_search"} **Input:** Image;

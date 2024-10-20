@@ -507,9 +507,7 @@ attention layer used in transformers. Before we move on though, let's
 think through the intuition of what self-attention might be doing.
 
 Consider that we are processing the safari image, and our task is
-semantic segmentation (label each patch with an object class). Figure
-[\[fig-attention_layer_cartoon\]](#fig-attention_layer_cartoon){reference-type="ref"
-reference="fig-attention_layer_cartoon"} illustrates this scenario. We
+semantic segmentation (label each patch with an object class). @fig-attention_layer_cartoon illustrates this scenario. We
 start by tokenizing the image so that each patch is represented by a
 token. Now we have a token, $\mathbf{t}_2$, that represents the patch of
 pixels around the torso of the impala. We wish to update this token via
@@ -624,9 +622,7 @@ connections. In @fig-transformers-ViT_arch we plot the ViT architecture
 from @dosovitskiy2020vit, showing where these additional pieces enter
 the picture.
 
-This architecture uses layer normalization (section
-[\[sec-neural_nets-normalization_layers\]](#sec-neural_nets:normalization_layers){reference-type="ref"
-reference="sec-neural_nets-normalization_layers"}) before each attention
+This architecture uses layer normalization (@sec-neural_nets-normalization_layers) before each attention
 layer and before each token-wise MLP layer. The normalization is done
 *within* each token (the token code vector is treated as a akin to a
 layer; each dimension of this vector is standardized by the mean and
@@ -667,12 +663,8 @@ for l in range(L):
 The output of a transformer, as we have so far defined it, is a set of
 tokens $\mathbf{T}_{\texttt{out}}$. Often we want an output of a
 different format, such as a single vector of logits for image
-classification (section
-[\[sec-intro_to_learning-image_classification\]](#sec-intro_to_learning-image_classification){reference-type="ref"
-reference="sec-intro_to_learning-image_classification"}), or in the
-format of an image for image-to-image tasks (section
-[\[sec-conditional_generative_models-im2im\]](#sec-conditional_generative_models:im2im){reference-type="ref"
-reference="sec-conditional_generative_models-im2im"}). To handle these
+classification (@sec-intro_to_learning-image_classification), or in the
+format of an image for image-to-image tasks (@sec-conditional_generative_models-im2imd). To handle these
 cases, we typically define a task-specific output layer that takes
 $\mathbf{T}_{\texttt{out}}$ as input and produces the desired format as
 output. For example, to produce a vector of logit predictions we could
@@ -911,9 +903,7 @@ each subsequent output token overlaps substantially with the subnetworks
 that predict each previous token. That is, there is sharing of
 computation between all the prediction problems. We will see a more
 concrete application of this strategy when we get to autoregressive
-models in section
-[\[sec-generative_models-autoregressive\]](#sec-generative_models:autoregressive){reference-type="ref"
-reference="sec-generative_models-autoregressive"}.
+models in @sec-generative_models-autoregressive.
 
 ## Positional Encodings {#sec-transformers-positional_encodings}
 
@@ -951,8 +941,7 @@ useful for CNNs as well, as a way to make convolutional filters that are
 conditioned on position, thereby applying a different weighted sum at
 each location in the image @liu2018intriguing. Positional encodings also
 appear in radiance fields, which we cover in chapter
-[\[chapter-nerfs\]](#sec-nerfs){reference-type="ref"
-reference="chapter-nerfs"}.
+@sec-nerfs.
 
 ![](figures/transformers/affine_layer_comparison.png){width="100%" #fig-transformers-affine_layer_comparison}
 

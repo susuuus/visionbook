@@ -144,9 +144,7 @@ One of the early computational models of motion perception was proposed
 by Hassenstein and Reichardt @hassenstein1956 when studying the motion
 detectors in the fly's visual system. Another computational model of
 human motion perception is the energy model proposed by Adelson and
-Bergen @Adelson85 and briefly discussed in chapter
-[\[chapter-filter_banks\]](#sec-filter_banks){reference-type="ref"
-reference="chapter-filter_banks"}. In this chapter we will focus on
+Bergen @Adelson85 and briefly discussed in @sec-filter_banks. In this chapter we will focus on
 motion estimation algorithms developed by the computer vision community
 without trying to follow biologically plausible mechanisms.
 
@@ -190,9 +188,7 @@ while large values of $s$ will result in large discriminative patches
 but might fail if there is sufficient geometric distortion between the
 two frames due to motion. By representing each pixel with a patch, we
 are transforming the image into a feature map of size
-$3\times(2s+1)\times(2s+1)$. As in chapter
-[\[chapter-perceptual_organization\]](#sec-perceptual_organization){reference-type="ref"
-reference="chapter-perceptual_organization"}, we could also use other
+$3\times(2s+1)\times(2s+1)$. As in @sec-perceptual_organization, we could also use other
 patch embeddings such as DINO or SIFT descriptors. But since the image
 transformation between two consecutive frames is usually small, using
 red-green-blue (RGB) patches can work well. Another constraint we can
@@ -222,8 +218,7 @@ $\mathbf{v}[i,j] = \mathop{\mathrm{arg\,min}}(\min (C[i,j], axis=0)) \quad \tria
 
 Note that padding must be applied if we want to compute the output
 optical flow near the image boundaries. Algorithm
-[\[alg:motion_matching_algorithm\]](#alg:motion_matching_algorithm){reference-type="ref"
-reference="alg:motion_matching_algorithm"} could be written more
+@fig-motion_matching_algorithm could be written more
 compactly but we prefer this form for its clarity. The following images
 shows the matching result for one input location. In this example, $s=5$
 (patch size of $11\times11$ pixels), and $L=16$ (search window of size
@@ -273,9 +268,7 @@ discontinuities such as object edges.
 One advantage of this algorithm is that motion is computed in a way that
 is independent of the objects present in the scene. We did not make any
 assumption about what objects are moving or how. We did not introduce
-any grouping cues (as in chapter
-[\[chapter-perceptual_organization\]](#sec-perceptual_organization){reference-type="ref"
-reference="chapter-perceptual_organization"}) to presegment the image
+any grouping cues (as in @sec-perceptual_organization) to presegment the image
 into candidate objects. Therefore, we could use the computed motion as
 new cue for grouping.
 
@@ -287,9 +280,7 @@ classes of algorithms that the visual system may use. The previous
 method is an example of **pattern matching methods** @Adelson85, which
 are often based on image correlations. A second class of motion
 algorithms are based on **spatiotemporal filtering** @Adelson85 and
-their principles were briefly described in chapter
-[\[chapter-filter_banks\]](#sec-filter_banks){reference-type="ref"
-reference="chapter-filter_banks"}. Spatiotemporal filtering uses the
+their principles were briefly described in @sec-filter_banks. Spatiotemporal filtering uses the
 responses of velocity-tuned filters to estimate the motion.
 
 Adelson and Bergen proposed a beautiful motion illusion that
@@ -297,10 +288,8 @@ distinguishes between two classes of motion algorithms that might be
 used by the visual system (@fig-motionIllusion1). The illusion involves
 temporal filtering, motion processing, and aliasing and thus provides a
 good review of the material in this chapter and also chapters
-[\[chapter-sampling\]](#sec-sampling){reference-type="ref"
-reference="chapter-sampling"} and
-[\[chapter-temporal_filters\]](#sec-temporal_filters){reference-type="ref"
-reference="chapter-temporal_filters"}.
+@sec-sampling and
+@sec-temporal_filters.
 
 ![Space-time signals, building toward the fluted square-wave motion illusion. The first row shows a stationary sine wave. (a) Movie of a motionless sine wave. (b) Space-time plot shows only vertical structure. (c) Spatiotemporal Fourier transform shows all energy on the zero temporal frequency axis because nothing is moving. (d) The second row shows a moving sine wave. (e) In the space-time plot, speed corresponds to
 local orientation. (f) The Fourier transform energy is sheared according to
@@ -309,8 +298,7 @@ the sine wave’s speed. (g–i) The third row shows a moving square wave. The a
 
 The signals, and magnitudes of their space-time Fourier transforms, are
 developed in @fig-motionIllusion1 and
-[\[fig-motionIllusion2\]](#fig-motionIllusion2){reference-type="ref"
-reference="fig-motionIllusion2"}, building-up from simpler signals. The
+@fig-motionIllusion2, building-up from simpler signals. The
 three rows of @fig-motionIllusion1 show a stationary sinusoid, a moving
 sinusoid, and a moving square wave. The spatiotemporal Fourier transform
 of the stationary sinusoid, $f(x,y,t) = \cos(\pi \omega x)$, is
@@ -340,14 +328,11 @@ frequency. The resulting Fourier transform magnitude is shown in
 
 ![Derivation of the fluted square-wave motion illusion, continued from \fig{\ref{fig-motionIllusion1](figures/optical_flow/ted_demo_motion_2.png){width="100%" #fig-motionIllusion2}
 
-Because orientation in space-time tells motion direction (section
-[\[sect:modelingSequences\]](#sect:modelingSequences){reference-type="ref"
-reference="sect:modelingSequences"}) the space-time plot of
+Because orientation in space-time tells motion direction (section @sec-modelingSequences the space-time plot of
 @fig-motionIllusion2b shows that the motion should be perceived to the
 left. This will be consistent with the behavior of velocity tuned
 filters (section
-[\[sect:velocityTunedFilters\]](#sect:velocityTunedFilters){reference-type="ref"
-reference="sect:velocityTunedFilters"}) responding to the lowest
+@sec-velocityTunedFilters) responding to the lowest
 spatiotemporal frequency impulses shown in @fig-motionIllusion2c.
 However, if we remove the lowest spatial frequency sinusoid from the
 signal, the result is shown in @fig-motionIllusion2e, with
@@ -364,8 +349,7 @@ the minimum correlation signal indeed moves to the left. But the vision
 system examining the orientation of the lowest spatiotemporal frequency
 components of the signal in @fig-motionIllusion2g, or looking at the
 dominant orientations in the space-time plots of
-figures [\[fig-motionIllusion2\]](#fig-motionIllusion2){reference-type="ref"
-reference="fig-motionIllusion2"}(e and g), would find a signal moving to
+figures @fig-motionIllusion2 (e and g), would find a signal moving to
 the right! Videos showing each signal are available on the book's web
 page. These illusions give support to the spatiotemporal energy models
 for human motion processing.

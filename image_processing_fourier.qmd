@@ -257,9 +257,7 @@ are the same, then their sum will represent a cosine wave; if their
 amplitudes are opposite, it will be a sine wave. Frequencies further
 away from the origin represent faster variation with movement across
 space. The DFT and its inverse in 1D are defined in the same way as
-shown in table
-[\[table:tableFamilyFT\]](#table:tableFamilyFT){reference-type="ref"
-reference="table:tableFamilyFT"}.
+shown in @tbl-tableFamilyFT.
 
 One very important property is that the decomposition of a signal into a
 sum of complex exponentials is unique: there is a unique linear
@@ -784,9 +782,7 @@ The inverse Fourier transform is
 $$\ell\left[n \right] = \frac{1}{2\pi} \int_{2 \pi} \mathscr{L}(w) \exp{(j w n)} d w$$
 where the integral is done only in one of the periods.
 
-Table
-[\[table:tableFamilyFT\]](#table:tableFamilyFT){reference-type="ref"
-reference="table:tableFamilyFT"} summarizes the three transforms we have
+@tbl-tableFamilyFT summarizes the three transforms we have
 seen in this chapter. All of them can be easily extended to 2D. There
 are more variations of the Fourier transform that we will not discuss
 here.
@@ -867,9 +863,7 @@ remarkable property of real images is that the magnitude of the DFT of
 natural images is quite similar and can be approximated by
 $A \left[u,v \right] = a/ (u^2+v^2)^b$ with $a$ and $b$ being two
 constants. We will talk more about this property when discussing
-statistical models of natural images in chapter
-[\[chapter-stat_image_models\]](#sec-stat_image_models){reference-type="ref"
-reference="chapter-stat_image_models"}. This typical structure of the
+statistical models of natural images in @sec-stat_image_models. This typical structure of the
 DFT magnitude of natural images has been used as a prior for many tasks
 such as image denoising.
 

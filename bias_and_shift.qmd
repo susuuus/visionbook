@@ -146,9 +146,7 @@ When training and testing is done using samples from the same
 distribution (A to A, or B to B) the learned model (best fit) passes
 near the test samples and the error is small. However, when training and
 test are coming from different distributions, the error can be large.
-Table
-[\[table:bias_and_shift:training_test_sets\]](#table:bias_and_shift:training_test_sets){reference-type="ref"
-reference="table:bias_and_shift:training_test_sets"} shows the
+@tbl-bias_and_shift-training_test_sets shows the
 generalization error made with different combinations of training and
 set sets as shown in @fig-bias_and_shift-training_test_sets.
 
@@ -165,12 +163,9 @@ The diagonal elements correspond to the error obtained when training on
 the training examples of dataset A and testing on the test examples of
 dataset A, and when training and testing on dataset B.
 
-As shown in table
-[\[table:bias_and_shift:training_test_sets\]](#table:bias_and_shift:training_test_sets){reference-type="ref"
-reference="table:bias_and_shift:training_test_sets"}, the error becomes
-larger for the elements off-diagonal. However, table
-[\[table:bias_and_shift:training_test_sets\]](#table:bias_and_shift:training_test_sets){reference-type="ref"
-reference="table:bias_and_shift:training_test_sets"} only gives a
+As shown in @tbl-bias_and_shift-training_test_sets, the error becomes
+larger for the elements off-diagonal. However, @tbl-bias_and_shift-training_test_sets
+only gives a
 partial picture about what is happening because it gives the error only
 for dataset size equal to 5. What happens if we add more data?
 
@@ -233,9 +228,7 @@ in @Torralba2011, a classifier can play the game quite successfully.
 
 ### The Value of Training Examples
 
-In table
-[\[table:market_bias\]](#table:market_bias){reference-type="ref"
-reference="table:market_bias"}, each number represents the value of one
+In @tbl-market_bias, each number represents the value of one
 training example from one dataset when used to test on another. A value
 of 0.25 means that you need 4 times more training examples than when
 using a sample derived from the same testing distribution. These results
@@ -276,7 +269,7 @@ another experiment from the same study, participants were shown one
 picture and their task was to classify the object as quickly as possible
 from a fixed set of twelve known possible classes. The average response
 time and accuracy were a measured for each of the
-12$\times$`<!-- -->`{=html}12 images. The speed and accuracy are a
+12$\times$12 images. The speed and accuracy are a
 measure of how easy is to recognize an object under a particular
 viewpoint. The study showed that people recognized objects better when
 presented in a canonical orientation.
@@ -372,9 +365,7 @@ These types of biases, besides impacting the overall model performance,
 can have a negative social impact once they are deployed. It is
 important to be aware of those biases, and incorporate techniques to
 mitigate their effects. Now it is a good moment for the reader to
-revisit chapter
-[\[chapter-computer_vision_and_society\]](#sec-computer_vision_and_society){reference-type="ref"
-reference="chapter-computer_vision_and_society"}.
+revisit @sec-computer_vision_and_society.
 
 ### Testing and Benchmark Bias
 
@@ -439,14 +430,10 @@ $\mathbf{\epsilon}$ to fool the system. Unfortunately, if you want to
 deploy your system to the public, then you have to give people access to
 it and that makes it vulnerable to attack.
 
-In chapter
-[\[chapter-neural_nets\]](#sec-neural_nets){reference-type="ref"
-reference="chapter-neural_nets"} we described a simple neural network
+In @sec-neural_nets we described a simple neural network
 for line classification and showed how, by accessing the architecture
 and the learned filters, we could manually design input examples that
-would get wrongly classified. Similarly, in chapter
-[\[sec-downsampling_and_upsampling\]](#chap-downsampling_and_upsampling){reference-type="ref"
-reference="sec-downsampling_and_upsampling"} we showed how aliasing
+would get wrongly classified. Similarly, in @sec-downsampling_and_upsampling we showed how aliasing
 could also create vulnerabilities in a network. For large systems,
 adversarial attacks are not manually designed, instead they are the
 result of an optimization procedure that optimizes the noise pattern
@@ -460,9 +447,7 @@ train our systems to minimize empirical risk, defined as the *mean*
 error over the training data. Because we only focus on the mean, the
 *worst case* might be arbitrarily bad. Alternative approaches try to
 minimize worst-case error, and this can result in systems that are more
-. In chapter
-[\[chapter-data_augmentation\]](#sec-data_augmentation){reference-type="ref"
-reference="chapter-data_augmentation"} we will discuss how **adversarial
+. In @sec-sec-data_augmentation we will discuss how **adversarial
 training** can be used to increase the robustness of the models to
 adversarial attacks.
 

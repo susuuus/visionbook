@@ -133,9 +133,7 @@ One way to do this is to use generative models. Latent variable
 generative models like generative adversarial networks (GANs) or
 variational autoencoders (VAEs) are especially suitable, because the
 latent variables can be used to control different factors of variation
-in the generated data (see chapter
-[\[chapter-generative_modeling_and_representation_learning\]](#sec-generative_modeling_and_representation_learning){reference-type="ref"
-reference="chapter-generative_modeling_and_representation_learning"}).
+in the generated data (see @sec-generative_modeling_and_representation_learning).
 Given a datapoint $\mathbf{x}$, an encoder
 $f_{\phi}: \mathcal{X} \rightarrow \mathcal{Z}$, and a generator
 $g_{\theta}: \mathcal{Z} \rightarrow \mathcal{X}$, we can create an
@@ -149,8 +147,7 @@ are all slight variations of one another, just like we saw previously in
 One simple approach is to just use Gaussian perturbations in latent
 space, that is, $\mathbf{w} \sim \mathcal{N}(0,\sigma^2)$ for some
 perturbation scale given by $\sigma$. Algorithm
-[\[alg:data_augmentation:generative_data_augmentation\]](#alg:data_augmentation:generative_data_augmentation){reference-type="ref"
-reference="alg:data_augmentation:generative_data_augmentation"}
+@fig-data_augmentation:generative_data_augmentation
 formalizes this approach (see @chai2021ensembling for a representative
 work that roughly follows this recipe, or @azizi2023synthetic for an
 alternative approach to generative data augmentation).
@@ -181,9 +178,7 @@ $L$, which is a mapping from input data to output learned function $f$.
  Without data augmentation we have $f = L(X)$, and with data
 augmentation we have $f = L(\tilde{X})$. But now, when $g_{\theta}$ is
 trained on $X$, then $\tilde{X}$ is just a function of $X$; in
-particular, if we use algorithm
-[\[alg:data_augmentation:generative_data_augmentation\]](#alg:data_augmentation:generative_data_augmentation){reference-type="ref"
-reference="alg:data_augmentation:generative_data_augmentation"}, it is
+particular, if we use algorithm @fig-data_augmentation-generative_data_augmentationd, it is
 $\tilde{X} = \texttt{genaug}(X)$. So, we can define a new learner
 $\tilde{L} = L \circ \texttt{genaug}$ where we have
 $f = \tilde{L}(X) = L(\texttt{genaug}(X)) = L(\tilde{X})$. This
@@ -222,9 +217,7 @@ epsilon-ball attacks we saw in the previous chapter.
 
 Adversarial training has many other uses as well, beyond the scope of
 the current chapter- it is used for training generative adversarial
-networks (chapter
-[\[chapter-generative_models\]](#sec-generative_models){reference-type="ref"
-reference="chapter-generative_models"}), for training agents to explore
+networks (@sec-generative_models), for training agents to explore
 in reinforcement learning @pathak2017curiosity, and for training agents
 that compete against other agents @silver2016mastering. This general
 approach is also known as **robust optimization** in the optimization
@@ -249,9 +242,7 @@ In line with the theme of this chapter, one approach is to not just
 broaden the *data* but to also broaden the *task*. The idea is to define
 a new task, $AB$, for which tasks $A$ and $B$ are special cases. Then we
 can train $AB$ on both the data for task $A$ and for task $B$. An
-example of a metatask like $AB$ is data imputation (see chapter
-[\[chapter-generative_modeling_and_representation_learning\]](#sec-generative_modeling_and_representation_learning){reference-type="ref"
-reference="chapter-generative_modeling_and_representation_learning"}).
+example of a metatask like $AB$ is data imputation (see @sec-generative_modeling_and_representation_learning).
 One example of data imputation is to predict missing color channels;
 this is the colorization problem, call this task $A$. Another data
 imputation problem is predicting a chunk of pixels masked out of the
