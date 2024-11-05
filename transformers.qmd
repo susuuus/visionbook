@@ -154,12 +154,12 @@ operations for transforming these tokens and eventually making decisions
 based on them. The first operation we will define is how to take a
 *linear combination of tokens*.
 
-![Linear combination of neurons versus tokens.](figures/transformers/lin_bomb_neurons_vs_tokens.png){#fig-transformers-lin_bomb_neurons_vs_tokens}
+![Linear combination of neurons versus tokens.](figures/transformers/lin_comb_neurons_vs_tokens.png){#fig-transformers-lin_bomb_neurons_vs_tokens}
 
 A linear combination of tokens is not the same as a fully connected
 layer in a neural net. Instead of taking a weighted sum of scalar
 neurons, it takes a weighted sum of vector-valued tokens
-(@fig-transformers-lin_bomb_neurons_vs_tokens)-The general form of these equations for multiple input and output
+(@fig-transformers-lin_comb_neurons_vs_tokens) - The general form of these equations for multiple input and output
 neurons/tokens is: 
 
 $$\begin{aligned}
@@ -235,9 +235,11 @@ parameter-rich.
 ## Token Nets
 We will use the term **token nets** to refer to computation graphs that
 use tokens as the primary nodes, rather than neurons.
+
 :::{.column-margin}
 Note that the terminology in this chapter is not standard. The term *token nets*, and some of the definitions we have given, are our own invention.
 :::
+
 Token nets are just like neural nets, alternating between layers that mix
 nodes in linear combinations (e.g., fully connected linear layers,
 convolutional layers, etc.) and layers that apply a pointwise
@@ -247,6 +249,10 @@ also a neural net, just viewed differently---it is a net of subnets. In
 @fig-transformers-neural_nets_vs_token_nets, we show a standard neural
 net and a token net side by side, to emphasize the similarities in their
 operations.
+
+
+![Neural nets versus token nets. The arrows here represent any functional dependency between the nodes (note that different arrows represent different types of functions).](figures/transformers/neural_nets_vs_token_nets.png){#fig-transformers-neural_nets_vs_token_nets width="100%"}
+
 
 ## The Attention Layer
 
@@ -264,6 +270,15 @@ the data-dependency with the function labeled $f$, and we color the
 attention matrix red to indicate that it is constructed from
 *transformed data* rather than being free parameters (for which we use
 the color blue):
+
+
+![Fully-connected layers versus attention layers.](figures/transformers/fc_vs_attn.png){#fig-transformers-fc_vs_attn width="40%"}
+
+:::{.column-margin}
+Here, we describe attention as fc layers with data-dependent weights. We could have instead described attention as a kind of **dynamic pooling**, which is mean pooling but using a weighted average where the weights are dynamically decided based on the input data.
+:::
+
+
 
 The equation for an attention layer is the same as for a linear layer
 except that the weights are a function of some other data (left
@@ -297,6 +312,8 @@ would solve our problem (it would minimize the loss and correctly answer
 the question). Other solutions might be possible, but we will focus on
 this intuitive solution, which we illustrate in
 @fig-transformers-attention_layer_safari_query_cartoon.
+
+![How attention can be allocated across different regions (tokens) in an image. The token code vectors consist of multiple dimensions and each can encode a different attribute of the token. To the left we show a dimension that encodes number of animal heads. To the right we show a different dimension that encodes color (or this could be three dimensions, coding RGB). The output token is a weighted sum over all the tokens attended to.](figures/transformers/attention_layer_safari_query_cartoon.png){#fig-transformers-attention_layer_safari_query_cartoon width="100%"}
 
 What's neat here is that attention gives us a way to make the layer
 dynamically change its behavior in response to different input
@@ -341,6 +358,11 @@ Transformers use a particular kind of attention based on the idea of
 queries, keys, and values. In query-key-value attention, each
 token is associated with a **query** vector, a **key** vector, and a
 **value** vector.
+
+
+:::{.column-margin}
+The idea of queries, keys, and values comes from databases, where a database cell holds a *value*, which is retrieved when a *query* matches the cell's *key*. Tokens are like database cells and attention is like retrieving information from the database of tokens.
+:::
 
 We define these vectors as linear transformations of the token's code
 vector, projecting to query/key/value vectors of length $m$. For a token
@@ -405,7 +427,21 @@ $$\begin{aligned}
     \end{bmatrix} 
 \end{aligned}$${#eq-transformers}
 
+
+:::{.column-margin}
+$\mathbf{v}_1$ is the value vector for $\mathbf{t}_1=\mathbf{T}_{\text {in }}[0,:],$, and so forth.
+:::
+
+:::{.column-margin}
+We use the following color scheme here and later in this chapter:
+
+![](figures/transformers/fig-transformers-color_scheme.png){width="70%"}
+:::
+
 @fig-transformers-attn_arch1 visualizes these steps.
+
+
+![Mechanics of an attention layer. Queries from the question match keys from the tokens representing the impala; value vectors of the impala tokens then contribute the most to the sum that yields $\mathbf{t}_{\texttt{out}}$'s code vector. (Softmax omitted in this example.)](figures/transformers/attn_arch1.png){#fig-transformers-attn_arch1 width="70%"}
 
 ### Self-Attention
 
@@ -428,6 +464,9 @@ $N$ queries, $N$ weighted sums, and $N$ output tokens to form
 $\mathbf{T}_{\texttt{out}}$. This is visualized below in
 @fig-transformers-self_attn_layer.
 
+
+![A self-attention layer.](figures/transformers/self_attn_layer.png){#fig-transformers-self_attn_layer width="70%"}
+
 To compute the query, key, and value for a set of input tokens,
 $\mathbf{T}_{\texttt{in}}$, we apply the same linear transformations to
 each token in the set, resulting in matrices
@@ -435,22 +474,16 @@ $\mathbf{Q}_{\texttt{in}}, \mathbf{K}_{\texttt{in}} \in \mathbb{R}^{N \times m}$
 and $\mathbf{V}_{\texttt{in}} \in \mathbb{R}^{N \times d}$, where each
 row is the query/key/value for each token: 
 
-
-
 :::{.column-margin}
-
-Note that
-the query and key vectors must have the same dimensionality, $m$,
+Note that the query and key vectors must have the same dimensionality, $m$,
 because we take a dot product between them. Conversely, the value
 vectors must match the dimensionality of the token code vectors, $d$,
 because these are summed up to produce the new token code
 vectors.
-
 :::
 
 
-
- $$\begin{aligned}
+$$\begin{aligned}
     \mathbf{Q}_{\texttt{in}}&= 
      \begin{bmatrix}
         \mathbf{q}_1^\mathsf{T}\\
@@ -492,15 +525,21 @@ vectors.
     = \mathbf{T}_{\texttt{in}}\mathbf{W}_v^\mathsf{T}&\triangleleft \quad\quad \text{value matrix}
 \end{aligned}$${#eq-transformers-query_matrix}
 
-Finally, we have the attention equation: $$\begin{aligned}
+Finally, we have the attention equation: 
+
+$$\begin{aligned}
     \mathbf{A} &= f(\mathbf{T}_{\texttt{in}}) = \texttt{softmax}\Big(\frac{\mathbf{Q}_{\texttt{in}}\mathbf{K}_{\texttt{in}}^\mathsf{T}}{\sqrt{m}}\Big) &\triangleleft \quad\quad \text{attention matrix}\\
     \mathbf{T}_{\texttt{out}}&= \mathbf{A}\mathbf{V}_{\texttt{in}}
 \end{aligned}$${#eq-transformers}
+
 where the softmax is taken within each row (i.e., over
 the vector of matches for each separate query vector, like in
 @eq-transformers-attention_question_keys). In expanded detail, here are
 the full mechanics of a self-attention layer
 (@fig-transformers-attn_arch):
+
+![Self-attention layer expanded. The nodes with the dashed outline correspond to each other; they represent one query being matched against one key to result in a scalar similarity value, in the gray box, which acts as a weight in the weighted sum computed by $\mathbf{A}$.](figures/transformers/attn_arch.png){#fig-transformers-attn_arch width="40%"}
+
 
 This fully defines a self-attention layer, which is the kind of
 attention layer used in transformers. Before we move on though, let's
@@ -529,6 +568,10 @@ that could be informative (the animal in the query is more likely to be
 an impala if it is found near giraffes and zebras, since all those
 animals tend to congregate together in the same biome).
 
+
+![One way self-attention could be used to aggregate information across all patches containing the same object, and thereby arrive at a better representation of the object in $\mathbf{t}_2$, the query patch.](figures/transformers/attention_layer_cartoon.png){#fig-attention_layer_cartoon width="100%"}
+
+
 This is just one way self-attention could be used by the network. How it
 is actually used will be determined by the training data and task. What
 really happens might deviate from our intuitive story: tokens on hidden
@@ -544,6 +587,9 @@ self-attention maps can look like on the safari image. In this example,
 we are simply using patch color as the query and key features. Each
 attention map shows one row of $\mathbf{A}$ reshaped into the size of
 the input image.
+
+![Example of self-attention maps where each token is an image patch and the query and key vectors are both set to the mean color of the patch, normalized to be a unit vector.](figures/transformers/transformers_attn_ex.png){#fig-transformers-transformers_attn_ex width="100%"}
+
 
 ### Multihead Self-Attention
 
@@ -582,8 +628,9 @@ shown in the math below: $$\begin{aligned}
         \vdots & \vdots & \vdots \\
         \mathbf{T}_{\texttt{out}}^1[N-1,:] & \ldots & \mathbf{T}_{\texttt{out}}^k[N-1,:]\\
     \end{bmatrix} &\quad\quad \triangleleft \quad \bar{\mathbf{T}}_{\texttt{out}} \in \mathbb{R}^{N \times kv}\\
-    \mathbf{T}_{\texttt{out}}&= \bar{\mathbf{T}}_{\texttt{out}}\mathbf{W}_{\texttt{MSA}} &\quad\quad \triangleleft \quad \mathbf{W}_{\texttt{MSA}} \in \mathbb{R}^{kv \times d} :MSA_merge
-\end{aligned}$${} where $v$ is the dimensionality of the value vectors and
+    \mathbf{T}_{\texttt{out}}&= \bar{\mathbf{T}}_{\texttt{out}}\mathbf{W}_{\texttt{MSA}} &\quad\quad \triangleleft \quad \mathbf{W}_{\texttt{MSA}} \in \mathbb{R}^{kv \times d}
+\end{aligned}$${#eq-MSA_merge}
+where $v$ is the dimensionality of the value vectors and
 $d$ is the dimensionality of the code vectors of the output
 (@dosovitskiy2020vit recommends setting $kv = d$). The matrix
 $\mathbf{W}_{\texttt{MSA}}$ *merges* all the heads; its values are
@@ -591,7 +638,6 @@ learnable parameters. The other learnable parameters of MSA are the
 query, key, and value projections for each of the $k$ attention heads.
 
 :::{.column-margin}
-
 Notice that here, unlike in the single-headed
 self-attention layers presented previously, the value vectors need not
 have the same dimensionality as the token code vectors, since we are
@@ -615,12 +661,17 @@ interleaved with tokenwise nonlinearities. These two steps are analogous
 to linear layers interleaved with neuronwise nonlinearities in an MLP,
 as shown below (@fig-transformers-transformer_vs_MLP):
 
+![The basic transformer architecture versus an MLP.](figures/transformers/transformer_vs_MLP.png){#fig-transformers-transformer_vs_MLP width="80%"}
+
 Beyond this basic template, there are many variations that can be added,
 resulting in different particular architectures within the transformer
 family. Some common additions are normalization layers and residual
 connections. In @fig-transformers-ViT_arch we plot the ViT architecture
 from @dosovitskiy2020vit, showing where these additional pieces enter
 the picture.
+
+
+![The ViT transformer architecture~\cite{dosovitskiy2020vit}. This set of layers forms a computational block, shaded in gray, that can be repeated $L$ times for a depth $L$ ViT. To clarify where the parameters live in this architecture, we have colored all the edges with learnable parameters in blue (note that the MSA merge, \eqn{\ref{eqn:transformers:MSA_merge}}, is also learnable but not explicitly shown in this diagram).](figures/transformers/ViT_arch.png){#fig-transformers-ViT_arch width="80%"}
 
 This architecture uses layer normalization (@sec-neural_nets-normalization_layers) before each attention
 layer and before each token-wise MLP layer. The normalization is done
@@ -693,6 +744,9 @@ have: $$\begin{aligned}
     \texttt{transformer}(\texttt{permute}(\mathbf{T}_{\texttt{in}})) &= \texttt{permute}(\texttt{transformer}(\mathbf{T}_{\texttt{in}}))
 \end{aligned}$$ This property is visualized in
 @fig-transformers-permutation_equivariance.
+
+
+![Transformers are permutation equivariant. For notational simplicity, we omit layer indices on the token variables here.](figures/transformers/permutation_equivariance.png){#fig-transformers-permutation_equivariance width="100%"}
 
 It is often useful to understand layers in terms of their invariances
 and equivariances. Convolutational layers are translation equivariant
@@ -771,8 +825,16 @@ kernel size 1, producing a new set of $N$ $m$-channel tokens. This
 equivalence is visualized below
 (@fig-transformers-conv_matmul_equivalence):
 
+
+![The query, key, and value projections in transformers can be written either as a convolution or a matrix multiply.](figures/transformers/conv_matmul_equivalence.png){#fig-transformers-conv_matmul_equivalence width="100%"}
+
 Therefore, the query, key, and value projections are all multichannel
 convolutions with kernels of size 1.
+
+
+:::{.column-margin}
+Convolution actually appears all over in linear algebra, and in fact \textit{every matrix product can be written as a convolution}! Whenever you see a product $\mathbf{A}\mathbf{B}$, you can think of it as the convolution of a multichannel filter bank $\mathbf{B}$ (one filter in each row; kernel size 1) with the signal $\mathbf{A}$ (time indexes rows, channels in the columns).
+:::
 
 ### Tokenwise MLP
 
@@ -807,6 +869,11 @@ other operations in transformers -- normalization layers, residual
 connections, etc -- are also common in CNNs. So what is *different*
 between transformers and CNNs?
 
+
+:::{.column-margin}
+Breaking up into chunks is such a fundamentally useful idea that it shows up in many different fields under different names. One general name for it is *factorizing* a problem into smaller pieces.
+:::
+
 ### The Differences between CNNs and Transformers
 
 #### CNNs can have kernels with non-unitary spatial extent
@@ -823,10 +890,7 @@ two-dimensional, three-dimensional, etc.
 
 :::
 
-
-
-In fact it cannot be otherwise. If you used larger kernel it would break the permutation
-invariance property of transformers, since the output of the filters
+In fact it cannot be otherwise. If you used larger kernel it would break the permutation invariance property of transformers, since the output of the filters
 would depend on which token is next to which. This is one of the key
 differences between CNNs and transformers. CNNs use $K \times K$
 filters, and this makes it so adjacent image regions get processed
@@ -856,10 +920,23 @@ cross-attention between different data modalities @wei2020multi, and for
 sequential prediction @chen2020generative. To illustrate, we will
 describe the sequential prediction use case. 
 
+:::{.column-margin}
+For simplicity, in this section we depict tokens with one-dimensional code vectors, but remember $\mathbf{T}$ would have $d$ columns for $d$-dimensional code vectors.
+:::
+
 A common problem is to predict the $(n+1)$-th token in a sequence given
 the previous $n$ tokens. For example, we may be trying to predict tokens
 that represent the next frame in a video, the next word in a sentence,
 or the weather on the next day.
+
+
+:::{.column-margin}
+The $\mathbf{T}_{1:n}$ is shorthand for the sequence of tokens $\begin{bmatrix}
+    \mathbf{t}_1^\transpose\\
+    \vdots\\
+    \mathbf{t}_{n}^\transpose
+\end{bmatrix}$.
+:::
 
 A simple way to model this prediction problem is with a linear layer:
 $\mathbf{y}_{n+1} = \mathbf{A}\mathbf{T}_{1:n}$. Here is what
@@ -873,6 +950,8 @@ During training, we will give examples like this: $$\begin{aligned}
 \end{aligned}$${#eq-transformers-causal_training_batches} and so on. We can make all these predictions at once
 with a single matrix multiply
 (@fig-transformers-masked_attn_one_matmul):
+
+![Masked attention to make multiple causal predictions at once. Black cells are masked; they are filled with zeros.](figures/transformers/masked_attn_one_matmul.png){width="100%" #fig-transformers-masked_attn_one_matmul}
 
 This way, one forward pass makes $N$ predictions rather than one
 prediction. This is equivalent to doing a single next token prediction
