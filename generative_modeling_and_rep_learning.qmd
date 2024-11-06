@@ -28,6 +28,10 @@ the full picture looks like this
 
 ![The relationship between representation learning and generative modeling. Here we label one side as ``Data'' and the other as ``Embedding''; but what's the precise difference between these two things? Why is an RGB image data while a 100-dimensional vector of neural activations is an embedding? This is a question for you to think about; there is no correct answer.](./figures/generative_modeling_and_representation_learning/rep_gen_schematic.png){width="35%" #fig-generative_modeling_and_representation_learning-rep_gen_schematic}
 
+:::{.column-margin}
+Moving backward through a net is also what backpropagation does, but it computes a different function: backpropagation computes the gradient $\nabla f$ whereas here we focus on the inverse $f^{-1}$.
+:::
+
 
 
 ## Latent Variables as Representations
@@ -154,7 +158,7 @@ complicated to model as the data space we started with, as indicated in
 
 ![The latent space of an autoencoder can be just as complex as the data space.](./figures/generative_modeling_and_representation_learning/autoencoder_complicated_latent_space.png){width="60%" #fig-generative_modeling_and_representation_learning-autoencoder_complicated_latent_space}
 
-VAEs are a way to turn an autoencoder into a proper generative model,
+**Variational autoencoders VAEs** are a way to turn an autoencoder into a proper generative model,
 which can be sampled from and which maximizes data likelihood under a
 formal probabilistic model. The trick is very simple: just take a
 vanilla autoencoder and (1) regularize the latent distribution to squish
@@ -185,6 +189,10 @@ model a complicated distribution as a product over many simple
 conditional distributions. VAEs follow a slightly different strategy:
 they model complicated distributions as *sums* of simple distributions.
 
+:::{.column-margin}
+Mixture models are probability models of the form $P(\mathbf{x}) = \sum_i w_ip_i(\mathbf{x})$.
+:::
+
 In particular, VAEs are **mixture models**, and the most common kind of
 VAE is a **mixture of Gaussians**. The mixture of Gaussians
 model is in fact classical model that represents a density as a weighted
@@ -200,7 +208,14 @@ that is, $k \rightarrow \infty$.
 But wait, how can we parameterize an infinite mixture? We can't learn an
 infinite set of means and variances. The trick we will use is to make
 the mean and variance be *functions* of an underlying continuous
-variable. The function the VAE uses is $g_{\theta}$. For notational
+variable. 
+
+:::{.column-margin}
+You can think of a function as the \textit{infinite set} of values a variable takes on over some domain.
+:::
+
+
+The function the VAE uses is $g_{\theta}$. For notational
 convenience, we decompose this function into $g_{\theta}^{\mu}$ and
 $g_{\theta}^{\Sigma}$ to separately model the means and variances of the
 Gaussians in the infinite mixture. Next we need a continuous domain to
@@ -237,11 +252,18 @@ mixture models.
 
 ### Optimizing VAEs
 
+:::{.column-margin}
+Wait, a whole section on optimization? Didn't this book say that general-purpose optimizers (like backpropagation) are often sufficient in the deep learning era? Yes. But only if you can actually compute the objective and its gradient. The issue here is that the VAE's objective is intractable. Its exact computation requires integrating over an infinite set of deep net forward passes. The difficulty of optimizing VAEs lies in the difficulty of approximating this intractable objective. Once we derive our approximation, optimization again will be easy: just apply backpropagation on this approximate loss.
+:::
+
  With the objective and hypothesis given previously, we can
-now fully define the VAE learning problem: $$\begin{aligned}
+now fully define the VAE learning problem: 
+
+$$\begin{aligned}
     \theta^* &= \mathop{\mathrm{arg\,max}}_{\theta} L(\{\mathbf{x}^{(i)}\}_{i=1}^N, \theta)\\
     &= \mathop{\mathrm{arg\,max}}_{\theta} \sum_{i=1}^N \log \underbrace{\int_{\mathbf{z}} \overbrace{\mathcal{N}(\mathbf{x}^{(i)}; g^{\mu}_{\theta}(\mathbf{z}), g^{\Sigma}_{\theta}(\mathbf{z}))}^{p_{\theta}(\mathbf{x}^{(i)} \shortgiven \mathbf{z})} \overbrace{\mathcal{N}(\mathbf{z}; \mathbf{0}, \mathbf{I})}^{p_{\mathbf{z}}(\mathbf{z})}d\mathbf{z}}_{p_{\theta}(\mathbf{x}^{(i)})}
 \end{aligned}$${#eq-generative_modeling_and_representation_learning-vae_learning_problem1}
+
 
 #### Trick 1: Approximating the objective via sampling
 
@@ -251,11 +273,16 @@ function. Therefore, we need to approximate this integral numerically.
 The first trick we will use is a *Monte Carlo estimate* of this
 integral: 
 
-$$\begin{aligned}    p_{\theta}(\mathbf{x}) &= \int_{\mathbf{z}} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})p_{\mathbf{z}}(\mathbf{z})d\mathbf{z} :vae_likelihood\\
+$$\begin{aligned}    
+p_{\theta}(\mathbf{x}) &= \int_{\mathbf{z}} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})p_{\mathbf{z}}(\mathbf{z})d\mathbf{z}\\
+\end{aligned}
+$${#eq-generative_models_and_representation_learning-vae_likelihood}
+
+$$\begin{aligned}
     &= \mathbb{E}_{\mathbf{z}\sim p_{\mathbf{z}}(\mathbf{z})}[p_{\theta}(\mathbf{x} \bigm | \mathbf{z})]\\
     &\approx \frac{1}{M} \sum_{j=1}^M p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(j)}), \quad \mathbf{z}^{(j)} \sim p_{\mathbf{z}}
-\end{aligned}$$
-{#eq-generative_models_and_representation_learning-vae_likelihood_monte_carlo_estimate}
+\end{aligned}
+$${#eq-generative_models_and_representation_learning-vae_likelihood_monte_carlo_estimate}
 
 We could stop here, as the learning problem is now
 written in a closed differentiable form: 
@@ -318,7 +345,7 @@ Consider the example in
 where we are trying to esimate the probability of the point $\mathbf{x}$
 (blue circle).
 
-![To estimate $p_{\theta}$](./figures/generative_modeling_and_representation_learning/vae_importance_sampling1.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling1}
+![To estimate $p_{\theta}(\mathbf{x})$ we only need to consider the Gaussian components (gray circles) that place significant probability on $\mathbf{x}$.](./figures/generative_modeling_and_representation_learning/vae_importance_sampling1.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling1}
 
 The mixture components are shaded according to the probability they
 assign to $\mathbf{x}$. Almost all are so far from $\mathbf{x}$ that we
@@ -359,9 +386,9 @@ $p_{\theta}(Z \bigm | \mathbf{x})$ is precisely a prediction of which
 $\mathbf{z}$ values are most likely to have generated the observed
 $\mathbf{x}$. The optimal importance sampling way to estimate the
 likelihood of a datapoint will therefore look like this:
-$$\begin{aligned}    &p_{\theta}(\mathbf{x}) \approx \frac{1}{M} \sum_{j=1}^M\frac{p_{\mathbf{z}}(\mathbf{z}^{(j)})}{p_{\theta}(\mathbf{z}^{(j)} \bigm | \mathbf{x})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(j)}) \quad\quad \triangleleft \quad\text{Optimal importance sampling}:vae_importance_sampling\\
+$$\begin{aligned}    &p_{\theta}(\mathbf{x}) \approx \frac{1}{M} \sum_{j=1}^M\frac{p_{\mathbf{z}}(\mathbf{z}^{(j)})}{p_{\theta}(\mathbf{z}^{(j)} \bigm | \mathbf{x})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z}^{(j)}) \quad\quad \triangleleft \quad\text{Optimal importance sampling}\\
     &\quad\quad \mathbf{z}^{(j)} \sim p_{\theta}(Z \bigm | \mathbf{x}) \nonumber
-\end{aligned}$${#eq-generative_models_and_representation_learning} 
+\end{aligned}$${#eq-generative_models_and_representation_learning-vae_importance_sampling-vae_importance_sampling} 
 
 Visually, rather than sampling from all over
 $p_{\mathbf{z}}$ and wasting samples on regions that place nearly zero
@@ -370,17 +397,27 @@ places high likelihood on the data, and we can get then away with far
 fewer samples to well approximate the data likelihood, as indicated
 @fig-generative_modeling_and_representation_learning-vae_importance_sampling2.
 
-![Optimal importance sampling estimates $p_{\theta}$](./figures/generative_modeling_and_representation_learning/vae_importance_sampling2.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling2}
+![Optimal importance sampling estimates $p_{\theta}(\mathbf{x})$ by drawing samples from $p_{\theta}(Z \given \mathbf{x})$.](./figures/generative_modeling_and_representation_learning/vae_importance_sampling2.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling2}
 
 #### Trick 3: Variational inference to approximate the sampling distribution
 
 Now we know what distribution we *should* be sampling $\mathbf{z}$ from:
 $p_{\theta}(Z \bigm | \mathbf{x})$. The only remaining problem is that
 this distribution may be complicated and hard to sample from. 
+
+
+:::{.column-margin}
+Remember, we have defined simple forms for only $p_{\theta}(X \given \mathbf{z})$ and $p_{\mathbf{z}}$ (both are Gaussians), but this does not mean $p_{\theta}(Z \given \mathbf{x})$ has a simple form.
+:::
+
 Sampling from arbitrary distributions is a standard topic in statistics,
 and many algorithms have been proposed, including the Markov chain Monte
 Carlo methods we encountered in previous chapters. VAEs use a strategy
 called **variational inference**.
+
+:::{.column-margin}
+The name *variational* comes from the "calculus of variations," which studies functionals (functions of functions). Integrals of probability densities are functionals. Variational inference is commonly (but not always) used to approximate densities expressed as the integral of some other densities, hence functionals, hence the name variational.
+:::
 
 The idea of variational inference is to approximate an intractable
 density $p$ by finding the nearest density in a tractable family
@@ -394,7 +431,7 @@ of a distribution over $\mathbf{z}$; in other words, $f_{\psi}$ is a
 probabilistic encoder! This function is shown next in
 @fig-generative_modeling_and_representation_learning-VAE_encoder:
 
-![A VAE's encoder, $f_{\psi}$](./figures/generative_modeling_and_representation_learning/VAE_encoder.png){width="55%" #fig-generative_modeling_and_representation_learning-VAE_encoder}
+![A VAE's encoder, $f_{\psi}$, models $p(Z \given \mathbf{x})$ as a Gaussian parameterized by $f_{\psi}(\mathbf{x})$.](./figures/generative_modeling_and_representation_learning/VAE_encoder.png){width="55%" #fig-generative_modeling_and_representation_learning-VAE_encoder}
 
 It will turn out that $f$ indeed plays the role of the encoder in the
 VAE, while $g$ plays the role of the decoder.
@@ -444,7 +481,14 @@ and can be optimized by taking a Monte Carlo sample from that
 expectation. We *could* also try using Monte Carlo to approximate the
 objective for $\theta$, but this would yield a biased estimator of
 $\theta$, since @eq-generative_modeling_and_representation_learning-J_p
-has the log outside the expectation.  That might be okay (as
+has the log outside the expectation.  
+
+
+:::{.column-margin}
+The expression $\log \frac{1}{N} \sum_i x_i$ is not an unbiased estimator of $\log \mathbb{E}[x]$, hence a Monte Carlo estimate is not the best choice for @eq-generative_modeling_and_representation_learning-J_p.
+:::
+
+That might be okay (as
 the number of samples $N$ goes to infinity, the bias goes to zero), but
 we can do better. To get around this issue, VAEs adopt the following
 strategy: rather than maximizing $J_p$ with respect to $p_{\theta}$,
@@ -457,11 +501,11 @@ optimizing $\psi$ in
 The fact that $J$ is a lower-bound on $J_p$ follows from Jensen's
 inequality: $$\begin{aligned}    J_p &= \log p_{\theta}(\mathbf{x})\\
     &= \log \mathbb{E}_{\mathbf{z}\sim q_{\psi}(Z \bigm | \mathbf{x})}\Big[\frac{p_{\mathbf{z}}(\mathbf{z})}{q_{\psi}(\mathbf{z} \bigm | \mathbf{x})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})\Big]\\
-    &\geq \mathbb{E}_{\mathbf{z}\sim q_{\psi}(Z \bigm | \mathbf{x})}\Big[\log \big(\frac{p_{\mathbf{z}}(\mathbf{z})}{q_{\psi}(\mathbf{z} \bigm | \mathbf{x})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})\big)\Big] \quad\quad \triangleleft \quad\text{Jensen's inequality}:lowerbound\\
+    &\geq \mathbb{E}_{\mathbf{z}\sim q_{\psi}(Z \bigm | \mathbf{x})}\Big[\log \big(\frac{p_{\mathbf{z}}(\mathbf{z})}{q_{\psi}(\mathbf{z} \bigm | \mathbf{x})} p_{\theta}(\mathbf{x} \bigm | \mathbf{z})\big)\Big] \quad\quad \triangleleft \quad\text{Jensen's inequality}\\
     &= \mathbb{E}_{\mathbf{z}\sim q_{\psi}(Z \bigm | \mathbf{x})}\Big[-\log q_{\psi}(\mathbf{z} \bigm | \mathbf{x}) + \log p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) + \log p_{\mathbf{z}}(\mathbf{z}) \Big]\\
     &= J \quad\quad\triangleleft\quad\text{VAE objective}\\
     &\Rightarrow \quad J \leq J_p
-\end{aligned}$${#eq-generative_modeling_meets_representation_learning}
+\end{aligned}$${#eq-generative_modeling_meets_representation_learning-lowerbound}
 
 This way our learning problem for both $\theta$ and $\psi$ share the
 same objective (which also saves computation) and can be stated simply
@@ -689,7 +733,14 @@ bend left or bend right) than is explicit in the Python script. It is
 important to realize that VAEs, and most representation learning
 methods, do not necessarily recover the true causal mechanisms that
 generated the data but rather might find other mechanisms that can
-equivalently explain the data. To summarize this section, we
+equivalently explain the data. 
+
+
+:::{.column-margin}
+A formal name for this issue is the *nonidentifiability* of the true parameters that generated a dataset.
+:::
+
+To summarize this section, we
 have seen that a VAE can be considered two things:
 
 -   An efficient way to optimize an infinite mixture of Gaussians
