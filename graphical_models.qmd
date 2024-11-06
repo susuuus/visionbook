@@ -37,7 +37,7 @@ that the probability distribution over $x_1$, $p(x_1) = \phi_1(x_1)$.
 
 Another trivial graphical model is this:
 
-![](figures/graphical_models/x1x2.png){width="20%"}
+![Two independent variables.](figures/graphical_models/x1x2.png){width="20%"}
 
 Here, the lack of a line connecting $x_1$ with $x_2$ indicates a lack of
 statistical dependence between these two variables. In detail, we
@@ -50,7 +50,7 @@ $p(x_1, x_2) = \phi_1(x_1) \phi_2(x_2)$.
 
 Let's add a line between these two variables:
 
-![](figures/graphical_models/x1bx2.png){width="16%"}
+![Two dependent variables.](figures/graphical_models/x1bx2.png){width="16%"}
 
 By that graph, we mean that there may be a statistical dependency
 between the two variables. The class of probability distributions
@@ -62,7 +62,7 @@ variables.
 
 Here is a graph with some structure:
 
-![](figures/graphical_models/x1bx2bx3.png){width="24%"}
+![Three dependent variables.](figures/graphical_models/x1bx2bx3.png){width="24%" #fig-3node}
 
 This graph means that if we condition on the variable $x_2$, then $x_1$
 and $x_3$ are independent. A general form for $p(x_1, x_2, x_3)$ that
@@ -97,7 +97,7 @@ A **maximal clique** is a clique that can't include more nodes of the
 graph without losing the clique property. The sets of nodes below form
 maximal cliques (left), or do not (right):
 
-![](figures/graphical_models/cliques2.png){width="40%"}
+![A maximal clique is the largest possible clique.](figures/graphical_models/cliques2.png){width="40%"}
 
 The **Hammersley-Clifford theorem** @Hammersley1971 states that a
 positive probability distribution has the independence structure
@@ -106,7 +106,7 @@ product of functions over the variables of each maximal clique:
 $$p(x_1, x_2, \ldots, x_N) =  \prod_{x_c  \in x_i} \Psi_{c} (x_c),$$
 where the product is over all maximal cliques $x_c$ in the graph, $x_i$.
 
-In the example of graph in , the maximal cliques are (x1, x2) and (x2,
+In the example of graph in @fig-3node, the maximal cliques are (x1, x2) and (x2,
 x3), so the Hammersley-Clifford theorem says that the corresponding
 joint probability must be of the form of equation (@eq-x1x2x3).
 
@@ -116,7 +116,7 @@ observed and unobserved variables. The graph below shows a simple
 **Markov chain** @Gagniuc1989 structure with three observed variables,
 shaded, labeled $y_i$, and three unobserved variables, labeled $x_i$:
 
-![](figures/graphical_models/x1x2x3y1y2y3.png){width="36%"}
+![Markov chain  with three observed variables, shaded, and three unobserved variables.](figures/graphical_models/x1x2x3y1y2y3.png){width="36%"}
 
 This is a chain because the variables form a linear sequence. It's a
 Markov chain structure because the hidden variables have the Markov
@@ -140,10 +140,12 @@ useful, called a **Markov random field** (MRF) @Blake2011:
 ![Two-dimensional Markov random field.](figures/graphical_models/mrf.png){width="48%" #fig-leafs}
 
 Then the joint probability over all the variables factorizes into this
-product: $$p(\mathbf{x} \bigm | \mathbf{y}) = 
+product: 
+
+$$p(\mathbf{x} \bigm | \mathbf{y}) = 
 \frac{1}{p(\mathbf{y})}
-\prod_{(i,j)} \phi_{ij}(x_i, x_j) \prod_i \psi_i(x_i, y_i),$$ where the
-first product is over all spatial neighbors $i$ and $j$, and the second
+\prod_{(i,j)} \phi_{ij}(x_i, x_j) \prod_i \psi_i(x_i, y_i),$$
+where the first product is over all spatial neighbors $i$ and $j$, and the second
 product is over all nodes $i$.
 
 An example of how Markov random field models are applied to images is
@@ -154,13 +156,13 @@ can be indicator variables of image segment membership for each pixel.
 The states of a hypothetical most-probable configuration of this MRF are
 shown as the color of each node in this illustration.
 
-  -------
-   \(a\)
-  -------
+:::{#fig-leafs layout-ncol="2"}
+![](figures/graphical_models/leaf2.jpg){width="2.3in" #fig-leafs-a}
 
-  -------
-   \(b\)
-  -------
+![](figures/graphical_models/leaf1.jpg){width="2.5in" #fig-leafs-b}
+
+Fig (a) Image to be segmented and a local region of (a) marked in red.  (b) Visualization of an MRF of nodes corresponding to image pixels inside the marked region, with states indicating segment membership, for a hypothetical most probable configuration.
+::: 
 
 ## Directed Graphical Models
 
@@ -204,6 +206,10 @@ given scene $\mathbf{x}$ occurring. For inference, we often ignore the
 denominator, $P(\mathbf{y})$, called the **evidence**, as it is constant
 with respect to the variables we seek to estimate, $\mathbf{x}$.
 
+:::{.column-margin}
+The stastician Harold Jeffreys wrote, "Bayes' theorem is to the theory of probability what Pythagorus' theorem is to geometry" \cite{Jeffreys1973}
+:::
+
 Typically, we make many observations, $\mathbf{y}$, of the variables of
 some system, and we want to find the the state of some hidden variable,
 $\mathbf{x}$, given those observations. The posterior probability,
@@ -232,10 +238,14 @@ outcome: $$\hat{\mathbf{x}}_{MMSE} = \mbox{argmin}_{\tilde{\mathbf{x}}}
 respect to $\mathbf{x}$ to solve for the stationary point, the global
 minimum for this convex function, we find
 $$\hat{\mathbf{x}}_{MMSE} = \int_{\mathbf{x}} \mathbf{x} p(\mathbf{x} \bigm | \mathbf{y})  d\mathbf{x}.$$
+
+
 Thus, the minimum mean square error estimate, $\hat{\mathbf{x}}_{MMSE}$,
 is the mean of the posterior distribution. If $\mathbf{x}$ represents a
 discretized space, then the marginalization integrals over $d\mathbf{x}$
-become sums over the corresponding discrete states of $\mathbf{x}$.:::{.column-margin}
+become sums over the corresponding discrete states of $\mathbf{x}$.
+
+:::{.column-margin}
 For a Gaussian probability distribution, the MAP
 estimate and the MMSE estimate are always the same, since the mean of
 the distribution is always its maximum value.
@@ -254,18 +264,17 @@ at node $i$.
 
 For the case of discrete variables, we compute the marginal probability
 at a node by summing over the states at all the other nodes,
-$$p(x_i \bigm | \mathbf{y}) =  \sum_{j  \mbox{\textbackslash} i} \sum_{x_j} 
-    p(x_1, x_2, \ldots, x_i, \ldots, x_N \bigm | \mathbf{y}),
-    $${#eq-discreteMarginalization} where the notation
-$j \mbox{\textbackslash} i$ means "all possible values of $j$ except for
-$j = i$."
+$$p\left(x_i \mid \mathbf{y}\right)=\sum_{\lambda_i} \sum_{x_j} p\left(x_1, x_2, \ldots, x_i, \ldots, x_N \mid \mathbf{y}\right),
+$${#eq-discreteMarginalization} 
 
-## Simple Example of Inference in a Graphical Model {#sect:simpleexample}
+where the notation $j \backslash i$ means "all possible values of $j$ except for $j = i$."
+
+## Simple Example of Inference in a Graphical Model {#sec-simpleexample}
 
 To gain intuition, let's calculate the marginal probability for a simple
-example. Consider the three-node Markov chain of @fig-chain2.
+example. Consider the three-node Markov chain of @fig-chain.
 
-![](figures/graphical_models/x1x2x3y1y2y3.png){width="36%"}
+![Same three-node Markov chain of @fig-chain.](figures/graphical_models/x1x2x3y1y2y3.png){width="36%" #fig-chain2}
 
 Vision tasks this can apply to include modeling the probability of a
 pixel belonging to an object edge, given the evidence, observations
@@ -292,29 +301,30 @@ becomes intractable as $N$ grows.
 But we can exploit the model's structure to avoid the exponential growth
 of the computation with $N$. Substituting the joint probability, from
 the graphical model, into the marginalization equation, equation
-(@eq-3chain), gives $$p(x_1 \bigm | \mathbf{y}) = 
+(@eq-3chain), gives 
+$$p(x_1 \bigm | \mathbf{y}) = 
 \frac{1}{p(\mathbf{y})} \sum_{x_2} \sum_{x_3}  
 \phi_{12}(x_1, x_2)  \phi_{23}(x_2, x_3) \psi_{1}(y_1, x_1) \psi_{2}(y_2, x_2) \psi_{3}(y_3, x_3) 
-$${#eq-3chainb} This form for the joint probability reveals that not every
+$${#eq-3chainb} 
+
+This form for the joint probability reveals that not every
 variable is coupled to every other one. We can pass summations through
 variables they don't sum over, letting us compute the marginalization
 much more efficiently. This will make only a small difference for this
 short chain, but it makes a huge difference for longer ones. So we write
 $$\begin{aligned}
-p(x_1 \bigm | \mathbf{y}) 
+p\left(x_1 \mid \mathbf{y}\right)
 & = & 
-\frac{1}{p(\mathbf{y})} \sum_{x_2} \sum_{x_3}  
-\phi_{12}(x_1, x_2)  \phi_{23}(x_2, x_3)
-\psi_{1}(y_1, x_1) \psi_{2}(y_2, x_2) \psi_{3}(y_3, x_3)  
-
+\frac{1}{p(\mathbf{y})} \sum_{x_2} \sum_{x_3} \phi_{12}\left(x_1, x_2\right) \phi_{23}\left(x_2, x_3\right) \psi_1\left(y_1, x_1\right) \psi_2\left(y_2, x_2\right) \psi_3\left(y_3, x_3\right)
 \\
 & = &
 \frac{1}{p(\mathbf{y})}
 \psi_{1}(y_1, x_1) 
 \sum_{x_2} \phi_{12}(x_1, x_2) \psi_{2}(y_2, x_2) 
 \sum_{x_3}   \phi_{23}(x_2, x_3)  \psi_{3}(y_3, x_3)  
-#eq-after 
-\end{aligned}$${#eq-before} That factorization of equation (@eq-after) is the key
+\end{aligned}$${#eq-after} 
+
+That factorization of equation (@eq-after) is the key
 step. It reduces the number of terms summed from order
 $\left| x \right| ^3$ to order $2
 \left| x \right|^2$ for this chain, and for a chain of length $N$ chain,
@@ -352,7 +362,7 @@ BP does that by identifying those reusable sums, that is, the messages.
 
 ![Summary of the messages (partial sums) for a simple belief propagation example.](figures/graphical_models/3bpc2.png){width="50%" #fig-3bpc}
 
-### Derivation of Message-Passing Rule {#sect:bpRules}
+### Derivation of Message-Passing Rule {#sec-bpRules}
 
 We'll describe belief propagation only for the special case of graphical
 models with pairwise potentials. The clique potentials between
@@ -367,21 +377,21 @@ propagation in @Jordan98, @Koller2009.
 Consider @fig-bpmotivator2, showing a section of a general network with
 pairwise potentials. There is a network of $N+1$ nodes, numbered $0$
 through $N$ and we will marginalize over nodes $x_1 \ldots x_N$.
-@fig-bpmotivator2a shows the marginalization equation for a network of
+@fig-bpmotivator2 (a) shows the marginalization equation for a network of
 variables with discrete states. (For continuous variables, integrals
 replace the summations). If we assume the nodes form a tree, we can
 distribute the marginalization sum past nodes for which the sum is a
-constant value to obtain the sums depicted in @fig-bpmotivator2b.
+constant value to obtain the sums depicted in @fig-bpmotivator2 (b).
 
 We define a **belief propagation message**: A message $m_{ij}$, from
 node $i$ to node $j$, is the sum of the probability over all states of
 all nodes in the subtree that leaves node $i$ and does not include node
 $j$.
 
-Referring to @fig-bpmotivator2a, shows the desired marginalization sum
+Referring to @fig-bpmotivator2 (a), shows the desired marginalization sum
 over a network of pairwise cliques. We can pass the summations over node
 states through nodes that are constant over those summations, arriving
-at the factorization shown in @fig-bpmotivator2b. Remembering that the
+at the factorization shown in @fig-bpmotivator2 (b). Remembering that the
 message from node $j$ to node $i$ is the sum over the tree leaving node
 $j$, we can then read-off the recursive belief propagation message
 update rule by marginalizing over the state probabilities at node $j$ in
@@ -392,13 +402,8 @@ $m_{kj} = \sum_{x_k \ldots x_N}$. Marginalization over the states of all
 nodes leaving node $j$, not including node $i$, leads to equation
 (@eq-bpupdate), the belief propagation message passing rule.
 
-  -------
-   \(a\)
-  -------
+![Example motivating belief propagation update rule. (a) Marginalization of a graph with no loops.  (b) Shows how the partial sums at $x_j$ distribute over nodes.](figures/graphical_models/bpmotivator2.png){width="50%" #fig-bpmotivator2}
 
-  -------
-   \(b\)
-  -------
 
 To compute the message from node $j$ to node $i$:
 
@@ -411,15 +416,19 @@ To compute the message from node $j$ to node $i$:
 3.  Marginalize over the variable $x_j$.
 
 These steps are summarized in this equation to compute the message from
-node $j$ to node $i$: $$m_{ji}(x_i) = \sum_{x_j} \psi_{ij} (x_i, x_j) 
-\prod_{k\in \eta(j) \mbox{\textbackslash}   i} m_{kj}(x_j)
-$${#eq-bpupdate} where $\eta(j) \mbox{\textbackslash}   i$ means "the
-neighbors of node $j$ except for node $i$." @fig-bpdiscrete shows this
+node $j$ to node $i$: 
+
+$$m_{j i}\left(x_i\right)=\sum_{x_j} \psi_{i j}\left(x_i, x_j\right) \prod_{k \in \eta(j) \backslash i} m_{k j}\left(x_j\right)
+$${#eq-bpupdate}
+
+where $\eta(j) \backslash i$ means "the neighbors of node $j$ except for node $i$." @fig-bpdiscrete shows this
 equation in a graphical form. Any local potential functions
 $\phi_{j}(x_j)$ are treated as an additional message into node $j$, that
 is, $m_{0j}(x_j) = \phi_{j}(x_j)$. For the case of continuous variables,
 the sum over the states of $x_j$ in equation (@eq-bpupdate) is replaced
 by an integral over the domain of $x_j$.
+
+![Pictorial depiction of belief propagation message passing rules of equation (@eq-bpupdate), where $\hadamard$ indicates elementwise multiplication (i.e., the Hadamard product).](figures/graphical_models/bpdiscrete1.png){width="48%" #fig-bpdiscrete}
 
 As mentioned previously, BP messages are partial sums in the
 marginalization calculation. The arguments of messages are always the
@@ -432,9 +441,7 @@ sense if one has teenaged children.)
 
 ### Marginal Probability
 
-![To compute the marginal probability at node $i$, we multiply
- together all the incoming messages at that node:  
-$p_{i](figures/graphical_models/bpi.png){width="48%" #fig-bpi}
+![To compute the marginal probability at node $i$, we multiply together all the incoming messages at that node: $p_{i}$ as another message.](figures/graphical_models/bpi.png){width="48%" #fig-bpi}
 
 The marginal probability at a node $i$, equation
 (@eq-discreteMarginalization), is the sum over the joint probabilities
@@ -484,40 +491,32 @@ every node, and thus the marginal probabilities everywhere, as it does
 to calculate the incoming messages for the marginal probability at a
 single node.
 
-  ----------------------------------------------------------
-   ![{\bf Synchronous parallel update schedule](figures/graphical_models/man1.png){width="20%" #fig-men}
-                            \(a\)
-  ----------------------------------------------------------
 
-  ----------------------------------------------------------
-   ![](figures/graphical_models/man2.png){width="20%"}
-                            \(b\)
-  ----------------------------------------------------------
+:::{#fig-men layout-ncol="3"}
+![](figures/graphical_models/man1.png)
 
-  ----------------------------------------------------------
-   ![](figures/graphical_models/man3.png){width="20%"}
-                            \(c\)
-  ----------------------------------------------------------
+![](figures/graphical_models/man2.png)
 
-  --------------------------------------------------------------
-   ![{\bf Depth-first BP message passing schedule](figures/graphical_models/rootman1.png){width="20%" #fig-men2}
-                              \(a\)
-  --------------------------------------------------------------
+![](figures/graphical_models/man3.png)
 
-  --------------------------------------------------------------
-   ![](figures/graphical_models/rootman2.png){width="20%"}
-                              \(b\)
-  --------------------------------------------------------------
+**Synchronous parallel update schedule** for BP message passing: Each node sends an outgoing message as soon as it receives the necessary incoming messages. Iterations: (a) one, (b) two, and (c) three.
+:::
 
-  --------------------------------------------------------------
-   ![](figures/graphical_models/rootman3.png){width="20%"}
-                              \(c\)
-  --------------------------------------------------------------
 
-  --------------------------------------------------------------
-   ![](figures/graphical_models/rootman4.png){width="20%"}
-                              \(d\)
-  --------------------------------------------------------------
+
+
+:::{#fig-men2 layout-ncol="4"}
+![](figures/graphical_models/rootman1.png)
+
+![](figures/graphical_models/rootman2.png)
+
+![](figures/graphical_models/rootman3.png)
+
+![](figures/graphical_models/rootman4.png)
+
+**Depth-first BP message passing schedule**. Select a root node. (a) Start at leaves; (b) proceed to root; (c), perform an outgoing sweep; and (d) compute remaining messages, ending at leaf nodes.
+:::
+
 
 ### Example Belief Propagation Application: Stereo
 
@@ -532,25 +531,18 @@ pixel, but to illustrate a simple example of belief propagation in
 vision, we will consider the stereo vision problem while considering
 only one scanline pair at a time.
 
-  ---------------------------------------------------------------
-   ![(a) Left and (b) right camera images. (c and d): insets showing areas of analysis.](figures/graphical_models/lcanoebig.jpg){width="40%" #fig-canoe1}
-                               \(a\)
-  ---------------------------------------------------------------
+:::{#fig-canoe1 layout-ncol="2"}
 
-  ---------------------------------------------------------------
-   ![](figures/graphical_models/rcanoebig.jpg){width="40%"}
-                               \(b\)
-  ---------------------------------------------------------------
+![](figures/graphical_models/lcanoebig.jpg){width="40%" #fig-canoe1-a}
 
-  -------------------------------------------------------------
-   ![](figures/graphical_models/lcanoe2.jpg){width="40%"}
-                              \(c\)
-  -------------------------------------------------------------
+![](figures/graphical_models/rcanoebig.jpg){width="40%" #fig-canoe1-b}
 
-  -------------------------------------------------------------
-   ![](figures/graphical_models/rcanoe2.jpg){width="40%"}
-                              \(d\)
-  -------------------------------------------------------------
+![](figures/graphical_models/lcanoe2.jpg){width="40%" #fig-canoe1-c}
+
+![](figures/graphical_models/rcanoe2.jpg){width="40%" #fig-canoe1-d}
+
+Fig. (a) Left and (b) right camera images. (c and d): insets showing areas of analysis.
+:::
 
 The graphical model that describes this stereo depth reconstruction for
 a single scanline is shown in @fig-canoe3.
@@ -559,7 +551,7 @@ a single scanline is shown in @fig-canoe3.
 
 Each unfilled circle in the graphical model (@fig-canoe3) represents the
 unknown depth of each pixel in the scan line of one of the stereo
-images, in this example, the left camera image in @fig-canoe1c. The
+images, in this example, the left camera image in @fig-canoe1 (c). The
 open circles mean that the depth of each pixels is an unobserved
 variable. Often, we represent the depth as the **disparity** between the
 left and right camera images, see @sec-stereo_vision.
@@ -573,45 +565,52 @@ left camera value, $\boldsymbol\ell_l$, but with independent,
 identically distributed (IID) Gaussian random noise added. This leads to
 a simple formula for the local evidence, $\psi_i$, for the given depth
 value of any pixel,
+
 $$\psi_i = p(d[i,j] \bigm | \boldsymbol\ell_r, \boldsymbol\ell_l) =  k \exp{\left( -\sum_{i=-10}^{i=10} \frac{(\boldsymbol\ell_r[i,j] - \boldsymbol\ell_l[i - d[i, j], j])^2}{2 \sigma^2}  \right)}$$
+
 For simplicity in this example, we discretize the disparity offsets into
 four different bins, each 45 disparity pixels wide. We sum the local
 disparity evidence within each depth bin, then normalize the evidence at
 each position to maintain a probability distribution. The resulting
 local evidence matrix, for each of the four depth states, at each left
-camera spatial position, is displayed in @fig-canoe4c. The intensities
+camera spatial position, is displayed in @fig-canoe4 (c). The intensities
 in each column in the third-row image add up to one.
 
-![Belief propagation applied to graphical model, \fig{\ref{fig-canoe3](figures/graphical_models/bpcanoes5.png){width=".8" #fig-canoe4}
+
+![Belief propagation applied to graphical model, @fig-canoe3, for the stereo problem. (a) Right and (b) left camera views. The black line shows the analyzed row. (c) Local evidence for each depth disparity at left camera. (d) Final rightward and (e) leftward belief propagation messages at each position. (f) Final marginalized posterior probability at each left camera pixel accurately finds the depth discontinuity.](figures/graphical_models/bpcanoes5.png){width=".8" #fig-canoe4}
 
 The prior probability of any configuration of pixel disparity states is
 described by setting the compatibility matrices,
 $\mathbf{\phi}[s_i, s_{i+1}]$ of the Markov chain of @fig-canoe3. For
 this example, we use a compatibility matrix referred to as the Potts
-Model @Wu1982: $$\mathbf{\phi}[s_i, s_{i+1}] = 
+Model @Wu1982: 
+
+$$\mathbf{\phi}[s_i, s_{i+1}] = 
     \begin{cases}
       1, & \text{if}\ s_i = s_{i+1} \\
       \delta, & \text{otherwise}
-    \end{cases}$$ For this example, we used $\delta = 0.001$
+    \end{cases}$$ 
+    
+For this example, we used $\delta = 0.001$
 
-We then ran BP (equation \[@eq-bpupdate\]) in a depth-first update
+We then ran BP (@eq-bpupdate) in a depth-first update
 schedule. For this network, that involves two linear sweeps over all the
 nodes of the chain, first from left to right, then from right to left.
 Starting from the left-most node, we updated the rightward messages one
 node at a time, in a rightward sweep; then, starting from the right-most
 node, updated all the leftward messages one node at a time, in a
-leftward sweep. The results are in @fig-canoe4(d and e), respectively.
+leftward sweep. The results are in @fig-canoe4 (d and e), respectively.
 
 Once all the messages were computed, we used equation (@eq-bpmarginal)
 to find the posterior marginal probability at each node. That involves,
 at each position, multiplying together all the incoming messages,
-including the local evidence. Thus, the values shown in @fig-canoe4f
-are the product, at each position, of @fig-canoe4c, d and e. Note that
+including the local evidence. Thus, the values shown in @fig-canoe4 (f)
+are the product, at each position, of @fig-canoe4 (c, d and e). Note that
 for this scanline, in this image pair, there is a depth discontinuity at
 location of the red vertical mark in @fig-canoe4, namely the canoe is
 closer to the camera than the ground beyond the canoe that appears to
 the right of the canoe. The local evidence for depth disparity,
-@fig-canoe4c, is rather noisy, but the marginal posterior probability,
+@fig-canoe4 (c), is rather noisy, but the marginal posterior probability,
 after aggregating evidence along the scanline, accurately finds the
 depth discontinuity at the canoe boundary.
 
@@ -634,7 +633,7 @@ belief propagation algorithm**:
 2.  Initialize all messages to all ones, or to random values between 0
     and 1.
 
-3.  Run the belief propagation update rules of -sect:bpRules until convergence.
+3.  Run the belief propagation update rules of @sec-bpRules until convergence.
 
 One can show that, in networks with loops, fixed points of the belief
 propagation algorithm (message configurations where the messages don't
@@ -655,7 +654,7 @@ Improvements have been developed over loopy belief propagation for the
 case of MAP estimation; see, for example, tree-reweighted belief
 propagation @Kolmogorov2006 and graph cuts @Zabih2004.
 
-### Numerical Example of Belief Propagation {#sect:numerical}
+### Numerical Example of Belief Propagation {#sec-numerical}
 
 Here we work though a numerical example of belief propagation. To make
 the arithmetic easy, we'll solve for the marginal probabilities in the
@@ -667,7 +666,9 @@ graphical model of two-state (0 and 1) random variables shown in
 That graphical model has three hidden variables, and one variable
 observed to be in state 0. The compatibility matrices are given in the
 arrays below (for which the state indices are 0, then 1, reading from
-left to right and top to bottom): $$\psi_{12}(x_1, x_2) = 
+left to right and top to bottom): 
+
+$$\psi_{12}(x_1, x_2) = 
 \begin{bmatrix}
 1.0 & 0.9 \\
 0.9 & 1.0 
@@ -706,6 +707,7 @@ Let's see what belief propagation gives. We'll follow the parallel,
 synchronous update scheme for calculating all the messages. The leaf
 nodes can send messages along their edges without waiting for any
 messages to be updated. For the message from node 1, we have
+
 $$\begin{aligned}
 m_{12}(x_2) & = & \sum_{x_1} \psi_{12} (x_1, x_2)  \nonumber \\
 & = & 
@@ -728,7 +730,9 @@ k_1
 1 \\ 
 1
 \end{bmatrix}
-\end{aligned}$$ For numerical stability, we typically normalize the
+\end{aligned}$$ 
+
+For numerical stability, we typically normalize the
 computed messages in equation (@eq-bpupdate) so the entries sum to 1, or
 so their maximum entry is 1, then remember to renormalize the final
 marginal probabilities to sum to 1. Here, we will normalize the messages
@@ -759,7 +763,9 @@ k_2
 \end{aligned}$$
 
 We have a nontrivial message from observed node $y_2$ (node 4) to the
-hidden variable $x_2$: $$\begin{aligned}
+hidden variable $x_2$: 
+
+$$\begin{aligned}
 m_{42}(x_2) & = & \sum_{x_4} \psi_{42} (x_2, y_2)  \nonumber \\
 & = & 
 \begin{bmatrix}
@@ -809,7 +815,8 @@ m_{21}(x_1) & = & \sum_{x_2} \psi_{12} (x_1, x_2)  m_{42}(x_2) m_{32}(x_2) \nonu
 
 The final message is that from node 2 to node 3 (since $y_2$ is
 observed, we don't need to compute the message from node 2 to node 4).
-That message is: $$\begin{aligned}
+That message is: 
+$$\begin{aligned}
 m_{23}(x_3) & = & \sum_{x_2} \psi_{23} (x_2, x_3)   m_{42}(x_2) m_{12}(x_2) \nonumber  \\
 & = & 
 \begin{bmatrix}
@@ -838,7 +845,8 @@ Now that we've computed all the messages, let's look at the marginals of
 the three hidden nodes. The product of all the messages arriving at node
 1 is just the one message, $m_{21}(x_1)$, so we have (introducing
 constant $k_3$ to normalize the product of messages to be a probability
-distribution) $$p_1(x_1) = k m_{21}(x_1) 
+distribution) 
+$$p_1(x_1) = k m_{21}(x_1) 
 =
 \frac{1}{2.09}
 \begin{bmatrix}
@@ -849,7 +857,8 @@ for state 0.
 
 The marginal at node 2 is proportional to the product of three messages.
 Two of those are trivial messages, but we'll show them all for
-completeness: $$\begin{aligned}
+completeness: 
+$$\begin{aligned}
 p_2(x_2) & = & k_4 m_{12}(x_2)  m_{42}(x_2)  m_{32}(x_2) \\
 & = & k_4 
 \begin{bmatrix} 
@@ -872,8 +881,8 @@ p_2(x_2) & = & k_4 m_{12}(x_2)  m_{42}(x_2)  m_{32}(x_2) \\
 1.0 \\
 0.1
 \end{bmatrix}
-\end{aligned}$$ As expected, belief propagation reveals a strong bias
-for node 2 being in state 0.
+\end{aligned}$$ 
+As expected, belief propagation reveals a strong bias for node 2 being in state 0.
 
 Finally, for the marginal probability at node 3, we have
 $$p_3(x_3) = k_5 m_{23}(x_3) 
@@ -882,7 +891,9 @@ $$p_3(x_3) = k_5 m_{23}(x_3)
 \begin{bmatrix}
 0.2 \\
 1.01
-\end{bmatrix}$$ As predicted, this variable is biased toward being in
+\end{bmatrix}$$ 
+
+As predicted, this variable is biased toward being in
 state 1.
 
 By running belief propagation within this tree, we have computed the
