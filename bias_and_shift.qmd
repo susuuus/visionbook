@@ -20,7 +20,7 @@ co-authored in 2016, so we don't feel too bad pointing out its flaws. In
 that paper, we trained a CNN to colorize black and white photos, and the
 results looked amazing (@fig-bias_and_shift-CIC_teaser).
 
-![Each pair of images shows the grayscale input image and, to its right, the output of the automatic colorization system. Source: \cite{zhang2016colorful](./figures/bias_and_shift/CIC_teaser_v5.jpg){width="100%" #fig-bias_and_shift-CIC_teaser}
+![Each pair of images shows the grayscale input image and, to its right, the output of the automatic colorization system. Source: @zhang2016colorful](./figures/bias_and_shift/CIC_teaser_v5.jpg){width="100%" #fig-bias_and_shift-CIC_teaser}
 
 This was the teaser figure from our paper, showing sixteen examples of
 grayscale input images and the output of our system. Looks almost
@@ -31,7 +31,7 @@ and white photos posted on Reddit @colorizebot_blog. In
 @fig-bias_and_shift-colorizebot_examples are two of the more popular
 results.
 
-![Two results of Reddit's ColorizeBot~\cite{colorizebot_blog](./figures/bias_and_shift/colorizebot_examples.png){width="70%" #fig-bias_and_shift-colorizebot_examples}
+![Two results of Reddit's ColorizeBot @colorizebot_blog. Original images are (left) Chopin, by Louis-Auguste Bisson, 1849, (right) and Benjamin the Thylacine, 1933. The bot ran the model from @zhang2016colorful on the original black and white photos.](./figures/bias_and_shift/colorizebot_examples.png){width="70%" #fig-bias_and_shift-colorizebot_examples}
 
 The results were much worse than what we had shown in our paper. The bot
 turned most photos sepia-toned, and would frequently add ugly smudges of
@@ -49,7 +49,7 @@ ImageNet photos are just dogs (around 12 percent). You can get an idea
 of the degree of the bias by looking at how our net colorizes the dogs
 in @fig-bias_and_shift-dogs_with_tongues.
 
-![(left) Colorization results, using a model trained on ImageNet (example made by Richard Zhang; input black and white photos from ImageNet~\cite{russakovsky2015imagenet](./figures/bias_and_shift/dogs_with_tongues.png){width="90%" #fig-bias_and_shift-dogs_with_tongues}
+![(left) Colorization results, using a model trained on ImageNet (example made by Richard Zhang; input black and white photos from ImageNet @russakovsky2015imagenet. (right) Examples of dog images in ImageNet @russakovsky2015imagenet.](./figures/bias_and_shift/dogs_with_tongues.png){width="90%" #fig-bias_and_shift-dogs_with_tongues}
 
 It adds a pinkish blob underneath their mouths! Why? Because not only is
 ImageNet full of dogs, it is full of dogs with their tongues out. So the
@@ -136,8 +136,8 @@ and testing on another. Each plot shows the training samples (circles),
 used to fit the model, and test samples (triangles) used to measure the
 generalization error. The diagonal plots show the training and test set
 corresponding to distribution A,
-@fig-bias_and_shift-training_test_sets(top-left), and distribution B,
-@fig-bias_and_shift-training_test_sets(bottom-right). In each case, the
+@fig-bias_and_shift-training_test_sets (top-left), and distribution B,
+@fig-bias_and_shift-training_test_sets (bottom-right). In each case, the
 fitted model is shown as a dashed line.
 
 ![Training and testing on different datasets. In this illustration, all datasets have 5 samples.](figures/bias_and_shift/toy_example/training_test_sets.png){width="100%" #fig-bias_and_shift-training_test_sets}
@@ -150,14 +150,11 @@ test are coming from different distributions, the error can be large.
 generalization error made with different combinations of training and
 set sets as shown in @fig-bias_and_shift-training_test_sets.
 
-::: center
-                          Test set  
-  ------------------ --- ---------- --------
-  3-4                A       B      
-  2-4 Training set   A     $0.18$    $0.7$
-  2-4                B     $1.93$    $0.23$
-  2-4                               
-:::
+| Training set | Test set A | Test set B |
+|--------------|------------|------------|
+| A            | 0.18       | 0.7        |
+| B            | 1.93       | 0.23       |
+: Generalization error for different combinations of training and test sets. {#tbl-bias_and_shift-training_test_sets}
 
 The diagonal elements correspond to the error obtained when training on
 the training examples of dataset A and testing on the test examples of
@@ -179,7 +176,7 @@ hypothesis space. But we can check what happens in this toy example.
 error (vertical axis) when evaluating on dataset A as a function of the
 amount of training data (horizontal axis).
 
-![Generalization error as a function of number of training examples. Test set is dataset A. Each curve shows the performance when training with dataset A and with dataset B (same distributions as in \fig{\ref{fig-bias_and_shift-training_test_sets](figures/bias_and_shift/toy_example/test_as_function_of_data.png){width="60%" #fig-bias_and_shift-test_as_function_of_data}
+![Generalization error as a function of number of training examples. Test set is dataset A. Each curve shows the performance when training with dataset A and with dataset B (same distributions as in @fig-bias_and_shift-training_test_sets)](figures/bias_and_shift/toy_example/test_as_function_of_data.png){width="60%" #fig-bias_and_shift-test_as_function_of_data}
 
 Interestingly, both training sets (A and B) succeed in reducing the
 generalization error on the test set of dataset A when more training
@@ -218,9 +215,14 @@ world it would be impossible to win the game, yet researchers with
 experience on these datasets can get around 75 percent of the matches
 right @Torralba2011.
 
-![Let's play the {\em Name That Dataset!](figures/bias_and_shift/datasetsJeopardy.png){width="100%" #fig-bias_and_shift-datasetsJeopardy}
+![Let's play the *Name That Dataset!* game. Modified from @Torralba2011. The game consists in associating each set of three images with the name of the dataset, from the list on the right, they belong to.](figures/bias_and_shift/datasetsJeopardy.png){width="100%" #fig-bias_and_shift-datasetsJeopardy}
 
- One can also train a classifier to play the *Name That
+
+:::{.column-margin}
+Answer key for @fig-bias_and_shift-datasetsJeopardy: 1) Caltech-101, 2) UIUC, 3) MSRC, 4) TinyImages, 5) ImageNet, 6) PASCAL VOC, 7) LabelMe, 8) SUNS-09, 9) 15 Scenes, 10) Corel, 11) Caltech-256, 12) COIL-100.
+:::
+
+One can also train a classifier to play the *Name That
 Dataset!* game automatically. We can do that by selecting a random
 subset of images from each dataset that we will use to train a
 classifier, and then we will test on new unseen images. Indeed, as shown
@@ -235,14 +237,16 @@ using a sample derived from the same testing distribution. These results
 are from 2011 @Torralba2011 and computer vision datasets have evolved
 since then.
 
-::: small
-                            LabelMe market   PASCAL mkt.   ImageNet mkt.   Caltech101 mkt.    
-  ----------------------- ---------------- ------------- --------------- ----------------- -- --
-  1 LabelMe is worth             1 LabelMe   0.26 Pascal   0.31 ImageNet         0 Caltech    
-  1 Pascal is worth           0.50 LabelMe      1 Pascal   0.88 ImageNet         0 Caltech    
-  1 ImageNet is worth         0.24 LabelMe   0.40 Pascal      1 ImageNet         0 Caltech    
-  1 Caltech101 is worth       0.23 LabelMe      0 Pascal   0.28 ImageNet         1 Caltech    
-:::
+
+|                     | LabelMe market | PASCAL mkt. | ImageNet mkt. | Caltech101 mkt. |
+|---------------------|----------------|-------------|---------------|-----------------|
+| 1 LabelMe is worth  | 1 LabelMe      | 0.26 Pascal | 0.31 ImageNet | 0 Caltech       |
+| 1 Pascal is worth   | 0.50 LabelMe   | 1 Pascal    | 0.88 ImageNet | 0 Caltech       |
+| 1 ImageNet is worth | 0.24 LabelMe   | 0.40 Pascal | 1 ImageNet    | 0 Caltech       |
+| 1 Caltech101 is worth | 0.23 LabelMe | 0 Pascal    | 0.28 ImageNet | 1 Caltech       |
+: "Market Value" for a "car" sample across datasets. Modified from @Torralba2011. {#tbl-market_bias}
+
+
 
 ## Sources of Bias
 
@@ -276,7 +280,7 @@ presented in a canonical orientation.
 @fig-bias_and_shift-palmer_1981enhanced shows the preferred viewpoint
 for the 12 objects studied.
 
-![Cannonical viewpoints for 12 objects. Figure from \cite{Palmer1981](figures/bias_and_shift/palmer_1981enhanced.jpg){width="100%" #fig-bias_and_shift-palmer_1981enhanced}
+![Cannonical viewpoints for 12 objects. Figure from @Palmer1981](figures/bias_and_shift/palmer_1981enhanced.jpg){width="100%" #fig-bias_and_shift-palmer_1981enhanced}
 
 The views that are recognized faster also match the viewpoints that are
 preferred when taking a picture of those objects @Palmer1981. Such
@@ -422,7 +426,7 @@ $$\begin{aligned}
 \end{aligned}$$ where $H$ is the cross-entropy loss and
 $\mathbf{y}_{\texttt{ostrich}}$ is a one-hot code for the ostrich class.
 
-![An adversarial attack that adds subtle changes to the cat photo to make a neural net classify it instead as an ostrich. The noise image color values are scaled 20x for visualization.](./figures/bias_and_shift/adversarial_perturbation_3.png){width="80%"}
+![An adversarial attack that adds subtle changes to the cat photo to make a neural net classify it instead as an ostrich. The noise image color values are scaled 20x for visualization.](./figures/bias_and_shift/adversarial_perturbation_3.png){width="80%" #fig-bias_and_shift-adversarial_perturbation}
 
 This type of attack required that the attacker has access to your system
 (the neural net $f$) so that they can optimize the noise pattern
@@ -446,8 +450,9 @@ Adversarial analysis is worst case analysis. Remember that we typically
 train our systems to minimize empirical risk, defined as the *mean*
 error over the training data. Because we only focus on the mean, the
 *worst case* might be arbitrarily bad. Alternative approaches try to
-minimize worst-case error, and this can result in systems that are more
-. In @sec-sec-data_augmentation we will discuss how **adversarial
+minimize worst-case error, and this can result in systems that are more **adversarially robust**. 
+
+In @sec-data_augmentation we will discuss how **adversarial
 training** can be used to increase the robustness of the models to
 adversarial attacks.
 
