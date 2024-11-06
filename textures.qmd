@@ -40,6 +40,15 @@ and we will not try to review it here in detail. Instead, we will just
 describe three visual phenomena that will allow you getting a sense of
 the mechanisms underlying texture perception by your own visual system.
 
+
+
+:::{.column-margin}
+How many stones there are in this wall?
+![](figures/heeger_bergen/stone_wall.jpg){width="100%"}
+Most people will not care about the number of rocks in the wall, unless you are in the business of selling rocks. Most observers perceive this image as a rock texture.
+It appears to observers as a texture instead of a composition of countable rocks. They are indeed countable, but counting them requires a significant effort.
+:::
+
 ### Perception of Sets
 
 When an image is composed of one or a few distinct objects, we can
@@ -206,9 +215,9 @@ results. In the examples shown here we use a steerable pyramid
 @sec-image_pyramids with six orientations and three
 scales. The final texture representation is the concatenation of the 18
 subband histograms, the low-pass residual histogram and the input image
-histogram (@fig-heegersubbands\[a\]).
+histogram (@fig-heegersubbands \[a\]).
 
-![](figures/heeger_bergen/analysis_and_synthesis_heeger_bergen.png){width=".8"}
+![(a) Texture analysis (encoder) using a steerable pyramid with six orientations and three scales. The output representation is the concatenation of the 18 subband histograms, the low-pass residual histogram and the input image histogram. (b) Texture synthesis, only one iteration shown. At each iteration, the output is put back as input and the process is repeated $N$ times. The diagram corresponds to the implementation of the function $f_{\theta}$ from @fig-heeger_bergen_iterations}](figures/heeger_bergen/analysis_and_synthesis_heeger_bergen.png){width=".8" #fig-heegersubbands}
 
 The crux of the algorithm is to alternate matching the intensity domain
 pixel histogram of the image, then to transform the resulting image into
@@ -242,7 +251,7 @@ the steerable pyramid.
 
 ![Histogram matching for one of the subbands. The same operation is done for all the subbands independently.](figures/heeger_bergen/heeger_bergen_one_subband_tmp.png){width="100%" #fig-heegersubbands_histmatch}
 
-@fig-heegersubbandsb shows the result of applying this to all the
+@fig-heegersubbands (b) shows the result of applying this to all the
 subbands and then collapsing the pyramid to reconstruct an image. Then
 we also histogram match the output texture to match the histogram of the
 pixel values of the reference texture. The result is an image that
@@ -277,6 +286,9 @@ followed after that introducing stronger statistical representations
 capable of generating higher quality textures @Portilla2000.
 
 
+:::{.column-margin}
+**Parametric texture models** represent a texture image with a small vector of parameters, usually around 1,000 dimensions @Portilla2000.
+:::
 
 These models, usually called **parametric texture models**, stayed
 popular until 2000. After that, **nonparametric texture models** became
@@ -332,25 +344,19 @@ a synthesized texture that maintains the circles, but not the regularity
 of their spacing; and @fig-efros1d shows how a still larger context
 region enforces all the spatial regularities of the input texture.
 
-  ---------------------------------------------------------------------
-   ![Synthesized texture from the Efros-Leung algorithm \cite{Efros99](figures/statistical_image_models/efros1a.jpg){width="10%" #fig-efros1}
-                                  \(a\)
-  ---------------------------------------------------------------------
+:::{#fig-efros1 layout-ncol="4"}
+![](figures/statistical_image_models/efros1a.jpg){#fig-efros1a}
 
-  ---------------------------------------------------------------------
-   ![](figures/statistical_image_models/efros1b.jpg){width="25%"}
-                                  \(b\)
-  ---------------------------------------------------------------------
 
-  ---------------------------------------------------------------------
-   ![](figures/statistical_image_models/efros1c.jpg){width="25%"}
-                                  \(c\)
-  ---------------------------------------------------------------------
+![](figures/statistical_image_models/efros1b.jpg){#fig-efros1b}
 
-  ---------------------------------------------------------------------
-   ![](figures/statistical_image_models/efros1d.jpg){width="25%"}
-                                  \(d\)
-  ---------------------------------------------------------------------
+![](figures/statistical_image_models/efros1c.jpg){#fig-efros1c}
+
+![](figures/statistical_image_models/efros1d.jpg){#fig-efros1d}
+
+Synthesized texture from the Efros-Leung algorithm @Efros99 as a function of size of the context region. 
+
+:::
 
 @fig-efrosresult shows additional image synthesis results. It is
 remarkable that such a simple model works so well. The results seem

@@ -115,7 +115,7 @@ or representation of the input data that has useful properties, as
 measured by some **objective function**. The objective could be, for
 example, to compress the data into a lower dimensional format that still
 preserves all information about the inputs. We will encounter this kind
-of learning in part @sec-generative_models_and_representation_learning of this
+of learning in part @sec-generative_modeling_and_representation_learning of this
 book, on representation learning and generative modeling.
 
 In reinforcement learning, we suppose that we are given a that
