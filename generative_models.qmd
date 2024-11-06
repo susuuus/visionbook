@@ -22,6 +22,10 @@ conversely, is **one-to-many**: there are many possible outputs for any
 given input. Generative models handle this ambiguity by making $g$ a
 **stochastic function**.
 
+:::{.column-margin}
+Although we describe $\mathbf{y}$ as a label here, generative models can in fact take other kinds of instructions as inputs, such as text descriptions of what we want to generate or hand-drawn sketches that we wish the model to fill in.
+:::
+
 One way to make a function stochastic is to make it a deterministic
 function of a stochastic input, and this is how most of the generative
 models in this chapter will work. We define $g$ as a function, called a
@@ -32,9 +36,19 @@ $g: \mathcal{Z} \times \mathcal{Y} \rightarrow \mathcal{X}$. Then this
 function can output a different image $\mathbf{x}$ for each different
 setting of $\mathbf{z}$. The generative process is as follows. First
 sample $\mathbf{z}$ from a prior $p(Z)$, then deterministically generate
-an image based on $\mathbf{z}$ and $\mathbf{y}$: $$\begin{aligned}    \mathbf{z} \sim p(Z)\\
+an image based on $\mathbf{z}$ and $\mathbf{y}$: 
+
+$$\begin{aligned}    \mathbf{z} \sim p(Z)\\
     \mathbf{x} = g(\mathbf{z},\mathbf{y})
-\end{aligned}$$  This procedure is shown in
+\end{aligned}$$  
+
+
+:::{.column-margin}
+Graphical model for generating $X \given Y, Z$.
+![](./figures/generative_models/graphical_model_y_z_to_x_white.png){width="100%"}
+:::
+
+This procedure is shown in
 @fig-generative_models-image_generation_with_z:
 
 ![Making a generator stochastic by conditioning on a random variable.](./figures/generative_models/image_generation_with_z_birds.png){width="70%" #fig-generative_models-image_generation_with_z}
@@ -64,9 +78,13 @@ $$\begin{aligned}
     \mathbf{x} = g(\mathbf{z})
 \end{aligned}$$  
 
-We call this an **unconditional generative
-model** because it is model of the unconditional distribution $p(X)$.
-Generally we will refer to unconditional generative models simply as
+
+:::{.column-margin}
+Graphical model for an unconditional generative model.
+![](./figures/generative_models/graphical_model_z_to_x_white.png){width="100%"}
+:::
+
+We call this an **unconditional generative model** because it is model of the unconditional distribution $p(X)$. Generally we will refer to unconditional generative models simply as
 generative models and use the term **conditional generative model** for
 a model of any conditional distribution $p(X \bigm | Y)$. Conditional
 generative models will be the focus of sec-conditional_generative_models; 
@@ -88,15 +106,8 @@ flip a coin to decide whether to turn left or right, repeat."
 
 Here is that program in pseudocode:
 
-::: algorithm
-[]{#alg:generative_models-simple_rivers_script
-label="alg:generative_models-simple_rivers_script"} **Input:** Random
-vector of coin flips $\mathbf{z} = [z_1, \ldots, z_{n}]$ with each
-$z_i \in \{0,1\}$ **Output:** Picture of a river
-`start drawing at origin with heading = `$90^\circ$
-`extend line 1 unit in current heading direction`
-`rotate heading `$10^\circ$` to the right`
-:::
+![**Algorithm @fig-generative_models-simple_rivers_script}**: A simple generative model that draws images of rivers.](./figures/generative_models/simple_rivers_script.png){width="100%" #fig-generative_models-simple_rivers_script}
+
 
 Here are a few rivers this program draws
 (@fig-generative_models-rivers1):
@@ -227,8 +238,9 @@ that measures the distance[^2] between $p_{\theta}$ and
 $p_{\texttt{data}}$ while only accessing samples from
 $p_{\texttt{data}}$. 
 
-A common choice is to use the , which is defined as
-follows: $$\begin{aligned}
+A common choice is to use the **Kullback-Leibler (KL) divergence**, which is defined as
+follows: 
+$$\begin{aligned}
     p_{\theta}^* &= \mathop{\mathrm{arg\,min}}_{p_\theta} \texttt{KL}\texttt{KL}\KLdivxx{p_{\texttt{data}}}{p_{\theta}}\\
     &= \mathop{\mathrm{arg\,min}}_{p_\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\Big[-\log \frac{p_{\theta}(\mathbf{x})}{p_{\texttt{data}}(\mathbf{x})}\Big]\\
     &= \mathop{\mathrm{arg\,max}}_{p_\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\big[\log p_{\theta}(\mathbf{x})\big] - \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\big[\log p_{\texttt{data}}(\mathbf{x})\big]\\
@@ -239,10 +251,17 @@ follows: $$\begin{aligned}
 expectation by sampling over the training dataset
 $\{\mathbf{x}^{(i)}\}_{i=1}^N$. @eq-generative_models-max_likelihood is the *expected log
 likelihood of the training data under the model's density function*.
+
+
+
+:::{.column-margin}
+$\KLdiv{p_{\texttt{data}}}{p_{\theta}}$ is sometime called the \textit{forward} KL divergence, and it measures the probability of the data under the model distribution. The \textit{reverse} KL divergence, $\KLdiv{p_{\theta}}{p_{\texttt{data}}}$, does the converse, measuring the probability of the model's samples under the data distribution; because we do not have access to the true data distribution, the reverse KL divergence usually cannot be computed.
+:::
+
 Maximizing this objective is therefore a form of **max likelihood learning**. Pictorially we can
 visualize the max likelihood objective as trying to push up the density over each observed datapoint:
 
-![](./figures/generative_models/max_likelihood_density.png){#fig-generative_models-max_likelihood_density width="100%"}
+![Fitting a max likelihood density model to data. The gray region holds a constant amount of mass; think of it as piles of dirt. To increase the amount of dirt at the locations of the green arrows you must remove dirt from other regions, indicated in red.](./figures/generative_models/max_likelihood_density.png){#fig-generative_models-max_likelihood_density width="100%"}
 
 Remember that a probability density function (pdf) is a function
 $p_{\theta}: \mathcal{X} \rightarrow [0,\infty)$ with
@@ -272,6 +291,16 @@ density $p_{\theta} = \frac{e^{-E_{\theta}}}{Z(\theta)}$, where
 $Z(\theta) = \int_{\mathbf{x}} e^{-E_{\theta}(\mathbf{x})}d\mathbf{x}$
 is the normalizing constant. The $Z(\theta)$ can be very expensive to
 compute and often can only be approximated.:
+
+
+:::{.column-margin}
+The parametric form $\frac{e^{-E_{\theta}}}{Z(\theta)}$ is sometimes referred to as a **Boltzmann** or **Gibbs distribution**.
+:::
+
+:::{.column-margin}
+Notice that $Z$ is a function of model parameters $\theta$ but not of datapoint $\mathbf{x}$, since we integrate over all possible data values.
+:::
+
 
 :::{.column-margin}
 Note that low energy $\Rightarrow$ high probability.
@@ -365,6 +394,12 @@ $$\begin{aligned}    \nabla_{\theta} \log Z(\theta) &= \frac{1}{Z(\theta)}\nabla
     &= -\int_x p_{\theta}(\mathbf{x}) \nabla_{\theta} E_{\theta}(\mathbf{x})d\mathbf{x} &&\quad\quad \triangleleft \quad \text{definition of $p_{\theta}$}\\
     &= -\mathbb{E}_{\mathbf{x} \sim p_{\theta}}[\nabla_{\theta} E_{\theta}(\mathbf{x})] &&\quad\quad \triangleleft \quad \text{definition of expectation}
 \end{aligned}$${#eq-generative_models-cd_neg} 
+
+
+:::{.column-margin}
+In @eq-generative_models-grad_log_identity we use a very useful identity from the chain rule of calculus, which appears often in machine learning: $\nabla_{x} \log f(x) = \frac{1}{f(x)} \nabla_{x} f(x)$.
+:::
+
 
 Plugging @eq-generative_models-cd_neg back into
 @eq-generative_models-cd, we arrive at: 
