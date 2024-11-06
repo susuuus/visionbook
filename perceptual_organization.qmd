@@ -29,9 +29,14 @@ primitive elements*: a contour is a group of points that form a line, an
 object is a group of parts that form a cohesive whole, and so on.
 Because of this, understanding how humans, and machines, can identify
 meaningful perceptual groups has been a longstanding area of interest in
-both human and computer vision @Palmer1999.  This leads us to
-a central question: which primitives should be grouped? We will examine
-a few answers below, including the idea that primitives should be
+both human and computer vision @Palmer1999.  
+
+
+:::{.column-margin}
+The content of this chapter can also go under the name **perceptual organization**, which is the study of how our vision system organizes the pixels into more abstracted structures, such as perceptual groups. The Gestalt psychologists were some of the first to study this problem @Koffka1935.
+:::
+
+This leads us to a central question: which primitives should be grouped? We will examine a few answers below, including the idea that primitives should be
 grouped based on *similarity* or based on *association*. We will also
 look at how natural groups can emerge as a byproduct of a downstream
 purpose.
@@ -97,7 +102,7 @@ solving this clustering problem: (1) assign similar pixels to the same
 cluster, (2) assign two pixels to the same cluster if there is no
 boundary between them. We will start with the first.
 
-![There are multiple ways you might segment any given image, and each way will highlight different world properties. This cactus branch could be viewed as (a) a single segment (the ``branch''), (b) two segments (the ``leaf" and the ``flower''), or (c) four segments (the main ``leaf,'' two ``buds,'' and the ``flower'').](./figures/perceptual_organization/ambiguous_segmentation_example.png){width="100%" #fig-perceptual_organization-ambiguous_segmentation_example}
+![There are multiple ways you might segment any given image, and each way will highlight different world properties. This cactus branch could be viewed as (a) a single segment (the "branch"), (b) two segments (the "leaf" and the "flower"), or (c) four segments (the main "leaf," two "buds," and the "flower").](./figures/perceptual_organization/ambiguous_segmentation_example.png){width="100%" #fig-perceptual_organization-ambiguous_segmentation_example}
 
 ### $K$-Means Segmentation
 
@@ -113,7 +118,7 @@ pixel. An image represented this way can be plotted as a scatter plot
 and you can think of it as samples from a distribution over $ab$ colors,
 as shown in @fig-perceptual_organization-scatter_ab_fruits2.
 
-![Different regions of coherent color in the image correspond to clusters in the scatter plot of all the $ab$-values of the image's pixels. In general, segmentation can be reduced to the problem of \textit{clustering pixels](./figures/perceptual_organization/scatter_ab_fruits2.png){width="75%" #fig-perceptual_organization-scatter_ab_fruits2}
+![Different regions of coherent color in the image correspond to clusters in the scatter plot of all the $ab$-values of the image's pixels. In general, segmentation can be reduced to the problem of *clustering pixels* in some feature space ($ab$-color in this example, but it can be any pixel-wise feature).](./figures/perceptual_organization/scatter_ab_fruits2.png){width="75%" #fig-perceptual_organization-scatter_ab_fruits2}
 
 $K$-means tries to find clusters in this scatter plot (and, if you
 prefer a probabilistic interpretation, it can be thought of as fitting a
@@ -135,7 +140,7 @@ However, it fails to group more complex patterns that are not defined by
 color similarity, as in the beach photo in
 @fig-perceptual_organization-kmeans_ab_zebra_and_beach.
 
-![(top row): $k$-means segmentation succeeds on a seemingly hard image. \textit{Photo source](./figures/perceptual_organization/kmeans_ab_zebra_and_beach.png){width="100%" #fig-perceptual_organization-kmeans_ab_zebra_and_beach}
+![(top row): $k$-means segmentation succeeds on a seemingly hard image. *Photo source*: Fredo Durand. (bottom row): $k$-means fails on an image that, to our eye, looks no more complex. ](./figures/perceptual_organization/kmeans_ab_zebra_and_beach.png){width="100%" #fig-perceptual_organization-kmeans_ab_zebra_and_beach}
 
 ### Affinity-Based Segmentation {#sec-perceptual_organization-affinity_based_segmentation}
 
@@ -208,7 +213,7 @@ segmentation. This entire pipeline is shown in
 @fig-perceptual_organization-kmeans_dino, using DINO @caron2021emerging
 as the particular contrastive embedding.
 
-![Image segmentation using $k$-means over DINO~\cite{caron2021emerging](./figures/perceptual_organization/kmeans_dino.png){width="100%" #fig-perceptual_organization-kmeans_dino}
+![Image segmentation using $k$-means over DINO @caron2021emerging features](./figures/perceptual_organization/kmeans_dino.png){width="100%" #fig-perceptual_organization-kmeans_dino}
 
 ## Edges, Boundaries, and Contours
 
@@ -244,6 +249,11 @@ to us humans.
 If you have ever seen an early Disney cartoon (e.g., Snow White), you
 may have noticed a compelling illusion of depth created by parallax
 between different layers of the animated scene. 
+
+:::{.column-margin}
+An schematic of a multiplane camera from William E. Garity's 1940 patent for a "Control Device for Animation."
+![](./figures/perceptual_organization/multiplane_patent.jpg){width="100%"}
+:::
 
 Animators for these cartoons used a device called a multiplane camera,
 which worked as follows. A camera looked at a stack of glass planes. On
