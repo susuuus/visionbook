@@ -104,7 +104,7 @@ see what we need in order to update its parameters
 
 
 
-![A generic layer in the computation graph. The braces represent the part of the computation graph we need to consider in order to evaluate $\mathbf{g}_{\texttt{out}}$, $\localgrad$, and $\costgradin$.](figures/backpropagation/generic_layer_g_L.png){#fig-backpropagation-generic_layer_g_L width="100%"}
+![A generic layer in the computation graph. The braces represent the part of the computation graph we need to consider in order to evaluate $\mathbf{g}_{\texttt{out}}$, $\mathbf{L}$, and $\mathbf{g}in$.](figures/backpropagation/generic_layer_g_L.png){#fig-backpropagation-generic_layer_g_L width="100%"}
 
 
 Here we have introduced two new shorthands, $\mathbf{L}$ and
@@ -129,7 +129,7 @@ $\theta$ to minimize the cost: $$\begin{aligned}
 \end{aligned}$${#eq-backpropagation-djdtheta} 
 
 :::{.column-margin}
-The transpose is because, by convention, $\theta$ is a column vector while $\frac{\partial J}{\partial \theta}$ is a row vector; see the Notation section prior to chapter @sec-notation.
+The transpose is because, by convention, $\theta$ is a column vector while $\frac{\partial J}{\partial \theta}$ is a row vector; see the Notation [section](\notations.html).
 :::
 
 The remaining question is clear: how do we get $\mathbf{g}_l$ and

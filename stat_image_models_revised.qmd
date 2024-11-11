@@ -151,7 +151,7 @@ multinomial defined by the $p_{\theta}$.
 
 
 :::{.column-margin}
-In the multinomial model, the probability that the image in location $(n,m)$ has the value $k$ is $p_{\theta}(\img [n,m] = k) = \theta_k$. In the case of color images, in this model, $k$ will be one of the $256^3$ possible color values.
+In the multinomial model, the probability that the image in location $(n,m)$ has the value $k$ is $p_{\theta}(\ell [n,m] = k) = \theta_k$. In the case of color images, in this model, $k$ will be one of the $256^3$ possible color values.
 :::
 
 ![Estimation of the image model parameters using one image, and then sampling a new image by sampling pixels independently using the histogram of the training image.](figures/statistical_image_models/model_hist_example2.png){width="100%" #fig-model_hist_example}

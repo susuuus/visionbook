@@ -932,9 +932,9 @@ or the weather on the next day.
 
 :::{.column-margin}
 The $\mathbf{T}_{1:n}$ is shorthand for the sequence of tokens $\begin{bmatrix}
-    \mathbf{t}_1^\transpose\\
+    \mathbf{t}_1^\mathsf{T}\\
     \vdots\\
-    \mathbf{t}_{n}^\transpose
+    \mathbf{t}_{n}^\mathsf{T}
 \end{bmatrix}$.
 :::
 

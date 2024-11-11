@@ -428,7 +428,7 @@ is, $m_{0j}(x_j) = \phi_{j}(x_j)$. For the case of continuous variables,
 the sum over the states of $x_j$ in equation (@eq-bpupdate) is replaced
 by an integral over the domain of $x_j$.
 
-![Pictorial depiction of belief propagation message passing rules of equation (@eq-bpupdate), where $\hadamard$ indicates elementwise multiplication (i.e., the Hadamard product).](figures/graphical_models/bpdiscrete1.png){width="48%" #fig-bpdiscrete}
+![Pictorial depiction of belief propagation message passing rules of equation (@eq-bpupdate), where $\odot$ indicates elementwise multiplication (i.e., the Hadamard product).](figures/graphical_models/bpdiscrete1.png){width="48%" #fig-bpdiscrete}
 
 As mentioned previously, BP messages are partial sums in the
 marginalization calculation. The arguments of messages are always the
