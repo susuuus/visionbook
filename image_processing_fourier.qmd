@@ -677,20 +677,20 @@ correspond to a translation with $n_0=16$ and $m_0=-4$. Note that at the
 image boundaries, new pixels appear in (c) not visible in (a). As this
 is not a pure circular translation, the result from equation (@eq-shift)
 will not apply exactly. To verify equation (@eq-shift) let's look at the
-real part of the DFT of each image shown in @fig-shiftFTb and (d). If
+real part of the DFT of each image shown in @fig-shiftFT (b) and (d). If
 equation (@eq-shift) holds true, then the real part of the ratio between
 the DFTs of the two translated images should be
 $\cos{ \left( -2\pi j \left( \frac{u\, n_0}{N} + \frac{v\, m_0}{M} \right) \right)}$
-with $N=M=128$ and $[n_0,m_0]=[16,-4]$. @fig-shiftFTf shows that the
+with $N=M=128$ and $[n_0,m_0]=[16,-4]$. @fig-shiftFT (f) shows that the
 real part of the ratio is indeed very close to a cosine, despite of the
 boundary pixels which are responsible of the noise (the same is true for
-the imaginary part). In fact, @fig-shiftFTe shows the inverse DFT of
+the imaginary part). In fact, @fig-shiftFT (e) shows the inverse DFT of
 the ratio between DFTs, considering both real and imaginary components,
 which is very close to an impulse at $[16,-4]$.
 
 ![](figures/Image_processing_fourier/shiftFT2.png){width="100%"}
 
-Locating the maximum on @fig-shiftFTf can be used to estimate the
+Locating the maximum on @fig-shiftFT (f) can be used to estimate the
 displacement between two images when the translation corresponds to a
 global translation. However, this method is not very robust and it is
 rarely used in practice.
@@ -996,17 +996,17 @@ analysis of linear filters.
 
 ### Example 1: Removing the Columns from the MIT Building
 
-@fig-filteringFTa shows a picture of the main MIT building. The columns
-produce a quasiperiodic pattern. @fig-filteringFTb shows the magnitude
+fig-filteringFT (a) shows a picture of the main MIT building. The columns
+produce a quasiperiodic pattern. fig-filteringFT (b) shows the magnitude
 of the DFT of the MIT picture. One can see picks in the horizontal
 frequency axis, those picks are due to the columns.
 
 To check this we can verify first that the location of the picks is
 related to the separation of the columns. The image in
-@fig-filteringFTa has a size of $256\times256$ pixels, and the columns
+fig-filteringFT (a) has a size of $256\times256$ pixels, and the columns
 are repeated every 14 pixels. Therefore, the DFT, with $N=256$, will
 have picks at the horizontal frequencies: $256/14=18.2$, which is indeed
-what we observe in @fig-filteringFTb. As the repeated pattern is not a
+what we observe in fig-filteringFT (b). As the repeated pattern is not a
 pure sinusoidal function, there will be picks at all the harmonic
 frequencies $k\frac{256}{14}$, where $k$ is an integer. Note also that
 the picks seem to produce vertical bands with decreasing amplitude with
@@ -1018,10 +1018,10 @@ also have some horizontal width.
 We can now also check the effect of suppressing those frequencies by
 zeroing the magnitude of the DFT around each pick (here we zero 7 pixels
 in the horizontal dimension and all the pixels along the vertical
-dimension) as shown @fig-filteringFTd. @fig-filteringFTc shows the
+dimension) as shown fig-filteringFT (d). fig-filteringFT (c) shows the
 resulting image where the columns are almost gone while the rest of the
-image is little affected. @fig-filteringFTe shows the complementary
-image (in fact, $a=c+e$) and its DFT in @fig-filteringFTf.
+image is little affected. fig-filteringFT (e) shows the complementary
+image (in fact, $a=c+e$) and its DFT in fig-filteringFT (f).
 
 ![Simple filtering in the Fourier domain.  (a) The repeated columns of the
   building of the MIT dome generate harmonics along a horizontal line
