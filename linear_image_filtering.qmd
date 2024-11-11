@@ -182,7 +182,7 @@ $f$, and output another signal,
 $\boldsymbol\ell_{\texttt{out}}= f(\boldsymbol\ell_{\texttt{in}})$.
 
 
-![System processing one signal.](figures/linear_image_filtering/genericfilterH.png){#fig-genericfilterH}
+![System processing one signal.](figures/linear_image_filtering/genericfilterH.png){#fig-genericfilterH width="60%"}
 
 This transformation is very general and it can do all sorts of complex
 things: it could detect edges in images, recognize objects, detect
@@ -389,7 +389,7 @@ $$\begin{bmatrix}
 This operation is much easier to understand if we draw it as a
 **convolutional layer** of a neural network as shown in @fig-conv_filter2_nn.
 
-![ convolution represented as a layer in a neural network. Each output unit $i$, $\ellout \left[i \right]$, is a linear combination of the input signal values around location $i$ always using the same set of weights given by $\mathbf{h}$.](figures/linear_image_filtering/conv_filter2.png){width="50%" #fig-conv_filter2_nn}
+![ convolution represented as a layer in a neural network. Each output unit $i$, $\ell_{\text {out }}[i]$, is a linear combination of the input signal values around location $i$ always using the same set of weights given by $\mathbf{h}$.](figures/linear_image_filtering/conv_filter2.png){width="50%" #fig-conv_filter2_nn}
 
 In two dimensions, the processing is analogous: the input filter is
 flipped vertically and horizontally, then slid over the image to record
@@ -484,14 +484,19 @@ properties.
 :::{.column-margin}
 Given the signal:
 
-The signal $\ell \left[n - n_0\right]$ is a shifted version of $\ell \left[n\right]$. With $n_0 = 2$ this is \\
+![](figures/linear_image_filtering/mn1.png){width="40%"}
 
+The signal $\ell \left[n - n_0\right]$ is a shifted version of $\ell \left[n\right]$. With $n_0 = 2$ this is
+
+
+![](figures/linear_image_filtering/mn2.png){width="40%"}
 :::
 
 
 :::{.column-margin}
-\marginnote{
 The impulse function is:
+
+![](figures/linear_image_filtering/mn3.png){width="40%"}
 
 :::
 
@@ -642,6 +647,8 @@ strict sense) or the Dirac delta function.
 
 :::{.column-margin}
 The delta distribution is usually represented with an arrow of height 1, indicating that it has an finite value at that point, and a finite area equal to 1:
+
+![](figures/linear_image_filtering/mn4.png){width="70%"}
 :::
 
 The impulse has several important properties:
