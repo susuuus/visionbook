@@ -64,7 +64,7 @@ density associated with this prediction is shown in
 @fig-conditional_generative_models-tshirts (b).
 
 :::{.column-margin}
-A point prediction does not necessarily come with probabilistic semantics, but here we will interpret a prediction of $\hat{a} = f_{\theta}(l)$ as implying a predictive distribution over $A$ that has the form $p_{\theta}(A = a \given l) = \delta(a - \hat{a})$, where $\delta$ is the Dirac delta function.
+A point prediction does not necessarily come with probabilistic semantics, but here we will interpret a prediction of $\hat{a} = f_{\theta}(l)$ as implying a predictive distribution over $A$ that has the form $p_{\theta}(A = a \\| l) = \delta(a - \hat{a})$, where $\delta$ is the Dirac delta function.
 :::
 
 This prediction is entirely wrong! It splits the difference between the
@@ -121,7 +121,7 @@ modeling tool: it models a maximally expressive predictive distribution
 over a quantized decision space.
 
 
-A point prediction does not necessarily come with probabilistic semantics, but here we will interpret a prediction of $\hat{a} = f_{\theta}(l)$ as implying a predictive distribution over $A$ that has the form $p_{\theta}(A = a \given l) = \delta(a - \hat{a})$, where $\delta$ is the Dirac delta function.
+A point prediction does not necessarily come with probabilistic semantics, but here we will interpret a prediction of $\hat{a} = f_{\theta}(l)$ as implying a predictive distribution over $A$ that has the form $p_{\theta}(A = a \\| l) = \delta(a - \hat{a})$, where $\delta$ is the Dirac delta function.
 :::
 
 ### Classification to the Rescue?

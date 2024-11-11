@@ -159,7 +159,7 @@ based on them. The first operation we will define is how to take a
 A linear combination of tokens is not the same as a fully connected
 layer in a neural net. Instead of taking a weighted sum of scalar
 neurons, it takes a weighted sum of vector-valued tokens
-(@fig-transformers-lin_comb_neurons_vs_tokens) - The general form of these equations for multiple input and output
+(@fig-transformers-lin_bomb_neurons_vs_tokens) - The general form of these equations for multiple input and output
 neurons/tokens is: 
 
 $$\begin{aligned}
@@ -629,7 +629,7 @@ shown in the math below: $$\begin{aligned}
         \mathbf{T}_{\texttt{out}}^1[N-1,:] & \ldots & \mathbf{T}_{\texttt{out}}^k[N-1,:]\\
     \end{bmatrix} &\quad\quad \triangleleft \quad \bar{\mathbf{T}}_{\texttt{out}} \in \mathbb{R}^{N \times kv}\\
     \mathbf{T}_{\texttt{out}}&= \bar{\mathbf{T}}_{\texttt{out}}\mathbf{W}_{\texttt{MSA}} &\quad\quad \triangleleft \quad \mathbf{W}_{\texttt{MSA}} \in \mathbb{R}^{kv \times d}
-\end{aligned}$${#eq-MSA_merge}
+\end{aligned}$${#eq-transformers-MSA_merge}
 where $v$ is the dimensionality of the value vectors and
 $d$ is the dimensionality of the code vectors of the output
 (@dosovitskiy2020vit recommends setting $kv = d$). The matrix
@@ -715,7 +715,7 @@ The output of a transformer, as we have so far defined it, is a set of
 tokens $\mathbf{T}_{\texttt{out}}$. Often we want an output of a
 different format, such as a single vector of logits for image
 classification (@sec-intro_to_learning-image_classification), or in the
-format of an image for image-to-image tasks (@sec-conditional_generative_models-im2imd). To handle these
+format of an image for image-to-image tasks (@sec-conditional_generative_models-im2im). To handle these
 cases, we typically define a task-specific output layer that takes
 $\mathbf{T}_{\texttt{out}}$ as input and produces the desired format as
 output. For example, to produce a vector of logit predictions we could

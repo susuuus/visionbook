@@ -598,13 +598,13 @@ These steps are repeated until a fixed point is reached, which occurs
 when all the datapoints that are assigned to each cluster are closest to
 that cluster's code vector.
 
-Why are these the correct updates? @eq-representation_learning:kmeans_update_assignments is
+Why are these the correct updates? @eq-representation_learning-kmeans_update_assignments is
 straightforward: it's just a brute force enumeration of all $k$ possible
 assignments, from which we select the one that minimizes the $k$-means
 objective for that datapoint, given the current set of code vectors
 $\{\mathbf{z}_j\}_{j=1}^k$.
 
-@eq-representation_learning:kmeans_update_means is
+@eq-representation_learning-kmeans_update_means is
 slightly trickier. It finds the optimal codes $\{\mathbf{z}_j\}_{j=1}^k$
 given the current set of assignments $\{a_i\}_{i=1}^N$. To see why
 @eq-representation_learning-kmeans_update_means is optimal, first

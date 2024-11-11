@@ -4,15 +4,15 @@ Vision is the problem of mapping visual data to representations. This section ex
 
 ## Outline
 
-- **Chapter {@sec-representation_learning}** introduces the idea of representation learning, where the goal is to train a model that produces good representations of the raw data, such as vector embeddings.
+- **Chapter @sec-representation_learning** introduces the idea of representation learning, where the goal is to train a model that produces good representations of the raw data, such as vector embeddings.
 
-- **Chapter {@sec-perceptual_organization}** zooms in on the particular problem of identifying perceptual groups, which are an important kind of visual representation with a long history in vision science.
+- **Chapter @sec-perceptual_organization** zooms in on the particular problem of identifying perceptual groups, which are an important kind of visual representation with a long history in vision science.
 
-- **Chapter {@sec-generative_models}** describes generative models that synthesize images.
+- **Chapter @sec-generative_models** describes generative models that synthesize images.
 
-- **Chapter {@sec-generative_modeling_and_representation_learning}** forges a connection between representation learning and generative modeling, describing these as inverses of each other.
+- **Chapter @sec-generative_modeling_and_representation_learning** forges a connection between representation learning and generative modeling, describing these as inverses of each other.
 
-- **Chapter {@sec-conditional_generative_models}** extends generative models to the conditional setting, where some data is synthesized based on other data.
+- **Chapter @sec-conditional_generative_models** extends generative models to the conditional setting, where some data is synthesized based on other data.
 
 ## Notation
 

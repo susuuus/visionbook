@@ -4,11 +4,11 @@ Building on the concepts introduced in the previous set of chapters, we will des
 
 ## Outline
 
-- **Chapter {@sec-convolutional_neural_nets}** introduces convolutional neural networks, which are very much like image pyramids, but with learned filters.
+- **Chapter @sec-convolutional_neural_nets** introduces convolutional neural networks, which are very much like image pyramids, but with learned filters.
 
-- **Chapter {@sec-recurrent_neural_nets}** covers recurrent networks, which enable memory and adaptation over time.
+- **Chapter @sec-recurrent_neural_nets** covers recurrent networks, which enable memory and adaptation over time.
 
-- **Chapter {@sec-transformers}** describes transformers, a relatively new kind of architecture where the units are vector-valued **tokens** rather than scalar-valued neurons.
+- **Chapter @sec-transformers** describes transformers, a relatively new kind of architecture where the units are vector-valued **tokens** rather than scalar-valued neurons.
 
 ## Notation
 

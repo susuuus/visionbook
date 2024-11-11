@@ -305,7 +305,7 @@ of the stationary sinusoid, $f(x,y,t) = \cos(\pi \omega x)$, is
 $(\delta(w_x + \omega) + \delta(w_x - \omega)) \delta(w_y) \delta(w_t)$.
 We have added a constant bias to the sinusoid to avoid negative
 intensity values, leading to an impulse at the center of the Fourier
-transform, as shown in @fig-motionIllusion1c. The resulting three
+transform, as shown in @fig-motionIllusion1 (c). The resulting three
 colinear impulses are along the temporal frequency, $w_t = 0$ line. A
 space-time plot of the signal (@fig-motionIllusion1\[b\]) shows only
 vertical structures, indicating no motion.
@@ -320,7 +320,7 @@ Fourier transform (@fig-motionIllusion1\[i\]).
 Continuing the development of the illusion, @fig-motionIllusion2c shows
 the Fourier transform and space-time plot of a square wave moving in 1/4
 period jumps each time increment. This signal can be formed from
-@fig-motionIllusion1h by applying a periodic sample-and-hold function,
+@fig-motionIllusion1 (h) by applying a periodic sample-and-hold function,
 resulting in the spectrum of @fig-motionIllusion1i replicated over
 temporal frequencies, and multiplied by a sinc function over temporal
 frequency. The resulting Fourier transform magnitude is shown in

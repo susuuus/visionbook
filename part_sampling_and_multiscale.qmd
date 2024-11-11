@@ -6,10 +6,10 @@ Image resizing is also a key operation to build scale-invariant representations.
 
 ## Outline
 
-- **Chapter {@sec-sampling}** explains how to sample a continuous signal. Sampling is a necessary step to digitize a signal.
+- **Chapter @sec-sampling** explains how to sample a continuous signal. Sampling is a necessary step to digitize a signal.
 
-- **Chapter {@sec-downsampling_and_upsampling}** describes the process of downsampling and upsampling an image.
+- **Chapter @sec-downsampling_and_upsampling** describes the process of downsampling and upsampling an image.
 
-- **Chapter {@sec-filter_banks}** introduces filter banks as a type of image representation.
+- **Chapter @sec-filter_banks** introduces filter banks as a type of image representation.
 
-- **Chapter {@sec-image_pyramids}** describes multiscale image pyramids.
+- **Chapter @sec-image_pyramids** describes multiscale image pyramids.

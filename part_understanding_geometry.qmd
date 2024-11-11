@@ -6,14 +6,14 @@ This collection of chapters will cover many aspects of 3D vision:
 
 ## Outline
 
-- **Chapter {@sec-geometry_homogeneous}** introduces homogeneous and heterogeneous coordinate systems and how to use them to model geometric transformations.
+- **Chapter @sec-geometry_homogeneous** introduces homogeneous and heterogeneous coordinate systems and how to use them to model geometric transformations.
 
-- **Chapter {@sec-camera_parameters}** describes camera models (intrinsic and extrinsic camera parameters) and camera calibration.
+- **Chapter @sec-camera_parameters** describes camera models (intrinsic and extrinsic camera parameters) and camera calibration.
 
-- **Chapter {@sec-stereo_vision}** describes how to recover 3D information from stereo images.
+- **Chapter @sec-stereo_vision** describes how to recover 3D information from stereo images.
 
-- **Chapter {@sec-homography}** describes homographies and their application to build image panoramas.
+- **Chapter @sec-homography** describes homographies and their application to build image panoramas.
 
-- **Chapter {@sec-3D_single_view}** describes how to recover 3D information using only a single image.
+- **Chapter @sec-3D_single_view** describes how to recover 3D information using only a single image.
 
 The material in this set of chapters will come in handy as soon as you have to deal with 3D scenes (i.e., always).

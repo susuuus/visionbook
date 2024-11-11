@@ -4,8 +4,8 @@ These chapters will provide some insights about how simple image models can capt
 
 ## Outline
 
-- **Chapter {@sec-stat_image_models}** presents a sequence of probabilistic models describing images, and a noise removal algorithm corresponding to each model.
+- **Chapter @sec-stat_image_models** presents a sequence of probabilistic models describing images, and a noise removal algorithm corresponding to each model.
 
-- **Chapter {@sec-textures}** introduces the problem of texture analysis and synthesis, and describes two approaches that will be the basic building blocks to understand other generative models of images.
+- **Chapter @sec-textures** introduces the problem of texture analysis and synthesis, and describes two approaches that will be the basic building blocks to understand other generative models of images.
 
-- **Chapter {@sec-probabilistic_graphical_models}** presents a representation and inference algorithm appropriate for statistical relationships with a modular structure, as is common for many computer vision problems.
+- **Chapter @sec-probabilistic_graphical_models** presents a representation and inference algorithm appropriate for statistical relationships with a modular structure, as is common for many computer vision problems.

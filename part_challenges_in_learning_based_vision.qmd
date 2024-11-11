@@ -4,8 +4,8 @@ Learning-based vision comes with a unique set of challenges. This approach to vi
 
 ## Outline
 
-- **Chapter {@sec-bias_and_shift}** introduces the problem of dataset bias and distribution shift. We also encounter the issue of adversarial examples. These problems all come down to a gap between how the model is trained and how it will be used.
+- **Chapter @sec-bias_and_shift** introduces the problem of dataset bias and distribution shift. We also encounter the issue of adversarial examples. These problems all come down to a gap between how the model is trained and how it will be used.
 
-- **Chapter {@sec-data_augmentation}** presents one way of dealing with this gap: train on a more diverse distribution of data.
+- **Chapter @sec-data_augmentation** presents one way of dealing with this gap: train on a more diverse distribution of data.
 
-- **Chapter {@sec-transfer_learning}** presents a second way of dealing with the gap: adapt your models to bridge the gap.
+- **Chapter @sec-transfer_learning** presents a second way of dealing with the gap: adapt your models to bridge the gap.

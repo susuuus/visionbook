@@ -6,10 +6,10 @@ While there are many topics important to a researcher's career that we don't cov
 
 ## Outline
 
-- **Chapter {@sec-how_to_do_research}** presents actionable tips for doing research, especially for those just starting out.
+- **Chapter @sec-how_to_do_research** presents actionable tips for doing research, especially for those just starting out.
 
-- **Chapter {@sec-how_to_write_papers}** gives our tips for writing and organizing your research manuscripts.
+- **Chapter @sec-how_to_write_papers** gives our tips for writing and organizing your research manuscripts.
 
-- **Chapter {@sec-how_to_give_talks}** provides some tips for giving engaging talks and managing nervousness.
+- **Chapter @sec-how_to_give_talks** provides some tips for giving engaging talks and managing nervousness.
 
 Feel free to read these chapters at any moment and in any order.

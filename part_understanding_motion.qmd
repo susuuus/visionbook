@@ -4,13 +4,13 @@ Images are observed by a moving camera recording a dynamic world, but we have de
 
 ## Outline
 
-- **Chapter {@sec-motion_estimation}** introduces the problem of motion estimation and provides a very simple approach to estimate motion across two frames of a video.
+- **Chapter @sec-motion_estimation** introduces the problem of motion estimation and provides a very simple approach to estimate motion across two frames of a video.
 
-- **Chapter {@sec-3D_motion_and_its_2D_projection}** explains the image formation process and how the three-dimensional (3D) motion in the scene projects into a sequence of two-dimensional (2D) images.
+- **Chapter @sec-3D_motion_and_its_2D_projection** explains the image formation process and how the three-dimensional (3D) motion in the scene projects into a sequence of two-dimensional (2D) images.
 
-- **Chapter {@sec-optical_flow_estimation}** goes deeper into optical flow estimation, describing classical methods for motion estimation.
+- **Chapter @sec-optical_flow_estimation** goes deeper into optical flow estimation, describing classical methods for motion estimation.
 
-- **Chapter {@sec-learning_to_estimate_motion}** introduces supervised and unsupervised learning-based methods for motion estimation.
+- **Chapter @sec-learning_to_estimate_motion** introduces supervised and unsupervised learning-based methods for motion estimation.
 
 ## Notation
 

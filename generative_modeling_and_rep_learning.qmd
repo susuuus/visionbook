@@ -26,7 +26,7 @@ just generative modeling! Indeed both modeling directions are valid, and
 the full picture looks like this
 (@fig-generative_modeling_and_representation_learning-rep_gen_schematic):
 
-![The relationship between representation learning and generative modeling. Here we label one side as ``Data'' and the other as ``Embedding''; but what's the precise difference between these two things? Why is an RGB image data while a 100-dimensional vector of neural activations is an embedding? This is a question for you to think about; there is no correct answer.](./figures/generative_modeling_and_representation_learning/rep_gen_schematic.png){width="35%" #fig-generative_modeling_and_representation_learning-rep_gen_schematic}
+![The relationship between representation learning and generative modeling. Here we label one side as "Data" and the other as "Embedding"; but what's the precise difference between these two things? Why is an RGB image data while a 100-dimensional vector of neural activations is an embedding? This is a question for you to think about; there is no correct answer.](./figures/generative_modeling_and_representation_learning/rep_gen_schematic.png){width="35%" #fig-generative_modeling_and_representation_learning-rep_gen_schematic}
 
 :::{.column-margin}
 Moving backward through a net is also what backpropagation does, but it computes a different function: backpropagation computes the gradient $\nabla f$ whereas here we focus on the inverse $f^{-1}$.
@@ -222,7 +222,7 @@ Gaussians in the infinite mixture. Next we need a continuous domain to
 integrate our mixture over, and as a simple choice, we will use the unit
 Gaussian distribution. Then our infinite mixture can be described as:
 $$\begin{aligned}
-    p_{\theta}(\mathbf{x}) = \int_{\mathbf{z}} \underbrace{\mathcal{N}(\mathbf{x}; g^{\mu}_{\theta}(\mathbf{z}), g^{\Sigma}_{\theta}(\mathbf{z}))}_{p_{\theta}(\mathbf{x} \shortgiven \mathbf{z})}\underbrace{\mathcal{N}(\mathbf{z}; \mathbf{0}, \mathbf{I})}_{p_{\mathbf{z}}(\mathbf{z})}d\mathbf{z} \quad\quad \triangleleft \quad\text{VAE hypothesis space}
+    p_{\theta}(\mathbf{x}) = \int_{\mathbf{z}} \underbrace{\mathcal{N}(\mathbf{x}; g^{\mu}_{\theta}(\mathbf{z}), g^{\Sigma}_{\theta}(\mathbf{z}))}_{p_{\theta}(\mathbf{x} \\| \mathbf{z})}\underbrace{\mathcal{N}(\mathbf{z}; \mathbf{0}, \mathbf{I})}_{p_{\mathbf{z}}(\mathbf{z})}d\mathbf{z} \quad\quad \triangleleft \quad\text{VAE hypothesis space}
 \end{aligned}$$ Notice that this equation---an infinite mixture of
 Gaussians parameterized by a function $g_{\theta}$---has exactly the
 same form as the marginal likelihood in
@@ -261,7 +261,7 @@ now fully define the VAE learning problem:
 
 $$\begin{aligned}
     \theta^* &= \mathop{\mathrm{arg\,max}}_{\theta} L(\{\mathbf{x}^{(i)}\}_{i=1}^N, \theta)\\
-    &= \mathop{\mathrm{arg\,max}}_{\theta} \sum_{i=1}^N \log \underbrace{\int_{\mathbf{z}} \overbrace{\mathcal{N}(\mathbf{x}^{(i)}; g^{\mu}_{\theta}(\mathbf{z}), g^{\Sigma}_{\theta}(\mathbf{z}))}^{p_{\theta}(\mathbf{x}^{(i)} \shortgiven \mathbf{z})} \overbrace{\mathcal{N}(\mathbf{z}; \mathbf{0}, \mathbf{I})}^{p_{\mathbf{z}}(\mathbf{z})}d\mathbf{z}}_{p_{\theta}(\mathbf{x}^{(i)})}
+    &= \mathop{\mathrm{arg\,max}}_{\theta} \sum_{i=1}^N \log \underbrace{\int_{\mathbf{z}} \overbrace{\mathcal{N}(\mathbf{x}^{(i)}; g^{\mu}_{\theta}(\mathbf{z}), g^{\Sigma}_{\theta}(\mathbf{z}))}^{p_{\theta}(\mathbf{x}^{(i)} \\| \mathbf{z})} \overbrace{\mathcal{N}(\mathbf{z}; \mathbf{0}, \mathbf{I})}^{p_{\mathbf{z}}(\mathbf{z})}d\mathbf{z}}_{p_{\theta}(\mathbf{x}^{(i)})}
 \end{aligned}$${#eq-generative_modeling_and_representation_learning-vae_learning_problem1}
 
 
@@ -287,7 +287,7 @@ $${#eq-generative_models_and_representation_learning-vae_likelihood_monte_carlo_
 We could stop here, as the learning problem is now
 written in a closed differentiable form: 
 
-$$\begin{aligned}    \theta^* &= \mathop{\mathrm{arg\,max}}_{\theta} \frac{1}{M} \sum_{i=1}^N \log \sum_{j=1}^M \overbrace{\mathcal{N}(\mathbf{x}^{(i)}; g^{\mu}_{\theta}(\mathbf{z}^{(j)}), g^{\Sigma}_{\theta}(\mathbf{z}^{(j)}))}^{p_{\theta}(\mathbf{x}^{(i)} \shortgiven \mathbf{z}^{(j)})}
+$$\begin{aligned}    \theta^* &= \mathop{\mathrm{arg\,max}}_{\theta} \frac{1}{M} \sum_{i=1}^N \log \sum_{j=1}^M \overbrace{\mathcal{N}(\mathbf{x}^{(i)}; g^{\mu}_{\theta}(\mathbf{z}^{(j)}), g^{\Sigma}_{\theta}(\mathbf{z}^{(j)}))}^{p_{\theta}(\mathbf{x}^{(i)} \\| \mathbf{z}^{(j)})}
 \end{aligned}$${#eq-generative_modeling_and_representation_learning-vae_learning_problem1} 
 
 As long as $g_{\theta}$ is a differentiable neural net,
@@ -397,7 +397,7 @@ places high likelihood on the data, and we can get then away with far
 fewer samples to well approximate the data likelihood, as indicated
 @fig-generative_modeling_and_representation_learning-vae_importance_sampling2.
 
-![Optimal importance sampling estimates $p_{\theta}(\mathbf{x})$ by drawing samples from $p_{\theta}(Z \given \mathbf{x})$.](./figures/generative_modeling_and_representation_learning/vae_importance_sampling2.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling2}
+![Optimal importance sampling estimates $p_{\theta}(\mathbf{x})$ by drawing samples from $p_{\theta}(Z \\| \mathbf{x})$.](./figures/generative_modeling_and_representation_learning/vae_importance_sampling2.png){width="50%" #fig-generative_modeling_and_representation_learning-vae_importance_sampling2}
 
 #### Trick 3: Variational inference to approximate the sampling distribution
 
@@ -407,7 +407,7 @@ this distribution may be complicated and hard to sample from.
 
 
 :::{.column-margin}
-Remember, we have defined simple forms for only $p_{\theta}(X \given \mathbf{z})$ and $p_{\mathbf{z}}$ (both are Gaussians), but this does not mean $p_{\theta}(Z \given \mathbf{x})$ has a simple form.
+Remember, we have defined simple forms for only $p_{\theta}(X \\| \mathbf{z})$ and $p_{\mathbf{z}}$ (both are Gaussians), but this does not mean $p_{\theta}(Z \\| \mathbf{x})$ has a simple form.
 :::
 
 Sampling from arbitrary distributions is a standard topic in statistics,
@@ -431,7 +431,7 @@ of a distribution over $\mathbf{z}$; in other words, $f_{\psi}$ is a
 probabilistic encoder! This function is shown next in
 @fig-generative_modeling_and_representation_learning-VAE_encoder:
 
-![A VAE's encoder, $f_{\psi}$, models $p(Z \given \mathbf{x})$ as a Gaussian parameterized by $f_{\psi}(\mathbf{x})$.](./figures/generative_modeling_and_representation_learning/VAE_encoder.png){width="55%" #fig-generative_modeling_and_representation_learning-VAE_encoder}
+![A VAE's encoder, $f_{\psi}$, models $p(Z \\| \mathbf{x})$ as a Gaussian parameterized by $f_{\psi}(\mathbf{x})$.](./figures/generative_modeling_and_representation_learning/VAE_encoder.png){width="55%" #fig-generative_modeling_and_representation_learning-VAE_encoder}
 
 It will turn out that $f$ indeed plays the role of the encoder in the
 VAE, while $g$ plays the role of the decoder.
