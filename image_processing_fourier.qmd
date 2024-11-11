@@ -114,7 +114,7 @@ $$s\left(t\right) = A \sin\left(w ~t - \theta \right)$$ where $A$ is the
 The wave signal is periodic with a period $T=2 \pi / w$.
 
 :::{.column-margin}
-![](figures/Image_processing_fourier/amplitudeandperiod.png)
+![](figures/Image_processing_fourier/amplitudeandperiod.png){width="50%"}
 :::
 
 In discrete time, the **discrete time sine wave** is as follows
@@ -440,6 +440,9 @@ interval. The following plot shows the box function for $L=5$ and
 $N=32$. In this plot, the box signal is defined between $-N/2=-16$ and
 $N/2-1=15$ and the rest is its periodic extension.
 
+
+![Box function for $L=5$ and $N=32$.](figures/Image_processing_fourier/box_fun.png){width="80%"}
+
 We will compute here the DFT of the finite length box function, with a
 length $N$. To compute the DFT we use the DFT definition and change the
 interval of the sum making use of the periodic nature of the terms
@@ -468,6 +471,15 @@ $$\begin{aligned}
 
 This last function in equation (@eq-discrete_sinc_function) gets the
 special name of **discrete sinc** function. 
+
+:::{.column-margin}
+The discrete sinc function ({\bf sincd}) is defined as follows:
+$$
+\text{sincd}(x;a) = \frac{\sin(\pi x)}{a \sin (\pi x/a)}
+$$
+Where $a$ is a constant. This is a symmetrical periodic function with a maximum value of 1.
+:::
+
 
 In summary, we get that The DFT of the box function is the discrete sinc
 function: 
@@ -534,6 +546,15 @@ $\ell\left[n,m \right] = \ell_1\left[n \right] \ell_2\left[m \right]$.
 If an image is separable, then its Fourier transform is separable:
 $\mathscr{L}\left[u,v \right] = \mathscr{L}_1 \left[u \right] \mathscr{L}_2 \left[v \right]$
 
+:::{.column-margin}
+**Separability**. Although almost all images are not separable, some can be approximated by a separable image. Here is one example.
+We can use the SVD decomposition to find a separable approximation to the image on the left. The result is shown on the right. 
+
+![](figures/Image_processing_fourier/facade1.jpg){width="40%"}
+
+![](figures/Image_processing_fourier/facade1aprox.jpg){width="40%"}
+The right-hand image can be written as the product of two 1D signals.
+:::
 
 
 ### Parseval's Theorem
@@ -688,7 +709,7 @@ the imaginary part). In fact, @fig-shiftFT (e) shows the inverse DFT of
 the ratio between DFTs, considering both real and imaginary components,
 which is very close to an impulse at $[16,-4]$.
 
-![](figures/Image_processing_fourier/shiftFT2.png){width="100%"}
+![Translation in space. Image (c) corresponds to image (a) after a translation of 16 pixels to the right and four pixels down. Images (b) and (d) show the real parts of their corresponding DFTs (with $N=128$). Image (f) shows the real part of the ratio between the two DFTs, and (e) is the inverse transform of the ratio between DFTs. The inverse is very close to an impulse located at the coordinates of the displacement vector between the two images.](figures/Image_processing_fourier/shiftFT2.png){width="100%" #fig-shiftFT}
 
 Locating the maximum on @fig-shiftFT (f) can be used to estimate the
 displacement between two images when the translation corresponds to a
@@ -787,15 +808,17 @@ seen in this chapter. All of them can be easily extended to 2D. There
 are more variations of the Fourier transform that we will not discuss
 here.
 
-::: center
-  Time domain                                                                               FT                                                                                                               FT$^{-1}$                                                         Frequency domain
-  ------------------------------------ ------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------- -----------------------------------------------
-  Discrete time, Finite length ($N$)    $\displaystyle \mathscr{L}\left[u \right] = \sum_{n=0}^{N-1} \ell\left[n \right] e^{-2 \pi j \frac{un}{N}}$   $\displaystyle \ell\left[n \right] = \frac{1}{N} \sum_{u=0}^{N-1} \mathscr{L}\left[u \right] e^{2 \pi j \frac{un}{N} }$  Discrete frequency, Finite length ($N$)
-  Continuous time, Infinite length                   $\displaystyle \mathscr{L}(w) = \int_{- \infty}^{\infty} \ell(t) e^{- j w t} dt$                             $\displaystyle \ell(t) = \frac{1}{2\pi} \int_{- \infty}^{\infty} \mathscr{L}(w) e^{j w t} d w$               Continuous frequency, Infinite length
-  Discrete time, Infinite length                $\displaystyle \mathscr{L}(w) = \sum_{n=-\infty}^{\infty} \ell\left[n \right] e^{- j w n}$                        $\displaystyle \ell\left[n \right] = \frac{1}{2\pi} \int_{2 \pi} \mathscr{L}(w) e^{j w n} d w$               Continuous frequency, Finite length ($2 \pi$)
-:::
+::: {#tbl-tableFamilyFT .bordered}
 
-[]{#table:tableFamilyFT label="table:tableFamilyFT"}
+| Time Domain                       | FT                                                                                                 | FT$^{-1}$                                                                                          | Frequency Domain                  |
+|-----------------------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|-----------------------------------|
+| Discrete time, Finite length ($N$) | $\mathscr{L} \left[u \right] = \sum_{n=0}^{N-1} \ell \left[n \right] e^{-2 \pi j \frac{un}{N}}$  | $\ell \left[n \right] = \frac{1}{N} \sum_{u=0}^{N-1} \mathscr{L} \left[u \right] e^{2 \pi j \frac{un}{N} }$ | Discrete frequency, Finite length ($N$) |
+| Continuous time, Infinite length  | $\mathscr{L} (w) = \int_{- \infty}^{\infty} \ell (t) e^{- j w t} dt$                              | $\ell (t) = \frac{1}{2\pi} \int_{- \infty}^{\infty} \mathscr{L} (w) e^{j w t} d w$                | Continuous frequency, Infinite length    |
+| Discrete time, Infinite length    | $\mathscr{L} (w) = \sum_{n=-\infty}^{\infty} \ell \left[n \right] e^{- j w n}$                    | $\ell \left[n \right] = \frac{1}{2\pi} \int_{2 \pi} \mathscr{L} (w) e^{j w n} d w$                | Continuous frequency, Finite length ($2 \pi$) |
+
+Fourier transforms. There are many variants of the Fourier transform. Here we describe the ones we will use in this book.
+
+:::
 
 ## Fourier Analysis as an Image Representation
 
@@ -858,8 +881,7 @@ magnitude of their DFT generally has its maximum at the origin and
 decays inversely proportional to the radial frequency.
 :::
 
- One
-remarkable property of real images is that the magnitude of the DFT of
+One remarkable property of real images is that the magnitude of the DFT of
 natural images is quite similar and can be approximated by
 $A \left[u,v \right] = a/ (u^2+v^2)^b$ with $a$ and $b$ being two
 constants. We will talk more about this property when discussing
@@ -912,7 +934,7 @@ domain produces periodic impulses in the Fourier domain. The location of
 the impulses will be related to the period and orientation or the
 repetitions.
 
-## Fourier Analysis of Linear Filters {#sect:transfer_function}
+## Fourier Analysis of Linear Filters {#sec-transfer_function}
 
 Linear convolutions, despite their simplicity, are surprisingly useful
 for processing and interpreting images. It's often very useful to blur
@@ -921,17 +943,13 @@ Other useful processing includes edge enhancement and motion analysis.
 From the previous section we know that we can write linear filters as
 convolutions:
 
-::: center
-=\[draw, minimum size=3em\] = \[pin edge=to-,thin,black\]
-:::
+![](figures/Image_processing_fourier/con1.png){width="60%"}
 
 where $h \left[n,m \right]$ is the impulse response of the system, or
 convolution kernel. We can also write this as a product in the Fourier
 domain:
 
-::: center
-=\[draw, minimum size=3em\] = \[pin edge=to-,thin,black\]
-:::
+![](figures/Image_processing_fourier/con2.png){width="60%"}
 
 The function $H \left[u, v \right]$ is called the **transfer function**
 of the filter. 
@@ -981,9 +999,16 @@ will show the **fine** details of the image. The three images in
 @fig-sketchresponses show the output image processed by three filters
 corresponding to the frequency responses of @fig-typestypes.
 
-![An image filtered by (left) low-pass, (middle) band-pass, and (right) high-pass filters.](figures/linear_image_filtering/sketch_coarse.jpg){width=".3" #fig-sketchresponses}
- ![](figures/linear_image_filtering/sketch_middle.jpg){width=".3"}
- ![](figures/linear_image_filtering/sketch_fine.jpg){width=".3"}
+:::{layout-ncol="3" #fig-sketchresponses}
+
+![](figures/linear_image_filtering/sketch_coarse.jpg){width=".3" #fig-sketchresponses-a}
+
+![](figures/linear_image_filtering/sketch_middle.jpg){width=".3" #fig-sketchresponses-b}
+
+![](figures/linear_image_filtering/sketch_fine.jpg){width=".3" #fig-sketchresponses-c}
+
+An image filtered by (left) low-pass, (middle) band-pass, and (right) high-pass filters.
+:::
 
 There are many other properties of a filter that can be used to classify
 linear systems (e.g., causality, stability, phase-changes). Some filters
@@ -1003,10 +1028,10 @@ frequency axis, those picks are due to the columns.
 
 To check this we can verify first that the location of the picks is
 related to the separation of the columns. The image in
-fig-filteringFT (a) has a size of $256\times256$ pixels, and the columns
+@fig-filteringFT (a) has a size of $256\times256$ pixels, and the columns
 are repeated every 14 pixels. Therefore, the DFT, with $N=256$, will
 have picks at the horizontal frequencies: $256/14=18.2$, which is indeed
-what we observe in fig-filteringFT (b). As the repeated pattern is not a
+what we observe in @fig-filteringFT (b). As the repeated pattern is not a
 pure sinusoidal function, there will be picks at all the harmonic
 frequencies $k\frac{256}{14}$, where $k$ is an integer. Note also that
 the picks seem to produce vertical bands with decreasing amplitude with
@@ -1018,10 +1043,10 @@ also have some horizontal width.
 We can now also check the effect of suppressing those frequencies by
 zeroing the magnitude of the DFT around each pick (here we zero 7 pixels
 in the horizontal dimension and all the pixels along the vertical
-dimension) as shown fig-filteringFT (d). fig-filteringFT (c) shows the
+dimension) as shown @fig-filteringFT (d). @fig-filteringFT (c) shows the
 resulting image where the columns are almost gone while the rest of the
-image is little affected. fig-filteringFT (e) shows the complementary
-image (in fact, $a=c+e$) and its DFT in fig-filteringFT (f).
+image is little affected. @fig-filteringFT (e) shows the complementary
+image (in fact, $a=c+e$) and its DFT in @fig-filteringFT (f).
 
 ![Simple filtering in the Fourier domain.  (a) The repeated columns of the
   building of the MIT dome generate harmonics along a horizontal line
@@ -1043,14 +1068,21 @@ field of visual psychophysics. **Visual psychophysics** is an
 experimental science that studies the relationship between real world
 stimuli and our perception. 
 
+
+:::{.column-margin}
+The concept of **psychophysics was introduced by Gustav Theodor Fechner (1801--1887).
+
+![](figures/Image_processing_fourier/experimental_setup.jpg){}
+:::
+
+
+
 Using the theory we have studied in this chapter, we can show that when
 the input to a linear system is a wave of frequency $u_0$ and amplitude
 1, the output is another wave of the same frequency as the input but
 with an amplitude equal to $|H \left[ u_0 \right]|$:
 
-::: center
-=\[draw, minimum size=3em\] = \[pin edge=to-,thin,black\]
-:::
+![](figures/Image_processing_fourier/H.png){width="80%"}
 
 This means that one way of identifying the transfer function of a system
 is by using as input a wave and measuring the output amplitude as a
@@ -1103,6 +1135,13 @@ factors such as overall intensity (the pick moves toward the left under
 low illumination.), adaptation (long exposure to one frequency reduces
 the sensitivity for that frequency), age, and so on.
 
+:::{.column-margin}
+Here is my own CSF, traced by hand, with and without eyeglasses. Can you guess which one is with eyeglasses? 
+
+![](figures/spatial_filters/my_CST.png)
+
+(Answer: the red curve is my CSF wearing eyeglasses.)
+:::
 
 
 ## Concluding Remarks
