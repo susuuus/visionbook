@@ -70,7 +70,7 @@ That is, the output value on each location $(n,m)$ is the sum of the input pixel
 
 Visually, filtering an image with the box filter results in blurring the picture. Figure @fig-convExamps2 shows some box filters and the corresponding output images (after normalizing the box filter coefficients so that they sum to 1). Figure @fig-convExamps2-a shows an image convolved with a squared box kernel (i.e., $N=M$). 
 
-::: {layout-ncol=4 #fig-convExamps2}
+:::{layout-ncol=4 #fig-convExamps2}
 ![Original Image.](figures/spatial_filters/img1.jpg){#fig-convExamps2-a}
 
 ![Square box kernel.](figures/spatial_filters/street_square_kernel.jpg){#fig-convExamps2-b}
@@ -79,7 +79,7 @@ Visually, filtering an image with the box filter results in blurring the picture
 
 ![Vertically blurred image.](figures/spatial_filters/street_vertical.jpg){#fig-convExamps2-d}
 
-(a) Input image. (b) Blurring with a square, (c) a horizontal, and (d) a vertical line. Each color channel is filtered independently.
+Fig (a) Input image. (b) Blurring with a square, (c) a horizontal, and (d) a vertical line. Each color channel is filtered independently.
 :::
 
 ### Properties
@@ -109,7 +109,7 @@ In the frequency domain, the DC gain of a filter refers to its gain at a frequen
 
 ![Fourier transform of Box Filter.](figures/spatial_filters/boxfilter_fourier.png){#fig-boxfilter-b}
 
-(a) A one-dimensional (1D) box filter ($\left[1,1,1\right]$), and (b) its Fourier transform over 20 samples. Note that the frequency gain is not monotonically decreasing with spatial frequency.
+Fig (a) A one-dimensional (1D) box filter ($\left[1,1,1\right]$), and (b) its Fourier transform over 20 samples. Note that the frequency gain is not monotonically decreasing with spatial frequency.
 :::
 
 When designing blur kernels (low-pass filters), we generally want to have a DC gain of 1. The reason is that if we have an image with grayscale levels in the range of 0 to 256 and with an average around 128, we will want to preserve the same mean value in the output. For this reason, in most applications, we will normalize the kernel values so that they sum 1. In the case of the box filter, this means dividing the kernel values by $(2N+1)(2M+1)$. 
@@ -330,7 +330,7 @@ The binomial coefficients form the **Pascal's triangle** as shown in Figure @fig
 \index{Pascal's triangle}
 
 ::: {layout-ncol=1 #fig-pascaltriangle}
-\[
+$$
 \begin{array}{*{20}{>{\centering\arraybackslash}p{.2cm}}{>{\arraybackslash}p{1.5cm}}}
 b_0 &   ~ &  ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & 1 & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~  & ~ & \sigma_0^2=0\\
 b_1 &    ~ &  ~ & ~ & ~ & ~ & ~ & ~ & ~ & 1 & ~ & 1 & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & \sigma_1^2=1/4\\
@@ -342,7 +342,7 @@ b_6 &  ~ &  ~ & ~  & 1 & ~ & 6   & ~   & 15 & ~   & 20 & ~   & 15 & ~   & 6   & 
 b_7 &  ~ &  ~ &  1 & ~ & 7 & ~   & 21 & ~   & 35 & ~   & 35 & ~   & 21 & ~   & 7 & ~ & 1 & ~ & ~ & \sigma_7^2=7/4\\
 b_8 &  ~ &  1 & ~  & 8 & ~ & 28 & ~   & 56 & ~   & 70 & ~   & 56 & ~   & 28 & ~ & 8 & ~ & 1 & ~ & \sigma_8^2=2
 \end{array}
-\]
+$$
 :::
 
 Each row of Figure @fig-pascaltriangle shows one 1D-binomial kernel. The first binomial kernel, $b_0$, is the impulse.
@@ -374,7 +374,7 @@ The frequency gain is shown in Figure @fig-gauss3filter-b. The gain decreases mo
 
 ![Fourier Transform of Binomial Filter.](figures/spatial_filters/gauss3filter_fourier.png){#fig-gauss3filter-b}
 
-(a) A one-dimensional three-tap approximation to the Gaussian filter ($\left[1,2,1\right]$) and, (b) its Fourier transform for $N=20$ samples.
+Fig (a) A one-dimensional three-tap approximation to the Gaussian filter ($\left[1,2,1\right]$) and, (b) its Fourier transform for $N=20$ samples.
 :::
 
 - **All the even binomial filters can be written as successive convolutions with the kernel $\left[1,2,1\right]$.** Therefore, their Fourier transform is a power of the Fourier transform of the filter $\left[1,2,1\right]$ and therefore they are also monotonic:
@@ -406,7 +406,7 @@ b_{2,2} = b_{2,0} \circ b_{0,2} =  \begin{bmatrix}
 \end{bmatrix}
 $$
 
-::: {.column-margin}
+:::{.column-margin}
 2D binomial filter:
 
 \begin{center}
@@ -457,11 +457,11 @@ The Gaussian and the binomial filters are widely used in computer vision. In par
 ::: {.column-margin}
 Keep the 2D binomial filter close to you:
 
-\[
+$$
 \begin{bmatrix}
   1 & 2 & 1 \\
   2 & 4 & 2\\
   1 & 2 & 1
 \end{bmatrix}/16
-\]
+$$
 :::
