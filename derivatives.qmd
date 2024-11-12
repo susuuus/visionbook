@@ -7,7 +7,7 @@ Computing image derivatives is an essential operator for extracting useful infor
 
 The operator that computes the image derivatives along the spatial dimensions ($x$ and $y$) is a linear system:
 
-![Computing image derivatives along $x$- and $y$-dimensions.](figures/derivatives/genericfilterH.png){#fig-genericfilterH}
+![Computing image derivatives along $x$- and $y$-dimensions.](figures/derivatives/genericfilterH.png){#fig-genericfilterH width="80%"}
 
 The derivative operator is linear and translation invariant. Therefore, it can be written as a convolution. The following images show an input image and the resulting derivatives along the horizontal and vertical dimensions using one of the discrete approximations that we will discuss in this chapter.
 
@@ -245,9 +245,9 @@ $${#eq-derivate1gauss2dcont}
 The next plots show the 2D Gaussian with $\sigma=1$, and its $x$-derivative:
 
 :::{#fig-gaussian-derivative layout-ncol=2}
-![](figures/gaussian_derivative/gaussian_sigma_1.png){#fig-gaussian-derivative-a}  
+![](figures/derivatives/gaussian_sigma_1.png){#fig-gaussian-derivative-a}  
 
-![](figures/gaussian_derivative/gaussian_x_derivative_sigma_1.png){#fig-gaussian-derivative-b}  
+![](figures/derivatives/gaussian_x_derivative_sigma_1.png){#fig-gaussian-derivative-b}  
 
 Fig (a) 2D Gaussian with $\sigma=1$, and (b) its $x$-derivative.
 :::
@@ -471,12 +471,10 @@ $$
 
 The next plot (@fig-mexican_hat_wavelet) shows the Gaussian Laplacian ($\sigma = 1$). Due to its shape, the Laplacian is also called the inverted **mexican hat wavelet**.
 
-:::{#fig-mexican_hat_wavelet}
-![](figures/spatial_filters/mexican_hat_wavelet_2d.png){#fig-mexican_hat_wavelet-a width=45%}  
-![](figures/spatial_filters/mexican_hat_wavelet_1d.png){#fig-mexican_hat_wavelet-b width=45%}  
 
-The Gaussian Laplacian ($\sigma = 1$) is also called the inverted **mexican hat wavelet**. (a) 2D plot. (b) 1D section at $y=0$.
-:::
+![The Gaussian Laplacian ($\sigma = 1$) is also called the inverted **mexican hat wavelet**. (a) 2D plot. (b) 1D section at $y=0$.
+](figures/derivatives/hat.png){#fig-mexican_hat_wavelet width=45%} 
+
 
 In the discrete domain, there are several approximations to the Laplacian filter. The simplest one consists in sampling the continuous Gaussian Laplacian in discrete locations. Figures @fig-DFTlaplacians(a-c) show the DFT of the Gaussian Laplacian for three different values of $\sigma$. For values $\sigma > 1$, the resulting filter is band-pass, which is the expected behavior for the Gaussian Laplacian.
 
@@ -534,15 +532,8 @@ The discrete approximation also provides a better intuition of how it works than
 
 @fig-discretelaplacian1d compares the output of the first-order derivative @fig-discretelaplacian1d (b) and the Laplacian @fig-discretelaplacian1d (d) on a simple 1D signal @fig-discretelaplacian1d (a). The local maximum of the derivative output @fig-discretelaplacian1d (c) and the zero crossings of the Laplacian output @fig-discretelaplacian1d (e) are aligned with the transitions (boundaries) of the input signal @fig-discretelaplacian1d (a).
 
-:::{#fig-discretelaplacian1d layout-ncol=5}
-![](figures/spatial_filters/discretelaplacian1d_a.png){#fig-discretelaplacian1d-a width=20%}  
-![](figures/spatial_filters/discretelaplacian1d_b.png){#fig-discretelaplacian1d-b width=20%}  
-![](figures/spatial_filters/discretelaplacian1d_c.png){#fig-discretelaplacian1d-c width=20%}  
-![](figures/spatial_filters/discretelaplacian1d_d.png){#fig-discretelaplacian1d-d width=20%}  
-![](figures/spatial_filters/discretelaplacian1d_e.png){#fig-discretelaplacian1d-e width=20%}  
 
-Comparison between the output of a first-order derivative and the Laplacian of 1D signal. (a) Input signal. (b) Kernel $d_1$. (c) Output of the derivative, that is, convolution of (a) and (b). (d) Discrete approximation of the Laplacian. (e) Output of convolving the signal (a) with the Laplacian kernel (d).
-:::
+![Comparison between the output of a first-order derivative and the Laplacian of 1D signal. (a) Input signal. (b) Kernel $d_1$. (c) Output of the derivative, that is, convolution of (a) and (b). (d) Discrete approximation of the Laplacian. (e) Output of convolving the signal (a) with the Laplacian kernel.](figures/derivatives/discretelaplacian1d.png){#fig-discretelaplacian1d}
 
 Marr and Hildreth [@Marr80] used zero-crossings of the Laplacian output to compute edges, but this method is not used nowadays for edge detection. Instead, the Laplacian filter is widely used in a number of other image representations. It is used to build image pyramids (multiscale representations, see Chapter @sec-image_pyramids), and to detect points of interest in images (it is the basic operator used to detect keypoints to compute SIFT descriptors [@Lowe04]).
 
