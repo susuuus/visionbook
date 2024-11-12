@@ -51,7 +51,7 @@ $$
 $$
 This function has its maximum at $x=0$ and then has decreasing oscillations.
 
-![](path_to_your_image.png){width=100%}
+![](figures/temporal_filters/sinc.png){width=100%}
 
 We will discuss this further in @sec-aliasing-ideal_reconstruction.
 :::
@@ -85,7 +85,7 @@ $$
 ::: {.column-margin}
 The Heaviside step function, $u \left[t\right]$, is an infinite length function with the form
 
-![](path_to_your_image.png){width=100%}
+![](figures/temporal_filters/heav.png){width=100%}
 :::
 
 Most filters described by difference equations have an impulse response with infinite support. They are called IIR (Infinite Impulse Response) filters. IIR filters can be further classified as stable and unstable. Stable filters are the ones that given a bounded input, $| f \left[n,m,t \right] |<A$, produce a bounded output, $| g \left[n,m,t \right] | <B$. For this to happen, the impulse response has to be bounded. In unstable filters, the amplitude of the impulse response diverges to infinity. In the previous example, the filter is stable if and only if $| \alpha | < 1$.
