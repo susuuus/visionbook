@@ -24,14 +24,18 @@ Building on the concepts introduced in the previous set of chapters, we will des
 
 As shown below, we draw networks with two kinds of nodes:
 
-::: {#fig-node-notation layout-ncol=3}
-![A scalar node in a neural network.](figures/imaging/network_node_scalar.png){#fig-node-scalar}
-
-![A vector node in a neural network.](figures/imaging/network_node_vector.png){#fig-node-vector}
-
-![A token vector in a neural network.](figures/imaging/network_node_token.png){#fig-node-token}
+:::{.column-margin}
+A token is a vector of neurons used in a particular way, which will be defined in the transformers chapter. We give it a special symbol, a rectangle, to distinguish it from other kinds of vectors of neurons. 
 :::
 
-A token is a vector of neurons used in a particular way, which will be defined in the transformers chapter. We give it a special symbol, a rectangle, to distinguish it from other kinds of vectors of neurons. 
+::: {layout-ncol="3"}
+![](figures/neural_nets/network_node_scalar.png){width="15%"}
+
+![](figures/neural_nets/network_node_vector.png){width="15%"}
+
+![](figures/neural_nets/network_node_token.png){width="15%"}
+:::
+
+
 
 As shown above, sometimes we draw networks with the layers moving left to right and sometimes bottom to top. Both mean the same thing, and the direction in each figure is just chosen for visual clarity.
