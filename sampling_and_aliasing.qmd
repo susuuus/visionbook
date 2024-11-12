@@ -13,7 +13,9 @@ Understanding how information is transformed when we convert a continuous signal
 
 Let's consider a one-dimensional (1D) continuous time signal $\ell (t)$ and its sampled version $\ell [n] = \ell(n T_s)$, where $T_s$ is the **sampling period**. Intuitively, it is clear that in this sampling process, some information will get lost. If no information was lost, then we should be able to recover the continuous signal $\ell (t)$ from its sampled version $\ell [n]$ by doing some kind of interpolation. One way of ensuring that information is not lost is to decrease $T_s$, which will result in a more accurate approximation of the continuous signal $\ell (t)$ at the expense of the amount of memory needed to store $\ell [n]$. Decreasing $T_s$ will also result in an increase in the computational cost of processing the signal $\ell [n]$. Therefore, it is important to choose the appropriate $T_s$. Understanding the sampling process and how to reconstruct the continuous signal is necessary as it will allow us to find the optimal sampling parameters.
 
-> In this chapter, we will be dealing with continuous and discrete signals and their corresponding Fourier transforms.
+:::{.column-margin}
+In this chapter, we will be dealing with continuous and discrete signals and their corresponding Fourier transforms.
+:::
 
 ## Aliasing
 
@@ -33,13 +35,24 @@ The plot above shows the superposition of the original signal before sampling an
 
 It is important to mention that there is nothing special about how the parameters have been chosen for this example. Many different parameter choices would have yielded the same qualitative behavior. This confusion of frequencies is called **aliasing**.
 
-Let's now look at an example in two dimensions (2D). As a concrete example, let's consider the 2D signal shown in @fig-aliasing-a. This 2D signal is a continuous function in the spatial domain defined as $\ell (x,y) = \cos (w (x+2y))$ and with a frequency, $w$, which also varies with location following $w = x+2y$. That is $\ell (x,y) = \cos \left( (x+2y)^2 \right)$. The image shows a set of diagonal waves with a changing frequency starting slow at the bottom left and becoming faster and faster as we approach the top-right corner.
+Let's now look at an example in two dimensions (2D). As a concrete example, let's consider the 2D signal shown in @fig-aliasing (a). This 2D signal is a continuous function in the spatial domain defined as $\ell (x,y) = \cos (w (x+2y))$ and with a frequency, $w$, which also varies with location following $w = x+2y$. That is $\ell (x,y) = \cos \left( (x+2y)^2 \right)$. The image shows a set of diagonal waves with a changing frequency starting slow at the bottom left and becoming faster and faster as we approach the top-right corner.
 
-In order to store this continuous image on a computer, we need to sample it and convert it into a discrete image, $\ell [ n,m ]$. @fig-aliasing-b shows the resulting sampled image when the sampling rate is chosen so that it results in an image size $52 \times 52$ pixels. The first thing to note is that the resulting image keeps very little similarity to the original signal. Only the bottom-left corner of the image looks anything like the continuous signal. As we move toward the right, the image changes the dominant orientation and the frequency becomes slow again.
+In order to store this continuous image on a computer, we need to sample it and convert it into a discrete image, $\ell [ n,m ]$. @fig-aliasing (b) shows the resulting sampled image when the sampling rate is chosen so that it results in an image size $52 \times 52$ pixels. The first thing to note is that the resulting image keeps very little similarity to the original signal. Only the bottom-left corner of the image looks anything like the continuous signal. As we move toward the right, the image changes the dominant orientation and the frequency becomes slow again.
 
-![A continuous image (here shown by sampling very finely). Its heavily sampled version resulting in an image with size $52 \times 52$.](figures/Image_processing_sampling/aliasing.png){#fig-aliasing}
 
-> Our perception seems to follow the slow and smooth assumption [@yair98]. We have a prior towards smooth and slow trajectories and textures. In the presence of noise, or missing information, our visual system will tend to follow the prior.
+:::{#fig-aliasing layout-ncol="2"}
+![](figures/Image_processing_sampling/aliasing_1.jpg){width="50%" #fig-alaising-a}
+
+
+![](figures/Image_processing_sampling/aliasing_2.jpg){width="50%" #fig-aliasing-b}
+
+A continuous image (here shown by sampling very finely). Its heavily sampled version resulting in an image with size $52 \times 52$.
+:::
+
+
+:::{.column-margin}
+Our perception seems to follow the slow and smooth assumption [@yair98]. We have a prior towards smooth and slow trajectories and textures. In the presence of noise, or missing information, our visual system will tend to follow the prior.
+:::
 
 ## Sampling Theorem
 
@@ -47,13 +60,12 @@ Let's start by considering a band-limited signal $\ell(t)$.
 
 A band-limited signal is a signal with no spectral content above a frequency $w_{max}$. An example of a band-limited signal is a signal with the following Fourier transform:
 
-![A band-limited signal with maximum frequency $w_{max}$.](figures/Image_processing_sampling/band_limited_signal.png){#fig-band_limited_signal}
+![A band-limited signal with maximum frequency $w_{max}$.](figures/Image_processing_sampling/band_limited_signal.png){#fig-band_limited_signal width="30%"}
 
 The **sampling theorem** (also known as Nyquist theorem) states that for a signal to be perfectly reconstructed from a set of samples (under the slow and smooth prior), the sampling frequency $w_s = 2 \pi /T_s$ has to be $w_s > 2w_{max}$ when $w_{max}$ is the maximum frequency present in the input signal [@Shannon1948].
 
 The same theorem can be stated in terms of periods: the sampling period, $T_s$, has to be $T_s < T_{min} / 2$, i.e., smaller than half of the period of the highest frequency component, $T_{min} = 2 \pi /w_{max}$. Note that our previous example did not satisfy the **Nyquist condition**.
 
-> In this book, we use the **radian frequency** for continuous signals, $w = 2 \pi f$, where $f$ is the **hertz frequency**. For a sinusoidal wave of period $T$ seconds, its frequency is $w=2\pi / T$.
 
 ::: {.column-margin}
 In this book, we use the **radian frequency** for continuous signals, $w = 2 \pi f$, where $f$ is the **hertz frequency**. For a sinusoidal wave of period $T$ seconds, its frequency is $w=2\pi / T$.
@@ -75,9 +87,7 @@ When $T_s = 1$, the delta train has the following shape:
 
 ![Delta train with period $T_s=1$. The arrows show when the train's value is infinite. The height of each impulse represents its area.](figures/Image_processing_sampling/delta_train.png){#fig-delta_train}
 
-The delta train can be used to model the sampling process. Remember the sampling property of the delta distribution $\ell (t) \delta (t-a) = \ell(a)$. If we multiply a function, $\ell(t)$, by the delta train, $\delta_{T_s}(t)$, we obtain its sampled version at times $nT_s$, which we will denote as $\ell_{\delta} 
-
- (t)$:
+The delta train can be used to model the sampling process. Remember the sampling property of the delta distribution $\ell (t) \delta (t-a) = \ell(a)$. If we multiply a function, $\ell(t)$, by the delta train, $\delta_{T_s}(t)$, we obtain its sampled version at times $nT_s$, which we will denote as $\ell_{\delta} (t)$:
 
 $$
 \ell_{\delta}  (t) = \ell(t) \delta_{T_s}(t) = \ell(t) \sum_{n=-\infty}^{\infty} \delta(t-n T_s)  =  \sum_{n=-\infty}^{\infty} \ell_s [ n ] \delta(t-n T_s)
@@ -135,13 +145,15 @@ $$
 \delta_{\frac{2 \pi}{T_s}}(w)
 $$
 
-> The delta train with period $T_s$ is:
-> 
-> ![Delta train with period $T_s$.](figures/Image_processing_sampling/delta_train_period.png)
-> 
-> and its Fourier transform is:
-> 
-> ![Fourier transform of delta train.](figures/Image_processing_sampling/fourier_delta_train.png)
+:::{.column-margin}
+The delta train with period $T_s$ is:
+ 
+![Delta train with period $T_s$.](figures/Image_processing_sampling/delta_train_period.png)
+ 
+and its Fourier transform is:
+ 
+![Fourier transform of delta train.](figures/Image_processing_sampling/fourier_delta_train.png)
+:::
 
 Therefore, the continuous Fourier transform of $\ell_{\delta} (t)$ can be written as:
 
@@ -149,7 +161,7 @@ $$
 \mathscr{L}_{\delta} (w) = \mathscr{L}(w) \circ \frac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} \delta \left(w-k \frac{2 \pi}{T_s} \right) = \frac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} \mathscr{L} \left(w-k \frac{2 \pi}{T_s} \right)
 $$
 
-where $\mathscr{L}(w)$ is the Fourier transform of $\ell(t)$. This equation shows that $\mathscr{L}_{\delta} (w)$ is built as an infinite sum of translated copies of $\mathscr{L}(w)$, as shown in @fig-sketch_aliasing-a. Each copy is centered on $k \frac{2 \pi}{T_s}$. If $T_s$ is small (i.e., if we sample very fast), then those copies will be far away from each other (@fig-sketch_aliasing-a). But if we have few samples and $T_s$ is large, those copies will get very close and will start mixing with each other (@fig-sketch_aliasing-b). High-frequency content in $\mathscr{L}(w)$ will affect the low-frequency content of $\mathscr{L}_{\delta} (w)$, and this is exactly what produces aliasing.
+where $\mathscr{L}(w)$ is the Fourier transform of $\ell(t)$. This equation shows that $\mathscr{L}_{\delta} (w)$ is built as an infinite sum of translated copies of $\mathscr{L}(w)$, as shown in @fig-sketch_aliasing (a). Each copy is centered on $k \frac{2 \pi}{T_s}$. If $T_s$ is small (i.e., if we sample very fast), then those copies will be far away from each other (@fig-sketch_aliasing (a)). But if we have few samples and $T_s$ is large, those copies will get very close and will start mixing with each other (@fig-sketch_aliasing (b)). High-frequency content in $\mathscr{L}(w)$ will affect the low-frequency content of $\mathscr{L}_{\delta} (w)$, and this is exactly what produces aliasing.
 
 ![Sketch to illustrate aliasing. Example of a band-limited signal, with frequency content only inside the interval $(-w_{max}, w_{max})$. (a) Sampled with a sampling period such a that $T_s < \pi/w_{max}$. (b) Sampled with a period $T_s > \pi/w_{max}$. Aliasing is due to the overlap between the translated copies of the signal Fourier transform, $\mathscr{L}(w)$.](figures/Image_processing_sampling/sketch_aliasing.png){#fig-sketch_aliasing}
 
@@ -169,7 +181,7 @@ H(w) =
     \frac{T_s}{2\pi}       & \quad \text{if } w \in \left[-\pi / T_s, \pi / T_s \right]\\
     0       & \quad \text{otherwise }\\
   \end{cases}
-$$
+$${#eq-boxfilterFT}
 
 The impulse response of such a filter is $h(t) = \text{sinc} (t/T_s)$ where the **sinc** function is:
 
@@ -320,23 +332,17 @@ The analysis we have presented in this chapter assumes signals of infinite lengt
 ## Anti-Aliasing Filter
 \index{Filter!Anti-aliasing}
 
-Sampling with the wrong frequency has interesting effects in 2D. Figure @fig-aliasingFTzebra-a shows an example of a picture downsampled at different resolutions (412×512, 103×128, 52×64, and 26×32) and then reconstructed to the original resolution (412×512 pixels). For the figures, as we do not have access to the continuous image, we always work with sampled versions. But the original image is very high resolution and we can think of it as being the continuous image.
+Sampling with the wrong frequency has interesting effects in 2D. Figure @fig-aliasingFTzebra (a) shows an example of a picture downsampled at different resolutions (412×512, 103×128, 52×64, and 26×32) and then reconstructed to the original resolution (412×512 pixels). For the figures, as we do not have access to the continuous image, we always work with sampled versions. But the original image is very high resolution and we can think of it as being the continuous image.
 
-The images in Figure @fig-aliasingFTzebra-a show the effects of aliasing. The stripes on the zebra's body change orientation as we downsample them. And for the lowest resolution image, it is even hard to recognize the animal as being a zebra. Figure @fig-aliasingFTzebra-b shows what happens with the image Fourier transform when we multiply the image with the delta train, with one every four samples along each dimension (second column of Figure @fig-aliasingFTzebra-b). Figure @fig-aliasingFTzebra-c shows the magnitude of the DFT of the sampled image (it corresponds to the region inside the green square in Figure @fig-aliasingFTzebra-b). The DFT changes substantially, due to aliasing, from one resolution to the next one.
+The images in Figure @fig-aliasingFTzebra (a) show the effects of aliasing. The stripes on the zebra's body change orientation as we downsample them. And for the lowest resolution image, it is even hard to recognize the animal as being a zebra. Figure @fig-aliasingFTzebra (b) shows what happens with the image Fourier transform when we multiply the image with the delta train, with one every four samples along each dimension (second column of Figure @fig-aliasingFTzebra (b)). Figure @fig-aliasingFTzebra (c) shows the magnitude of the DFT of the sampled image (it corresponds to the region inside the green square in Figure @fig-aliasingFTzebra (b)). The DFT changes substantially, due to aliasing, from one resolution to the next one.
 
-::: {#fig-aliasingFTzebra}
-![Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking like a cow. (b) Fourier transform of the continuous signal $\ell(x,y)$ multiplied by delta trains: $\ell_{\delta](figures/Image_processing_sampling/aliasing_ft_abc1.png){width=100% #fig-aliasingFTzebra}
+![Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking like a cow. (b) Fourier transform of the continuous signal $\ell(x,y)$ multiplied by delta trains: $\ell_{\delta}(x,y)$. (c) Discrete Fourier transform of the corresponding sampled signals, $\ell\left[n,m\right]$. (d) Fourier transform of the reconstructed signal with aliasing. (e) Sampled image after processing it with an anti-aliasing filter. (f) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\ell\left[n,m\right]$. Note that now the central part of the Fourier transform is not changing.](figures/Image_processing_sampling/aliasing_ft_abc1.png){width=100% #fig-aliasingFTzebra}
 
-Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking like a cow. (b) Fourier transform of the continuous signal $\ell(x,y)$ multiplied by delta trains: $\ell_{\delta}(x,y)$. (c) Discrete Fourier transform of the corresponding sampled signals, $\ell\left[n,m\right]$. (d) Fourier transform of the reconstructed signal with aliasing. (e) Sampled image after processing it with an anti-aliasing filter. (f) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\ell\left[n,m\right]$. Note that now the central part of the Fourier transform is not changing.
-:::
 
-In order to reduce aliasing artifacts, we need to filter the continuous signal with a low-pass filter to make it band-limited. Then we will be able to sample it, avoiding high-spatial frequencies that interfere with the low-frequency content of the image. The anti-aliasing filter will not prevent the loss of information contained in the high spatial frequencies. @fig-aliasingFTzebra2-a shows the reconstructed images at different resolutions when an anti-aliasing filter is applied before sampling. Each resolution requires a different filter. The anti-aliasing filter can be a box filter like in Equation @eq-boxfilterFT with the support equal to the green region in @fig-aliasingFTzebra-b.
+In order to reduce aliasing artifacts, we need to filter the continuous signal with a low-pass filter to make it band-limited. Then we will be able to sample it, avoiding high-spatial frequencies that interfere with the low-frequency content of the image. The anti-aliasing filter will not prevent the loss of information contained in the high spatial frequencies. @fig-aliasingFTzebra2 (a) shows the reconstructed images at different resolutions when an anti-aliasing filter is applied before sampling. Each resolution requires a different filter. The anti-aliasing filter can be a box filter like in Equation @eq-boxfilterFT with the support equal to the green region in @fig-aliasingFTzebra (b).
 
-::: {#fig-aliasingFTzebra2}
-![Subsampling with anti-aliasing filter. (a) Sampled image after processing it with an anti-aliasing filter. (b) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\ell\left[n,m\right]$. Note that now the central part of the Fourier transform is almost not changing.](figures/Image_processing_sampling/aliasing_ft_abc2.png){width=100% #fig-aliasingFTzebra2}
+![Subsampling with aliasing. (a) The zebra sampled with aliasing starts looking like a cow. (b) Fourier transform of the continuous signal $\ell(x,y)$ multiplied by delta trains: $\ell_{\delta}(x,y)$. (c) Discrete Fourier transform of the corresponding sampled signals, $\ell\left[n,m\right]$. (d) Fourier transform of the reconstructed signal with aliasing. (e) Sampled image after processing it with an anti-aliasing filter. (f) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\ell\left[n,m\right]$. Note that now the central part of the Fourier transform is not changing..](figures/Image_processing_sampling/aliasing_ft_abc2.png){width=100% #fig-aliasingFTzebra2}
 
-Subsampling with anti-aliasing filter. (a) Sampled image after processing it with an anti-aliasing filter. (b) Discrete Fourier transform of the corresponding anti-aliased sampled images, $\ell\left[n,m\right]$. Note that now the central part of the Fourier transform is almost not changing.
-:::
 
 ## Spatiotemporal Sampling
 
@@ -346,6 +352,10 @@ The most common type of spatiotemporal sampling is regular sampling: here, all t
 
 In many cameras (DSLRs, mobile phones, etc.), the most commonly used sampling is the rolling shutter mode. Here, every row in the image is sampled simultaneously. But different rows are sampled at different instants. This sampling mode allows for a faster sampling rate with current hardware implementations, but it can create spatial distortions in the image if the camera moves or when taking pictures of moving objects.
 
+::: {.column-margin}
+**Moire patterns**, also related to aliasing, are interference patterns that appear when superposing semitransparent patterns on top of each other.  
+![](figures/upsamplig_downsampling/moire.png){width=40%}
+:::
 
 ## Concluding Remarks
 
@@ -355,7 +365,3 @@ However, aliasing is not always bad and it might be possible to use aliasing to 
 
 Also, when an image is encoded by multiple channels, aliasing in one channel does not mean that the information is lost because multiple channels could contain complementary information that allows the recovery of high-resolution details.
 
-::: {.column-margin}
-**Moire patterns**, also related to aliasing, are interference patterns that appear when superposing semitransparent patterns on top of each other.  
-![](figures/upsamplig_downsampling/moire.png){width=40%}
-:::
