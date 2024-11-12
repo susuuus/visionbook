@@ -67,11 +67,9 @@ the output at the discarded samples (pixels at an odd row or column) do
 not matter, or may even serve as extra degrees of freedom that can be
 used to make the attack less noticeable.
 
-:::{#fig-simple-network}
-![Analytic aliasing-based attack of a toy system that computes the horizontal image gradient~\cite{rodríguezmuñoz2022aliasing](figures/upsamplig_downsampling/toy_example_book2.png){width=80% #figure-simple-network}
+![Analytic aliasing-based attack of a toy system that computes the horizontal image gradient @rodríguezmuñoz2022aliasing. Input image, $\ell_{\text{in}}$, and output image of $\ell_{\text{out}}=\max(0, \ell_{\text{in}} \circ_2 [1, -1])$, where $\circ_2$ denotes convolution with a stride of 2. As this simple system has aliasing, an attacker can inject a high frequency pattern, $z$, to change the output. Attacked image, $\ell_{\text{in}}+z$, and the output after attack. It doesn't even look like a derivative!](figures/upsamplig_downsampling/toy_example_book2.png){#fig-simple-network width=80%}
 
-Analytic aliasing-based attack of a toy system that computes the horizontal image gradient @rodríguezmuñoz2022aliasing. Input image, $\ell_{\text{in}}$, and output image of $\ell_{\text{out}}=\max(0, \ell_{\text{in}} \circ_2 [1, -1])$, where $\circ_2$ denotes convolution with a stride of 2. As this simple system has aliasing, an attacker can inject a high frequency pattern, $z$, to change the output. Attacked image, $\ell_{\text{in}}+z$, and the output after attack. It doesn't even look like a derivative!
-:::
+
 
 
 In this chapter we will study aliasing when manipulating image
@@ -102,8 +100,8 @@ assume that both dimensions are treated equally, as it is usually done.
 
 :::{.column-margin}
 Decimation is often drawn using the following block:
-~\\
-![Decimation Block Diagram](path/to/your/decimation_block_diagram.png)
+
+![](figures/upsamplig_downsampling/decimation_block_diagram.png)
 :::
 
 Decimation is a linear operation therefore we can write it as a matrix.
@@ -377,12 +375,12 @@ be completely removed, but the attenuation is enough in most cases.
 
 
 
-![The binomial kernel $b_2 = \left[1,2,1\right]$, and its DFT.](figures/upsamplig_downsampling/binomial_kernel.png){#fig-discretesinc width=100%}
+![The binomial kernel $b_2 = \left[1,2,1\right]$, and its DFT.](figures/upsamplig_downsampling/binomial_kernel1.png){#fig-discretesinc2 width=100%}
 
 Or $b_4 = [ 1, 4, 6, 4, 1]$, which attenuates the aliased frequencies
 even more, also results in an oversmoothed signal.
 
-![The binomial kernel $b_4 = [ 1, 4, 6, 4, 1]$, and its DFT.](figures/upsamplig_downsampling/binomial_kernel.png){#fig-discretesinc width=100%}
+![The binomial kernel $b_4 = [ 1, 4, 6, 4, 1]$, and its DFT.](figures/upsamplig_downsampling/binomial_kernel4.png){#fig-discretesinc4 width=100%}
 
 When implementing 2D anti-aliasing filters, we apply two consecutive 1D
 convolutions along each dimension. For efficiency, the anti-aliasing
@@ -412,7 +410,7 @@ we want to prevent with the anti-aliasing filter. The Hamming windowed
 sinc (shown in @fig-ringing_artifacts\[b\]) reduces the oscillation but
 there is still a halo present around edges. This is because there is
 still one oscillation on the filter impulse response.
-@fig-ringing_artifactsc shows the result applying am anti-aliasing
+@fig-ringing_artifacts (c) shows the result applying am anti-aliasing
 binomial filter.
 
 For most applications using a binomial filter ($b_2$ or $b_4$) is enough
