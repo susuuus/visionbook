@@ -201,7 +201,8 @@ produce a new improved image as shown in @fig-heeger_bergen_iterations.
 We will describe a similar algorithm in @sec-generative_models-diffusion_models
 when talking about **diffusion models**.
 
-![The steps of the Heeger-Bergen texture synthesis algorithm. The process starts with white noise input image. Each step takes as input the previous output, and it is modified by a function $f_{\theta](figures/heeger_bergen/heeger_bergen_iterations.png){width="100%" #fig-heeger_bergen_iterations}
+
+![The steps of the Heeger-Bergen texture synthesis algorithm. The process starts with white noise input image. Each step takes as input the previous output, and it is modified by a function $f_{\theta}$, where $\theta$ are the parameters describing a texture. At each step the output image $x_t$ gets closer to the appearance of the reference texture @fig-analysis_heeger_bergen](figures/heeger_bergen/heeger_bergen_iterations.png){width="100%" #fig-heeger_bergen_iterations}
 
 @fig-heegersubbands shows the main idea behind the approach proposed by
 Heeger and Bergen to implement the analysis and synthesis functions.
@@ -217,7 +218,7 @@ scales. The final texture representation is the concatenation of the 18
 subband histograms, the low-pass residual histogram and the input image
 histogram (@fig-heegersubbands \[a\]).
 
-![(a) Texture analysis (encoder) using a steerable pyramid with six orientations and three scales. The output representation is the concatenation of the 18 subband histograms, the low-pass residual histogram and the input image histogram. (b) Texture synthesis, only one iteration shown. At each iteration, the output is put back as input and the process is repeated $N$ times. The diagram corresponds to the implementation of the function $f_{\theta}$ from @fig-heeger_bergen_iterations}](figures/heeger_bergen/analysis_and_synthesis_heeger_bergen.png){width=".8" #fig-heegersubbands}
+![(a) Texture analysis (encoder) using a steerable pyramid with six orientations and three scales. The output representation is the concatenation of the 18 subband histograms, the low-pass residual histogram and the input image histogram. (b) Texture synthesis, only one iteration shown. At each iteration, the output is put back as input and the process is repeated $N$ times. The diagram corresponds to the implementation of the function $f_{\theta}$ from @fig-heeger_bergen_iterations](figures/heeger_bergen/analysis_and_synthesis_heeger_bergen.png){width=".8" #fig-heegersubbands}
 
 The crux of the algorithm is to alternate matching the intensity domain
 pixel histogram of the image, then to transform the resulting image into
@@ -311,7 +312,7 @@ algorithm @Efros99 is an example of the texture to be synthesized, and
 the output is an image of more of that texture. It is an iterative
 algorithm as shown in @fig-sampling_efros_leung.
 
-![In the Efros-Leung algorithm \cite{Efros99](figures/heeger_bergen/sampling_efros_leung.png){width="100%" #fig-sampling_efros_leung}
+![In the Efros-Leung algorithm @Efros99](figures/heeger_bergen/sampling_efros_leung.png){width="100%" #fig-sampling_efros_leung}
 
 At each iteration, we have synthesized pixels in the neighborhood of the
 pixel to be synthesized. We look through the input image for examples of
@@ -367,7 +368,7 @@ Also, we can see that some elements of the reference texture might
 appear multiple times in the output texture. Removing repetitions
 requires decreasing the neighborhood size.
 
-![Image synthesis results from the Efros-Leung algorithm.  The small crops are used to synthesize the larger texture regions. Input images are 128$\times$128 pixels, and the outputs are 256$\times$256 pixels. The neighbourhood size is 17$\times$17 pixels.](figures/heeger_bergen/two_examples_efros_leung.png){width="100%" #fig-efrosresult}
+![Image synthesis results from the Efros-Leung algorithm.  The small crops are used to synthesize the larger texture regions. Input images are 128 $\times$ 128 pixels, and the outputs are 256 $\times$ 256 pixels. The neighbourhood size is 17 $\times$ 17 pixels.](figures/heeger_bergen/two_examples_efros_leung.png){width="100%" #fig-efrosresult}
 
 Embellishments have been developed that account for structures over
 scale @DeBonet98 or which are more efficient by operating on patches
