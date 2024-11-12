@@ -77,11 +77,9 @@ The Gabor filter is an oriented band-pass filter.
 
 @fig-gabor_ft shows the magnitude of the Fourier transform of the Gabor filters. @fig-gabor_ft (a) shows the cosine phase Gabor function, $\psi_r(x,y;u_0,v_0)$, and @fig-gabor_ft (b) shows the sine phase Gabor function, $\psi_i(x,y;u_0,v_0)$. @fig-gabor_ft (c) shows the Fourier transform of the cosine phase Gabor function, $\Psi_r(u,v;u_0,v_0)$, and @fig-gabor_ft (d) shows the Fourier transform of the complex Gabor function, $\Psi(u,v;u_0,v_0)$.
 
-:::{#fig-gabor_ft}
 ![(a) Cosine and (b) sine Gabor functions. (c) Magnitude of the Fourier transform of both the cosine and sine Gabor functions (their FT only differs in the phase). (d) FT of the complex Gabor function, which is asymmetrical with a single lobe.](figures/spatial_filter_sets/gabor_FT.png){width=100% #fig-gabor_ft}
 
-(a) Cosine and (b) sine Gabor functions. (c) Magnitude of the Fourier transform of both the cosine and sine Gabor functions (their FT only differs in the phase). (d) FT of the complex Gabor function, which is asymmetrical with a single lobe.
-:::
+
 
 @fig-gabor_ex_ft shows how the Gabor function changes when modifying
 its parameters (central frequency, $(u_0,v_0)$, and width, $\sigma$).
@@ -92,11 +90,9 @@ frequency extend small. A small value of $\sigma$ has the opposite
 behavior. Analyzing the image with a set of Gabor functions with a large
 $\sigma$ is like computing the Fourier transform of the image.
 
-:::{#fig-gabor_ex_ft}
 ![Cosine phase Gabor functions tuned to different widths, frequencies, and orientations, and their corresponding Fourier transforms (only the magnitude is shown).](figures/spatial_filter_sets/gabor_examples_FT.png){width=100% #fig-gabor_ex_ft}
 
-Cosine phase Gabor functions tuned to different widths, frequencies, and orientations, and their corresponding Fourier transforms (only the magnitude is shown).
-:::
+
 
 The sine phase Gabor function is zero mean. However, the cosine phase
 Gabor function is not zero mean. The Gaussian width $\sigma$ has to be
@@ -110,6 +106,10 @@ similar to the shape of some cortical receptive fields found in the
 mammalian visual system. This provides a hint that we're on the right
 track with these filters to build image representations.
 
+:::{.column-margin}
+Remember the description of simple and complex cells in the visual system from @sec-challenge_of_vision.
+:::
+
 The convolution of the Gabor function with an image, $\ell(x,y)$ results
 in an output image that depends on both space, $(x,y)$, and frequency,
 $(u,v)$: $$
@@ -122,11 +122,9 @@ detect vertical edges. Gabor filters are useful for analyzing line or
 edge phase structures in images. But they have many other benefits when
 we combine them together in quadrature pairs.
 
-:::{#fig-gabor_zebra}
 ![Zebra picture filtered by cosine and sine Gabor functions at three scales with $\sigma = 2,4,8$ and $u_0 = 1/(2\sigma)$, $v_0=0$. Each row shows one scale. (a) Cosine and sine Gabor filters. (b) Cosine and sine outputs. (c) Magnitude and phase of the output of the complex Gabor filter.](figures/spatial_filter_sets/gabor_zebra.png){width=100% #fig-gabor_zebra}
 
-Zebra picture filtered by cosine and sine Gabor functions at three scales with $\sigma = 2,4,8$ and $u_0 = 1/(2\sigma)$, $v_0=0$. Each row shows one scale. (a) Cosine and sine Gabor filters. (b) Cosine and sine outputs. (c) Magnitude and phase of the output of the complex Gabor filter.
-:::
+
 
 ### Quadrature Pairs and the Hilbert Transform
 
@@ -234,11 +232,9 @@ The amplitude of the delta function is the Gaussian envelope of the Gabor functi
 
 The sign invariance property is especially useful when using the local amplitude to localize edges in images. @fig-quad3 (d) shows an image composed of several squares. Each square is defined by different polarities with respect to the background. Two of the squares are solid while the other two are only defined by lines. The local amplitude, @fig-quad3 (f), provides a detector for the square boundaries that is invariant to all those changes. The differences between all the squares are encoded in the local phase image as we will discuss in the following section. @fig-gabor_zebra shows the local amplitude signal computed on real images.
 
-:::{#fig-quad3}
+
 ![Examples of Gabor outputs to illustrate the contrast invariances present in the local amplitude. In these examples the Gabor filters are centered along the horizontal frequency axis ($v_0=0$) therefore detecting only vertical edges.](figures/spatial_filter_sets/gabor_quad_examples.png){width=100% #fig-quad3}
 
-Examples of Gabor outputs to illustrate the contrast invariances present in the local amplitude. In these examples, the Gabor filters are centered along the horizontal frequency axis ($v_0=0$) therefore detecting only vertical edges.
-:::
 
 One property to notice in all these examples, is that, although the
 images $\ell_h(x,y)$ and $\ell_q(x,y)$ are band-pass, the amplitude
@@ -281,11 +277,9 @@ Here, the Gaussian width $\sigma$ is proportional to the distance
 between the central frequency and the origin. This produces filters that
 are rotated and scaled versions of each other.
 
-:::{#fig-gabor_rectandpolar_tiles}
 ![Examples of Gabor sets. Two different ways of tiling the frequency domain.](figures/spatial_filter_sets/gabor_rectandpolar_tiles.png){width=100% #fig-gabor_rectandpolar_tiles}
 
-Examples of Gabor sets. Two different ways of tiling the frequency domain.
-:::
+
 
 If we write in detail the convolution from equation (@eq-gaborconv) we
 can see that the convolution with a Gabor function is like doing a
@@ -359,15 +353,11 @@ due to the positive direction of $\theta$ to be counter-clockwise.
 @fig-steer1 shows examples for the first- and second-order Gaussian
 derivatives.
 
-:::{#fig-steer1}
+
 ![The simplest steerable filters: a first-order derivative filter of any
   orientation can be synthesized from a linear combination of two
   basis filter derivatives. The second-order derivative needs three basis.](figures/spatial_filter_sets/steer1.png){width=100% #fig-steer1}
 
-The simplest steerable filters: a first-order derivative filter of any
-orientation can be synthesized from a linear combination of two
-basis filter derivatives. The second-order derivative needs three basis.
-:::
 
 
 This leads to an architecture for processing images with oriented
@@ -378,11 +368,10 @@ each pixel). Those gain maps adjust the linear combinations of the basis
 filters to allow the input filter to be steered to the desired
 orientations at each position.
 
-:::{#fig-steer1arc}
+
 ![Architecture for steerable filters. This architecture computes the second-order image derivative along orientation $\theta$.](figures/spatial_filter_sets/steer_architecture.png){width=60% #fig-steer1arc}
 
-Architecture for steerable filters. This architecture computes the second-order image derivative along orientation $\theta$.
-:::
+
 
 
 In the case of oriented Gabor filters it is not possible to reconstruct
@@ -491,10 +480,10 @@ same spectral content, but the opposite phase. @fig-steerg2h2 analyzes
 the quality of the approximation. The figure shows the quadrature pair,
 $g_{xx}$ and $h_{xx}$, sampled in space and cropped into a window of
 $13\times13$ pixels, and its Fourier transform. The DFT is computed by
-zero padding to $256\times256$ pixels. In @fig-steerg2h2a $g_{xx}$ is
-the even phase, and in @fig-steerg2h2b $h_{xx}$ is the odd phase.
-@fig-steerg2h2c illustrates that the sum of their squares reveals the
-square of their Gaussian envelopes. @fig-steerg2h2d illustrates a
+zero padding to $256\times256$ pixels. In @fig-steerg2h2 (a) $g_{xx}$ is
+the even phase, and in @fig-steerg2h2 (b) $h_{xx}$ is the odd phase.
+@fig-steerg2h2 (c) illustrates that the sum of their squares reveals the
+square of their Gaussian envelopes. @fig-steerg2h2 (d) illustrates a
 section of the magnitude of their Fourier transforms along the $u$ axis
 for $v=0$. The $h_{xx}$ is a sampled third-order polynomial
 approximation to the Hilbert transform of $g_{xx}$, so their power
@@ -502,11 +491,10 @@ spectra may not be exactly the same. The blue line shows the magnitude
 of the analytic filter $g_{xx}+jh_{xx}$. It has double amplitude, and
 the content for negative frequencies is close to zero.
 
-:::{#fig-steerg2h2}
-![Quadrature pair, $g_{xx](figures/spatial_filter_sets/steer_quad_aprox_a.png){width=100% #fig-steerg2h2}
 
-Quadrature pair, $g_{xx} \left[n,m \right]$ and $h_{xx} \left[n,m \right]$. The filters are sampled in space and cropped into a window of $13\times13$ pixels.
-:::
+![Quadrature pair, $g_{xx} \left[n,m \right]$ and $h_{xx} \left[n,m \right]$. The filters are sampled in space and cropped into a window of $13\times13$ pixels.](figures/spatial_filter_sets/steer_quad_aprox_a.png){width=100% #fig-steerg2h2}
+
+
 
 
 To steer $h_{xx}(x,y)$ to an angle $\theta$, this approximation requires
@@ -520,12 +508,10 @@ h_4(x,y) &= -0.9780 (-2.254 y+y^3) \exp \left(-(x^2+y^2) \right)
 
 These functions have been optimized in order to be $x-y$ separable. The basis function for steerability are not unique. For instance, figures @fig-steer_quad_basis (a and c) show two basis functions that span all rotations of $g_{xx}$. @fig-steer_quad_basis (a) has separable filters corresponding to $g_{xx}$, $g_{xy}$ and $g_{yy}$, and @fig-steer_quad_basis (c) shows three rotated versions of $g_{xx}$ at 0, 60, and 120 degrees. @fig-steer_quad_basis (c) is a non-separable basis spanning the same space as the filters of @fig-steer_quad_basis (a). Figures @fig-steer_quad_basis (b and d) show two basis functions that span all rotations on $h_{xx}$ spanning the same space as the filters of @fig-steer_quad_basis (b). Spatial scaling of the filters will result in changing $\sigma$.
 
-:::{#fig-steer_quad_basis}
 ![(a) Second derivative of Gaussian, $x-y$
 separable steerable basis set. b) Approximation to Hilbert transform of second derivative of  Gaussian, $x-y$ steerable basis set. (c)  Nonseparable basis equivalent to (a). (d) Nonseparable basis set equivalent to (b).](figures/spatial_filter_sets/steer_quad_basis.png){width=100% #fig-steer_quad_basis}
 
-(a) Second derivative of Gaussian, $x-y$ separable steerable basis set. (b) Approximation to Hilbert transform of second derivative of Gaussian, $x-y$ steerable basis set. (c) Nonseparable basis equivalent to (a). (d) Nonseparable basis set equivalent to (b).
-:::
+
 
 Putting it all together, can we compute oriented energy as a function of
 angle, for all angles, just from the seven basis filter responses shown
@@ -541,18 +527,16 @@ derivatives and their quadrature pairs don't suffer from that problem,
 the $g_{xx}$, $h_{xx}$ filters actually do have enough angular
 resolution. In this case, the issue is a more subtle one.
 
-:::{#fig-multioriflorets}
-![](figures/spatial_filter_sets/steer_quad_polarplot_cross.png){width=100%}
+![(Polar plots of orientation energy as a function of angle, computed using $g_{xx}$, $h_{xx}$ filters. (a) Note the non-superposition of oriented energies near the junction of the two lines. (b) Spatially blurring the oriented energy components of the filters results in much improved linear superposition of the orientation plots, removing spurious interference terms, as described in the text.](figures/spatial_filter_sets/steer_quad_polarplot_cross.png){#fig-multioriflorets width=100%}
 
-(Polar plots of orientation energy as a function of angle, computed using $g_{xx}$, $h_{xx}$ filters. (a) Note the non-superposition of oriented energies near the junction of the two lines. (b) Spatially blurring the oriented energy components of the filters results in much improved linear superposition of the orientation plots, removing spurious interference terms, as described in the text.
-:::
+
 
 
 When there are two oriented structures within the passband of the
 quadrature pair filters, the sum of the energies of the individual
 structures is not the same as the energy of the sum of the structures.
 Because we're squaring to find the energies, the combination of multiple
-structures isn't linear. As @fig-multiorifloretsa shows, when there are
+structures isn't linear. As @fig-multioriflorets (a) shows, when there are
 two oriented structures within the passband, when the filter responses
 are squared, the convolution in the Fourier domain picks up extra
 cross-terms from the one oriented structure interacting with the other,
@@ -562,17 +546,14 @@ spurious spatial frequencies in the energy term, and we can get rid of
 them by spatially low-pass filtering the squared oriented energy
 responses. Using the blurred squared basis filter responses, we get much
 cleaner oriented energy as a function of angle plots, even with the
-$g_{xx}$, $h_{xx}$ filters in the junctions, @fig-multiorifloretsb.
+$g_{xx}$, $h_{xx}$ filters in the junctions, @fig-multioriflorets (b).
 
 @fig-multioriflorets_examples shows two examples on real images. At
 each pixel, the polar plots reveal the local image structure.
 
-:::{#fig-multioriflorets_examples}
-![Polar plots of orientation energy as a
-  function of angle, computed using $g_{xx](figures/spatial_filter_sets/steer_quad_polarplot_zebra_cube.png){width=100% #fig-multioriflorets_examples}
+![Polar plots of orientation energy as a function of angle, computed using $g_{xx}$, $h_{xx}$ filters in two images.](figures/spatial_filter_sets/steer_quad_polarplot_zebra_cube.png){width=100% #fig-multioriflorets_examples}
 
-Polar plots of orientation energy as a function of angle, computed using $g_{xx}$, $h_{xx}$ filters in two images.
-:::
+
 
 We can also make steerable filters in three dimensions (3D), allowing us
 to analyze medical volumetric data, or to process spatiotemporal volumes
