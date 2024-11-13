@@ -162,7 +162,7 @@ formalizes this approach (see @chai2021ensembling for a representative
 work that roughly follows this recipe, or @azizi2023synthetic for an
 alternative approach to generative data augmentation).
 
-![](./figures/data_augmentation/genaug.png){width="100%"}
+![](./figures/data_augmentation/genaug.png){width="100%" #fig-data_augmentation-generative_data_augmentation}
 
 There are some subtleties when working with learned data augmentation.
 You might be tempted to train $g_{\theta}$ on the same dataset you are

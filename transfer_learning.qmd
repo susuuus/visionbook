@@ -2,11 +2,12 @@
 
 ## Introduction
 
-A common criticism of deep learning systems is that they are data
-hungry. To learn a new concept (e.g., "is this a dog?") may require
-showing a deep net thousands of labeled examples of that concept.
-Conversely, humans can learn to recognize a new kind of animal after
-seeing it just once, an ability known as .
+A common criticism of deep learning systems is that they are data hungry. To learn a new concept (e.g., "is this a dog?") may require showing a deep net thousands of labeled examples of that concept. Conversely, humans can learn to recognize a new kind of animal after seeing it just once, an ability known as **one-shot learning**.
+
+
+:::{.column-margin}
+Correspondingly, **few-shot learning** refers to learning from just a few examples, and the **zero-shot** setting refers to when a model works out of the box on a new problem, with zero adaptation whatsoever.
+:::
 
 Humans can do this because we have extensive prior knowledge we bring to
 bear to accelerate the learning of new concepts. Deep nets are data
@@ -55,6 +56,11 @@ instead recognize wheat versus soybeans. This is visualized below in
 
 ![Transfer learning consists of two phases: first we pretrain a model on one task and then we adapt that model to perform a new task.](./figures/transfer_learning/pretraining_and_adaptation.png){width="85%" #fig-transfer_learning-finetuning_basic}
 
+
+:::{.column-margin}
+The pretraining phase could just be regular training, which we only call *pre*training in retrospect, once we decide to start adapting to a new problem. Or we can specifically design pretraining algorithms that are *only* meant as a warm up for the real event. Representation learning algorithms @sec-representation_learning are of this latter variety.
+:::
+
 In the next sections we will describe specific kinds of transfer
 learning algorithms, which handle each of these stages in different
 ways. Then, in @sec-transfer_learning-combinatorial_catalog, we will
@@ -81,23 +87,11 @@ $f: \mathcal{X} \rightarrow \mathcal{Y}$, (2) initialize
 $f^{\prime} = f$, and (3) finetune
 $f^{\prime}: \mathcal{X}^{\prime} \rightarrow \mathcal{Y}^{\prime}$. The
 full algorithm is written in algorithm
-@alg-transfer_learning-finetuning, with $f$ and $f^{\prime}$
+@fig-transfer_learning-finetuning, with $f$ and $f^{\prime}$
 indicated as just a continually learning $f_{\theta}$ with different
 iterates of $\theta$ as learning progresses.
 
-::: algorithm
-[]{#alg:transfer_learning:finetuning
-label="alg:transfer_learning:finetuning"} **Input:** initial parameter
-vector $\theta^{0}$, data $\{x^{(i)},y^{(i)}\}_{i=1}^N$,
-$\{x^{\prime^{(i)}},y^{\prime^{(i)}}\}_{i=1}^M$, learning rates $\eta_1$
-and $\eta_2$ **Output:** trained models $f_{\theta^{N}}$ and
-$f_{\theta^{N+M}}$ **Pretraining:**
-$J = \mathbb{E}_{x,y}[\mathcal{L}(f_{\theta^{k-1}}(x),y)]$
-$\theta^{k} \leftarrow \theta^{k-1} - \eta_1 \nabla_{\theta} J$
-**Finetuning:**
-$J = \mathbb{E}_{x^{\prime},y^{\prime}}[\mathcal{L}(f_{\theta^{k-1+N}}(x^{\prime}),y^{\prime})]$
-$\theta^{k+N} \leftarrow \theta^{k-1+N} - \eta_2 \nabla_{\theta} J$
-:::
+![](./figures/transfer_learning/fig-transfer_learning-finetuning.png){width="100%" #fig-transfer_learning-finetuning}
 
 Finetuning is simple and works well. But there is one tricky bit we
 still need to deal with: What if the structure of $f_{\theta}$ is
@@ -119,6 +113,8 @@ replace it with a new final layer that outputs the correct
 dimensionality. If the input dimensionality changes, you can do the same
 with the first layer of the network. Both these changes are shown next,
 in @fig-transfer_learning-finetuning_stages.
+
+![](./figures/transfer_learning/fig-transfer_learning-finetuning_stages.png){width="100%" #fig-transfer_learning-finetuning_stages}
 
 To be precise, let $f: \mathcal{X} \rightarrow \mathcal{Y}$ decompose as
 $f= f_1 \circ f_2 \circ f_3$, with
@@ -172,6 +168,12 @@ given the depth and class predictions, we have a final module,
 semantics of a car. This module outputs a bounding box $\mathbf{y}$
 indicating where it thinks the car is. 
 
+
+
+:::{.column-margin}
+We will use the symbol ![](.figures/transfer_learning/lock.png){width="10px"} to indicate a frozen module and the symbol ![](.figures/transfer_learning/fire.png){width="10px"} to indicate a module that is updated during the adaptation phase.
+:::
+
 ![Finetuning certain subsets of a computation graph. Here we show some modules that have been pretrained (those with a shaded background) and one that is trained from scratch at finetuning time.](./figures/transfer_learning/finetuning_certain_modules_example.png){width="70%" #fig-transfer_learning-finetuning_certain_modules_example}
 
 Within a single layer, it is also possible to update just a subspace of
@@ -206,8 +208,7 @@ from examples*. You are given a dataset of example inputs and their
 corresponding outputs and the task is to infer the relationship that can
 explain these input-output pairs:
 
-::: center
-:::
+![](./figures/transfer_learning/fig-transfer_learning-learning_from_examples.png){width="100%" #fig-transfer_learning-learning_from_examples}
 
 This kind of learning is like having a very lazy teacher, who just gives
 you the answer key to the homework questions but does not provide any
@@ -222,10 +223,7 @@ student can learn to imitate the teacher's outputs or can learn to match
 *how the teacher processes the queries*, matching intermediate
 activations of the teacher model.
 
-::: center
-:::
-
-
+![](./figures/transfer_learning/fig-transfer_learning-learning_from_teacher.png){width="100%" #fig-transfer_learning-learning_from_teacher}
 
 :::{.column-margin}
 Learning from examples can be considered a special
@@ -247,9 +245,6 @@ model $f_{\theta}: \mathcal{X} \rightarrow \vartriangle^{K-1}$, simply
 tries to imitate the teacher's output pmf: for each input $x$ that the
 student sees, its goal is to output the same pmf vector as the teacher
 outputs for $x$. The full algorithm is given in the diagram below.
-
-::: center
-:::
 
 
 
