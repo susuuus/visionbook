@@ -19,6 +19,8 @@ For example, below we show some common data augmentations applied to an
 example image (@fig-data_augmentation-data_aug_examples):
 
 
+![A few common types of data augmentation.](./figures/data_augmentation/data_aug_examples.png){width="100%" #fig-data_augmentation-data_aug_examples}
+
 
 :::{.column-margin}
 Data augmentation might not seem not seem very
@@ -29,15 +31,12 @@ learning: it converts lead (small data) into gold (big
 data).
 :::
 
-
-
 When you do this for every image in a dataset, you are essentially
 mapping from a smaller dataset to a larger dataset. We know that more
 data is usually better, so this is a way to simulate the effect of
 adding more real data to your dataset.
 
-::: center
-:::
+![](./figures/data_augmentation/arrow.png){width="100%" #fig-data_augmentation-arrow}
 
 The way data augmentation works is that for each
 $\{\mathbf{x}^{(i)}, \mathbf{y}^{(i)}\}$ pair in your original dataset,
@@ -112,7 +111,11 @@ in-distribution, compared to the training data. If we apply enough data
 augmentation, then the test data will look just like more random samples
 from the training distribution!
 
-![Data augmentation broadens the training distribution so that it might better cover the test cases. (a) Training data are from Caltech256~\cite{griffin2007caltech](./figures/data_augmentation/data_aug_real_example.png){width="100%" #fig-data_augmentation-data_aug_real_example}
+
+
+
+
+![Data augmentation broadens the training distribution so that it might better cover the test cases. (a) Training data are from Caltech256 @griffin2007caltech and test data are from CIFAR100 @cifar100. The scatter plots show these data in a 2D feature space [the first two principle components (pcs) of CLIP @radford2021learning]. (b) Training data after `mirror` augmentations (random horizontal flips). (c) The same plus `crops` (crop then rescale to the original size). (d) The same plus `color jitter` (random shifts in color and contrast).](./figures/data_augmentation/data_aug_real_example.png){width="100%" #fig-data_augmentation-data_aug_real_example}
 
 ### Learned Data Augmentation
 
@@ -140,32 +143,26 @@ $g_{\theta}: \mathcal{Z} \rightarrow \mathcal{X}$, we can create an
 augmented copy of $\mathbf{x}$ as, $$\begin{aligned}
     \mathbf{x} = g_{\theta}(f_{\psi}(\mathbf{x})+\mathbf{w}) \quad\quad \triangleleft \quad\text{generative data augmentation via latent manipulation}
 \end{aligned}$$ where $\mathbf{w}$ is a small perturbation to the latent
-variable $\mathbf{z}$.  If we do this for a variety of
+variable $\mathbf{z}$.  
+
+
+:::{.column-margin}
+GANs do not necessarily come with encoders $f_{\psi}$, but for applications that need one, like we have here, you can simply train an encoder via supervised learning on pairs $\{g_{\theta}(\mathbf{z}), \mathbf{z}\}$, solving $\arg\min_{\psi} \mathbb{E}_z [\mathcal{L}(f_{\psi}(g_{\theta}(\mathbf{z})), \mathbf{z})]$. See @donahue2016adversarial for discussion of this method and more advanced techniques.
+:::
+
+If we do this for a variety of
 settings of $\mathbf{w}$, then we will get a set of output images that
 are all slight variations of one another, just like we saw previously in
 @fig-generative_modeling_and_representation_learning-biggan_latent_walk.
 One simple approach is to just use Gaussian perturbations in latent
 space, that is, $\mathbf{w} \sim \mathcal{N}(0,\sigma^2)$ for some
 perturbation scale given by $\sigma$. Algorithm
-@fig-data_augmentation:generative_data_augmentation
+@fig-data_augmentation-generative_data_augmentation
 formalizes this approach (see @chai2021ensembling for a representative
 work that roughly follows this recipe, or @azizi2023synthetic for an
 alternative approach to generative data augmentation).
 
-::: algorithm
-[]{#alg:data_augmentation:generative_data_augmentation
-label="alg:data_augmentation:generative_data_augmentation"} **Input:**
-Generative model $g_{\theta}: \mathcal{Z} \rightarrow \mathcal{X}$ and
-its (approximate) inverse
-$f_{\psi}: \mathcal{X} \rightarrow \mathcal{Z}$, perturbation scale
-parameter $\sigma$, Dataset
-$X \triangleq \{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}_{i=1}^N$,
-hyperparameter $k$ **Output:** Augmented dataset
-$\tilde{X} \triangleq \{\tilde{\mathbf{x}}^{(i)}, \tilde{\mathbf{y}}^{(i)}\}_{i=1}^{kN}$
-$\mathbf{z}^{(i)} = f_{\psi}(\mathbf{x}^{(i)})$
-$\mathbf{w}_j \sim \mathcal{N}(0,\sigma^2)$
-$\tilde{X} \leftarrow \{g_{\theta}(\mathbf{z}^{(i)}+\mathbf{w}_j), \mathbf{y}^{(i)}\}$
-:::
+![](./figures/data_augmentation/genaug.png){width="100%"}
 
 There are some subtleties when working with learned data augmentation.
 You might be tempted to train $g_{\theta}$ on the same dataset you are
@@ -175,7 +172,12 @@ effects, but it introduces an uncomfortable circularity, which can be
 understood as follows. We want to create augmented data for training
 some function $f$. Let the learner for $f$ be denoted as the function
 $L$, which is a mapping from input data to output learned function $f$.
- Without data augmentation we have $f = L(X)$, and with data
+
+:::{.column-margin}
+It can be confusing to think of a learning *algorithm* as a *function*, but that's what it is; as we pointed out in @sec-intro_to_learning, a learner is a function that outputs a function.
+:::
+
+Without data augmentation we have $f = L(X)$, and with data
 augmentation we have $f = L(\tilde{X})$. But now, when $g_{\theta}$ is
 trained on $X$, then $\tilde{X}$ is just a function of $X$; in
 particular, if we use algorithm @fig-data_augmentation-generative_data_augmentationd, it is
@@ -202,17 +204,23 @@ and we want our learner to do well in expectation over these random
 transformations. Instead of doing random transformations, we could
 instead consider augmenting with *worst case* transformations, applying
 those transformations that incur the highest loss possible for a given
-training example: $$\begin{aligned}
-    \mathop{\mathrm{arg\,min}}_f \mathbb{E}_{\mathbf{x},\mathbf{y}} [\max_{\theta \in \Theta}[\mathcal{L}(f(T(\mathbf{x};\theta)),\mathbf{y})]] :adversarial_training
-\end{aligned}$${#eq-data_augmentation} This idea is known as . One of its effects is that it
+training example: 
+$$\begin{aligned}
+    \mathop{\mathrm{arg\,min}}_f \mathbb{E}_{\mathbf{x},\mathbf{y}} [\max_{\theta \in \Theta}[\mathcal{L}(f(T(\mathbf{x};\theta)),\mathbf{y})]] 
+\end{aligned}$${#eq-data_augmentation-adversarial_training} 
+
+This idea is known as . One of its effects is that it
 can increase the robustness of the learned function $f$ to perturbations
 that may occur at test time (like those we saw in the previous chapter).
 
 In the context of adversarial robustness, one form of
 @eq-data_augmentation-adversarial_training is to set $T$ to be an
 epsilon-ball attack, that is,
-$T(\mathbf{x}) = \mathbf{x}+\mathbf{\epsilon}$: $$\begin{aligned}    \mathop{\mathrm{arg\,min}}_f \mathbb{E}_{\mathbf{x},\mathbf{y}} [\max_{\mathbf{\epsilon} \, s.t. \left\lVert\mathbf{\epsilon}\right\rVert < r}[\mathcal{L}(f(\mathbf{x}+\mathbf{\epsilon}),\mathbf{y})]] :eps_robust_training
-\end{aligned}$${#eq-data_augmentation} This can increase robustness against the kinds of
+$T(\mathbf{x}) = \mathbf{x}+\mathbf{\epsilon}$: 
+$$\begin{aligned}    \mathop{\mathrm{arg\,min}}_f \mathbb{E}_{\mathbf{x},\mathbf{y}} [\max_{\mathbf{\epsilon} \, s.t. \left\lVert\mathbf{\epsilon}\right\rVert < r}[\mathcal{L}(f(\mathbf{x}+\mathbf{\epsilon}),\mathbf{y})]]
+\end{aligned}$${#eq-data_augmentation-eps_robust_training} 
+
+This can increase robustness against the kinds of
 epsilon-ball attacks we saw in the previous chapter.
 
 Adversarial training has many other uses as well, beyond the scope of
