@@ -120,8 +120,8 @@ have a better understanding of why classification is such a ubiquitous
 modeling tool: it models a maximally expressive predictive distribution
 over a quantized decision space.
 
-
-A point prediction does not necessarily come with probabilistic semantics, but here we will interpret a prediction of $\hat{a} = f_{\theta}(l)$ as implying a predictive distribution over $A$ that has the form $p_{\theta}(A = a \\| l) = \delta(a - \hat{a})$, where $\delta$ is the Dirac delta function.
+:::{.column-margin}
+Remember that softmax *regression* is a way to solve a *classification* problem. It is called regression since we predict a set of continuous numbers (a probability distribution), then take the argmax of this set to perform the classification.
 :::
 
 ### Classification to the Rescue?
@@ -145,6 +145,10 @@ deal. We can always increase the resolution by increasing $k$. Most
 image formats only represent 256 possible values for $a$, so if we set
 $k=256$ then we incur no quantization error.
 
+:::{.column-margin}
+Why 256 values? Because each channel in standard image formats is stored as an array of \texttt{uint8}s.
+:::
+
 The second issue is much more severe. If we are predicting the $a$-value
 of a single pixel, then the classification approach says there are $k$
 possible values it could take on. This approach can be extended to
@@ -165,6 +169,12 @@ pixel. For a $256 \times 256$ resolution image, the number of classes
 required is astronomical (for $k=10$, the number is a one followed by
 over 100,000 zeros).
 
+
+
+:::{.column-margin}
+Quantizing on a grid doesn't scale to high-dimensions, but more intelligent quantization methods can work. These more intelligent methods are called *vector quantization* or *clustering*, and we cover them in @sec-representation_learning.
+:::
+
 ### The Failure of Independent Predictions: Joint Structure
 
 To circumvent this curse of dimensionality, we can turn to
@@ -172,7 +182,13 @@ factorization: rather than treating the whole configuration of pixels as
 a class, make *independent* predictions for each pixel in the image.
 From a probabilistic inference perspective, the corresponds to the
 following factorization of the joint distribution: $$\begin{aligned}    p_{\theta}(\mathbf{ab} \bigm | \mathbf{l}) = \prod_{n=1}^N\prod_{m=1}^M  p_{\theta}(ab[n,m,:] \bigm | \mathbf{l})
-\end{aligned}$$  The underlying assumption of this
+\end{aligned}$$  
+
+:::{.column-margin}
+Note the similarity between this image model and the "independent pixels" model we saw in @eq-histmodel in @sec-stat_image_models. The present model can represent images with more structure because rather than assuming the pixels are all completely independent (i.e., marginally independent), it only assumes the pixel colors are *conditionally* independent, conditioned on the luminance image (which provides a great deal of structure).
+:::
+
+The underlying assumption of this
 factorization is one of conditional independence: each pixel's $ab$
 value is considered to be conditionally independent from all other
 pixels' $ab$ values, given the observed luminance (of all pixels). This
@@ -276,7 +292,12 @@ $\mathbf{x}$. We could, but don't want to, fit a separate generative
 model for each $\mathbf{x}$. Instead we want neural nets that take a
 query $\mathbf{x}$ as input and produce an output that models or samples
 from $p(Y \bigm | X=\mathbf{x})$. We will briefly cover how to do this
-for several popular models: 
+for several popular models:
+
+
+:::{.column-margin}
+In this chapter, $Y$ is the image we are generating and $X$ is the data we are conditioning on. Note that this is different than in the previous generative modeling chapters @sec-generative_models and @sec-generative_modeling_and_representation_learning, where $X$ was the image we were generating, unconditionally.
+:::
 
 ### Conditional Generative Adversarial Networks
 
@@ -521,7 +542,7 @@ different discriminator patch sizes and observing the results. We show
 this in
 @fig-conditional_generative_models-patchgan_patch_size_variations.
 
-![Varying the receptive field (patch size) of the convolutional discriminator affects what kinds of structure the discriminator enforces. These results are from @Adelson85pix2pix2017](./figures/conditional_generative_models/patchgan_patch_size_variations.png){width="100%" #fig-conditional_generative_models-patchgan_patch_size_variations}
+![Varying the receptive field (patch size) of the convolutional discriminator affects what kinds of structure the discriminator enforces. These results are from @pix2pix2017](./figures/conditional_generative_models/patchgan_patch_size_variations.png){width="100%" #fig-conditional_generative_models-patchgan_patch_size_variations}
 
 
 A $1\times1$ discriminator can only observe a single pixel at a time and
@@ -585,6 +606,11 @@ Now consider training a GAN to map from $\mathbf{x}$ to $\mathbf{y}$ values:
 $$\begin{aligned}    \arg\min_{\theta}\max_{\phi} \mathbb{E}_{\mathbf{x},\mathbf{y}} \big[ \log d_{\phi}(g_{\theta}(\mathbf{x})) + \log (1 - d_{\phi}(\mathbf{y})) \big]
 \end{aligned}$${#eq-conditional_generative_models-x_to_y_GAN_learning_problem}  
 
+
+:::{.column-margin}
+Note that this is a regular GAN objective rather than a conditional GAN, except that we have relabeled the variables compared to \eqref{eq-conditional_generative_models-x_to_y_GAN_learning_problem}, with $\mathbf{y}$ playing the role of $\mathbf{x}$ and $\mathbf{x}$ playing the role of $\mathbf{z}$.
+:::
+
 Such a GAN would self-organize so that the
 outputs are realistic $\mathbf{y}$ values and so that different inputs
 map to different outputs (collectively they must map to the data
@@ -613,6 +639,10 @@ things that look like realistic $\mathbf{y}$ values. This property makes
 GANs perfect for working with unpaired data, where we don't have
 instance-level supervision but only have set-level
 superversion.
+
+:::{.column-margin}
+We call this **unpaired** learning rather than **unsupervised** because we still have supervision in the form of labels indicating which *set* each datapoint belongs to. That is, we know whether each image is an $\mathbf{x}$ or a $\mathbf{y}$.
+:::
 
 So, a regular GAN objective, applied to mapping from $X$ to $Y$, solves
 the unpaired translation problem, but it does not distinguish between
