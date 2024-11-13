@@ -161,7 +161,7 @@ It is important to mention that while you can add two points in
 heterogeneous coordinates, you can not do the same in homogeneous
 coordinates!
 
-## 2D Image Transformations {#sect:2dtransforms}
+## 2D Image Transformations {#sec-2dtransforms}
 
 One important operation in computer vision (and in computer graphics) is
 geometric transformations of shapes. Some of the common transformations
@@ -570,7 +570,7 @@ Representing 3D lines with homogeneous coordinates is not that easy and
 the reader can consult other sources @Hartley2004 to learn more about
 representing geometric objects in homogeneous coordinates.
 
-## Image Warping {#sect:image_warping}
+## Image Warping {#sec-image_warping}
 
 Now that we have seen how to describe simple geometric transformations
 to pixel coordinates, we need to go back to the representation of the

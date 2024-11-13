@@ -592,7 +592,7 @@ cannot disambiguate the input velocity.
 Space-time Gabor filters. (a) Cosine and sine $x$-$t$ Gabor filter, and (b) the sketch of its transfer function. (c) Sketch of the transfer function of a spatiotemporal Gabor filter in two spatial dimensions ($x$-$y$-$t$). The two planes show examples of spatiotemporal planes that intersect the Gabor filter in the same way.
 :::
 
-### Velocity-Tuned Filters {#sect:velocityTunedFilters}
+### Velocity-Tuned Filters {#sec-velocityTunedFilters}
 
 How can we measure input velocity? There are many different approaches in the computer vision community for measuring motion, and we will study them in @sec-motion_estimation. Here we show that it is possible to measure motion even with the simple processing machinery that we've developed so far.
 

@@ -545,7 +545,7 @@ $\mathbf{x}_{\texttt{in}}$, and the gradients being sent back,
 $\mathbf{g}_{\texttt{out}}$ (see
 @fig-backpropagation-parameter_grad_linear_matrices).
 
-### Forward-Backward Is Just a Bigger Neural Network {#section:backpropagation:backprop_as_neural_net}
+### Forward-Backward Is Just a Bigger Neural Network {#sec-backpropagation-backprop_as_neural_net}
 
 In the previous section we saw that the backward pass through an neural
 network can itself be implemented as another neural network, which is in

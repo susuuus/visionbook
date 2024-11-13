@@ -644,7 +644,7 @@ this property.
 
 We will discuss this in more detail in @sec-transfer_function.
 
-### Dual Convolution {#section:dualconv}
+### Dual Convolution {#sec-dualconv}
 
 Another common operation with working with images is to do products
 between images. For instance, this might happen if we are applying a
@@ -723,7 +723,7 @@ transform is translated, a property related to the previous one:
 
 $$\ell\left[n,m \right]  \exp{ \left( -2\pi j \left( \frac{u_0\, n}{N} + \frac{v_0\, m}{M} \right) \right)}\xrightarrow{\mathscr{F}}\mathscr{L}\left[u-u_0,v-v_0 \right]
 $${#eq-modulation_exp} This can be proven using the dual convolution
-property from section -section:dualconv. Note that now the result in equation
+property from section -sec-dualconv. Note that now the result in equation
 (@eq-modulation_exp) is not a real signal, and for this reason its
 Fourier Transform does not have symmetries around $u,v=0$.
 

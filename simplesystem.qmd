@@ -456,7 +456,7 @@ Similar relationships can be obtained from equations
 @eq-derivative_Y_along_edge_hor and
 @eq-derivative_Y_along_edge_tan.
 
-### Constraint Propagation {#sect:constraint}
+### Constraint Propagation {#sec-constraint}
 
 Most of the image consists of flat regions where we do not have such
 edge constraints and we thus don't have enough local information to
