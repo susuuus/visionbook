@@ -171,8 +171,10 @@ indicating where it thinks the car is.
 
 
 :::{.column-margin}
-We will use the symbol ![](.figures/transfer_learning/lock.png){width="10px"} to indicate a frozen module and the symbol ![](.figures/transfer_learning/fire.png){width="10px"} to indicate a module that is updated during the adaptation phase.
+We will use the symbol ![](.figures/transfer_learning/lock.png){width="10%"} 
+to indicate a frozen module and the symbol ![](.figures/transfer_learning/fire.png){width="10%"} to indicate a module that is updated during the adaptation phase.
 :::
+
 
 ![Finetuning certain subsets of a computation graph. Here we show some modules that have been pretrained (those with a shaded background) and one that is trained from scratch at finetuning time.](./figures/transfer_learning/finetuning_certain_modules_example.png){width="70%" #fig-transfer_learning-finetuning_certain_modules_example}
 
@@ -208,7 +210,7 @@ from examples*. You are given a dataset of example inputs and their
 corresponding outputs and the task is to infer the relationship that can
 explain these input-output pairs:
 
-![](./figures/transfer_learning/fig-transfer_learning-learning_from_examples.png){width="100%" #fig-transfer_learning-learning_from_examples}
+![](./figures/transfer_learning/fig-transfer_learning-learning_from_examples.png){width="100%"}
 
 This kind of learning is like having a very lazy teacher, who just gives
 you the answer key to the homework questions but does not provide any
@@ -223,7 +225,7 @@ student can learn to imitate the teacher's outputs or can learn to match
 *how the teacher processes the queries*, matching intermediate
 activations of the teacher model.
 
-![](./figures/transfer_learning/fig-transfer_learning-learning_from_teacher.png){width="100%" #fig-transfer_learning-learning_from_teacher}
+![](./figures/transfer_learning/fig-transfer_learning-learning_from_teacher.png){width="100%"}
 
 :::{.column-margin}
 Learning from examples can be considered a special
@@ -240,15 +242,21 @@ that is, the examples $y$ that match each input $x$.
 learning a classifier from a teacher. We assume that the teacher is a
 well-trained classifier that outputs a $K-1$-dimensional probability
 mass function (pmf), $t: \mathcal{X} \rightarrow \vartriangle^{K-1}$
-(see @sec-intro_to_learning:image_classification. The student, a
+(see @sec-intro_to_learning-image_classification. The student, a
 model $f_{\theta}: \mathcal{X} \rightarrow \vartriangle^{K-1}$, simply
 tries to imitate the teacher's output pmf: for each input $x$ that the
 student sees, its goal is to output the same pmf vector as the teacher
 outputs for $x$. The full algorithm is given in the diagram below.
 
+![](./figures/transfer_learning/fig-transfer_learning-knowledge_distillation.png){width="100%"}
 
 
 ![Comparing knowledge distillation to supervised learning from labels.](./figures/transfer_learning/KD_diagram.png){width="100%" #fig-transfer_learning-KD_diagram}
+
+
+:::{.column-margin}
+This section describes knowledge distillation as it was defined in @hinton2015distilling, which is the paper that introduced the term. Note that the term is now often used to refer to the whole family of algorithms that have extended this original method. See @gou2021knowledge for a survey.
+:::
 
 Notice that this learning problem is very similar to softmax regression
 on labeled data, and a diagram comparing the two is given in
@@ -316,8 +324,14 @@ optimized signal that changes the model's behavior. The top prompt was
 optimized to make the model predict the dog's species and the bottom
 prompt was optimized to make the model predict the dog's expression.
 Mathematically, this kind of prompting is very similar to the
-adversarial noise we covered in @sec-bias_and_shift-adversarial_attacks.  However,
-here we are not adding noise that *hurts* performance but instead adding
+adversarial noise we covered in @sec-bias_and_shift-adversarial_attacks.  
+
+
+:::{.column-margin}
+Because of its similarity to adversarial examples, early papers on prompting sometimes referred to it as *adversarial reprogramming* @elsayed2018adversarial.
+:::
+
+However, here we are not adding noise that *hurts* performance but instead adding
 noise that *improves* performance on a new task of interest. Given a set
 of $M$ training examples that we would like to adapt to,
 $\{\mathbf{x}^{(i)}, \mathbf{y}^{(i)}\}_{i=1}^M$, we learn a prompt via
@@ -335,6 +349,10 @@ the prompt for a vision transformer architecture @dosovitskiy2020vit
 token is concatenated to the input of the transformer, which is a set of
 tokens representing image patches
 (@fig-transformers-prompting_a_transformer):
+
+
+
+![Prompting a transformer with a learnable input token. The prompt token is mixed into the network via attention; therefore \textit{no} parameters of the original network have to be updated (see @sec-transformers}}).](./figures/transformers/prompting_a_transformer.png){width="100%" #fig-transformers-prompting_a_transformer}
 
 The token is a $d$-dimensional code vector and this vector is optimized
 to change the behavior of the transformer to achieve a desired result,
@@ -357,7 +375,7 @@ use the tools of conditional generative modeling (chapter
 @sec-conditional_generative_models to train systems can
 are conditioned on user text instructions (e.g., @dalle1,
 @rombach2022high, which we cover in chapter
-@sec-VLMs.
+@sec-VLMs-CLIP.
 
 ## Domain Adaptation
 
@@ -391,7 +409,7 @@ as has been explored in e.g.,
 version of this algorithm is given in algorithm
 @fig-transfer_learning-domain_adaptation_by_translation.
 
-
+![](./figures/transfer_learning/domain_adaptation_by_translation.png){width="100%" #fig-transfer_learning-domain_adaptation_by_translation}
 
 :::{.column-margin}
 You may notice that domain adaptation is very similar
@@ -404,20 +422,6 @@ be.
 :::
 
 
-
-::: algorithm
-[]{#alg:transfer_learning:domain_adaptation_by_translation
-label="alg:transfer_learning:domain_adaptation_by_translation"}
-**Input:** training data
-$\{x_{\texttt{train}}^{(i)},y_{\texttt{train}}^{(i)}\}_{i=1}^N$, test
-data, $\{x_{\texttt{test}}^{\prime^{(i)}}\}_{i=1}^M$ **Output:** trained
-model $F$ **Train predictor on `train`:**
-$f = \mathop{\mathrm{arg\,min}}_{f} \mathbb{E}_{x_{\texttt{train}},y_{\texttt{train}}}[\mathcal{L}(f(x_{\texttt{train}}),y_{\texttt{train}})]$
-**Train translator $\mathcal{X}_{\texttt{test}}$ to
-$\mathcal{X}_{\texttt{train}}$:**
-$G = \mathop{\mathrm{arg\,min}}_g \max_d \mathbb{E}_{x_{\texttt{train}}}[\log d(x_{\texttt{train}}))] + \mathbb{E}_{x_{\texttt{test}}}[\log(1-d(g(x_{\texttt{test}}))]$
-return $F = f \circ g$
-:::
 
 ## Generative Data
 
@@ -484,22 +488,24 @@ Many of the methods we introduced previously follow a similar format:
 -   Adapt that component and/or other components.
 
 In table
-@tbl-generative_models:types_of_gen_model, we present the
+@tbl-generative_models-types_of_gen_model, we present the
 relationship these methods by framing them all as empirical risk
 minimization with different components optimized during pretraining
 and/or during adaptation.
 
-  ------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------
-  Method              Learning                                                                                                                                                                                                                                                              Inference
-                      [pretrained]{.pretrained_color} / [adapted]{.adapted_color} / [both]{.both_color}                                                                                                                                           
-  Generative data     $\mathop{\mathrm{arg\,min}}_{\textcolor{adapted_color}{\theta}} \mathbb{E}_{\textcolor{pretrained_color}{x},\textcolor{pretrained_color}{y}}[\mathcal{L}(f_{\textcolor{adapted_color}{\theta}}(\textcolor{pretrained_color}{x}), \textcolor{pretrained_color}{y})]$   $f_{\textcolor{adapted_color}{\theta}}(x)$
-  Distillation        $\mathop{\mathrm{arg\,min}}_{\textcolor{adapted_color}{\theta}} \mathbb{E}_{x}[\mathcal{L}(f_{\textcolor{adapted_color}{\theta}}(x), \textcolor{pretrained_color}{t}(x))]$                                                                                            $f_{\textcolor{adapted_color}{\theta}}(x)$
-  Prompting           $\mathop{\mathrm{arg\,min}}_{\textcolor{adapted_color}{\epsilon}} \mathbb{E}_{x,y}[\mathcal{L}(f_{\textcolor{pretrained_color}{\theta}}(x \oplus \textcolor{adapted_color}{\epsilon}), y)]$                                                                           $f_{\textcolor{pretrained_color}{\theta}}(x \oplus \textcolor{adapted_color}{\epsilon})$
-  Finetuning          $\mathop{\mathrm{arg\,min}}_{\textcolor{both_color}{\theta}} \mathbb{E}_{x,y}[\mathcal{L}(f_{\textcolor{both_color}{\theta}}(x), y)]$                                                                                                                                 $f_{\textcolor{both_color}{\theta}}(x)$
-  Probes / heads      $\mathop{\mathrm{arg\,min}}_{\textcolor{adapted_color}{\phi}} \mathbb{E}_{x,y}[\mathcal{L}(h_{\textcolor{adapted_color}{\phi}}(f_{\textcolor{pretrained_color}{\theta}}(x)), y)]$                                                                                     $h_{\textcolor{adapted_color}{\phi}}(f_{\textcolor{pretrained_color}{\theta}}(x))$
-  Learned loss        $\mathop{\mathrm{arg\,min}}_{\textcolor{adapted_color}{\theta}} \mathbb{E}_{x,y}[\textcolor{pretrained_color}{\mathcal{L}}(f_{\textcolor{adapted_color}{\theta}}(x), y)]$                                                                                             $f_{\textcolor{adapted_color}{\theta}}(x)$
-  Learned optimizer   $\textcolor{pretrained_color}{\mathop{\mathrm{arg\,min}}}_{\textcolor{adapted_color}{\theta}} \mathbb{E}_{x,y}[\mathcal{L}(f_{\textcolor{adapted_color}{\theta}}(x), y)]$                                                                                             $f_{\textcolor{adapted_color}{\theta}}(x)$
-  ------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------
+<!-- TODO: text color -->
+
+| Method             | Learning                                                                                     | Inference                                             |
+|--------------------|---------------------------------------------------------------------------------------------|------------------------------------------------------|
+| Generative data    | $\arg\min_{\textcolor{{rgb}{0.8, 0.0, 0.2}}{\theta}} \mathbb{E}_{\textcolor{pretrained_color}{x},\textcolor{pretrained_color}{y}}[\mathcal{L}(f_{\textcolor{adapted_color}{\theta}}(\textcolor{pretrained_color}{x}), \textcolor{pretrained_color}{y})]$ | $f_{\textcolor{adapted_color}{\theta}}(x)$          |
+| Distillation       | $\arg\min_{\textcolor{adapted_color}{\theta}} \mathbb{E}_{x}[\mathcal{L}(f_{\textcolor{adapted_color}{\theta}}(x), \textcolor{pretrained_color}{t}(x))]$ | $f_{\textcolor{adapted_color}{\theta}}(x)$          |
+| Prompting          | $\arg\min_{\textcolor{adapted_color}{\epsilon}} \mathbb{E}_{x,y}[\mathcal{L}(f_{\textcolor{pretrained_color}{\theta}}(x \oplus \textcolor{adapted_color}{\epsilon}), y)]$ | $f_{\textcolor{pretrained_color}{\theta}}(x \oplus \textcolor{adapted_color}{\epsilon})$ |
+| Finetuning         | $\arg\min_{\textcolor{both_color}{\theta}} \mathbb{E}_{x,y}[\mathcal{L}(f_{\textcolor{both_color}{\theta}}(x), y)]$ | $f_{\textcolor{both_color}{\theta}}(x)$             |
+| Probes / heads     | $\arg\min_{\textcolor{adapted_color}{\phi}} \mathbb{E}_{x,y}[\mathcal{L}(h_{\textcolor{adapted_color}{\phi}}(f_{\textcolor{pretrained_color}{\theta}}(x)), y)]$ | $h_{\textcolor{adapted_color}{\phi}}(f_{\textcolor{pretrained_color}{\theta}}(x))$ |
+| Learned loss       | $\arg\min_{\textcolor{adapted_color}{\theta}} \mathbb{E}_{x,y}[\textcolor{pretrained_color}{\mathcal{L}}(f_{\textcolor{adapted_color}{\theta}}(x), y)]$ | $f_{\textcolor{adapted_color}{\theta}}(x)$          |
+| Learned optimizer  | $\textcolor{pretrained_color}{\arg\min}_{\textcolor{adapted_color}{\theta}} \mathbb{E}_{x,y}[\mathcal{L}(f_{\textcolor{adapted_color}{\theta}}(x), y)]$ | $f_{\textcolor{adapted_color}{\theta}}(x)$          |
+: Different kinds of transfer learning presented as empirical risk minimization (ERM). *Notes*: The $\oplus$ symbol indicates concatenation or addition (or other kinds of signal combination). Domain adaptation does not map neatly to ERM so we omit it here. {#tbl-generative_models}
+
 
 ## Sequence Models from the Lens of Adaptation
 
@@ -543,6 +549,12 @@ sequence. Since we can apply this $f$ to any arbitrary query
 $\mathbf{x}^{(n+1)}$, what we have is a learned function that operates
 just like a function learned by any other learning algorithm; it's just
 that in this case the learning algorithm was an RNN.
+
+
+:::{.column-margin}
+Another name for this kind of learning, which is emergent in a sequence modeling problem, is **in-context learning**.
+:::
+
 
 ## Concluding Remarks
 

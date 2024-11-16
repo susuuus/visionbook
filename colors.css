@@ -140,3 +140,7 @@
 .cross_attn_color {
   color: rgb(168, 168, 168); /* 0.66 * 255 = 168 */
 }
+
+.color-pretrained { color: rgb(0, 204, 51); }  /* pretrained_color */
+.color-adapted { color: rgb(204, 0, 51); }     /* adapted_color */
+.color-both { color: rgb(25, 25, 204); }       /* both_color */
