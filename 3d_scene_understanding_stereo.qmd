@@ -2,7 +2,7 @@
 
 ## Introduction
 
-@fig-titanica shows a **stereo anaglyph** of the ill-fated ocean liner,
+@fig-titanic (a) shows a **stereo anaglyph** of the ill-fated ocean liner,
 the Titanic, from @McManus2022. This was taken with two cameras, one
 displaced laterally from the other. The right camera's image appears in
 red in this image, and the left camera image is in cyan. If you view
@@ -15,7 +15,7 @@ changes as a function of their depth, which allows us to form a 3D
 interpretation of the ship when viewing the image with the glasses
 (@fig-titanic\[b\]).
 
-![(a) Stereo anaglyph of the Titanic \cite{McManus2022](figures/3d_scene_understanding/titanic.png){width="100%" #fig-titanic}
+![(a) Stereo anaglyph of the Titanic @McManus2022](figures/3d_scene_understanding/titanic.png){width="100%" #fig-titanic}
 
 In this chapter, we study how to compute depth from a pair of images
 from spatially offset cameras, such as those of @fig-titanic. There are
@@ -91,6 +91,12 @@ observer and the observed scene. Just as in the example of estimating
 the distance to boats in the sea, our brain uses disparities across the
 two eye views to measures distances to objects.
 
+
+
+:::{.column-margin}
+**Free fusion* consists in making the eyes converge or diverge in order to fuse a stereogram without needing a stereoscope. Making it work requires practice. Try it in @fig-random_dot_stereogram.
+:::
+
 Our brain will use many different cues such as the ones presented in the
 previous chapter. But image disparity provides an independent additional
 cue. This is illustrated by the **random dot stereograms**
@@ -103,7 +109,7 @@ statistics of the natural world. But this seems not to affect our
 ability to compute the displacements between the two images and perceive
 3D structure.
 
-![Random dot stereogram. Both images are almost identical. The difference is that there is a square in the middle that is displaced by a few pixels left-right between the two images. When each image it seen by one eye you should see a square floating in from of a flat background. You can use a stereoscope or free fusion to see it. %\reviewcomment{When I free-fuse this pair, I see an irregularly shaped hole in the center, opening to a plane behind the rest of the image, not a square floating in front of a background.](figures/3d_scene_understanding/random_dot_stereogram.png){width="100%" #fig-random_dot_stereogram}
+![Random dot stereogram. Both images are almost identical. The difference is that there is a square in the middle that is displaced by a few pixels left-right between the two images. When each image it seen by one eye you should see a square floating in from of a flat background. You can use a stereoscope or free fusion to see it. ](figures/3d_scene_understanding/random_dot_stereogram.png){width="100%" #fig-random_dot_stereogram}
 
 ### Building a Stereo Pinhole Camera
 
@@ -133,10 +139,10 @@ filters.
 We used one of the anaglyph glasses to get the filters and placed them
 in front of the two pinholes. @fig-anaglyph shows two pictures of the
 two pinholes (@fig-anaglyph\[a\]) and the filters positioned in front of
-each pinhole (@fig-anaglyph\[b\]). @fig-anaglyphd is a resulting
+each pinhole (@fig-anaglyph\[b\]). @fig-anaglyph (d) is a resulting
 anaglyph image that appears on the projection plane
 (@fig-anaglyph\[c\]); this picture was taken by placing a camera in the
-observation hole seen at the right of @fig-anaglyphc. @fig-anaglyphd
+observation hole seen at the right of @fig-anaglyph (c). @fig-anaglyph (d)
 should give you a 3D perception of the image when viewed with anaglyph
 glasses.
 
@@ -194,7 +200,7 @@ for the projection in both cameras will be equal, $y_L=y_R$. Therefore,
 we can look at the top view of the setting as shown in @fig-stereo b. We
 consider the depth estimate within a single image row.
 
-![Simple stereo. (a) Two cameras, of identical focal length, $f$, and separated by an offset, $T$, image the point $P$ onto the two-dimensional (2D) points $[x_L,y_L]^\mathsf{T}$ and $[x_R,y_R]^\mathsf{T}$ at each camera.  (b) The similarity of the two triangles in leads to @eq-depthFromDisparity](figures/3d_scene_understanding/triangularization_stereo.png){width="100%" #fig-stereo}
+![Simple stereo. (a) Two cameras, of identical focal length, $f$, and separated by an offset, $T$, image the point $P$ onto the two-dimensional (2D) points $[x_L,y_L]^\mathsf{T}$ and $[x_R,y_R]^\mathsf{T}$ at each camera.  (b) The similarity of the two triangles in leads to @eq-depthFromDisparity](figures/3d_scene_understanding/triangularization_stereo.png){#fig-stereo}
 
 The point $\mathbf{P}$, for which we want to estimate the depth, $Z$,
 appears in the left camera at position $x_L$ and in the right camera at
@@ -210,7 +216,7 @@ lowercase letters, and 3D world coordinates by uppercase letters.
 
 A simple way to triangulate the depth, $Z$, of a point visible in both
 images is through similar triangles. The two triangles (yellow triangle
-and yellow+orange triangle) shown in @fig-stereob are similar, and so
+and yellow+orange triangle) shown in @fig-stereo (b) are similar, and so
 the ratios of their height to base must be the same. Thus we have:
 $$\frac{T+x_R-x_L}{Z-f} = \frac{T}{Z}$$ Solving for $Z$ gives:
 $$Z =  \frac{fT}{x_L-x_R}
@@ -241,15 +247,14 @@ image and then finding the corresponding point in the other image, based
 on the visual similarity of the local image region. To do this
 automatically is the crux of the stereo problem.
 
-  --------------------------------------------------------
-   ![Two cameras, displaced from each other laterally, photograph the same scene, resulting in images (a) and (b).  Colored rectangles show some identifiable features in image (a), and where those features appear in image (b).  Arrows show the corresponding displacements, which reveal depth through @eq-depthFromDisparity](figures/stereo/officeLeft.jpg){width="47.5%" #fig-stereomatch}
-                           \(a\)
-  --------------------------------------------------------
+:::{layout-ncol="2" #fig-stereomatch}
 
-  ---------------------------------------------------------
-   ![](figures/stereo/officeRight.jpg){width="47.5%"}
-                            \(b\)
-  ---------------------------------------------------------
+![](figures/stereo/officeLeft.jpg){width="47.5%"}
+
+![](figures/stereo/officeRight.jpg){width="47.5%"}
+
+Two cameras, displaced from each other laterally, photograph the same scene, resulting in images (a) and (b).  Colored rectangles show some identifiable features in image (a), and where those features appear in image (b).  Arrows show the corresponding displacements, which reveal depth through @eq-depthFromDisparity
+:::
 
 A naive algorithm for finding the disparity of any pixel in the left
 image is to search for a pixel of the same intensity in the
@@ -270,7 +275,7 @@ texture in the image, which leads to noisy matches among the many nearly
 identical pixels; image intensity noise; specularities in the image
 which change location from one camera view to another; and scene points
 appearing in one image but not another due to occlusion.
-@fig-stereolampd shows an effective approach to remove the matching
+@fig-stereolamp (d) shows an effective approach to remove the matching
 noise: blurring the disparity space image using an edge-preserving
 filter @Hosni2013. The best-matched disparities are plotted in red, and
 compare well with the ground truth disparities (@fig-stereolamp\[f\]),
@@ -352,20 +357,15 @@ scale of Laplacian filter outputs.
 @fig-stereopoints (a and b) show the result of the Harris
 feature detector to the images of @fig-stereomatch.
 
-  ------------------------------------------------------
-   ![The feature-based stereo approach, illustrated for the stereo pair of @fig-stereomatch](figures/stereo/pointsLeft.jpg){width="31%" #fig-stereopoints}
-                          \(a\)
-  ------------------------------------------------------
+:::{#fig-stereopoints layout-ncol="3"}
+![](figures/stereo/pointsLeft.jpg){width="31%"}
 
-  -------------------------------------------------------
-   ![](figures/stereo/pointsRight.jpg){width="31%"}
-                           \(b\)
-  -------------------------------------------------------
+![](figures/stereo/pointsRight.jpg){width="31%"}
 
-  -------------------------------------------------------
-   ![](figures/stereo/officeDepth.jpg){width="31%"}
-                           \(c\)
-  -------------------------------------------------------
+![](figures/stereo/officeDepth.jpg){width="31%"}
+
+The feature-based stereo approach, illustrated for the stereo pair of @fig-stereomatch. (a and b) Feature points. (c) Depth image.
+:::
 
 @fig-stereopoints (a and b) reveal the challenges of the
 feature matching task: (1) not every feature is marked across both
@@ -374,7 +374,7 @@ together. Feature points are found, independently, in each of the stereo
 pair images (@fig-stereopoints [a and b]). Detected Harris feature
 points @Harris88 are shown as green dots. It is especially visible
 within the marked ellipses that not the same set of feature points is
-marked in each image. @fig-stereopointsc shows a depth image resulting
+marked in each image. @fig-stereopoints (c) shows a depth image resulting
 from a matched and interpolated set of feature points.
 
 #### Local image descriptors
@@ -387,7 +387,7 @@ insensitive to minor changes in lighting or location which may occur
 across the two images of a stereo pair.
 
 @fig-SIFT shows a sketch of the use of oriented edges and SIFT
-descriptors in image analysis. The top row of @fig-SIFTa shows two
+descriptors in image analysis. The top row of @fig-SIFT \[a\] shows two
 images of a hand under different lighting conditions. Despite that both
 images look quite different in a pixel intensity representation, they
 look quite similar in a local orientation, depicted in the bottom row by
@@ -396,15 +396,14 @@ observation. Taking histograms (@fig-SIFT\[b\]) of local orientation
 over local spatial regions further allow for image descriptors to be
 robust to small image translations @Freeman98c, @Lowe04.
 
-  -------------------------------------------------
-   ![Orientation-based image descriptors.  (a) Oriented features. Reprinted from \cite{Freeman98c](figures/stereo/hands.jpg){width="40%" #fig-SIFT}
-                        \(a\)
-  -------------------------------------------------
+:::{#fig-SIFT layout-ncol="2"}
+![](figures/stereo/hands.jpg){width="40%" }
 
-  ------------------------------------------------
-   ![](figures/stereo/SIFT.jpg){width="50%"}
-                       \(b\)
-  ------------------------------------------------
+
+![](figures/stereo/SIFT.jpg){width="50%"}
+
+Orientation-based image descriptors.  (a) Oriented features. Reprinted from @Freeman98c  (b) SIFT image descriptors @Lowe04.
+:::
 
 #### Interpolation between feature matches
 
@@ -425,7 +424,7 @@ approximate a global solution to the stereo shape inference problem.
 Until now we have considered only the case where the two cameras are
 parallel, but in general the two images will be produced by cameras that
 can have arbitrary orientations. Note that disparity of the smokestacks
-in @fig-titanica increases with depth, rather than decreasing as
+in @fig-titanic (a) increases with depth, rather than decreasing as
 described by equation (@eq-depthFromDisparity). That is because the
 cameras that took the stereo pair were not in the same orientation,
 related only by a translation.
@@ -476,7 +475,7 @@ point, $\mathbf{P}$, in the world, we define the following objects:
     location does not depend on the point $\mathbf{P}$. Therefore, all
     the epipolar lines intersect at the same epipoles.
 
-![Geometry of a stereo pair and terminology. The figure shows the epipolar plane, epipolar lines, and epipoles ($e_1$ and $e_2$), for a given point $\mathbf{P](figures/3d_scene_understanding/epipolar_geometry.png){width="80%" #fig-epipolar_geometry_terminology}
+![Geometry of a stereo pair and terminology. The figure shows the epipolar plane, epipolar lines, and epipoles ($e_1$ and $e_2$), for a given point $\mathbf{P}$. As we move the point $\mathbf{P}$, only the epipoles remain constant.](figures/3d_scene_understanding/epipolar_geometry.png){width="80%" #fig-epipolar_geometry_terminology}
 
 In the example shown in @fig-epipolar_geometry_terminology, as both
 cameras are only rotated along their vertical axis and there is no
@@ -719,7 +718,9 @@ z \left[n,m \right] = \frac{1}{ d \left[n,m \right] }
 pixel. Assuming a pinhole camera and using the depth,
 $z \left[n,m \right]$, and the intrinsic camera parameters,
 $\mathbf{K}$, we obtain the 3D coordinates for a pixel with image
-coordinates $[n,m]$ in the camera reference frame as $$\begin{aligned}
+coordinates $[n,m]$ in the camera reference frame as 
+
+$$\begin{aligned}
 \begin{bmatrix}
 X \\
 Y \\ 
@@ -755,7 +756,7 @@ to compute the matching cost and estimate the disparities at every
 pixel.
 $$f(\mathbf{v}_1, \mathbf{v}_2) = c \left( g(\mathbf{v}_1), g(\mathbf{v}_2) \right)$$
 
-A common approach, depicted in block diagram form in @fig-stereoblock,
+A common approach, depicted in block diagram form in @fig-stereo (b)lock,
 is the following:
 
 -   Rectify the stereo pair so that scanlines in each image depict the
@@ -776,7 +777,7 @@ is the following:
     nonneural-network approaches, such as SGM @Hirschmuller2007, but the
     performance is better for the neural network approaches.
 
-![Block diagram of CNN stereo processing, abstracted from the block diagrams of \cite{Chang2018,Zhang2019GANet,Kendall2017](figures/stereo/stereocnn.jpg){width="100%" #fig-stereoblock}
+![Block diagram of CNN stereo processing, abstracted from the block diagrams of @Chang2018, @Zhang2019GANet, @Kendall2017](figures/stereo/stereocnn.jpg){width="100%" #fig-stereoblock}
 
 The performance of methods following the block diagram of
 @fig-stereoblock surpassed that of methods with handcrafted features.
