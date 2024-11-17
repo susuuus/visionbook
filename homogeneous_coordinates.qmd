@@ -34,7 +34,9 @@ geometric transformations easily by directly working with the spatial
 coordinates. Imagine you want to translate an image, described by
 equation (@eq-set_of_pixels), to the right by one pixel, you can do that
 easily by simply creating the new image defined by the set of translated
-pixels: $\left\{ [\ell_i,x_i+1,y_i] : i \right\}$.:::{.column-margin}
+pixels: $\left\{ [\ell_i,x_i+1,y_i] : i \right\}$.
+
+:::{.column-margin}
 Representing images as sets of points is very common
 in geometry-based computer vision. We will use this representation
 extensively in the following chapters.
@@ -173,9 +175,7 @@ simple when using homogeneous coordinates, and they will become the
 basis for more complex operations such as 3D perspective projection and
 camera calibration as we will see in later sections.
 
-![2D geometric transformations. 
-%On the left we see the original image. The next four transformations correspond to translation, rotation, scaling and shear. Those four transformations can be easily described with matrices. 
-The final transformation is an arbitrary warping with a more complex deformation field.](figures/imaging_geometry/2d_transformations.png){width="100%" #fig-2dtransformations_clock}
+![2D geometric transformations. The final transformation is an arbitrary warping with a more complex deformation field.](figures/imaging_geometry/2d_transformations.png){width="100%" #fig-2dtransformations_clock}
 
 We'll explore the use of homogeneous coordinates for describing 2D
 geometric transformations first, then see how they can easily represent
@@ -545,7 +545,7 @@ coordinates of $\mathbf{p}$ computed that way will be given in
 homogeneous coordinates. So you need to divide by the third component in
 order to get the actual point coordinates in heterogeneous coordinates.
 
-![](figures/imaging_geometry/points_and_lines_homogeneous.png){width=".7"}
+![Using homogeneous coordinates to get the line that passes by two points, and to obtain the intersection of two lines. Both operations are analogous.](figures/imaging_geometry/points_and_lines_homogeneous.png){width=".7" #fig-points_and_lines_homogeneous_imggeo}
 
 If three 2D points are colinear, then the determinant of the matrix
 formed by concatenating the three vectors, in homogeneous coordinates,
@@ -590,7 +590,8 @@ not a good idea. We will have all sorts of artifacts such as missing
 values and aliasing as shown in @fig-warping_sketch and
 @fig-warping_forward_backward.
 
-![](figures/imaging_geometry/warping_sketch.png){width="100%"}
+![Comparison between forward and backward mapping using nearest neighbor interpolation. Forward mapping will produce missing values.](figures/imaging_geometry/warping_sketch.png){#fig-warping_sketch}
+. 
 
 The best approach is to use what is called **backward mapping** which
 consists of looping over all the pixels of the target image and applying
@@ -607,7 +608,7 @@ the input image. Figures
 @fig-warping_forward_backward compare forward and backward
 mapping.
 
-![](figures/imaging_geometry/warping_forward_backward.png){width="100%"}
+![Comparison between forward and backward mapping. Forward mapping produces many artifacts. In both cases we use nearest neighbor interpolation.](figures/imaging_geometry/warping_forward_backward.png){width="100%" #fig-warping_forward_backward}
 
 To achieve high image quality warping it is important to chose a high
 quality interpolation filter such as bilinear, bicubic, or Lanczos.
@@ -674,9 +675,14 @@ by a sinusoidal representation network (SIREN) @sitzmann2019siren and
 then reconstructed with a rotation of 45 degrees and a scaling by 0.5
 along both dimensions.
 
-![](figures/imaging_geometry/siren_original_image.png){width=".49"}
+:::{layout-ncol="2" #fig-siren_rotation_and_scaling}
+
+![](figures/imaging_geometry/siren_original_image.png){#fig-siren_original_image}
  
-![](figures/imaging_geometry/siren_rotation_and_scaling.png){width=".49"}
+![](figures/imaging_geometry/siren_rotation_and_scaling.png){#fig-siren_rotation_and_scaling}
+
+Figure (left) Original image encoded by a SIREN network. (right) Image after a rotation of 45 degrees and a scaling by 0.5 along both dimensions.
+:::
 
 From this result we can make a few observations. First, we can see that,
 due to the transformation, there is aliasing in the sampled image

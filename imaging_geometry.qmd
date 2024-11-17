@@ -41,7 +41,7 @@ But before we move into the material, we are sure you would like to see
 the picture that the standing character from the previous sketch took.
 Here it is:
 
-![The picture taken by the standing character from \fig{\ref{fig-world_and_camera_coordinates](figures/imaging_geometry/the_picture.png){width=".25" #fig-pinholeGeometry2bis}
+![The picture taken by the standing character from @fig-world_and_camera_coordinates](figures/imaging_geometry/the_picture.png){width="25%" #fig-world_and_camera_coordinates}
 
 ## 3D Camera Projections in Homogeneous Coordinates
 
@@ -61,7 +61,7 @@ geometry and homogeneous coordinates are tools that simplify those
 algebraic relations, and thus simplify many of the equations that
 involve geometric transformations.
 
-![](figures/imaging_geometry/camera_centric.png){width="80%"}
+![Perspective projection. Remember that from similar triangles, we have $x/f = X/Z$ and $y/f = Y/Z$.](figures/imaging_geometry/camera_centric.png){width="80%" #fig-pinholeGeometry2bis}
 
 To write points in 3D space in homogeneous coordinates, we add a fourth
 coordinate to the three coordinates of Euclidean space, as described in
@@ -295,19 +295,19 @@ describe is not very accurate, but it provides be a good sanity check
 before doing more precise camera calibrations. We will describe a more
 accurate method in @sec-camera_calibration.
 
-  -------------------------------------------------------------------------------------
-   ![A simple calibration setting.](figures/imaging_geometry/simple_calibration_1.jpg){width=".62" #fig-simple_calibration}
-                                          \(a\)
-  -------------------------------------------------------------------------------------
+:::{layout-ncol="2" #fig-simple_calibration}
 
-  -------------------------------------------------------------------------------------
-   ![](figures/imaging_geometry/simple_calibration_2.jpg){width=".33"}
-                                          \(b\)
-  -------------------------------------------------------------------------------------
+![](figures/imaging_geometry/simple_calibration_1.jpg){width="62%" }
+                                         
+![](figures/imaging_geometry/simple_calibration_2.jpg){width="33%"}
+
+A simple calibration setting.
+:::
+
 
 To calibrate a camera we need the following three ingredients:
 
--   An object of known size: In this setting, @fig-simple_calibrationa,
+-   An object of known size: In this setting, @fig-simple_calibration (a),
     the object is a $8\times10$ chessboard pattern printed so that each
     square exactly measures 2 $\times$ 2 cm. The total width is
     $W=20$ cm. This chessboard is a standard calibration target
@@ -315,11 +315,11 @@ To calibrate a camera we need the following three ingredients:
 
 -   The distance between the camera and the object: We use a ruler to
     measure that the distance between the camera and the chessboard as
-    shown in @fig-simple_calibrationa. The distance is approximately
+    shown in @fig-simple_calibration (a). The distance is approximately
     $Z=31$ cm.
 
--   A picture of the object: @fig-simple_calibrationb shows the picture
-    taken by the camera shown in @fig-simple_calibrationa. The camera
+-   A picture of the object: @fig-simple_calibration (b) shows the picture
+    taken by the camera shown in @fig-simple_calibration (a). The camera
     plane is parallel to the chessboard. From the picture, we can
     measure the width of the chessboard in pixels, which is $L=2{,}002$
     pixels.
@@ -391,7 +391,7 @@ finally translating it by $\mathbf{T}$ (the order of these two
 operations matters). We use the inverse of $\mathbf{R}$ (equal to its
 transpose) to simplify the derivations later.
 
-![World- and camera-coordinate systems. A 3D point expressed in world coordinates, $\mathbf{P](figures/imaging_geometry/world_and_camera_coordinates_2.png){width="70%" #fig-camera_calibration}
+![World- and camera-coordinate systems. A 3D point expressed in world coordinates, $\mathbf{P}_W$, can be expressed in the camera-coordinate frame, $\mathbf{P}_c$, by applying the translation, $\mathbf{T}$, and rotation, $\mathbf{R}$, to the point coordinates.](figures/imaging_geometry/world_and_camera_coordinates_2.png){width="70%" #fig-camera_calibration}
 
 We are now given a point in the world $\mathbf{P}_W$, with its
 coordinates are described in terms of the world-coordinate system. Our
@@ -483,7 +483,9 @@ parameters to get a full camera model.
 
 The concatenation of the extrinsic and intrinsic transformation matrices
 yields the desired transformation matrix, which will transform world
-coordinates to rendered pixel coordinates: $$\lambda
+coordinates to rendered pixel coordinates: 
+
+$$\lambda
     \begin{bmatrix}
     x \\
     y \\
@@ -503,7 +505,7 @@ coordinates to rendered pixel coordinates: $$\lambda
     Z \\
     1
     \end{bmatrix}
-    $${#eq-combined} Converting back to heterogeneous from homogeneous
+$${#eq-combined} Converting back to heterogeneous from homogeneous
 coordinates, the 2D pixel indices of a 3D point $[X, Y, Z]^\mathsf{T}$
 are $[x,y]^\mathsf{T}=[x'/w, y'/w]^\mathsf{T}$. We can make all the
 matrices in equation (@eq-combined) explicit and write:
@@ -581,7 +583,7 @@ build models for different camera types such as orthographic cameras,
 weak-perspective model, affine cameras, and so on.
 @fig-summary_camera_projection summarizes this section.
 
-![Projection of a point into the image plane. This summary puts together \fig{\ref{fig-pinholeGeometry2bis](figures/imaging_geometry/summary_camera_model.png){width="80%" #fig-summary_camera_projection}
+![Projection of a point into the image plane. This summary puts together @fig-pinholeGeometry2bis](figures/imaging_geometry/summary_camera_model.png){width="80%" #fig-summary_camera_projection}
 
 In the rest, we will usually refer to the camera projection matrix,
 which includes both intrinsic as extrinsic parameters as:
@@ -601,12 +603,13 @@ have growing complexity as shown in @fig-camera_calibration_scenarios.
 
 ![Four examples of camera poses respect to the world-coordinates system with increasing complexity. In the text we derive the projection matrix for each scenario.](figures/imaging_geometry/camera_calibration_scenarios.png){width="100%" #fig-camera_calibration_scenarios}
 
-. We will start with a camera located at the origin of the
+We will start with a camera located at the origin of the
 world-coordinate systems, as shown in
-@fig-camera_calibration_scenariosa. In this case, both coordinate
+@fig-camera_calibration_scenarios (a). In this case, both coordinate
 systems are identical and the camera projection matrix is:
 
-$$\mathbf{M}    =             
+$$
+\mathbf{M}    =             
     \begin{bmatrix}
     a & 0 & 0 & 0 \\
     0 & a & 0 & 0 \\
@@ -624,22 +627,18 @@ $$\mathbf{M}    =
     0 & a & 0 & 0 \\
     0 & 0 & 1 & 0
     \end{bmatrix}
-    $${#eq-model1}
+$${#eq-model1}
 
 We have set $c_x=c_y=0$, which assumes that the center of the image are
 the coordinates $(x,y)=(0,0)$. This will simplify the equations for the
 following examples.
 
-. The second scenario we will consider is shown in
-@fig-camera_calibration_scenariosb. This scenario corresponds to a case
-where a person is holding a camera, pointing toward the horizon in such
-a way that the optical axis of the camera is parallel to the ground. In
-this case we place the world-coordinate frame with its origin on the
-ground plane right below the camera. The camera is at a height $h$ from
-the ground, measured in meters.
+The second scenario we will consider is shown in
+@fig-camera_calibration_scenarios (b). This scenario corresponds to a case where a person is holding a camera, pointing toward the horizon in such a way that the optical axis of the camera is parallel to the ground. In this case we place the world-coordinate frame with its origin on the ground plane right below the camera. The camera is at a height $h$ from the ground, measured in meters.
 
-$$\mathbf{M}    =             
-    \begin{bmatrix}
+$$
+\mathbf{M}    =            
+\begin{bmatrix}
     a & 0 & 0 & 0 \\
     0 & a & 0 & 0 \\
     0 & 0 & 1 & 0
@@ -656,13 +655,17 @@ $$\mathbf{M}    =
     0 & a & 0 & -ah \\
     0 & 0 & 1 & 0
     \end{bmatrix}
-    $${#eq-model2}
+$${#eq-model2}
 
 Going back to heterogeneous coordinates we have that a 3D point at
 location $P_W=[X, Y, Z]^\mathsf{T}$ in world coordinates projects to the
-image coordinates: $$\begin{aligned}x &=& a \frac{X}{Z} \\
+image coordinates: 
+
+$$\begin{aligned}x &=& a \frac{X}{Z} \\
 y &=& a \frac{Y-h}{Z} 
-\end{aligned}$$ In this scenario, if you hold the camera parallel to the
+\end{aligned}$$ 
+
+In this scenario, if you hold the camera parallel to the
 ground at the height of your eyes and take a picture of a person
 standing in front of you with a similar height, their eyes will project
 near the middle portion of the vertical axis of the picture (their eyes
@@ -675,14 +678,17 @@ the horizon line in the following chapter).
 
 ![If you hold the camera parallel to the ground at the height of your eyes and take a picture of a person standing in front of you with a similar height, their eyes will project near the middle portion of the vertical axis of the picture.](figures/imaging_geometry/horizon_heads.jpg){width=".6" #fig-horizon_heads}
 
-. Let's now consider that the camera is tilted by looking downward with
-an angle $\theta$, as shown in @fig-camera_calibration_scenariosc. The
+Let's now consider that the camera is tilted by looking downward with
+an angle $\theta$, as shown in @fig-camera_calibration_scenarios (c). The
 horizontal camera axis remains parallel to the ground, but now the
 optical axis points toward the ground if $\theta>0$.
 
 Let's first write down the camera-extrinsic parameters. The angle
 $\theta$ here corresponds to a rotation around the $X_c$-axis, thus we
-can write: $$\begin{aligned}
+can write: 
+
+$$
+\begin{aligned}
     \begin{bmatrix}
     \mathbf{R} & -\mathbf{R}\mathbf{T} \\
     \mathbf{0}^\mathsf{T}& 1
@@ -708,19 +714,23 @@ can write: $$\begin{aligned}
     0 & -\sin (\theta) & \cos (\theta) & h \sin (\theta) \\
     0 & 0 & 0 & 1 \\
     \end{bmatrix}
-    
-\end{aligned}$${#eq-model3}
+\end{aligned}
+$${#eq-model3}
 
 Putting both intrinsic and extrinsic camera parameters together we get
-the following projection matrix: $$\begin{aligned}    \mathbf{M} 
+the following projection matrix: 
+
+$$
+\begin{aligned}    
+\mathbf{M} 
     &=& 
     \begin{bmatrix}
     a & 0 & 0 & 0 \\
     0 & a\cos (\theta) & a\sin (\theta) & -ah \cos (\theta) \\
     0 & -\sin (\theta) & \cos (\theta) & h \sin (\theta) \\
-    \end{bmatrix}
-    
-\end{aligned}$${#eq-model3b}
+    \end{bmatrix}    
+\end{aligned}
+$${#eq-model3b}
 
 Going back to heterogeneous coordinates we have:
 
@@ -769,9 +779,15 @@ The horizontal red lines show the approximate location of the horizon
 line in each image and coincides also with the vertical location where
 the heads of the people walking appear on the picture.
 
-![The two pictures taken with two different camera angles. The red line indicates the position of the horizon line estimated as the horizontal location in which the two vanishing lines (blue) intersect.](figures/imaging_geometry/low_horizon_vp.jpg){width=".48" #fig-low_and_high_horizon}
+:::{layout-ncol="2" #fig-low_and_high_horizon}
+![](figures/imaging_geometry/low_horizon_vp.jpg){width="48%"}
  
-![](figures/imaging_geometry/high_horizon_vp.jpg){width=".48"}
+![](figures/imaging_geometry/high_horizon_vp.jpg){width="48%"}
+
+The two pictures taken with two different camera angles. The red line indicates the position of the horizon line estimated as the horizontal location in which the two vanishing lines (blue) intersect.
+
+:::
+
 
 These pictures were taken with the iPhone 13 pro, which we calibrated
 before. The intrinsic camera parameter we got is $a  \simeq 3{,}103$,
@@ -785,7 +801,9 @@ angle of the camera when we were taking these two pictures, both angles
 seem about right. We leave it to the reader to take two similar pictures
 to the ones in the example above, and get a precise measurement of the
 camera angle using a protractor and check if the estimated angle from
-the horizon line matches your measurement.:::{.column-margin}
+the horizon line matches your measurement.
+
+:::{.column-margin}
 Example 3 can be useful to model typical imaging
 conditions. It results in a simple model with three parameters ($h$,
 $a$, and $\theta$). 
@@ -793,7 +811,7 @@ $a$, and $\theta$).
 
 
 
-. The setting shown in shown in @fig-camera_calibration_scenariosd is
+The setting shown in shown in @fig-camera_calibration_scenarios (d) is
 like the one we used in the simple visual system @sec-simplesystem. Let's see if we recover the same
 equations!
 
@@ -802,8 +820,9 @@ two axes. We have a rotation around the $X_w$-axis with an angle
 $\theta_X=\theta$ and a rotation along the $Y_w$-axis with a
 $\theta_Y = 180$ degrees rotation.
 
-$$\begin{aligned}    \mathbf{R}
-    &=&        
+$$
+\begin{aligned}
+\mathbf{R}    &=&        
     \begin{bmatrix}
     1 & 0 & 0 \\
     0 & \cos (\theta_X) & \sin (\theta_X)  \\
@@ -821,7 +840,9 @@ $$\begin{aligned}    \mathbf{R}
     0 & \cos (\theta_X) & -\sin (\theta_X)  \\
     0 & -\sin (\theta_X) & -\cos (\theta_X) \\
     \end{bmatrix}
-\end{aligned}$$ It is important to note that this form of dealing with
+\end{aligned}$$ 
+
+It is important to note that this form of dealing with
 rotations is more complex than it seems. Once we apply a rotation along
 one axis, the following rotation will be affected. That is, the order in
 which these rotations are executed matters. In this example, it works if
@@ -829,7 +850,9 @@ we rotate along the $Y$-axis first. In general, it is better to use
 other conventions to write the rotation matrix.
 
 The projection matrix is obtained by using both intrinsic and extrinsic
-camera parameters together, resulting in: $$\begin{aligned}
+camera parameters together, resulting in: 
+
+$$\begin{aligned}
     \mathbf{M} 
     &=& 
     \begin{bmatrix}
@@ -856,8 +879,8 @@ camera parameters together, resulting in: $$\begin{aligned}
     0 & a\cos (\theta) & -a\sin (\theta) & -ah \cos (\theta) +ad \sin (\theta) \\
     0 & -\sin (\theta) & -\cos (\theta) & h \sin (\theta) + d \cos(\theta) \\
     \end{bmatrix}
-    
-\end{aligned}$${#eq-model4}
+    \end{aligned}
+$${#eq-model4}
 
 And going back to heterogeneous coordinates we have: $$\begin{aligned}x &=& -a \frac{X}{\sin( \theta ) (h-Y) + \cos ( \theta ) (d-Z)} \\
 y &=& a \frac{\cos (\theta) (Y-h) + \sin(\theta) (d-Z)}{\sin( \theta ) (h-Y) + \cos ( \theta ) (d-Z)}
@@ -986,7 +1009,9 @@ $$\mathbf{A} \mathbf{m} = \mathbf{0}$$ where $\mathbf{A}$ is a
 $2N \times 12$ matrix. The vector $\mathbf{m}$ contains all the elements
 of the matrix $\mathbf{M}$ stacked as a column vector of length 12. Note
 that $\mathbf{m}$ only has 11 degrees of freedom as the results do not
-change for a global scaling of all the values.:::{.column-margin}
+change for a global scaling of all the values.
+
+:::{.column-margin}
 Rearranging the vector m into the matrix M is a
 potential source of bugs. Try first simulating some 3D points and
 project them with a known M matrix, and check that you recover the same
@@ -1133,7 +1158,7 @@ points and their corresponding image coordinates. The image coordinates
 are approximated also and are collected manually. We use Adobe Photoshop
 to read the pixel coordinates.
 
-![Office picture and a table with the 3D world coordinates of 12 points, extracted using the measurements from \fig{\ref{fig-office_measurements](figures/imaging_geometry/correspondences_img.png){width="100%" #fig-office_correspondences_img}
+![Office picture and a table with the 3D world coordinates of 12 points, extracted using the measurements from @fig-office_measurements](figures/imaging_geometry/correspondences_img.png){width="100%" #fig-office_correspondences_img}
 
 Photoshop has the image coordinates origin on the top left. Our
 convention has been to put the origin on the bottom and the $x$-axis
@@ -1202,7 +1227,14 @@ with the QR decomposition is $$\mathbf{R} =
    -0.4769  & -0.3496  & -0.8064
    \end{bmatrix}$$ The viewing direction of the camera can be obtained
 as $\mathbf{R}^\mathsf{T}[0, 0, 1]^\mathsf{T}$ (this is the direction of
-the $Z$-axis in the camera-coordinates system).  The angle of
+the $Z$-axis in the camera-coordinates system).  
+
+
+:::{.column-margin}
+Another potential bug when extracting the camera orientation is to use the rotation matrix instead of its inverse. We defined $\mathbf{R}^\transpose$ as the rotation needed to move the world coordinate axes to be aligned with the camera-coordinate axes.
+:::
+
+The angle of
 the camera with respect to the vertically can be computed in multiple
 ways. Here is one: $$\begin{aligned}
 \arccos \left( [0,1,0] \mathbf{R}^\mathsf{T}[0,1,0]^\mathsf{T}\right) &=& \arccos (R[2,2]) \nonumber \\

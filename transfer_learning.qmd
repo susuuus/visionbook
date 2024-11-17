@@ -171,8 +171,8 @@ indicating where it thinks the car is.
 
 
 :::{.column-margin}
-We will use the symbol ![](.figures/transfer_learning/lock.png){width="10%"} 
-to indicate a frozen module and the symbol ![](.figures/transfer_learning/fire.png){width="10%"} to indicate a module that is updated during the adaptation phase.
+We will use the symbol ![](figures/transfer_learning/lock.png){width="10%"} 
+to indicate a frozen module and the symbol ![](figures/transfer_learning/fire.png){width="10%"} to indicate a module that is updated during the adaptation phase.
 :::
 
 
