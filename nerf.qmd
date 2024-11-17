@@ -33,7 +33,7 @@ the continuous wavelength. We can represent the plenoptic function with
 the parametric form $L_{\theta}$ where the parameters $\theta$ have to
 be adapted to represent each scene.
 
-![Plenoptic function \cite{Adelson91](figures/nerfs/plenoptic_function.png){width="100%" #fig-nerfs-plenoptic_function}
+![Plenoptic function @Adelson91. The figure shows a slice of the plenoptic function at four locations. Two of the locations are in free space, and two other locations are inside a pinhole camera.](figures/nerfs/plenoptic_function.png){width="100%" #fig-nerfs-plenoptic_function}
 
 An image gets formed by summing all the light rays that reach each
 sensor on the camera (that is, we sum over a section of the plenoptic
@@ -79,13 +79,19 @@ coordinates can be two-dimensional (2D) ($X,Y$) for a 2D world, or 3D
 ($\psi$ and $\phi$) that represent the viewing angle from which we are
 looking at the scene. Representing color using $r,g,b$ values, and
 representing density with a scalar $\sigma$, a radiance field is
-therefore a function: $$\begin{aligned}
+therefore a function: 
+
+$$\begin{aligned}
     L: X,Y,Z,\psi,\phi \rightarrow r,g,b,\sigma \quad\quad\triangleleft \quad\text{radiance field}
-\end{aligned}$$ The angular coordinates $\psi$ and $\phi$ allow that an
+\end{aligned}$$ 
+
+The angular coordinates $\psi$ and $\phi$ allow that an
 object's color be different depending on the angle we look at it, which
 is the case for shiny surfaces and many other materials. We will use the
 terms $L^c$ and $L^\sigma$ to denote the subcomponents of $L$ that
-output color and density values respectively: $$\begin{aligned}
+output color and density values respectively: 
+
+$$\begin{aligned}
     L^c&: X,Y,Z,\psi,\phi \rightarrow r,g,b\\
     L^{\sigma}&: X,Y,Z,\psi,\phi \rightarrow\sigma
 \end{aligned}$$
@@ -99,7 +105,7 @@ Abbott @abbott2009flatland where the characters are triangles, squares,
 and other simple shapes that inhabit a 2D plane. Here is what their
 world looks like (@fig-nerfs-flatland_cameras_and_images):
 
-![The scene we are modeling. The circle of black triangles on the left are the cameras. The 1D images they see are shown on the right.](figures/nerfs/flatland_cameras_and_images.png){width="65%" #fig-nerfs-flatland_cameras_and_images}
+![The scene we are modeling. The circle of black triangles on the left are the cameras. The 1D images they see are shown on the right. These images are denoted as $\{\boldimg^{(i)}\}_{i=1}^N$.](figures/nerfs/flatland_cameras_and_images.png){width="65%" #fig-nerfs-flatland_cameras_and_images}
 
 On the left is a top-down image of the world, but inhabitants of
 Flatland cannot see this. Instead they see the images on the right,
@@ -152,7 +158,9 @@ examples are the following:
 -   **Signed distance functions** (**SDFs**) @curless1996volumetric,
     $f: X,Y,Z \rightarrow d$, represent the distance to the closest
     surface to point $[X,Y,Z]^\mathsf{T}$. This is a useful
-    representation of geometry.:::{.column-margin}
+    representation of geometry.
+    
+:::{.column-margin}
 Notation reminder: we use capital letters for world
 coordinates and lowercase letters for image coordinates.
 :::
@@ -177,6 +185,12 @@ values of the field at all coordinates. Instead we just record a
 the field at any coordinate. Recall that we learned about implicit image
 representations in @sec-implicit_image_representations. 
 
+
+:::{.column-margin}
+Implicit representations are also used in variational autoencoders (VAEs)
+where we represent an infinite set (an infinite mixture of Gaussians) via a parameterized function from a continuous input domain (see \chap{\ref{chapter:generative_modeling_and_representation_learning}}). You can consider a VAE to be a continuous field mapping from latent variables to images!
+:::
+
 There are many different parameterized functions $L_{\theta}$ that could
 represent our target radiance field $L$. We could use a neural net
 (e.g., @mildenhall2020nerf), or a mixture of Gaussians (e.g.,
@@ -192,6 +206,10 @@ for this, we can think of it just like a module in a differentiable
 computation graph (@fig-nerfs-nerf_module). Later we will put together
 multiple such modules and use backpropagation to optimize the whole
 system to fit the field to a set of images.
+
+
+
+![Module for a parameterized radiance field. We use $\mathbf{R}$ to denote the vector of coordinates $\lightfield_\theta$ takes as input.](figures/nerfs/nerf_module.png){width="100%" #fig-nerfs-nerf_module}
 
 ### Neural Radiance Fields (NeRFs) {#sec-nerfs-nerf_section}
 
@@ -213,6 +231,9 @@ grid. In this usage, the NeRF $L_{\theta}$ looks like a convolutional
 neural network (CNN) with 1x1 filters, as this is the architecture that
 results from applying an MLP to each position in a grid of inputs. We
 show this usage below, in @fig-nerfs-image_to_image_arch.
+
+
+![NeRF architecture for computing the values at each position in an entire radiance field, sampled on a grid. The $\texttt{pos\_enc}$ refers to positional encoding. You can consider this architecture be a CNN with 1x1 filters, or as an MLP applied to each input coordinate vector.](figures/nerfs/image_to_image_arch.png){width="100%" #fig-nerfs-image_to_image_arch}
 
 As in the original NeRF @mildenhall2020nerf, the output layer is
 $\texttt{relu}$ for producing $\sigma$ (which needs to be nonnegative)
@@ -282,10 +303,12 @@ rendering radiance fields are shown in @fig-nerfs-flatland_training.
 But before we get to those, let us go step by step through the math of
 volume rendering.
 
-The volume rendering equation is: $$\begin{aligned}
+The volume rendering equation is: 
+$$\begin{aligned}
     \ell(r) = \int_{t_n}^{t_f}\alpha(t) \, \overbrace{L^\sigma(r(t))}^{\text{density}} \, \overbrace{L^c(r(t),\mathbf{D})}^{\text{color}} \, dt :vol_rendering_integral\\
     \alpha(t) = \exp \Big(-\int_{t_n}^{t} \underbrace{L^\sigma(r(t))}_{\text{density}} dt\Big)
-\end{aligned}$${#eq-nerfs}  where $r(t)$ gives the coordinates, in the
+\end{aligned}$${#eq-nerfs}  
+where $r(t)$ gives the coordinates, in the
 radiance field, of a point $t$ distance along the ray, $\mathbf{D}$ is
 the direction of the ray (a unit vector), and $t_n$ and $t_f$ are the
 near and far cutoff points, respectively (we only integrate over the
@@ -294,6 +317,11 @@ scene content of interest). To render an image, we can apply this
 equation to the ray that passes through each pixel in the image. This
 procedure maps a radiance field $L$ to an image $\boldsymbol\ell$ as
 viewed by some camera.
+
+
+:::{.column-margin}
+Here we model the color as being dependent on the direction $\mathbf{D}$ but the density as being direction-independent. This is a modeling choice and happens to work well because view-dependent color effects are abundant in scenes (e.g., specularities) but view-dependent density effects are less common.
+:::
 
 This model is based on the idea that the volume is filled with colored
 particles. When we trace a ray out of the camera into the scene, it may
@@ -378,10 +406,19 @@ during fitting a radiance field to explain a scene).
 
 Following this strategy, for a ray whose origin is $\mathbf{O}$ and
 whose direction is $\mathbf{D}$, we compute sampled coordinates
-$\{\mathbf{R}_1, \ldots, \mathbf{R}_T\}$ as follows: $$\begin{aligned}
+$\{\mathbf{R}_1, \ldots, \mathbf{R}_T\}$ as follows: 
+
+$$\begin{aligned}
     \mathbf{R}_i &= \mathbf{O} + t_i\mathbf{D}\\
     &t_i \sim \mathcal{U}[i-1,i]*\frac{t_f-t_n}{T}+t_n
-\end{aligned}$$  Now we can put all our pieces together as a
+\end{aligned}$$  
+
+
+:::{.column-margin}
+The distribution $\mathcal{U}[a,b]$ is the uniform distribution over the interval $[a,b]$.
+:::
+
+Now we can put all our pieces together as a
 series a computational modules that define the full volume rendering
 pipeline. Later in the chapter, we will combine these modules with other
 modules (including neural nets) to create a computation graph that can
@@ -402,12 +439,26 @@ constructing $\mathbf{K}_{\texttt{cam}}$ are given in @sec-simple_system_revisit
 this mapping, then compute the unit vector from the origin to the pixel
 to get the direction $\mathbf{D}$ (@fig-nerfs-pixel2ray):
 
+
+
+![Module for mapping from pixel coordinates to the world coordinates of a ray through that pixel.](figures/nerfs/pixel2ray.png){width="100%" #fig-nerfs-pixel2ray}
+
+
+
+
 Next we sample world coordinates along the ray, as described previously
 (@fig-nerfs-ray2coords):
+
+
+
+![Module for sampling coordinates along a ray.](figures/nerfs/ray2coords.png){width="100%" #fig-nerfs-ray2coords}
 
 Finally, we use the volume rendering integral (using the quadrature rule
 approximation given previously) to compute the color of the pixel
 (@fig-nerfs-vrender):
+
+
+![Module for volume rendering of a single ray.](figures/nerfs/vrender.png){width="100%" #fig-nerfs-vrender}
 
 This pipeline gives a mapping from pixel coordinates to color values:
 $n,m \rightarrow r,g,b$. Our task in the next section will be to explain
@@ -441,7 +492,19 @@ Given $L_{\theta}$, we will render an image simply using volume
 rendering as described previously. The entire computation graph is shown
 in @fig-nerfs-full_nerf_pipeline. Notice that all the modules are
 differentiable, which will be critical for our next step, fitting the
-parameters to data.### Optimizing the Parameters of this Computation Graph
+parameters to data.
+
+
+![Full NeRF pipeline for rendering an image.](figures/nerfs/full_nerf_pipeline.png){width="100%" #fig-nerfs-full_nerf_pipeline}
+
+
+
+:::{.column-margin}
+Note that the camera parameters also also need to be input into $\texttt{pixel2ray}$ and that $\texttt{vrender}$ also takes as 
+input the direction $\mathbf{D}$ and sampling points $\mathbf{t}$ computed by $\texttt{ray2coords}$.
+:::
+
+### Optimizing the Parameters of this Computation Graph
 
 Fitting a $L_{\theta}$ to explain the images just involves optimizing
 the parameters $\theta$ to minimize the reconstruction error between the
@@ -451,10 +514,8 @@ and the observed input images.
 We can phrase this procedure as a learning problem and show it as the
 diagram below:
 
-::: center
-:::
 
-
+![](figures/nerfs/nerf_learning.png){width="100%"}
 
 :::{.column-margin}
 Fitting a radiance field to volume rendered images is
@@ -561,6 +622,12 @@ $\rho(\mathbf{x},\mathbf{x}',\mathbf{x}^{\prime\prime})$ is the
 intensity of light scattered from $\mathbf{x}^{\prime\prime}$ to
 $\mathbf{x}$ by a patch of surface at location $x'$ (this is related to
 the bidirectional reflectance distribution function).
+
+
+
+:::{.column-margin}
+Here $\mathbf{x}$, $\mathbf{x}'$, and $\mathbf{x}^{\prime\prime}$ represents a vector of world coordinates, e.g., $\mathbf{x} = [X,Y,Z]$.
+:::
 
 The term $g(\mathbf{x}, \mathbf{x}')$ is a visibility function and
 encodes the geometry of the scene and the occlusions present. If points

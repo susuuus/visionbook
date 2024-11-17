@@ -337,6 +337,14 @@ likely to be stable under different sets of geometric transformations
 (translation, scaling, rotation, skew, and projective), and illumination
 changes. These stable regions are called **interest points**.
 
+
+:::{.column-margin}
+Initially, **interest points** were called moving elements. A **moving element**
+was any image point that could be identified and followed over time such
+as a corner, a line termination point, or a texture element
+@Ullman1979.
+:::
+
 When talking about stereo matching we described a simple procedure to
 detect interest points: the Harris corner detector @Harris88. Corners
 are examples of image regions that are likely to be distinct from the

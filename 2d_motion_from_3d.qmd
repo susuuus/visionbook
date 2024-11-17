@@ -22,7 +22,7 @@ $\mathbf{p}(t) = (x(t),y(t))$ and its projection will move with the 2D
 instantaneous velocity $\dot{\mathbf{p}} = (\dot{x}(t), \dot{y}(t))$,
 where all the derivatives are done with respect to time, $t$.
 
-![A 3D point, $\mathbf{P](figures/optical_flow/basic_motion_point.png){width=".5" #fig-optical_flow_basic_motion_point}
+![A 3D point, $\mathbf{P}$, moving in the world projects a 2D moving point, $\mathbf{p}$, into the camera plane.](figures/optical_flow/basic_motion_point.png){width=".5" #fig-optical_flow_basic_motion_point}
 
 Using the equations of perspective projection $x=f X/Z$ and $y=f Y/Z$
 (assuming that the camera is at the origin of the world-coordinate
@@ -37,7 +37,9 @@ $X$ and $Y$. Note that $f$ is the focal length. In many derivations, the
 notation is simplified by setting the focal length $f=1$. Here we will
 keep it to make explicit which factors depend on the camera parameters
 and which ones do not. We can write the last two equations in matrix
-form as: $$\begin{aligned}
+form as: 
+
+$$\begin{aligned}
 \begin{bmatrix}
 \dot{x} \\
 \dot{y}
@@ -52,13 +54,16 @@ f & 0 & -x \\
 \dot{Y} \\
 \dot{Z}
 \end{bmatrix}
+\end{aligned}$${#eq-motionprojection} 
 
-\end{aligned}$${#eq-motionprojection} This expression reveals a number of interesting
+This expression reveals a number of interesting
 properties of the optical flow and how it relates to motion in the
 world. For instance, points that move parallel to the camera plane
 ($\dot{Z} = 0$) will project to a motion parallel to the motion in 3D
 but with a magnitude that will be inversely proportional to the distance
-$Z$: $$\begin{aligned}
+$Z$: 
+
+$$\begin{aligned}
 \begin{bmatrix}
 \dot{x} \\
 \dot{y}
@@ -68,11 +73,11 @@ $Z$: $$\begin{aligned}
 \dot{X} \\
 \dot{Y}
 \end{bmatrix}
-
 \end{aligned}$${#eq-parallelmotion}
 
 For points moving parallel to the $Z$ axis ($\dot{X} = \dot{Y} = 0$) we
-get: $$\begin{aligned}
+get: 
+$$\begin{aligned}
 \begin{bmatrix}
 \dot{x} \\
 \dot{y}
@@ -82,7 +87,6 @@ get: $$\begin{aligned}
 x \\
 y
 \end{bmatrix}
-
 \end{aligned}$${#eq-forward_objects} Points at the same distance $Z$ from the camera, moving
 away or towards the camera ($\dot{Z} \neq 0$, and
 $\dot{X} = \dot{Y} = 0$), with the same velocity will project into
@@ -107,16 +111,21 @@ Let's consider a point moving in a straight line in 3D with constant
 velocity over time: $\dot{\mathbf{P}} = (V_X, V_Y, V_Z)^\mathsf{T}$. At
 each time instant, $t$, the point location will be
 $\mathbf{P}(t) = (X+V_Xt, Y+V_Yt, Z+V_Zt)^\mathsf{T}$, and its 2D
-projection: $$\begin{aligned}
+projection: 
+
+$$\begin{aligned}
 x(t) & = & f \frac{X + V_X t}{Z + V_Z t}\\
 y(t) & = & f \frac{Y + V_Y t}{Z + V_Z t} 
-\end{aligned}$$ If $\dot{Z}=0$, then the projected point will move with
+\end{aligned}$$ 
+
+If $\dot{Z}=0$, then the projected point will move with
 constant velocity over time, as shown in equation (@eq-parallelmotion).
 If $\dot{Z} \neq  0$, then, as time goes to infinity, the point will
-converge to a **vanishing point**: $$\begin{aligned}
+converge to a **vanishing point**: 
+
+$$\begin{aligned}
 \lim_{t \to \infty} x(t)  & = & f \frac{V_X}{V_Z} = x_{\infty}\\
 \lim_{t \to \infty} y(t) & = & f \frac{V_Y}{V_Z} = y_{\infty}
-
 \end{aligned}$${#eq-motionvanishingpoint}
 
 The following sketch (@fig-flying_bird) shows Gibson's bird (see
@@ -125,7 +134,7 @@ the camera the bird gets smaller as it flies away until it disappears at
 the vanishing point. In this drawing the vanishing point is within the
 view of the camera.
 
-![Projection onto the camera plane of the sequence produced by a bird flying away. The bird will vanish at the {\bf vanishing point](figures/optical_flow/flying_bird.png){width="100%" #fig-flying_bird}
+![Projection onto the camera plane of the sequence produced by a bird flying away. The bird will vanish at the **vanishing point**](figures/optical_flow/flying_bird.png){width="100%" #fig-flying_bird}
 
 The vanishing point is the location
 $\mathbf{p}_{\infty}=(x_{\infty}, y_{\infty})^\mathsf{T}$ where the
@@ -166,12 +175,12 @@ V_X\\
 V_Y \\
 V_Z 
 \end{bmatrix}
-
 \end{aligned}$${#eq-2d_motion_field_equation}
 
 We can also express the same relationship by making the contribution of
 the camera coordinates more explicit. We can do this by rearranging the
 terms in equation (@eq-2d_motion_field_equation), resulting in:
+
 $$\begin{aligned}
 \begin{bmatrix}
 \dot{x} \\
@@ -252,7 +261,6 @@ $$\begin{aligned}
 x \\
 y  
 \end{bmatrix}
-
 \end{aligned}$${#eq-motion_projection_focus_expansion}
 
 Equation (@eq-motion_projection_focus_expansion) provides a few
@@ -299,12 +307,14 @@ consecutive frames. After a small time interval, $\Delta t$, the camera
 will move, generating a displacement in the points with respect to the
 camera coordinate system equal to:
 
-$$\mathbf{P}_{t+\Delta t} = - \mathbf{T}_{\Delta t}  + \mathbf{R}_{\Delta t} \mathbf{P}_t$$
+$$\mathbf{P}_{t+\Delta t} = - \mathbf{T}_{\Delta t}  + \mathbf{R}_{\Delta t} \mathbf{P}_t
+$$
 where $\mathbf{T}_{\Delta t}$ is the camera translation and
 $\mathbf{R}_{\Delta t}$ is the camera rotation that took place over that
 time interval, $\Delta t$. The velocity of a 3D point with respect to
 the camera will be:
-$$\dot{\mathbf{P}} = \frac{\mathbf{P}_{t+\Delta t} - \mathbf{P}_{t}}{\Delta t} = - \mathbf{V} + \frac{\mathbf{R}_{\Delta t} -\mathbf{I}}{\Delta t} \mathbf{P}_t
+$$
+\dot{\mathbf{P}} = \frac{\mathbf{P}_{t+\Delta t} - \mathbf{P}_{t}}{\Delta t} = - \mathbf{V} + \frac{\mathbf{R}_{\Delta t} -\mathbf{I}}{\Delta t} \mathbf{P}_t
 $${#eq-general_camera_motion_equation_full}
 
 To derive the rotation, we consider the **Euler angles**
@@ -315,7 +325,8 @@ the three axes (yaw, pitch, roll):
 
 Each angle measures the rotation along the camera-coordinate axes. Using
 this representation of the rotation, the rotation matrix can be written
-as: $$\begin{aligned}
+as: 
+$$\begin{aligned}
 \mathbf{R}_{\Delta t} = 
 \begin{bmatrix}
 \cos \theta_Z &  \sin \theta_Z & 0\\
@@ -332,7 +343,8 @@ as: $$\begin{aligned}
 0 & \cos \theta_X &  \sin \theta_X \\
 0 & -\sin \theta_X &  \cos \theta_X 
 \end{bmatrix}
-\end{aligned}$$ In this equation, the sign of the angles are chosen to
+\end{aligned}
+$$ In this equation, the sign of the angles are chosen to
 reflect that a rotation of the camera is equivalent to the opposite
 rotation of the 3D point.
 
@@ -374,7 +386,9 @@ $$\mathbf{P}_{t+\Delta t} - \mathbf{P}_{t} = - \mathbf{T}_{\Delta t} + (\mathbf{
 \theta_Z & 0 &  -\theta_X \\
 -\theta_Y &  \theta_X &  0 
 \end{bmatrix}
-\mathbf{P}_t$$ The last term corresponds to the cross product in matrix
+\mathbf{P}_t$$ 
+
+The last term corresponds to the cross product in matrix
 form (note that we changed the sign of the matrix to make the cross
 product form more obvious). Therefore, we can rewrite the previous
 expression as: $$\mathbf{P}_{t+\Delta t} - \mathbf{P}_{t} = 
@@ -382,6 +396,7 @@ expression as: $$\mathbf{P}_{t+\Delta t} - \mathbf{P}_{t} =
 $\bm{\theta}=(\theta_X,\theta_Y, \theta_Z)$. Substituting this
 expression into equation (@eq-general_camera_motion_equation_full), we
 get the expression of the motion of a 3D point:
+
 $$\dot{\mathbf{P}} = - \mathbf{V} - \mathbf{W} \times \mathbf{P}_t =
 -\begin{bmatrix}
 V_X\\
@@ -393,9 +408,13 @@ V_Z
 -W_Z Y + W_Y Z\\
 W_Z X - W_X Z \\
 -W_Y X + W_X Y 
-\end{bmatrix}$$ where $\mathbf{W}$ is the angular velocity
+\end{bmatrix}$$ 
+
+where $\mathbf{W}$ is the angular velocity
 $\mathbf{W}=(W_X,W_Y,W_Z)$. Now we are ready to compute the 2D motion
-field by using equation (@eq-motionprojection): $$\begin{aligned}
+field by using equation (@eq-motionprojection): 
+
+$$\begin{aligned}
 \begin{bmatrix}
 \dot{x} \\
 \dot{y}
@@ -423,7 +442,9 @@ W_Z X - W_X Z \\
 \end{aligned}$$
 
 This expression can be rewritten as, using $x=f \, X/Z$ and
-$y=f \, Y/Z$: $$\begin{aligned}
+$y=f \, Y/Z$: 
+
+$$\begin{aligned}
 \begin{bmatrix}
 \dot{x} \\
 \dot{y}
@@ -449,8 +470,9 @@ W_X\\
 W_Y \\
 W_Z 
 \end{bmatrix}
+\end{aligned}$${#eq-2d_motion_field_from_translation_and_rotation} 
 
-\end{aligned}$${#eq-2d_motion_field_from_translation_and_rotation} This is the expression we were looking for. It relates
+This is the expression we were looking for. It relates
 the 2D motion field with the camera velocity and rotation. The matrices
 are only a function of the intrinsic camera parameters (focal length,
 $f$) and the camera coordinates. Note that this expression is only valid
@@ -458,7 +480,9 @@ for small displacements.
 
 In the previous section we saw what happens when there is no rotation;
 now we can focus on the case when there is only camera rotation, that is
-$V_X=V_Y=V_Z=0$, $$\begin{aligned}
+$V_X=V_Y=V_Z=0$, 
+
+$$\begin{aligned}
 \begin{bmatrix}
 \dot{x} \\
 \dot{y}
@@ -484,7 +508,9 @@ The only thing we can learn from the 2D motion field is about the motion
 of the camera.
 
 Let's consider first rotation along the camera optical axis, that is
-$W_X=W_Y=0$. In this case the motion field is: $$\begin{aligned}
+$W_X=W_Y=0$. In this case the motion field is: 
+
+$$\begin{aligned}
 \begin{bmatrix}
 \dot{x} \\
 \dot{y}
@@ -495,7 +521,8 @@ $W_X=W_Y=0$. In this case the motion field is: $$\begin{aligned}
 -x  
 \end{bmatrix}
 W_Z 
-\end{aligned}$$ The 2D motion field at each location $(x,y)$ will point
+\end{aligned}$$ 
+The 2D motion field at each location $(x,y)$ will point
 in the orthogonal direction to the vector that connects that point with
 the origin (@fig-motion_wz). The motion field does not depend on the
 focal length, $f$.
@@ -503,7 +530,9 @@ focal length, $f$.
 ![Motion field for a rotating camera around the optical axis, $W_X=W_Y=0$.](figures/optical_flow/motion_wz.png){width=".4" #fig-motion_wz}
 
 If $W_Z=0$, then the rotation along $W_X$ or $W_Y$ will produce similar
-2D motion fields, so let's consider $W_X=0$. We have: $$\begin{aligned}
+2D motion fields, so let's consider $W_X=0$. We have: 
+
+$$\begin{aligned}
 \begin{bmatrix}
 \dot{x} \\
 \dot{y}
@@ -515,7 +544,9 @@ f^2+x^2 \\
 xy  
 \end{bmatrix}
 W_Y 
-\end{aligned}$$ In this case, the focal length $f$ will have a strong
+\end{aligned}$$ 
+
+In this case, the focal length $f$ will have a strong
 effect on the appearance of the motion field. For very large $f$, we can
 approximate the 2D motion field by $\dot{x} \approx f W_Y$ and
 $\dot{y} \approx 0$. The resulting motion field is approximately
@@ -526,8 +557,7 @@ camera motion. The flows shown in @fig-motion_wy_f03_f1_f3 correspond
 to $f=1/3$, $f=1$, and $f=3$.
 
 ![Motion flows corresponding to a rotation around the 
-$Y$-axis. (left) $f = 1/3$. (middle) $f = 1$.
-(right) $f = 3$.](figures/optical_flow/camera_motion_field_rotation_three_f.png){width="100%" #fig-motion_wy_f03_f1_f3}
+$Y$-axis. (left) $f = 1/3$. (middle) $f = 1$. (right) $f = 3$.](figures/optical_flow/camera_motion_field_rotation_three_f.png){width="100%" #fig-motion_wy_f03_f1_f3}
 
 Camera rotation around the $Y$-axis does not inform about the scene
 structure, but it informs about the camera parameters. The magnitude of
@@ -548,7 +578,8 @@ over time, producing motion in the image plane. If the focal length
 increases, it will seem as if we are zooming into the scene. Would it be
 similar to a forward motion?
 
-Starting from the perspective projection equation, $$\begin{aligned}
+Starting from the perspective projection equation, 
+$$\begin{aligned}
 \begin{bmatrix}
 x \\
 y
@@ -558,9 +589,10 @@ y
 X \\
 Y
 \end{bmatrix}
-
 \end{aligned}$${#eq-pers_proj} If we compute the temporal derivative where only $f$
-varies over time, we get: $$\begin{aligned}
+varies over time, we get: 
+
+$$\begin{aligned}
 \begin{bmatrix}
 \dot{x} \\
 \dot{y}

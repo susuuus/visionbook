@@ -21,9 +21,9 @@ becomes extremely powerful as soon as the world starts to move. Our
 visual system can form a detailed representation of moving objects with
 complex shapes. Even in front of a static image, we form a
 representation of the dynamics of an object, as shown in the photograph
-in @fig-050822_172806\_\_MG_5366.
+in @fig-050822_172806__MG_5366.
 
-![Even from a static picture we form a rich representation of the dynamics of the scene. {\em Source](figures/optical_flow/050822_172806__MG_5366.jpg){width=".7" #fig-050822_172806__MG_5366}
+![Even from a static picture we form a rich representation of the dynamics of the scene. *Source*: Photograph by Fredo Durand](figures/optical_flow/050822_172806__MG_5366.jpg){width=".7" #fig-050822_172806__MG_5366}
 
 Looking at the power of that static image to convey motion, one wonders
 if seeing movies is really necessary. From the notes you took about what
@@ -114,7 +114,7 @@ illusion, using very simple elements to produce the illusion. The effect
 becomes more intense as we move our eyes to explore different parts of
 the bicycle.
 
-![Motion-induced visual illusion, after \cite{Murakami2010](figures/optical_flow/moving_bike.png){width="100%" #fig-motion_illusion}
+![Motion-induced visual illusion, after @Murakami2010.  The illusion becomes stronger when viewed peripherally rather than looking directly at the image. Changing the contrast of this image can change the direction of perceived motion.](figures/optical_flow/moving_bike.png){width="100%" #fig-motion_illusion}
 
 The opposite visual illusion can also be achieved: perceiving no motion
 when there is movement. By creating sequences with isoluminant and
@@ -154,15 +154,15 @@ Let's get our hands dirty quickly by trying to estimate how pixels move
 in a video. Let's consider two frames of a video sequence that contains
 a few moving objects, as shown in @fig-two_frames_from_palma_street.
 
-  --------------------------------------------------------
-   ![Two frames of a video sequence captured from a moving car driving along a busy street in Palma de Mallorca (Spain).](figures/optical_flow/frame1.jpg){width="48%" #fig-two_frames_from_palma_street}
-                         (Frame 1)
-  --------------------------------------------------------
+:::{layout-ncol="2" #fig-two_frames_from_palma_street}
 
-  --------------------------------------------------------
-   ![](figures/optical_flow/frame2.jpg){width="48%"}
-                         (Frame 2)
-  --------------------------------------------------------
+![Frame 1](figures/optical_flow/frame1.jpg){width="48%" #fig-two_frames_from_palma_street-a}
+
+
+![Frame 2](figures/optical_flow/frame2.jpg){width="48% #fig-two_frames_from_palma_street-b}
+
+Two frames of a video sequence captured from a moving car driving along a busy street in Palma de Mallorca (Spain).
+:::
 
 These two frames belong to a sequence captured from a moving car driving
 along a busy street. In this sequence there are cars moving on both
@@ -201,20 +201,7 @@ motion at each pixel in the first frame by searching for the patch with
 the smallest distance in the second frame. We can implement this with
 the following algorithm:
 
-::: algorithm
-[]{#alg:motion_matching_algorithm label="alg:motion_matching_algorithm"}
-**Input frames:**
-$\boldsymbol\ell_1, \boldsymbol\ell_2 \in \mathbb{R}^{N \times M \times 3}$,
-**Output motion flow:**
-$\mathbf{u}, \mathbf{v} \in \mathbb{R}^{N \times M}$ **Parameters:**
-$L = \text{Maximum displacement}, s = \text{Patch size parameter}$
-$\mathbf{r}_1[i,j] = \boldsymbol\ell_1 [i-s:i+s, j-s:j+s] \quad \triangleleft \text{Chop up frame 1 into patches}$
-$\mathbf{r}_2[i,j] = \boldsymbol\ell_2 [i-s:i+s, j-s:j+s] \quad \triangleleft \text{Chop up frame 2 into patches}$
-$C[i,j][d_i,d_j] = \text{dist}(\mathbf{r}_2[i+di,j+dj], \mathbf{r}_1[i,j])
-     \quad \triangleleft \text{Compute matching cost}$
-$\mathbf{u}[i,j] = \mathop{\mathrm{arg\,min}}(\min (C[i,j], axis=1)) \quad \triangleleft \text{Estimate  displacement x}$
-$\mathbf{v}[i,j] = \mathop{\mathrm{arg\,min}}(\min (C[i,j], axis=0)) \quad \triangleleft \text{Estimate  displacement y}$
-:::
+![](figures/optical_flow/alg_match.png){width="100%" #fig-motion_matching_algorithm}
 
 Note that padding must be applied if we want to compute the output
 optical flow near the image boundaries. Algorithm
@@ -293,8 +280,7 @@ good review of the material in this chapter and also chapters
 
 ![Space-time signals, building toward the fluted square-wave motion illusion. The first row shows a stationary sine wave. (a) Movie of a motionless sine wave. (b) Space-time plot shows only vertical structure. (c) Spatiotemporal Fourier transform shows all energy on the zero temporal frequency axis because nothing is moving. (d) The second row shows a moving sine wave. (e) In the space-time plot, speed corresponds to
 local orientation. (f) The Fourier transform energy is sheared according to
-the sine wave’s speed. (g–i) The third row shows a moving square wave. The additional harmonics required to form a square wave are visible in (i) the spatiotemporal Fourier transform.   
-%First row: stationary sine wave, (a) Movie of a motionless sine wave. (b) The space-time plot shows only vertical structure. (c) spatio-temporal Fourier transform has all energy on the zero temporal frequency axis, since nothing is moving. Second row:  (d) moving sine wave. (e) In the space-time plot, speed corresponds to local orientation. (f) The Fourier transform energy is sheared according to the sine wave's speed.   Third row:  Moving square wave.  The additional harmonics required to form a square wave are visible in the spatio-temporal Fourier transform, (i).](figures/optical_flow/ted_demo_motion_1.png){width="100%" #fig-motionIllusion1}
+the sine wave’s speed. (g–i) The third row shows a moving square wave. The additional harmonics required to form a square wave are visible in (i) the spatiotemporal Fourier transform.](figures/optical_flow/ted_demo_motion_1.png){width="100%" #fig-motionIllusion1}
 
 The signals, and magnitudes of their space-time Fourier transforms, are
 developed in @fig-motionIllusion1 and
@@ -317,37 +303,37 @@ line perpendicular to the moving structures in the spatiotemporal signal
 extra harmonics needed to construct the square wave visible in the
 Fourier transform (@fig-motionIllusion1\[i\]).
 
-Continuing the development of the illusion, @fig-motionIllusion2c shows
+Continuing the development of the illusion, @fig-motionIllusion2 \[c\] shows
 the Fourier transform and space-time plot of a square wave moving in 1/4
 period jumps each time increment. This signal can be formed from
 @fig-motionIllusion1 (h) by applying a periodic sample-and-hold function,
-resulting in the spectrum of @fig-motionIllusion1i replicated over
+resulting in the spectrum of @fig-motionIllusion1 \[i\] replicated over
 temporal frequencies, and multiplied by a sinc function over temporal
 frequency. The resulting Fourier transform magnitude is shown in
-@fig-motionIllusion2c.
+@fig-motionIllusion2 \[c\].
 
-![Derivation of the fluted square-wave motion illusion, continued from \fig{\ref{fig-motionIllusion1](figures/optical_flow/ted_demo_motion_2.png){width="100%" #fig-motionIllusion2}
+![Derivation of the fluted square-wave motion illusion, continued from @fig-motionIllusion1 . Top row shows that the square wave moves in 1/4 wavelength jumps, instead of continuously. This staggered motion generates the additional spatiotemporal frequencies shown in (c).  The lowest spatiotemporal frequency (green rectangle) still indicates motion to the left.  Second row shows that if we remove the lowest spatial frequency sine wave of the square wave, creating a* fluted square wave*, then the lowest spatio-emporal frequency now moves in the other direction.  This is also visible from (e) the space time plot and especially in (f) the spatiotemporally low-pass filtered version.](figures/optical_flow/ted_demo_motion_2.png){width="100%" #fig-motionIllusion2}
 
 Because orientation in space-time tells motion direction (section @sec-modelingSequences the space-time plot of
-@fig-motionIllusion2b shows that the motion should be perceived to the
+@fig-motionIllusion2 \[b\] shows that the motion should be perceived to the
 left. This will be consistent with the behavior of velocity tuned
 filters (section
 @sec-velocityTunedFilters) responding to the lowest
-spatiotemporal frequency impulses shown in @fig-motionIllusion2c.
+spatiotemporal frequency impulses shown in @fig-motionIllusion2 \[c\].
 However, if we remove the lowest spatial frequency sinusoid from the
-signal, the result is shown in @fig-motionIllusion2e, with
-spatiotemporal Fourier transform shown in @fig-motionIllusion2g. Now
+signal, the result is shown in @fig-motionIllusion2 \[e\], with
+spatiotemporal Fourier transform shown in @fig-motionIllusion2 \[g\]. Now
 the lowest spatiotemporal frequency cosine wave is oriented in the other
 direction. This opposite slope is also visible in the spatial domain, in
-the space-time plot of @fig-motionIllusion2e, and especially if we
-apply a low-pass filter, resulting in @fig-motionIllusion2f.
+the space-time plot of @fig-motionIllusion2 \[e\], and especially if we
+apply a low-pass filter, resulting in @fig-motionIllusion2 \[f\].
 
 The signal of the second row of @fig-motionIllusion2 poses a conundrum.
 It can be argued that the signal moves to the left, just as does the
 signal of row 1 of @fig-motionIllusion2. The pattern match, that is,
 the minimum correlation signal indeed moves to the left. But the vision
 system examining the orientation of the lowest spatiotemporal frequency
-components of the signal in @fig-motionIllusion2g, or looking at the
+components of the signal in @fig-motionIllusion2 \[g\], or looking at the
 dominant orientations in the space-time plots of
 figures @fig-motionIllusion2 (e and g), would find a signal moving to
 the right! Videos showing each signal are available on the book's web
