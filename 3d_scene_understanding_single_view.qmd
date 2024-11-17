@@ -42,7 +42,7 @@ in the street, the sky between the structures, and even what appears to
 be the entrance to a movie theater on the left sidewalk. Yet, the
 sidewalk is simply one line!
 
-![The image shows how scene understanding is possible from simple 3D cues and context. This sketch is a recreation of a real photograph shown in \cite{Biederman1976](figures/single_view_3d/streetgeons.png){width=".8" #fig-streetgeons}
+![The image shows how scene understanding is possible from simple 3D cues and context. This sketch is a recreation of a real photograph shown in @Biederman1976](figures/single_view_3d/streetgeons.png){width=".8" #fig-streetgeons}
 
 We perceive everything we see in the sketch as 3D, even when we know
 that it's merely a 2D image. Our 3D processing is ingrained that we
@@ -72,7 +72,11 @@ appears to be perfectly rectangular. This is achieved by making the part
 of the wall that is farther away from the viewer larger so that it
 appears fronto-parallel.
 
+:::{.column-margin}
+Geometric description of the Ames room visual illusion.
 
+![](figures/single_view_3d/ames_room_description.png){width="100%"}
+:::
 
 The best way to understand this illusion is by building it and
 experiencing it by yourself. You can find the instructions in
@@ -81,7 +85,10 @@ indicated by "cut" the room will appear square and smaller than it
 actually is, and it will seem as if you are looking inside the room from
 the middle of it despite that the opening is closer to the right wall.
 
-![Make your own Ames room. Take a picture of this page and print it as large as you can (A4 or letter size will be sufficient). When you look through the aperture on the {\em front wall](figures/single_view_3d/ames_room.png){width=".8" #fig-ames_room}
+
+
+
+![Make your own Ames room. Take a picture of this page and print it as large as you can (A4 or letter size will be sufficient). When you look through the aperture on the *front wall*, the room will appear square and smaller than it actually is. The shape of the *reference wall* is the only one that will appear unchanged, while all other planes will appear smaller than their actual size. You can change the room's content by drawing on the *reference wall* and then warping the image onto the other walls using homography. The floor pattern results from a homography with a square floor plan.](figures/single_view_3d/ames_room.png){width=".8" #fig-ames_room}
 
 This illusion is especially remarkable when the room is large enough for
 people to walk in. You will notice that as people walk along the back
@@ -90,9 +97,15 @@ all of your (very strong) prior expectations about how that person
 should appear. @fig-ames_room_cat illustrates this phenomenon with our
 cut-out version of the Ames room.
 
-![](figures/single_view_3d/IMG_9148_small.jpeg){width=".49"}
+
+:::{#fi-ames_room_cat}
+
+![](figures/single_view_3d/IMG_9148_small.jpeg){width="49%"}
  
-![](figures/single_view_3d/IMG_9150_large.jpeg){width=".494"}
+![](figures/single_view_3d/IMG_9150_large.jpeg){width="49%"}
+
+If you place an object along the back wall of the Ames room shown in @fig-ames_room, its perceived size will change. Also note that both doors appear to be similar en size despite being quite different in reality.
+:::
 
 Clearly, a single image contains very strong cues about the 3D scene
 structure. In the following sections we will study linear perspective,
@@ -135,7 +148,9 @@ $${#eq-parametric_vector_line} The 3D point $\mathbf{P}_t$ moves along a
 line when the independent variable $t$ goes from $-\infty$ to $\infty$.
 A camera located in the world coordinates origin will observe a 2D line
 resulting from projecting the 3D line into the camera plane as shown in
-the sketch shown in @fig-vanishing_points.![Projection of a 3D line onto the camera plane. The 3D line and the camera center form a plane (the camera center is a the world-coordinates origin). The intersection of this plane with the camera plane is the 2D line that appears in the image. The image point $\mathbf{v](figures/single_view_3d/vanishing_points.png){width="100%" #fig-vanishing_points}
+the sketch shown in @fig-vanishing_points.
+
+![Projection of a 3D line onto the camera plane. The 3D line and the camera center form a plane (the camera center is a the world-coordinates origin). The intersection of this plane with the camera plane is the 2D line that appears in the image. The image point $\mathbf{v](figures/single_view_3d/vanishing_points.png){width="100%" #fig-vanishing_points}
 
 We can get the equation of the 2D line that appears in the image by
 using the perspective projection equations, resulting in:
@@ -196,7 +211,7 @@ interprets that the towers should have different 3D orientations. This
 process is automatic and we can not shut it down despite the fact that
 we know both images are identical.
 
-![The {\em leaning tower illusion](figures/single_view_3d/LeaningTower1.jpg){width="100%" #fig-LeaningTower1}
+![The *leaning tower illusion* @Kingdom2017 involves two identical pictures placed side by side. The picture on the right appears to be more tilted than the one on the left.](figures/single_view_3d/LeaningTower1.jpg){width="100%" #fig-LeaningTower1}
 
 Homogeneous coordinates offer an alternative way of working with
 vanishing points. Let's start by writing the parametric vector form of a
@@ -278,7 +293,7 @@ Any 3D plane becomes a half-plane in the image and has an horizon line.
 The horizon line is the line that passes by all the vanishing points of
 all the lines contained in the plane as shown in @fig-palma_horizon.
 
-![](figures/single_view_3d/palma_horizon.png){width="100%"}
+![All parallel lines contained in a plane converge to a set of vanishing points. All those vanishing points are contained in the **horizon line** of the plane. Parallel planes have the same horizon line.](figures/single_view_3d/palma_horizon.png){width="100%" #fig-palma_horizon}
 
 As parallel lines converge to the same vanishing point, parallel planes
 also have the same horizon line. In @fig-palma_horizon, the lines in
@@ -308,7 +323,7 @@ their cross-product. Finally, the horizon line is the line that passes
 through both points that can be computed as the cross-product of the
 vanishing points in homogeneous coordinates.
 
-![](figures/imaging_geometry/horizon_line.png){width=".9" #fig-horizon_line_cross_products}
+![Using parallel lines, in homogeneous coordinates, to compute vanishing points and the horizon line.](figures/imaging_geometry/horizon_line.png){width=".9" #fig-horizon_line_cross_products}
 
 ### Detecting Vanishing Points
 
@@ -318,7 +333,7 @@ along orthogonal directions. The three vanishing points are estimated by
 selecting pairs of long edges in the image corresponding to parallel 3D
 lines in the scene and finding their intersection.
 
-![](figures/single_view_3d/office_vanishing_points_3.png){width="100%"}
+![Most object boundaries in this photograph are oriented parallel to one of the world-coordinates reference frame (the world-coordinates frame is chosen in this way on purpose). All the parallel 3D lines converge on the image plane in a vanishing point. In this picture there are three main vanishing points, each of them related to one of the world-coordinates frame.](figures/single_view_3d/office_vanishing_points_3.png){width="100%" #fig-vanishing_lines}
 
 Vanishing points can be extracted automatically from images by first
 detecting image edges and their orientations (like we did in chapter
@@ -373,7 +388,7 @@ cross-ratio (regardless of the choice of origin $\mathbf{O}$ or scale
 factor). That is:
 $$CR(\mathbf{P}_1,\mathbf{P}_2,\mathbf{P}_3,\mathbf{P}_4) = CR(\mathbf{Q}_1,\mathbf{Q}_2,\mathbf{Q}_3,\mathbf{Q}_4)$$
 
-![The set of points $\mathbf{P](figures/single_view_3d/cross_ratio_description2.png){width=".9" #fig-cross_ratio_description}
+![The set of points $\mathbf{P}$ are related to the points $\mathbf{Q}$ (and $\mathbf{R}$) by the cross-ratio. The point $\mathbf{R}_1$ is in infinity because the line connecting the points $\mathbf{R}$ is parallel to the line passing by $\mathbf{O}$, $\mathbf{P}_1$, and $\mathbf{Q}_1$.](figures/single_view_3d/cross_ratio_description2.png){width=".9" #fig-cross_ratio_description}
 
 The order in which these points are considered matters in the
 calculation. There are $4!=24$ possible orderings resulting in six
@@ -484,7 +499,17 @@ use the cross-ratio invariant we need two sets of four colinear points
 related by a projective geometry. @fig-office_measuring_desk_sketch
 shows a sketch of the setup we have in @fig-office_measuring_desk.
 
-![Projection of desk height onto the bookshelf. We start with the bottom and top image coordinates of points along vertical edges of the bookshelf: $\mathbf{t}$](figures/single_view_3d/office_measuring_desk.png){width="85%" #fig-office_measuring_desk}
+![Projection of desk height onto the bookshelf. We start with the bottom and top image coordinates of points along vertical edges of the bookshelf: 
+$\mathbf{t}_b = [702~~2{,}958]^\transpose$ 
+$\mathbf{g}_b= [987~~618]^\transpose$ 
+and the desk: 
+$\mathbf{t}_d = [679~~1{,}018]^\transpose$ 
+$\mathbf{g}_d= [793~~59]^\transpose$ 
+We compute the points 
+$\mathbf{a}= [4{,}471~~2{,}486]^\transpose$ 
+and
+$\mathbf{b}= [2{,}237~~2{,}765]^\transpose$ 
+as described in the text.](figures/single_view_3d/office_measuring_desk.png){width="85%" #fig-office_measuring_desk}
 
 In the image plane, we have the four image points $\mathbf{t}_b$,
 $\mathbf{b}$, $\mathbf{g}_b$ and $\mathbf{v}_3$. Those four 2D image
@@ -492,7 +517,7 @@ points correspond to the 3D locations given by the top of the bookshelf,
 desk height, ground and infinity (which is the location of the vertical
 vanishing point in 3D).
 
-![Sketch of the setting from @fig-office_measuring_desk](figures/single_view_3d/office_measuring_desk_sketch.png){width="70%" #fig-office_measuring_desk_sketch}
+![Sketch of the setting from @fig-office_measuring_desk. There are two sets of colinear points related by central projection. Their cross-ratios are identical.](figures/single_view_3d/office_measuring_desk_sketch.png){width="70%" #fig-office_measuring_desk_sketch}
 
 The rest of calculations requires computing distances between points,
 which only works when using heterogeneous coordinates (or homogeneous
@@ -511,11 +536,22 @@ terms, resulting in the ratio between the bookshelf and desk heights. To
 compute the hand side we need the coordinates of the corresponding four
 image points. Those are provided in @fig-office_measuring_desk.
 Replacing all those values in equation (@eq-cross_ratio_shelf_desk) we
-obtain: $$\frac{h_{\text{bookshelf}}}{h_{\text{desk}}} = 
+obtain: 
+
+$$\frac{h_{\text{bookshelf}}}{h_{\text{desk}}} = 
 \frac{\left| \mathbf{b} - \mathbf{v}_3 \right| \left| \mathbf{t}_b - \mathbf{g}_b \right| }{\left| \mathbf{b} - \mathbf{g}_b \right| \left| \mathbf{t}_b - \mathbf{v}_3  \right|}$$
+
 The only unknown value in this equality is the height of the desk,
 $h_{\text{desk}}$, which results in $h_{\text{desk}} \simeq 73.1$ cm,
-which is close to the actual height of the desk (which is around 76 cm).### Height Propagation to Supported Objects
+which is close to the actual height of the desk (which is around 76 cm).
+
+
+:::{.column-margin}
+**Projective invariants** are measures that do not change after perspective projection. The cross-ratio is the most important projective invariant.
+:::
+
+
+### Height Propagation to Supported Objects
 
 The method described in the previous section relies on using vertical
 lines in contact with the ground plane to propagate information from one
@@ -655,7 +691,7 @@ the geometry of this object provides the information to localize the
 projection of the point $\mathbf{P}$ on the ground plane, which we
 denote with $\mathbf{G}$.
 
-![(a) In the absence of any other information, we can not recover the 3D location of point $\mathbf{P](figures/single_view_3d/locating_a_3d_point.png){width="100%" #fig-locating_a_3d_point}
+![Figure (a) In the absence of any other information, we can not recover the 3D location of point $\mathbf{P}$. (b) If we are given a way to project the point P into the ground, then we can read out the coordinates of the point by projecting into the world axis.](figures/single_view_3d/locating_a_3d_point.png){width="100%" #fig-locating_a_3d_point}
 
 Once we know the image location of the projection of the 3D point
 $\mathbf{P}$ to the ground, $\mathbf{G}$, we can project this point to
@@ -742,22 +778,25 @@ Cholesky factorization, which decomposes a matrix as the product of an
 upper triangular matrix and its transpose. The last step is to normalize
 the result by normalizing all the matrix values so that the value on the
 bottom-right side is 1. In our running example of the office picture, we
-get the following solution for $\mathbf{K}$: $$\mathbf{K} = 
+get the following solution for $\mathbf{K}$: 
+
+$$
+\mathbf{K} = 
     \begin{bmatrix}
     3{,}054.6    &      0    &     1{,}999.4\\
        0    &       3{,}054.6    &     1{,}528.3\\
        0    &          0    &          1
-    \end{bmatrix}$$
+\end{bmatrix}
+$$
 
 
 
 We can now compare this result with the one we obtained when we (1) used
-the physical camera parameters (section
-@sec-simple_unreliable_calibration_method); (2) used a
-calibration pattern (section
-@sec-simple_unreliable_calibration_metho); and (3) used a
-collection of 3D points and the corresponding image locations (section
-@sec-a_toy_example). We can see that in all cases we get
+the physical camera parameters @sec-simple_unreliable_calibration_method; (2) used a
+calibration pattern 
+@sec-simple_unreliable_calibration_method; and (3) used a
+collection of 3D points and the corresponding image locations 
+@sec-a_toy_example. We can see that in all cases we get
 similar results, although, not identical.
 
 ## Concluding Remarks
