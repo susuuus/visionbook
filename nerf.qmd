@@ -307,7 +307,7 @@ The volume rendering equation is:
 $$\begin{aligned}
     \ell(r) = \int_{t_n}^{t_f}\alpha(t) \, \overbrace{L^\sigma(r(t))}^{\text{density}} \, \overbrace{L^c(r(t),\mathbf{D})}^{\text{color}} \, dt :vol_rendering_integral\\
     \alpha(t) = \exp \Big(-\int_{t_n}^{t} \underbrace{L^\sigma(r(t))}_{\text{density}} dt\Big)
-\end{aligned}$${#eq-nerfs}  
+\end{aligned}$${#eq-nerfs-vol_rendering_integral}  
 where $r(t)$ gives the coordinates, in the
 radiance field, of a point $t$ distance along the ray, $\mathbf{D}$ is
 the direction of the ray (a unit vector), and $t_n$ and $t_f$ are the
@@ -368,7 +368,9 @@ Because of this, we must use numerical methods to approximate
 One way to do this is to approximate the integral as a discrete sum. A
 particularly effective approximation is the following, which is called a
 quadrature rule (see  @max1995optical, @max2005local for justification
-of this choice of approximation): $$\begin{aligned}    \ell(r) &\approx \sum_{i=1}^T \alpha_i \, (1-e^{-L^\sigma(\mathbf{R}_i)\delta_i}) \, L^c(\mathbf{R}_i, \mathbf{D})\\
+of this choice of approximation): 
+
+$$\begin{aligned}    \ell(r) &\approx \sum_{i=1}^T \alpha_i \, (1-e^{-L^\sigma(\mathbf{R}_i)\delta_i}) \, L^c(\mathbf{R}_i, \mathbf{D})\\
     &\alpha_i = \exp\Big(-\sum_{j=1}^{i-1} L^\sigma(\mathbf{R}_j)\delta_j\Big)\\
     &\delta_i = t_{i+1} - t_i
 \end{aligned}$$ where we have now replaced our continuous radiance field

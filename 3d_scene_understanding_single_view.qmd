@@ -98,7 +98,7 @@ should appear. @fig-ames_room_cat illustrates this phenomenon with our
 cut-out version of the Ames room.
 
 
-:::{#fi-ames_room_cat}
+:::{#fig-ames_room_cat}
 
 ![](figures/single_view_3d/IMG_9148_small.jpeg){width="49%"}
  
@@ -676,13 +676,13 @@ There are many ways in which we can arrive to the same result.
 
 In the absence of any other information, we can not recover the 3D
 location of a single point $\mathbf{P}$ from a single view as
-illustrated in @fig-locating_a_3d_pointa. But real world scenes are
+illustrated in @fig-locating_a_3d_point \[a\]. But real world scenes are
 composed by a multitude of objects providing context, which allows
 solving the 3D estimation problem even with just a single image. In the
 previous section we showed how to estimate the height of an object, here
 we show how to estimated the 3D coordinates of a point.
 
-The basic procedure is illustrated in @fig-locating_a_3d_pointb. The
+The basic procedure is illustrated in @fig-locating_a_3d_point \[b\]. The
 trick consists in using context (what object is the point part of, where
 is the horizon line of the scene and where are the vanishing points) to
 estimate 3D from a single image. It suffices to know that the point
