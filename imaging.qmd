@@ -11,7 +11,7 @@ surface, that let us interpret what we see. In this chapter, we describe
 how light interacts with surfaces and how those interactions are
 recorded with a camera.
 
-## Light Interacting with Surfaces {#sec:light_interacting_with_surfaces}
+## Light Interacting with Surfaces {#sec-light_interacting_with_surfaces}
 
 Visible light is electromagnetic radiation, exhibiting wave effects like
 diffraction. For many imaging models, however, it is helpful to

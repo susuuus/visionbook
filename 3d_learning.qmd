@@ -65,15 +65,23 @@ distances between objects. This depth cue is called **aerial
 perspective** or atmospheric perspective. One example using haze to
 infer depth is in @Kaiming2009.
 
-  ---------------------------------------------------------------------
-   ![(a) This image contains multiple 3D cues: shading effects (bump shapes), texture gradients (relative size between bumps), and linear perspective (due to the regular arrangement of the bumps). (b) Aerial perspective. Objects far in the background have lower contrast than objects closer to the camera.](figures/learning_3d/IMG_0508.JPG){width=".53" #fig-aerial_perspective}
-                                  \(a\)
-  ---------------------------------------------------------------------
+\begin{figure}
+\centerline{
+\sublabel{a}{\includegraphics[height=.53\linewidth]{figures/learning_3d/IMG_0508.JPG}}
+\sublabel{b}{\includegraphics[height=.53\linewidth]{figures/learning_3d/IMG_2772_crop.jpg}}
+}
+\caption{(a) This image contains multiple 3D cues: shading effects (bump shapes), texture gradients (relative size between bumps), and linear perspective (due to the regular arrangement of the bumps). (b) Aerial perspective. Objects far in the background have lower contrast than objects closer to the camera.}
+\label{fig:aerial_perspective}
+\end{figure}
 
-  --------------------------------------------------------------------------
-   ![](figures/learning_3d/IMG_2772_crop.jpg){width=".53"}
-                                    \(b\)
-  --------------------------------------------------------------------------
+:::{layout-ncol="2" #fig-aerial_perspective}
+![](figures/learning_3d/IMG_0508.JPG){width="49%"}
+
+![](figures/learning_3d/IMG_2772_crop.jpg){width="49%"}
+
+Fig (a) This image contains multiple 3D cues: shading effects (bump shapes), texture gradients (relative size between bumps), and linear perspective (due to the regular arrangement of the bumps). (b) Aerial perspective. Objects far in the background have lower contrast than objects closer to the camera.
+:::
+
 
 Depth can also be estimated by detecting **familiar objects** with known
 sizes. One example is people detection. Objects with known sizes can be
@@ -103,20 +111,26 @@ depth maps, $z [n,m]$, as shown in @fig-kinect. Given a dense depth
 map, we can translate the depth into a 3D point cloud if we know the
 intrinsic camera parameters, $\mathbf{K}$, of the sensor.
 
-  ----------------------------------------------------------------
-   ![Image and depth captured by an Azure Kinect sensor. (a) RGB image; and (b) corresponding dense depth map. Both images have the same size of 1280 $\times$ 720 pixels.](figures/learning_3d/rgb.jpg){width=".475" #fig-kinect}
-                               \(a\)
-  ----------------------------------------------------------------
 
-  ------------------------------------------------------------------------
-   ![](figures/learning_3d/depth-turbo.png){width=".475"}
-                                   \(b\)
-  ------------------------------------------------------------------------
+
+:::{layout-ncol="2" #fig-kinect}
+![](figures/learning_3d/rgb.jpg){width="49%"}
+
+![](figures/learning_3d/depth-turbo.png){width="49%"}
+
+Image and depth captured by an Azure Kinect sensor. (a) RGB image; and (b) corresponding dense depth map. Both images have the same size of 1280 $\times$ 720 pixels.
+:::
+
+:::{.column-margin}
+Depth maps are usually visualized using the **turbo colormap**, which is a modification of the **jet colormap** from Matlab. We will use this convention as it differentiates a depth map from a natural gray-scale image.
+![](figures/learning_3d/colorbar_transposed.png){width="100%"}
+The jet colormap can be problematic as it has a nonmonotonic intensity profile as can be seen above.
+:::
 
 @fig-kinect2 illustrates how the depth map translates into a point
 cloud where each pixel is mapped to a 3D point.
 
-![Translating the depth map into a point cloud. This requires a calibrated camera (i.e., knowing the intrinsic camera parameters). The sketch shows how one pixel $(n,m)$ is mapped into a 3D point, $\mathbf{P](figures/learning_3d/from_depthmap_2_pointcloud.png){width="100%" #fig-kinect2}
+![Translating the depth map into a point cloud. This requires a calibrated camera (i.e., knowing the intrinsic camera parameters). The sketch shows how one pixel $(n,m)$ is mapped into a 3D point, $\mathbf{P}$, by using the depth, $z[n,m]$, at that location. Colored lines are parallel to the respective axis direction in the camera coordinates system.](figures/learning_3d/from_depthmap_2_pointcloud.png){width="100%" #fig-kinect2}
 
 Using homogeneous coordinates, the equation translating a depth map into
 a 3D point cloud is (for each pixel):
@@ -235,22 +249,24 @@ planar shapes, or introducing other structural priors. However, must
 current approaches will use a fairly generic architecture and let the
 data and the loss decide what the best function is.
 
-![Typical architecture for depth estimation from a single image\cite{Xian2018](figures/learning_3d/encoder_decoder_arch.png){width="100%" #fig-encoder_decoder_arch_depth}
+![Typical architecture for depth estimation from a single image @Xian2018](figures/learning_3d/encoder_decoder_arch.png){width="100%" #fig-encoder_decoder_arch_depth}
 
 Existing methods rely on training on massive amounts of data to achieve
 good generalization across a wide set of images. @fig-office_midas
 shows the result of applying the method from @Ranftl2022 on the office
 scene from @fig-finding_depth_office in the previous chapter.
 
-  ---------------------------------------------------------------------------
-   ![(a) Office scene. (b) Estimated $Z$ component by the approach from \cite{Ranftl2021,Ranftl2022](figures/learning_3d/IMG_6186_small.jpg){width=".35" #fig-office_midas}
-                                     \(a\)
-  ---------------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
-   ![](figures/learning_3d/Zmap_turbo.png){width=".35"}
-                                   \(b\)
-  -----------------------------------------------------------------------
+
+
+:::{layout-ncol="2" #fig-office_midas}
+![](figures/learning_3d/IMG_6186_small.jpg){width="35%"}
+
+![](figures/learning_3d/Zmap_turbo.png){width="35%"}
+
+\(a\) Office scene. \(b\) Estimated $Z$ component by the approach from @Ranftl2021, @Ranftl2022
+:::
+
 
 Just looking at the depth map from @fig-office_midasb might seem like
 the estimates are good. But it is hard to tell how good the estimation
@@ -263,19 +279,27 @@ discontinuities are removed to improve the clarity of the visualization.
 Points near depth discontinuities are often wrong and have depth values
 that are the average of the values on each side of the discontinuity.
 
-  -----------------------------------------------------------------------------
-   ![Reconstructed point cloud of the office scene with two different view points. Results are good, but not great.](figures/learning_3d/view1_pointcloud.png){width=".44" #fig-office_midas_point_cloud}
-                                      \(a\)
-  -----------------------------------------------------------------------------
 
-  -----------------------------------------------------------------------------
-   ![](figures/learning_3d/view2_pointcloud.png){width=".44"}
-                                      \(b\)
-  -----------------------------------------------------------------------------
+:::{layout-ncol="2" #fig-office_midas_point_cloud}
+![](figures/learning_3d/view1_pointcloud.png){width="44%"}
+
+![](figures/learning_3d/view2_pointcloud.png){width="44%"}
+
+Reconstructed point cloud of the office scene with two different view points. Results are good, but not great.
+:::
+
+
 
 The point cloud has an arbitrary scaling, so we cannot directly use it
 to make 3D measurements. But if we are given one real distance we can
 calibrate the 3D reconstruction.
+
+
+
+
+:::{.column-margin}
+What cues are being used by a learning-based model to infer depth from a single image? What has the network learned? We discussed in  \chap{\ref{chapter:3D_single_view}} the importance of the ground plane and the support-by relationships to make 3D measurements. Is there a representation inside the network of the ground plane? Are surfaces and object represented? If you train a system, how would you try to interpret the learned representation?
+:::
 
 ## Unsupervised Methods for Depth from a Single Image
 
@@ -308,7 +332,7 @@ and $\mathbf{T}$) between the two frames, as shown in
 \left[ \hat{\mathbf{R}},\hat{\mathbf{T}} \right] &=& f_2(\boldsymbol\ell_1,\boldsymbol\ell_2)
 \end{aligned}$$
 
-![System for unsupervised learning of camera motion and depth \cite{Tinghui2017](figures/learning_3d/unsupervised_depth.png){width="100%" #fig-unsupervised_depth_system}
+![System for unsupervised learning of camera motion and depth @Tinghui2017. The goal is to learn the parameters of the functions $f_1$ and $f_2$ by minimizing the reconstruction error. The function $f_3$ is deterministic.](figures/learning_3d/unsupervised_depth.png){width="100%" #fig-unsupervised_depth_system}
 
 If the estimations of the depth and camera motion were correct, then we
 could warp the pixels in $\boldsymbol\ell_1$ into the pixels of
@@ -397,6 +421,13 @@ sequences captured by a rotating camera, the points are related by a
 homography regardless of the 3D structure. Therefore, to learn depth
 from single images, we need to have complex camera motions inside
 environments with rich 3D structure.
+
+
+
+
+:::{.column-margin}
+To model the motion of objects we need to introduce new concepts. We will do that later when studying motion estimation in @sec-optical_flow_estimation.
+:::
 
 ## Concluding Remarks
 
