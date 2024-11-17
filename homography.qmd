@@ -28,9 +28,15 @@ by a rotation (@fig-rotation_homography). In those two cases the
 coordinates of corresponding points across the two images are related by
 a **homography**.
 
-![These two images are (approximately) related by an homography.](figures/homography/IMG_7801_crop.jpg){width=".455" #fig-illustration_homography}
+
+:::{layout_ncols="2" #fig-illustration_homography}
+
+![](figures/homography/IMG_7801_crop.jpg){width="45%"}
   
-![](figures/homography/IMG_7802_crop.jpg){width=".49"}
+![](figures/homography/IMG_7802_crop.jpg){width="45%"}
+
+These two images are (approximately) related by an homography.
+:::
 
 Homographies can be used in applications such as perspective correction,
 augmented reality, image stitching, creating bird's-eye views,
@@ -95,9 +101,16 @@ between to images are related by a homography.
 
 Consider the following three images shown in @fig-example_three_images.
 
-![Three pictures taken by rotating the camera while trying to keep the camera center fixed.](figures/homography/3_IMG_7883_small.jpg){width="44.5%" #fig-example_three_images}
-  ![](figures/homography/2_IMG_7884_small.jpg){width="25%"}
-  ![](figures/homography/1_IMG_7885_small.jpg){width="25%"}
+:::{#fig-example_three_images layout-ncol="3"}
+![](figures/homography/3_IMG_7883_small.jpg){width="44.5%" }
+ 
+![](figures/homography/2_IMG_7884_small.jpg){width="25%"}
+
+![](figures/homography/1_IMG_7885_small.jpg){width="25%"}
+
+Three images taken from the same point by rotating the camera.
+:::
+
 
 The three images are taken from the same point by rotating the camera.
 There is no translation between the three camera positions as the
@@ -245,8 +258,13 @@ that case, the coordinates of corresponding points across the two camera
 views, for points inside the plane, are related by a homography
 (@fig-example_two_images_facade).
 
-![Two pictures of a building facade taken from different positions. The coordinates of corresponding points on the planar facade are related by a homography.](figures/homography/IMG_7127_crop.jpg){width="45%" #fig-example_two_images_facade}
-  ![](figures/homography/IMG_7126.jpg){width="45%"}
+:::{#fig-example_two_images_facade layout-ncol="2"}
+![](figures/homography/IMG_7127_crop.jpg){width="45%"}
+
+![](figures/homography/IMG_7126.jpg){width="45%"}
+
+Two pictures of a building facade taken from different positions. The coordinates of corresponding points on the planar facade are related by a homography.
+:::
 
 To prove this, we can first show that the coordinates inside a plane
 relate to the coordinates in the image plane by a homography
@@ -410,9 +428,9 @@ of robustly fitting a straight line model to a collection of datapoints
 (@fig-ransac\[a\]). First, a number of datapoints, sufficient to
 uniquely specify the model parameters, are drawn from the dataset. For
 this problem, that is two points. Two randomly selected points are
-marked in green in @fig-ransacb. After finding the line that passes
+marked in green in @fig-ransac (b). After finding the line that passes
 through those two points, the number of **inliers** (datapoints within
-$\epsilon$ of the model) are determined. For the line in @fig-ransacb,
+$\epsilon$ of the model) are determined. For the line in @fig-ransac (b),
 the number of inliers is three. This process is repeated until some
 desired number of samplings, $S$, have been drawn. The output model is
 fitted from all the inlier datapoints corresponding to the model that
@@ -424,7 +442,7 @@ The paper @Fischler1981 derives a heuristic for the number of samples,
 $S$, required to be assured a good model fit. Let $n$ be the number of
 datapoints required to specify the model, and let $w$ be (an estimate
 of) the probability that any selected datapoint is within the error
-tolerance of the model. For @fig-ransacf, there are $2$ outliers out of
+tolerance of the model. For @fig-ransac (f), there are $2$ outliers out of
 11 points, so $w = 0.18$ (in general, this value needs to be estimated).
 The $w^n$ is the probability that all the selected points are inliers,
 and $1 -  w^n$ is the probability that at least one selected point is an
@@ -458,7 +476,7 @@ this example we pick the middle image as a reference). We can use the
 estimated homographies to warp all of the images into a single camera
 view as shown in @fig-panorama.
 
-![Panoramic image composed by the three overlapping images from \fig{\ref{fig-example_three_images](figures/homography/panorama.jpg){width="100%" #fig-panorama}
+![Panoramic image composed by the three overlapping images from @fig-example_three_images](figures/homography/panorama.jpg){width="100%" #fig-panorama}
 
 ## Concluding Remarks
 
