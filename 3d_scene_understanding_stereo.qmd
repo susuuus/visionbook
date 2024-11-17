@@ -526,6 +526,25 @@ orthogonal vectors is zero). Therefore, $\mathbf{P}_1$ and
 $\mathbf{P}_2$ satisfy the following relationship:
 $$\mathbf{P}_2^\mathsf{T}\left( \mathbf{T} \times \mathbf{R} \right) \mathbf{P}_1 = 0$$
 
+
+:::{.column-margin}
+The cross product of two vectors $\mathbf{a} \times \mathbf{b}$ can be written in matrix form as:
+$$
+\mathbf{a} \times \mathbf{b} =
+\mathbf{a}_{\times} \mathbf{b}
+$$
+The special matrix $\mathbf{a}_{\times}$ is defined as:
+$$
+\mathbf{a}_{\times} =
+\begin{bmatrix}
+0 & -a_3 & a_2 \\
+a_3 & 0 & -a_1 \\
+-a_2 & a_1 & 0 \\
+\end{bmatrix}
+$$
+This matrix $\mathbf{a}_{\times}$ is rank 2. In addition, it is a skew-symmetric matrix (i.e., $\mathbf{a}_{\times} = -\mathbf{a}_{\times}^\transpose$). It has two identical singular values and the third one is zero.
+:::
+
 The matrix $\mathbf{E}$ is called the **essential matrix** and it
 corresponds to:
 $$\mathbf{E} =  \mathbf{T} \times \mathbf{R} = \mathbf{T}_{\times} \mathbf{R}$$
@@ -568,7 +587,7 @@ $\mathbf{E}$.
 
 #### The fundamental matrix
 
-We have been using camera coordinates, $\mathbf{p}$. If we want to use
+Weehave been using camera coordinates, $\mathbf{p}$. If we want to use
 image coordinates, in homogeneous coordinates,
 $\mathbf{c}=[n,m,1]^\mathsf{T}$, we need to also incorporate the
 intrinsic camera parameters (which will also incorporate pixel size and
@@ -648,6 +667,10 @@ It is also useful to use the equations defining the epipolar lines and
 deduce the equations for the epipolar lines for some of the special
 cases shown in @fig-epipolarlinesgame.
 
+
+:::{.column-margin}
+When building systems, it is crucial to visualize intermediate results in order to find bugs in code. This requires knowing what the results should look like. The game from @fig-epipolarlinesgame helps building that understanding.
+:::
 
 
 ### Image Rectification
