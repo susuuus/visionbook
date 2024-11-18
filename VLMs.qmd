@@ -80,6 +80,10 @@ to a target dimensionality for token code vectors ($d$).
 string to tokens. For simplicity, we show word-level one-hot encoding
 rather than byte-pair encoding.
 
+![Tokenizing text. Note that these steps can be implemented with a lookup table that simply stores the token code vector for each unique item in our vocabulary.](figures/vision_and_language/tokenizing_text.png){width="60%" #fig-VLMs-tokenizing_text}
+
+
+
 These steps map text to tokens, which can be input into transformers. To
 handle the output side, where we produce text as an output, we need to
 convert tokens back to text. The most common way to do this is to use an
@@ -121,8 +125,7 @@ one data view is the image and the other is a caption describing the
 image. Specifically, CLIP is a form of contrastive learning from
 co-occurring visual and linguistic views that is formulated as follows:
 
-::: center
-:::
+![](figures/vision_and_language/clip_objective.png)
 
 where $\boldsymbol\ell$ represents an image, $\mathbf{t}$ represents
 text, $\mathbb{S}^{d_z}$ represents the space of unit vectors of
@@ -183,7 +186,10 @@ feature in pixel-space while shape requires processing to extract, but
 in text-space, color words and shape words are equally superficial and
 easy to group sentences by.
 
-![CLIP~\cite{radford2021learning](figures/vision_and_language/clip_mapping_diagram_two_branch.png){width="100%" #fig-vision_and_language-clip_mapping_diagram_two_branch}
+
+
+
+![CLIP @radford2021learning mapping diagram, using the same technique as described in @sec-neural_nets_as_distribution_transformers. To reduce dimensionality we apply t-SNE @tsne separately for the text encoder and the image encoder. Within each encoder, we run t-SNE jointly across all shown layers. ](figures/vision_and_language/clip_mapping_diagram_two_branch.png){width="100%" #fig-vision_and_language-clip_mapping_diagram_two_branch}
 
 After passing the data through these two encoders, the final stage is to
 normalize the outputs and compute the alignment between the image and
@@ -199,7 +205,7 @@ embeddings, with a cosine kernel, and remove the first principle
 component as that component codes for a global offset between the image
 embeddings and text embeddings.
 
-![CLIP~\cite{radford2021learning](figures/vision_and_language/clip_shared_embedding.png){width="80%" #fig-vision_and_language-clip_shared_embedding}
+![CLIP @radford2021learning joint embedding](figures/vision_and_language/clip_shared_embedding.png){width="80%" #fig-vision_and_language-clip_shared_embedding}
 
 Using language as one of the views may seem like a minor variation on
 the contrastive methods we saw previously, but it's a change that opens
@@ -233,7 +239,7 @@ The green outlined dot product is the highest, indicating that the query
 image will be classified as class $a$, which is defined as "striped red
 circles."
 
-![Making a ``striped red circles'' (class $a$) versus ``polka dotted green square'' (class $b$) classifier using a trained CLIP. The CLIP model parameters are frozen and not updated. Instead the classifier is constructed by embedding the text describing to the two classes and seeing which is closer to the embedding of the query image. Inspired by figure 1 of \cite{radford2021learning](figures/vision_and_language/clip_inference_fig.png){width="75%" #fig-vision_and_language-clip_inference}
+![Making a ``striped red circles'' (class $a$) versus ``polka dotted green square'' (class $b$) classifier using a trained CLIP. The CLIP model parameters are frozen and not updated. Instead the classifier is constructed by embedding the text describing to the two classes and seeing which is closer to the embedding of the query image. Inspired by figure 1 of @radford2021learning](figures/vision_and_language/clip_inference_fig.png){width="75%" #fig-vision_and_language-clip_inference}
 
 @fig-vision_and_language-clip_clocks gives more examples of creating
 custom binary classifiers in this way. The two classes are described by
@@ -244,13 +250,19 @@ image embedding is closer, in angular distance, to the red vector or the
 green vector. This approach isn't limited to binary classification: you
 can add more text vectors to partition the space in more ways.
 
-![(a)](figures/vision_and_language/clip_clocks/joint_embedding.png){width=""}
+:::{layout-ncol="4" #fig-vision_and_language-clip_clocks}
 
-![(b)](figures/vision_and_language/clip_clocks/circle_triangle.png){width=""}
+![](figures/vision_and_language/clip_clocks/joint_embedding.png)
 
-![(c)](figures/vision_and_language/clip_clocks/purple_teal.png){width=""}
+![](figures/vision_and_language/clip_clocks/circle_triangle.png)
 
-![(d)](figures/vision_and_language/clip_clocks/arrowhead_ball.png){width=""}
+![](figures/vision_and_language/clip_clocks/purple_teal.png)
+
+![](figures/vision_and_language/clip_clocks/arrowhead_ball.png)
+
+Making custom classifiers using CLIP. (a) Image embeddings in joint embedding space, (b) triangle-circle classifier, (c) purple-teal classifier, and (d) arrowhead-ball classifier. It's a bit like a modern astrolabe where you turn dials to read off the prediction of interest.
+
+:::
 
 ## Translating between Images and Text
 
@@ -388,6 +400,11 @@ implemented with a transformer. See @li2023blip2 for an example of a
 system that uses this general approach. @fig-VLMs-im2text shows this
 architecture.
 
+
+
+![Image-to-text using a small transformer with cross-attention. The edges in gray are cross-attention edges. Many variations of this architecture are possible. For example, each layer of the text encoder could cross-attend to the output image tokens. Or, the image encoder could compress all its input tokens into a single output token that represents the entire photo; this output token would then get cross-attended by the text decoder. This approach could save memory and computation time.](figures/vision_and_language/im2text.png){width="100%" #fig-VLMs-im2text}
+
+
 There is one special layer to point out, the **cross-attention** layer
 (`cross-attn`). This layer addresses the question of how to insert image
 tokens into a text model. The answer is quite simple: just let the text
@@ -396,20 +413,26 @@ value vectors which will be mixed with the text token value vectors
 according to the attention weights to produce the next layer of tokens
 in the text decoder.
 
-Here are the equations for a cross-attention layer: $$\begin{aligned}
+Here are the equations for a cross-attention layer:
+$$\begin{aligned}
     \mathbf{Q}_{t} = \mathbf{T}_{t}\mathbf{W}_{t,q}^\mathsf{T}\\
     \mathbf{K}_{\ell} = \mathbf{T}_{\ell}\mathbf{W}_{\ell,k}^\mathsf{T}\\
     \mathbf{V}_{\ell} = \mathbf{T}_{\ell}\mathbf{W}_{\ell,v}^\mathsf{T}\\
     \mathbf{A}_{\texttt{cross}} = \texttt{softmax}(\frac{\mathbf{Q}_{t}\mathbf{K}_{\ell}^\mathsf{T}}{\sqrt{m}})\\
     \mathbf{T}_{\texttt{out}, \texttt{cross}} = \mathbf{A}_{\texttt{cross}}\mathbf{V}_{\ell}
-\end{aligned}$$ where variables subscripted with $t$ are associated with
+\end{aligned}$$ 
+
+where variables subscripted with $t$ are associated with
 text tokens and variables subscripted with $\ell$ are associated with
 image tokens.
 
 Then, the tokens output by cross-attention can be combined with tokens
-output by self-attention by weighted summation: $$\begin{aligned}
+output by self-attention by weighted summation: 
+
+$$\begin{aligned}
     \mathbf{T} = w_{\texttt{cross}}\mathbf{T}_{\texttt{out}, \texttt{cross}}  + w_{\texttt{self}}\mathbf{T}_{\texttt{out}, \texttt{self}}
-\end{aligned}$$ where $\mathbf{T}_{\texttt{out}, \texttt{self}}$ is
+\end{aligned}
+$$ where $\mathbf{T}_{\texttt{out}, \texttt{self}}$ is
 regular self-attention on the input text token $\mathbf{T}_t$, and
 $w_{\texttt{cross}}$ and $w_{\texttt{self}}$ are optional learnable
 weights.
@@ -461,6 +484,9 @@ answer, as shown in @fig-vision_and_language-VQA_examples.
 ![An example VQA system.](figures/vision_and_language/VQA_examples.png){width="100%" #fig-vision_and_language-VQA_examples}
 
 
+:::{.column-margin}
+By now you have seen several ways to build image and text encoders as well as decoders, and how to put them together. As an exercise, think about how you might implement the VQA system shown here, using the tools from elsewhere in this chapter and book. See if you can modify the transformer architecture in @fig-VLMs-im2text to solve this problem.
+:::
 
 In this chapter, we have already seen all the tools necessary to create
 a VQA system; you just need a text encoder (for the question), an image
