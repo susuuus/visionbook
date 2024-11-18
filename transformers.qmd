@@ -1006,7 +1006,9 @@ signal is an image, then the positional code should represent the x- and
 y-coordinates. However, it need not represent these coordinates as
 scalars; more commonly we use a periodic representation of position,
 where the coordinates are encoded as the vector of values a set of
-sinusoidal waves take on at each position: $$\begin{aligned}
+sinusoidal waves take on at each position: 
+
+$$\begin{aligned}
     \mathbf{p}_x &= [\sin(x), \sin(x/B), \sin(x/B^2), \ldots, \sin(x/B^P)]^\mathsf{T}\\
     \mathbf{p}_y &= [\sin(y), \sin(y/B), \sin(y/B^2), \ldots, \sin(y/B^P)]^\mathsf{T}\\
     \mathbf{p} &= \begin{bmatrix}

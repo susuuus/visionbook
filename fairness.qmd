@@ -103,7 +103,7 @@ non-Western countries and for lower-income households, such as those of
 the right two photographs.
 
 
-![Images of household items, and their recognized classes by five object recognition systems \cite{DeVries2019}. The systems tend to perform worse for non-Western countries and for lower-income households, such as those of the right two photographs.](figures/fairness/soap3.jpg){#fig-soap}
+![Images of household items, and their recognized classes by five object recognition systems @DeVries2019. The systems tend to perform worse for non-Western countries and for lower-income households, such as those of the right two photographs.](figures/fairness/soap3.jpg){#fig-soap}
 
 ### Generative Adversarial Networks to Create Unbiased Datasets and Algorithms
 

@@ -574,7 +574,7 @@ $$\begin{bmatrix}    x' \\
 
 This is usually written as: $$\mathbf{p} =    \mathbf{K}
     \begin{bmatrix}
-    \mathbf{R} ~ \vline ~ -\mathbf{R} \mathbf{T} 
+    \mathbf{R} ~ \mid ~ -\mathbf{R} \mathbf{T} 
     \end{bmatrix}
     \mathbf{P}_W$$
 
@@ -991,7 +991,9 @@ $$\left [
     = 
     \mathbf{0}$$ Now, if we stack together all the equations derived
 from $N$ correspondences we get the following homogeneous linear system
-of equations: $$\begin{bmatrix}
+of equations: 
+
+$$\begin{bmatrix}
     -\mathbf{P}_1^\mathsf{T}& \mathbf{0} & x_1 \mathbf{P}_1^\mathsf{T}\\
     \mathbf{0} & -\mathbf{P}_1^\mathsf{T}& y_1 \mathbf{P}_1^\mathsf{T}\\
     \vdots & \vdots & \vdots \\
@@ -1047,7 +1049,7 @@ method), and you want to extract the matrices $\mathbf{K}$,
 $\mathbf{R}$, and $\mathbf{T}$. It is possible to decompose the matrix
 $\mathbf{M}$ such that it can be written as: $$\mathbf{M} = 
     \begin{bmatrix}
-    \mathbf{K}\mathbf{R} ~ \vline ~ -\mathbf{K}\mathbf{R}\mathbf{T} 
+    \mathbf{K}\mathbf{R} ~ \mid ~ -\mathbf{K}\mathbf{R}\mathbf{T} 
     \end{bmatrix}
 $${#eq-projection_matrix_bis}
 
@@ -1112,7 +1114,7 @@ The reprojection error can be evaluated with the loss:
 $$\sum_{i=1}^N \|\mathbf{p}_i - \mathbf{p}'_i \|^2=\sum_{i=1}^N 
 \| \mathbf{p}_i - \pi \left( \mathbf{K} 
 \begin{bmatrix}
-\mathbf{R} ~ \vline ~ -\mathbf{R}\mathbf{T} 
+\mathbf{R} ~ \mid ~ -\mathbf{R}\mathbf{T} 
 \end{bmatrix}
 \mathbf{P}_i \right) \| ^2 
 $${#eq-reprojection_loss} where $\pi()$ is the function that transforms
@@ -1231,7 +1233,7 @@ the $Z$-axis in the camera-coordinates system).
 
 
 :::{.column-margin}
-Another potential bug when extracting the camera orientation is to use the rotation matrix instead of its inverse. We defined $\mathbf{R}^\transpose$ as the rotation needed to move the world coordinate axes to be aligned with the camera-coordinate axes.
+Another potential bug when extracting the camera orientation is to use the rotation matrix instead of its inverse. We defined $\mathbf{R}^\mathsf{T}$ as the rotation needed to move the world coordinate axes to be aligned with the camera-coordinate axes.
 :::
 
 The angle of

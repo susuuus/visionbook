@@ -210,8 +210,8 @@ cones. This sampling pattern was measured from near the **fovea**, where there a
 
 ![](figures/color/Cones_SMJ2_E.jpg){#fig-ramon-b}
 
-Fig (a) Measured cone receptor classes and positions in a human retina, with cone receptor classes shown as red, green, and blue (subject YY, redrawn from \cite{Hofer2005}).
-(b) Photoreceptor sensitivities as a function of light wavelength \cite{Vanessaezekowitz2007}.
+Fig (a) Measured cone receptor classes and positions in a human retina, with cone receptor classes shown as red, green, and blue (subject YY, redrawn from @Hofer2005).
+(b) Photoreceptor sensitivities as a function of light wavelength @Vanessaezekowitz2007.
 :::
 
 We can describe the photoreceptor responses using matrix algebra. If the
@@ -421,7 +421,7 @@ primary spectra, $\mathbf{P}$, must be non-negative.
 
 ![](figures/color/primaryLights.jpg){}
 
-The elements of the matrices $\mathbf{C}$ and $\mathbf{P}$ for an example color matching system.  (a) Spectral sensitivity curves, the rows of a color measurement matrix, $\mathbf{C}$. These should be linear combinations of the eye's photosensitivity curves, $\mathbf{C}_{\mbox{eye}}$. (b) Corresponding primary lights, $\mathbf{P}$ \cite{Acdx2009},  satisfying $\mathbf{C} \mathbf{P}= \mathbf{I}_3$ ($\mathbf{M} = \mathbf{I}_3$ in @eq-conditions
+The elements of the matrices $\mathbf{C}$ and $\mathbf{P}$ for an example color matching system.  (a) Spectral sensitivity curves, the rows of a color measurement matrix, $\mathbf{C}$. These should be linear combinations of the eye's photosensitivity curves, $\mathbf{C}_{\mbox{eye}}$. (b) Corresponding primary lights, $\mathbf{P}$ @Acdx2009,  satisfying $\mathbf{C} \mathbf{P}= \mathbf{I}_3$ ($\mathbf{M} = \mathbf{I}_3$ in @eq-conditions
 :::
 
 Because many color sensitivity matrices $\mathbf{C}$ can satisfy

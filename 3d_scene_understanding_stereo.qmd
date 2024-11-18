@@ -542,7 +542,7 @@ a_3 & 0 & -a_1 \\
 -a_2 & a_1 & 0 \\
 \end{bmatrix}
 $$
-This matrix $\mathbf{a}_{\times}$ is rank 2. In addition, it is a skew-symmetric matrix (i.e., $\mathbf{a}_{\times} = -\mathbf{a}_{\times}^\transpose$). It has two identical singular values and the third one is zero.
+This matrix $\mathbf{a}_{\times}$ is rank 2. In addition, it is a skew-symmetric matrix (i.e., $\mathbf{a}_{\times} = -\mathbf{a}_{\times}^\mathsf{T}$). It has two identical singular values and the third one is zero.
 :::
 
 The matrix $\mathbf{E}$ is called the **essential matrix** and it

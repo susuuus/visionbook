@@ -500,15 +500,15 @@ related by a projective geometry. @fig-office_measuring_desk_sketch
 shows a sketch of the setup we have in @fig-office_measuring_desk.
 
 ![Projection of desk height onto the bookshelf. We start with the bottom and top image coordinates of points along vertical edges of the bookshelf: 
-$\mathbf{t}_b = [702~~2{,}958]^\transpose$ 
-$\mathbf{g}_b= [987~~618]^\transpose$ 
+$\mathbf{t}_b = [702~~2{,}958]^\mathsf{T}$ 
+$\mathbf{g}_b= [987~~618]^\mathsf{T}$ 
 and the desk: 
-$\mathbf{t}_d = [679~~1{,}018]^\transpose$ 
-$\mathbf{g}_d= [793~~59]^\transpose$ 
+$\mathbf{t}_d = [679~~1{,}018]^\mathsf{T}$ 
+$\mathbf{g}_d= [793~~59]^\mathsf{T}$ 
 We compute the points 
-$\mathbf{a}= [4{,}471~~2{,}486]^\transpose$ 
+$\mathbf{a}= [4{,}471~~2{,}486]^\mathsf{T}$ 
 and
-$\mathbf{b}= [2{,}237~~2{,}765]^\transpose$ 
+$\mathbf{b}= [2{,}237~~2{,}765]^\mathsf{T}$ 
 as described in the text.](figures/single_view_3d/office_measuring_desk.png){width="85%" #fig-office_measuring_desk}
 
 In the image plane, we have the four image points $\mathbf{t}_b$,

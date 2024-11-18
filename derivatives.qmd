@@ -376,7 +376,7 @@ Sobel_y =  \begin{bmatrix}
 $$ {#eq-sobel_kernels}
 
 This particular filter is called the **Sobel-Feldman operator**.  
-The goal of this operator was to be compact and as isotropic as possible. The Sobel-Feldman operator can be implemented very efficiently as it can be written as the convolution with four small kernels, \(Sobel_x = b_1 \circ d_0 \circ b_1^T \circ b_1^T\).
+The goal of this operator was to be compact and as isotropic as possible. The Sobel-Feldman operator can be implemented very efficiently as it can be written as the convolution with four small kernels, $$Sobel_x = b_1 \circ d_0 \circ b_1^T \circ b_1^T$$.
 
 ::: {.column-margin}
 Remember that \(b_1=[1, 1]\), and \(b_2=b_1 \circ b_1 = [1,2,1]\).

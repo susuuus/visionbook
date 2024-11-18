@@ -273,7 +273,7 @@ and extrinsic camera matrices we get:
 
 $$\sum_{j=1}^M \sum_{i=1}^N\left\lVert \mathbf{p}^{(j)}_i - \pi \left( \mathbf{K}^{(j)} 
 \begin{bmatrix}
-\mathbf{R}^{(j)} ~ \vline ~ -\mathbf{R}^{(j)}\mathbf{T}^{(j)} 
+\mathbf{R}^{(j)} ~ \mid ~ -\mathbf{R}^{(j)}\mathbf{T}^{(j)} 
 \end{bmatrix}
 \mathbf{P}^{(j)}_i \right) 
 \right\rVert ^2
@@ -290,7 +290,7 @@ v_i^{(j)}
 \left\lVert 
 \mathbf{p}^{(j)}_i - \pi \left( \mathbf{K}^{(j)} 
 \begin{bmatrix}
-\mathbf{R}^{(j)} ~ \vline ~ -\mathbf{R}^{(j)}\mathbf{T}^{(j)} 
+\mathbf{R}^{(j)} ~ \mid ~ -\mathbf{R}^{(j)}\mathbf{T}^{(j)} 
 \end{bmatrix}
 \mathbf{P}^{(j)}_i \right) 
 \right\rVert ^2 
