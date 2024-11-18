@@ -60,7 +60,7 @@ This model has been trained using a mix of four datasets with real
 images. The images below (@fig-examples_training_midas) show one sample
 from each dataset alongside their ground-truth depth.
 
-![Images and depth maps from the training set. {\em Source](figures/simplesystem_revisited/examples_training_midas.jpg){width="100%" #fig-examples_training_midas}
+![Images and depth maps from the training set. *Source*: Image from @Ranftl2022](figures/simplesystem_revisited/examples_training_midas.jpg){width="100%" #fig-examples_training_midas}
 
 As the model is trained with a diverse collections of data sources,
 there is an ambiguity on the overall scale, camera parameters, and
@@ -91,7 +91,9 @@ $$\begin{aligned}z \left[n,m \right] = \frac{1}{ d \left[n,m \right] + d_0}
 pixel. Assuming a pinhole camera and using the depth
 $z \left[n,m \right]$ and the camera matrix $\mathbf{K}$, we obtain the
 3D coordinates for a pixel with image coordinates $(n,m)$ in the camera
-reference frame as, $$\begin{aligned}
+reference frame as, 
+
+$$\begin{aligned}
 \begin{bmatrix}
 X \\
 Y \\ 
@@ -103,15 +105,18 @@ n \\
 m \\ 
 1 
 \end{bmatrix}
-
-\end{aligned}$${#eq-recoverworldcoord}
+\end{aligned}
+$${#eq-recoverworldcoord}
 
 The camera parameters will have to account for the focal length, image
 size, camera center, and the camera rotation with respect to the world
-coordinates: $$\mathbf{K} = \mathbf{M} \mathbf{R}$$
+coordinates: 
+$$\mathbf{K} = \mathbf{M} \mathbf{R}
+$$
 
 The intrinsic camera parameters (using perspective projection) are:
-$$\begin{aligned}
+$$
+\begin{aligned}
 \mathbf{M}
 = 
 \begin{bmatrix}
@@ -119,11 +124,14 @@ a & 0 & n_0\\
 0 & a & m_0 \\ 
 0 & 0 & 1 
 \end{bmatrix}.
-\end{aligned}$$
+\end{aligned}
+$$
 
 The extrinsic camera parameters will model the 3D rotation, which is
 mainly around the $X$-axis (we will ignore the translation of the
-origin): $$\begin{aligned}
+origin): 
+$$
+\begin{aligned}
 \mathbf{R}
 = 
 \begin{bmatrix}
@@ -131,8 +139,12 @@ origin): $$\begin{aligned}
 0 & \cos(\theta) & -\sin(\theta) \\ 
 0 & \sin(\theta) & \cos(\theta) 
 \end{bmatrix}.
-\end{aligned}$$
-![](figures/simplesystem_revisited/projection-revisted.png){width=".24"}
+\end{aligned}
+$$
+
+![](figures/simplesystem_revisited/projection-revisted.png){width="24%"}
+
+
 In order to apply equation (@eq-recoverworldcoord), we need to define
 certain parameters: $d_0$, $n_0$, $m_0$, $a$, and $\theta$. Although we
 could determine these parameters using a calibration image, in this
@@ -172,7 +184,7 @@ Just as we did in @sec-simplesystem, to show that the algorithm for 3D
 interpretation gives reasonable results, we can re-render the inferred
 3D structure from different viewpoints.
 
-![3D reconstruction using a pretrained model. The images show multiple view points of the reconstructed 3D scene from \fig{\ref{fig-simplesystem_revisited_img1](figures/simplesystem_revisited/views_midas.jpg){width="100%" #fig-views_midas}
+![3D reconstruction using a pretrained model. The images show multiple view points of the reconstructed 3D scene from @fig-simplesystem_revisited_img1](figures/simplesystem_revisited/views_midas.jpg){width="100%" #fig-views_midas}
 
 It is quite remarkable that it works somewhat well even though this
 system has been trained with natural images, which are quite dissimilar
@@ -185,7 +197,7 @@ instead of flat.
 We can compare this result with the 3D images recovered using the
 algorithm we defined in @sec-simplesystem:
 
-![3D reconstruction using the simple visual system from \chap{\ref{chapter:simplesystem](figures/simplesystem/views.png){width="100%" #fig-chatgpt_blockworld}
+![3D reconstruction using the simple visual system from @sec-simplesystem](figures/simplesystem/views.png){width="100%" #fig-chatgpt_blockworld}
 
 However, while the learned-based model may have lost accuracy in this
 example that fits our simple world assumptions, it has gained in
@@ -193,7 +205,7 @@ robustness and generalization. The following figure compares the results
 obtained running MiDaS (the learning-based approach) or the simple world
 model (a hand-crafted approach).
 
-![](figures/simplesystem_revisited/comparison_midas_simpleworld.jpg){width="100%"}
+![Out of domain generalization. For the pretrained model, these images might still be within the domain of the training, as it contained a very diverse set of natural images. The simple system model only works for the first example and breaks down for the rest, producing completely wrong reconstructions.](figures/simplesystem_revisited/comparison_midas_simpleworld.jpg){width="100%"}
 
 When the images fit the assumptions of the world model, the hand-crafted
 approach can produce beautiful results. However, it is very fragile, and
@@ -220,7 +232,7 @@ space, and it reasons about perspective geometry to find vanishing
 points and estimate shape (as we have discussed along many chapters in
 this book).
 
-![](figures/simplesystem_revisited/chatgpt_blockworld.png){width="100%"}
+![(a) Input image and text prompt to ChatGPT. (b) Output by ChatGPT (Gpt4-v, version from Nov 21, 2023) when asked to describe the image from the simple world.](figures/simplesystem_revisited/chatgpt_blockworld.png){width="100%"}
 
 But it's not all solved. Because if we reconstruct the image from this
 text, it looks not quite right: @fig-chatgpt_blockworld2. What is
@@ -229,7 +241,7 @@ it is likely that this particular example will be fixed, but there will
 be other failures. And some of those failures will give clues to what is
 the next fundamental question that will need to be addressed.
 
-![Output by ChatGPT when asked to render a new image with the same elements as in \fig{\ref{fig-chatgpt_blockworld](figures/simplesystem_revisited/chatgpt_blockworld_2.png){width=".5" #fig-chatgpt_blockworld2}
+![Output by ChatGPT when asked to render a new image with the same elements as in @fig-chatgpt_blockworld This conversation is a continuation of the same chat from @fig-chatgpt_blockworld](figures/simplesystem_revisited/chatgpt_blockworld_2.png){width=".5" #fig-chatgpt_blockworld2}
 
 ## Unsolved Solved Computer Vision Problems
 
@@ -285,10 +297,16 @@ junctions to the flat surfaces. How does the pretrained model work
 exactly? Has it learned some of the heuristics we introduced by hand, or
 is it using other ones?
 
+:::{.column-margin}
+![](figures/simplesystem_revisited/conclusion_by_gpt4v.png){width="80%"}
+:::
+
 GPT4-v seems to be capable of recognizing the geometric figures and
 their spatial configuration but the integration with the rendering
 engine seems fragile and was not able to create a new image with the
 same elements (although it is very close!). But why did it fail?
+
+
 
 The precise answers to these questions do not matter right now. The
 field is evolving quickly and many of those problems will be addressed
@@ -300,4 +318,7 @@ With learning-based systems we find ourselves doing experiments similar
 to the ones performed by psychophysics in trying to understand the
 mechanisms implemented by the human visual system.
 
-![](figures/simplesystem_revisited/gibson_bird.png){width=".06"}
+
+
+
+![](figures/simplesystem_revisited/gibson_bird.png){width="6%"}

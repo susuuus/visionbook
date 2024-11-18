@@ -32,6 +32,14 @@ This was the strategy used by some of the first scene interpretation
 systems. Larry G. Roberts @Roberts63 introduced the **Block world**, a
 world composed of simple 3D geometrical figures.
 
+
+
+:::{.column-margin}
+Blocks world from Larry Roberts' Ph.D. in June 1963.
+
+![](figures/simplesystem/roberts_phd_figure.png){width="40%"}
+:::
+
 For the purposes of this chapter, let's think of a world composed of a
 very simple (yet varied) set of objects. These simple objects are
 composed of flat surfaces that can be horizontal or vertical. These
