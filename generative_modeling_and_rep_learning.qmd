@@ -445,7 +445,7 @@ yields some nice properties. We will call the objective for $q_{\psi}$
 as $J_{q}$, which we will define as the negative KL-divergence, so our
 goal is to maximize this quantity. Using the definition of
 KL-divergence, we can expand this objective as follows:
-$$\begin{aligned}    J_q(\mathbf{x},\psi) &= -\texttt{KL}\texttt{KL}\KLdivxx{q_{\psi}(Z \bigm | \mathbf{x})}{p_{\theta}(Z \bigm | \mathbf{x})}\\
+$$\begin{aligned}    J_q(\mathbf{x},\psi) &= -\mathrm{KL}\left(q_\psi(Z \mid \mathbf{x}) \| p_\theta(Z \mid \mathbf{x})\right)\\
     &= -\mathbb{E}_{\mathbf{z} \sim q_{\psi}(Z \bigm | \mathbf{x})}[ \log q_{\psi}(\mathbf{z} \bigm | \mathbf{x}) - \log p_{\theta}(\mathbf{z} \bigm | \mathbf{x})]\\
     &= -\mathbb{E}_{\mathbf{z} \sim q_{\psi}(Z \bigm | \mathbf{x})}[ \log q_{\psi}(\mathbf{z} \bigm | \mathbf{x}) - \log p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) - \log p_{\mathbf{z}}(\mathbf{z}) + \log p_{\theta}(\mathbf{x})]\\
     &= \mathbb{E}_{\mathbf{z} \sim q_{\psi}(Z \bigm | \mathbf{x})}[ -\log q_{\psi}(\mathbf{z} \bigm | \mathbf{x}) + \log p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) + \log p_{\mathbf{z}}(\mathbf{z})] - \log p_{\theta}(\mathbf{x})
@@ -520,7 +520,7 @@ $J_p$, which equals $\log p_{\theta}(\mathbf{x})$).
 
 Using the definition of KL-divergence, we can also rewrite $J$ as
 follows: $$\begin{aligned}
-    J &= \mathbb{E}_{\mathbf{z}\sim q_{\psi}(Z \bigm | \mathbf{x})}\Big[\log p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) \Big] - \texttt{KL}\texttt{KL}\KLdivxx{q_{\psi}(Z \bigm | \mathbf{x})}{p_{\mathbf{z}}} \quad\quad\triangleleft\quad\text{VAE objective}
+    J &= \mathbb{E}_{\mathbf{z}\sim q_{\psi}(Z \bigm | \mathbf{x})}\Big[\log p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) \Big] - \mathrm{KL}\left(q_\psi(Z \mid \mathbf{x}) \| p_{\mathbf{z}}\right) \quad\quad\triangleleft\quad\text{VAE objective}
 \end{aligned}$${#eq-generative_modeling_meets_representation_learning-vae_objective_form2}
 
 In this form, the VAE objective is presented as the sum of two terms.
@@ -555,7 +555,7 @@ As shown in
 @eq-generative_modeling_meets_representation_learning-vae_objective_form2,
 the VAE learning problem seeks to maximize the following objective:
 $$\begin{aligned}
-    \frac{1}{N}\sum_{i=1}^N \Big( \underbrace{\mathbb{E}_{z\sim q_{\psi}(Z \bigm | x^{(i)})}\Big[ \log p_{\theta}(x^{(i)} \bigm | z) \Big]}_{\text{likelihood term}} - \underbrace{\texttt{KL}\texttt{KL}\KLdivxx{q_{\psi}(Z \bigm | x^{(i)})}{p_{z}}}_{\text{KL term}} \Big)
+    \frac{1}{N}\sum_{i=1}^N \Big( \underbrace{\mathbb{E}_{z\sim q_{\psi}(Z \bigm | x^{(i)})}\Big[ \log p_{\theta}(x^{(i)} \bigm | z) \Big]}_{\text{likelihood term}} - \underbrace{\mathrm{KL}\left(q_\psi\left(Z \mid x^{(i)}\right) \| p_z\right)}_{\text{KL term}} \Big)
 \end{aligned}$$
 
 On each step of optimization, we compute this objective over a batch of
@@ -564,8 +564,10 @@ increase the objective.
 
 For each datapoint $x$, the KL term can be computed in closed form since
 it is between two normal distributions (see the appendix of
-@kingma2013auto for a derivation): $$\begin{aligned}
-    \texttt{KL}\texttt{KL}\KLdivxx{q_{\psi}(Z \bigm | x)}{p_{z}} &= \texttt{KL}\texttt{KL}\KLdivxx{\mathcal{N}(\mu_z,\sigma^2_z)}{\mathcal{N}(0,1)}\\
+@kingma2013auto for a derivation): 
+
+$$\begin{aligned}
+    \mathrm{KL}\left(q_\psi(Z \mid x) \| p_z\right)&=\operatorname{KL}\left(\mathcal{N}\left(\mu_z, \sigma_z^2\right) \| \mathcal{N}(0,1)\right)\\
     &= \frac{1}{2}(\mu_z^2 + \sigma_z^2 - \log(\sigma_z^2) - 1)
 \end{aligned}$$
 

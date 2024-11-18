@@ -249,7 +249,7 @@ $p_{\texttt{data}}$.
 A common choice is to use the **Kullback-Leibler (KL) divergence**, which is defined as
 follows: 
 $$\begin{aligned}
-    p_{\theta}^* &= \mathop{\mathrm{arg\,min}}_{p_\theta} \texttt{KL}\texttt{KL}\KLdivxx{p_{\texttt{data}}}{p_{\theta}}\\
+    p_{\theta}^* &= \mathop{\mathrm{arg\,min}}_{p_\theta} \mathrm{KL}\left(p_{\text {data }} \| p_\theta\right)\\
     &= \mathop{\mathrm{arg\,min}}_{p_\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\Big[-\log \frac{p_{\theta}(\mathbf{x})}{p_{\texttt{data}}(\mathbf{x})}\Big]\\
     &= \mathop{\mathrm{arg\,max}}_{p_\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\big[\log p_{\theta}(\mathbf{x})\big] - \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\big[\log p_{\texttt{data}}(\mathbf{x})\big]\\
     &= \mathop{\mathrm{arg\,max}}_{p_\theta} \mathbb{E}_{\mathbf{x} \sim p_{\texttt{data}}}\big[\log p_{\theta}(\mathbf{x})\big] \quad \triangleleft \quad\text{dropped second term since no dependence on $p_{\theta}$}
@@ -668,7 +668,7 @@ $$\begin{aligned}
 \end{aligned}$${#eq-generative_models-autoregressive_likelihood} 
 
 :::{.column-margin}
-As a notational convenience, we define here that $p(\mathbf{x}_i \given \mathbf{x}_1, \ldots, \mathbf{x}_{i-1}) = p(\mathbf{x}_1)$ when $i=1$.
+As a notational convenience, we define here that $p(\mathbf{x}_i \\ | \mathbf{x}_1, \ldots, \mathbf{x}_{i-1}) = p(\mathbf{x}_1)$ when $i=1$.
 :::
 
 This factorization demonstrates that sampling from such
