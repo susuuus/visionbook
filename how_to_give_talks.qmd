@@ -69,6 +69,10 @@ technical talks, regardless of length.
 
 ## Preparation
 
+
+
+![The key to a good talk:  preparation and practice.](figures/how_to_give_talks/speaker.jpg){width="80%" #fig-speaker}
+
 We believe the keys to both a good talk and to overcoming nerves are the
 same: prepare and practice. Think through your talk. It's almost always
 better to give a talk from notes than to read it from a script--the
@@ -171,8 +175,7 @@ As described by @Adelson95, the audience loves to watch a good fight. You can se
 
 ![The experimental evidence: a photograph of ships approaching a port.](figures/how_to_give_talks/boatsphoto.jpg){#fig-boats-c width=100%}
 
-Fig (a) The appearance of ships approaching a port, from the flat-earth theory. (b) Their appearance as predicted by the round-earth theory. (c) The experimental evidence: a photograph of ships approaching a port [@mnsomero]
-
+Fig (a) The appearance of ships approaching a port, from the flat-earth theory. (b) Their appearance as predicted by the round-earth theory. (c) The experimental evidence: a photograph of ships approaching a port @mnsomero
 :::
 
 ## Show Yourself to the Audience

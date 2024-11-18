@@ -20,7 +20,7 @@ It may feel like you're going slowly, but you'll be making much more progress th
 
 **"This sounds like hard work."** Yes. It's no longer about being smart. By now, everyone around you is smart. In graduate school, it's the **hard workers** who pull ahead. This happens in sports, too. You always read stories about how hard the great players work, being the first ones out to practice, the last ones to leave, and so on.
 
-::: {.marginnote}
+::: {.column-margin}
 A co-author, who generally works harder than I do, tells me I should add comments here about the importance of taking time off from work and maintaining a good life/work balance. That is true: you should work at a pace you can sustain, and you should refresh yourself by making time for the things that matter more than work, such as relationships, service, and relaxation. Perhaps the point is to protect your time so you will have enough time to do the research well.
 :::
 
@@ -62,3 +62,8 @@ Having the intuitions from working with toy problems gives you a big advantage i
 
 For a presentation to the visiting admitted MIT computer science graduate students, I emailed all MIT Computer Science and Artificial Intelligence Laboratory (CSAIL) researchers and faculty members, asking "Please send me what you think is the most important quality for success in graduate school." I compiled their responses (along with photos of the responders) into slides that are available online:  
 <http://people.csail.mit.edu/billf/talks/10minFreeman2013.pdf>
+
+:::{.column-margin}
+**One final note about doing research.** We hope you love it. We certainly do. The research community is a community of people who are passionate about what they do, and we welcome you to it!
+:::
+

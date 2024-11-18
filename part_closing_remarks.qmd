@@ -1,11 +1,6 @@
-# Challenges in Learning-Based Vision {#sec-challenges-in-learning-based-vision}
+# Challenges in Learning-Based Vision 
 
-Learning-based vision comes with a unique set of challenges. This approach to vision derives rules from *data*, and therefore requires tools for understanding where data can go wrong. This part of the book first presents several failure modes of data-driven methods and then provides tools for mitigating these failures.
+The purpose of this book was to cover foundational concepts that, in many cases, have already passed the test of time, and others that we believe are likely to pass it in the future. These concepts should help the reader to understand future advancements beyond what has been covered here. 
 
-## Outline
+With all the material presented in this book, we have now the tools to revisit the simple visual system we explored in @sec-simplesystem and try to solve it in a different way to what we proposed earlier, which will conclude this book. 
 
-- **Chapter {@sec-bias_and_shift}** introduces the problem of dataset bias and distribution shift. We also encounter the issue of adversarial examples. These problems all come down to a gap between how the model is trained and how it will be used.
-
-- **Chapter {@sec-data_augmentation}** presents one way of dealing with this gap: train on a more diverse distribution of data.
-
-- **Chapter {@sec-transfer_learning}** presents a second way of dealing with the gap: adapt your models to bridge the gap.

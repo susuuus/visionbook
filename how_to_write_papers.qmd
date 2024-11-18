@@ -52,8 +52,8 @@ many research papers:
   3\.   Main idea
   4\.   Algorithm
         4.1 Estimating the blur kernel
-        4.1.1 Multiscale approach
-        4.1.2 User supervision
+            4.1.1 Multiscale approach
+            4.1.2 User supervision
         4.2 Image reconstruction
   5\.   Experiments
         5.1 Small blurs
