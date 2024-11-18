@@ -14,7 +14,7 @@ belong to it. In other cases, identifying what a chair is might be
 difficult, requiring understanding of its context and social conventions
 (@fig-what_is_a_chair_with_text).
 
-![](figures/object_recognition/what_is_a_chair_with_text.jpg){width="50%"}
+![What is a chair? The definition is based on affordances (i.e., something you can sit on) and on social conventions (i.e., some surfaces you can sit on are meant to be used to support other objects than yourself). Affordances are likely to be directly accessible through vision, while social conventions might not be.](figures/object_recognition/what_is_a_chair_with_text.jpg){width="50%" #fig-what_is_a_chair_with_text}
 
 In this chapter we will study three tasks related to the recognition of
 objects in images (classification, localization, and segmentation). We
@@ -49,7 +49,7 @@ breaking the object in "regions of sharp concavity". And the third
 observation is that the object resembles other known objects. Does it
 look like an ice cream or hot-dog cart to you?
 
-![](figures/object_recognition/do_it_yourself.png){width="50%"}
+![What is this? This drawing from Biederman @Biederman1987, shows a novel object. After looking at this drawing we can conclude the following: (1) we have never seen this object before, (2) it can be decomposed into parts that most people will agree with, and (3) it resembles some familiar objects. Maybe it looks like an ice cream or hot-dog cart.](figures/object_recognition/do_it_yourself.png){width="50%" #fig-do_it_yourself}
 
 Biederman postulated that objects are represented by decomposing the
 object into a small set of geometric components (e.g., blocks,
@@ -132,21 +132,21 @@ there different levels of abstraction: superordinate level, basic-level,
 and subordinate level. The following example, from @Rosch1978,
 illustrates the three different levels of categorization:
 
-::: center
-  Superordinate   Basic Level   Subordinate
-  --------------- ------------- -------------------
-  1-3 Furniture   Chair         Kitchen chair
-                                Living-room chair
-                  Table         Kitchen table
-                                Dining-room table
-                  Lamp          Floor lamp
-                                Desk lamp
-  Tree            Oak           White oak
-                                Red oak
-                  Maple         Silver maple
-                                Sugar maple
-                  Birch         River birch
-                                White birch
+:::{#tbl-levels_of_categorization}
+| Superordinate | Basic Level  | Subordinate        |
+|---------------|--------------|--------------------|
+| Furniture     | Chair        | Kitchen chair      |
+|               |              | Living-room chair  |
+|               | Table        | Kitchen table      |
+|               |              | Dining-room table  |
+|               | Lamp         | Floor lamp         |
+|               |              | Desk lamp          |
+| Tree          | Oak          | White oak          |
+|               |              | Red oak            |
+|               | Maple        | Silver maple       |
+|               |              | Sugar maple        |
+|               | Birch        | River birch        |
+|               |              | White birch        |
 :::
 
 Superordinate categories are very general and provide the a high degree
@@ -181,15 +181,13 @@ used, it has an occasion meaning that differs from its conventional
 meaning. The same thing happens with visual objects as illustrated in
 @fig-box_table.
 
-  ------------------------------------------------------------------
-   ![The same object can have different occasion meanings depending on the context. (a) A box. (b) A box used as a table.](figures/object_recognition/box_box2.jpg){width="47.5%" #fig-box_table}
-                                \(a\)
-  ------------------------------------------------------------------
+:::{layout-ncol="2" #fig-box_table}
+![](figures/object_recognition/box_box2.jpg){width="47.5%"}
 
-  -------------------------------------------------------------------
-   ![](figures/object_recognition/box_table.jpg){width="47.5%"}
-                                 \(b\)
-  -------------------------------------------------------------------
+![](figures/object_recognition/box_table.jpg){width="47.5%"}
+                                
+The same object can have different occasion meanings depending on the context. (a) A box. (b) A box used as a table.
+:::
 
 Avoiding categorization all together has been also the focus on some
 computer vision approaches to image understanding like **the Visual
@@ -200,7 +198,9 @@ of increasing descriptive power.
 
 ## Image Classification {#sec-image_classification}
 
-
+:::{.column-margin}
+In @sec-image_classification we will repeat material already presented in the book. Read this section as if it were written by Pierre Menard, from the short story \textit{Pierre Menard, Author of the Quixote} by Jorges Luis Borges~\cite{borges1939pierre}. This character rewrote \textit{Don Quixote} word for word, but the same words did not mean the same thing, because the context of the writing (who wrote it, why they wrote it, and when they wrote it) was entirely different.
+:::
 
 Image classification is one of the simplest tasks in object recognition.
 The goal is to answer the following, seemingly simple, question: Is
@@ -239,7 +239,7 @@ the image. For instance, the training set will be composed of examples
 of images and the corresponding class indicator vectors as shown in
 @fig-classification_training_set (in this case, $K=3$).
 
-![](figures/object_recognition/classification_training_set_v2.png){width="100%"}
+![Training set for image classification with $K=3$ classes.](figures/object_recognition/classification_training_set_v2.png){width="100%" #fig-classification_training_set}
 
 We want to enrich the output so that it also represents the uncertainty
 in the presence of the object. This uncertainty can be the result of a
@@ -251,7 +251,7 @@ of the $K$ classes. Letting $Y_c \in \{0,1\}$ be a binary random
 variable indicating the presence of class $c$, we model uncertainty as,
 $$\begin{aligned}
     p(Y_c=1 \bigm | \mathbf{x}) &= \hat{y}_c :classification_probability_model
-\end{aligned}$${#eq-object_recognition}
+\end{aligned}$${#eq-object_recognition-classification_probability_model}
 
 #### Exclusive classes
 
@@ -259,6 +259,7 @@ One common assumption is that only one class, among the $K$ possible
 classes, is present in the image. This is typical in settings where most
 of the images contain a single large object. Multiclass classification
 with exclusive classes results is given in the following constraint:
+
 $$\sum_{c=1}^K \hat{y}_c=1 
 $${#eq-object_recognition-sum_to_one_constraint}
 
@@ -267,7 +268,9 @@ previously, the valid solutions for
 $\hat{\mathbf{y}}=[\hat{y}_1, \hat{y}_2, \hat{y}_3]^\mathsf{T}$ are
 constrained to lie within a **simplex**.
 
-![](figures/object_recognition/simplex_v2.png){width=".3"}
+![](figures/object_recognition/simplex_v2.png){width="30%"}
+
+
 Under this formulation, the function $f$ is a mapping
 $f:\mathbb{R}^{N \times M \times 3} \rightarrow \vartriangle^{K-1}$ from
 the set of red-green-blue (RGB) images to the $(K-1)$-dimensional
@@ -284,9 +287,13 @@ This yields the softmax regression model we saw previously in section
 @sec-intro_to_learning-image_classification. Given the
 constraint of @eq-object_recognition-sum_to_one_constraint, the output
 of $f_{\theta}$ can be interpreted as a probability mass function over
-$K$ classes: $$\begin{aligned}
+$K$ classes: 
+
+$$\begin{aligned}
     p_{\theta}(Y \bigm | \mathbf{x}) &= \hat{\mathbf{y}} = f_{\theta}(\mathbf{x})
-\end{aligned}$$ where $Y$ is the random variable indicating the single
+\end{aligned}$$ 
+
+where $Y$ is the random variable indicating the single
 class per image. This relates to our previous model in
 @eq-object_recognition-classification_probability_model as:
 $$\begin{aligned}
@@ -334,7 +341,9 @@ we will be tractable to optimize during the training stage.
 If we interpret the function $f$ as estimating the probability
 $p(Y_c=1 \bigm | {\bf x}) = \hat{y}_c$, with $\sum_c \hat{y}_c =1$. The
 likelihood of the ground truth data is:
-$$\prod_{t=1}^T \prod_{c=1}^K \left( \hat{y}^{(t)}_c \right) ^{y^{(t)}_c}:classification_likelihood$${#eq-object_recognition}
+$$
+\prod_{t=1}^T \prod_{c=1}^K \left( \hat{y}^{(t)}_c \right) ^{y^{(t)}_c}
+$${#eq-object_recognition-classification_likelihood}
 
 where $y^{(t)}_c$ is the ground truth value of $Y_c$ for image $t$, and
 the first product loops over all $T$ training examples while the second
@@ -345,8 +354,11 @@ whole training image. As we have seen in chapter
 likelihood corresponds to minimizing the **cross-entropy loss** (which
 we get by just taking the negative log of the equation
 @eq-object_recognition-classification_likelihood, resulting in a total classification loss:
-$$\mathcal{L}_{cls}(\hat{\mathbf{y}},\mathbf{y})
-     = -\sum_{t=1}^{T} \sum_{c=1}^{K} y^{(t)}_c \log(\hat{y}^{(t)}_c)$$
+
+$$
+\mathcal{L}_{cls}(\hat{\mathbf{y}},\mathbf{y})
+     = -\sum_{t=1}^{T} \sum_{c=1}^{K} y^{(t)}_c \log(\hat{y}^{(t)}_c)
+$$
 
 The cross-entropy loss is differentiable and it is commonly used in
 image classification tasks.
@@ -380,11 +392,10 @@ $\hat{y} = \underset{c}{\mathrm{argmax}} ( \hat{y}_c )$, in the test
 set:
 
 $$\text{TOP-1} = \frac{100}{T}
-    \sum_{t=1}^T \mathbb{1}( \hat{y}^{(t)} = y^{(t)})$$ where $y^{(t)}$
-is the ground truth class of image $t$. This evaluation metric only
-works for the exclusive class case since we assume a single ground truth
-class per image. For the multilabel case, we may instead check if each
-label's is predicted correctly.
+    \sum_{t=1}^T \mathbb{1}( \hat{y}^{(t)} = y^{(t)})
+$$ 
+
+where $y^{(t)}$ is the ground truth class of image $t$. This evaluation metric only works for the exclusive class case since we assume a single ground truth class per image. For the multilabel case, we may instead check if each label's is predicted correctly.
 
 In some benchmarks (such as ImageNet), researchers also measure the
 **top-5** performance, which is the percentage of times that the true
@@ -405,21 +416,19 @@ classifier. The diagonal elements are the same as the top-1 performance
 for each class. The off-diagonal elements show the confusions. In this
 case, it seems that the classifier confuses cats as dogs the most.
 
-::: center
-                          Predicted class                
-  ---------------- ----- ----------------- ------ ------ --------------------------
-  3-5              Cat          Car         Dog          
-  2-5              Cat         $80$         $5$    $15$   $\rightarrow \sum = 100$
-  2-5 True class   Car          $2$         $95$   $3$    $\rightarrow \sum = 100$
-  2-5              Dog          $4$         $0$    $96$   $\rightarrow \sum = 100$
-  2-5                                                    
-:::
 
-The elements of the confusion matrix are: $$C_{i,j} = 100 \frac{
+
+
+![](figures/object_recognition/confusion_matrix.png){width="50%" #tbl-confusion_matrix}
+
+The elements of the confusion matrix are: 
+
+$$C_{i,j} = 100 \frac{
     \sum_{i=1}^N \mathbb{1}( \hat{y}^{(t)} = j)  \mathbb{1} (y^{(t)} = i)
     }{
     \sum_{i=1}^N \mathbb{1}(y^{(t)} = i) 
-    }$$ where $C_{i,j}$ measures the percentage of times that true class
+    }
+$$ where $C_{i,j}$ measures the percentage of times that true class
 $i$ is classified as class $j$.
 
 In this toy example (
@@ -443,12 +452,19 @@ boundaries are soft? Even in cases were we believe that the boundaries
 might be well defined, it is east to find images that will challenge our
 assumption, as shown in @fig-whatisacar.
 
-![Which of these images contains a car? This is a simple question that does not have a simple answer.](figures/object_recognition/IMG_1260.jpeg){width="32%" #fig-whatisacar}
+:::{layout-ncol="3" #fig-whatisacar}
+![](figures/object_recognition/IMG_1260.jpeg){width="32%" #fig-whatisacar}
 ![](figures/object_recognition/IMG_7095.jpeg){width="32%"}
 ![](figures/object_recognition/IMG_9933.jpeg){width="32%"}
+
+
 ![](figures/object_recognition/tesla.jpg){width="32%"}
 ![](figures/object_recognition/IMG_4467.jpeg){width="32%"}
 ![](figures/object_recognition/IMG_9325.jpeg){width="32%"}
+
+Which of these images contains a car? This is a simple question that does not have a simple answer.
+:::
+
 
 Which of this images of @fig-whatisacar contains a car? A simple
 question that does not have a simple answer. The top three images
@@ -550,17 +566,7 @@ pyramid), and classifying each local window as shown in
 
 The window scanning algorithm is the following:
 
-::: algorithm
-[]{#alg:scanning_window label="alg:scanning_window"} **Input:** Image;
-**Output:** Object bounding boxes and classes,
-$\{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}_{i=1}^B$
-$\{\hat{\mathbf{b}}_i\}_{i=1}^{B^{\prime}} \leftarrow$ list all bounding
-boxes (all locations, scales, aspect ratios, \...)
-
-$\{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}_{i=1}^B \leftarrow$
-Thresholding and nonmaximum suppression []{#alg:object_localization
-label="alg:object_localization"}
-:::
+![Window scanning algorithm.](figures/object_recognition/window_scanning.png){width="100%" #fig-window_scanning}
 
 In this approach, location and translation invariance are achieved by
 the bounding box proposal mechanism. We can add another invariance, such
@@ -591,16 +597,7 @@ approaches also add a bounding box refinement step. The overall approach
 is described in algorithm
 @fig-selective_search.
 
-::: algorithm
-[]{#alg:selective_search label="alg:selective_search"} **Input:** Image;
-**Output:** Object bounding boxes and classes,
-$\{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}_{i=1}^B$
-$\{\hat{\mathbf{b}}_i\}_{i=1}^{B^{\prime}} \leftarrow$ Bounding box
-proposals
-
-$\{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}_{i=1}^B \leftarrow$
-Thresholding and nonmaximum suppression
-:::
+![Selective search algorithm.](figures/object_recognition/selective_search_algorithm.png){width="100%" #fig-selective_search}
 
 This algorithm has four main steps. In the first step, the algorithm
 uses an efficient window scanning approach to produce a set of candidate
@@ -616,6 +613,13 @@ one bounding box for each instance present in the image.
 
 
 
+:::{.column-margin}
+The nonmaximum suppression algorithm takes as input a set of object bounding boxes and confidences, $S=\{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}_{i=1}^B$\, and outputs a smaller set removing overlapping bounding boxes. It is an iterative algorithm as follows: 
+(1) Take the highest confidence bounding box from the set $S$ and add it to the final set $S^*$.
+(2) Remove from $S$ the selected bounding box and all the bounding boxes with an IoU larger than a threshold.
+(3) Go to step 1 until $S$ is empty.
+:::
+
 Each step can be implemented in several different ways, giving rise to
 different approaches. The whole pipeline is summarized in
 @fig-selective_search_pipeline.
@@ -629,7 +633,7 @@ Bounding box proposal (represented as $f_0$ in
 classification and bounding box refinement, $f_1$, can be implemented by
 a classifier and a regression function.
 
-![Sketch of the selective search architecture. The image is first broken into candidate regions. Then each region is processed individually using a classifier and a regression.](figures/object_recognition/selective_search_architecture.png){width=".4" #fig-selective_search_architecture}
+![Sketch of the selective search architecture. The image is first broken into candidate regions. Then each region is processed individually using a classifier and a regression.](figures/object_recognition/selective_search_architecture.png){width="40%" #fig-selective_search_architecture}
 
 #### Cascade of classifiers
 
@@ -646,17 +650,8 @@ classifiers of increasing computational complexity and accuracy.
 
 The algorithm for the cascade of classifiers is:
 
-::: algorithm
-[]{#alg:cascade_classifier label="alg:cascade_classifier"} **Input:**
-Image, $\mathbf{x}$; **Output:** Object bounding boxes and classes,
-$\{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}_{i=1}^B$
+![Cascade of classifiers algorithm.](figures/object_recognition/cascade_algorithm.png){width="100%" #fig-cascade_algorithm}
 
-$S_0 = \{\hat{\mathbf{b}}_i\}_{i=1}^{B_0} \leftarrow$ Initial set of
-bounding box proposals
-
-$\{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}_{i=1}^B \leftarrow$
-Nonmaximum suppression
-:::
 
 Cascades of classifiers became popular in computer vision when Paul
 Viola and Michael Jones @Viola01 introduced it in 2001 with a
@@ -676,7 +671,7 @@ classifier allocates computing power in the image when trained to detect
 faces. The intensity shown in the heat map is proportional to the number
 of levels in the cascade applied to each location.
 
-![(left) Input image with the output of a face detector from 1999. (right) The heat map reports the computational cost at each location. Most of the computation was allocated into the wrong detections in the top left corner. Figure from \cite{Fleuret2001](figures/object_recognition/cascade.png){width=".8" #fig-iou_l2_comparison}
+![(left) Input image with the output of a face detector from 1999. (right) The heat map reports the computational cost at each location. Most of the computation was allocated into the wrong detections in the top left corner. Figure from @Fleuret2001](figures/object_recognition/cascade.png){width="80%" #fig-iou_l2_comparison}
 
 It is interesting to point out that the scanning window approach
 ($Levels = 1$) and the selective search procedure ($Levels = 2$) are
@@ -730,21 +725,22 @@ or assigned to the background class (indicated in white). Note that
 several detections can be assigned to the same ground truth bounding
 box.
 
-![](figures/object_recognition/detections.png){width="100%"}
+![(left) Detector output (using a low threshold to generate many detections). (middle) Ground truth bounding boxes (one color per instance). (right) Detector outputs that overlap with ground truth annotations, which are color coded](figures/object_recognition/detections.png){width="100%"}
 
 Now that we have assigned detections to ground truth annotations, we can
 compare them to measure the loss. For the classification loss, as each
 bounding box can only have one class, we can use the cross-entropy loss:
+
 $$\mathcal{L}_{\text{cls}}(\hat{\mathbf{y}}_i, \mathbf{y}_i)
-     = -  \sum_{c=1}^{K} y_{c,i} \log(\hat{y}_{c,i})$$ where $K$ is the
-number of classes.
+     = -  \sum_{c=1}^{K} y_{c,i} \log(\hat{y}_{c,i})
+$$ where $K$ is the number of classes.
 
 Let's now focus on the second part; how do we measure the localization
 loss $\mathcal{L}_{\text{loc}} (\hat{\mathbf{b}}_i, \mathbf{b}_i)$? One
 typical measure of similarity between two bounding boxes is the
 **Intersection over Union** (IoU) as shown in the following drawing:
 
-![](figures/object_recognition/iou.png){width="55%"}
+![Sketch of the computation of intersection over union for two bounding boxes.](figures/object_recognition/iou.png){width="55%"}
 
 The IoU is a quantity between 0 and 1, with 0 meaning no overlap and 1
 meaning that both bounding boxes are identical. As the IoU is a
@@ -760,7 +756,7 @@ invariant. The L2 loss is larger for big bounding boxes. The next graph
 loss for two square bounding boxes, with an area equal to 1, as a
 function of the relative $x$-displacement.
 
-![](figures/object_recognition/iou_l2_comparison.png){width=".9"}
+![Comparison of the the IoU loss and the L2 regression loss for two square bounding boxes as a function of the relative $x$-displacement.](figures/object_recognition/iou_l2_comparison.png){width="90%" #fig-iou_l2_comparison}
 
 The IoU loss becomes 1 when the two bounding boxes do not overlap, which
 means that there will be no gradient information when running
@@ -768,11 +764,14 @@ backpropagation.
 
 Now we can put together the classification and the localization loss to
 compute the overall loss:
-$$\mathcal{L}( \{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}, \{\mathbf{b}_i, \mathbf{y}_i\})
+
+$$
+\mathcal{L}( \{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}, \{\mathbf{b}_i, \mathbf{y}_i\})
      =  \mathcal{L}_{\text{cls}}(\hat{\mathbf{y}}_i, \mathbf{y}_i) +
      \lambda \mathbb{1} (\mathbf{y}_i \neq 0)
      \mathcal{L}_{\text{loc}} 
-     (\hat{\mathbf{b}}_i, \mathbf{b}_i)$$ where the indicator function
+     (\hat{\mathbf{b}}_i, \mathbf{b}_i)
+$$ where the indicator function 
 $\mathbb{1} (\mathbf{y}_i \neq 0)$ sets to zero the location loss for
 the bounding boxes that do not overlap with any of the ground truth
 bounding boxes. The parameter $\lambda$ can be used to balance the
@@ -815,13 +814,16 @@ $\sum_i  \mathbb{1} (\hat{\mathbf{y}}_i > \beta) \times \mathbf{y}_i$.
 From these two quantities we compute the **precision** as the percentage
 of correct detections:
 
-$$Precision(\beta) = \frac{\sum_i  \mathbb{1} (\hat{\mathbf{y}}_i > \beta) \times \mathbf{y}_i} {\sum_i  \mathbb{1} (\hat{\mathbf{y}}_i > \beta)}$$
+$$
+Precision(\beta) = \frac{\sum_i  \mathbb{1} (\hat{\mathbf{y}}_i > \beta) \times \mathbf{y}_i} {\sum_i  \mathbb{1} (\hat{\mathbf{y}}_i > \beta)}
+$$
 
 The precision only gives a partial view on the detector performance as
 it does not account for the number of ground truth instances that are
 not detected (misdetections). The **recall** measures the proportion of
 ground truth instances that are detected for a given decision threshold
 $\beta$:
+
 $$Recall (\beta) = \frac{\sum_i  \mathbb{1} (\hat{\mathbf{y}}_i > \beta) \times \mathbf{y}_i} {\sum_i \mathbf{y}_i}$$
 
 Both, the precision and recall, are quantities between 0 and 1. High
@@ -829,7 +831,7 @@ values of precision and recall correspond to high performance. The next
 graph (@fig-example_precision_recall) shows the precision-recall curve
 as a function of $\beta$ (decision threshold).
 
-![Example of a precision-recall curve. This is a standard plot to evaluate detection algorithms. It is usually summarized by the area under the curve. In this example, note that recall stops around 0.5. This is because this algorithm fails to detect the other 50 percent of the test examples for all thresholds $\beta$.](figures/object_recognition/example_precision_recall.png){width=".45" #fig-example_precision_recall}
+![Example of a precision-recall curve. This is a standard plot to evaluate detection algorithms. It is usually summarized by the area under the curve. In this example, note that recall stops around 0.5. This is because this algorithm fails to detect the other 50 percent of the test examples for all thresholds $\beta$.](figures/object_recognition/example_precision_recall.png){width="45%" #fig-example_precision_recall}
 
 The precision-recall curve is non-monotonic. The average precision (AP)
 summarizes the entire curve with one number. The AP is the area under
@@ -973,14 +975,18 @@ $\hat{s}_i \left[ n,m \right]$ is the instance segmentation mask.
 
 The loss can be written as a combination of the classification,
 localization, and segmentation losses that we discussed before:
-$$\mathcal{L}( \{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}, \{\mathbf{b}_i, \mathbf{y}_i\})
+$$
+\mathcal{L}( \{\hat{\mathbf{b}}_i, \hat{\mathbf{y}}_i\}, \{\mathbf{b}_i, \mathbf{y}_i\})
      =  \mathcal{L}_{\text{cls}}(\hat{\mathbf{y}}_i, \mathbf{y}_i) +
      \mathbb{1} (\mathbf{y}_i \neq 0)
      \left( 
      \lambda_1 \mathcal{L}_{\text{loc}} (\hat{\mathbf{b}}_i, \mathbf{b}_i)
      +
      \lambda_2 \mathcal{L}_{\text{seg}} (\hat{\mathbf{s}}_i, \mathbf{s}_i)
-     \right)$$ The first classification loss corresponds to the
+     \right)
+$$ 
+
+The first classification loss corresponds to the
 classification of the crop as containing the object or not; if the
 object is present, the second term measures the accuracy of the bounding
 box, and the third term measures whether the segmentation,

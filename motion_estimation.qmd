@@ -84,14 +84,7 @@ follows the same steps as traditional approaches:
     the optical flow to warp the features and the next finer level of
     the pyramid.
 
-![Motion estimation. (1) Extract
-features from each image;
-(2) compute a 3D cost volume;
-and (3) aggregate the
-cost volume in order to
-estimate the best optical
-flow for each pixel.
-%Motion estimation by: 1) Extract features from each image, 2) compute a 3D cost volume, and 3) aggregate the cost volume in order to estimate the best optical flow for each pixel.](figures/optical_flow/supervised_estimation_modular.png){width=".8" #fig-supervised_estimation_modular}
+![Motion estimation. (1) Extract features from each image; (2) compute a 3D cost volume; and (3) aggregate the cost volume in order to estimate the best optical flow for each pixel.](figures/optical_flow/supervised_estimation_modular.png){width=".8" #fig-supervised_estimation_modular}
 
 Other variations over this architecture incorporate some of the concepts
 we studied before, such as coarse-to-fine refinement, matching, and
@@ -113,6 +106,11 @@ $$\mathcal{L} \left( \hat{\mathbf{u}}, \hat{\mathbf{v}}, \mathbf{u}, \mathbf{v} 
 \sum_{n,m} (\hat{u}[n,m] - u[n,m])^2 + (\hat{v}[n,m] - v[n,m])^2$$ The
 sum is over all the pixels in the image. Each pixel has an estimated
 optical flow $(\hat{u}[n,m],\hat{v}[n,m])$.
+
+
+:::{.column-margin}
+![](figures/optical_flow/endpoint_error.png){width="80%"}
+:::
 
 #### Handling occlusions
 
