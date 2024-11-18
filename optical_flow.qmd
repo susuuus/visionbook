@@ -50,7 +50,7 @@ between them. This visualization using a color code was introduced in
 more direct visualization and it is sufficient for the examples we will
 work with.
 
-![](figures/optical_flow/visualization_optical_flow.png){width="100%"}
+![Two frames of a sequence, ground-truth optical flow (color coded), and the color code to read the vector at each pixel.](figures/optical_flow/visualization_optical_flow.png){width="100%" #fig-visualization_optical_flow}
 
 ### When Optical Flow and Motion Flow Are Not the Same
 
@@ -93,8 +93,13 @@ termination points are in view within the observation window (i.e., the
 aperture), it is impossible to measure the actual image motion. Only the
 component orthogonal to the moving structure can be measured.
 
-![](figures/optical_flow/apperture_problem.png){width=".9"}
+![Aperture problem when observing the motion of a one-dimensional (1D) structure larger than the image frame. The actual motion of the bar is upward, but the perception, when vision is limited to what is visible within the observation window, appears as if the motion of the bar is in the direction perpendicular to the bar.](figures/optical_flow/apperture_problem.png){width=".9" #fig-apperture_problem}
 
+
+:::{.column-margin}
+The **Barber-pole illusion** is an illustration of the aperture problem. The barber pole induces the illusion of downward motion while rotating.
+![](figures/optical_flow/barber_pole.png){width="40%"}
+:::
 
 
 ### Representation of Optical Flow
@@ -144,8 +149,12 @@ The **brightness constancy assumption** says that as a scene element
 moves in the world, the brightness captured by the camera from that
 element does not change over time. Mathematically, this assumption
 translates into the following relationship, given a sequence
-$\ell(x,y,t)$: $$\ell(x +u, y+v, t + 1)  = \ell(x,y,t)
-$${#eq-constancy_brightness_assumption} where $u$ and $v$ are the element
+$\ell(x,y,t)$: 
+
+$$\ell(x +u, y+v, t + 1)  = \ell(x,y,t)
+$${#eq-constancy_brightness_assumption} 
+
+where $u$ and $v$ are the element
 displacement over one unit of time and are also a function of pixel
 location, $u(x,y)$ and $v(x,y)$, but we will drop that dependency to
 simplify the notation. The previous relationship is equivalent to saying
@@ -154,7 +163,10 @@ remains onboard without getting confused by the indices and how the
 translation works, here is a simple toy example of a translation with
 $(u=1, v=0)$:
 
-![](figures/optical_flow/toy_motion_figure.png){width=".5"}
+![Translation to the right of a simple 6 $\times$ 6 size image.](figures/optical_flow/toy_motion_figure.png){width="50%" #fig-toy_motion_figure}
+
+
+
 
 The constant brightness assumption only approximately holds in reality.
 For it to be exact, we should have a scene with Lambertian objects
@@ -207,12 +219,17 @@ explicit the spatial variables, $(x',y')$, over which the sum is being
 made and the factors that are function of the location $(x,y)$ at which
 the flow is computed. From now, to simplify the derivation, we will drop
 all the arguments and write the loss in a single location as:
-$$\mathcal{L}(u, v) = \sum g \left| u \ell_x  + v \ell_y + \ell_t \right| ^2$$
+
+$$
+\mathcal{L}(u, v) = \sum g \left| u \ell_x  + v \ell_y + \ell_t \right| ^2
+$$
 where only $u$ and $v$ are constant.
 
 The solution that minimizes this loss can be obtained by computing where
 the derivatives of the loss with respect to $u$ and $v$ are equal to
-zero: $$\begin{aligned}
+zero: 
+
+$$\begin{aligned}
 \frac{\partial \mathcal{L}(u, v)}{\partial u } =
 \sum g \left( u \ell_x ^ 2 + v \ell_x \ell_y + \ell_x \ell_t  \right) = 0 \\
 \frac{\partial \mathcal{L}(u, v)}{\partial v } = 
@@ -220,7 +237,9 @@ zero: $$\begin{aligned}
 \end{aligned}$$
 
 We can write the previous two equations in matrix form at each location
-$(x',y')$ as: $$\begin{bmatrix}
+$(x',y')$ as: 
+
+$$\begin{bmatrix}
 \sum g \ell_x ^ 2  & \sum g \ell_x \ell_y \\
 \sum g \ell_x \ell_y & \sum g \ell_y ^ 2 
 \end{bmatrix}
@@ -234,7 +253,9 @@ v
 \sum g \ell_x \ell_t \\
 \sum g \ell_y \ell_t
 \end{bmatrix}
-$${#eq-lk} We will have an equivalent set of equations for each image
+$${#eq-lk} 
+
+We will have an equivalent set of equations for each image
 location. The solution at each location can be computed analytically as
 $\mathbf{u} = \mathbf{A}^{-1} \textbf{b}$ where $\mathbf{A}$ is the
 $2 \times 2$ matrix of equation (@eq-lk). The motion at location $x,y$
@@ -247,20 +268,9 @@ image structure is 1D inside the region of analysis that will be defined
 by the size of the Gaussian window $g(x,y)$.
 
 In order to implement this approach we can make use of convolutions in
-order to compute all the quantities efficiently in a compact algorithm @fig-gradient_algorithm
-:
+order to compute all the quantities efficiently in a compact algorithm @fig-gradient_algorithm:
 
-::: algorithm
-[]{#alg:gradient_algorithm label="alg:gradient_algorithm"} **Input:**
-$\boldsymbol\ell_1, \boldsymbol\ell_2 \in \mathbb{R}^{N \times M \times 3}$,
-**Output:** $\mathbf{u}, \mathbf{v} \in \mathbb{R}^{N \times M}$
-**Parameters:** $g$ = integration window **Compute:** $\ell_x$,
-$\ell_y$, and $\ell_t$ **Compute $\mathbf{A}$:**
-$A_{1,1} = \ell_x^2 \circ g$, $A_{1,2} = \ell_x\ell_y \circ g$,
-$A_{2,2} = \ell_y^2 \circ g$ **Compute $\textbf{b}$:**
-$b_1=\ell_x\ell_t \circ g$, $b_2=\ell_y\ell_t \circ g$
-$u[i,j], v[i,j] = inv(\mathbf{A} [i,j])  \textbf{b}[i,j]$
-:::
+![](figures/optical_flow/gradient_algorithm.png){width="100%" #fig-gradient_algorithm}
 
 To see how optical flow is computed from gradients, let's consider a
 simple sequence with two moving squares as shown in
@@ -269,7 +279,7 @@ velocity of $(0,0.5)$ pixels/frame and the bottom one moves at
 $(-0.5, -0.5)$ pixels/frame (the figure shows frames $0$ and $10$ to
 make the motion more visible).
 
-![](figures/optical_flow/square_grandient_based_1.png){width=".4"}
+![Toy sequence with two moving squares. The red arrows indicate the direction of motion of each square.](figures/optical_flow/square_grandient_based_1.png){width="40%" #fig-square_grandient_based_1}
 
 To apply the gradient-based optical flow algorithm we need to compute
 the gradients along $x$, $y$, and $t$. In practice, the image
@@ -287,7 +297,7 @@ and temporal location in the $x-y-t$ volume). For the moving squares
 sequence, the spatial and temporal derivatives are shown in
 @fig-square_grandient_based_2.
 
-![](figures/optical_flow/square_grandient_based_2.png){width=".7"}
+![Spatial and temporal derivatives for the sequence from @fig-square_grandient_based_1 ](figures/optical_flow/square_grandient_based_2.png){width="70%" #fig-square_grandient_based_2}
 
 The next step consists of computing $\ell_x^2$, $\ell_x\ell_y$,
 $\ell_y^2$, $\ell_x\ell_t$, and $\ell_y\ell_t$ and blurring them with
@@ -295,7 +305,7 @@ the Gaussian kernel, $g$, which will then be used to build the matrix
 $\mathbf{A}$ at each pixel. @fig-square_grandient_based_3 shows the
 results.
 
-![](figures/optical_flow/square_grandient_based_3.png){width="100%"}
+![Computation of all the products between derivatives fro @fig-square_grandient_based_2m](figures/optical_flow/square_grandient_based_3.png){width="100%" #fig-square_grandient_based_3}
 
 In order to compute the optical flow, we need to compute the matrix
 inverse $\mathbf{A}^{-1}$. This matrix depends only on the spatial
@@ -303,7 +313,7 @@ derivatives and thus is independent of the motion present in the scene.
 If we compute optical flow at each pixel, the result looks like the
 image in @fig-square_grandient_based_5.
 
-![](figures/optical_flow/square_grandient_based_5.png){width=".25"}
+![Estimated optical flow for the sequence in @fig-square_grandient_based_2 ](figures/optical_flow/square_grandient_based_5.png){width="25%" #fig-square_grandient_based_5}
 
 We can see that the result seems to be wrong for the motion estimated
 near the center of the side of each square. The inverse can only be
@@ -321,7 +331,7 @@ the estimated optical flow in the regions with $R > 2$. Harris proposed
 this formulation to avoid the computation of the eigenvalues at each
 pixel because it is computational expensive.
 
-![](figures/optical_flow/square_grandient_based_4.png){width=".7"}
+![Estimated optical flow in the regions with $R > 2$ (around *good features to track* @shi1994goodfeatures](figures/optical_flow/square_grandient_based_4.png){width="70%" #fig-square_grandient_based_4}
 
 The regions for which $R > 2$ will increase by making the apertures
 larger, which is achieved by using a Gaussian filter, $g$, with larger
@@ -360,7 +370,7 @@ initialization at the next level. We iterate this process until arriving
 at the highest possible resolution. This process is shown in
 @fig-multiscale_iterative_optical_flow.
 
-![](figures/optical_flow/multiscale_iterative_optical_flow.png){width="100%"}
+![Multiscale iterative refinement for optical flow. Optical flow estimation is done on a Gaussian pyramid. (left) First, we run a few iterations on the lowest resolution scale of the pyramid (where the motion will be the smallest). The estimated motion is then upsampled and used as the initialization at the next level. (right) We iterate this process until arriving at the highest possible resolution.](figures/optical_flow/multiscale_iterative_optical_flow.png){width="100%" #fig-multiscale_iterative_optical_flow}
 
 @fig-comparison_gradient_vs_iterative compares the optical flow
 computed using the gradient-based algorithm (i.e., one iteration) and
@@ -370,18 +380,24 @@ displacement between consecutive frames is close to four pixels and that
 makes the first-order Taylor approximation very poor. The multiscale
 method is capable of estimating large displacements.
 
-![](figures/optical_flow/comparison_gradient_vs_iterative.png){width="100%"}
+![Comparison between the optical flow estimated using the gradient-based algorithm and the multiscale iterative refinement approach.](figures/optical_flow/comparison_gradient_vs_iterative.png){width="100%" #fig-comparison_gradient_vs_iterative}
 
 The photometric reconstruction can incorporate a regularization term
 penalizing fast variations on the estimated optical flow:
-$$\mathcal{L}(\mathbf{u}, \mathbf{v}) = L(\boldsymbol\ell_1,\boldsymbol\ell_2,\mathbf{u}, \mathbf{v}) + \lambda R(\mathbf{u}, \mathbf{v}) \\
-$${#eq-horn_shunck_objective} This problem formulation was introduced by
+$$
+\mathcal{L}(\mathbf{u}, \mathbf{v}) = L(\boldsymbol\ell_1,\boldsymbol\ell_2,\mathbf{u}, \mathbf{v}) + \lambda R(\mathbf{u}, \mathbf{v}) \\
+$${#eq-horn_shunck_objective} 
+This problem formulation was introduced by
 Horn and Schunck in 1981 @Horn81.
 
 There are several popular regularization terms. One penalizes large
-velocities (**slow prior**): $$R(\mathbf{u}, \mathbf{v}) = 
+velocities (**slow prior**): 
+
+$$
+R(\mathbf{u}, \mathbf{v}) = 
 \sum_{x,y} \left( u(x,y) \right)^2 +
-\left( v(x,y)  \right)^2$$
+\left( v(x,y)  \right)^2
+$$
 
 Another penalizes variations on the optical flow (**smooth prior**):
 $$R(\mathbf{u}, \mathbf{v}) = 
