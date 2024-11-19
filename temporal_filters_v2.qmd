@@ -22,7 +22,7 @@ This is what we see in Figure @fig-motion (c) where the bands are created by mov
 We use continuous values for $x$, $y$, and $t$, and continuous images, $\text{img}_0(x,y)$, because it allows us to deal with any velocity values. This function also assumes that the brightness of the pixels does not change while the scene is moving (**constant brightness assumption**).
 
 ::: {.column-margin}
-The constant brightness assumption is the initial hypothesis of most motion estimation algorithms. We will devote multiple chapters in @sec-understanding_geometry to study motion in depth.
+The constant brightness assumption is the initial hypothesis of most motion estimation algorithms. We will devote multiple chapters in [Part Understanding Geometry](/part_understanding_geometry.html)  to study motion in depth.
 :::
 
 

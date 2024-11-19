@@ -95,7 +95,7 @@ As discussed in @sec-linear_image_filtering, convolution is just a special kind 
 
 ![Two equivalent visualizations of a convolutional layer.](figures/convolutional_neural_nets/conv_matrix_vs_net.png){width="100%" #fig-convolutional_neural_nets-conv_matrix_vs_net}
 
-We already saw that convolutional filters are useful for image processing in [Foundations of Image Processing](/part_foundation_image_processing.html) and @sec-linear_filters. In those sections, we introduced a variety of hand-designed filter banks with useful properties. A CNN instead *learns* an effective filter bank.
+We already saw that convolutional filters are useful for image processing in [Foundations of Image Processing](/part_foundation_image_processing.html) and [ Linear Filters](part_linear_filters.html). In those sections, we introduced a variety of hand-designed filter banks with useful properties. A CNN instead *learns* an effective filter bank.
 
 
 ### Multi-Input, Multi-Output Convolutional Layers

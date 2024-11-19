@@ -570,7 +570,7 @@ Representing 3D lines with homogeneous coordinates is not that easy and
 the reader can consult other sources @Hartley2004 to learn more about
 representing geometric objects in homogeneous coordinates.
 
-## Image Warping {#sec-image_warping}
+## Image Warping {#sec-image_wrapping}
 
 Now that we have seen how to describe simple geometric transformations
 to pixel coordinates, we need to go back to the representation of the
