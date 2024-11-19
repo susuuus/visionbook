@@ -661,7 +661,7 @@ mixture of Gaussians example shown previously, we again assume an
 isotropic Gaussian model for the decoder, and here also assume that
 model for the encoder.
 
-![Training a VAE to model the blue distribution. The Gaussian components spread out to tile both the embedding space and the data space.](./figures/generative_modeling_and_representation_learning/VAE_training_iters.png){#fig-generative_modeling_and_representation_learning-VAE_training_iters}
+![Training a VAE to model the blue distribution. The Gaussian components spread out to tile both the embedding space and the data space.](./figures/generative_modeling_and_representation_learning/vae_training_iters.png){#fig-generative_modeling_and_representation_learning-VAE_training_iters}
 
 ## Do VAEs Learn Good Representations?
 
