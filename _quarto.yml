@@ -141,9 +141,7 @@ format:
     cap-location: margin
     mathjax: true
     lightbox: true
-resources:
-  - demos/
-  # pdf:
+  pdf:
     # see https://pandoc.org/MANUAL.html for all options
     # documentclass: src/DL_class
     # classoption: src/DL_class
@@ -162,9 +160,11 @@ resources:
     #         code-overflow: wrap
     #         mermaid:
     #             theme: neutral
-    # include-in-header:
-      # - src/setup.tex
-    #   - text: |
+    include-in-header: |
+      \usepackage{xcolor}
+      - src/setup.tex
+      - src/color.tex
+    # - text: |
     #       \usepackage{makeidx}
     #       \makeindex
     # include-after-body:
@@ -174,7 +174,8 @@ resources:
 # latex-auto-install: true
 comments:
   hypothesis: true
-
+resources:
+  - demos/
 filters:
   - pseudocode
   - tikz

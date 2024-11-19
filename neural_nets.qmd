@@ -555,9 +555,12 @@ the network are contained in these layers; we call these parameters the
 weights and biases. We have already introduced linear layers previously.
 They look like this: 
 
-$$\begin{aligned}
-    \textcolor{data_color_dark}{\mathbf{x}_{\texttt{out}}} = \textcolor{param_color_dark}{\mathbf{W}} \textcolor{data_color_dark}{\mathbf{x}_{\texttt{in}}} + \textcolor{param_color_dark}{\mathbf{b}} & \quad\quad \triangleleft \quad\texttt{linear}
-\end{aligned}$$
+$$
+\begin{aligned}
+    \textcolor[rgb]{1.0, 0.4, 0.38}{\mathbf{x}_{\texttt{out}}} = \textcolor[rgb]{0.2, 0.6, 1.0}{\mathbf{W}} \textcolor[rgb]{1.0, 0.4, 0.38}{\mathbf{x}_{\texttt{in}}} + \textcolor[rgb]{0.2, 0.6, 1.0}{\mathbf{b}} & \quad\quad \triangleleft \quad\texttt{linear}
+\end{aligned}
+$$
+
 
 ### Activation Layers
 
@@ -573,21 +576,23 @@ these layers, if any, are not learned (but they can be). Some common
 activation layers are defined below and are plotted in
 @fig-neural_nets-pointwise_nonlinearities: 
 
-$$\begin{aligned}
-    \textcolor{data_color_dark}{x_{\texttt{out}}}[i] &= 
+$$
+\begin{aligned}
+    \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{out}}}[i] &= 
         \begin{cases}
-            1, &\text{if} \quad \textcolor{data_color_dark}{x_{\texttt{in}}}[i] > 0\\
+            1, &\text{if} \quad \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i] > 0\\
             0,              & \text{otherwise}
         \end{cases} & \quad\quad \triangleleft \quad \texttt{threshold}\\
-    \textcolor{data_color_dark}{x_{\texttt{out}}}[i] &= \frac{1}{1 + e^{-\textcolor{data_color_dark}{x_{\texttt{in}}}[i]}} & \quad\quad \triangleleft \quad \texttt{sigmoid}\\
-    \textcolor{data_color_dark}{x_{\texttt{out}}}[i] &= 2*\texttt{sigmoid}(2*\textcolor{data_color_dark}{x_{\texttt{in}}}[i])-1 & \quad\quad \triangleleft \quad \texttt{tanh}\\
-    \textcolor{data_color_dark}{x_{\texttt{out}}}[i] &= \max(\textcolor{data_color_dark}{x_{\texttt{in}}}[i],0) & \quad\quad \triangleleft \quad \texttt{relu}\\
-    \textcolor{data_color_dark}{x_{\texttt{out}}}[i] &= 
+    \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{out}}}[i] &= \frac{1}{1 + e^{-\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i]}} & \quad\quad \triangleleft \quad \texttt{sigmoid}\\
+    \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{out}}}[i] &= 2*\texttt{sigmoid}(2*\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i])-1 & \quad\quad \triangleleft \quad \texttt{tanh}\\
+    \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{out}}}[i] &= \max(\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i],0) & \quad\quad \triangleleft \quad \texttt{relu}\\
+    \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{out}}}[i] &= 
         \begin{cases}
-            \max(\textcolor{data_color_dark}{x_{\texttt{in}}}[i],0), &\text{if} \quad \textcolor{data_color_dark}{x_{\texttt{in}}}[i] \geq 0\\
-            \textcolor{param_color_dark}{a}\min(\textcolor{data_color_dark}{x_{\texttt{in}}}[i],0),              & \text{otherwise}
+            \max(\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i],0), &\text{if} \quad \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i] \geq 0\\
+            \textcolor[rgb]{0.2, 0.6, 1.0}{a}\min(\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i],0),              & \text{otherwise}
         \end{cases} & \quad\quad \triangleleft \quad \texttt{leaky-relu}
-\end{aligned}$$
+\end{aligned}
+$$
 
 ### Normalization Layers {#sec-neural_nets-normalization_layers}
 
@@ -599,12 +604,17 @@ of a set of neurons. Let's start with the example of
 
 Batchnorm **standardizes** each neural activation with respect to its
 mean and variance over a batch of datapoints. Mathematically,
-$$\begin{aligned}
-    \textcolor{data_color_dark}{x_{\texttt{out}}}[i] = \textcolor{param_color_dark}{\gamma}\frac{\textcolor{data_color_dark}{x_{\texttt{in}}}[i] - \mathbb{E}[\textcolor{data_color_dark}{x_{\texttt{in}}}[i]]}{\sqrt{\texttt{Var}[\textcolor{data_color_dark}{x_{\texttt{in}}}[i]]}} + \textcolor{param_color_dark}{\beta} & \quad\quad \triangleleft \quad \texttt{batchnorm}
-\end{aligned}$$  where $\textcolor{param_color_dark}{\gamma}$
-and $\textcolor{param_color_dark}{\beta}$ are learned parameters of this
-layer that maintain expressivity so that the layer can output values
-with non-zero mean and non-unit variance. Most commonly batchnorm is
+$$
+\begin{aligned}
+    \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{out}}}[i] = 
+    \textcolor[rgb]{0.2, 0.6, 1.0}{\gamma}
+    \frac{\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i] - \mathbb{E}[\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i]]}
+         {\sqrt{\texttt{Var}[\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i]]}} 
+    + \textcolor[rgb]{0.2, 0.6, 1.0}{\beta} & \quad\quad \triangleleft \quad \texttt{batchnorm}
+\end{aligned}
+$$
+
+where $\textcolor[rgb]{0.2, 0.6, 1.0}{\gamma}$ and $\textcolor[rgb]{0.2, 0.6, 1.0}{\beta}$ are learned parameters of this layer that maintain expressivity so that the layer can output values with non-zero mean and non-unit variance. Most commonly batchnorm is
 applied using training batch statistics to compute the mean and
 variance, which change batch to batch. At test time, aggregate
 statistics from the training data are used. However, using test batch
@@ -621,18 +631,27 @@ normalization** and **layer normalization**
 (**layernorm**) @ba2016layer. $L_2$ normalization projects the inputs
 onto the unit hypersphere, which useful for bounding the activations to
 unit vectors: 
+$$
+\begin{aligned}
+    \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{out}}}[i] &= 
+    \frac{\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i]}{\left\lVert\textcolor[rgb]{1.0, 0.4, 0.38}{\mathbf{x}_{\texttt{in}}}\right\rVert_2} 
+    & \quad\quad \triangleleft \quad \texttt{L2-norm}
+\end{aligned}
+$$ 
 
-$$\begin{aligned}
-    \textcolor{data_color_dark}{x_{\texttt{out}}}[i] &= \frac{\textcolor{data_color_dark}{x_{\texttt{in}}}[i]}{\left\lVert\textcolor{data_color_dark}{\mathbf{x}_{\texttt{in}}}\right\rVert_2} & \quad\quad \triangleleft \quad \texttt{L2-norm}
-\end{aligned}$$ 
+Layernorm is similar except that it standardizes the vector of input activations:
 
-Layernorm is similar except that it standardizes the vector of input activations: 
-
-$$\begin{aligned}
-    \mu &= \frac{1}{n} \sum_{i=1}^n \textcolor{data_color_dark}{x_{\texttt{in}}}[i]\\
-    \sigma^2 &= \frac{1}{n} \sum_{i=1}^n (\textcolor{data_color_dark}{x_{\texttt{in}}}[i] - \mu)^2\\
-    \textcolor{data_color_dark}{x_{\texttt{out}}}[i] &= \textcolor{param_color_dark}{\gamma}\frac{\textcolor{data_color_dark}{x_{\texttt{in}}}[i] - \mu}{\sigma} + \textcolor{param_color_dark}{\beta} & \quad\quad \triangleleft \quad \texttt{layernorm}
-\end{aligned}$$ 
+$$
+\begin{aligned}
+    \mu &= \frac{1}{n} \sum_{i=1}^n \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i]\\
+    \sigma^2 &= \frac{1}{n} \sum_{i=1}^n \left(\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i] - \mu\right)^2\\
+    \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{out}}}[i] &= 
+    \textcolor[rgb]{0.2, 0.6, 1.0}{\gamma}
+    \frac{\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i] - \mu}{\sigma} + 
+    \textcolor[rgb]{0.2, 0.6, 1.0}{\beta} 
+    & \quad\quad \triangleleft \quad \texttt{layernorm}
+\end{aligned}
+$$
 
 :::{.column-margin}
 Notice that layernorm, like
@@ -670,12 +689,20 @@ chapters. In image synthesis problems, the desired output is typically a
 3D array with dimensions $N \times M \times 3$, and values in the range
 $[0,255]$. A sigmoid multiplied by 255 is a typical output
 transformation for this setting. The equations for these two layers are:
-$$\begin{aligned}
-    \textcolor{data_color_dark}{x_{\texttt{out}}}[i] &= \frac{e^{-\textcolor{param_color_dark}{\tau}\textcolor{data_color_dark}{x_{\texttt{in}}}[i]}}{\sum_{k=1}^K e^{-\textcolor{param_color_dark}{\tau}\textcolor{data_color_dark}{x_{\texttt{in}}}[k]}} & \quad\quad \triangleleft \quad \texttt{softmax}\\
-    \textcolor{data_color_dark}{x_{\texttt{out}}}[i] &= 255*\texttt{sigmoid}(\textcolor{data_color_dark}{x_{\texttt{in}}}[i]) & \quad\quad \triangleleft \quad \text{common layer for image output problems}
-\end{aligned}$$ In the softmax definition we have added a
-**temperature** parameter $\textcolor{param_color_dark}{\tau}$, which is
-used to scale how peaky, or confident, the predictions are.
+$$
+\begin{aligned}
+    \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{out}}}[i] &= 
+    \frac{e^{-\textcolor[rgb]{0.2, 0.6, 1.0}{\tau}\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i]}}
+         {\sum_{k=1}^K e^{-\textcolor[rgb]{0.2, 0.6, 1.0}{\tau}\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[k]}} 
+    & \quad\quad \triangleleft \quad \texttt{softmax}\\
+    \textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{out}}}[i] &= 
+    255*\texttt{sigmoid}(\textcolor[rgb]{1.0, 0.4, 0.38}{x_{\texttt{in}}}[i]) 
+    & \quad\quad \triangleleft \quad \text{common layer for image output problems}
+\end{aligned}
+$$ 
+
+In the softmax definition, we have added a **temperature** parameter 
+$\textcolor[rgb]{0.2, 0.6, 1.0}{\tau}$, which is used to scale how peaky, or confident, the predictions are.
 
 The output layer is the input to the loss function, thus completing our
 specification of the deep learning problem. However, to use the outputs
