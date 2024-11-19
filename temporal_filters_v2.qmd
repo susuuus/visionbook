@@ -181,4 +181,4 @@ Note that despite assuming that the sequence contained a single moving object wh
 
 ## Concluding Remarks
 
-In this chapter, we have discussed different types of spatiotemporal filters used to analyze video. However, we have not presented how these filters can be used to estimate useful quantities such as velocity. We will devote several chapters in @sec-understanding_motion to motion estimation.
+In this chapter, we have discussed different types of spatiotemporal filters used to analyze video. However, we have not presented how these filters can be used to estimate useful quantities such as velocity. We will devote several chapters in [Part Understanding Motion](/part_understanding_motion.html) to motion estimation.

@@ -553,5 +553,5 @@ the grayscale or RGB intensity of a 3D point is invariant to the viewing
 direction) or the images having a substantially smaller baseline motion
 compared to the range of motions a point feature-based SFM approach can
 handle. We will talk about dense optimization of the photometric error
-when discussing motion estimation in part
-@sec-understanding_motion.
+when discussing motion estimation in 
+[Part Understanding Motion](/part_understanding_motion.html).

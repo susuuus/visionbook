@@ -10,7 +10,7 @@ This part is composed of the following chapters:
 
 - **Chapter @sec-image_derivatives** describes a set of band-pass filters, such as image derivatives, and several applications.
 
-- **Chapter @sec-temporal_filters** extends filtering to the temporal domain, and describes applications of spatiotemporal filters for motion estimation, a topic that will be further extended in Chapter {@sec-understanding_motion}.
+- **Chapter @sec-temporal_filters** extends filtering to the temporal domain, and describes applications of spatiotemporal filters for motion estimation, a topic that will be further extended in {[Part Understanding Motion](/part_understanding_motion.html)}.
 
 ## Notation
 
