@@ -294,11 +294,13 @@ width=".9"}
 
 In this projection, as the rays are orthogonal to the projection plane,
 the size of objects is independent of the distance to the camera. The
-projection equations are generally written as follows: $$\begin{aligned}
+projection equations are generally written as follows: 
+$$\begin{aligned}
 x & = & k X \nonumber \\
 y & = & k Y
-\label{eq-orthographicProj}
-\end{aligned}$$ where the constant scaling factor $k$ accounts for
+\end{aligned}
+$${#eq-orthographicProj}
+where the constant scaling factor $k$ accounts for
 change of units and is a fixed global image scaling.
 
 Orthographic projection is a good model for telephoto lenses, where the

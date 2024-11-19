@@ -142,7 +142,7 @@ forms of camera models, as we will see next.
 
 We can use homogeneous coordinates to describe a wide variety of camera
 models. For instance, the projection matrix for an orthographic
-projection (equation \[@eq-orthographicProj\]), $\mathbf{K}$, is
+projection (@eq-orthographicProj), $\mathbf{K}$, is
 $$\mathbf{K} =    \begin{bmatrix}
     1 & 0 & 0 & 0 \\
     0 & 1 & 0 & 0 \\
@@ -260,7 +260,7 @@ origin along the $Z$-axis (@fig-coordinate_systems_ray). Therefore, in
 where $f$ is the focal length, $X_c=x$, and $Y_c=y$, as illustrated in
 @fig-coordinate_systems_ray.
 
-![](figures/imaging_geometry/light_ray.png){width="75%"}
+![](figures/imaging_geometry/light_ray.png){width="75%" #fig-coordinate_systems_ray}
 
 The ray that connects the camera center and the point $\mathbf{p}$ is
 $\lambda (x,y,f)$, with $\lambda$ being a positive real number. Any 3D
@@ -906,7 +906,8 @@ $$\begin{aligned}
     0 & 0 & 0 & 1 \\
     \end{bmatrix}
     
-\end{aligned}$${#eq-model4}
+\end{aligned}
+$${#eq-model4}
 
 The second constraint we had in the simple world chapter is that the
 origin of the world coordinates was the point where the camera optical

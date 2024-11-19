@@ -105,7 +105,7 @@ Abbott @abbott2009flatland where the characters are triangles, squares,
 and other simple shapes that inhabit a 2D plane. Here is what their
 world looks like (@fig-nerfs-flatland_cameras_and_images):
 
-![The scene we are modeling. The circle of black triangles on the left are the cameras. The 1D images they see are shown on the right. These images are denoted as $\{\boldimg^{(i)}\}_{i=1}^N$.](figures/nerfs/flatland_cameras_and_images.png){width="65%" #fig-nerfs-flatland_cameras_and_images}
+![The scene we are modeling. The circle of black triangles on the left are the cameras. The 1D images they see are shown on the right. These images are denoted as $\{\boldsymbol\ell^{(i)}\}_{i=1}^N$.](figures/nerfs/flatland_cameras_and_images.png){width="65%" #fig-nerfs-flatland_cameras_and_images}
 
 On the left is a top-down image of the world, but inhabitants of
 Flatland cannot see this. Instead they see the images on the right,
@@ -209,7 +209,7 @@ system to fit the field to a set of images.
 
 
 
-![Module for a parameterized radiance field. We use $\mathbf{R}$ to denote the vector of coordinates $\lightfield_\theta$ takes as input.](figures/nerfs/nerf_module.png){width="100%" #fig-nerfs-nerf_module}
+![Module for a parameterized radiance field. We use $\mathbf{R}$ to denote the vector of coordinates $L_\theta$ takes as input.](figures/nerfs/nerf_module.png){width="100%" #fig-nerfs-nerf_module}
 
 ### Neural Radiance Fields (NeRFs) {#sec-nerfs-nerf_section}
 

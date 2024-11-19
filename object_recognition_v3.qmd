@@ -250,7 +250,7 @@ the image ${\bf x}$ and outputs the probability of the presence of each
 of the $K$ classes. Letting $Y_c \in \{0,1\}$ be a binary random
 variable indicating the presence of class $c$, we model uncertainty as,
 $$\begin{aligned}
-    p(Y_c=1 \bigm | \mathbf{x}) &= \hat{y}_c :classification_probability_model
+    p(Y_c=1 \bigm | \mathbf{x}) &= \hat{y}_c 
 \end{aligned}$${#eq-object_recognition-classification_probability_model}
 
 #### Exclusive classes

@@ -352,7 +352,7 @@ tokens representing image patches
 
 
 
-![Prompting a transformer with a learnable input token. The prompt token is mixed into the network via attention; therefore \textit{no} parameters of the original network have to be updated (see @sec-transformers}}).](./figures/transformers/prompting_a_transformer.png){width="100%" #fig-transformers-prompting_a_transformer}
+![Prompting a transformer with a learnable input token. The prompt token is mixed into the network via attention; therefore \textit{no} parameters of the original network have to be updated (see @sec-transformers).](./figures/transformers/prompting_a_transformer.png){width="100%" #fig-transformers-prompting_a_transformer}
 
 The token is a $d$-dimensional code vector and this vector is optimized
 to change the behavior of the transformer to achieve a desired result,

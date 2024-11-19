@@ -392,8 +392,8 @@ The last term corresponds to the cross product in matrix
 form (note that we changed the sign of the matrix to make the cross
 product form more obvious). Therefore, we can rewrite the previous
 expression as: $$\mathbf{P}_{t+\Delta t} - \mathbf{P}_{t} = 
-- \mathbf{T}_{\Delta t} - \bm{\theta} \times \mathbf{P}_t$$ where
-$\bm{\theta}=(\theta_X,\theta_Y, \theta_Z)$. Substituting this
+- \mathbf{T}_{\Delta t} - \boldsymbol{\theta} \times \mathbf{P}_t$$ where
+$\boldsymbol{\theta}=(\theta_X,\theta_Y, \theta_Z)$. Substituting this
 expression into equation (@eq-general_camera_motion_equation_full), we
 get the expression of the motion of a 3D point:
 
