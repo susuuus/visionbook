@@ -91,7 +91,7 @@ The resulting images show the complexity of the interactions between the
 different surfaces. The sum of the contribution of all the light rays
 emitted by the light source will give rise to a natural looking picture.
 On each image, the approximate direction of the light beam produced by
-pointer is indicated by the red arrow in .
+pointer is indicated by the red arrow in @fig-lightRay (b-c).
 
 Despite the complexity of the structure of the ambient light (a term
 coined by James J. Gibson @Gibson1966) with multiple reflections,
@@ -170,20 +170,20 @@ illusion, and (c) E. Adelson's Checkershadow illusion.
 ](figures/taxonomy/measuringScene2.png){#fig-measuringScene
 width="100%"}
 
-In , we see a red square occluding a smaller blue square. But why do we
+In @fig-measuringScene (a), we see a red square occluding a smaller blue square. But why do we
 see a blue square and not an L-shaped figure like the green shape on the
 top? If we assume that squares are typical in the world and that
 occlusions are common, then perceiving an occluded blue square is the
 most natural interpretation of the scene. Even though the green figure
 shows us that L-shaped figures are possible, we interpret the blue
-L-shaped figure as an occluded square. The next image, , shows the
+L-shaped figure as an occluded square. The next image, @fig-measuringScene (b), shows the
 "turning tables illusion" by Roger Shepard @Shepard90. In this illusion,
 both table tops have the same shape and size but one is rotated with
 respect to the other. The visual system insists in interpreting these
 objects as 3D objects giving the impression that the left table is
 longer than the table of the right. And this perception can not be shut
 down even if we know exactly how this image has been generated. The
-third example, , shows the "checkershadow illusion" by Adelson
+third example, @fig-measuringScene (c), shows the "checkershadow illusion" by Adelson
 @adelson1995checkershadow. In this figure, the squares marked with A and
 B have the exact same intensity values. But the visual system is trying
 to measure the surface reflectance of the squares, removing the effect
@@ -361,7 +361,7 @@ He listed the following seven axioms of light, extracted from
 Starting from those axioms, in his paper "Optics" @Burton1945, Euclid
 describes many different ways to use geometric reasoning to measure the
 size of objects in the world using the properties of light and vision.
-One example of the application of his theory is shown in . The
+One example of the application of his theory is shown in @fig-euclid. The
 description of the figure in the original text reads as follows: "To
 know how great is a given elevation (AB) when the sun is shining. Let
 the eye be D, and let GA be a ray of the sun falling upon the end of
@@ -416,10 +416,7 @@ and that the rays only become visible when they reach the eye
 perpendicularly. He described the pinhole camera and invented the
 **camera obscura**.
 
-![Alhacen's diagram of the eyes and the optic nerve (), drawn around the
-year 1027. It is one of the first drawings of the visual system.
-*Source*: MS Fatih 3212, vol. 1, fol. 81b, Süleimaniye Mosque Library,
-Istanbul.](figures/taxonomy/Alhazen1652.png){#fig-Alhacen
+![Alhacen's diagram of the eyes and the optic nerve (), drawn around the year 1027. It is one of the first drawings of the visual system. *Source*: MS Fatih 3212, vol. 1, fol. 81b, Süleimaniye Mosque Library, Istanbul.](figures/taxonomy/Alhazen1652.png){#fig-Alhacen
 width="60%"}
 
 Ibn al-Haytham rejected the extramission theory. He argued that sight
@@ -462,7 +459,7 @@ wavelengths of light.
 
 He measured the speed of transmission of nerves (24.6--38.4 m/s
 @wikiHelmholtz2021, previously thought to be unmeasurably fast
-@Shapin2019). He also developed the ophthalmascope, shown in , an
+@Shapin2019). He also developed the ophthalmascope, shown in @fig-helmholtz, an
 instrument to observe the retina of the human eye. The key of the
 ophthalmascope was to see the need for colinear viewing and illumination
 directions. @fig-helmholtz shows a schematic illustration of
@@ -554,7 +551,7 @@ Perceptual organization studies how our visual system organizes
 individual visual features (i.e., colors, lines, \...) into coherent
 objects and wholes. Wertheimer proposed a set of rules used by the
 visual system to organize elements on a simple display. He showed sets
-of dots and lines disposed in different arrangements, as shown in , to
+of dots and lines disposed in different arrangements, as shown in @fig-gestalt, to
 find out when those elements were grouped together into larger elements.
 
 ![Gestalt grouping rules for perceptual organization. Most of the
@@ -567,7 +564,7 @@ uncovered. However, they are not strictly laws and not all grouping cues
 are equally strong. Some of the most important laws are as follows:
 
 -   Law of **proximity**: Items that are nearby are more likely to group
-    together. From , we can see that groupings a-b, c-d, e-f, and g-h
+    together. From @fig-gestalt, we can see that groupings a-b, c-d, e-f, and g-h
     are stronger than b-c, d-e, and f-g. With some effort one can group
     the items according to the second arrangement, but it is hard to
     sustain that grouping perceptually. The law of proximity is affected
@@ -579,7 +576,7 @@ are equally strong. Some of the most important laws are as follows:
 
 -   Law of **closure**: We are very familiar with the fact that when a
     line forms a closed figure, we do not simply see a line, we see a
-    shape. The example shown in shows how closure wins over proximity.
+    shape. The example shown in @fig-gestalt shows how closure wins over proximity.
     The vertical lines are closer for the grouping a-b. However, we
     group them as b-c, d-e, and f-g.
 
@@ -642,6 +639,11 @@ perceived lightness on a display. Koffka @Koffka1935 introduced the
 **Koffka ring**, a beautiful illusion to illustrate the power of
 perceptual grouping to explain lightness perception (@fig-koffka_ring).
 
+
+:::{.column-margin}
+Kurt Koffka, born in Berlin in 1886, published his \booktitle{Principles of Gestalt Psychology} in 1935, after moving to the USA in 1924.
+:::
+
 ![(a) A ring of uniform gray. (b) Koffka ring and (c) a variant
 introduced by Adelson @Adelson99. In all the examples, the two sides of
 the ring are
@@ -650,9 +652,9 @@ width="100%"}
 
 In each display, the two sides of the ring have the same gray level.
 Depending on the spatial configuration of the two sides, their
-lightnesses appear very different. In the ring appears as solid gray. In
+lightnesses appear very different. In @fig-koffka_ring (a) the ring appears as solid gray. In @fig-koffka_ring (b)
 splitting the figure into two halves by an interleaving white space
-makes the two sides of the ring look different. @fig-koffka_ring shows
+makes the two sides of the ring look different. @fig-koffka_ring (c) shows
 a variant of the Koffka ring proposed by Adelson @Adelson99 where the
 grouping cues create a stronger effect. One can conclude from this
 experiment that lightness perception is not a local process and that it
@@ -660,7 +662,7 @@ involves considering the context and the principles of grouping.
 
 Another striking proof of the importance of perceptual organization is
 the visual phenomenon of **amodal completion**. As discussed in the
-introduction, in we see a red square on top of a blue square. Even
+introduction, in @fig-measuringScene (a) we see a red square on top of a blue square. Even
 though the blue square is occluded by the red square, we see it as a
 square. The green geometric figure is identical to the blue one but the
 gap breaks the illusion of occlusion and we do not perceive it as a
@@ -676,7 +678,7 @@ amodal completion to extend the object behind the occlusion.
 see an induced object appear in front of others. @fig-kanizsa shows
 several examples of modal and amodal completion. A beautiful visual
 illusion that illustrates modal completion is the **Kanizsa triangle**,
-shown in . In this case, we see a triangle that is not really there.
+shown in @fig-kanizsa (d). In this case, we see a triangle that is not really there.
 
 ![Amodal and modal completion. (a) is this 13 or an occluded B? (b) By
 adding boundaries to the occluder, the letter B becomes clearer. (c) How
@@ -767,7 +769,7 @@ optic array** is the set of light rays that converge into a point of
 observation. And this point of observation can be occupied by an
 observer who will move around the world. This moving ambient optic array
 will contain information about the environment and also about the
-observer themself ().
+observer themself @fig-gibson_bird.
 
 ![The flow pattern in the optic array of a bird flying over the earth
 provides information about the environment and also about the bird.
@@ -789,8 +791,12 @@ Gibson's theory of visual perception postulates that the ambient optic
 array is very rich and contains all the information needed to perceive
 the environment. **Direct perception** is the process of **information
 pickup** directly from the ambient array. This is in contrast with other
-theories of visual perception that assume that the input stimuli
-
+theories of visual perception that assume that the input stimuli is very impoverished and that perception is
+**indirect** as it has to be complemented by additional processes. The
+indirect theory of perception is the most common one. However, the
+important message to learn here is that, when building a perceptual
+system, the richer the input is, one might hope that the solution to the
+perception problem will be simpler.
 
 :::{.column-margin}
 Gibson did not like the term **stimuli** because it
@@ -798,13 +804,6 @@ implied that the environment stimulates the observer. For Gibson, it is
 important to stress that the observer is only picking up
 information.
 :::
-
- is very impoverished and that perception is
-**indirect** as it has to be complemented by additional processes. The
-indirect theory of perception is the most common one. However, the
-important message to learn here is that, when building a perceptual
-system, the richer the input is, one might hope that the solution to the
-perception problem will be simpler.
 
 ### The Neural Mechanisms of Visual Perception
 
@@ -822,20 +821,18 @@ For a long time it was known that the brain was the center of reason,
 but the mechanisms and anatomy of the brain were not well understood. In
 fact, researchers believed that the brain was not composed of
 individualized cells as the rest of the body. It was in 1890 that
-Santiago Ramón y Cajal, using Golgi's stain, 
-
-:::{.column-margin}
-Santiago
-Ramón y Cajal was born in 1852 in Navarra, Spain.
-:::
-
- isolated individual
+Santiago Ramón y Cajal, using Golgi's stain, isolated individual
 neurons and proved that the brain is composed by **networks of
 interconnected cells** as shown in his work on the anatomy of the retina
 @cajal1893retine. This was the first time that networks were observed.
 Ramón y Cajal then mapped most of the brain and his drawings are still a
 reference. Both Santiago Ramón y Cajal and Camillo Golgi received the
 Nobel prize in 1906 @Glickstein2006.
+
+:::{.column-margin}
+Santiago
+Ramón y Cajal was born in 1852 in Navarra, Spain.
+:::
 
 ![Drawing of the retina by Santiago Ramón y Cajal. In this drawing
 photoreceptors are in the top and light comes from the bottom: 1. Rod
@@ -936,10 +933,10 @@ applied to record the activity of cells in the cortex.
 @fig-receptivefields shows some of the receptive fields found in the
 LGN. When a cell with an **ON-center Receptive Field (RF)** is
 illuminated with a small spot of light projected on the inner part of
-the RF, the firing rate increases, as shown in . The gray rectangle
+the RF, the firing rate increases, as shown in @fig-receptivefields (a). The gray rectangle
 under the graph represents the duration of the stimulation. When the
 outer part of the RF is stimulated there is an inhibition of the cells
-response. @fig-receptivefields shows an **OFF-center RF**.
+response. @fig-receptivefields (a) shows an **OFF-center RF**.
 
 ![Receptive fields (RF) for retinal ganglion cells and oriented
 receptive fields from the primary visual system. (a) ON-center RF. (b)
@@ -976,7 +973,7 @@ cell according to its attributes: spatial selectivity, orientation
 preference, eye preference (left or right), and the type (simple,
 complex, or hypercomplex).
 
-@fig-receptivefields shows an **oriented simple cell**, while shows
+@fig-receptivefields (c) shows an **oriented simple cell**, while @fig-receptivefields (d) shows
 another type of simple oriented cell found in the visual cortex. An
 oriented cell shows increased firing rate when stimulated with an
 oriented bar in the positive region of the RF with the preferred
@@ -985,7 +982,7 @@ orientation.
 @fig-visual_pathways shows a schematic of the visual pathways from the
 retina up to the primary visual cortex.The first visual area in the
 visual cortex is called **V1**. It is a sheet of neurons is arranged
-along several layers as shown in . Hubel and Wiesel found that neurons
+along several layers as shown in @fig-visual_pathways. Hubel and Wiesel found that neurons
 in V1 are organized along **columns**. When probing with an electrode,
 as the electrode went from the surface to the bottom of V1, all the
 cells found were selective to the same orientation. When moving the
@@ -1010,13 +1007,13 @@ magnocellural, and koniocellular (not shown). Those channels project
 into the primary visual cortex following a very regular architecture
 organized along hypercolumns. The koniocellular pathway projects into
 the color blobs in the upper layer of the visual cortex. Figure modified
-from @kandel:neural.](figures/taxonomy/visual_pathways_aina.png){#fig-visual_pathways width="70%"}
+from @kandel-neural.](figures/taxonomy/visual_pathways_aina.png){#fig-visual_pathways width="70%"}
 
 
 
 :::{.column-margin}
-Compare the drawing from with the one made a thousand
-years earlier by Ibn al-Haytham, shown in .
+Compare the drawing from @fig-visual_pathways with the one made a thousand
+years earlier by Ibn al-Haytham, shown in @fig-Alhacen.
 :::
 
 
@@ -1037,7 +1034,7 @@ will see throughout this book.
 
 ### Marr's Computational Theory of Vision
 
-David's Marr influential book was published posthumously in 1982
+David's Marr influential book Vision was published posthumously in 1982
 @Marr82. Marr's philosophy was influenced by advances in computer
 vision, and studies in cognitive psychology and neurophysiology. Studies
 in psychology at the time suggested that visual information was
@@ -1087,20 +1084,17 @@ information-processing device should be described at three levels:
     system performance. We will discuss the importance of
     representations many times throughout this book.
 
--   **Hardware**. Finally, the representation and algorithm will have to
-    be implemented in a physical device.
-
-Marr noted that when trying to explain visual phenomena, one needs to
+-   **Hardware**. Finally, the representation and algorithm will have to be implemented in a physical device. Marr noted that when trying to explain visual phenomena, one needs to
 find what is the right level to use to describe it. For instance, the
 trichromatic color theory of human perception is explained by the
 hardware level (i.e., by the three color receptors in our retina) while
 the bistable nature of the Necker cube is likely to be related to the 3D
-representation. The illusions shown in , are also likely due to the
+representation. The illusions shown in @fig-measuringScene, are also likely due to the
 representation and algorithm used and they are rather independent on the
 particular hardware implementation. Marr considered that Gibson was
 asking the right questions, getting very close to a computational theory
 of vision, but that he had a naive view on how difficult it would be to
-solve them. We will return to this point in when we will build a simple
+solve them. We will return to this point in @sec-simplesystem when we will build a simple
 visual system.
 
 ![Necker cube illusion, introduced by Louis Albert Necker @Necker1832.
@@ -1248,7 +1242,7 @@ were designed manually.
 
 :::{.column-margin}
  Some example images from the COIL dataset
-@Nene1996:\
+@Nene1996:
 
 ![](figures/taxonomy/obj100__295.jpg){width="20%"}
 ![](figures/taxonomy/obj28__240.jpg){width="20%"}
@@ -1280,7 +1274,7 @@ learning is really all about data.
 
 Learning derives vision algorithms by fitting functions to data. One way
 to think about it is that our goal is to "program" a vision algorithm
-and there are a few ways to do so (). One way is to write the algorithm
+and there are a few ways to do so (@fig-taxonomy-programming_vs_learning). One way is to write the algorithm
 directly in Python code: first we will compare the intensity of this
 pixel and that pixel, then we will threshold about some such value, and
 so on. Another approach is to derive the algorithm as the rational thing
@@ -1311,7 +1305,7 @@ recognition problems created an explosion of interest in neural nets.
 
 :::{.column-margin}
  Rosenblatt published the perceptron algorithm in the
-journal in 1958. This is a nice example of the interdisciplinary nature
+journal Psychological Review in 1958. This is a nice example of the interdisciplinary nature
 of the AI field in its origins. 
 :::
 
@@ -1353,7 +1347,7 @@ distributed processing in artificial networks.
 
 
 :::{.column-margin}
- @Rumelhart86 cover:\
+ @Rumelhart86 cover:
 ![](figures/taxonomy/pdp_cover.jpg){width="160"}
 :::
 
