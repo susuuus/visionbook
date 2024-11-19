@@ -141,7 +141,7 @@ format:
     cap-location: margin
     mathjax: true
     lightbox: true
-  pdf:
+  # pdf:
     # see https://pandoc.org/MANUAL.html for all options
     # documentclass: src/DL_class
     # classoption: src/DL_class
@@ -160,10 +160,10 @@ format:
     #         code-overflow: wrap
     #         mermaid:
     #             theme: neutral
-    include-in-header: |
-      \usepackage{xcolor}
-      - src/setup.tex
-      - src/color.tex
+    # include-in-header: |
+    #   \usepackage{xcolor}
+    #   - src/setup.tex
+    #   - src/color.tex
     # - text: |
     #       \usepackage{makeidx}
     #       \makeindex
