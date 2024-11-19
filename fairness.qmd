@@ -201,7 +201,9 @@ participants of a study that they will not be affected by allowing their
 data to be used in a study or analysis, no matter what other studies,
 datasets, or information sources are available.
 
+::: {.margin-note}
 **Differential privacy** allows extracting aggregated information about a population from a database without revealing information about any single individual.
+:::
 
 Algorithms can be designed for which it can be shown that the guarantee
 of differential privacy is met @Kearns2020, @Dwork2014. One approach is
@@ -231,8 +233,8 @@ population. The price for this differential privacy is that more data
 must be collected to obtain the same accuracy guarantees in the estimate
 of the true population averages.
 
-::: {.margin-note}
-There are also risks associated with the wrong use of differential privacy @{Dwork_Kohli_Mulligan_2019}.
+::: {.column-margin}
+There are also risks associated with the wrong use of differential privacy @Dwork_Kohli_Mulligan_2019.
 ::: 
 
 ## Ethics {#sect-ethics}

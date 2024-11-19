@@ -132,8 +132,13 @@ $n \notin S$ where $S$ is a finite length interval. A signal
 $\ell\left[n \right]$ is **periodic** if there is a value $N$ such that
 $\ell\left[n \right] = \ell\left[n + k N\right]$ for all $n$ and $k$. A
 periodic signal is an infinite length signal. An important quantity is
-the mean value of a signal often called the **DC value**.  In
-the case of an image, the DC component is the average intensity of the
+the mean value of a signal often called the **DC value**.  
+
+:::{.column-margin}
+DC means **direct current** and it comes from electrical engineering. Although most signals have nothing to do with currents, the term DC is still commonly used.
+:::
+
+In the case of an image, the DC component is the average intensity of the
 image. For a finite signal of length $N$ (or a periodic signal), the
 **DC value** is
 $$\mu = \frac{1}{N} \sum_{n=0}^{N-1} \ell\left[n\right]$$ If the signal

@@ -128,6 +128,11 @@ an important part of computer vision, especially in the context of
 vision for robots. We direct the interested reader to
 @sutton2018reinforcement to learn more. 
 
+
+:::{.column-margin}
+At first glance unsupervised learning and reinforcement learning look similar: both maximize a function that scores desirable properties of the input-output mapping. The big difference is that unsupervised learning has access to training data whereas reinforcement learning usually does not; instead the reinforcement learner has to collect its own training data.
+:::
+
 ## Key Ingredients {#sec-intro_to_learning-key_ingredients}
 
 A learning algorithm consists of three key ingredients:
@@ -442,11 +447,7 @@ $z_{\theta}: \mathcal{X} \rightarrow \mathbb{R}^K$, (2) then squash the
 output into the range $[0,1]$ and normalize it to sum to 1. A popular
 way to squash is via the function:
 
-:::{.column-margin}
-Using softmax is a
-modeling choice; we could have used any function that squashes into a
-valid pmf, that is, a nonnegative vector that sums to 1.
-:::
+
 
 A popular way to squash is via the **softmax** function:
 

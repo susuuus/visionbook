@@ -72,6 +72,10 @@ Here we show, from left to right, the hand, the pen, and the blue mug.
 recognize image patches outside their natural context.](figures/visionscience/dalle-small.png){#fig-small-dalle}
 
 
+:::{.column-margin}
+What is the minimum number of pixels needed to form a recognizable image? The answer depends on the image. It is possible to create visually recognizable images with very few pixels @torralba_2009.
+:::
+
 ## The More You Look, the More You See
 
 Visual perception cannot be formulated as a simple input-output function

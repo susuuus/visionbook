@@ -176,6 +176,13 @@ patches, regions of uniform properties, and edges.
 
 
 
+:::{.column-margin}
+**Question**: Are there animal eyes that produce a different initial representations than ours?
+**Answer**: Yes! One example is the Gekko's eye. Their pupil has a four-diamond-shaped pinhole aperture that could allow them to encode distance to a target in the retinal image @Murphy1986. Photo credit: @Randall.
+
+![](figures/simplesystem/Tokay-Gecko-Eye-1440x954.jpg)
+:::
+
 ### A Catalog of Edges
 
 Edges denote image regions where there are strong changes of the image
@@ -237,6 +244,11 @@ of variation using the gradient: $$\begin{aligned}
 which the variation of intensities is larger. If we are on top of an
 edge, the direction of larger variation will be in the direction
 perpendicular to the edge.
+
+:::{.column-margin}
+Gradient of an image at one location.
+![](figures/simplesystem/gradient2.png){width="80%"}
+:::
 
 However, the image is not a continuous function as we only know the
 values of the $\ell (x,y)$ at discrete locations (pixels). Therefore, we
@@ -300,6 +312,15 @@ world into the image plane). Here we have written the world coordinates
 as functions of image location $(x,y)$ to make explicit that we want to
 recover the 3D locations of the visible points.
 
+
+
+:::{.column-margin}
+The classical visual illusion ``two faces or a vase'' is an example of **figure-ground** segmentation problem.
+
+![](figures/simplesystem/figure-ground.png){width="100%"}
+:::
+
+
 In this simple world, we will formulate this problem as a set of linear
 equations.
 
@@ -332,6 +353,13 @@ important to know which object is in front as this will be the one
 owning the boundary. Knowing who owns the boundary is important as an
 edge provides cues about the 3D geometry, but those cues only apply to
 the surface that owns the boundary.
+
+
+:::{.column-margin}
+**Border ownership**: The foreground object is the one that owns the common edge.
+
+![](figures/simplesystem/border_ownership.png){width="100%"}
+:::
 
 In this simple world, we will assume that objects do not occlude each
 other (this can be relaxed) and that the only occlusion boundaries are
@@ -375,6 +403,11 @@ the image. Here is a list of some of those invariant properties:
     the corresponding projections will also terminate at a common point.
 
 -   Smoothness: a smooth 3D curve will project into a smooth 2D curve.
+
+:::{.column-margin}
+![](figures/simplesystem/invariants2.png)
+:::
+
 
 Note that those invariances refer to the process of going from world
 coordinates to image coordinates. The opposite might not be true. For
@@ -434,13 +467,27 @@ In a 3D vertical edge, using the projection equations, the derivative of
 $Y$ along the edge will be 
 
 $$\begin{aligned}
-\partial Y / \partial y & = & 1/ \cos(\theta)\end{aligned}$${#eq-derivative_Y_along_edge}
+\partial Y / \partial y & = & 1/ \cos(\theta)\end{aligned}
+$${#eq-derivative_Y_along_edge}
+
 
 In a 3D horizontal edge, the coordinate $Y$ will not change. Therefore,
-the derivative along the edge should be zero: $$\begin{aligned}
+the derivative along the edge should be zero: 
+
+$$\begin{aligned}
 \partial Y / \partial {\bf t} & = & 0
-\end{aligned}$${#eq-derivative_Y_along_edge_hor} where the vector $\bf t$ denotes direction tangent to
-the edge, ${\bf t}=(-n_y, n_x)$. We can write this derivative as a
+\end{aligned}
+$${#eq-derivative_Y_along_edge_hor} 
+
+where the vector $\bf t$ denotes direction tangent to
+the edge, ${\bf t}=(-n_y, n_x)$. 
+
+:::{.column-margin}
+![](figures/simplesystem/tangent.png)
+:::
+
+
+We can write this derivative as a
 function of derivatives along the $x$ and $y$ image coordinates:
 $$\begin{aligned}
 \partial Y / \partial {\bf t} =  \nabla Y \cdot {\bf t} = -n_y \partial Y / \partial x + n_x \partial Y / \partial y
@@ -472,6 +519,19 @@ infer the surface orientation. Therefore, we need some criteria in order
 to propagate information from the boundaries, where we do have
 information about the 3D structure, into the interior of flat image
 regions. This problem is common in many visual domains.
+
+
+
+:::{.column-margin}
+As shown on the left image below, an image patch without context is not enough to infer its 3D shape.
+The same patch shown in the original image (right):
+
+![](figures/simplesystem/cube_propagartion_1.png) 
+![](figures/simplesystem/cube_propagartion_2.png)
+
+Information about its 3D orientation its propagated from the surrounding edges.
+:::
+
 
 In this case we will assume that the object faces are planar. Thus, flat
 image regions impose the following constraints on the local 3D
@@ -506,12 +566,14 @@ as $\mathbf{a}_i = [0, \dots, 0, -1, 2, -1, 0, \dots, 0]$, $b_i=0$, and
 analogous equations can be written for the other two.
 
 We can solve the system of equations by minimizing the following cost
-function: $$\begin{aligned}
+function: 
+$$\begin{aligned}
 J = \sum_i (\mathbf{a}_i\mathbf{Y} - b_i)^2
 \end{aligned}$$ where the sum is over all the constraints.
 
 If some constraints are more important than others, it is possible to
-also add a weight $w_i$. $$\begin{aligned}
+also add a weight $w_i$. 
+$$\begin{aligned}
 J = \sum_i w_i (\mathbf{a}_i \mathbf{Y} - b_i)^2
 \end{aligned}$$
 
@@ -582,6 +644,11 @@ described in . Later in the book, when we describe learning-based
 approaches, the training dataset will specify the domain. What happens
 when assumptions are violated? Or when the images contain configurations
 that we did not consider while designing the algorithm?
+
+
+:::{.column-margin}
+**Out of domain generalization** refers to the ability of a system to operate outside the **domain** for which it was designed.
+:::
 
 Let's run the algorithm with shapes that do not satisfy the assumptions
 that we have made for the simple world. @fig-out_of_domain shows the

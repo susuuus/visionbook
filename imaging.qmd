@@ -61,6 +61,13 @@ surface. For a Lambertian surface, the intensity of the reflected light
 is a function of the direction of the incoming light ray, but not a
 function of the outgoing direction of the ray, $\mathbf{q}$.
 
+
+
+
+:::{.column-margin}
+Perfectly Lambertian surfaces are not common. The synthetic material called spectralon is the most perfectly Lambertian material.
+:::
+
 ### Specular Surfaces
 
 A widely used model of surfaces with a specular component of reflection
@@ -190,6 +197,12 @@ helps to focus the picture that appears in the wall. In this case we can
 see some buildings that are outside the window.</figcaption>
 </figure>
 
+
+:::{.column-margin}
+The world is full of **accidental cameras** that create faint images
+often ignored by the naive observer.
+:::
+
 ### Image Formation by Perspective Projection
 
 A pinhole camera projects 3D coordinates in the world to 2D positions on
@@ -250,6 +263,10 @@ $$\begin{align}
 y & = & f \frac{Y}{Z} 
 \end{align}$${#eq-perspctiveProj}
 
+:::{.column-margin}
+Thales of Miletus, 624 B.C., introduced the notion of **similar triangles**.  It seems he used this to measure the height of Egypt pyramids, and the distance to boats in the sea.
+:::
+
 Equations @eq-perspctiveProj1 and @eq-perspctiveProj are called the **perspective projection
 equations**. Under perspective projection, distant objects become
 smaller, through the inverse scaling by $Z$. As we will see, the
@@ -277,6 +294,11 @@ what we introduced a simple projection model in in the framework of the
 simple vision system in . In that example, we placed the world
 coordinate system in front of the camera, and the origin was not the
 location of the pinhole camera. 
+
+
+:::{.column-margin}
+Biological systems rarely have eyes that are built as pinhole cameras. One exception is the Nautilus, which has evolved a pinhole eye (without any lens).
+:::
 
 ### Image Formation by Orthographic Projection
 
@@ -306,7 +328,14 @@ change of units and is a fixed global image scaling.
 Orthographic projection is a good model for telephoto lenses, where the
 apparent size of objects in the image is roughly independent of their
 distance to the camera. We used this projection when building the simple
-visual system in .
+visual system in @sec-simplesystem.
+
+
+
+:::{.column-margin}
+Orthographic Projection is a correct model when looking at an infinitely far away object that is infinitely zoomed in, as discussed in @sec-simplesystem.
+:::
+
 
 The next section provides another example of a camera producing an
 orthographic projection.
@@ -332,12 +361,16 @@ other directions. It works better if the straws are painted black to
 reduce internal reflections that might capture light rays not parallel
 to the straws, resulting in a less sharp picture.
 
-shows the resulting image when imagining the scene shown in . The straw
+@fig-straw (c) shows the resulting image when imagining the scene shown in @fig-straw (b). The straw
 camera doesn't invert the image as the pinhole camera does and objects
 do not get smaller as they move away from the camera. The image
 projection is orthographic, with a unity scale factor; the object sizes
 on the projection plane are the same as those of the objects in the
 world.
+
+:::{.column-margin}
+A larger straw camera has been built by Michael Farrell and Cliff Haynes @straw2017 with an impressive 32,000 drinking straws.
+:::
 
 Another implementation of an orthographic camera is the telecentric lens
 that combines a pinhole with a lens.
