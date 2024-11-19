@@ -305,7 +305,7 @@ the Gaussian kernel, $g$, which will then be used to build the matrix
 $\mathbf{A}$ at each pixel. @fig-square_grandient_based_3 shows the
 results.
 
-![Computation of all the products between derivatives fro @fig-square_grandient_based_2m](figures/optical_flow/square_grandient_based_3.png){width="100%" #fig-square_grandient_based_3}
+![Computation of all the products between derivatives from @fig-square_grandient_based_2](figures/optical_flow/square_grandient_based_3.png){width="100%" #fig-square_grandient_based_3}
 
 In order to compute the optical flow, we need to compute the matrix
 inverse $\mathbf{A}^{-1}$. This matrix depends only on the spatial

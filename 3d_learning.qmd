@@ -268,7 +268,7 @@ scene from @fig-finding_depth_office in the previous chapter.
 :::
 
 
-Just looking at the depth map from @fig-office_midasb might seem like
+Just looking at the depth map from @fig-office_midas (b) might seem like
 the estimates are good. But it is hard to tell how good the estimation
 is with this visualization. The best way of appreciating the quality of
 a 3D reconstruction is by translating the depth map into a point cloud

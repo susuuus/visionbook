@@ -591,7 +591,7 @@ values and aliasing as shown in @fig-warping_sketch and
 @fig-warping_forward_backward.
 
 ![Comparison between forward and backward mapping using nearest neighbor interpolation. Forward mapping will produce missing values.](figures/imaging_geometry/warping_sketch.png){#fig-warping_sketch}
-. 
+ 
 
 The best approach is to use what is called **backward mapping** which
 consists of looping over all the pixels of the target image and applying

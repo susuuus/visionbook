@@ -630,7 +630,7 @@ simple nonlinearities.
 
 Hand-crafted filter banks started as a model of low-level vision
 mechanisms in humans, and became the basis to perform many visual tasks
-such as texture analysis @RG:Heeger-Bergen95, image segmentation
+such as texture analysis @RG-Heeger-Bergen95, image segmentation
 @Perona91, motion analysis @Heeger92, orientation analysis @Freeman90c,
 image denoising @Simoncelli96, and many others.
 

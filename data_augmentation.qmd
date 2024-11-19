@@ -180,7 +180,7 @@ It can be confusing to think of a learning *algorithm* as a *function*, but that
 Without data augmentation we have $f = L(X)$, and with data
 augmentation we have $f = L(\tilde{X})$. But now, when $g_{\theta}$ is
 trained on $X$, then $\tilde{X}$ is just a function of $X$; in
-particular, if we use algorithm @fig-data_augmentation-generative_data_augmentationd, it is
+particular, if we use algorithm @fig-data_augmentation-generative_data_augmentation, it is
 $\tilde{X} = \texttt{genaug}(X)$. So, we can define a new learner
 $\tilde{L} = L \circ \texttt{genaug}$ where we have
 $f = \tilde{L}(X) = L(\texttt{genaug}(X)) = L(\tilde{X})$. This

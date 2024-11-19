@@ -172,7 +172,7 @@ filters, they would look identical to a human observer. Heeger disagreed
 and aimed to prove Bergen wrong by implementing the proposal using a
 steerable pyramid @Simoncelli95. To Heeger's surprise, the first example
 he tried worked very well, and this led to Heeger and Bergen's
-influential paper on texture synthesis @RG:Heeger-Bergen95.
+influential paper on texture synthesis @RG-Heeger-Bergen95.
 
 Texture generation has two stages depicted in
 @fig-analysis_heeger_bergen. **Texture analysis** of a reference

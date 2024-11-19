@@ -37,7 +37,11 @@ with big kernels, which is very slow. Another alternative is to change
 the image size as shown in @fig-birds_multiscale_processing, resulting
 in a **multiscale image pyramid**. 
 
-In this example, the original image has a resolution of 848 $\times$ 643 pixels. Each image in the pyramid is obtained by scaling down the image from the previous level by reducing the number of pixels by a factor of $25$ percent (that is, each image in the pyramid has 3/4 of the size of the precedent image)^[Downsampling is discussed in detail in @sec-downsampling_and_upsampling.].
+In this example, the original image has a resolution of 848 $\times$ 643 pixels. Each image in the pyramid is obtained by scaling down the image from the previous level by reducing the number of pixels by a factor of $25$ percent (that is, each image in the pyramid has 3/4 of the size of the precedent image).
+
+:::{.column-margin}
+Downsampling is discussed in detail in @sec-downsampling_and_upsampling.
+:::
 
 ![Multiscale image pyramid. Each image is 25 percent smaller than the previous one. The red box indicates the size of a template used for detecting birds. As the size of the template is fixed; it will only be able to detect the birds that tightly fit inside the box. By running the same template across many levels in this pyramid, different instances of birds are detected at different scales..](figures/pyramids/multiscale_birds_boxes.png){width=80% #fig-birds_multiscale_processing}
 
@@ -606,5 +610,3 @@ Another important framework for multiscale image analysis, not presented in this
 \index{Scale space}
 For an in-depth presentation of this topic, we direct the reader to @Lindeberg1994.
 :::
-
-[^1]: Downsampling is discussed in detail in @sec-downsampling_and_upsampling.
