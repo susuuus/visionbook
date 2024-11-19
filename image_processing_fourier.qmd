@@ -161,7 +161,7 @@ frequencies and define how fast or slow the waves change along the
 spatial dimensions $n$ and $m$. @fig-disc2Dsignal shows some examples.
 
 
-![2D sine waves with $N=M=20$. The frequency values are (a) $u=2, v=0$; (b) $u=3, v=1$; (c) $u=7,v=-5$.](figures/image_processing_fourier/disc2Dsignal.png){#fig-disc2Dsignal}
+![2D sine waves with $N=M=20$. The frequency values are (a) $u=2, v=0$; (b) $u=3, v=1$; (c) $u=7,v=-5$.](figures/Image_processing_fourier/disc2Dsignal.png){#fig-disc2Dsignal}
 
 ### Complex Exponentials
 
@@ -178,7 +178,7 @@ goes from 0 to $N-1$ the function rotates along the complex circle of
 unit magnitude.
 
 
-![Complex exponential wave with (a) $N=40$, $k=1$, $A=1$; and (b) $N=40$, $k=3$, $A=1$. The red and green curves show the real and imaginary waves. The black line is the complex exponential. The dots correspond to the discrete samples.](figures/image_processing_fourier/complexexponential.png){width="80%" #fig-complexexponential}
+![Complex exponential wave with (a) $N=40$, $k=1$, $A=1$; and (b) $N=40$, $k=3$, $A=1$. The red and green curves show the real and imaginary waves. The black line is the complex exponential. The dots correspond to the discrete samples.](figures/Image_processing_fourier/complexexponential.png){width="80%" #fig-complexexponential}
 
 In 2D, the complex exponential wave is
 $$e_{u,v}\left[n,m\right] = \exp \left(2 \pi j \left(  \frac{u\, n}{N}  + \frac{v\,m}{M}  \right) \right)$$where $u$ and $v$ are the two spatial frequencies. Note that complex
