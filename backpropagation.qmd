@@ -11,26 +11,31 @@ two-layer multilayer perceptron (MLP) from chapter @sec-neural_nets.
 ![In this chapter we will visualize neural nets as a sequence of layers, which we call a computation graph.](figures/backpropagation/simple_MLP.png){#fig-backpropagation-simple_MLP}
 
 
-Each [layer]{style="background-color: comp_graph_node_bcolor"} takes in
+Each <span style="background-color: rgb(242, 214, 158); padding: 2px; border-radius: 3px;">layer</span> takes in
 some inputs and transforms them into some outputs. We call this the
 $\texttt{forward}$ pass through the layer. If the layer has parameters,
 we will consider the parameters to be an *input* to a parameter-free
-transformation: $$\begin{aligned}    \mathbf{x}_{\texttt{out}}&= f(\mathbf{x}_{\texttt{in}},\theta)
-\end{aligned}$$ Graphically, we will depict the forward operation of a
+transformation:
+
+$$\begin{aligned}    \mathbf{x}_{\texttt{out}}&= f(\mathbf{x}_{\texttt{in}},\theta)
+\end{aligned}
+$$ 
+
+Graphically, we will depict the forward operation of a
 layer like shown below (@fig-backpropagation-mod_block_forward).
 
 ![Forward operation of a neural net layer.](figures/backpropagation/mod_block_forward.png){#fig-backpropagation-mod_block_forward width="50%"}
 
 :::{.column-margin}
-We will use the color
-[$\theta$]{style="background-color: comp_graph_param_bcolor"} to indicate *free* parameters, which are set via learning and are not the result of any other processing.
+We will use the color 
+<span style="background-color: rgb(77, 179, 255); padding: 2px 10px; border-radius: 3px;"></span>
+ to indicate *free* parameters, which are set via learning and are not the result of any other processing.
 :::
 
-The learning problem is to find the parameters
-[$\theta$]{style="background-color: comp_graph_param_bcolor"} that
-achieve a desired mapping. Usually we will solve this problem via
-gradient descent. The question of this chapter is, how do we compute the
-gradients? 
+The learning problem is to find the parameters 
+<span style="background-color: rgb(77, 179, 255); padding: 2px; border-radius: 3px;">$\theta$</span> 
+that achieve a desired mapping. Usually, we will solve this problem via gradient descent. 
+The question of this chapter is, how do we compute the gradients?
 
 **Backpropagation** is an algorithm that efficiently calculates the
 gradient of the loss with respect to each and every parameter in a
@@ -73,7 +78,9 @@ $\theta_2$, and so forth. To do so we need to compute the gradients
 $\frac{\partial J}{\partial \theta_1}$,
 $\frac{\partial J}{\partial \theta_2}$, etc. Each of these gradients can
 be calculated via the chain rule. Here is the chain rule written out for
-the gradients for $\theta_1$ and $\theta_2$: $$\begin{aligned}
+the gradients for $\theta_1$ and $\theta_2$: 
+
+$$\begin{aligned}
     \frac{\partial J}{\partial \theta_1} &= \mathchoice%
   {\colorbox{shared_term_color}{$\displaystyle\frac{\partial J}{\partial \mathbf{x}_L}\frac{\partial \mathbf{x}_L}{\partial \mathbf{x}_{L-1}} \cdots \frac{\partial \mathbf{x}_3}{\partial \mathbf{x}_2}$}}%
   {\colorbox{shared_term_color}{$\textstyle\frac{\partial J}{\partial \mathbf{x}_L}\frac{\partial \mathbf{x}_L}{\partial \mathbf{x}_{L-1}} \cdots \frac{\partial \mathbf{x}_3}{\partial \mathbf{x}_2}$}}%
@@ -95,6 +102,10 @@ each layer's gradients independently, observe that they share many of
 the same terms, so we might as well calculate each shared term once and
 reuse them. 
 
+:::{.column-margin}
+This strategy, in general, is called **dynamic programming**.
+:::
+
 ## Backward for a Generic Layer
 
 To come up with a general algorithm for reusing all the shared
@@ -110,7 +121,9 @@ see what we need in order to update its parameters
 Here we have introduced two new shorthands, $\mathbf{L}$ and
 $\mathbf{g}$; these represent arrays of partial derivatives, defined
 below, and they are the key arrays we need to keep track of to do
-backprop. They are defined as:  $$\begin{aligned}
+backprop. They are defined as:  
+
+$$\begin{aligned}
     \mathbf{g}_l&\triangleq \frac{\partial J}{\partial \mathbf{x}_l} &&\quad\quad \triangleleft \quad \text{grad of cost with respect to } \mathbf{x}_l \quad [1 \times |\mathbf{x}_l|]\\
     \mathbf{L}&\triangleq \frac{\partial \mathbf{x}_{\texttt{out}}}{\partial [\mathbf{x}_{\texttt{in}}, \theta]} &&\quad\quad \triangleleft \quad \text{grad of layer}\\
     &\quad\quad \mathbf{L}^{\mathbf{x}} \triangleq \frac{\partial \mathbf{x}_{\texttt{out}}}{\partial \mathbf{x}_{\texttt{in}}} &&\quad\quad \triangleleft \quad \text{\quad with respect to layer input data} \quad [|\mathbf{x}_{\texttt{out}}| \times |\mathbf{x}_{\texttt{in}}|]\\
@@ -123,7 +136,8 @@ All these arrays represent the gradient *at a single operating point*, namely th
 
 These arrays give a simple formula for computing the gradient we need,
 that is, $\frac{\partial J}{\partial \theta}$, in order to `update`
-$\theta$ to minimize the cost: $$\begin{aligned}
+$\theta$ to minimize the cost: 
+$$\begin{aligned}
     \frac{\partial J}{\partial \theta} &= \underbrace{\frac{\partial J}{\partial \mathbf{x}_{\texttt{out}}}}_{\mathbf{g}_{\texttt{out}}} \underbrace{\frac{\partial \mathbf{x}_{\texttt{out}}}{\partial \theta}}_{\mathbf{L}^{\theta}} = \mathbf{g}_{\texttt{out}}\mathbf{L}^{\theta}\\
     \theta^{i+1} &\leftarrow \theta^{i} - \eta \Big(\frac{\partial J}{\partial \theta}\Big)^\mathsf{T}&&\quad\quad \triangleleft \quad \texttt{update}
 \end{aligned}$${#eq-backpropagation-djdtheta} 
@@ -146,12 +160,13 @@ chain rule, and depends on all the layers between
 $\mathbf{x}_{\texttt{out}}$ and $J$. However, this can be computed
 iteratively: once we know $\mathbf{g}_l$, computing $\mathbf{g}_{l-1}$
 is just one more matrix multiply! This can be summarized with the
-following recurrence relation: $$\begin{aligned}    \mathbf{g}_{\texttt{in}} &= \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{x}} &&\quad\quad \triangleleft \quad \text{backpropagation of errors}
+following recurrence relation: 
+
+$$\begin{aligned}    \mathbf{g}_{\texttt{in}} &= \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{x}} &&\quad\quad \triangleleft \quad \text{backpropagation of errors}
 \end{aligned}$${#eq-backpropagation-backward} 
 
 This recurrence is essence of backprop: it sends error signals (gradients) backward through the network, starting at the last
-layer and iteratively applying @eq-backpropagation-backward to compute
-$\mathbf{g}$ for each previous layer. 
+layer and iteratively applying @eq-backpropagation-backward to compute $\mathbf{g}$ for each previous layer. 
 
 :::{.column-margin}
 Deep learning libraries like Pytorch have a \texttt{.grad} field associated with each variable (data, activations, parameters). This field represents $\frac{\partial J}{\partial v}$ for each variable $v$.
@@ -164,9 +179,16 @@ inputs ($\mathbf{x}_{\texttt{in}}, \theta, \mathbf{g}_{\texttt{out}}$)
 and two outputs ($\mathbf{g}_{\texttt{in}}$ and
 $\frac{\partial J}{\partial \theta}$).
 
-![Backward operation of a neural net layer.](figures/backpropagation/mod_block_backward.png){#fig-backpropagation-mod_block_backward width="50%"}
+![`backward` for a generic layer. We use the color 
+<span style="display: inline-block; background-color: rgb(247, 224, 89); height: 10px; width: 20px; position: relative; top: 1mm;"></span> 
+to indicate parameter gradients.](figures/backpropagation/mod_block_backward.png){#fig-backpropagation-mod_block_backward width="50%"}
 
 
+:::{.column-margin}
+We use the color 
+<span style="display: inline-block; background-color: rgb(230, 51, 51); height: 10px; width: 20px; position: relative; top: 1mm;"></span> 
+for data/activation gradients being passed backward through the network.
+:::
 
 ## The Full Algorithm: Forward, Then Backward
 
@@ -194,7 +216,9 @@ like.
 
 
 :::{.column-margin}
-We use the color ${\colorbox{{rgb}{0.2,0.9,0.2}}{\makebox(0,0){}}}$ for data/activations being passed forward through the network.
+We use the color 
+<span style="display: inline-block; background-color: rgb(51, 230, 51); height: 10px; width: 20px; position: relative; top: 1mm;"></span> 
+for data/activations being passed forward through the network.
 :::
 
 Next, we compute a **backward pass**, iteratively evaluating the
@@ -243,7 +267,12 @@ backpropagation for the loss at a single datapoint. As you read on, keep
 in mind that doing the same for batches simply requires applying
 @eq-backpropagation-average_of_gradients.
 
-## Example: Backpropagation for an MLP
+
+:::{.column-margin}
+The gradient of a sum of terms is the sum of the gradients of each term. 
+:::
+
+## Example: Baickpropagation for an MLP
 
 In order to fully describe backprop for any given architecture, we need
 $\mathbf{L}$ for each layer in the network. One way to do this is to
@@ -292,20 +321,25 @@ $$\begin{aligned}
     \end{cases} 
 \end{aligned}$${#eq-lingrad3}
 
-@eq-lingrad1 and @eq-lingrad3
-imply: $$\begin{aligned}
+@eq-lingrad1 and @eq-lingrad3 imply: 
+
+$$\begin{aligned}
     \boxed{\mathbf{L}^{\mathbf{x}} = \mathbf{W}} &\quad\quad \triangleleft \quad [M \times N]\\
     \boxed{\mathbf{L}^{\mathbf{b}} = \mathbf{I}} &\quad\quad \triangleleft \quad [M \times M]
-\end{aligned}$$ There is no such simple shorthand for
-$\mathbf{L}^\mathbf{W}$, but that is no matter, as we can proceed at
-this point to implement `backward` for a linear layer by plugging our
+\end{aligned}$$ 
+
+There is no such simple shorthand for $\mathbf{L}^\mathbf{W}$, but that is no matter, as we can proceed at this point to implement `backward` for a linear layer by plugging our
 computed $\mathbf{L}^\mathbf{x}$ into @eq-backpropagation-backward, and
 $\mathbf{L}^\mathbf{W}$ and $\mathbf{L}^\mathbf{b}$ into
-@eq-backpropagation-djdtheta. $$\begin{aligned}
+@eq-backpropagation-djdtheta. 
+
+$$\begin{aligned}
     \mathbf{g}_{\texttt{in}} &= \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{x}} = \mathbf{g}_{\texttt{out}}\mathbf{W}\\
     \frac{\partial J}{\partial \mathbf{W}} &=  \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{W}}\\
     \frac{\partial J}{\partial \mathbf{b}} &= \mathbf{g}_{\texttt{out}}\mathbf{L}^{\mathbf{b}} = \mathbf{g}_{\texttt{out}}
-\end{aligned}$${#eq-backpropagation-linear_backward_costgrad} To get an intuition for
+\end{aligned}$${#eq-backpropagation-linear_backward_costgrad} 
+
+To get an intuition for
 @eq-backpropagation-linear_backward_costgrad, it can help to draw the
 matrices being multiplied. Below, in
 @fig-backpropagation-linear_forward_backward_matrices, on the left we
@@ -342,9 +376,8 @@ $\mathbf{x}_{\texttt{out}}$ is N dimensions, and the loss $J$ is always
 a scalar.
 :::
 
- Now we can just arrange all these scalar
-derivatives into the matrix for
-$\frac{\partial J}{\partial \mathbf{W}}$, and obtain the following:
+Now we can just arrange all these scalar
+derivatives into the matrix for $\frac{\partial J}{\partial \mathbf{W}}$, and obtain the following:
 $$\begin{aligned}
     \frac{\partial J}{\partial \mathbf{W}} & = 
         \begin{bmatrix}
@@ -367,7 +400,7 @@ Note, we are using the convention of
 zero-indexing into vectors and matrices.
 :::
 
- So we see that in
+So we see that in
 the end this gradient has the simple form of an outer product between
 two vectors, $\mathbf{x}_{\texttt{in}}$ and $\mathbf{g}_{\texttt{out}}$
 (@fig-backpropagation-parameter_grad_linear_matrices).
@@ -455,9 +488,13 @@ in @fig-backpropagation-pointwise_backward_matices.
 with $a = h^\prime(x_{\texttt{in}}[0])$,
 $b = h^\prime(x_{\texttt{in}}[1])$, and
 $c = h^\prime(x_{\texttt{in}}[2])$. We can simplify this equation as
-follows: $$\begin{aligned}
+follows: 
+
+$$\begin{aligned}
     \mathbf{g}_{\texttt{in}}[i] = \mathbf{g}_{\texttt{out}}[i]h^{\prime}(\mathbf{x}_{\texttt{in}}[i]) \quad \forall i 
 \end{aligned}$${#eq-backpropagation-pointwise_costgrad}
+
+
 
 The full set of operations for a pointwise layer is shown next in
 @fig-backpropagation-pointwise_layer_backprop.
@@ -693,11 +730,13 @@ operation, as shown in @fig-backpropagation-parameter_sharing.
 
 Then, from the previous section, it is clear that gradients summate for
 shared parameters. Let $\{\theta^i\}^N_{i=1}$ be a set of variables that
-are all copies of one free parameter
-[$\theta$]{style="background-color: comp_graph_param_bcolor"}. Then,
-$$\begin{aligned}
+are all copies of one free parameter 
+<span style="background-color: rgb(77, 179, 255); padding: 2px; border-radius: 3px;">$\theta$</span>. Then, 
+$$
+\begin{aligned}
     \frac{\partial J}{\partial \theta} = \sum_i \frac{\partial J}{\partial \theta^i}
-\end{aligned}$$
+\end{aligned}
+$$
 
 ## Backpropagation to the Data
 
