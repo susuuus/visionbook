@@ -91,9 +91,7 @@ to the low resolution of peripheral vision as both letters are at the
 same distance from the fixation location. The explanation of this
 phenomena is due to something called **crowding** @Pell2007.
 
-As the letter
-
-B is surrounded by other letters, the features of the three letters get
+As the letter B is surrounded by other letters, the features of the three letters get
 entangled as if the pooling window for image features was larger than
 the three letters together. While you fixate the cross, as you pay
 attention to the location of the B, you will notice that the features of
