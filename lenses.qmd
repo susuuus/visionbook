@@ -98,7 +98,7 @@ view of @fig-lens (a), with angles and distances distorted for clarity of labeli
 
 
 ::: {#fig-lens layout-nrow=2}
-![](figures/imaging/lensRealCropped.png){#fig-lens-a}
+![](figures/imaging/lensRealcropped.png){#fig-lens-a}
 
 ![](figures/imaging/lensDistortedCropped.png){#fig-lens-b}
 
