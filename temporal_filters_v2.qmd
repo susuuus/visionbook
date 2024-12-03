@@ -16,8 +16,8 @@ $$
 f (x,y,t) = f_0 (x-v_xt,y-v_yt)
 $${#eq-globaly_moving_image}
 
-where $f_0(x,y)= f (x,y,0)$ is the image being translated, and $v_x$ and $v_y$ are constants. At time $t$ the image $\text{img}_0(x,y)$ is translated by the vector $(v_x t, v_y t)$ as described by Equation @eq-globaly_moving_image. The pixel value at location $(x=0, y=0)$ at time $t=0$ will appear at time $T$ in location $(x=v_x T, y=v_y T)$.
-This is what we see in Figure @fig-motion (c) where the bands are created by moving pixels.
+where $f_0(x,y)= f (x,y,0)$ is the image being translated, and $v_x$ and $v_y$ are constants. At time $t$ the image $\text{img}_0(x,y)$ is translated by the vector $(v_x t, v_y t)$ as described by @eq-globaly_moving_image. The pixel value at location $(x=0, y=0)$ at time $t=0$ will appear at time $T$ in location $(x=v_x T, y=v_y T)$.
+This is what we see in @fig-motion (c) where the bands are created by moving pixels.
 
 We use continuous values for $x$, $y$, and $t$, and continuous images, $\text{img}_0(x,y)$, because it allows us to deal with any velocity values. This function also assumes that the brightness of the pixels does not change while the scene is moving (**constant brightness assumption**).
 
@@ -153,23 +153,23 @@ $$
 h(x,y,t;v_x,v_y) = g_t+v_xg_x+v_yg_y = \nabla  g \left( 1,v_x,v_y \right)^\top
 $$ {#eq-spt_nulling_filter}
 
-we get a kernel $h(x,y,t;v_x,v_y)$ that we can use as a spatiotemporal filter that will do exactly what we were looking for. Indeed, if we convolve it with the input sequence $\text{img}_0 (x-v_x t,y-v_y t)$ we get a zero output (using Equation @eq-brightnessconstancy):
+we get a kernel $h(x,y,t;v_x,v_y)$ that we can use as a spatiotemporal filter that will do exactly what we were looking for. Indeed, if we convolve it with the input sequence $\text{img}_0 (x-v_x t,y-v_y t)$ we get a zero output (using @eq-brightnessconstancy):
 
 $$
 \text{img}_0 (x-v_x t, y-v_y t) \circ h = \text{img}_0 (x-v_x t, y-v_y t) \circ \left( g_t + v_x g_x + v_y g_y \right) = \left( \frac{\partial \text{img}_0}{\partial t} + v_x \frac{\partial \text{img}_0}{\partial x} + v_y \frac{\partial \text{img}_0}{\partial y} \right) \circ g = 0
 $$
 
-The filter $h$ from Equation @eq-spt_nulling_filter is shown in Figure @fig-gaussian_seq. As this filter is 3D, we show it as a sequence for different velocities. Each row in the figure corresponds to one particular velocity $v_x, v_y$. In the example shown in Figure @fig-gaussian_seq (a), the Gaussian has a width of $\sigma^2=\sigma_t^2=1.5$ and has been discretized as a 3D array of size $7 \times 7 \times 7$. Figures @fig-gaussian_seq (b, c, and d) show the filter $h$ for different velocities: $(v_x, v_y) = (0,0)$, $(1,0)$, and $(-1,0)$.
+The filter $h$ from @eq-spt_nulling_filter is shown in @fig-gaussian_seq. As this filter is 3D, we show it as a sequence for different velocities. Each row in the figure corresponds to one particular velocity $v_x, v_y$. In the example shown in @fig-gaussian_seq (a), the Gaussian has a width of $\sigma^2=\sigma_t^2=1.5$ and has been discretized as a 3D array of size $7 \times 7 \times 7$. Figures @fig-gaussian_seq (b, c, and d) show the filter $h$ for different velocities: $(v_x, v_y) = (0,0)$, $(1,0)$, and $(-1,0)$.
 
 
 ![Visualization of the space-time Gaussian. The Gaussian has a width of $\sigma^2=\sigma_t^2=1.5$, and has been discretized as a 3D array of size $7 \times 7 \times 7$. Each image shows one frame. a) Gaussian b) The partial derivative of the Gaussian with respect to $t$. c) Derivative along $v=(1,0)$ pixels/frame. d) $v=(-1,0)$ pixels/frame.](figures/temporal_filters/gaussians_xyt_seq.png){#fig-gaussian_seq}
 
-Figure @fig-gaussian_xyt_section shows a different visualization of the same filter $h$ from Equation @eq-spt_nulling_filter. Each image in Figure @fig-gaussian_xyt_section shows a space-time section of the same spatiotemporal Gaussian derivatives as the ones shown in Figure @fig-gaussian_seq. Both visualizations are equivalent and help to understand how the filter works.
+@fig-gaussian_xyt_section shows a different visualization of the same filter $h$ from @eq-spt_nulling_filter. Each image in @fig-gaussian_xyt_section shows a space-time section of the same spatiotemporal Gaussian derivatives as the ones shown in @fig-gaussian_seq. Both visualizations are equivalent and help to understand how the filter works.
 
 
 ![Spatio-temporal Gaussian $g\left[ n,t \right]$ and derivatives. a) Gaussian with $\sigma^2=1.5$. b) Partial derivative with respect to $t$. c) Partial derivative along $(1,-1)$, d) Partial derivative along $(1,1)$.](figures/temporal_filters/gaussians_xyt_section.png){#fig-gaussian_xyt_section}
 
-Such a filter $h$ will cancel any objects moving at the velocity $(v_x,v_y)$. By using different filters, each one computing derivatives along different space-time orientations, we can create output sequences where specific objects disappear, as shown in Figure @fig-tunedfilter. This filter is called a **nulling filter** [@Darrell93].
+Such a filter $h$ will cancel any objects moving at the velocity $(v_x,v_y)$. By using different filters, each one computing derivatives along different space-time orientations, we can create output sequences where specific objects disappear, as shown in @fig-tunedfilter. This filter is called a **nulling filter** [@Darrell93].
 
 ::: {#fig-tunedfilter}
 ![(a) Input sequence. (b) Output to $h$ with $v_x=v_y=0$. (c) $v_x=1$ pixels/frame. (d) $v_x=-1$ pixel/frame.](figures/temporal_filters/seq_filtered_der.png){width=100% #fig-tunedfilter}
@@ -177,7 +177,7 @@ Such a filter $h$ will cancel any objects moving at the velocity $(v_x,v_y)$. By
 (a) Input sequence. (b) Output to $h$ with $v_x=v_y=0$. (c) $v_x=1$ pixels/frame. (d) $v_x=-1$ pixel/frame.
 :::
 
-Note that despite assuming that the sequence contained a single moving object when deriving the formulation for the nulling filter, the filter also works in sequences with multiple objects moving at different speeds, as shown in Figure @fig-tunedfilter. This is because the operations are local (the kernel $h$ has a small size), and the behavior will be correct if in a local image patch there is only one velocity present. In fact, it is easy to show that the method will also work if the sequence is a sum of several moving transparent layers.
+Note that despite assuming that the sequence contained a single moving object when deriving the formulation for the nulling filter, the filter also works in sequences with multiple objects moving at different speeds, as shown in @fig-tunedfilter. This is because the operations are local (the kernel $h$ has a small size), and the behavior will be correct if in a local image patch there is only one velocity present. In fact, it is easy to show that the method will also work if the sequence is a sum of several moving transparent layers.
 
 ## Concluding Remarks
 

@@ -378,7 +378,7 @@ $p_{\theta}(Z \bigm | \mathbf{x}, \mathbf{y})$. In practice, this means
 that a cVAE can be trained just like a regular VAE except that the
 encoder takes the conditioning information, $\mathbf{x}$, as input (in
 addition to $\mathbf{y}$), and the decoder also takes in $\mathbf{x}$
-(in addition to $\mathbf{z}$). Figure @fig-conditional_generative_models-cVAE_ball_bouncing_example_nets depicts this setting.
+(in addition to $\mathbf{z}$). @fig-conditional_generative_models-cVAE_ball_bouncing_example_nets depicts this setting.
 
 ![cVAE architecture. The dotted lines indicate that the *target encoder* is only used during training; at test time, usage follows the solid path.](./figures/conditional_generative_models/cVAE_ball_bouncing_example_nets.png){width="90%" #fig-conditional_generative_models-cVAE_ball_bouncing_example_nets}
 

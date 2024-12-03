@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Blur filters are low-pass filters. They remove the high spatial-frequency content from an image leaving only the low-frequency spatial components. The result is an image that has lost details and that looks **blurry**. Image blur has many applications in computer graphics and computer vision. It can be used to reduce noise (as shown in Figure @fig-stop_256_noise_3), to reveal image structures at different scales, or for upsampling and downsampling images.
+Blur filters are low-pass filters. They remove the high spatial-frequency content from an image leaving only the low-frequency spatial components. The result is an image that has lost details and that looks **blurry**. Image blur has many applications in computer graphics and computer vision. It can be used to reduce noise (as shown in @fig-stop_256_noise_3), to reveal image structures at different scales, or for upsampling and downsampling images.
 
 ::: {layout-ncol=2 #fig-stop_256_noise_3}
 ![Original noisy image.](figures/blur_filters/stop_256_noise_3.jpg){#fig-stop_256_noise_3-a}
@@ -46,7 +46,7 @@ $$
 
 That is, the output value on each location $(n,m)$ is the sum of the input pixels within the rectangle around that location.  
 
-Visually, filtering an image with the box filter results in blurring the picture. Figure @fig-convExamps2 shows some box filters and the corresponding output images (after normalizing the box filter coefficients so that they sum to 1). Figure @fig-convExamps2 (a) shows an image convolved with a squared box kernel (i.e., $N=M$). 
+Visually, filtering an image with the box filter results in blurring the picture. @fig-convExamps2 shows some box filters and the corresponding output images (after normalizing the box filter coefficients so that they sum to 1). @fig-convExamps2 (a) shows an image convolved with a squared box kernel (i.e., $N=M$). 
 
 ![Fig (a) Input image. (b) Blurring with a square, (c) a horizontal, and (d) a vertical line. Each color channel is filtered independently.](figures/blur_filters/convexamps.png){#fig-convExamps2}
 
@@ -70,7 +70,7 @@ $$
 
 In the example of the box filter with $N=1$, the DC gain is 3. 
 
-In the frequency domain, the DC gain of a filter refers to its gain at a frequency of 0. This gain is represented by the value $H[0,0]$, where $H$ is the result of applying the Discrete Fourier Transform (DFT) to the filter's kernel $h$. This can be easily proven by checking the definition of the DFT and setting the spatial frequencies to zero. One can verify in Figure @fig-boxfilter that the value of $\left| \text{Box}_1[0] \right|$ is $3$. The DC gain of a filter will change the mean value of the input signal. 
+In the frequency domain, the DC gain of a filter refers to its gain at a frequency of 0. This gain is represented by the value $H[0,0]$, where $H$ is the result of applying the Discrete Fourier Transform (DFT) to the filter's kernel $h$. This can be easily proven by checking the definition of the DFT and setting the spatial frequencies to zero. One can verify in @fig-boxfilter that the value of $\left| \text{Box}_1[0] \right|$ is $3$. The DC gain of a filter will change the mean value of the input signal. 
 
 ::: {layout-ncol=2 #fig-boxfilter}
 ![1D Box Filter.](figures/blur_filters/boxfilter_1d.png){#fig-boxfilter-a}
@@ -86,7 +86,7 @@ When designing blur kernels (low-pass filters), we generally want to have a DC g
 
 The box filter is simple to implement and to understand, but it has a number of limitations:
 
-- **The box filter is not a perfect blurring filter.** A blur filter should attenuate high spatial frequencies with stronger attenuation for higher spatial frequencies. However, if you consider the highest spatial frequency, which will be an oscillating signal that takes successively on the values 1 and $-1$: $\left[..., 1, -1, 1, -1, 1, -1, ... \right]$ when filtered with the box filter $\text{box}_{1}$ the result is the same oscillating signal! However, if you filter a wave with lower frequency such as $\left[..., 0.5, 0.5, -1, 0.5, 0.5, -1, ... \right]$ then the result is $\left[..., 0,0,0,0, ...\right]$. Therefore, the attenuation is not monotonic with spatial frequency as shown in Figure @fig-boxfilter. This is not a desirable behavior for a blurring filter, and it can cause artifacts to appear. This could be addressed using an even size box filter $\left[1,1 \right]$. However, an even box filter is not centered around the origin and the output image will have a half-pixel translation. Therefore, odd filter sizes are preferred.
+- **The box filter is not a perfect blurring filter.** A blur filter should attenuate high spatial frequencies with stronger attenuation for higher spatial frequencies. However, if you consider the highest spatial frequency, which will be an oscillating signal that takes successively on the values 1 and $-1$: $\left[..., 1, -1, 1, -1, 1, -1, ... \right]$ when filtered with the box filter $\text{box}_{1}$ the result is the same oscillating signal! However, if you filter a wave with lower frequency such as $\left[..., 0.5, 0.5, -1, 0.5, 0.5, -1, ... \right]$ then the result is $\left[..., 0,0,0,0, ...\right]$. Therefore, the attenuation is not monotonic with spatial frequency as shown in @fig-boxfilter. This is not a desirable behavior for a blurring filter, and it can cause artifacts to appear. This could be addressed using an even size box filter $\left[1,1 \right]$. However, an even box filter is not centered around the origin and the output image will have a half-pixel translation. Therefore, odd filter sizes are preferred.
 
 ::: {.column-margin}
 The oscillating signal:
@@ -150,7 +150,7 @@ We have removed the normalization constant as the sum of the discrete Gaussian w
 
 
 By adjusting the standard deviation, $\sigma$, of the Gaussian, it is possible to adjust the level of image detail
-that appears in the blurred image. Figure @fig-zebragaussian shows the result of narrow and wider Gaussians applied to an image.
+that appears in the blurred image. @fig-zebragaussian shows the result of narrow and wider Gaussians applied to an image.
 
 ::: {layout-ncol=3 #fig-zebragaussian}
 ![Gaussian filter with $\sigma=2$.](figures/spatial_filters/gausian_zebra_c_2.jpg){#fig-zebragaussian-a}
@@ -162,7 +162,7 @@ that appears in the blurred image. Figure @fig-zebragaussian shows the result of
 An image filtered with three Gaussians with standard deviations: (a) $\sigma=2$, (b) $\sigma=4$, and (c) $\sigma=8$. Plots (d--f) show the three Gaussians over the same spatial support as the image. The discrete Gaussians are approximated by sampling the continuous Gaussian. The convolutions are performed with mirror boundary conditions.
 :::
 
-The $n$-dimensional Gaussian filter has the additional computational advantage that it can be applied as a concatenation of $n$ 1D Gaussian filters. This can be seen by writing the 2D Gaussian, Equation @eq-gauss2dcont, in the convolution equation, @eq-2dconv. Letting $g^x$ and $g^y$ be the 1D Gaussian convolution kernels in the horizontal and vertical directions (i.e., $g^x [n]=g[n,0]$, and $g^y[m]=g[0,m]$), we have:
+The $n$-dimensional Gaussian filter has the additional computational advantage that it can be applied as a concatenation of $n$ 1D Gaussian filters. This can be seen by writing the 2D Gaussian, @eq-gauss2dcont, in the convolution equation, @eq-2dconv. Letting $g^x$ and $g^y$ be the 1D Gaussian convolution kernels in the horizontal and vertical directions (i.e., $g^x [n]=g[n,0]$, and $g^y[m]=g[0,m]$), we have:
 
 $$
 g \left[n,m \right] \circ \ell \left[n,m\right] 
@@ -176,9 +176,9 @@ $$
 = g^x \circ (g^y \circ \ell \left[n,m \right])
 $$ {#eq-2dgauss}
 
-This can save quite a bit in computation time when applying the convolution of Equation @eq-2dgauss. If the 2D convolution kernel is $N \times N$ samples, then a direct convolution of that 2D kernel scales in proportion to $N^2$, since Equation @eq-2dgauss requires one multiplication per image position per kernel sample. Using the cascade of two 1D kernels, resulting in an equivalent 2D filter of the same size, scales in proportion to $2N$.
+This can save quite a bit in computation time when applying the convolution of @eq-2dgauss. If the 2D convolution kernel is $N \times N$ samples, then a direct convolution of that 2D kernel scales in proportion to $N^2$, since @eq-2dgauss requires one multiplication per image position per kernel sample. Using the cascade of two 1D kernels, resulting in an equivalent 2D filter of the same size, scales in proportion to $2N$.
 
-Another application of blurring is to remove distracting high-resolution image details. Figure @fig-lincoln shows a Gaussian low-pass filter applied to remove unwanted image details (the blocky artifacts) from an image [@Harmon_1973].
+Another application of blurring is to remove distracting high-resolution image details. @fig-lincoln shows a Gaussian low-pass filter applied to remove unwanted image details (the blocky artifacts) from an image [@Harmon_1973].
 
 ::: {layout-ncol=2 #fig-lincoln}
 ![Original Image.](figures/blur_filters/Jules_Lincoln_1971.jpg){#fig-lincoln-a}
@@ -239,7 +239,7 @@ The next low-pass filter addresses the limitations of the box and Gaussian filte
 In practice, there are very efficient discrete approximations to the Gaussian filter that, for certain $\sigma$ values, have nicer properties than when working with discretized Gaussians. One common approximation of the Gaussian filter is to use **binomial coefficients** [@Chehikian91]. Binomial filters are obtained by successive convolutions of the box filter $\left[1,1\right]$.
 
 The binomial coefficients use the central limit theorem to approximate a Gaussian as successive convolutions of a very simple function. 
-The binomial coefficients form the **Pascal's triangle** as shown in Figure @fig-pascaltriangle.
+The binomial coefficients form the **Pascal's triangle** as shown in @fig-pascaltriangle.
 \index{Pascal's triangle}
 
 ::: {layout-ncol=1 #fig-pascaltriangle}
@@ -260,7 +260,7 @@ $$
 Binomial coefficients. To build the Pascal's triangle, each number is the sum of the number above to the left and the one above to the right.
 :::
 
-Each row of Figure @fig-pascaltriangle shows one 1D-binomial kernel. The first binomial kernel, $b_0$, is the impulse.
+Each row of @fig-pascaltriangle shows one 1D-binomial kernel. The first binomial kernel, $b_0$, is the impulse.
 
 ### Properties
 
@@ -282,7 +282,7 @@ $$
 B_2 \left[u\right] = 2+2 \cos (2 \pi u/N)
 $$
 
-The frequency gain is shown in Figure @fig-gauss3filter-b. The gain decreases monotonically (there are no ripples) with spatial frequency, $u$, and it becomes zero at the highest frequency, $G_3 \left[ 10 \right]=0$.
+The frequency gain is shown in @fig-gauss3filter-b. The gain decreases monotonically (there are no ripples) with spatial frequency, $u$, and it becomes zero at the highest frequency, $G_3 \left[ 10 \right]=0$.
 
 ::: {layout-ncol=2 #fig-gauss3filter}
 ![1D Binomial Filter.](figures/blur_filters/gauss3filter_1d.png){#fig-gauss3filter-a}
@@ -329,7 +329,7 @@ $$
 
 The filter $b_{2,2}$ has a DC gain of 16, so we will divide the convolution output by 16 so that the output image has a similar contrast to the input image. 
 
-Figure @fig-boat_b_noise shows an image corrupted by high-frequency checkerboard-pattern noise. The next two images are the result of filtering the noisy image with a $3\times3$ box filter (middle) and with the $b_{2,2}$ binomial filter.
+@fig-boat_b_noise shows an image corrupted by high-frequency checkerboard-pattern noise. The next two images are the result of filtering the noisy image with a $3\times3$ box filter (middle) and with the $b_{2,2}$ binomial filter.
 \index{Checkerboard-pattern noise}
 The $3\times3$ box filter cannot completely eliminate the noise, while the binomial filter can perfectly cancel this checkerboard noise. Both the box and the binomial filter reduce the resolution of the input image.
 

@@ -697,7 +697,7 @@ Derivatives classified into reflectance or luminance components.
 :::
 
 
-Then, the image $\log r(x,y)$ is obtained by integrating the gradients, as shown in @sec-editinggradientdomain, and exponentiating the result. Finally, the illumination can be obtained as $l(x,y) = \text{img}(x,y)/r(x,y)$. The results are shown in Figure @fig-simultaneous3.
+Then, the image $\log r(x,y)$ is obtained by integrating the gradients, as shown in @sec-editinggradientdomain, and exponentiating the result. Finally, the illumination can be obtained as $l(x,y) = \text{img}(x,y)/r(x,y)$. The results are shown in @fig-simultaneous3.
 
 :::{#fig-simultaneous3}
 ![](figures/statistical_image_models/retinex_solution_a.png){width=100%}
@@ -707,7 +707,7 @@ Recovered components. The estimated reflectance, $r(x,y)$, is close to what we p
 
 Note that the illumination derivatives have much lower magnitude than the reflectance derivatives; however, they extend over much larger spatial regions, which means that once they are integrated, changes in brightness due to nonuniform illumination might be larger than changes due to variations in reflectance values.
 
-Despite the simplicity of this approach, it works remarkably well with images like the ones shown in Figure @fig-simultaneous and also with a number of real images. However, the algorithm is limited and it is easy to make it fail in situations where the visual system works, as we will see later in more depth.
+Despite the simplicity of this approach, it works remarkably well with images like the ones shown in @fig-simultaneous and also with a number of real images. However, the algorithm is limited and it is easy to make it fail in situations where the visual system works, as we will see later in more depth.
 
 The Retinex algorithm works by making assumptions about the structure of the images it tries to separate. The underlying assumption is that the illumination image, $l(x,y)$, varies smoothly and the reflectance image, $r(x,y)$, is composed of uniform regions separated by sharp boundaries. These assumptions are very restrictive and will limit the domain of applicability of such an approach. Understanding the structure of images in order to build models such as Retinex has been the focus of a large amount of research. This chapter will introduce some of the most important image models.
 
