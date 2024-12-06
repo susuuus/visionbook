@@ -1,7 +1,6 @@
 ---
-title-block-style: none
 include-before-body: pre-title.html
-
+title-block-style: none
 ---
 
 
