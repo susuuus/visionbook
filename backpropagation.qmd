@@ -115,7 +115,7 @@ see what we need in order to update its parameters
 
 
 
-![A generic layer in the computation graph. The braces represent the part of the computation graph we need to consider in order to evaluate $\mathbf{g}_{\texttt{out}}$, $\mathbf{L}$, and $\mathbf{g}in$.](figures/backpropagation/generic_layer_g_L.png){#fig-backpropagation-generic_layer_g_L width="100%"}
+![A generic layer in the computation graph. The braces represent the part of the computation graph we need to consider in order to evaluate $\mathbf{g}_{\texttt{out}}$, $\mathbf{L}$, and $\mathbf{g}in$.](figures/backpropagation/generic_layer_g_L.png){#fig-backpropagation-generic_layer_g_L width="80%"}
 
 
 Here we have introduced two new shorthands, $\mathbf{L}$ and
@@ -348,7 +348,7 @@ right we have the backward operation in
 @eq-backpropagation-linear_backward_costgrad.
 
 
-![The forward and backward matrix multiples for a linear layer.](figures/backpropagation/linear_forward_backward_matrices.png){#fig-backpropagation-linear_forward_backward_matrices width="100%"}
+![The forward and backward matrix multiples for a linear layer.](figures/backpropagation/linear_forward_backward_matrices.png){#fig-backpropagation-linear_forward_backward_matrices width="80%"}
 
 Unlike the other equations, at first glance
 $\frac{\partial J}{\partial \mathbf{W}}$ does not seem to have a simple
@@ -414,7 +414,7 @@ diagram for linear layer in @fig-backpropagation-linear_layer_backprop.
 
 
 
-![Linear layer forward and backward.](figures/backpropagation/linear_layer_backprop.png){#fig-backpropagation-linear_layer_backprop width="80%"}
+![Linear layer forward and backward.](figures/backpropagation/linear_layer_backprop.png){#fig-backpropagation-linear_layer_backprop width="70%"}
 
 Notice that all these operations are simple expressions, mainly
 involving matrix multiplies. `Forward` and `backward` for a linear layer
@@ -499,7 +499,7 @@ $$\begin{aligned}
 The full set of operations for a pointwise layer is shown next in
 @fig-backpropagation-pointwise_layer_backprop.
 
-![Matrix multiply for \texttt{backward} of a pointwise layer.](figures/backpropagation/pointwise_layer_backprop.png){#fig-backpropagation-pointwise_layer_backprop width="90%"}
+![Matrix multiply for \texttt{backward} of a pointwise layer.](figures/backpropagation/pointwise_layer_backprop.png){#fig-backpropagation-pointwise_layer_backprop width="70%"}
 
 
 ### Backpropagation for Loss Layers
@@ -527,7 +527,7 @@ $\texttt{backward}$ for a $L_2$ loss layer, yielding
 
 
 
-![Matrix multiply for \texttt{backward} of an $L_2$ loss layer.](figures/backpropagation/L2_loss_layer_backprop.png){#fig-backpropagation-L2_loss_layer_backprop width="90%"}
+![Matrix multiply for \texttt{backward} of an $L_2$ loss layer.](figures/backpropagation/L2_loss_layer_backprop.png){#fig-backpropagation-L2_loss_layer_backprop width="70%"}
 
 ### Putting It All Together: Backpropagation through an MLP
 

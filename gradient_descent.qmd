@@ -33,9 +33,7 @@ Higher-order optimization methods observe higher-order derivatives of the loss, 
 
 The simplest version of gradient descent just takes a step in the gradient direction of length proportional to the gradient magnitude. This algorithm is described in @fig-gradient_descent_basic_gradient_descent.
 
-:::{#fig-gradient_descent_basic_gradient_descent}
-![Gradient descent `GD`. Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by descending the gradient $\nabla_{\theta} J$.](./figures/gradient_descent/alg1.png)
-:::
+![Gradient descent `GD`. Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by descending the gradient $\nabla_{\theta} J$.](./figures/gradient_descent/alg1.png){#fig-gradient_descent_basic_gradient_descent}
 
 This algorithm has two hyperparameters, the **learning rate** $\eta$, which controls the step size (learning rate times gradient magnitude), and the number of steps $K$. If the learning rate is sufficiently small and the initial parameter vector $\theta^0$ is random, then this algorithm will almost surely converge to a local minimum of $J$ as $K \rightarrow \infty$~\cite{lee2016gradient}. However, to descend more quickly, it can be useful to set the learning rate to a higher value. 
 

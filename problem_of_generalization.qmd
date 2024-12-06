@@ -80,7 +80,7 @@ at linear regression. With $K=2$, we are fitting quadratic functions
 space expands to include ever more curvy fits to the data, as shown in
 @fig-under_and_overfitting.
 
-![](./figures/problem_of_generalization/under_and_overfitting.png){#fig-under_and_overfitting}
+![Underfitting and overfitting.](./figures/problem_of_generalization/under_and_overfitting.png){#fig-under_and_overfitting}
 
 The black line is the model's fit. The green line is the ground truth
 relationship between random variables $X$ and $Y$. The observed data
@@ -147,7 +147,7 @@ eventually we overfit, with generalization error becoming high again.
 @fig-under_and_overfitting_vs_polyK shows how it looks like for our
 example.
 
-![](./figures/problem_of_generalization/under_and_overfitting_vs_polyK.png){#fig-under_and_overfitting_vs_polyK}
+![Approximation error `approx` versus generalization error `gen` for polynomial regression of order $K$. Here we measured error as the proportion of validation points that are mispredicted (defined as having an $L_2$ prediction error greater than 0.25).](./figures/problem_of_generalization/under_and_overfitting_vs_polyK.png){#fig-under_and_overfitting_vs_polyK width="48%"}
 
 This U-shaped curve is characteristic of classical learning regimes like
 polynomial regression, where we often find that the more parameters a

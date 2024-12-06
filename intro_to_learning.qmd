@@ -151,7 +151,7 @@ on sufficient hardware (referred to as **compute**) can do amazing
 things. We will focus on the learning algorithms in this chapter, but
 often the data and compute turn out to be more important.
 
-![](./figures/intro_to_learning/key_ingredients.png){#fig-intro_to_learning-key_ingredients}
+![](./figures/intro_to_learning/key_ingredients.png){#fig-intro_to_learning-key_ingredients width="70%"}
 
 A learner outputs an algorithm, $f: \mathcal{X} \rightarrow \mathcal{Y}$, which maps inputs, $\mathbf{x} \in \mathcal{X}$, to outputs, $\mathbf{y} \in \mathcal{Y}$.
 Commonly, $f$ is referred to as the **learned function**. The objective
