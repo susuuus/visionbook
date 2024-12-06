@@ -65,14 +65,7 @@ distances between objects. This depth cue is called **aerial
 perspective** or atmospheric perspective. One example using haze to
 infer depth is in @Kaiming2009.
 
-\begin{figure}
-\centerline{
-\sublabel{a}{\includegraphics[height=.53\linewidth]{figures/learning_3d/IMG_0508.JPG}}
-\sublabel{b}{\includegraphics[height=.53\linewidth]{figures/learning_3d/IMG_2772_crop.jpg}}
-}
-\caption{(a) This image contains multiple 3D cues: shading effects (bump shapes), texture gradients (relative size between bumps), and linear perspective (due to the regular arrangement of the bumps). (b) Aerial perspective. Objects far in the background have lower contrast than objects closer to the camera.}
-\label{fig:aerial_perspective}
-\end{figure}
+
 
 :::{layout-ncol="2" #fig-aerial_perspective}
 ![](figures/learning_3d/IMG_0508.JPG){width="49%"}
