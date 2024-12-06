@@ -98,6 +98,7 @@ component orthogonal to the moving structure can be measured.
 
 :::{.column-margin}
 The **Barber-pole illusion** is an illustration of the aperture problem. The barber pole induces the illusion of downward motion while rotating.
+
 ![](figures/optical_flow/barber_pole.png){width="40%"}
 :::
 

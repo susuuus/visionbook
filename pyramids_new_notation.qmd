@@ -149,7 +149,7 @@ processing.
 Each level has half the resolution of the previous level.
 
 :::{#fig-gausspyr layout-ncol=6}
-![Gaussian pyramid with six levels. The first level, $\mathbf{g](figures/pyramids/gaussianPyr_1.jpg){width="0.5%" #fig-gausspyr}
+![](figures/pyramids/gaussianPyr_1.jpg){width="0.5%"}
 
 ![](figures/pyramids/gaussianPyr_2.jpg){width="0.25%"}
 

@@ -273,7 +273,7 @@ another experiment from the same study, participants were shown one
 picture and their task was to classify the object as quickly as possible
 from a fixed set of twelve known possible classes. The average response
 time and accuracy were a measured for each of the
-12$\times$12 images. The speed and accuracy are a
+$12 \times 12$ images. The speed and accuracy are a
 measure of how easy is to recognize an object under a particular
 viewpoint. The study showed that people recognized objects better when
 presented in a canonical orientation.

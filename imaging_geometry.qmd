@@ -780,12 +780,12 @@ line in each image and coincides also with the vertical location where
 the heads of the people walking appear on the picture.
 
 :::{layout-ncol="2" #fig-low_and_high_horizon}
-![](figures/imaging_geometry/low_horizon_vp.jpg){width="48%"}
+![](figures/imaging_geometry/low_horizon_vp.jpg)
  
-![](figures/imaging_geometry/high_horizon_vp.jpg){width="48%"}
+
+![](figures/imaging_geometry/high_horizon_vp.jpg)
 
 The two pictures taken with two different camera angles. The red line indicates the position of the horizon line estimated as the horizontal location in which the two vanishing lines (blue) intersect.
-
 :::
 
 
@@ -852,7 +852,8 @@ other conventions to write the rotation matrix.
 The projection matrix is obtained by using both intrinsic and extrinsic
 camera parameters together, resulting in: 
 
-$$\begin{aligned}
+$$
+\begin{aligned}
     \mathbf{M} 
     &=& 
     \begin{bmatrix}
@@ -882,9 +883,13 @@ $$\begin{aligned}
     \end{aligned}
 $${#eq-model4}
 
-And going back to heterogeneous coordinates we have: $$\begin{aligned}x &=& -a \frac{X}{\sin( \theta ) (h-Y) + \cos ( \theta ) (d-Z)} \\
+And going back to heterogeneous coordinates we have: 
+
+$$
+\begin{aligned}x &=& -a \frac{X}{\sin( \theta ) (h-Y) + \cos ( \theta ) (d-Z)} \\
 y &=& a \frac{\cos (\theta) (Y-h) + \sin(\theta) (d-Z)}{\sin( \theta ) (h-Y) + \cos ( \theta ) (d-Z)}
-\end{aligned}$$
+\end{aligned}
+$$
 
 This setting is similar to the one we used when studying the simple
 visual system from @sec-simplesystem. However, you will notice that the
@@ -905,7 +910,6 @@ $$\begin{aligned}
     0 & a\cos (\theta) & -a\sin (\theta) & -ah \cos (\theta) +ad \sin (\theta) \\
     0 & 0 & 0 & 1 \\
     \end{bmatrix}
-    
 \end{aligned}
 $${#eq-model4}
 

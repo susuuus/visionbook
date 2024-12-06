@@ -675,11 +675,13 @@ by a sinusoidal representation network (SIREN) @sitzmann2019siren and
 then reconstructed with a rotation of 45 degrees and a scaling by 0.5
 along both dimensions.
 
-:::{layout-ncol="2" #fig-siren_rotation_and_scaling}
+:::{layout-ncol="2" #fig-siren_rotation_original-and_scaling}
 
-![](figures/imaging_geometry/siren_original_image.png){#fig-siren_original_image}
- 
-![](figures/imaging_geometry/siren_rotation_and_scaling.png){#fig-siren_rotation_and_scaling}
+![](figures/imaging_geometry/siren_original_image.png){#fig-siren_original_image width="100%"}
+
+![](figures/imaging_geometry/siren_rotation_and_scaling.png){#fig-siren_rotation_and_scaling width="100%"}
+
+
 
 Figure (left) Original image encoded by a SIREN network. (right) Image after a rotation of 45 degrees and a scaling by 0.5 along both dimensions.
 :::

@@ -171,11 +171,8 @@ The filter $h$ from @eq-spt_nulling_filter is shown in @fig-gaussian_seq. As thi
 
 Such a filter $h$ will cancel any objects moving at the velocity $(v_x,v_y)$. By using different filters, each one computing derivatives along different space-time orientations, we can create output sequences where specific objects disappear, as shown in @fig-tunedfilter. This filter is called a **nulling filter** [@Darrell93].
 
-::: {#fig-tunedfilter}
 ![(a) Input sequence. (b) Output to $h$ with $v_x=v_y=0$. (c) $v_x=1$ pixels/frame. (d) $v_x=-1$ pixel/frame.](figures/temporal_filters/seq_filtered_der.png){width=100% #fig-tunedfilter}
 
-(a) Input sequence. (b) Output to $h$ with $v_x=v_y=0$. (c) $v_x=1$ pixels/frame. (d) $v_x=-1$ pixel/frame.
-:::
 
 Note that despite assuming that the sequence contained a single moving object when deriving the formulation for the nulling filter, the filter also works in sequences with multiple objects moving at different speeds, as shown in @fig-tunedfilter. This is because the operations are local (the kernel $h$ has a small size), and the behavior will be correct if in a local image patch there is only one velocity present. In fact, it is easy to show that the method will also work if the sequence is a sum of several moving transparent layers.
 

@@ -115,15 +115,14 @@ What about @fig-gradient_descent-grad_descent_simple_examples (e), where the gra
 ![Gradient clipping algorithm.](./figures/gradient_descent/alg5.png){#fig-gradient_descent_grad_clipping}
 
 :::{.column-margin}
-\texttt{clip} is the "clipping" function: $\texttt{clip}(v, -m, m) = \max(\min(v,m),-m)$
+`clip` is the "clipping" function: $\texttt{clip}(v, -m, m) = \max(\min(v,m),-m)$
 :::
 
 This algorithm indeed successfully minimizes our example of the exploding gradient, as can be seen in @fig-gradient_descent-clipped_out1.
 
 
-:::{#fig-gradient_descent-clipped_out1}
-![Using `GD` with clipping to minimize a loss with exploding gradients, using $m=0.1$.](./figures/gradient_descent/clipped_out1.png){width=80%}
-:::
+![Using `GD` with clipping to minimize a loss with exploding gradients, using $m=0.1$.](./figures/gradient_descent/clipped_out1.png){width=80% #fig-gradient_descent-clipped_out1}
+
 
 
 ## Stochastic Gradient Descent {#sec-gradient_descent-SGD}
