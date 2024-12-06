@@ -158,7 +158,7 @@ format:
     mathjax: true
     lightbox: true
     # include-in-header: title-block.html
-    include-before-body: pre-title.html
+    
   # pdf:
     # see https://pandoc.org/MANUAL.html for all options
     # documentclass: src/DL_class
