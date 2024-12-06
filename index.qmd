@@ -1,6 +1,10 @@
-## Disclaimer {.unnumbered}
+---
+title-block-style: none
 
-This is a draft site for the book. 
+
+---
+
+
 
 ## Preface {#preface .unnumbered}
 
@@ -216,8 +220,7 @@ a wonderful source of support along this journey.
 William Freeman thanks Franny, Roz, Taylor, Maddie, Michael, and Joseph
 for their love and support.
 
-## How to Cite This Book
-
+## How to Cite This Book {.unnumbered}
 If you would like to cite this book, please use the following BibTeX entry:
 
 ```bibtex

@@ -2,12 +2,27 @@ project:
   type: book
 
 book:
-  title: "Foundations of Computer Vision"
+  title: Foundations of Computer Vision
   repo-url: https://github.com/shensquared/cv_book
   repo-actions: [edit, issue, source]
   repo-subdir: /
-  author: "Antonio Torralba, Phillip Isola, and William Freeman"
-  date: "04/16/2024"
+  site-url: https://shenshen.mit.edu/cv_book
+  twitter-card: true
+  # author: 
+  #   - name: Antonio Torralba
+  #     affiliation: MIT EECS
+      
+  #   - name: Phillip Isola
+  #     # affiliation: MIT
+  #   - name: William Freeman
+      # affiliation: MIT
+  # date: "04/16/2024"
+  # date: last-modified
+  # date-format: "DD MMMM YYYY"
+  favicon: Figures/favicon.ico
+  # cover-image: figures/logo.jpg
+
+
   chapters:
     - index.qmd
     - notations.qmd
@@ -97,10 +112,8 @@ book:
       chapters:
         - simplesystem_final.qmd
     - references.qmd
-  favicon: Figures/favicon.ico
-  cover-image: figures/logo.jpg
-  downloads: [pdf]
-  sharing: [twitter]
+  # reader-mode: true
+  sharing: [twitter, linkedin]
   sidebar:
     style: "floating"
     collapse-level: 2
@@ -111,6 +124,8 @@ book:
     center: "[Website](https://shenshen.mit.edu/cv_book) | [GitHub](https://github.com/shensquared/cv_book) | [MIT Vision Group](http://groups.csail.mit.edu/vision)"
     right: Built with [Quarto](https://quarto.org/).
   page-navigation: true
+
+
 
 bibliography:
   - all.bib
@@ -134,13 +149,16 @@ format:
     code-block-bg: true
     code-overflow: wrap
     # css: ./scripts/custom-style.css
-    theme: cosmo
-    # theme: neutral
+    theme: 
+      light: cosmo
+      dark: darkly
     fig-align: "center"
     reference-location: margin
     cap-location: margin
     mathjax: true
     lightbox: true
+    # include-in-header: title-block.html
+    include-before-body: pre-title.html
   # pdf:
     # see https://pandoc.org/MANUAL.html for all options
     # documentclass: src/DL_class
@@ -181,3 +199,4 @@ filters:
   - tikz
 tikz:
   cache: true
+

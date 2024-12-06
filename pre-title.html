@@ -1,0 +1,91 @@
+<style>
+    .book-info {
+        display: flex;
+        align-items: flex-start; /* Align items at the top */
+        gap: 20px;
+    }
+
+    .text-column {
+        flex: 2; /* Allocate more space to text */
+    }
+
+    .image-column {
+        flex: 1; /* Allocate less space to the image */
+        text-align: center; /* Center-align the image */
+    }
+
+    .image-column img {
+        max-width: 100%;
+        height: auto;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .text-column strong {
+        display: block;
+        font-size: 1.2rem;
+    }
+
+    .text-column p {
+        margin: 5px 0;
+        line-height: 1.5;
+    }
+
+    /* Optional: Add spacing between the text-column and image-column */
+    .text-column,
+    .image-column {
+        align-self: flex-start; /* Ensure both columns align at the top */
+    }
+    .author-label {
+        font-size: 0.8em; /* Smaller font size */
+        font-weight: bold; /* Bold text */
+        text-transform: uppercase; /* Make text uppercase */
+        letter-spacing: 0.1em; /* Add letter spacing */
+        color: #666666; /* Muted gray color */
+        margin-bottom: 5px; /* Add spacing below */
+    }
+</style>
+
+<div class="book-info">
+    <div class="text-column">
+        <div>
+            <div class="author-label">Authors</div>
+            <p>
+                <a href="https://groups.csail.mit.edu/vision/torralbalab/" target="_blank">Antonio Torralba</a>,
+                <a href="https://web.mit.edu/phillipi/" target="_blank">Phillip Isola</a>, and
+                <a href="https://billf.mit.edu" target="_blank">William Freeman</a>
+            </p>
+            <p>Department of Electrical Engineering and Computer Science</p>
+            <p>Massachusetts Institute of Technology</p>
+        </div>
+
+
+        <div class="callout callout-style-default callout-tip no-icon callout-titled">
+            <div class="callout-header d-flex align-content-center">
+                <div class="callout-icon-container">
+                    <i class="callout-icon no-icon"></i>
+                </div>
+                <div class="callout-title-container flex-fill">
+                    Disclaimer
+                </div>
+            </div>
+            <div class="callout-body-container callout-body">
+                <p>
+                    This website is a draft for the hardcover book
+                    <em>Foundations of Computer Vision</em>, published by
+                    <a href="https://mitpress.mit.edu/9780262048972/foundations-of-computer-vision/" target="_blank">The MIT Press</a>
+                    on April 16, 2024.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="image-column">
+        <img src="figures/logo.jpg" alt="Book Cover"/>
+    </div>
+
+
+</div>
