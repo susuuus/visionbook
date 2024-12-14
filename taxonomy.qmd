@@ -110,7 +110,7 @@ called the **plenoptic function** Edward H. Adelson and James R. Bergen
 pattern of light rays that fills the space.
 
 :::{.column-margin}
-we will study color in chapter [Color](color.html)
+We will study color in chapter [Color](color.html)
 :::
 
 

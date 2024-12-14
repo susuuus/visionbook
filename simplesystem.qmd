@@ -271,7 +271,9 @@ $$\begin{aligned}
 \end{aligned}$$ We will discuss these approximations in detail in .
 
 From the image gradient, we can extract a number of interesting
-quantities: $$\begin{aligned}
+quantities: 
+
+$$\begin{aligned}
     e(x,y) &= \lVert \nabla \ell(x,y) \rVert   & \quad\quad \triangleleft \quad \texttt{edge strength}\\
     \theta(x,y) &= \angle \nabla \ell =  \arctan \left( \frac{\partial \ell / \partial y}{\partial \ell / \partial x} \right) & \quad\quad \triangleleft \quad \texttt{edge orientation}
 \end{aligned}$$ 

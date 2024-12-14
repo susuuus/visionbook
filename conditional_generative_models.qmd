@@ -146,7 +146,7 @@ image formats only represent 256 possible values for $a$, so if we set
 $k=256$ then we incur no quantization error.
 
 :::{.column-margin}
-Why 256 values? Because each channel in standard image formats is stored as an array of \texttt{uint8}s.
+Why 256 values? Because each channel in standard image formats is stored as an array of `uint8`s.
 :::
 
 The second issue is much more severe. If we are predicting the $a$-value

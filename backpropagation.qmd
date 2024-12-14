@@ -527,7 +527,7 @@ $\texttt{backward}$ for a $L_2$ loss layer, yielding
 
 
 
-![Matrix multiply for \texttt{backward} of an $L_2$ loss layer.](figures/backpropagation/L2_loss_layer_backprop.png){#fig-backpropagation-L2_loss_layer_backprop width="70%"}
+![Matrix multiply for `backward` of an $L_2$ loss layer.](figures/backpropagation/L2_loss_layer_backprop.png){#fig-backpropagation-L2_loss_layer_backprop width="70%"}
 
 ### Putting It All Together: Backpropagation through an MLP
 
