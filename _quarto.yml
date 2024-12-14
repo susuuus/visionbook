@@ -4,7 +4,7 @@ project:
 book:
   title: Foundations of Computer Vision
   repo-url: https://github.com/shensquared/cv_book
-  repo-actions: [edit, issue, source]
+  repo-actions: [edit, issue]
   repo-subdir: /
   site-url: https://shenshen.mit.edu/cv_book
   twitter-card: true
