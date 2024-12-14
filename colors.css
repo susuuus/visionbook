@@ -1,3 +1,7 @@
+.quarto-float-caption-margin.quarto-float-caption {
+        color: black !important;
+      }
+      
 /* Neuron colors */
 .gray_neuron {
   color: rgb(179, 179, 179); /* 0.7 * 255 = 179 */
