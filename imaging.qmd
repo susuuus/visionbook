@@ -87,11 +87,16 @@ shows the ambient, Lambertian, and Phong shading components of a sphere
 under two-source illumination, and a comparison with a real sphere under
 similar real illumination.
 
-<figure id="fig-rendering">
+:::{layout-ncol="3" #fig-rendering}
+![Lambertian](figures/imaging/sphereDiffuse.png){width="30%" #fig-rendering-a}
 
-<figcaption>(a and b) Two different renderings of a sphere. (c) Note the
-many extra details required of a photorealistic rendering.</figcaption>
-</figure>
+![Phong](figures/imaging/spherePhongRoughness0.3.png){width="30%" #fig-rendering-b}
+
+![Photograph](figures/imaging/photoSphere.jpg){width="30%" #fig-rendering-c}
+
+Fig (a and b) Two different renderings of a sphere.  (c) Note the many extra details required of a photorealistic rendering.
+
+:::
 
 In general, surface reflection behaves linearly: the reflection from the
 sum of two light sources is the sum of the reflections from the
@@ -162,18 +167,16 @@ The needed elements are an aperture to let light through, mechanisms to
 block stray light, a projection screen, and some method to view or
 record the image on the projection screen.
 
-<figure id="fig-pinhole2">
-<embed src="figures/imaging/pinholeBag.png" style="width:100.0%" />
-<embed src="figures/imaging/pinholeBag2.png" style="width:100%" />
-<figcaption>A pinhole camera made from paper bags. Following steps 1–4,
-you can turn a paper bag into a light-tight pinhole camera, with the
-viewer inside. Newspapers can be added between two layers of paper bags
-to make a light-tight enclosure. The last picture shows the use of the
-<span><strong>paper bag pinhole</strong></span> camera by one of the
-authors. Walking with this camera is challenging because you only get to
-see an upside-down version of what is behind you (adult supervision
-required).</figcaption>
-</figure>
+
+:::{layout-nrow="2" #fig-pinhole2}  
+![](figures/imaging/pinholeBag.png)
+
+![](figures/imaging/pinholeBag2.png)
+
+A pinhole camera made from paper bags.
+Following steps 1--4, you can turn a paper bag into a light-tight pinhole camera, with the viewer inside.  Newspapers can be added between two layers of paper bags to make a light-tight enclosure. The last picture shows the use of the **paper bag pinhole**
+camera by one of the authors. Walking with this camera is challenging because you only get to see an upside-down version of what is behind you (adult supervision required).
+:::
 
 We started the section asking why there are no pictures on regular walls
 and explaining that, for an image to appear, we need some way of
@@ -189,13 +192,18 @@ bottom part of the world outside the window. As a consequence, most
 walls will appear as having a faint blue tone on the bottom because they
 reflect the sky, as shown in .
 
-<figure id="fig-accidental">
+:::{layout-ncol="2" #fig-accidental}
 
-<figcaption>(a) A wall might contain a picture of the world after all.
+![](figures/imaging/room1.jpg){width="28%" #fig-accidental-a}
+
+![](figures/imaging/room2.jpg){width="62.5%" #fig-accidental-b}
+
+Fig (a) A wall might contain a picture of the world after all.
 (b) Turning the room into a pinhole camera by closing most of the window
 helps to focus the picture that appears in the wall. In this case we can
-see some buildings that are outside the window.</figcaption>
-</figure>
+:::
+
+
 
 
 :::{.column-margin}
