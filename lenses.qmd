@@ -24,7 +24,7 @@ element records light from many different image positions, creating a
 blurry image. A lens can collect light reflected over many different
 angles from a single point, allowing a bright, sharp
 image.](figures/imaging/apertures_and_lenses.png){#fig-pinholes
-width=".9"}
+width="90%"}
 
 ![Physical demonstration of the trade-offs illustrated in . (a) Gumby
 subject, illumination light, barrier with the three apertures, and white

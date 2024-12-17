@@ -990,7 +990,7 @@ block or let pass certain frequencies. Filters are many times classified
 according to the frequencies that they let pass through the filter (low,
 medium, or high frequencies) as shown in @fig-typestypes.
 
-![Sketch of the frequency responses of low-pass, band-pass, and high-pass filters.](figures/Image_processing_fourier/filter-types.png){width=".9" #fig-typestypes}
+![Sketch of the frequency responses of low-pass, band-pass, and high-pass filters.](figures/Image_processing_fourier/filter-types.png){width="90%" #fig-typestypes}
 
 When filtering images, low-pass filters will output a blurry picture
 encoding the **coarse** elements of the image. A band-pass filter will

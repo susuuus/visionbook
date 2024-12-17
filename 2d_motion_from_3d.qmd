@@ -22,7 +22,7 @@ $\mathbf{p}(t) = (x(t),y(t))$ and its projection will move with the 2D
 instantaneous velocity $\dot{\mathbf{p}} = (\dot{x}(t), \dot{y}(t))$,
 where all the derivatives are done with respect to time, $t$.
 
-![A 3D point, $\mathbf{P}$, moving in the world projects a 2D moving point, $\mathbf{p}$, into the camera plane.](figures/optical_flow/basic_motion_point.png){width=".5" #fig-optical_flow_basic_motion_point}
+![A 3D point, $\mathbf{P}$, moving in the world projects a 2D moving point, $\mathbf{p}$, into the camera plane.](figures/optical_flow/basic_motion_point.png){width="50%" #fig-optical_flow_basic_motion_point}
 
 Using the equations of perspective projection $x=f X/Z$ and $y=f Y/Z$
 (assuming that the camera is at the origin of the world-coordinate
@@ -321,7 +321,7 @@ To derive the rotation, we consider the **Euler angles**
 (@fig-yaw_pitch_roll) and decompose the rotation using rotations along
 the three axes (yaw, pitch, roll):
 
-![Rotation expressed by Euler angles (yaw, pitch, roll).](figures/optical_flow/yaw_pitch_roll.png){width=".4" #fig-yaw_pitch_roll}
+![Rotation expressed by Euler angles (yaw, pitch, roll).](figures/optical_flow/yaw_pitch_roll.png){width="40%" #fig-yaw_pitch_roll}
 
 Each angle measures the rotation along the camera-coordinate axes. Using
 this representation of the rotation, the rotation matrix can be written
@@ -532,7 +532,7 @@ in the orthogonal direction to the vector that connects that point with
 the origin (@fig-motion_wz). The motion field does not depend on the
 focal length, $f$.
 
-![Motion field for a rotating camera around the optical axis, $W_X=W_Y=0$.](figures/optical_flow/motion_wz.png){width=".4" #fig-motion_wz}
+![Motion field for a rotating camera around the optical axis, $W_X=W_Y=0$.](figures/optical_flow/motion_wz.png){width="40%" #fig-motion_wz}
 
 If $W_Z=0$, then the rotation along $W_X$ or $W_Y$ will produce similar
 2D motion fields, so let's consider $W_X=0$. We have: 

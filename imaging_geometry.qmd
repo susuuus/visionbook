@@ -676,7 +676,7 @@ regardless of how far away they are. This is illustrated in
 $Z \rightarrow \infty$, which are also at $y=0$ (we will talk more about
 the horizon line in the following chapter).
 
-![If you hold the camera parallel to the ground at the height of your eyes and take a picture of a person standing in front of you with a similar height, their eyes will project near the middle portion of the vertical axis of the picture.](figures/imaging_geometry/horizon_heads.jpg){width=".6" #fig-horizon_heads}
+![If you hold the camera parallel to the ground at the height of your eyes and take a picture of a person standing in front of you with a similar height, their eyes will project near the middle portion of the vertical axis of the picture.](figures/imaging_geometry/horizon_heads.jpg){width="60%" #fig-horizon_heads}
 
 Let's now consider that the camera is tilted by looking downward with
 an angle $\theta$, as shown in @fig-camera_calibration_scenarios (c). The
@@ -764,7 +764,7 @@ equations, their eyes will be located at the position
 $y = a \tan(\theta)$ in the picture, which is independent of $Z$ and the
 same vertical location as the horizon line.
 
-![Sketch showing a person taking a picture of two people standing at different distances from the camera. Their eyes will project to the same image row regardless of their distance to the camera.](figures/imaging_geometry/eyes_location.png){width=".9" #fig-sketch_eyes_location}
+![Sketch showing a person taking a picture of two people standing at different distances from the camera. Their eyes will project to the same image row regardless of their distance to the camera.](figures/imaging_geometry/eyes_location.png){width="90%" #fig-sketch_eyes_location}
 
 Note that if $a$ is known (i.e., if the camera is calibrated), then we
 can infer $\theta$ by locating the horizon line in the image.
@@ -1113,7 +1113,7 @@ locations, $\mathbf{p}'_i$, of their projections. The reprojection error
 is the distance between those points, as shown in
 @fig-reprojection_error.
 
-![Reprojection error indicated by the red lines on the image plane.](figures/imaging_geometry/reprojection_error.png){width=".6" #fig-reprojection_error}
+![Reprojection error indicated by the red lines on the image plane.](figures/imaging_geometry/reprojection_error.png){width="60%" #fig-reprojection_error}
 
 The reprojection error can be evaluated with the loss:
 $$\sum_{i=1}^N \|\mathbf{p}_i - \mathbf{p}'_i \|^2=\sum_{i=1}^N 

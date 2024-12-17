@@ -232,7 +232,7 @@ To cascade two translation operations $\mathbf{t}$ and $\mathbf{s}$, in
 heterogeneous coordinates, we have
 $$\mathbf{p}' = \mathbf{p} + \mathbf{t}  + \mathbf{s}$$
 
-![(left) Translation. (right) Composition of two consecutive translations.](figures/imaging_geometry/translations.png){width=".7" #fig-translations}
+![(left) Translation. (right) Composition of two consecutive translations.](figures/imaging_geometry/translations.png){width="70%" #fig-translations}
 
 In homogeneous coordinates, we cascade the corresponding translation
 matrices: $$\mathbf{p}' = \mathbf{S} \mathbf{T} \mathbf{p},$$ where the
@@ -279,7 +279,7 @@ coordinates, $$\mathbf{S} =
 
 The scaling matrix is a diagonal matrix.
 
-![Non-uniform or anisotropic scaling. In this example the $y$-axis is compressed and the $x$-axis is expanded.](figures/imaging_geometry/scaling.png){width=".6" #fig-scaling}
+![Non-uniform or anisotropic scaling. In this example the $y$-axis is compressed and the $x$-axis is expanded.](figures/imaging_geometry/scaling.png){width="60%" #fig-scaling}
 
 Uniform scaling is obtained when $s_x=s_y$, otherwise the scaling is
 nonuniform or anisotropic. After uniform scaling, all of the angles are
@@ -296,7 +296,7 @@ matrix in homogeneous coordinates: $$\mathbf{R} =
     0 & 0 & 1
     \end{bmatrix}$$
 
-![Rotation by an angle $\theta$ counterclockwise around the origin.](figures/imaging_geometry/rotation.png){width=".6" #fig-rotation}
+![Rotation by an angle $\theta$ counterclockwise around the origin.](figures/imaging_geometry/rotation.png){width="60%" #fig-rotation}
 
 As in the case of the translation, a rotation in homogeneous coordinates
 is a product $$\mathbf{p}' = \mathbf{R} \mathbf{p},$$ Also, as we should
@@ -478,7 +478,7 @@ we discussed before can be implemented as one-dimensional (1D)
 convolutions over the locations as shown in the diagram in
 @fig-rotation_as_convolution.
 
-![Geometric transformation as a convolution. The input and output signals are represented as pixel sets with explicit geometry. The convolution kernels are $w_x$ and $w_y$, corresponding to one dimensional convolutions as they only mix input features within the same input vector. The output intensity values are the same as the input.](figures/imaging_geometry/rotation_as_convolution.png){width=".6" #fig-rotation_as_convolution}
+![Geometric transformation as a convolution. The input and output signals are represented as pixel sets with explicit geometry. The convolution kernels are $w_x$ and $w_y$, corresponding to one dimensional convolutions as they only mix input features within the same input vector. The output intensity values are the same as the input.](figures/imaging_geometry/rotation_as_convolution.png){width="60%" #fig-rotation_as_convolution}
 
 In the diagram (@fig-rotation_as_convolution), each input element is a
 vector $(x_i,y_i,\ell_i)$ where $x_i$, $y_i$ are the pixel location, and
@@ -545,7 +545,7 @@ coordinates of $\mathbf{p}$ computed that way will be given in
 homogeneous coordinates. So you need to divide by the third component in
 order to get the actual point coordinates in heterogeneous coordinates.
 
-![Using homogeneous coordinates to get the line that passes by two points, and to obtain the intersection of two lines. Both operations are analogous.](figures/imaging_geometry/points_and_lines_homogeneous.png){width=".7" #fig-points_and_lines_homogeneous_imggeo}
+![Using homogeneous coordinates to get the line that passes by two points, and to obtain the intersection of two lines. Both operations are analogous.](figures/imaging_geometry/points_and_lines_homogeneous.png){width="70%" #fig-points_and_lines_homogeneous_imggeo}
 
 If three 2D points are colinear, then the determinant of the matrix
 formed by concatenating the three vectors, in homogeneous coordinates,

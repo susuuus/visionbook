@@ -93,7 +93,7 @@ termination points are in view within the observation window (i.e., the
 aperture), it is impossible to measure the actual image motion. Only the
 component orthogonal to the moving structure can be measured.
 
-![Aperture problem when observing the motion of a one-dimensional (1D) structure larger than the image frame. The actual motion of the bar is upward, but the perception, when vision is limited to what is visible within the observation window, appears as if the motion of the bar is in the direction perpendicular to the bar.](figures/optical_flow/apperture_problem.png){width=".9" #fig-apperture_problem}
+![Aperture problem when observing the motion of a one-dimensional (1D) structure larger than the image frame. The actual motion of the bar is upward, but the perception, when vision is limited to what is visible within the observation window, appears as if the motion of the bar is in the direction perpendicular to the bar.](figures/optical_flow/apperture_problem.png){width="90%" #fig-apperture_problem}
 
 
 :::{.column-margin}

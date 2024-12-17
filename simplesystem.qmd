@@ -195,7 +195,7 @@ intensities. Those variations can be due to a multitude of scene factors
 (e.g., occlusion boundaries, changes in surface orientation, changes in
 surface albedo, and
 shadows).](figures/simplesystem/edgeLabeling.png){#fig-edgeLabeling
-width=".9"}
+width="90%"}
 
 One of the tasks that we will solve first is to classify **image edges**
 according to their most probable cause. We will use the following

@@ -23,7 +23,7 @@ complex shapes. Even in front of a static image, we form a
 representation of the dynamics of an object, as shown in the photograph
 in @fig-050822_172806__MG_5366.
 
-![Even from a static picture we form a rich representation of the dynamics of the scene. *Source*: Photograph by Fredo Durand](figures/optical_flow/050822_172806__MG_5366.jpg){width=".7" #fig-050822_172806__MG_5366}
+![Even from a static picture we form a rich representation of the dynamics of the scene. *Source*: Photograph by Fredo Durand](figures/optical_flow/050822_172806__MG_5366.jpg){width="70%" #fig-050822_172806__MG_5366}
 
 Looking at the power of that static image to convey motion, one wonders
 if seeing movies is really necessary. From the notes you took about what
@@ -227,7 +227,7 @@ parameter in this algorithm.
 @fig-matching_optical_flow_patch_size_effect shows the effect of the
 choice of the parameter $s$ on the estimated optical flow.
 
-![Effect of the choice of the patch size parameter, $s$, on the estimated optical flow. When the patch size is just one pixel ($s=0$), the approach fails as there are many similar pixels that correspond to different parts of the scene. Only when the patches are large enough, the image matches correspond to the same scene elements. Large patch sizes are necessary. But too large patches lead to oversmoothing.](figures/optical_flow/matching_optical_flow_patch_size_effect.png){width=".8" #fig-matching_optical_flow_patch_size_effect}
+![Effect of the choice of the patch size parameter, $s$, on the estimated optical flow. When the patch size is just one pixel ($s=0$), the approach fails as there are many similar pixels that correspond to different parts of the scene. Only when the patches are large enough, the image matches correspond to the same scene elements. Large patch sizes are necessary. But too large patches lead to oversmoothing.](figures/optical_flow/matching_optical_flow_patch_size_effect.png){width="80%" #fig-matching_optical_flow_patch_size_effect}
 
 When using single pixels to represent each location, the matching fails
 in detecting true correspondences and the estimated motion field is very

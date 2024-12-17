@@ -117,7 +117,7 @@ texture in order to decide what those fundamental units were and his
 models were restricted to binary images formed by simple elements as
 shown in @fig-julez_texture.
 
-![Texture discrimination using textons.](figures/heeger_bergen/julez.png){width=".9" #fig-julez_texture}
+![Texture discrimination using textons.](figures/heeger_bergen/julez.png){width="90%" #fig-julez_texture}
 
 One interesting observation about @fig-julez_texture is that it seems
 easy to see the boundary between the two textures in the image.
@@ -155,7 +155,7 @@ computer graphics applications, and also as way of studying what
 representations of a texture can be useful for visual recognition.
 
 ![A reference texture image is transformed into a representation using a texture analysis (encoder). Then the texture synthesis procedure takes as input  a random noise image of the size of the desired output texture and the parameters of the reference image $\theta$.
-%Texture analysis (encoder) using a steerable pyramid with 4 orientations and 3 scales. The output representation is the concatenation of the 12 subband histograms, the low-pass residual histogram and the input image histogram.](figures/heeger_bergen/analysis_heeger_bergen.png){width=".8" #fig-analysis_heeger_bergen}
+](figures/heeger_bergen/analysis_heeger_bergen.png){width="80%" #fig-analysis_heeger_bergen}
 
 An influential wavelet-based image synthesis algorithm is the
 Heeger-Bergen texture synthesis method published in 1995, with the
@@ -216,7 +216,7 @@ scales. The final texture representation is the concatenation of the 18
 subband histograms, the low-pass residual histogram and the input image
 histogram (@fig-heegersubbands \[a\]).
 
-![(a) Texture analysis (encoder) using a steerable pyramid with six orientations and three scales. The output representation is the concatenation of the 18 subband histograms, the low-pass residual histogram and the input image histogram. (b) Texture synthesis, only one iteration shown. At each iteration, the output is put back as input and the process is repeated $N$ times. The diagram corresponds to the implementation of the function $f_{\theta}$ from @fig-heeger_bergen_iterations](figures/heeger_bergen/analysis_and_synthesis_heeger_bergen.png){width=".8" #fig-heegersubbands}
+![(a) Texture analysis (encoder) using a steerable pyramid with six orientations and three scales. The output representation is the concatenation of the 18 subband histograms, the low-pass residual histogram and the input image histogram. (b) Texture synthesis, only one iteration shown. At each iteration, the output is put back as input and the process is repeated $N$ times. The diagram corresponds to the implementation of the function $f_{\theta}$ from @fig-heeger_bergen_iterations](figures/heeger_bergen/analysis_and_synthesis_heeger_bergen.png){width="80%" #fig-heegersubbands}
 
 The crux of the algorithm is to alternate matching the intensity domain
 pixel histogram of the image, then to transform the resulting image into

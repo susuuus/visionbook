@@ -23,7 +23,7 @@ on typical example from the set of all images. A typical sample from the
 set of all images is $32\times32$ pixels independently sampled from a
 uniform distribution.
 
-![The space of natural images is just very small part of the space of all possible images. In the case of color images with $32\times32$ pixels, most of the space is filled with images that look like noise.](figures/statistical_image_models/spaces_real_images.png){width=".8" #fig-spaces_real_images}
+![The space of natural images is just very small part of the space of all possible images. In the case of color images with $32\times32$ pixels, most of the space is filled with images that look like noise.](figures/statistical_image_models/spaces_real_images.png){width="80%" #fig-spaces_real_images}
 
 As natural images are quite complex, researchers have used simple visual
 worlds that retain some of the important properties of natural images
@@ -575,7 +575,7 @@ Therefore, only the second factor is important for this analysis.
 places where the function reaches a local maximum as a function of $a$
 for every value of $r$.
 
-![Best values of $a$, as a function of $r$, that maximize the probability of the 1D image $\left[1,1,1,1,1,a,0,0,0,0,0 \right]$ under the wavelet prior model. The optimal $a$ changes when crossing the $r=1$ value.](figures/statistical_image_models/best_a_s1.png){width=".6" #fig-surface_best_a}
+![Best values of $a$, as a function of $r$, that maximize the probability of the 1D image $\left[1,1,1,1,1,a,0,0,0,0,0 \right]$ under the wavelet prior model. The optimal $a$ changes when crossing the $r=1$ value.](figures/statistical_image_models/best_a_s1.png){width="60%" #fig-surface_best_a}
 
 For $r=2$ the best value of $a$ is $a=0.5$, and this solution is the
 best for any value of $r>1$. For $r=1$, any value
@@ -631,7 +631,7 @@ but the posterior still has a peak at zero. And in @fig-waveletBayes c
 an observed coefficient value of 1.22 yields a maximum posterior
 probability estimate of 0.9.
 
-![Showing the likelihood, prior, and posterior terms for the estimation of a subband coefficient from several noisy observations.  (a)  A zero subband coefficient is observed. (b)  An observation of 0.26 shifts the likelihood term, but the posterior still has a peak at zero. (c) an observed coefficient value of 1.22 yields a maximum posterior probability estimate of 0.9.](figures/statistical_image_models/wavelet_denoising.png){width=".9" #fig-waveletBayes}
+![Showing the likelihood, prior, and posterior terms for the estimation of a subband coefficient from several noisy observations.  (a)  A zero subband coefficient is observed. (b)  An observation of 0.26 shifts the likelihood term, but the posterior still has a peak at zero. (c) an observed coefficient value of 1.22 yields a maximum posterior probability estimate of 0.9.](figures/statistical_image_models/wavelet_denoising.png){width="90%" #fig-waveletBayes}
 
 @fig-bayeslut shows the resulting look-up table to modify the noisy
 observation to the MAP estimate for the denoised coefficient value. Note

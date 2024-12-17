@@ -92,7 +92,7 @@ identical length might have different lengths after a homography.
 @fig-illustration_homography2 shows how a planar grid gets transformed
 after applying a homography.
 
-![Homography. Colinear points remain colinear after transformation. Angles between lines are not preserved.](figures/homography/example_homography.png){width=".7" #fig-illustration_homography2}
+![Homography. Colinear points remain colinear after transformation. Angles between lines are not preserved.](figures/homography/example_homography.png){width="70%" #fig-illustration_homography2}
 
 Let's start discussing in which scenarios the coordinates of points
 between to images are related by a homography.

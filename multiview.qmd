@@ -68,7 +68,7 @@ seeing any single frame (as shown in @fig-demos_motivation_sfm\[a\]) it
 is hard to see the cylinders or even to say which points are attached to
 the same surface.
 
-![Early illustrations on the perceptual power of motion. (a) Nested cylinders by Shimon Ullman, 1979, illustrated how rigid motion elicits a strong 3D interpretation. (b) One frame from the point-light walker by Gunnar Johansson, as an early illustration of biological motion perception from few moving keypoints.](figures/sfm/demos_motivation.png){width=".7" #fig-demos_motivation_sfm}
+![Early illustrations on the perceptual power of motion. (a) Nested cylinders by Shimon Ullman, 1979, illustrated how rigid motion elicits a strong 3D interpretation. (b) One frame from the point-light walker by Gunnar Johansson, as an early illustration of biological motion perception from few moving keypoints.](figures/sfm/demos_motivation.png){width="70%" #fig-demos_motivation_sfm}
 
 One of the first algorithms for structure from motion for rigid bodies
 was introduced by Tomasi and Kanade @Tomasi92. For simplicity, their

@@ -795,7 +795,7 @@ you are in a room you often hear that sounds are distorted with echos
 depend on the geometry of the room, whether it is full or empty and the
 materials in the walls and ceilings.
 
-![As shown in the sketch, sounds produced by one speaking person reach a listener via multiple paths. What the person hears is the superposition of all those signals. Figure modified from @TraerE7856.](figures/linear_image_filtering/impulse_response_room_a1.png){width=".6" #fig-impulse_response_room_a}
+![As shown in the sketch, sounds produced by one speaking person reach a listener via multiple paths. What the person hears is the superposition of all those signals. Figure modified from @TraerE7856.](figures/linear_image_filtering/impulse_response_room_a1.png){width="60%" #fig-impulse_response_room_a}
 
 
 Interestingly the relationship between the sounds that are originated in

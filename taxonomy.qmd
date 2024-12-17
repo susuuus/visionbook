@@ -1100,7 +1100,7 @@ visual system.
 ![Necker cube illusion, introduced by Louis Albert Necker @Necker1832.
 Figure recreated from
 @Marr82.](figures/taxonomy/necker.png){#fig-necker_cube
-width=".9"}
+width="90%"}
 
 Marr postulated that these three levels of understanding can be studied
 relatively independently, despite their loose coupling, with each
@@ -1152,7 +1152,7 @@ depth.
 
 ![Image of a cube, and its 2.5D sketch. Figure inspired from figure 4-2
 from @Marr82.](figures/taxonomy/sketch.png){#fig-sketch
-width=".9"}
+width="90%"}
 
 It is hard to overstate the influence that Marr's book had in shaping
 the thinking of several generations of computer vision scientists,

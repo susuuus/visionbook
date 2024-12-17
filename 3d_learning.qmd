@@ -374,7 +374,7 @@ geometric interpretation of all the steps):
 -   The resulting coordinates $\mathbf{p}'$ are translated back into
     heterogeneous coordinates.
 
-![Geometry between two images captured by a moving camera. The coordinates of corresponding points between the two frames are constrained by the 3D world coordinates of the point the relative camera motion.](figures/learning_3d/geometry_reconstruction_12.png){width=".6" #fig-geometry_reconstruction}
+![Geometry between two images captured by a moving camera. The coordinates of corresponding points between the two frames are constrained by the 3D world coordinates of the point the relative camera motion.](figures/learning_3d/geometry_reconstruction_12.png){width="60%" #fig-geometry_reconstruction}
 
 Putting all these steps together, ignoring the transformations between
 homogeneous and heterogeneous coordinates, the reconstruction of

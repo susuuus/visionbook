@@ -43,7 +43,7 @@ pixel wide. How can that provide enough information?
 resolution, we can still recognize most of its content. *Source*:
 Original image created with Dall-E, and downsampled with
 Photoshop.](figures/visionscience/DALLE_32x32.png){#fig-pexels-retha-ferguson
-width=".8"}
+width="80%"}
 
 
 
@@ -164,7 +164,7 @@ leaves during a solar eclipse.
 ![During an eclipse, the shadow of the tree contains many copies of the
 crescent
 sun.](figures/visionscience/tree_shadow_eclipse2.jpg){#fig-tree_shadow_eclipse
-width=".9"}
+width="90%"}
 
 One of the most common situations that we often encounter is the
 **pinhole cameras** formed by the spacing between the leaves of a tree.
@@ -232,12 +232,12 @@ talk more about how camera motion relates to distance in .
 Principle of continuity. In the following drawing, we
 see one wave and one line:\
 
-![](figures/visionscience/principle_continuity_1.png){width=".6"}
+![](figures/visionscience/principle_continuity_1.png){width="60%"}
 
 \
 Despite this, other groupings are also possible.\
 
-![](figures/visionscience/principle_continuity_2.png){width=".6"}
+![](figures/visionscience/principle_continuity_2.png){width="60%"}
 
 
 :::
@@ -341,7 +341,7 @@ without touching it, as shown in @fig-wet_sand.
 ![Why does wet sand look dark? The answer to this question is
 interesting, but not as much as the question
 itself.](figures/visionscience/wet_sand_2.jpeg){#fig-wet_sand
-width=".8"}
+width="80%"}
 
 Why does sand look darker when it's wet? Does everything wet look darker
 than when it is dry? How can we tell which parts of the sand are dark
