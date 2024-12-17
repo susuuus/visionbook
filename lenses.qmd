@@ -112,7 +112,7 @@ systems: the deviations in angle from the optical axes are very small
 (i.e., the *paraxial approximation*) and the lens is modeled to have
 negligible thickness compared with other distances along the optical
 axis (i.e., the *thin lens approximation*). Under those approximations,
-we can write simple expressions for the bending angles shown in a@fig-lens-b a
+we can write simple expressions for the bending angles shown in a @fig-lens-b a
 function of $\theta_S$, the lens surface orientation at height $c$. Those relations are summarized below in table @tbl-lensmaker.
 
 The middle row of table @tbl-lensmaker requires explanation. The light ray within
