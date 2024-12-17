@@ -147,7 +147,7 @@ emanating at a small angle from point $a$ will be focused to point $b$. @eq-ts1 
 linear proportional to the distance $c$ from the center of the lens.
 
 ::: {.column-margin}
-To focus, the lens surface angle, $\theta_S$, must be a {\em linear} function of the distance, $c$, from the center of the lens.
+To focus, the lens surface angle, $\theta_S$, must be a *linear* function of the distance, $c$, from the center of the lens.
 :::
 
 In the thin lens approximation, both parabolic and spherical shapes

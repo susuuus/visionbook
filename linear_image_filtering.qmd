@@ -296,7 +296,7 @@ algorithm at every pixel.
 
 ![A fundamental property of images is translation
   invariance--the same image may appear at arbitrary spatial positions
-  within the image. {\em Source}: Fredo Durand.](figures/linear_image_filtering/fredo_birds1.jpg){width="100%" #fig-translationInvar}
+  within the image. *Source*: Fredo Durand.](figures/linear_image_filtering/fredo_birds1.jpg){width="100%" #fig-translationInvar}
 
 An example of a translation invariant system is a function that takes as
 input an image and computes at each location a local average value of
