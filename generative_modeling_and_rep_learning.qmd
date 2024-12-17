@@ -694,7 +694,7 @@ identify the underlying latent variables that explain river appearance.
 In this example we will use data for which we know the true data
 generating process, which is simply a Python script that procedurally
 synthesizes cartoon images of rivers given input noise (this is a more
-elaborate version of the script we saw in @fig-generative_models-simple_rivers_script of @sec-generative_models. The script takes in random
+elaborate version of the script we saw in @alg-generative_models-simple_rivers_script of @sec-generative_models. The script takes in random
 values that control the attributes of the scene (the grass color, the
 heading of the river, the number of trees, etc.) and generates an image
 with these attributes, as shown in
@@ -729,7 +729,7 @@ process (the Python script), and the VAE recovered it. However,
 interestingly there was no single input to the script that controls the
 overall river curvature, instead the curves are generating by a vector
 of Bernoulli variables that rotate the heading left and right as the
-river extends (using the same algorithm as in @fig-generative_models-simple_rivers_script.) The VAE has discovered a latent
+river extends (using the same algorithm as in @alg-generative_models-simple_rivers_script.) The VAE has discovered a latent
 dimension that somehow summarizes a more global mode of behavior (i.e.,
 bend left or bend right) than is explicit in the Python script. It is
 important to realize that VAEs, and most representation learning

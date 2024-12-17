@@ -573,7 +573,7 @@ was nonnegative. This layer acts to mask out gradients for variables on
 the negative side of the $\texttt{relu}$. Notice that this operation is
 a matrix multiply --- in fact, *all* `backward` operations are matrix
 multiplies, no matter what the `forward` operation might be, as you can
-observe in algorithm @fig-backpropagation-backprop_for_chains.
+observe in algorithm @alg-backpropagation-backprop_for_chains.
 
 In the diagrams above, we have not yet included the computation of the
 parameter gradients. At each step of the backward pass, these are
