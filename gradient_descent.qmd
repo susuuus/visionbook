@@ -104,7 +104,7 @@ Besides the true gradient, what are some other good choices for $\mathbf{v}$? On
 
 As shown in @fig-gradient_descent-sampling_out1, this algorithm can successfully minimize the function in @fig-gradient_descent-grad_descent_simple_examples (c).
 
-![Using @fig-gradient_descent_ES) to minimize a nondifferentiable (zero-gradient) loss, using $\sigma=1$, $M=10$, and $\eta=0.02$.](./figures/gradient_descent/sampling_out1.png){#fig-gradient_descent-sampling_out1 width=80%}
+![Using @alg-gradient_descent_ES) to minimize a nondifferentiable (zero-gradient) loss, using $\sigma=1$, $M=10$, and $\eta=0.02$.](./figures/gradient_descent/sampling_out1.png){#fig-gradient_descent-sampling_out1 width=80%}
 
 ### Gradient Clipping
 
