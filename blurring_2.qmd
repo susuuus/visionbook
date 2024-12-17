@@ -104,7 +104,7 @@ $$
 \text{box}_{1,0} \circ \text{box}_{1,0} = \left[1, 1, 1\right] \circ \left[1, 1, 1\right] = \left[1,2,3,2,1\right]
 $$
 
-The output is a **triangular filter** \index{Filter!Triangular filter} with length $2\times L-1$, with $L=3$ the length of the box filter. When convolving two box filters of different lengths, the result will be a truncated triangle. Although that is not a problem at first sight, it means that if you blur an image twice with box filters, what you get is not the equivalent to blurring only once with a larger box filter.
+The output is a **triangular filter** \index{Filter!Triangular filter} with length $2 \times (L-1)$, with $L=3$ the length of the box filter. When convolving two box filters of different lengths, the result will be a truncated triangle. Although that is not a problem at first sight, it means that if you blur an image twice with box filters, what you get is not the equivalent to blurring only once with a larger box filter.
 
 The next low-pass filter addresses both of these issues.
 
@@ -329,9 +329,9 @@ $$
 
 The filter $b_{2,2}$ has a DC gain of 16, so we will divide the convolution output by 16 so that the output image has a similar contrast to the input image. 
 
-@fig-boat_b_noise shows an image corrupted by high-frequency checkerboard-pattern noise. The next two images are the result of filtering the noisy image with a $3\times3$ box filter (middle) and with the $b_{2,2}$ binomial filter.
+@fig-boat_b_noise shows an image corrupted by high-frequency checkerboard-pattern noise. The next two images are the result of filtering the noisy image with a $3 \times 3$ box filter (middle) and with the $b_{2,2}$ binomial filter.
 \index{Checkerboard-pattern noise}
-The $3\times3$ box filter cannot completely eliminate the noise, while the binomial filter can perfectly cancel this checkerboard noise. Both the box and the binomial filter reduce the resolution of the input image.
+The $3 \times 3$ box filter cannot completely eliminate the noise, while the binomial filter can perfectly cancel this checkerboard noise. Both the box and the binomial filter reduce the resolution of the input image.
 
 ::: {layout-ncol=3 #fig-boat_b_noise}
 ![Noisy Image.](figures/blur_filters/boat_b_noise.jpg){#fig-boat_b_noise-a}
@@ -340,7 +340,7 @@ The $3\times3$ box filter cannot completely eliminate the noise, while the binom
 
 ![Binomial Filtered Image.](figures/blur_filters/boat_d_binomial.jpg){#fig-boat_b_noise-c}
 
-Image corrupted by a checkerboard-pattern noise (right) and its output to two different blur kernels: (middle) $3\times3$ box filter. (right) Binomial filter $b_{2,2}$.
+Image corrupted by a checkerboard-pattern noise (right) and its output to two different blur kernels: (middle) $3 \times 3$ box filter. (right) Binomial filter $b_{2,2}$.
 :::
 
 ## Concluding Remarks

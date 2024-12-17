@@ -561,7 +561,7 @@ from one of the cameras, the equation reduces to the equation of a line
 for the coordinates of the other camera, which is consistent with the
 geometric reasoning that we made before.
 
-The essential matrix is a 3 $\times$ 3 matrix with some special
+The essential matrix is a $3 \times 3$ matrix with some special
 properties:
 
 -   $\mathbf{E}$ has five degrees of freedom instead of nine. To see
@@ -581,7 +581,7 @@ properties:
     the rotation matrix $\mathbf{R}$ that does not change the singular
     values.
 
-As a consequence, not all 3 $\times$ 3 matrices correspond to an
+As a consequence, not all $3 \times 3$ matrices correspond to an
 essential matrix which is important when trying to estimate
 $\mathbf{E}$.
 

@@ -59,9 +59,9 @@ $$ {#eq-deriv2}
 Where the matrix $\mathbf{B}=(\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1} \mathbf{A}^T$ is the regularized inverse of the imaging matrix $\mathbf{A}$.
 
 1D and the scene lives in flatland. Let the sensor measurements be ${\boldsymbol\ell_{\texttt{s}}}$ and the unknown scene be ${\boldsymbol\ell_{\texttt{w}}}$.  We represent the camera by matrix $\mathbf{A}$.  For the case of a pinhole camera, and assuming 13 pixel sensor
-observations, the camera matrix is just a 13$\times$13 identity matrix, depicted in @fig-amats1 (b), as each sensor depends only on the value of a single scene element.  
+observations, the camera matrix is just a $13 \times 13$ identity matrix, depicted in @fig-amats1 (b), as each sensor depends only on the value of a single scene element.  
 
-Let the sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be $\boldsymbol\ell_{\texttt{w}}$. We represent the camera by matrix $\mathbf{A}$. For the case of a pinhole camera, and assuming 13 pixel sensor observations, the camera matrix is just a 13$\times$13 identity matrix, depicted in @fig-amats1 (b), as each sensor depends only on the value of a single scene element.  
+Let the sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be $\boldsymbol\ell_{\texttt{w}}$. We represent the camera by matrix $\mathbf{A}$. For the case of a pinhole camera, and assuming 13 pixel sensor observations, the camera matrix is just a $13 \times 13$ identity matrix, depicted in @fig-amats1 (b), as each sensor depends only on the value of a single scene element.  
 
 Next, consider the case of a wide aperture pinhole camera, shown in . If
 ingle pixel in the sensor plane covers exactly two positions of the

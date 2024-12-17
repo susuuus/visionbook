@@ -273,7 +273,7 @@ into the original color space. For the results in @fig-two_examples,
 the algorithm is run only for 15 iterations. Adding more iterations
 makes the images look worse.
 
-![Two examples of synthesized textures. Inputs have a size of 256$\times$256 pixels, outputs are 512$\times$512. In these examples, the algorithm runs for 15 iterations, using a pyramid of six orientation and four scales.](figures/heeger_bergen/two_examples.png){width="100%" #fig-two_examples}
+![Two examples of synthesized textures. Inputs have a size of 256 $\times$ 256 pixels, outputs are 512 $\times$ 512. In these examples, the algorithm runs for 15 iterations, using a pyramid of six orientation and four scales.](figures/heeger_bergen/two_examples.png){width="100%" #fig-two_examples}
 
 Texture models using statistics of filter outputs are a precursor to
 diffusion models (@sec-generative_models-diffusion_models) and share a number

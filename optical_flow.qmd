@@ -164,7 +164,7 @@ remains onboard without getting confused by the indices and how the
 translation works, here is a simple toy example of a translation with
 $(u=1, v=0)$:
 
-![Translation to the right of a simple 6 $\times$ 6 size image.](figures/optical_flow/toy_motion_figure.png){width="50%" #fig-toy_motion_figure}
+![Translation to the right of a simple $6 \times 6$ size image.](figures/optical_flow/toy_motion_figure.png){width="50%" #fig-toy_motion_figure}
 
 
 
@@ -269,9 +269,9 @@ image structure is 1D inside the region of analysis that will be defined
 by the size of the Gaussian window $g(x,y)$.
 
 In order to implement this approach we can make use of convolutions in
-order to compute all the quantities efficiently in a compact algorithm @fig-gradient_algorithm:
+order to compute all the quantities efficiently in a compact algorithm @alg-gradient_algorithm:
 
-![](figures/optical_flow/gradient_algorithm.png){width="100%" #fig-gradient_algorithm}
+![Gradient-based optical flow estimation using two input frames.](figures/optical_flow/gradient_algorithm.png){width="100%" #alg-gradient_algorithm}
 
 To see how optical flow is computed from gradients, let's consider a
 simple sequence with two moving squares as shown in

@@ -292,14 +292,14 @@ angular directions. The result is shown in the bottom row of
 @fig-FT_angular_averages. The plot also shows three additional curves
 corresponding to $1/w$, $1/w^{1.5}$, and $1/w^2$. The plots are
 normalized to start at 1. These images have size
-512$\times$512. The frequency ranges used for the plot
+512 $\times$ 512. The frequency ranges used for the plot
 are $w \in [20,256]$. As we can see from the middle row, there are
 differences on how spectral content is organized across orientations,
 but the decay along the radial frequency roughly follows a $1/w^{1.5}$
 decay in these examples. And these property is shared across the four
 images despite their very distinct appearance.
 
-![(top) Three natural images with size 512$\times$512 pixels, and one random image. (middle) The magnitude of their Fourier transforms (FT), images are transformed to grayscale by averaging the three color channels. (bottom) Plot of the angular average of radial sections of the FT, compared with the curves that correspond to $1/w$, $1/w^{1.5}$, and $1/w^2$, where $w$ is the radial frequency. We can see that the FT of the three natural images decays roughly with $1/w^{\alpha}$. The noise image is very different (has a flat magnitude).](figures/statistical_image_models/FT_power_law_angular2.png){width="100%" #fig-FT_angular_averages}
+![(top) Three natural images with size 512 $\times$ 512 pixels, and one random image. (middle) The magnitude of their Fourier transforms (FT), images are transformed to grayscale by averaging the three color channels. (bottom) Plot of the angular average of radial sections of the FT, compared with the curves that correspond to $1/w$, $1/w^{1.5}$, and $1/w^2$, where $w$ is the radial frequency. We can see that the FT of the three natural images decays roughly with $1/w^{\alpha}$. The noise image is very different (has a flat magnitude).](figures/statistical_image_models/FT_power_law_angular2.png){width="100%" #fig-FT_angular_averages}
 
 We will now use this observation to build a better statistical model of
 images than using pixel histograms as we described in @sec-independent_pixels.

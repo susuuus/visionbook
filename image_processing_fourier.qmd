@@ -345,7 +345,7 @@ value of the image, therefore the resulting image is just a constant.
 The next two components correspond to two complex conjugates of a very
 slow varying wave. And so on. As more components get added, the figure
 slowly emerges. In this example, the first 127 coefficients are
-sufficient for recognizing this 64$\times$`<!-- -->`{=html}64 resolution
+sufficient for recognizing this $64 \times 64$ resolution
 image.
 
 ![Reconstructing an image from the $N$ Fourier coefficients of the largest amplitude.  The right frame shows the location, in the Fourier domain, of the $N$ Fourier coefficients, which when inverted, give the image at the left.](figures/Image_processing_fourier/dft_b.png){width="100%" #fig-DFT_b}

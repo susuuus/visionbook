@@ -111,7 +111,7 @@ intrinsic camera parameters, $\mathbf{K}$, of the sensor.
 
 ![](figures/learning_3d/depth-turbo.png){width="49%"}
 
-Image and depth captured by an Azure Kinect sensor. (a) RGB image; and (b) corresponding dense depth map. Both images have the same size of 1280 $\times$ 720 pixels.
+Image and depth captured by an Azure Kinect sensor. (a) RGB image; and (b) corresponding dense depth map. Both images have the same size of $1280 \times 720$ pixels.
 :::
 
 :::{.column-margin}

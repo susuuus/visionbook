@@ -309,7 +309,7 @@ To calibrate a camera we need the following three ingredients:
 
 -   An object of known size: In this setting, @fig-simple_calibration (a),
     the object is a $8\times10$ chessboard pattern printed so that each
-    square exactly measures 2 $\times$ 2 cm. The total width is
+    square exactly measures $2 \times 2$ cm. The total width is
     $W=20$ cm. This chessboard is a standard calibration target
     @Zhang1999.
 
