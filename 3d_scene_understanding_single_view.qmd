@@ -7,7 +7,7 @@ recovering three-dimensional (3D) information about the scene from a
 single image like the picture of the office we used before
 (@fig-finding_depth_office).
 
-![Is it possible to recover three-dimensional (3D) scene information from a single two-dimensional (2D) image? How tall is the desk? How wide is the bookshelf? What do we need to know about the scene in order to be able to answer those questions?](figures/single_view_3d/inverse_office_measurements.jpg){width=".8" #fig-finding_depth_office}
+![Is it possible to recover three-dimensional (3D) scene information from a single two-dimensional (2D) image? How tall is the desk? How wide is the bookshelf? What do we need to know about the scene in order to be able to answer those questions?](figures/single_view_3d/inverse_office_measurements.jpg){width="80%" #fig-finding_depth_office}
 
 Single view metrology relies on understanding the geometry of the image
 formation process, the rules of perspective, and other visual cues
@@ -42,7 +42,7 @@ in the street, the sky between the structures, and even what appears to
 be the entrance to a movie theater on the left sidewalk. Yet, the
 sidewalk is simply one line!
 
-![The image shows how scene understanding is possible from simple 3D cues and context. This sketch is a recreation of a real photograph shown in @Biederman1976](figures/single_view_3d/streetgeons.png){width=".8" #fig-streetgeons}
+![The image shows how scene understanding is possible from simple 3D cues and context. This sketch is a recreation of a real photograph shown in @Biederman1976](figures/single_view_3d/streetgeons.png){width="80%" #fig-streetgeons}
 
 We perceive everything we see in the sketch as 3D, even when we know
 that it's merely a 2D image. Our 3D processing is ingrained that we
@@ -88,7 +88,7 @@ the middle of it despite that the opening is closer to the right wall.
 
 
 
-![Make your own Ames room. Take a picture of this page and print it as large as you can (A4 or letter size will be sufficient). When you look through the aperture on the *front wall*, the room will appear square and smaller than it actually is. The shape of the *reference wall* is the only one that will appear unchanged, while all other planes will appear smaller than their actual size. You can change the room's content by drawing on the *reference wall* and then warping the image onto the other walls using homography. The floor pattern results from a homography with a square floor plan.](figures/single_view_3d/ames_room.png){width=".8" #fig-ames_room}
+![Make your own Ames room. Take a picture of this page and print it as large as you can (A4 or letter size will be sufficient). When you look through the aperture on the *front wall*, the room will appear square and smaller than it actually is. The shape of the *reference wall* is the only one that will appear unchanged, while all other planes will appear smaller than their actual size. You can change the room's content by drawing on the *reference wall* and then warping the image onto the other walls using homography. The floor pattern results from a homography with a square floor plan.](figures/single_view_3d/ames_room.png){width="80%" #fig-ames_room}
 
 This illusion is especially remarkable when the room is large enough for
 people to walk in. You will notice that as people walk along the back
@@ -323,7 +323,7 @@ their cross-product. Finally, the horizon line is the line that passes
 through both points that can be computed as the cross-product of the
 vanishing points in homogeneous coordinates.
 
-![Using parallel lines, in homogeneous coordinates, to compute vanishing points and the horizon line.](figures/imaging_geometry/horizon_line.png){width=".9" #fig-horizon_line_cross_products}
+![Using parallel lines, in homogeneous coordinates, to compute vanishing points and the horizon line.](figures/imaging_geometry/horizon_line.png){width="90%" #fig-horizon_line_cross_products}
 
 ### Detecting Vanishing Points
 
@@ -379,7 +379,9 @@ where $\left| \mathbf{P}_i -\mathbf{P}_j \right|$ is the euclidean
 distance between points $\mathbf{P}_i$ and $\mathbf{P}_j$, using
 heterogeneous coordinates.
 
-![](figures/single_view_3d/4_colinear_points.png){width=".25"}
+:::{.column-margin}
+![](figures/single_view_3d/4_colinear_points.png)
+:::
 
 The cross-ratio is considered the most important projective invariant.
 Two sets of points $\mathbf{P}$ and $\mathbf{Q}$ related by a projective
@@ -388,7 +390,7 @@ cross-ratio (regardless of the choice of origin $\mathbf{O}$ or scale
 factor). That is:
 $$CR(\mathbf{P}_1,\mathbf{P}_2,\mathbf{P}_3,\mathbf{P}_4) = CR(\mathbf{Q}_1,\mathbf{Q}_2,\mathbf{Q}_3,\mathbf{Q}_4)$$
 
-![The set of points $\mathbf{P}$ are related to the points $\mathbf{Q}$ (and $\mathbf{R}$) by the cross-ratio. The point $\mathbf{R}_1$ is in infinity because the line connecting the points $\mathbf{R}$ is parallel to the line passing by $\mathbf{O}$, $\mathbf{P}_1$, and $\mathbf{Q}_1$.](figures/single_view_3d/cross_ratio_description2.png){width=".9" #fig-cross_ratio_description}
+![The set of points $\mathbf{P}$ are related to the points $\mathbf{Q}$ (and $\mathbf{R}$) by the cross-ratio. The point $\mathbf{R}_1$ is in infinity because the line connecting the points $\mathbf{R}$ is parallel to the line passing by $\mathbf{O}$, $\mathbf{P}_1$, and $\mathbf{Q}_1$.](figures/single_view_3d/cross_ratio_description2.png){width="90%" #fig-cross_ratio_description}
 
 The order in which these points are considered matters in the
 calculation. There are $4!=24$ possible orderings resulting in six
@@ -615,7 +617,7 @@ present in the scene and are aligned with the image vanishing points. We
 will show how can we use the world-coordinates in order to extract 3D
 object locations from a single image.
 
-![Can we find out where to put the ticks in the world-coordinate axes as seen by the camera so that they correspond to calibrated measurements? Simply placing them at evenly spaced intervals along the three axes in the image won't be correct due to perspective projection.](figures/single_view_3d/office_world_calibration.png){width=".7" #fig-office_world_calibration}
+![Can we find out where to put the ticks in the world-coordinate axes as seen by the camera so that they correspond to calibrated measurements? Simply placing them at evenly spaced intervals along the three axes in the image won't be correct due to perspective projection.](figures/single_view_3d/office_world_calibration.png){width="70%" #fig-office_world_calibration}
 
 In this section we will describe first how to calibrate the projected
 world-coordinate axes in the image plane and then we will show how to

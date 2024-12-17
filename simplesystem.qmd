@@ -389,7 +389,7 @@ transitions from ground to figure are occlusion boundaries, and
 transitions from figure to ground are contact edges. This heuristic will
 fails when an object occludes
 another.](figures/simplesystem/ground_figure_points.png){#fig-ground_figure_points
-width=".5"}
+width="50%"}
 
 ### Generic View and Nonaccidental Scene Properties
 

@@ -28,7 +28,7 @@ $\mathbf{x} \in \mathcal{X}$, to abstract representations,
 $\mathbf{z} \in \mathcal{Z}$, as schematized in
 @fig-representation_learning-rep_learning_schematic:
 
-![The goal in this chapter is to learn to map from datapoints to abstract representations, which are typically simpler and more useful than the raw data.](figures/representation_learning/rep_learning_schematic.png){width=".52" #fig-representation_learning-rep_learning_schematic}
+![The goal in this chapter is to learn to map from datapoints to abstract representations, which are typically simpler and more useful than the raw data.](figures/representation_learning/rep_learning_schematic.png){width="52%" #fig-representation_learning-rep_learning_schematic}
 
 We call this mapping an **encoding** and learn an function
 $f: \mathcal{X} \rightarrow \mathcal{Z}$. Typically both $\mathbf{x}$
