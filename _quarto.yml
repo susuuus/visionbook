@@ -133,6 +133,8 @@ bibliography:
 
 format:
   html:
+    cite-method: natbib
+    # citation-style: cvpr.csl
     css: colors.css
     anchor-sections: true
     fontsize: "16px"
@@ -157,6 +159,11 @@ format:
     cap-location: margin
     mathjax: true
     lightbox: true
+    crossref:
+      custom:
+        - key: alg
+          kind: float
+          reference-prefix: Algorithm
     # include-in-header: title-block.html
     
   # pdf:
