@@ -133,7 +133,7 @@ bibliography:
 
 format:
   html:
-    cite-method: natbib
+    # cite-method: natbib
     # citation-style: cvpr.csl
     css: colors.css
     anchor-sections: true
