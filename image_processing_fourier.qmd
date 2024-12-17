@@ -463,10 +463,10 @@ equation (@eq-boxdftderivation) as
 
 $$\begin{aligned}
 \sum_{n=-L}^{L} \,
-\exp{ \left( -2\pi j \frac{u\, n}{N} \right)} & = & 
+\exp{ \left( -2\pi j \frac{u\, n}{N} \right)} &= 
 \frac{\exp{ \left( \pi j \frac{u(2L+1)}{N} \right)} - \exp{ \left( -\pi j \frac{u(2L+1)}{N} \right)}}
 {\exp{ \left( \pi j \frac{u}{N} \right)} - \exp{ \left( - \pi j \frac{u}{N} \right)} } \\
-& = & \frac{\sin \left( \pi u(2L+1)/N \right)}{\sin \left( \pi u/N \right)}
+&= \frac{\sin \left( \pi u(2L+1)/N \right)}{\sin \left( \pi u/N \right)}
 \end{aligned}$${#eq-discrete_sinc_function}
 
 This last function in equation (@eq-discrete_sinc_function) gets the

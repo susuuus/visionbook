@@ -264,11 +264,11 @@ If the distance from the sensing plane to the pinhole is $f$ (see ) then
 similar triangles gives us the following relations: 
 
 $$\begin{align}
-x & = & f \frac{X}{Z}
+x &= f \frac{X}{Z}
 \end{align}$$ {#eq-perspctiveProj1}
 
 $$\begin{align}
-y & = & f \frac{Y}{Z} 
+y &= f \frac{Y}{Z} 
 \end{align}$${#eq-perspctiveProj}
 
 :::{.column-margin}
@@ -293,8 +293,8 @@ way we usually do for image coordinates $(m,n)$, where $m$ indexes the
 pixel column and $n$ the pixel row in an image. This is shown in . The
 relationship between camera coordinates and image coordinates is
 $$\begin{aligned}
-n & = & - a x + n_0\\
-m & = & a y + m_0
+n &= - a x + n_0\\
+m &= a y + m_0
 \label{eq-cameratoimagecoordinates}
 \end{aligned}$$ where $a$ is a constant, and $(n_0, m_0)$ is the image
 coordinates of the camera optical axis. Note that this is different than
@@ -326,8 +326,8 @@ In this projection, as the rays are orthogonal to the projection plane,
 the size of objects is independent of the distance to the camera. The
 projection equations are generally written as follows: 
 $$\begin{aligned}
-x & = & k X \nonumber \\
-y & = & k Y
+x &= k X \nonumber \\
+y &= k Y
 \end{aligned}
 $${#eq-orthographicProj}
 where the constant scaling factor $k$ accounts for

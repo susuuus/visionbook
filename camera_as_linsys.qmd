@@ -47,8 +47,8 @@ The regularization parameter, $\lambda$, determines the trade-off between explai
 Setting the derivative of @eq-posterior of the vector $\boldsymbol\ell_{\texttt{w}}$ equal to zero, we have 
 $$
 \begin{align}
-0 & = &  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lVert \boldsymbol\ell_{\texttt{s}}- \mathbf{A} \boldsymbol\ell_{\texttt{w}}\rVert ^2 +  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lambda \lVert \boldsymbol\ell_{\texttt{w}}\rVert ^2 \\
-& = &  \mathbf{A}^T \mathbf{A} \boldsymbol\ell_{\texttt{w}}- \mathbf{A}^T \boldsymbol\ell_{\texttt{s}}+ \lambda \boldsymbol\ell_{\texttt{w}}
+0 &=  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lVert \boldsymbol\ell_{\texttt{s}}- \mathbf{A} \boldsymbol\ell_{\texttt{w}}\rVert ^2 +  \bigtriangledown_{\boldsymbol\ell_{\texttt{w}}} \lambda \lVert \boldsymbol\ell_{\texttt{w}}\rVert ^2 \\
+&=  \mathbf{A}^T \mathbf{A} \boldsymbol\ell_{\texttt{w}}- \mathbf{A}^T \boldsymbol\ell_{\texttt{s}}+ \lambda \boldsymbol\ell_{\texttt{w}}
 \end{align}
 $$ {#eq-deriv}
 or 

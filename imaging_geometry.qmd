@@ -74,7 +74,7 @@ homogeneous coordinates, $\mathbf{P}=[X, Y, Z, 1]^\mathsf{T}$.
 We can verify that the matrix, $\mathbf{K}$, shown below, multiplied by
 the vector describing the 3D point, $\mathbf{P}$, returns the position
 of its perspective projection (equation \[@eq-perspctiveProj\]):
-$$\begin{aligned}    \mathbf{K} \mathbf{P} & = &
+$$\begin{aligned}    \mathbf{K} \mathbf{P} &=
     \begin{bmatrix}
     f & 0 & 0 & 0 \\
     0 & f & 0 & 0 \\

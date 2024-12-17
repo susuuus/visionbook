@@ -29,8 +29,8 @@ Using the equations of perspective projection $x=f X/Z$ and $y=f Y/Z$
 system), we can derive the equations of how the instantaneous velocity
 in the camera plane relates to the point motion in 3D world coordinates:
 $$\begin{aligned}
-\dot{x} & = & f \frac{\dot{X} Z - \dot{Z} X}{Z^2} = \frac{f \dot{X} - \dot{Z} x}{Z}\\
-\dot{y} & = & f \frac{\dot{Y} Z - \dot{Z} Y}{Z^2} = \frac{f \dot{Y} - \dot{Z} y}{Z} 
+\dot{x} &= f \frac{\dot{X} Z - \dot{Z} X}{Z^2} = \frac{f \dot{X} - \dot{Z} x}{Z}\\
+\dot{y} &= f \frac{\dot{Y} Z - \dot{Z} Y}{Z^2} = \frac{f \dot{Y} - \dot{Z} y}{Z} 
 \end{aligned}$$ The second expression is obtained by using $x=f \, X/Z$
 and $y=f \, Y/Z$, which removes the dependency on the world coordinates
 $X$ and $Y$. Note that $f$ is the focal length. In many derivations, the
@@ -114,8 +114,8 @@ $\mathbf{P}(t) = (X+V_Xt, Y+V_Yt, Z+V_Zt)^\mathsf{T}$, and its 2D
 projection: 
 
 $$\begin{aligned}
-x(t) & = & f \frac{X + V_X t}{Z + V_Z t}\\
-y(t) & = & f \frac{Y + V_Y t}{Z + V_Z t} 
+x(t) &= f \frac{X + V_X t}{Z + V_Z t}\\
+y(t) &= f \frac{Y + V_Y t}{Z + V_Z t} 
 \end{aligned}$$ 
 
 If $\dot{Z}=0$, then the projected point will move with
@@ -124,8 +124,8 @@ If $\dot{Z} \neq  0$, then, as time goes to infinity, the point will
 converge to a **vanishing point**: 
 
 $$\begin{aligned}
-\lim_{t \to \infty} x(t)  & = & f \frac{V_X}{V_Z} = x_{\infty}\\
-\lim_{t \to \infty} y(t) & = & f \frac{V_Y}{V_Z} = y_{\infty}
+\lim_{t \to \infty} x(t)  &= f \frac{V_X}{V_Z} = x_{\infty}\\
+\lim_{t \to \infty} y(t) &= f \frac{V_Y}{V_Z} = y_{\infty}
 \end{aligned}$${#eq-motionvanishingpoint}
 
 The following sketch (@fig-flying_bird) shows Gibson's bird (see

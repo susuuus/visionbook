@@ -469,7 +469,7 @@ In a 3D vertical edge, using the projection equations, the derivative of
 $Y$ along the edge will be 
 
 $$\begin{aligned}
-\partial Y / \partial y & = & 1/ \cos(\theta)\end{aligned}
+\partial Y / \partial y &= 1/ \cos(\theta)\end{aligned}
 $${#eq-derivative_Y_along_edge}
 
 
@@ -477,7 +477,7 @@ In a 3D horizontal edge, the coordinate $Y$ will not change. Therefore,
 the derivative along the edge should be zero: 
 
 $$\begin{aligned}
-\partial Y / \partial {\bf t} & = & 0
+\partial Y / \partial {\bf t} &= 0
 \end{aligned}
 $${#eq-derivative_Y_along_edge_hor} 
 
@@ -506,7 +506,7 @@ derivatives in the same way that we approximated the image partial
 derivatives in equations (@eq-image_partial_derivatives_aprox). Using
 this approximation, @eq-derivative_Y_along_edge can be written as
 follows: $$\begin{aligned}
-Y(x,y)-Y(x,y-1) & = & 1/ \cos(\theta)
+Y(x,y)-Y(x,y-1) &= 1/ \cos(\theta)
 \end{aligned}$$
 
 Similar relationships can be obtained from equations
@@ -538,9 +538,9 @@ Information about its 3D orientation its propagated from the surrounding edges.
 In this case we will assume that the object faces are planar. Thus, flat
 image regions impose the following constraints on the local 3D
 structure: $$\begin{aligned}
-\partial^2 Y / \partial x^2 & = & 0  \\
-\partial^2 Y / \partial y^2 & = & 0 \\  
-\partial^2 Y / \partial y \partial x & = & 0 
+\partial^2 Y / \partial x^2 &= 0  \\
+\partial^2 Y / \partial y^2 &= 0 \\  
+\partial^2 Y / \partial y \partial x &= 0 
 \end{aligned}$$ That is, the second order derivative of $Y$ should be
 zero. As before, we want to approximate the continuous partial
 derivatives. The approximation to the second derivative can be obtained

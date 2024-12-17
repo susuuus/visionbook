@@ -314,10 +314,10 @@ much more efficiently. This will make only a small difference for this
 short chain, but it makes a huge difference for longer ones. So we write
 $$\begin{aligned}
 p\left(x_1 \mid \mathbf{y}\right)
-& = & 
+&= 
 \frac{1}{p(\mathbf{y})} \sum_{x_2} \sum_{x_3} \phi_{12}\left(x_1, x_2\right) \phi_{23}\left(x_2, x_3\right) \psi_1\left(y_1, x_1\right) \psi_2\left(y_2, x_2\right) \psi_3\left(y_3, x_3\right)
 \\
-& = &
+&=
 \frac{1}{p(\mathbf{y})}
 \psi_{1}(y_1, x_1) 
 \sum_{x_2} \phi_{12}(x_1, x_2) \psi_{2}(y_2, x_2) 
@@ -709,8 +709,8 @@ nodes can send messages along their edges without waiting for any
 messages to be updated. For the message from node 1, we have
 
 $$\begin{aligned}
-m_{12}(x_2) & = & \sum_{x_1} \psi_{12} (x_1, x_2)  \nonumber \\
-& = & 
+m_{12}(x_2) &= \sum_{x_1} \psi_{12} (x_1, x_2)  \nonumber \\
+&= 
 \begin{bmatrix} 
 1.0 & 0.9 \\ 
 0.9 & 1.0 
@@ -739,8 +739,8 @@ marginal probabilities to sum to 1. Here, we will normalize the messages
 for simplicity, absorbing the normalization into constants, $k_i$.
 
 The message from node 3 to node 2 is $$\begin{aligned}
-m_{32}(x_2) & = & \sum_{x_3} \psi_{32} (x_2, x_3) \nonumber  \\
-& = & 
+m_{32}(x_2) &= \sum_{x_3} \psi_{32} (x_2, x_3) \nonumber  \\
+&= 
 \begin{bmatrix}
 0.1 & 1.0 \\
 1.0 & 0.1 
@@ -766,8 +766,8 @@ We have a nontrivial message from observed node $y_2$ (node 4) to the
 hidden variable $x_2$: 
 
 $$\begin{aligned}
-m_{42}(x_2) & = & \sum_{x_4} \psi_{42} (x_2, y_2)  \nonumber \\
-& = & 
+m_{42}(x_2) &= \sum_{x_4} \psi_{42} (x_2, y_2)  \nonumber \\
+&= 
 \begin{bmatrix}
 1.0 & 0.1 \\
 0.1 & 1.0 
@@ -789,8 +789,8 @@ Now we just have two messages left to compute before we have all
 messages computed (and therefore all node marginals computed from simple
 combinations of those messages). The message from node 2 to node 1 uses
 the messages from nodes 4 to 2 and 3 to 2: $$\begin{aligned}
-m_{21}(x_1) & = & \sum_{x_2} \psi_{12} (x_1, x_2)  m_{42}(x_2) m_{32}(x_2) \nonumber \\
-& = & 
+m_{21}(x_1) &= \sum_{x_2} \psi_{12} (x_1, x_2)  m_{42}(x_2) m_{32}(x_2) \nonumber \\
+&= 
 \begin{bmatrix}
 1.0 & 0.9 \\
 0.9 & 1.0 
@@ -817,8 +817,8 @@ The final message is that from node 2 to node 3 (since $y_2$ is
 observed, we don't need to compute the message from node 2 to node 4).
 That message is: 
 $$\begin{aligned}
-m_{23}(x_3) & = & \sum_{x_2} \psi_{23} (x_2, x_3)   m_{42}(x_2) m_{12}(x_2) \nonumber  \\
-& = & 
+m_{23}(x_3) &= \sum_{x_2} \psi_{23} (x_2, x_3)   m_{42}(x_2) m_{12}(x_2) \nonumber  \\
+&= 
 \begin{bmatrix}
 0.1 & 1.0 \\
 1.0 & 0.1 
@@ -859,8 +859,8 @@ The marginal at node 2 is proportional to the product of three messages.
 Two of those are trivial messages, but we'll show them all for
 completeness: 
 $$\begin{aligned}
-p_2(x_2) & = & k_4 m_{12}(x_2)  m_{42}(x_2)  m_{32}(x_2) \\
-& = & k_4 
+p_2(x_2) &= k_4 m_{12}(x_2)  m_{42}(x_2)  m_{32}(x_2) \\
+&= k_4 
 \begin{bmatrix} 
 1 \\ 
 1

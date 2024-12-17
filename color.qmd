@@ -399,12 +399,12 @@ sensors-to-primaries mixing matrix, $\mathbf{M}$ for a color
 reproduction system are summarized below: 
 
 $$\begin{aligned}
-\mathbf{C} & = & \mathbf{R} \mathbf{C}_{\mbox{eye}} 
+\mathbf{C} &= \mathbf{R} \mathbf{C}_{\mbox{eye}} 
 \end{aligned}
 $${#eq-conditionsA} 
 
 $$\begin{aligned}
-\mathbf{M} & = & (\mathbf{C P})^{-1},
+\mathbf{M} &= (\mathbf{C P})^{-1},
 \end{aligned}
 $${#eq-conditions} 
 
