@@ -1321,7 +1321,7 @@ algorithms was high.
 period of roughly 25 years. What will happen
 next?](figures/taxonomy/neural_net_enthusiasm.png){#fig-taxonomy-neural_net_enthusiam width="70%"}
 
-In 1969, @marvin1969perceptrons published a book titled Perceptrons. You might think this would be a book that would
+In 1969, Marvin Minsky and Seymour Papert published a book titled *Perceptrons: an introduction to computational geometry* @marvin1969perceptrons. You might think this would be a book that would
 increase the excitement around perceptrons, but in fact it largely
 killed it. Minsky and Papert showed that perceptrons are incapable of
 learning basic logical operations. Clearly then, perceptrons could not

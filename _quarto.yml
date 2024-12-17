@@ -133,8 +133,7 @@ bibliography:
 
 format:
   html:
-    # cite-method: natbib
-    # citation-style: cvpr.csl
+    citation-style: elsevier-with-titles.csl
     css: colors.css
     anchor-sections: true
     fontsize: "16px"

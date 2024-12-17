@@ -252,9 +252,10 @@ Gradient of an image at one location.
 
 However, the image is not a continuous function as we only know the
 values of the $\ell (x,y)$ at discrete locations (pixels). Therefore, we
-will approximate the partial derivatives by: $$\begin{aligned}
-\frac{\partial \ell}{\partial x} & \simeq & \ell(x,y) - \ell(x-1,y) \\
-\frac{\partial \ell}{\partial y} & \simeq & \ell(x,y) - \ell(x,y-1) 
+will approximate the partial derivatives by: 
+$$\begin{aligned}
+\frac{\partial \ell}{\partial x} &\simeq \ell(x,y) - \ell(x-1,y) \\
+\frac{\partial \ell}{\partial y} &\simeq \ell(x,y) - \ell(x,y-1) 
 \end{aligned}$${#eq-image_partial_derivatives_aprox}
 
 A better behaved approximation of the partial image derivative can be
