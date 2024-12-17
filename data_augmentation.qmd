@@ -156,13 +156,13 @@ are all slight variations of one another, just like we saw previously in
 @fig-generative_modeling_and_representation_learning-biggan_latent_walk.
 One simple approach is to just use Gaussian perturbations in latent
 space, that is, $\mathbf{w} \sim \mathcal{N}(0,\sigma^2)$ for some
-perturbation scale given by $\sigma$. Algorithm
-@fig-data_augmentation-generative_data_augmentation
+perturbation scale given by $\sigma$. 
+@alg-data_augmentation-generative_data_augmentation
 formalizes this approach (see @chai2021ensembling for a representative
 work that roughly follows this recipe, or @azizi2023synthetic for an
 alternative approach to generative data augmentation).
 
-![](./figures/data_augmentation/genaug.png){width="100%" #fig-data_augmentation-generative_data_augmentation}
+![Generative data augmentation `genaug`](./figures/data_augmentation/genaug.png){width="100%" #alg-data_augmentation-generative_data_augmentation}
 
 There are some subtleties when working with learned data augmentation.
 You might be tempted to train $g_{\theta}$ on the same dataset you are
@@ -180,7 +180,7 @@ It can be confusing to think of a learning *algorithm* as a *function*, but that
 Without data augmentation we have $f = L(X)$, and with data
 augmentation we have $f = L(\tilde{X})$. But now, when $g_{\theta}$ is
 trained on $X$, then $\tilde{X}$ is just a function of $X$; in
-particular, if we use algorithm @fig-data_augmentation-generative_data_augmentation, it is
+particular, if we use algorithm @alg-data_augmentation-generative_data_augmentation, it is
 $\tilde{X} = \texttt{genaug}(X)$. So, we can define a new learner
 $\tilde{L} = L \circ \texttt{genaug}$ where we have
 $f = \tilde{L}(X) = L(\texttt{genaug}(X)) = L(\tilde{X})$. This

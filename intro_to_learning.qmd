@@ -15,7 +15,7 @@ Because learning is itself an algorithm, it can be understood as a
 meta-algorithm: an algorithm that outputs algorithms
 (@fig-learning_as_meta_algorithm).
 
-![](./figures/intro_to_learning/learning_as_meta_algorithm.png){#fig-learning_as_meta_algorithm}
+![Learning is an algorithm that outputs algorithms.](./figures/intro_to_learning/learning_as_meta_algorithm.png){#fig-learning_as_meta_algorithm}
 
 Learning usually consists of two phases: the phase, where we search for
 an algorithm that performs well on past instances of the problem
@@ -49,7 +49,7 @@ It may not seem like it, but you just performed learning! You *learned*
 what $\star$ does by looking at examples. In fact,
 @fig-star_symbol_learning shows what you did:
 
-![](./figures/intro_to_learning/star_symbol_learning.png){#fig-star_symbol_learning}
+![How your brain may have solved the star problem.](./figures/intro_to_learning/star_symbol_learning.png){#fig-star_symbol_learning}
 
 Nice job!
 
@@ -78,7 +78,7 @@ complicated. From the three examples in
 @fig-intro_to_learning-inpainting_example, can you figure out what the
 operator $F$ does?
 
-![](./figures/intro_to_learning/inpainting_example.png){#fig-intro_to_learning-inpainting_example}
+![A complicated function that could be learned from examples. This example is from @hays2007scene. ](./figures/intro_to_learning/inpainting_example.png){#fig-intro_to_learning-inpainting_example}
 
 You probably came up with something like "it fills in the missing
 pixels." That's exactly right, but it's sweeping a lot of details under
@@ -151,7 +151,9 @@ on sufficient hardware (referred to as **compute**) can do amazing
 things. We will focus on the learning algorithms in this chapter, but
 often the data and compute turn out to be more important.
 
-![](./figures/intro_to_learning/key_ingredients.png){#fig-intro_to_learning-key_ingredients width="70%"}
+:::{.centered}
+![](./figures/intro_to_learning/key_ingredients.png){width="70%"}
+:::
 
 A learner outputs an algorithm, $f: \mathcal{X} \rightarrow \mathcal{Y}$, which maps inputs, $\mathbf{x} \in \mathcal{X}$, to outputs, $\mathbf{y} \in \mathcal{Y}$.
 Commonly, $f$ is referred to as the **learned function**. The objective

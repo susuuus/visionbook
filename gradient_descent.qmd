@@ -31,9 +31,9 @@ Higher-order optimization methods observe higher-order derivatives of the loss, 
 
 ## Basic Gradient Descent
 
-The simplest version of gradient descent just takes a step in the gradient direction of length proportional to the gradient magnitude. This algorithm is described in @fig-gradient_descent_basic_gradient_descent.
+The simplest version of gradient descent just takes a step in the gradient direction of length proportional to the gradient magnitude. This algorithm is described in @alg-gradient_descent_basic_gradient_descent.
 
-![Gradient descent `GD`. Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by descending the gradient $\nabla_{\theta} J$.](./figures/gradient_descent/alg1.png){#fig-gradient_descent_basic_gradient_descent}
+![Gradient descent `GD`. Optimizing a cost function $J: \theta \rightarrow \mathbb{R}$ by descending the gradient $\nabla_{\theta} J$.](./figures/gradient_descent/alg1.png){#alg-gradient_descent_basic_gradient_descent}
 
 This algorithm has two hyperparameters, the **learning rate** $\eta$, which controls the step size (learning rate times gradient magnitude), and the number of steps $K$. If the learning rate is sufficiently small and the initial parameter vector $\theta^0$ is random, then this algorithm will almost surely converge to a local minimum of $J$ as $K \rightarrow \infty$~\cite{lee2016gradient}. However, to descend more quickly, it can be useful to set the learning rate to a higher value. 
 
@@ -59,9 +59,9 @@ $$
 One downside of linear decay is that it depends on the total number of steps $K$. This makes it hard to compare optimization runs of different lengths. This is something to also be aware of in more advanced learning rate schedules, such as cosine decay~\cite{loshchilov2016sgdr}, which also have different behavior for different settings of $K$.
 :::
 
-The $\beta$ and $M$ are additional hyperparameters of these methods. The general approach of learning rate decay is summarized in @fig-gradient_descent_gradient_descent_with_lr_decay.
+The $\beta$ and $M$ are additional hyperparameters of these methods. The general approach of learning rate decay is summarized in @alg-gradient_descent_gradient_descent_with_lr_decay.
 
-![Gradient descent with learning rate decay algorithm.](./figures/gradient_descent/alg2.png){#fig-gradient_descent_gradient_descent_with_lr_decay}
+![Gradient descent with learning rate decay algorithm.](./figures/gradient_descent/alg2.png){#alg-gradient_descent_gradient_descent_with_lr_decay}
 
 Variations on this algorithm include only decaying the learning rate when a plateau is reached (i.e., when the loss is not decreasing for many iterations in a row), or decaying the learning rate according to more complex nonlinear schedules, such as one shaped like a cosine function~\cite{loshchilov2016sgdr}.
 
@@ -71,9 +71,9 @@ Could we do a smarter update than just taking a step in the direction of the gra
 $$
 \mathbf{v}^{k+1} = \mu \mathbf{v}^{k} - \eta\nabla_{\theta} J(\theta^k)
 $$
-The weight $\mu$ in this combination is a new hyperparameter, sometimes simply called the momentum. The full algorithm is given in @fig-gradient_descent_gradient_descent_with_momentum.
+The weight $\mu$ in this combination is a new hyperparameter, sometimes simply called the momentum. The full algorithm is given in @alg-gradient_descent_gradient_descent_with_momentum.
 
-![Gradient descent with momentum algorithm.](./figures/gradient_descent/alg3.png){#fig-gradient_descent_gradient_descent_with_momentum}
+![Gradient descent with momentum algorithm.](./figures/gradient_descent/alg3.png){#alg-gradient_descent_gradient_descent_with_momentum}
 
 @fig-gradient_descent-momentum_out1 shows how momentum affects gradient descent for a simple objective $J = \texttt{abs}(\theta)$ (absolute value of $\theta$). As can be seen in the figure, some momentum can help the convergence rate ($\mu = 0.5$) but too much momentum will cause the trajectory to overshoot the optimum and even when the optimum loss is achieved, the trajectory might not stop (@fig-gradient_descent-momentum_out1 $\mu = 0.95$).
 
@@ -98,9 +98,9 @@ Finally, @fig-gradient_descent-grad_descent_simple_examples (f) shows one more p
 
 What about minimizing functions like @fig-gradient_descent-grad_descent_simple_examples (d), where the gradient is zero almost everywhere? This is a case where gradient descent truly struggles. However, it is often possible to transform such a problem into one that can be treated with gradient descent. Remember that the key property of a gradient, from the perspective of optimization, is that it is a locally loss-minimizing direction in parameter space. Most gradient-based optimizers don't really need true gradients; instead, their update functions are compatible with a broader family of local loss-minimizing directions, $\mathbf{v}$. 
 
-Besides the true gradient, what are some other good choices for $\mathbf{v}$? One common idea is to set $\mathbf{v}$ to be the gradient of a **surrogate loss** function, which is a function, $J_{\texttt{surr}}$, with meaningful (non-zero) gradients that approximates $J$. An example might be a smoothed version of $J$. Another way to get $\mathbf{v}$ is to compute it by sampling perturbations of $\theta$, and seeing which perturbation leads to lower loss. In this strategy, we evaluate $J(\theta+\epsilon)$ for a set of perturbations $\epsilon$, then move toward the $\epsilon$'s that decreased the loss. Approaches of this kind are sometimes called **evolution strategies**~\cite{beyer2002evolution, salimans2017evolution}, and a basic version of this algorithm is given in @fig-gradient_descent_ES.
+Besides the true gradient, what are some other good choices for $\mathbf{v}$? One common idea is to set $\mathbf{v}$ to be the gradient of a **surrogate loss** function, which is a function, $J_{\texttt{surr}}$, with meaningful (non-zero) gradients that approximates $J$. An example might be a smoothed version of $J$. Another way to get $\mathbf{v}$ is to compute it by sampling perturbations of $\theta$, and seeing which perturbation leads to lower loss. In this strategy, we evaluate $J(\theta+\epsilon)$ for a set of perturbations $\epsilon$, then move toward the $\epsilon$'s that decreased the loss. Approaches of this kind are sometimes called **evolution strategies**~\cite{beyer2002evolution, salimans2017evolution}, and a basic version of this algorithm is given in @alg-gradient_descent_ES.
 
-![Evolution strategy algorithm.](./figures/gradient_descent/alg4.png){#fig-gradient_descent_ES}
+![Evolution strategy algorithm.](./figures/gradient_descent/alg4.png){#alg-gradient_descent_ES}
 
 As shown in @fig-gradient_descent-sampling_out1, this algorithm can successfully minimize the function in @fig-gradient_descent-grad_descent_simple_examples (c).
 
@@ -108,9 +108,9 @@ As shown in @fig-gradient_descent-sampling_out1, this algorithm can successfully
 
 ### Gradient Clipping
 
-What about @fig-gradient_descent-grad_descent_simple_examples (e), where the gradient explodes near the optimum? Is there anything we can do to improve the optimization of this function? To combat exploding gradients, a useful trick is **gradient clipping**, which just means clamping the magnitude of the gradient to some maximum value. @fig-gradient_descent_grad_clipping describes this approach.
+What about @fig-gradient_descent-grad_descent_simple_examples (e), where the gradient explodes near the optimum? Is there anything we can do to improve the optimization of this function? To combat exploding gradients, a useful trick is **gradient clipping**, which just means clamping the magnitude of the gradient to some maximum value. @alg-gradient_descent_grad_clipping describes this approach.
 
-![Gradient clipping algorithm.](./figures/gradient_descent/alg5.png){#fig-gradient_descent_grad_clipping}
+![Gradient clipping algorithm.](./figures/gradient_descent/alg5.png){#alg-gradient_descent_grad_clipping}
 
 :::{.column-margin}
 `clip` is the "clipping" function: $\texttt{clip}(v, -m, m) = \max(\min(v,m),-m)$
@@ -147,9 +147,9 @@ If we sample a large batch, where $B$ is almost as large as $N$, then the averag
 
 The variant of gradient descent that uses this idea is called **stochastic gradient descent** (SGD), because each iteration of descent uses a different randomly (stochastically) sampled batch of training data to estimate the gradient. 
 
-The full description of SGD is given in 
+The full description of SGD is given in @alg-gradient_descent_SGD.
 
-![Stochastic gradient descent algorithm.](./figures/gradient_descent/alg6.png){#fig-gradient_descent_SGD}
+![Stochastic gradient descent algorithm.](./figures/gradient_descent/alg6.png){#alg-gradient_descent_SGD}
 
 `SGD` has a number of useful properties beyond just being faster to compute than `GD`. Because each step of descent is somewhat random, $\texttt{SGD}$ can jump over small bumps in the loss landscape, as long those bumps disappear for some randomly sampled batches. Another important property is that $\texttt{SGD}$ can implicitly regularize the learning problem. For example, for linear problems (i.e., $f_\theta$ is linear), then if there are multiple parameter settings that minimize the loss, $\texttt{SGD}$ will often converge to the solution with minimum parameter norm~\cite{zhang2021understanding}.
 

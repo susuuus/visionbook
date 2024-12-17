@@ -107,7 +107,7 @@ flip a coin to decide whether to turn left or right, repeat."
 
 Here is that program in pseudocode:
 
-![A simple generative model that draws images of rivers.](./figures/generative_models/simple_rivers_script.png){width="100%" #fig-generative_models-simple_rivers_script}
+![A simple generative model that draws images of rivers.](./figures/generative_models/simple_rivers_script.png){width="100%" #alg-generative_models-simple_rivers_script}
 
 
 Here are a few rivers this program draws
@@ -803,12 +803,12 @@ that has been corrupted by our noise (if $t$ is large this is likely) or
 a scene where the actual physical structure is full of chaotic, rough
 textures that happen to look like noise (if $t$ is small this is more
 likely, because for small $t$ we haven't added much noise to the scene
-yet). Algorithm @fig-generative_models-diffusion_model presents these steps
+yet). Algorithm @alg-generative_models-diffusion_model presents these steps
 in more formal detail.
 
-![Diffusion Model](./figures/generative_models/diffusion_model.png){width="100%" #fig-generative_models-diffusion_model}
+![Training a diffusion model consists of first producing training pairs of the form $\{noisy image, less noisy image\}$. Then do supervised learning on these pairs.](./figures/generative_models/diffusion_model.png){width="100%" #alg-generative_models-diffusion_model}
 
-In @fig-generative_models-diffusion_model we train the denoiser
+In @alg-generative_models-diffusion_model we train the denoiser
 using a loss $\mathcal{L}$, which could be the $L_2$ distance. In many
 diffusion models, $f_{\theta}$ is instead trained to output the
 parameters (mean and variance) as a Gaussian density model fit to the

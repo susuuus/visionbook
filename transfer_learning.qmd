@@ -86,12 +86,12 @@ There are three stages: (1) pretrain
 $f: \mathcal{X} \rightarrow \mathcal{Y}$, (2) initialize
 $f^{\prime} = f$, and (3) finetune
 $f^{\prime}: \mathcal{X}^{\prime} \rightarrow \mathcal{Y}^{\prime}$. The
-full algorithm is written in algorithm
-@fig-transfer_learning-finetuning, with $f$ and $f^{\prime}$
+full algorithm is written in 
+@alg-transfer_learning-finetuning, with $f$ and $f^{\prime}$
 indicated as just a continually learning $f_{\theta}$ with different
 iterates of $\theta$ as learning progresses.
 
-![](./figures/transfer_learning/fig-transfer_learning-finetuning.png){width="100%" #fig-transfer_learning-finetuning}
+![Finetuning. Using gradient descent to train one model and then finetuning to produce a second model.](./figures/transfer_learning/fig-transfer_learning-finetuning.png){width="100%" #alg-transfer_learning-finetuning}
 
 Finetuning is simple and works well. But there is one tricky bit we
 still need to deal with: What if the structure of $f_{\theta}$ is

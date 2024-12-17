@@ -229,9 +229,9 @@ gradients for each layer (@fig-backpropagation-backward_pass).
 ![](figures/backpropagation/backward_pass.png){#fig-backpropagation-backward_pass width="100%"}
 
 
-The full algorithm is summarized in algorithm @fig-backpropagation-backprop_for_chains.
+The full algorithm is summarized in algorithm @alg-backpropagation-backprop_for_chains.
 
-![](figures/backpropagation/backprop_for_chains.png){#fig-backpropagation-backprop_for_chains width="100%"}
+![Backpropagation (for chain computation graphs). A simple version of the backpropagation algorithm. This will work for the computation graphs we have seen so far, which consist of a series of layers, $f_1 \circ \ldots \circ f_L$, with no merging or branching (see @sec-backpropagation-branch_and_merge for how to handle more complicated graphs with merge and branch operations).](figures/backpropagation/backprop_for_chains.png){#alg-backpropagation-backprop_for_chains width="100%"}
 
 ## Backpropagation Over Data Batches
 
