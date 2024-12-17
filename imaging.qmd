@@ -17,7 +17,7 @@ Visible light is electromagnetic radiation, exhibiting wave effects like
 diffraction. For many imaging models, however, it is helpful to
 introduce the abstraction of a **light ray**, describing the light
 radiation heading in a particular direction from a particular location
-in space (). A light ray is specified by its position, direction, and
+in space (@fig-lightSpray). A light ray is specified by its position, direction, and
 intensity as a function of wavelength and polarization. In this
 treatment, we ignore diffraction effects.
 
@@ -75,7 +75,7 @@ is the **Phong reflection model** @Phong1975. The light reflected from a
 surface is assumed to have three components that result in the observed
 reflection: (1) an ambient component, which is a constant term added to
 all reflections; (2) a diffuse component, which is the Lambertian
-reflection of ; and (3) a specular reflection component. For a given ray
+reflection of @eq-Lambert; and (3) a specular reflection component. For a given ray
 direction, $\mathbf{q}$, from the surface, the Phong specular
 contribution, $\ell_{\mbox{Phong spec}}$, is:
 $$\ell_{\mbox{Phong spec}} = k_s (\mathbf{r} \cdot \mathbf{q})^\alpha \ell_{\texttt{in}},$$
@@ -83,7 +83,8 @@ where $k_s$ is a constant, $\alpha$ is a parameter governing the spread
 of the specular reflection, and the unit vector $\mathbf{r}$ denotes the
 direction of maximum specular reflection, given by
 $$\mathbf{r} = 2(\mathbf{p} \cdot \mathbf{n}) \mathbf{n} - \mathbf{p}$$
-shows the ambient, Lambertian, and Phong shading components of a sphere
+
+@fig-rendering shows the ambient, Lambertian, and Phong shading components of a sphere
 under two-source illumination, and a comparison with a real sphere under
 similar real illumination.
 
@@ -112,7 +113,7 @@ Naively, we might wonder when looking at a blank wall, why we don't see
 an image of the scene facing that wall. The light reflected from the
 wall integrates light from every reflecting surface in the room, so the
 reflected intensities are an average of light intensities from many
-different directions and many different sources, as illustrated in .
+different directions and many different sources, as illustrated in @fig-wallpicture (a).
 
 Mathematically, integrating the equation for Lambertian reflections (@eq-Lambert) over all possible incoming light directions
 $\mathbf{p}$, we have for the intensity reflecting off a Lambertian
@@ -130,7 +131,7 @@ space, and thus from different surfaces in the world.
 Perhaps the simplest camera is a **pinhole camera**. A pinhole camera
 requires a light-tight enclosure, a small hole that lets light pass, and
 a projection surface where one senses or views the illumination
-intensity as a function of position. shows the the geometry of a scene,
+intensity as a function of position. @fig-wallpicture (b) shows the the geometry of a scene,
 the pinhole, and a projection surface (wall). For any given point on the
 projection surface, the light that falls there comes from only from one
 direction, along the straight line joining the surface position and the
@@ -143,8 +144,8 @@ appear.](figures/imaging/no_picture_on_a_wall_aina.png){#fig-wallpicture
 width="100%"}
 
 Making pinhole cameras is easy and it is a good exercise to gain an
-intuition of the image projection process. The picture in shows a very
-simple setup similar to the diagram from . This setup is formed by two
+intuition of the image projection process. The picture in @fig-pinhole3 shows a very
+simple setup similar to the diagram from @fig-wallpicture (b). This setup is formed by two
 pieces of paper, one with a hole on it. With the right illumination
 conditions you can see an image projected on the white piece of paper in
 front of the opening. You can use this very simple setup to see the
@@ -160,7 +161,7 @@ brighter, but blurrier
 image.](figures/imaging/simple_pinhole.jpg){#fig-pinhole3
 width="80%"}
 
-shows how to make a pinhole camera using a paper bag with a hole in it.
+@fig-pinhole2 shows how to make a pinhole camera using a paper bag with a hole in it.
 One sticks their head inside the bag, which has been padded to be
 opaque. We encourage readers to make their own pinhole camera designs.
 The needed elements are an aperture to let light through, mechanisms to
@@ -190,13 +191,13 @@ blocked. In general, the lower part of a wall will see the top of the
 world outside the window, while the top part of the wall will see the
 bottom part of the world outside the window. As a consequence, most
 walls will appear as having a faint blue tone on the bottom because they
-reflect the sky, as shown in .
+reflect the sky, as shown in @fig-accidental-a.
 
 :::{layout-ncol="2" #fig-accidental}
 
-![](figures/imaging/room1.jpg){width="28%" #fig-accidental-a}
+![](figures/imaging/room1.jpg){ #fig-accidental-a}
 
-![](figures/imaging/room2.jpg){width="62.5%" #fig-accidental-b}
+![](figures/imaging/room2.jpg){#fig-accidental-b}
 
 Fig (a) A wall might contain a picture of the world after all.
 (b) Turning the room into a pinhole camera by closing most of the window
@@ -215,8 +216,8 @@ often ignored by the naive observer.
 
 A pinhole camera projects 3D coordinates in the world to 2D positions on
 the projection plane of the camera through the straight line path of
-each light ray through the pinhole (). The simple geometry of the camera
-lets us identify the projection by inspection. The sketch in shows a
+each light ray through the pinhole (@fig-wallpicture). The simple geometry of the camera
+lets us identify the projection by inspection. The sketch in @fig-pinhole_names shows a
 pinhole camera and the relevant terminology.
 
 ![Coordinate systems. In computer vision it is common to use the
@@ -224,8 +225,8 @@ pinhole camera and the relevant terminology.
 axes.](figures/imaging/pinhole_names2.png){#fig-pinhole_names
 width="70%"}
 
-shows the pinhole camera of but with the box removed, leaving visible
-the projection plane. shows the definition of the three coordinate
+@fig-pinholeGeometry shows the pinhole camera of @fig-pinhole_names but with the box removed, leaving visible
+the projection plane. @fig-pinholeGeometry shows the definition of the three coordinate
 systems that we will use:
 
 -   **World coordinates**. Let the origin of a World Cartesian
@@ -252,7 +253,7 @@ systems that we will use:
     system $(n,m)$ are related by an affine transform as we will discuss
     later.
 
-![(a) Geometry of the pinhole camera. A 3D point $\mathbf{P}$ projects
+![Fig (a) Geometry of the pinhole camera. A 3D point $\mathbf{P}$ projects
 into the location $\mathbf{p}$ in the projection plane, located at a
 distance $f$ of the pinhole. The virtual camera plane is a radially
 symmetric projection of the camera plane. (b) Relation between the
@@ -260,7 +261,7 @@ camera, $(x,y)$, and the image coordinate system
 $(n,m)$.](figures/imaging/pinhole_geometry2.png){#fig-pinholeGeometry
 width="100%"}
 
-If the distance from the sensing plane to the pinhole is $f$ (see ) then
+If the distance from the sensing plane to the pinhole is $f$ (see @fig-pinholeGeometry2) then
 similar triangles gives us the following relations: 
 
 $$\begin{align}
@@ -290,7 +291,7 @@ width="70%"}
 Due to the choice of coordinate systems, the coordinates in the virtual
 camera plane have the $x$ coordinate in the opposite direction than the
 way we usually do for image coordinates $(m,n)$, where $m$ indexes the
-pixel column and $n$ the pixel row in an image. This is shown in . The
+pixel column and $n$ the pixel row in an image. This is shown in @fig-pinholeGeometry (b). The
 relationship between camera coordinates and image coordinates is
 $$\begin{aligned}
 n &= - a x + n_0\\
@@ -299,7 +300,7 @@ m &= a y + m_0
 \end{aligned}$$ where $a$ is a constant, and $(n_0, m_0)$ is the image
 coordinates of the camera optical axis. Note that this is different than
 what we introduced a simple projection model in in the framework of the
-simple vision system in . In that example, we placed the world
+simple vision system in @sec-simplesystem. In that example, we placed the world
 coordinate system in front of the camera, and the origin was not the
 location of the pinhole camera. 
 
@@ -314,7 +315,7 @@ Perspective projection is not the only feasible projection from 3D
 coordinates of a scene down to the 2D coordinates of the sensor plane.
 Different camera geometries can lead to other projections. One
 alternative to perspective projection is **orthographic projection**.
-shows the geometric interpretation of orthographic (or parallel)
+@fig-orthographics shows the geometric interpretation of orthographic (or parallel)
 projection.
 
 ![Orthographic projection. Projection is done by parallel rays
@@ -354,7 +355,7 @@ Can we build a camera that has an orthographic projection? What we need
 is some way of restricting the light rays so that only perpendicular
 rays to the plane illuminate the projection plane.
 
-One such camera is the **soda straw camera**, shown in , which you can
+One such camera is the **soda straw camera**, shown in @fig-straw, which you can
 easily build. The example shown in (c) used around 500 straws.
 
 ![Straw camera example. (a) View through parallel straws. (b) The

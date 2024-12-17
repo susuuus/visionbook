@@ -86,15 +86,15 @@ optical system.
 For small angles $\theta$ denoted in radians,
 $\sin(\theta) \approx \theta$. If we also assume the index of refraction
 of air is 1 (it is 1.0003) and denote the index of refraction of lens
-glass as $n$, then Snell's law, as shown in , becomes
+glass as $n$, then Snell's law, as shown in @fig-snell, becomes
 $$\theta_1 = n \theta_2,$$ for small bending angles $\theta_1$ and
 $\theta_2$.
 
 Consider a lens, and two points along its optical axis at a distance $a$
-and $b$ from the lens, as shown in . We seek to find a surface shape for
-a lens which creates the light paths shown in @fig-lens: light leaving from any
-direction at point $a$ will be focused to arrive at point $b.$ @fig-lens (b) shows a
-view of @fig-lens (a), with angles and distances distorted for clarity of labeling.
+and $b$ from the lens, as shown in @fig-lens-a. We seek to find a surface shape for
+a lens which creates the light paths shown in @fig-lens-a: light leaving from any
+direction at point $a$ will be focused to arrive at point $b.$ @fig-lens-b shows a
+view of @fig-lens-a, with angles and distances distorted for clarity of labeling.
 
 
 ::: {#fig-lens layout-nrow=2}
@@ -112,11 +112,11 @@ systems: the deviations in angle from the optical axes are very small
 (i.e., the *paraxial approximation*) and the lens is modeled to have
 negligible thickness compared with other distances along the optical
 axis (i.e., the *thin lens approximation*). Under those approximations,
-we can write simple expressions for the bending angles shown in as a
+we can write simple expressions for the bending angles shown in a@fig-lens-b a
 function of $\theta_S$, the lens surface orientation at height $c$. Those relations are summarized below in table @tbl-lensmaker.
 
 The middle row of table @tbl-lensmaker requires explanation. The light ray within
-the lens, depicted in , is not necessarily parallel to the optical axis.
+the lens, depicted in @fig-lens-b, is not necessarily parallel to the optical axis.
 In general, it will be rotated by some angle $\delta$ away from the
 optical axis, giving $\theta_S = \theta_2 + \delta$, and, at the other
 lens surface, $\theta_S = \theta_3 - \delta$. Adding those two equations
@@ -162,8 +162,13 @@ the desired property that $\theta_S \propto c$.
 lens.](figures/imaging/sphereLens3.png){#fig-sphereLens width="30%"}
 
 Substituting into the focusing condition, yields the **Lensmaker's
-Formula**, $$\frac{1}{a} + \frac{1}{b} = \frac{1}{f},
-$${#eq-lensmaker} where the lens **focal length**, $f$ is defined to be $$f = \frac{R}{2(n-1)}$$
+Formula**, 
+
+$$
+\frac{1}{a} + \frac{1}{b} = \frac{1}{f},
+$${#eq-lensmaker} where the lens **focal length**, $f$ is defined to be 
+
+$$f = \frac{R}{2(n-1)}$$
 
 It is straightforward to show, by rotating the lens in @fig-lens-a through an angle $\theta_R$ in the above derivation, thus adding $\theta_R$ to $\theta_S$ in table @tbl-lensmaker, that the lensmaker's equation also holds for
 light originating off the optical axis. Thus, under the paraxial and thin lens approximations, the lens focuses light from points on a plane onto points on a second plane, both perpendicular to the optical axis,
@@ -222,7 +227,7 @@ bending. Thus a convex thin lens images as a pinhole camera does, creating a per
 Light travels straight through the center of a thin lens, where front and back surfaces are parallel. (a) Lens with non-zero thickness. (b) Idealized thin lens. (c) Rays passing through the center of the lens behave like rays passing through a pinhole camera, and thus lenses impose a *perspective projection*.
 :::
 
-Two points on opposite sides of the lens at distances $a$ and $b$ from the lens that satisfy are known as conjugate points. Light from one
+Two points on opposite sides of the lens at distances $a$ and $b$ from the lens that satisfy @eq-lensmaker are known as conjugate points. Light from one
 conjugate point, traveling through the lens, focuses to the other
 conjugate point, and vice versa (see @fig-lenspropt). The rules for tracing light
 travel through a lens include the following:
@@ -232,12 +237,12 @@ travel through a lens include the following:
     fundamental focusing property of a lens.
 
 2.  Parallel rays entering the lens all focus to a point at distance $f$
-    behind the lens, per . In this case, one of the focal points is at
+    behind the lens, per @eq-lensmaker. In this case, one of the focal points is at
     infinity.
 
 3.  Any ray passing through the center of the thin lens proceeds in a
     straight line, as if through a pinhole at the center of the lens
-    (see ). Thus, lenses, like pinholes, render the world in
+    (see @fig-thinLens). Thus, lenses, like pinholes, render the world in
     *perspective projection*.
 
 4.  Because focused rays render positions onto a plane as does a line
@@ -276,10 +281,10 @@ focus at infinity.
 Assume that the lens is part of a camera, focusing light from the world onto the camera's sensor. If a plane outside of the camera, called the **focal plane**, and the camera's sensor plane are at conjugate positions, then an object in the focal plane is focussed sharply onto the sensor plane. All rays from a point on the object's surface will come into focus at a point in the sensor plane. This will image a point
 in the focal plane to a **circle of confusion** at the sensor plane, as illustrated in @fig-circleOfConfusion.
 
-![Circle of confusion and depth of field. Referring to , if the object
+![Circle of confusion and depth of field. Referring to @fig-rotatedLens, if the object
 of interest and the camera's sensor plane are related as conjugate
 points, that is, with distances $a$ and $b$ from the camera lens
-respecting the lensmaker's formula (), then the object will form an
+respecting the lensmaker's formula (@eq-lensmaker), then the object will form an
 image in sharp focus in the sensor plane. But objects in front of the
 plane of focus by $\delta_a$ will, in general, come to focus some
 distance $\delta_b$ behind the sensor plane
@@ -310,13 +315,16 @@ circle of confusion be $C$. If the distance, $U$, of the focal plane to
 the camera is much larger than the focal length of the lens ($U >> f$)
 then the diameter of the focal plane that is imaged onto the circle of
 confusion is $C$ times the magnification of the imaging system, or
-approximately $C U/f$, again, for $U >> f$. Referring to the top of , by
+approximately $C U/f$, again, for $U >> f$. Referring to the top of @fig-circleOfConfusion, by
 similar triangles, we have $$\frac{D_1 f}{C U} = 
     \frac{U - D_1}{\frac{f}{N}}$$ Also by similar triangles, we have
 $$\frac{D_2 f}{C U} =
-    \frac{D_2+U}{\frac{f}{N}}$$ Defining the depth of field, $D$, to be
+    \frac{D_2+U}{\frac{f}{N}}
+    $$ Defining the depth of field, $D$, to be
 $D = D_1 + D_2$, and combining terms, we have
-$$D = \frac{2 N C U^2 f^2}{f^4 - N^2 C^2 U^2}$$ When the circle of
+$$D = \frac{2 N C U^2 f^2}{f^4 - N^2 C^2 U^2}$$ 
+
+When the circle of
 confusion, $C$, is much smaller than the lens aperture, $f/N$, then the
 term $N^2 C^2 D^2$ can be ignored relative to $f^4$, and we have
 $$D \approx \frac{2 N C U^2}{f^2}$$ Note that for smaller camera
