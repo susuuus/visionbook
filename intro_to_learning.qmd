@@ -26,7 +26,7 @@ solve new instances of the problem.
 
 
 :::{.column-margin}
-Learning from examples is also called \textbf{supervised learning}.
+Learning from examples is also called **supervised learning**.
 :::
 
 Imagine you find an ancient mathematics text, with marvelous looking

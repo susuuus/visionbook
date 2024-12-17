@@ -135,7 +135,7 @@ $$
 \end{align}
 $$
 
-For large $N$, computing this sum is very expensive. Suppose instead we randomly subsample (without replacement) a \textit{batch} of terms from this sum, $\{\mathbf{x}^{(b)}, \mathbf{y}^{(b)}\}_{b=1}^B$, where $B$ is the \index{Batch size}\textbf{batch size}. We then compute an \textit{estimate} of the total gradient as the average gradient over this batch as follows:
+For large $N$, computing this sum is very expensive. Suppose instead we randomly subsample (without replacement) a \textit{batch} of terms from this sum, $\{\mathbf{x}^{(b)}, \mathbf{y}^{(b)}\}_{b=1}^B$, where $B$ is the **batch size**. We then compute an \textit{estimate} of the total gradient as the average gradient over this batch as follows:
 $$
 \begin{align}
     \tilde{\mathbf{g}} = \frac{1}{N}\sum_{b=1}^B \nabla_{\theta} \mathcal{L}(f_{\theta}(\mathbf{x}^{(b)}), \mathbf{y}^{(b)})
