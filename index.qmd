@@ -156,7 +156,7 @@ computer vision conferences and specialized monographs.
 
 We want to mention a number of related books that we've had the pleasure
 to learn from. For a number of years, we taught our computer vision
-class from the *Computer Vision: A Modern Approach* by 
+class from the *Computer Vision: A Modern Approach* 
 @Forsyth2012, and have also used Rick Szeliski's book, *Computer Vision:
 Algorithms and Applications* @Szeliski2011. These are excellent general
 texts. *Robot Vision*, by Horn @Horn86 is an older textbook, but covers
