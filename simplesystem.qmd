@@ -285,7 +285,9 @@ magnitude, and the edge orientation is perpendicular to the gradient
 direction.
 :::
 
-The unit norm vector perpendicular to an edge is: $$\begin{aligned}
+The unit norm vector perpendicular to an edge is: 
+
+$$\begin{aligned}
 {\bf n} = \frac{\nabla \ell}{\lVert \nabla \ell \rVert}
 \end{aligned}$$
 
@@ -585,10 +587,14 @@ Our formulation has resulted on a big system of linear constraints
 convenient to write the system of equations in matrix form:
 $$\begin{aligned}
 \mathbf{A} \mathbf{Y}  = \mathbf{b}
-\end{aligned}$$ where row $i$ of the matrix ${\bf A}$ contains the
+\end{aligned}$$ 
+
+where row $i$ of the matrix ${\bf A}$ contains the
 constraint coefficients $\mathbf{a}_i$. The system of equations is
 overdetermined ($\mathbf{A}$ has more rows than columns). We can use the
-pseudoinverse to compute the solution: $$\begin{aligned}
+pseudoinverse to compute the solution: 
+
+$$\begin{aligned}
 \bf Y = (\mathbf{A}^T \mathbf{A})^{-1} \mathbf{A}^T \mathbf{b}
 \end{aligned}$$ This problem can be solved efficiently as the matrix
 $\mathbf{A}$ is very sparse (most of the elements are zero).

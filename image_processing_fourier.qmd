@@ -473,7 +473,7 @@ This last function in equation (@eq-discrete_sinc_function) gets the
 special name of **discrete sinc** function. 
 
 :::{.column-margin}
-The discrete sinc function ({\bf sincd}) is defined as follows:
+The discrete sinc function **sincd** is defined as follows:
 $$
 \text{sincd}(x;a) = \frac{\sin(\pi x)}{a \sin (\pi x/a)}
 $$

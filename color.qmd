@@ -32,7 +32,7 @@ color passes through the second prism, the light doesn't break into
 other colors.](figures/color/newtonDrawing.jpg){#fig-prism}
 
 :::{.column-margin}
-Newton understood that white light could be decomposed into different colors and invented the term {\bf spectrum}.
+Newton understood that white light could be decomposed into different colors and invented the term **spectrum**.
 :::
 
 Our understanding of light and color explains such experiments. Light is
