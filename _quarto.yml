@@ -163,6 +163,8 @@ format:
         - key: alg
           kind: float
           reference-prefix: Algorithm
+    grid:
+      gutter-width: 2em
     # include-in-header: title-block.html
     
   # pdf:
