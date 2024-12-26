@@ -550,9 +550,12 @@ $\mathscr{L}\left[u,v \right] = \mathscr{L}_1 \left[u \right] \mathscr{L}_2 \lef
 **Separability**. Although almost all images are not separable, some can be approximated by a separable image. Here is one example.
 We can use the SVD decomposition to find a separable approximation to the image on the left. The result is shown on the right. 
 
+:::{layout-ncol="2"}
 ![](figures/Image_processing_fourier/facade1.jpg){width="40%"}
 
 ![](figures/Image_processing_fourier/facade1aprox.jpg){width="40%"}
+:::
+
 The right-hand image can be written as the product of two 1D signals.
 :::
 
