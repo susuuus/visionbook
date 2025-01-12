@@ -80,7 +80,7 @@ In this chapter, we deviate slightly from our usual notation and use lowercase f
 
 Recalling the definition of the operator $\star$ from @sec-linear_image_filtering, we give here an example of
 a convolutional layer over a 2D array $\mathbf{x}_{\texttt{in}}$, using
-a square kernel of size $K \times K$: 
+a square kernel of size $2K+1 \times 2K+1$: 
 
 $$\begin{aligned}x_{\texttt{out}}[n,m] =
 b + \sum_{k_1,k_2=-K}^K w[k_1,k_2] x_{\texttt{in}}[n+k_1,m+k_2] & \quad\quad \\
