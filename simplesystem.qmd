@@ -2,6 +2,8 @@
 
 ## Introduction
 
+## New Introduction
+
 The goal of this chapter is to embrace the optimism of the 1960s and to
 hand-design an end-to-end visual system. During this process, we will
 cover some of the main concepts that will be developed in the rest of
