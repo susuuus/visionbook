@@ -1,3 +1,9 @@
+# This repo is getting too large. How to clone this repo more efficiently? 
+1. `git clone --no-checkout <repository_url>`
+2. `cd <repository_name>`
+3. `git fetch --shallow-since=7f001e7167b0954fbd7ae185edc490b9356552fc`
+4. `git checkout master`
+
 # How to dev locally?
 
 We need two things.
