@@ -1,13 +1,16 @@
 <style>
     .book-info {
         display: flex;
-        align-items: flex-start; /* Align items at the top */
+        align-items: stretch; /* Align items to stretch to the same height */
         gap: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
     }
 
     .text-column {
         flex: 1.3; /* Allocate more space to text */
+        display: flex;
+        flex-direction: column; /* Stack children vertically */
+        justify-content: space-between; /* Space out children */
     }
 
     .image-column {
@@ -26,19 +29,20 @@
         line-height: 1.5;
     }
 
-    /* Optional: Add spacing between the text-column and image-column */
-    .text-column,
-    .image-column {
-        align-self: flex-start; /* Ensure both columns align at the top */
-    }
     .author-label {
-        font-size: 0.8em;
+        /* font-size: 1.8em; */
         text-transform: uppercase; /* Make text uppercase */
-        /* letter-spacing: 0.1em; Add letter spacing */
         color: #666666; /* Muted gray color */
-        /* margin-bottom: 5px; Add spacing below */
+        margin-bottom: 10px; /* Add spacing below */
+    }
+
+    .press-label {
+        margin-top: auto; /* Push this to the bottom of the column */
+        /* font-size: 1.2em;  */
+        text-align: left; /* Align text to the left */
     }
 </style>
+
 
 <div class="book-info">
     <div class="text-column">
@@ -54,7 +58,9 @@
             <!-- <p>Massachusetts Institute of Technology</p> -->
             <br>
             <br>
-            <br>
+            </div>
+
+<div class="press-label">
 <p>The MIT Press</p>
 <p>Cambridge, Massachusetts</p>
 <p?>London, England</p>
