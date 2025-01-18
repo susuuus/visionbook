@@ -181,7 +181,7 @@ patches, regions of uniform properties, and edges.
 **Question**: Are there animal eyes that produce a different initial representations than ours?
 **Answer**: Yes! One example is the Gekko's eye. Their pupil has a four-diamond-shaped pinhole aperture that could allow them to encode distance to a target in the retinal image @Murphy1986. Photo credit: @Randall.
 
-![](figures/simplesystem/Tokay-Gecko-Eye-1440x954.jpg)
+![](figures/simplesystem/Tokay-Gecko-Eye-1440x954.jpg){width="90%"}
 :::
 
 ### A Catalog of Edges
@@ -532,8 +532,8 @@ regions. This problem is common in many visual domains.
 As shown on the left image below, an image patch without context is not enough to infer its 3D shape.
 The same patch shown in the original image (right):
 
-![](figures/simplesystem/cube_propagartion_1.png) 
-![](figures/simplesystem/cube_propagartion_2.png)
+![](figures/simplesystem/cube_propagartion_1.png){width="44%"} 
+![](figures/simplesystem/cube_propagartion_2.png){width="44%"}
 
 Information about its 3D orientation its propagated from the surrounding edges.
 :::
