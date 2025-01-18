@@ -58,9 +58,9 @@ Snell's Law relates the bending angles of refraction, $\theta_1$ and $\theta_2$,
 :::
 
 ::: {#fig-snell layout-ncol=2}
-![](figures/imaging/snellcropped.png){#fig-snell-a}
+![](figures/imaging/snellcropped.png){width="85%" #fig-snell-a}
 
-![](figures/imaging/IMG_2490.JPG){#fig-snell-b}
+![](figures/imaging/IMG_2490.JPG){width="100%" #fig-snell-b}
 
 Figure: (a) Snell's law describes the bending of light at interfaces of differing indices of refraction, $n_1$ and $n_2$, in terms of the angles, $\theta_1$ and $\theta_2$, relative to the interface, or surface, normal. (b) Straw below water surface appears distorted due to refraction at the air/water boundary. Note that (a) and (b) are not trivially connected!
 :::
@@ -218,11 +218,11 @@ where the front and back surfaces are parallel, proceeds without
 bending. Thus a convex thin lens images as a pinhole camera does, creating a perspective projection.
 
 ::: {#fig-thinLens layout-ncol=3}
-![](figures/imaging/centerThick.jpg){#fig-thinLens-a}
+![](figures/imaging/centerThick.jpg){width="85%" #fig-thinLens-a}
 
-![](figures/imaging/centerThin.jpg){#fig-thinLens-b}
+![](figures/imaging/centerThin.jpg){width="85%" #fig-thinLens-b}
 
-![](figures/imaging/lenspinhole3.png){#fig-thinLens-c}
+![](figures/imaging/lenspinhole3.png){width="105%" #fig-thinLens-c}
 
 Light travels straight through the center of a thin lens, where front and back surfaces are parallel. (a) Lens with non-zero thickness. (b) Idealized thin lens. (c) Rays passing through the center of the lens behave like rays passing through a pinhole camera, and thus lenses impose a *perspective projection*.
 :::
@@ -390,7 +390,7 @@ rays leaving lens 2. Referring to @fig-telescope-b, an angular deviation of the 
 rays of $\delta_i$ will become an angular deviation, exiting the convex
 lens of $\delta_o$.
 
-::: {#fig-telescope layout-ncol=2}
+::: {#fig-telescope layout-ncol=1}
 ![](figures/imaging/telescope1.png){#fig-telescope-a}
 
 ![](figures/imaging/telescope2.png){#fig-telescope-b}
