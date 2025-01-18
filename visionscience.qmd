@@ -32,7 +32,7 @@ images and to pay attention to individual pixels. The image in
 @fig-pexels-retha-ferguson is a tiny image with just $32 \times 32$
 pixels. It is so small that we can actually look at each single pixel
 and think about how it is that we can make sense of it. For instance,
-let's look at the pixel in row 21 counting from the top, and column 20
+let's look at the pixel in row 13 counting from the bottom, and column 12
 counting from the left. That pixel corresponds to a dark gray pixel,
 which is near a couple of other pixels with similar intensity,
 surrounded by a set of white pixels. That pixel seems to be a pen, but
@@ -51,7 +51,7 @@ width="80%"}
  Same image as in @fig-pexels-retha-ferguson but
 shown small.\
 
-![](figures/visionscience/DALLE_32x32.png){width=".20"}
+![](figures/visionscience/DALLE_32x32.png){width="40%"}
 
 \
 Reducing the size helps better recognizing the objects despite

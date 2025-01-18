@@ -89,11 +89,11 @@ under two-source illumination, and a comparison with a real sphere under
 similar real illumination.
 
 :::{layout-ncol="3" #fig-rendering}
-![Lambertian](figures/imaging/sphereDiffuse.png){width="30%" #fig-rendering-a}
+![Lambertian](figures/imaging/sphereDiffuse.png){width="90%" #fig-rendering-a}
 
-![Phong](figures/imaging/spherePhongRoughness0.3.png){width="30%" #fig-rendering-b}
+![Phong](figures/imaging/spherePhongRoughness0.3.png){width="90%" #fig-rendering-b}
 
-![Photograph](figures/imaging/photoSphere.jpg){width="30%" #fig-rendering-c}
+![Photograph](figures/imaging/photoSphere.jpg){width="90%" #fig-rendering-c}
 
 Fig (a and b) Two different renderings of a sphere.  (c) Note the many extra details required of a photorealistic rendering.
 
@@ -193,11 +193,12 @@ bottom part of the world outside the window. As a consequence, most
 walls will appear as having a faint blue tone on the bottom because they
 reflect the sky, as shown in @fig-accidental-a.
 
+
 :::{layout-ncol="2" #fig-accidental}
 
-![](figures/imaging/room1.jpg){ #fig-accidental-a}
+![](figures/imaging/room1.jpg){width="80%" #fig-accidental-a}
 
-![](figures/imaging/room2.jpg){#fig-accidental-b}
+![](figures/imaging/room2.jpg){width="145%" #fig-accidental-b}
 
 Fig (a) A wall might contain a picture of the world after all.
 (b) Turning the room into a pinhole camera by closing most of the window
