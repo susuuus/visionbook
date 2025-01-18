@@ -38,7 +38,7 @@ world composed of simple 3D geometrical figures.
 :::{.column-margin}
 Blocks world from Larry Roberts' Ph.D. in June 1963.
 
-![](figures/simplesystem/roberts_phd_figure.png){width="40%"}
+![](figures/simplesystem/roberts_phd_figure.png){width="70%"}
 :::
 
 For the purposes of this chapter, let's think of a world composed of a
