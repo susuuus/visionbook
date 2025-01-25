@@ -3,25 +3,24 @@ project:
 
 book:
   title: Foundations of Computer Vision
-  repo-url: https://github.com/shensquared/cv_book
+  repo-url: https://github.com/Foundations-of-Computer-Vision-book/visionbook
   repo-actions: [edit, issue]
   repo-subdir: /
-  site-url: https://shenshen.mit.edu/cv_book
+  site-url: https://visionbook.mit.edu
   twitter-card: true
-  # author: 
+  # author:
   #   - name: Antonio Torralba
   #     affiliation: MIT EECS
-      
+
   #   - name: Phillip Isola
   #     # affiliation: MIT
   #   - name: William Freeman
-      # affiliation: MIT
+  # affiliation: MIT
   # date: "04/16/2024"
   # date: last-modified
   # date-format: "DD MMMM YYYY"
   favicon: Figures/favicon.ico
   # cover-image: figures/logo.jpg
-
 
   chapters:
     - index.qmd
@@ -123,11 +122,9 @@ book:
     search: true
   page-footer:
     left: "All content licensed under [CC-BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)<br> Antonio Torralba, Phillip Isola, and William Freeman"
-    center: "[Website](https://shenshen.mit.edu/cv_book) | [GitHub](https://github.com/shensquared/cv_book) | [MIT Vision Group](http://groups.csail.mit.edu/vision)"
+
     right: Built with [Quarto](https://quarto.org/).
   page-navigation: true
-
-
 
 bibliography:
   - all.bib
@@ -152,7 +149,7 @@ format:
     code-block-bg: true
     code-overflow: wrap
     # css: ./scripts/custom-style.css
-    theme: 
+    theme:
       light: cosmo
       dark: darkly
     fig-align: "center"
@@ -168,36 +165,36 @@ format:
     grid:
       gutter-width: 2em
     # include-in-header: title-block.html
-    
+
   # pdf:
-    # see https://pandoc.org/MANUAL.html for all options
-    # documentclass: src/DL_class
-    # classoption: src/DL_class
-    #         lof: false
-    #         lot: false
-    # toc: true
-    #         toc-depth: 2
-    #         fig-cap-location: bottom
-    #         tbl-cap-location: top
-    #         urlcolor: "blue"
-    #         linkcolor: "black"
-    #         biblio-style: apalike
-    #         keep-tex: true
-    #         code-block-bg: "#f2f2f2"
-    #         code-block-border-left: "#f2f2f2"
-    #         code-overflow: wrap
-    #         mermaid:
-    #             theme: neutral
-    # include-in-header: |
-    #   \usepackage{xcolor}
-    #   - src/setup.tex
-    #   - src/color.tex
-    # - text: |
-    #       \usepackage{makeidx}
-    #       \makeindex
-    # include-after-body:
-    #   text: |
-    #     \printindex
+  # see https://pandoc.org/MANUAL.html for all options
+  # documentclass: src/DL_class
+  # classoption: src/DL_class
+  #         lof: false
+  #         lot: false
+  # toc: true
+  #         toc-depth: 2
+  #         fig-cap-location: bottom
+  #         tbl-cap-location: top
+  #         urlcolor: "blue"
+  #         linkcolor: "black"
+  #         biblio-style: apalike
+  #         keep-tex: true
+  #         code-block-bg: "#f2f2f2"
+  #         code-block-border-left: "#f2f2f2"
+  #         code-overflow: wrap
+  #         mermaid:
+  #             theme: neutral
+  # include-in-header: |
+  #   \usepackage{xcolor}
+  #   - src/setup.tex
+  #   - src/color.tex
+  # - text: |
+  #       \usepackage{makeidx}
+  #       \makeindex
+  # include-after-body:
+  #   text: |
+  #     \printindex
 # # https://christophertkenny.com/posts/2023-07-01-creating-quarto-journal-articles/
 # latex-auto-install: true
 comments:
@@ -209,4 +206,3 @@ filters:
   - tikz
 tikz:
   cache: true
-
