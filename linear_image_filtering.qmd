@@ -100,7 +100,7 @@ of a computer vision system is to **reorganize** this array of numbers
 into a meaningful representation of the scene depicted in the image. The
 next image shows the same array of values but visualized as gray levels.
 
-![Grayscale image showing a person walking in the street. This tiny image has only $18\times18$ pixels.](figures/linear_image_filtering/gray_image.png){width="70%"}
+![Grayscale image showing a person walking in the street. This tiny image has only $18\times18$ pixels.](figures/linear_image_filtering/gray_image.png){width="50%"}
 
 
 When we want to make explicit the location of a pixel we will write
@@ -187,7 +187,7 @@ $f$, and output another signal,
 $\boldsymbol\ell_{\texttt{out}}= f(\boldsymbol\ell_{\texttt{in}})$.
 
 
-![System processing one signal.](figures/linear_image_filtering/genericfilterH.png){#fig-genericfilterH width="60%"}
+![System processing one signal.](figures/linear_image_filtering/genericfilterH.png){#fig-genericfilterH width="40%"}
 
 This transformation is very general and it can do all sorts of complex
 things: it could detect edges in images, recognize objects, detect
@@ -286,7 +286,10 @@ Linear systems are still too general for us. So let's consider an even
 smaller family of systems: **linear translation invariant** (LTI)
 **systems**.
 
-![](figures/linear_image_filtering/space_of_functions.png){width="25%"}
+:::{.column-margin}
+![](figures/linear_image_filtering/space_of_functions.png){width="80%"}
+:::
+
 
 Translation invariant systems are motivated by the following
 observation: typically, we don't know where within the image we expect
@@ -489,19 +492,19 @@ properties.
 :::{.column-margin}
 Given the signal:
 
-![](figures/linear_image_filtering/mn1.png){width="40%"}
+![](figures/linear_image_filtering/mn1.png){width="80%"}
 
 The signal $\ell \left[n - n_0\right]$ is a shifted version of $\ell \left[n\right]$. With $n_0 = 2$ this is
 
 
-![](figures/linear_image_filtering/mn2.png){width="40%"}
+![](figures/linear_image_filtering/mn2.png){width="80%"}
 :::
 
 
 :::{.column-margin}
 The impulse function is:
 
-![](figures/linear_image_filtering/mn3.png){width="40%"}
+![](figures/linear_image_filtering/mn3.png){width="80%"}
 
 :::
 
@@ -539,7 +542,8 @@ image missing.
 
 :::{.column-margin}
 Only the green region contains values that can be computed, the rest will be affected by how we decide to handle the boundaries:
-![](figures/linear_image_filtering/regions_convolution.png)
+
+![](figures/linear_image_filtering/regions_convolution.png){width="80%"}
 :::
 
 The most general approach consists in extending the input image by
@@ -783,7 +787,7 @@ $\delta \left[n -n_0 \right]$ is $h \left[n -n_0 \right]$. This is why
 the kernel that defines an LTI system, $h\left[n\right]$, is also called
 the impulse response of the system.
 
-![LTI system with impulse response $h\left[n\right]$.](figures/linear_image_filtering/genericfilterH2.png){width="50%" #fig-genericfilterH}
+![LTI system with impulse response $h\left[n\right]$.](figures/linear_image_filtering/genericfilterH2.png){width="30%" #fig-genericfilterH}
 
 For an unknown system, one way of finding the convolution kernel $h$
 consists in computing the output of the system when the input is an
