@@ -236,3 +236,8 @@ If you would like to cite this book, please use the following BibTeX entry:
   publisher={MIT Press}
 }
 ```
+## Resources for Instructors
+
+1. The print version of this book is available for purchase at [the MIT Press](https://mitpress.mit.edu/9780262048972/foundations-of-computer-vision/).
+
+2. Slides that accompany this book are available for download [here](https://www.dropbox.com/scl/fo/gcoxinej7b4mxaj4bd4kl/ABS0wiObwBY74mGI_cHoDxE?rlkey=rn1ny067y2av1ojnqtw7dbzje&st=h7x6e0yo&dl=0).
