@@ -3,9 +3,9 @@ project:
 
 book:
   title: Foundations of Computer Vision
-  repo-url: https://github.com/Foundations-of-Computer-Vision-book/visionbook
+  repo-url: https://github.com/Foundations-of-Computer-Vision/visionbook
   repo-actions: [edit, issue]
-  repo-subdir: /
+  repo-subdir: ""
   site-url: https://visionbook.mit.edu
   twitter-card: true
   # author:
@@ -121,9 +121,9 @@ book:
     border: true
     search: true
   page-footer:
-    left: "All content licensed under [CC-BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)<br> Antonio Torralba, Phillip Isola, and William Freeman"
+    left: "All content licensed under [CC-BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)<br>© Antonio Torralba, Phillip Isola, and William Freeman"
 
-    right: Built with [Quarto](https://quarto.org/).
+    right: Site built by [Shen Shen](https://shenshen.mit.edu) and [contributors](https://github.com/Foundations-of-Computer-Vision/visionbook/graphs/contributors) with [Quarto](https://quarto.org/).
   page-navigation: true
 
 bibliography:
