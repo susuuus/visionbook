@@ -125,7 +125,7 @@ book:
 
     center: © [Antonio Torralba](https://groups.csail.mit.edu/vision/torralbalab/), [Phillip Isola](https://web.mit.edu/phillipi/), and [William Freeman](https://billf.mit.edu/)
 
-    right: Site built by [Shen Shen](https://shenshen.mit.edu) and [contributors](https://github.com/Foundations-of-Computer-Vision/visionbook/graphs/contributors) with [Quarto](https://quarto.org/).
+    right: Translation to web format by [Shen Shen](https://shenshen.mit.edu) and [Contributors](https://github.com/Foundations-of-Computer-Vision/visionbook/graphs/contributors) with [Quarto](https://quarto.org/)
   page-navigation: true
 
 bibliography:
