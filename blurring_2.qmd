@@ -33,17 +33,16 @@ $$
 ::: {.column-margin}
 The box filter with $N=M=1$ is:
 
-![](figures/blur_filters/box.png)
+![](figures/blur_filters/box.png){width="90%"}
 :::
 
 Filtering an input image, $\ell_{\text{in}}$, with a box filter results in the following:
-
-$$
-\ell_{\text{out}} \left[n,m\right] = \text{box}_{N,M} \left[n,m\right] \circ \ell_{\text{in}} \left[n,m\right] 
-=  \sum_{k,l} \ell_{\text{in}} \left[n-k,m-l \right] \text{box}_{N,M} \left[k,l \right]
-=  \sum_{k=-N}^N \sum_{l=-M}^M \ell_{\text{in}} \left[n-k,m-l \right]
-$$
-
+$$\begin{aligned}
+\ell_{\text{out}} \left[n,m\right] &= 
+\text{box}_{N,M} \left[n,m\right] \circ \ell_{\text{in}} \left[n,m\right]  \\
+&= \sum_{k,l} \ell_{\text{in}} \left[n-k,m-l \right] \text{box}_{N,M} \left[k,l \right] \\
+&= \sum_{k=-N}^N \sum_{l=-M}^M \ell_{\text{in}} \left[n-k,m-l \right]
+\end{aligned}$$
 That is, the output value on each location $(n,m)$ is the sum of the input pixels within the rectangle around that location.  
 
 Visually, filtering an image with the box filter results in blurring the picture. @fig-convExamps2 shows some box filters and the corresponding output images (after normalizing the box filter coefficients so that they sum to 1). @fig-convExamps2 (a) shows an image convolved with a squared box kernel (i.e., $N=M$). 
@@ -91,11 +90,11 @@ The box filter is simple to implement and to understand, but it has a number of 
 ::: {.column-margin}
 The oscillating signal:
 
-![](figures/blur_filters/osci.png)
+![](figures/blur_filters/osci.png){width="80%"}
 
 convolved with the kernel $[1,1,1]$ results in:
 
-![](figures/blur_filters/kern.png)
+![](figures/blur_filters/kern.png){width="80%"}
 :::
 
 - **If you convolve two boxes, you do not get another box.** Instead, you get a triangle. You can easily check this by convolving two box filters. For instance, in the simple case where $N=1, M=0$:
@@ -142,7 +141,7 @@ $$ {#eq-gauss2d}
 ::: {.column-margin}
 1D Gaussian with $\sigma=1$ and its discretized version:
 
-![](figures/blur_filters/gaus.png)
+![](figures/blur_filters/gaus.png){width="90%"}
 :::
 
 We have removed the normalization constant as the sum of the discrete Gaussian will be different from the integral of the continuous function. So here we prefer to define the form in which the value at the origin is 1. In practice, we should normalize the discrete Gaussian by the sum of its values to make sure that the DC gain is 1.
@@ -324,7 +323,7 @@ $$
 :::{.column-margin}
 2D binomial filter:
 
-![](figures/blur_filters/bin2.png)
+![](figures/blur_filters/bin2.png){width="90%"}
 :::
 
 The filter $b_{2,2}$ has a DC gain of 16, so we will divide the convolution output by 16 so that the output image has a similar contrast to the input image. 

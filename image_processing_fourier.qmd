@@ -114,7 +114,7 @@ $$s\left(t\right) = A \sin\left(w ~t - \theta \right)$$ where $A$ is the
 The wave signal is periodic with a period $T=2 \pi / w$.
 
 :::{.column-margin}
-![](figures/Image_processing_fourier/amplitudeandperiod.png){width="50%"}
+![](figures/Image_processing_fourier/amplitudeandperiod.png){width="70%"}
 :::
 
 In discrete time, the **discrete time sine wave** is as follows
@@ -307,7 +307,7 @@ properties and symmetries can be observed from inspecting that matrix.
  complex values of the Fourier transform matrix are indicated by the color,
  with the key in the bottom left.  In the vector at the right, black
  values indicate zero.
-](figures/Image_processing_fourier/visualization_DFT_color.png){#fig-colorDFT}
+](figures/Image_processing_fourier/visualization_DFT_color.png){width="80%" #fig-colorDFT}
 
 ### Visualizing the Fourier Transform
 
@@ -447,7 +447,6 @@ We will compute here the DFT of the finite length box function, with a
 length $N$. To compute the DFT we use the DFT definition and change the
 interval of the sum making use of the periodic nature of the terms
 inside the sum: 
-
 $$\begin{aligned}
 \mathcal{F} \left\{ \text{box}_{L} \left[n \right] \right\} &=& 
 \sum_{n=0}^{N-1} \, \text{box}_{L} \left[n \right] 
@@ -946,13 +945,16 @@ Other useful processing includes edge enhancement and motion analysis.
 From the previous section we know that we can write linear filters as
 convolutions:
 
-![](figures/Image_processing_fourier/con1.png){width="60%"}
+
+
+![Convolutional linear filter.](figures/Image_processing_fourier/con1.png){width="60%"}
+
 
 where $h \left[n,m \right]$ is the impulse response of the system, or
 convolution kernel. We can also write this as a product in the Fourier
 domain:
 
-![](figures/Image_processing_fourier/con2.png){width="60%"}
+![Transfer function of a linear filter.](figures/Image_processing_fourier/con2.png){width="60%"}
 
 The function $H \left[u, v \right]$ is called the **transfer function**
 of the filter. 
@@ -1066,18 +1068,16 @@ perception. Indeed, under certain conditions, the first stages of visual
 computation perform of the visual system can be approximated by a linear
 filter.
 
+
+:::{.column-margin}
+The concept of **psychophysics was introduced by Gustav Theodor Fechner (1801--1887).
+![](figures/Image_processing_fourier/experimental_setup.jpg){width="90%"}
+:::
+
 Fourier analysis and the use of sine waves became very popular in the
 field of visual psychophysics. **Visual psychophysics** is an
 experimental science that studies the relationship between real world
 stimuli and our perception. 
-
-
-:::{.column-margin}
-The concept of **psychophysics was introduced by Gustav Theodor Fechner (1801--1887).
-
-![](figures/Image_processing_fourier/experimental_setup.jpg){}
-:::
-
 
 
 Using the theory we have studied in this chapter, we can show that when
@@ -1085,7 +1085,7 @@ the input to a linear system is a wave of frequency $u_0$ and amplitude
 1, the output is another wave of the same frequency as the input but
 with an amplitude equal to $|H \left[ u_0 \right]|$:
 
-![](figures/Image_processing_fourier/H.png){width="80%"}
+![Output to an exponential wave.](figures/Image_processing_fourier/H.png){width="60%"}
 
 This means that one way of identifying the transfer function of a system
 is by using as input a wave and measuring the output amplitude as a
@@ -1141,7 +1141,7 @@ the sensitivity for that frequency), age, and so on.
 :::{.column-margin}
 Here is my own CSF, traced by hand, with and without eyeglasses. Can you guess which one is with eyeglasses? 
 
-![](figures/spatial_filters/my_CST.png)
+![](figures/spatial_filters/my_CST.png){width="90%"}
 
 (Answer: the red curve is my CSF wearing eyeglasses.)
 :::

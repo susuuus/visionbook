@@ -627,7 +627,7 @@ The circular convolution has the same properties than the convolution
 
 :::{.column-margin}
 Writing the circular convolution in matrix form will look like:
-![](figures/linear_image_filtering/circ_conv.png)
+![](figures/linear_image_filtering/circ_conv.png){width="80%"}
 :::
 
 

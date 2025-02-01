@@ -7,7 +7,7 @@ Computing image derivatives is an essential operator for extracting useful infor
 
 The operator that computes the image derivatives along the spatial dimensions ($x$ and $y$) is a linear system:
 
-![Computing image derivatives along $x$- and $y$-dimensions.](figures/derivatives/genericfilterH.png){#fig-genericfilterH width="80%"}
+![Computing image derivatives along $x$- and $y$-dimensions.](figures/derivatives/genericfilterH.png){#fig-genericfilterH width="60%"}
 
 The derivative operator is linear and translation invariant. Therefore, it can be written as a convolution. The following images show an input image and the resulting derivatives along the horizontal and vertical dimensions using one of the discrete approximations that we will discuss in this chapter.
 
@@ -50,7 +50,7 @@ $$
 $$
 @fig-discretederivative (e) shows the result of filtering the 1D signal (@fig-discretederivative [a]) convolved with $d_1 \left[n\right]$ (@fig-discretederivative [d]). Now the output shows the highest magnitude output in the midpoint where there is variation in the input signal.
 
-![(a) Input signal, $\ell [n]$. (b) Convolutional kernel $d_0 [n]$, defined as $d_0 [0]=1$ and $d_0 [1]=-1$ and zero everywhere else. (c) Output of the convolution between $\ell [n]$ and $d_0 [n]$. (d) Kernel $d_1 [n]$, defined as $d_1 [-1]=1$ and $d_1 [1]=-1$ and zero everywhere else. (e) Output of the convolution between $\ell [n]$ and $d_1 [n]$.](figures/derivatives/discretederivative.png){#fig-discretederivative}
+![(a) Input signal, $\ell [n]$. (b) Convolutional kernel $d_0 [n]$, defined as $d_0 [0]=1$ and $d_0 [1]=-1$ and zero everywhere else. (c) Output of the convolution between $\ell [n]$ and $d_0 [n]$. (d) Kernel $d_1 [n]$, defined as $d_1 [-1]=1$ and $d_1 [1]=-1$ and zero everywhere else. (e) Output of the convolution between $\ell [n]$ and $d_1 [n]$.](figures/derivatives/discretederivative.png){width=70% #fig-discretederivative}
 
 It is also interesting to see the behavior of the derivative and its discrete approximations in the Fourier domain. In the continuous domain, the relationship between the Fourier transform on a function and the Fourier transform of its derivative is:
 $$
@@ -80,7 +80,7 @@ $$
 
 @fig-d0andd1_dft shows the magnitude of $D_0\left[u \right]$ and $D_1\left[u \right]$ and compares it with $\left| 2 \pi u/N \right|$, which will be the ideal approximation to the derivative. The amplitude of $D_0\left[u \right]$ provides a better approximation to the ideal derivative, but the phase of $D_0\left[u \right]$ introduces a small shift in the output. Conversely, $D_1\left[u \right]$ has no shift, but it approximates the derivative over a smaller range of frequencies. The output to $D_1\left[u \right]$ is smoother than the output to $D_0\left[u \right]$, and, in particular, $D_1\left[u \right]$ gives a zero output when the input is the signal $\left[ 1, -1, 1, -1, ... \right]$. In fact, we can see that $\left[1,0,-1\right] = \left[1,-1\right] \circ \left[1,1\right]$, and, therefore $D_1\left[u \right] = D_0\left[u \right] B_1\left[u \right]$, where $B_1\left[u \right]$ is the DFT of the binomial filter $b_1 \left[n \right]$.
 
-![Magnitude of (a) $D_0\left[u \right]$ and (b) $D_1\left[u \right]$ and comparison with $\left| 2 \pi u/N \right|$, shown as a thin black line. Both DFTs are computed over 20 samples.](figures/derivatives/d0andd1_dft.png){#fig-d0andd1_dft}
+![Magnitude of (a) $D_0\left[u \right]$ and (b) $D_1\left[u \right]$ and comparison with $\left| 2 \pi u/N \right|$, shown as a thin black line. Both DFTs are computed over 20 samples.](figures/derivatives/d0andd1_dft.png){width=90% #fig-d0andd1_dft}
 
 When working with two-dimensional (2D) images, there are several ways in which partial image derivatives can be approximated. For instance, we can compute derivatives along
 
@@ -238,9 +238,14 @@ If $g(x,y)$ is a blurring kernel, it will smooth the derivatives, reducing the o
 
 If $g$ is a Gaussian, then the first-order derivative is
 $$
-g_x(x,y; \sigma) = \frac {\partial g(x,y; \sigma)}{\partial x}= \frac{-x}{2 \pi \sigma^4} \exp{-\frac{x^2 +
-   y^2}{2 \sigma^2}} = \frac{-x}{\sigma^2} g(x,y; \sigma)
+\begin{split}
+g_x(x,y; \sigma) & = \frac {\partial g(x,y; \sigma)}{\partial x} \\
+& = \frac{-x}{2 \pi \sigma^4} \exp{-\frac{x^2 +
+   y^2}{2 \sigma^2}} \\
+& = \frac{-x}{\sigma^2} g(x,y; \sigma)
+\end{split}
 $${#eq-derivate1gauss2dcont}
+
 
 The next plots show the 2D Gaussian with $\sigma=1$, and its $x$-derivative:
 
@@ -298,12 +303,14 @@ For $n=0$ we have the original Gaussian. @fig-gaussian_gaussiander shows the 1D 
 In two dimensions, as the Gaussian is separable, the partial derivatives result on the product of two Hermite polynomial, one for each spatial dimension:
 
 $$
-g_{x^n,y^m}(x,y; \sigma) =  
-\frac{\partial^{n+m} g(x,y)}{\partial x^n \partial y^m}
-= \left( \frac{-1}{\sigma \sqrt{2}} \right)^{n+m}
+\begin{split}
+g_{x^n,y^m}(x,y; \sigma) & =  
+\frac{\partial^{n+m} g(x,y)}{\partial x^n \partial y^m} \\
+& = \left( \frac{-1}{\sigma \sqrt{2}} \right)^{n+m}
 H_n\left( \frac{x}{\sigma \sqrt {2}} \right)
 H_m\left( \frac{y}{\sigma \sqrt {2}} \right)
 g(x,y; \sigma)
+\end{split}
 $$ {#eq-derivate2gauss2dhermite}
 
 @fig-gauss_derivatives_triangle shows the 2D Gaussian derivatives, and @fig-gauss_derivatives_triangle_FT shows the corresponding Fourier transforms.  
@@ -409,36 +416,39 @@ The angle is shown only where the magnitude is $>0$. The derivative output along
 
 As we saw in @sec-simplesystem, an important image representation is given by the image gradient. From the image derivatives, we can also define the image gradient as the vector:
 $$
-\nabla \text{img} (x,y) = \left( \frac{\partial \text{img}(x,y)}{\partial x}, \frac{\partial \text{img}(x,y)}{\partial y} \right)
+\nabla \ell (x,y) = \left( \frac{\partial \ell(x,y)}{\partial x}, \frac{\partial \ell(x,y)}{\partial y} \right)
 $$
 For each pixel, the output is a 2D vector. In the case of using Gaussian derivatives, we can write:
 $$
-\nabla \text{img} \circ g = \nabla g \circ \text{img} = \left( g_x(x,y), g_y(x,y) \right) \circ \text{img}
+\nabla \ell \circ g = \nabla g \circ \ell = \left( g_x(x,y), g_y(x,y) \right) \circ \ell
 $$
 
 Although we have mostly computed derivatives along the $x$ and $y$ variables, we can obtain the derivative in any orientation as a linear combination of the two derivatives along the main axes. With ${\bf t}=\left( \cos (\theta), \sin(\theta) \right)$, we can write the directional derivative along the vector ${\bf t}$ as:
 $$
-\frac{\partial \text{img} (x,y)}{\partial {\bf t}} =  \nabla \text{img} \cdot {\bf t} = \cos(\theta) \frac{\partial \text{img}}{\partial x} + \sin(\theta) \frac{\partial \text{img}}{\partial y}
+\frac{\partial \ell (x,y)}{\partial {\bf t}} =  \nabla \ell \cdot {\bf t} = \cos(\theta) \frac{\partial \ell}{\partial x} + \sin(\theta) \frac{\partial \ell}{\partial y}
 $$
 
 In the Gaussian case:
 $$
-\frac{\partial \text{img}}{\partial {\bf t}} \circ g = \left( \cos(\theta) g_x(x,y) + \sin(\theta) g_y(x,y) \right) \circ \text{img} = \left( \nabla g  \cdot {\bf t} \right) \circ \text{img}
-= g_{\theta} (x,y)  \circ \text{img}
+\begin{split}
+\frac{\partial \ell}{\partial {\bf t}} \circ g & = \left( \cos(\theta) g_x(x,y) + \sin(\theta) g_y(x,y) \right) \circ \ell \\
+& = \left( \nabla g  \cdot {\bf t} \right) \circ \ell \\
+& = g_{\theta} (x,y)  \circ \ell(x,y)
+\end{split}
 $$ {#eq-steerable_derivative_filter}
 
 with $g_{\theta} (x,y) = \cos(\theta) g_x(x,y) + \sin(\theta) g_y(x,y)$. However, to compute the derivative along any arbitrary angle $\theta$ does not require doing new convolutions. Instead, we can compute any derivative as a linear combination of the output of convolving the image with $g_x(x,y)$ and $g_y(x,y)$:
 $$
-\frac{\partial \text{img}}{\partial {\bf t}} \circ g =  \cos(\theta) g_x(x,y) \circ \text{img} + \sin(\theta) g_y(x,y) \circ \text{img}
+\frac{\partial \ell}{\partial {\bf t}} \circ g =  \cos(\theta) g_x(x,y) \circ \ell + \sin(\theta) g_y(x,y) \circ \ell(x,y)
 $$
 
 When using discrete convolutional kernels $d_n\left[n,m\right]$ and $d_m\left[n,m\right]$ to approximate the derivatives along $n$ and $m$, it can be written as:
 $$
-\nabla \text{img} = \left( d_n\left[n,m\right], d_m\left[n,m\right] \right) \circ \text{img} \left[n,m\right]
+\nabla \ell = \left( d_n\left[n,m\right], d_m\left[n,m\right] \right) \circ \ell \left[n,m\right]
 $$
 and
 $$
-\frac{\partial \text{img}}{\partial {\bf t}} \circ g = d_{\theta} \left[n,m\right] \circ \text{img} \left[n,m\right]
+\frac{\partial \ell}{\partial {\bf t}} \circ g = d_{\theta} \left[n,m\right] \circ \ell \left[n,m\right]
 $$
 
 with $d_{\theta} \left[n,m\right]  = \cos(\theta) d_n\left[n,m\right] + \sin(\theta) d_m\left[n,m\right]$. We expect that the linear combination of these two kernels should approximate the derivative along the direction $\theta$. The quality of this approximation will vary for the different kernels we have seen in the previous sections.
@@ -454,13 +464,13 @@ One example of application of the Laplacian is in the paper *Can One Hear the Sh
 The Laplacian operator is defined as the sum of the second order partial derivatives of a function:
 
 $$
-\nabla^2 \text{img} = \frac{\partial^2 \text{img}}{\partial x^2} + \frac{\partial^2 \text{img}}{\partial y^2}
+\nabla^2 \ell = \frac{\partial^2 \ell}{\partial x^2} + \frac{\partial^2 \ell}{\partial y^2}
 $$
 
-The Laplacian is more sensitive to noise than the first order derivative. Therefore, in the presence of noise, when computing the Laplacian operator on an image $\text{img}(x,y)$, it is useful to smooth the output with a Gaussian kernel, $g(x,y)$. We can write,
+The Laplacian is more sensitive to noise than the first order derivative. Therefore, in the presence of noise, when computing the Laplacian operator on an image $\ell(x,y)$, it is useful to smooth the output with a Gaussian kernel, $g(x,y)$. We can write,
 
 $$
-\nabla^2 \text{img} \circ g = \nabla^2 g \circ \text{img}
+\nabla^2 \ell \circ g = \nabla^2 g \circ \ell
 $$
 
 Therefore, the same result can be obtained if we first compute the Laplacian of the Gaussian kernel, $g(x,y)$ and then convolve it with the input image. The Laplacian of the Gaussian is
@@ -501,11 +511,13 @@ It involves the central pixel and its four nearest neighbors. This is a sum-sepa
 The Laplacian of the image, using the five-point formula, is:
 
 $$
-\nabla_5^2 \text{img}[n,m] = -4 \text{img}[n,m] 
-                       + \text{img}[n+1,m] 
-                       + \text{img}[n-1,m] 
-                       + \text{img}[n,m+1] 
-                       + \text{img}[n,m-1]
+\begin{split}
+\nabla_5^2 \ell[n,m] = & - 4 \ell[n,m] \\
+                     &  + \ell[n+1,m] \\
+                     &  + \ell[n-1,m] \\
+                     &  + \ell[n,m+1] \\
+                     &  + \ell[n,m-1]
+\end{split}
 $$
 :::
 
@@ -533,7 +545,7 @@ The discrete approximation also provides a better intuition of how it works than
 @fig-discretelaplacian1d compares the output of the first-order derivative @fig-discretelaplacian1d (b) and the Laplacian @fig-discretelaplacian1d (d) on a simple 1D signal @fig-discretelaplacian1d (a). The local maximum of the derivative output @fig-discretelaplacian1d (c) and the zero crossings of the Laplacian output @fig-discretelaplacian1d (e) are aligned with the transitions (boundaries) of the input signal @fig-discretelaplacian1d (a).
 
 
-![Comparison between the output of a first-order derivative and the Laplacian of 1D signal. (a) Input signal. (b) Kernel $d_1$. (c) Output of the derivative, that is, convolution of (a) and (b). (d) Discrete approximation of the Laplacian. (e) Output of convolving the signal (a) with the Laplacian kernel.](figures/derivatives/discretelaplacian1d.png){#fig-discretelaplacian1d}
+![Comparison between the output of a first-order derivative and the Laplacian of 1D signal. (a) Input signal. (b) Kernel $d_1$. (c) Output of the derivative, that is, convolution of (a) and (b). (d) Discrete approximation of the Laplacian. (e) Output of convolving the signal (a) with the Laplacian kernel.](figures/derivatives/discretelaplacian1d.png){width=70% #fig-discretelaplacian1d}
 
 Marr and Hildreth [@Marr80] used zero-crossings of the Laplacian output to compute edges, but this method is not used nowadays for edge detection. Instead, the Laplacian filter is widely used in a number of other image representations. It is used to build image pyramids (multiscale representations, see Chapter @sec-image_pyramids), and to detect points of interest in images (it is the basic operator used to detect keypoints to compute SIFT descriptors [@Lowe04]).
 
@@ -558,7 +570,7 @@ The first thing worth pointing out is that the Fourier transform of the impulse 
 :::{#fig-csfchart layout-ncol=2}
 ![](figures/spatial_filters/csf.jpg){width=100%}  
 
-![](figures/derivatives/dft_radial_EVS.png){width=100%}  
+![](figures/derivatives/dft_radial_EVS.png){width=80%}  
 
 Campbell and Robson chart, and a radial section of the Fourier transform of $h$ from @eq-humanmodel.
 :::
@@ -652,29 +664,29 @@ This image shows a very simple scene formed by a surface with a set of squares o
 Let's think of the image formation process. The surface is made of patches of different reflectances $r(x,y) \in (0,1)$. Each location receives an illumination $l(x,y)$. The observed brightness is the product:
 
 $$
-\text{img}(x,y) = r(x,y) \times l(x,y)
+\ell(x,y) = r(x,y) \times l(x,y)
 $$
 
-Despite what reaches the eye is the signal $\text{img}(x,y)$, our perception is not the value of $\text{img}(x,y)$. In fact, the squares 1 and 2 in @fig-simultaneous have the exact same values of intensity, but we see them differently, which is generally explained by saying that we discount (at least partially) the effects of the illumination, $l(x,y)$.
+Despite what reaches the eye is the signal $\ell(x,y)$, our perception is not the value of $\ell(x,y)$. In fact, the squares 1 and 2 in @fig-simultaneous have the exact same values of intensity, but we see them differently, which is generally explained by saying that we discount (at least partially) the effects of the illumination, $l(x,y)$.
 
-But how can we estimate $r(x,y)$ and $l(x,y)$ by only observing $\text{img}(x,y)$? One of the first solutions to this problem was the **Retinex algorithm** proposed by Land and McCann [@Land1971]. Land and McCann observed that it is possible to extract $r$ and $l$ from $\text{img}$ if one takes into account some constraints about the expected nature of the images $r$ and $l$. Land and McCann noted that if one considers two adjacent pixels inside one of the patches of uniform reflectance, the difference between the two pixel values will be very small as the illumination, even if it is nonuniform, will only produce a small change in the brightness of the two pixels. However, if the two adjacent pixels are on the boundary between two patches of different reflectances, then the intensities of these two pixels will be very different.
+But how can we estimate $r(x,y)$ and $l(x,y)$ by only observing $\ell(x,y)$? One of the first solutions to this problem was the **Retinex algorithm** proposed by Land and McCann [@Land1971]. Land and McCann observed that it is possible to extract $r$ and $l$ from $\ell$ if one takes into account some constraints about the expected nature of the images $r$ and $l$. Land and McCann noted that if one considers two adjacent pixels inside one of the patches of uniform reflectance, the difference between the two pixel values will be very small as the illumination, even if it is nonuniform, will only produce a small change in the brightness of the two pixels. However, if the two adjacent pixels are on the boundary between two patches of different reflectances, then the intensities of these two pixels will be very different.
 
 ::: {.column-margin}
 The Retinex algorithm, by Land and McCann [@Land1971], is based on modeling images as if they were part of a Mondrian world (images that look like the paintings of Piet Mondrian). One example of a color Mondrian is:
 
-![](figures/spatial_filters/mondrian.png){width=100%}
+![](figures/spatial_filters/mondrian.png){width=90%}
 :::
 
-The Retinex algorithm works by first extracting $x$ and $y$ spatial derivatives of the image $\text{img}(x,y)$ and then thresholding the gradients. First, we transform the product into a sum using the $\log$:
+The Retinex algorithm works by first extracting $x$ and $y$ spatial derivatives of the image $\ell(x,y)$ and then thresholding the gradients. First, we transform the product into a sum using the $\log$:
 
 $$
-\log \text{img}(x,y) = \log r(x,y) + \log l(x,y)
+\log \ell(x,y) = \log r(x,y) + \log l(x,y)
 $$
 
 Taking derivatives along $x$ and $y$ is now simple:
 
 $$
-\frac{\partial \log \text{img}(x,y)}{\partial x} = \frac{\partial \log r(x,y)}{\partial x} + \frac{\partial \log l(x,y)}{\partial x}
+\frac{\partial \log \ell(x,y)}{\partial x} = \frac{\partial \log r(x,y)}{\partial x} + \frac{\partial \log l(x,y)}{\partial x}
 $$
 
 And the same thing is done for the derivative along $y$.
@@ -683,7 +695,7 @@ Any derivative larger than the threshold is assigned to the derivative of the re
 
 $$
 \frac{\partial \log r(x,y)}{\partial x} =  \begin{cases}
-\frac{\partial \log \text{img}(x,y)}{\partial x} & \text{if} ~  \left| \frac{\partial \log \text{img}(x,y)}{\partial x} \right|>T\\
+\frac{\partial \log \ell(x,y)}{\partial x} & \text{if} ~  \left| \frac{\partial \log \ell(x,y)}{\partial x} \right|>T\\
 0 & \text{otherwise}
 \end{cases}
 $$
@@ -697,7 +709,7 @@ Derivatives classified into reflectance or luminance components.
 :::
 
 
-Then, the image $\log r(x,y)$ is obtained by integrating the gradients, as shown in @sec-editinggradientdomain, and exponentiating the result. Finally, the illumination can be obtained as $l(x,y) = \text{img}(x,y)/r(x,y)$. The results are shown in @fig-simultaneous3.
+Then, the image $\log r(x,y)$ is obtained by integrating the gradients, as shown in @sec-editinggradientdomain, and exponentiating the result. Finally, the illumination can be obtained as $l(x,y) = \ell(x,y)/r(x,y)$. The results are shown in @fig-simultaneous3.
 
 :::{#fig-simultaneous3}
 ![](figures/statistical_image_models/retinex_solution_a.png){width=100%}

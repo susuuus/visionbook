@@ -5,21 +5,21 @@ Although adding time might seem like a trivial extension from 2D signals to 3D s
 
 ## Modeling sequences {#sec-modelingSequences}
 
-Sequences will be represented as functions $f (x,y,t)$, where $x,y$ are the spatial coordinates and $t$ is time. As before, when processing sequences, we will work with the discretized version that we will represent as $f \left[n,m,t \right]$, where $n,m$ are the pixel indices and $t$ is the frame number. Discrete sequences will be bounded in space and time, and can be stored as arrays of size $N \times M \times P$.
+Sequences will be represented as functions $\ell (x,y,t)$, where $x,y$ are the spatial coordinates and $t$ is time. As before, when processing sequences, we will work with the discretized version that we will represent as $\ell \left[n,m,t \right]$, where $n,m$ are the pixel indices and $t$ is the frame number. Discrete sequences will be bounded in space and time, and can be stored as arrays of size $N \times M \times P$.
 
-![Fig (a) 8 Frames from a sequence with people walking. The frames are shown at regular time intervals. The full sequence had 90 frames (corresponding to 3 seconds of video). b) Space-time array, $f \left[n,m,t \right]$ of size $128 \times 128 \times 90$. c) Section for $m=50$, d) Section for $n=75$. Static objects appear as straight lines.](figures/temporal_filters/motion_illustration.png){#fig-motion}
+![Fig (a) 8 Frames from a sequence with people walking. The frames are shown at regular time intervals. The full sequence had 90 frames (corresponding to 3 seconds of video). b) Space-time array, $\ell \left[n,m,t \right]$ of size $128 \times 128 \times 90$. c) Section for $m=50$, d) Section for $n=75$. Static objects appear as straight lines.](figures/temporal_filters/motion_illustration.png){#fig-motion}
 
-@fig-motion illustrates this with one sequence shown in @fig-motion (a). This sequence has 90 frames and shows people on the street walking parallel to the camera plane and at different distances from the camera. @fig-motion (b) shows the space-time array $f \left[n,m,t \right]$. When we look at a picture, we are looking at a 2D section, $t$=constant, of this cube. But it is interesting to look at sections along other orientations.  @fig-motion (c) and @fig-motion (d) show sections for $m$=constant and $n$=constant, respectively. Although they are also 2D images, their structure looks very different from the images we are used to seeing. @fig-motion (c) shows a horizontal section that is parallel to the direction of motion of the people walking. Here we see straight bands with different orientations. These bands appear to occlude each other. Each band corresponds to one person, and its orientation is given by the speed of walk and the direction of motion. @fig-motion (d) looks like a photo-finish photograph, similar to those used in sporting races. In both images (c) and (d), static objects appear as vertical stripes in (b) and horizontal stripes in (d).
+@fig-motion illustrates this with one sequence shown in @fig-motion (a). This sequence has 90 frames and shows people on the street walking parallel to the camera plane and at different distances from the camera. @fig-motion (b) shows the space-time array $\ell \left[n,m,t \right]$. When we look at a picture, we are looking at a 2D section, $t$=constant, of this cube. But it is interesting to look at sections along other orientations.  @fig-motion (c) and @fig-motion (d) show sections for $m$=constant and $n$=constant, respectively. Although they are also 2D images, their structure looks very different from the images we are used to seeing. @fig-motion (c) shows a horizontal section that is parallel to the direction of motion of the people walking. Here we see straight bands with different orientations. These bands appear to occlude each other. Each band corresponds to one person, and its orientation is given by the speed of walk and the direction of motion. @fig-motion (d) looks like a photo-finish photograph, similar to those used in sporting races. In both images (c) and (d), static objects appear as vertical stripes in (b) and horizontal stripes in (d).
 
 One special sequence is when the image has a global motion with constant velocity $(v_x,v_y)$. In such a case, we can write:
 $$
-f (x,y,t) = f_0 (x-v_xt,y-v_yt)
+\ell (x,y,t) = \ell _0 (x-v_xt,y-v_yt)
 $${#eq-globaly_moving_image}
 
-where $f_0(x,y)= f (x,y,0)$ is the image being translated, and $v_x$ and $v_y$ are constants. At time $t$ the image $\text{img}_0(x,y)$ is translated by the vector $(v_x t, v_y t)$ as described by @eq-globaly_moving_image. The pixel value at location $(x=0, y=0)$ at time $t=0$ will appear at time $T$ in location $(x=v_x T, y=v_y T)$.
+where $\ell _0(x,y)= \ell (x,y,0)$ is the image being translated, and $v_x$ and $v_y$ are constants. At time $t$ the image $\ell _0(x,y)$ is translated by the vector $(v_x t, v_y t)$ as described by @eq-globaly_moving_image. The pixel value at location $(x=0, y=0)$ at time $t=0$ will appear at time $T$ in location $(x=v_x T, y=v_y T)$.
 This is what we see in @fig-motion (c) where the bands are created by moving pixels.
 
-We use continuous values for $x$, $y$, and $t$, and continuous images, $\text{img}_0(x,y)$, because it allows us to deal with any velocity values. This function also assumes that the brightness of the pixels does not change while the scene is moving (**constant brightness assumption**).
+We use continuous values for $x$, $y$, and $t$, and continuous images, $\ell _0(x,y)$, because it allows us to deal with any velocity values. This function also assumes that the brightness of the pixels does not change while the scene is moving (**constant brightness assumption**).
 
 ::: {.column-margin}
 The constant brightness assumption is the initial hypothesis of most motion estimation algorithms. We will devote multiple chapters in [Part Understanding Geometry](/part_understanding_geometry.html)  to study motion in depth.
@@ -28,7 +28,7 @@ The constant brightness assumption is the initial hypothesis of most motion esti
 
 In general, sequences will be more complex, but the properties of a globally moving image are helpful to understand local properties in sequences. We can also write models for more complex sequences. For instance, a sequence containing a moving object over a static background can be written as:
 $$
-f (x,y,t) = b(x,y) (1-m(x-v_xt,y-v_yt)) + o(x-v_xt,y-v_yt) m(x-v_x t,y-v_y t)
+\ell (x,y,t) = b(x,y) (1-m(x-v_xt,y-v_yt)) + o(x-v_xt,y-v_yt) m(x-v_x t,y-v_y t)
 $$
 where $b(x,y)$ is the static background image, $o(x,y)$ is the object image moving with speed $(v_x,v_y)$, and $m(x,y)$ is a binary mask that moves with the object and that models the fact that the object occludes the background.
 
@@ -36,13 +36,13 @@ where $b(x,y)$ is the static background image, $o(x,y)$ is the object image movi
 
 The FT of a globally moving image is (using the shift property):
 $$
-F (w_x,w_y,w_t) = F_0 (w_x, w_y) \delta (w_t + v_x w_x + v_y w_y)
+\mathscr{L} (w_x,w_y,w_t) = \mathscr{L}_0 (w_x, w_y) \delta (w_t + v_x w_x + v_y w_y)
 $$
-The continuous FT of the sequence is equal to the product of the 2D FT of the static image $f_0(x,y)$ and a delta wall. To better understand this function, let's look at a simple example in only one spatial dimension, as shown in @fig-mov_pulse_012.
+The continuous FT of the sequence is equal to the product of the 2D FT of the static image $\ell _0(x,y)$ and a delta wall. To better understand this function, let's look at a simple example in only one spatial dimension, as shown in @fig-mov_pulse_012.
 
 ![Fig (a) A sequence with one spatial dimension showing a static rectangular pulse. b) The rectangular pulse moves to the left at a speed $v=-0.5$ and c) moving towards the left, $v=-1$. As we work with discretized signals, speed units are in pixels per frame.](figures/temporal_filters/mov_pulse_012.png){#fig-mov_pulse_012}
 
-@fig-mov_pulse_012 shows the FT for a sequence with one spatial dimension, $f(x,t)$, that contains a blurry rectangular pulse moving at three different speeds towards the left. @fig-mov_pulse_012 (a) shows a sequence when the pulse is static, and @fig-mov_pulse_012 (d) shows its FT. Across the spatial frequency $w_x$, the FT is approximately a sinc function. Across the temporal frequency $w_t$, as the signal is constant, its FT is a delta function. Therefore, the FT is a sinc function contained inside a delta wall in the line $w_t=0$. @fig-mov_pulse_012 (b) shows the same rectangular pulse moving towards the left, $v_x=0.5$. @fig-mov_pulse_012 (e) shows the sinc function but skewed along the frequency line $w_t+0.5w_x=0$. Note that this is not a rotation of the sinc function from @fig-mov_pulse_012 (d) as the locations of the zeros lie at the same $w_x$ locations. @fig-mov_pulse_012 (c) shows the pulse moving at a faster speed resulting in a larger skewing of its FT, @fig-mov_pulse_012 (f).
+@fig-mov_pulse_012 shows the FT for a sequence with one spatial dimension, $\ell (x,t)$, that contains a blurry rectangular pulse moving at three different speeds towards the left. @fig-mov_pulse_012 (a) shows a sequence when the pulse is static, and @fig-mov_pulse_012 (d) shows its FT. Across the spatial frequency $w_x$, the FT is approximately a sinc function. Across the temporal frequency $w_t$, as the signal is constant, its FT is a delta function. Therefore, the FT is a sinc function contained inside a delta wall in the line $w_t=0$. @fig-mov_pulse_012 (b) shows the same rectangular pulse moving towards the left, $v_x=0.5$. @fig-mov_pulse_012 (e) shows the sinc function but skewed along the frequency line $w_t+0.5w_x=0$. Note that this is not a rotation of the sinc function from @fig-mov_pulse_012 (d) as the locations of the zeros lie at the same $w_x$ locations. @fig-mov_pulse_012 (c) shows the pulse moving at a faster speed resulting in a larger skewing of its FT, @fig-mov_pulse_012 (f).
 
 ::: {.column-margin}
 The **sinc function** is the FT of a box kernel. In the continuous domain, the sinc function has the form:
@@ -68,9 +68,9 @@ Many filters are non-causal and have both causal and anti-causal components (e.g
 
 In this chapter, we have written all the filters as convolutions. However, some filters are better described as difference equations (this is especially important in time). An example of a difference equation is:
 $$
-g \left[n,m,t \right] = f \left[n,m,t \right] + \alpha \, h \left[n,m,t-1 \right]
+\ell _{out} \left[n,m,t \right] = \ell _{in} \left[n,m,t \right] + \alpha \, \ell _{out} \left[n,m,t-1 \right]
 $$
-where the output $g$ at time $t$ depends on the input at time $t$ and the output at the previous time instant $t-1$ multiplied by a constant $\alpha$. We can easily evaluate the impulse response, $h \left[n,m,t \right]$, of such a filter by replacing $f\left[n,m,t \right]$ with an impulse, $\delta \left[n,m,t \right]$. The impulse response is:
+where the output $g$ at time $t$ depends on the input at time $t$ and the output at the previous time instant $t-1$ multiplied by a constant $\alpha$. We can easily evaluate the impulse response, $h \left[n,m,t \right]$, of such a filter by replacing $\ell \left[n,m,t \right]$ with an impulse, $\delta \left[n,m,t \right]$. The impulse response is:
 $$
 h \left[n,m,t \right] = \alpha^t  \delta \left[n,m \right] u \left[t \right]
 $$
@@ -88,7 +88,7 @@ The Heaviside step function, $u \left[t\right]$, is an infinite length function 
 ![](figures/temporal_filters/heav.png){width=100%}
 :::
 
-Most filters described by difference equations have an impulse response with infinite support. They are called IIR (Infinite Impulse Response) filters. IIR filters can be further classified as stable and unstable. Stable filters are the ones that given a bounded input, $| f \left[n,m,t \right] |<A$, produce a bounded output, $| g \left[n,m,t \right] | <B$. For this to happen, the impulse response has to be bounded. In unstable filters, the amplitude of the impulse response diverges to infinity. In the previous example, the filter is stable if and only if $| \alpha | < 1$.
+Most filters described by difference equations have an impulse response with infinite support. They are called IIR (Infinite Impulse Response) filters. IIR filters can be further classified as stable and unstable. Stable filters are the ones that given a bounded input, $| \ell _{in} \left[n,m,t \right] |<A$, produce a bounded output, $| \ell _{out} \left[n,m,t \right] | <B$. For this to happen, the impulse response has to be bounded. In unstable filters, the amplitude of the impulse response diverges to infinity. In the previous example, the filter is stable if and only if $| \alpha | < 1$.
 
 Let's now describe some spatio-temporal filters.
 
@@ -119,7 +119,7 @@ This directional blur is not a rotation of the original Gaussian as the change o
 
 Spatial derivatives were useful to find regions of image variation such as object boundaries. Temporal derivatives can be used to locate moving objects. We can approximate a temporal derivative for discrete signals as:
 $$
-f \left[m,n,t\right] - f \left[m,n,t-1\right]
+\ell \left[m,n,t\right] - \ell \left[m,n,t-1\right]
 $$
 
 
@@ -140,9 +140,13 @@ We can use the analytic form of the spatiotemporal Gaussian derivatives from @eq
 
 To answer that question, we will first assume the sequence contains a single object moving at a constant velocity. We will then compute the  derivatives along $x$, $y$, and $t$ of the sequence and we will find out what particular linear combination of those derivatives makes the output go to zero only when the input sequence moves at a target velocity.
 
-In the case of a moving image with velocity $(v_x, v_y)$, the sequence is $f (x,y,t) = f_0 (x-v_xt,y-v_yt)$, we can compute the temporal derivative of $f(x,y,t)$ as:
+In the case of a moving image with velocity $(v_x, v_y)$, the sequence is 
 $$
-\frac{\partial f}{\partial t} = \frac{\partial f_0}{\partial t} = -v_x \frac{\partial f_0}{\partial x} - v_y \frac{\partial f_0}{\partial y}
+\ell (x,y,t) = \ell _0 (x-v_xt,y-v_yt)
+$${#eq-brightnessconstancy1}
+We can compute the temporal derivative of $f(x,y,t)$ as:
+$$
+\frac{\partial \ell}{\partial t} = \frac{\partial \ell _0}{\partial t} = -v_x \frac{\partial \ell _0}{\partial x} - v_y \frac{\partial f_0}{\partial y}
 $${#eq-brightnessconstancy}
 
 This result is interesting because it shows that for a moving image there is a relationship between the temporal derivative of the sequence and the spatial derivatives a long the direction of motion. We can use this relationship to find a linear combination of the temporal and spatial derivatives so that the output is zero. 
@@ -156,7 +160,11 @@ $$ {#eq-spt_nulling_filter}
 we get a kernel $h(x,y,t;v_x,v_y)$ that we can use as a spatiotemporal filter that will do exactly what we were looking for. Indeed, if we convolve it with the input sequence $\text{img}_0 (x-v_x t,y-v_y t)$ we get a zero output (using @eq-brightnessconstancy):
 
 $$
-\text{img}_0 (x-v_x t, y-v_y t) \circ h = \text{img}_0 (x-v_x t, y-v_y t) \circ \left( g_t + v_x g_x + v_y g_y \right) = \left( \frac{\partial \text{img}_0}{\partial t} + v_x \frac{\partial \text{img}_0}{\partial x} + v_y \frac{\partial \text{img}_0}{\partial y} \right) \circ g = 0
+\begin{split}
+\ell _0 (x-v_x t, y-v_y t) \circ h & = \ell _0 (x-v_x t, y-v_y t) \circ \left( g_t + v_x g_x + v_y g_y \right) \\
+& = \left( \frac{\partial \ell _0}{\partial t} + v_x \frac{\partial \ell _0}{\partial x} + v_y \frac{\partial \ell _0}{\partial y} \right) \circ g \\
+& = 0
+\end{split}
 $$
 
 The filter $h$ from @eq-spt_nulling_filter is shown in @fig-gaussian_seq. As this filter is 3D, we show it as a sequence for different velocities. Each row in the figure corresponds to one particular velocity $v_x, v_y$. In the example shown in @fig-gaussian_seq (a), the Gaussian has a width of $\sigma^2=\sigma_t^2=1.5$ and has been discretized as a 3D array of size $7 \times 7 \times 7$. Figures @fig-gaussian_seq (b, c, and d) show the filter $h$ for different velocities: $(v_x, v_y) = (0,0)$, $(1,0)$, and $(-1,0)$.
