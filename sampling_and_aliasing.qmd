@@ -37,18 +37,18 @@ It is important to mention that there is nothing special about how the parameter
 
 Let's now look at an example in two dimensions (2D). As a concrete example, let's consider the 2D signal shown in @fig-aliasing (a). This 2D signal is a continuous function in the spatial domain defined as $\ell (x,y) = \cos (w (x+2y))$ and with a frequency, $w$, which also varies with location following $w = x+2y$. That is $\ell (x,y) = \cos \left( (x+2y)^2 \right)$. The image shows a set of diagonal waves with a changing frequency starting slow at the bottom left and becoming faster and faster as we approach the top-right corner.
 
-In order to store this continuous image on a computer, we need to sample it and convert it into a discrete image, $\ell [ n,m ]$. @fig-aliasing (b) shows the resulting sampled image when the sampling rate is chosen so that it results in an image size $52 \times 52$ pixels. The first thing to note is that the resulting image keeps very little similarity to the original signal. Only the bottom-left corner of the image looks anything like the continuous signal. As we move toward the right, the image changes the dominant orientation and the frequency becomes slow again.
 
 
 :::{#fig-aliasing layout-ncol="2"}
-![](figures/Image_processing_sampling/aliasing_1.jpg){width="50%" #fig-alaising-a}
+![](figures/Image_processing_sampling/aliasing_1.jpg){width="90%" #fig-alaising-a}
 
 
-![](figures/Image_processing_sampling/aliasing_2.jpg){width="50%" #fig-aliasing-b}
+![](figures/Image_processing_sampling/aliasing_2.jpg){width="90%" #fig-aliasing-b}
 
 A continuous image (here shown by sampling very finely). Its heavily sampled version resulting in an image with size $52 \times 52$.
 :::
 
+In order to store this continuous image on a computer, we need to sample it and convert it into a discrete image, $\ell [ n,m ]$. @fig-aliasing (b) shows the resulting sampled image when the sampling rate is chosen so that it results in an image size $52 \times 52$ pixels. The first thing to note is that the resulting image keeps very little similarity to the original signal. Only the bottom-left corner of the image looks anything like the continuous signal. As we move toward the right, the image changes the dominant orientation and the frequency becomes slow again.
 
 :::{.column-margin}
 Our perception seems to follow the slow and smooth assumption [@yair98]. We have a prior towards smooth and slow trajectories and textures. In the presence of noise, or missing information, our visual system will tend to follow the prior.
@@ -56,11 +56,10 @@ Our perception seems to follow the slow and smooth assumption [@yair98]. We have
 
 ## Sampling Theorem
 
-Let's start by considering a band-limited signal $\ell(t)$.
-
+Let's start by considering a band-limited signal $\ell (t)$.
 A band-limited signal is a signal with no spectral content above a frequency $w_{max}$. An example of a band-limited signal is a signal with the following Fourier transform:
 
-![A band-limited signal with maximum frequency $w_{max}$.](figures/Image_processing_sampling/band_limited_signal.png){#fig-band_limited_signal width="30%"}
+![A band-limited signal with maximum frequency $w_{max}$.](figures/Image_processing_sampling/band_limited_signal.png){#fig-band_limited_signal width="25%"}
 
 The **sampling theorem** (also known as Nyquist theorem) states that for a signal to be perfectly reconstructed from a set of samples (under the slow and smooth prior), the sampling frequency $w_s = 2 \pi /T_s$ has to be $w_s > 2w_{max}$ when $w_{max}$ is the maximum frequency present in the input signal [@Shannon1948].
 
@@ -108,11 +107,12 @@ $$
 and the continuous Fourier transform of $\ell_{\delta} (t)$, an infinite-length continuous signal, is:
 
 $$
-\mathscr{L}_{\delta} (w) = \int_{n=-\infty}^{\infty} \ell_{\delta} (t) \exp{(-jwt)} dt = \int_{n=-\infty}^{\infty} \ell(t) \sum_{n=-\infty}^{\infty} \delta(t-n T_s) \exp{(-jwt)} dt
-$$
-
-$$
-= \sum_{n=-\infty}^{\infty} \int_{n=-\infty}^{\infty} \ell(t) \delta(t-n T_s) \exp{(-jwt)} dt = \sum_{n=-\infty}^{\infty} \ell(n T_s) \exp{(-j w n T_s)}
+\begin{split}
+\mathscr{L}_{\delta} (w) &= \int_{n=-\infty}^{\infty} \ell_{\delta} (t) \exp{(-jwt)} dt \\
+& = \int_{n=-\infty}^{\infty} \ell(t) \sum_{n=-\infty}^{\infty} \delta(t-n T_s) \exp{(-jwt)} dt \\
+& = \sum_{n=-\infty}^{\infty} \int_{n=-\infty}^{\infty} \ell(t) \delta(t-n T_s) \exp{(-jwt)} dt \\
+& = \sum_{n=-\infty}^{\infty} \ell(n T_s) \exp{(-j w n T_s)}
+\end{split}
 $$
 
 Comparing the equations, we see that both Fourier transforms are identical up to a scaling factor:
@@ -130,11 +130,12 @@ Now that we have seen that $\ell_{\delta} (t)$ and the discrete signal $\ell_s  
 The Fourier transform of a delta comb is:
 
 $$
-\Delta_{T_s} (w) = \int_{-\infty}^{\infty}  \delta_{T_s}(t) \exp \left(-jwt\right) dw =\sum_{n=-\infty}^{\infty} \int_{-\infty}^{\infty}  \delta(t-n T_s) \exp \left(-jwt\right) dw
-$$
-
-$$
-=\sum_{n=-\infty}^{\infty}  \exp \left(-jwnT_s\right) = \frac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} \delta \left(w-k \frac{2 \pi}{T_s} \right)
+\begin{split}
+\Delta_{T_s} (w) &= \int_{-\infty}^{\infty}  \delta_{T_s}(t) \exp \left(-jwt\right) dw \\
+& =\sum_{n=-\infty}^{\infty} \int_{-\infty}^{\infty}  \delta(t-n T_s) \exp \left(-jwt\right) dw \\
+& =\sum_{n=-\infty}^{\infty}  \exp \left(-jwnT_s\right) \\
+& = \frac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} \delta \left(w-k \frac{2 \pi}{T_s} \right)
+\end{split}
 $$
 
 Deriving the last step is a bit involved, and we invite the readers to work out the details. The result is that the Fourier transform of an impulse train is also an impulse train but with a displacement in frequency between impulses that grows when the spacing in time decreases:
@@ -196,10 +197,10 @@ The sinc function (@fig-sinc_function) is an infinite-length continuous signal t
 When no other prior information is available about the function $\ell(t)$, and under the slow and smooth prior, this is the optimal reconstruction in terms of the L2 norm:
 
 $$
-\text{sinc} (t/T_s) = \argmin_{h(t)} \int \left( \ell(t) - \ell_{\delta} (
-
-t) \circ h(t) \right)^2 dt = 
-\argmin_{h(t)} \int \left( \mathscr{L}(w) - \mathscr{L}_{\delta} (w) H(w) \right) ^2 dw
+\begin{split}
+\text{sinc} (t/T_s) & = \text{argmin}_{h(t)} \int \left( \ell(t) - \ell_{\delta} (t) \circ h(t) \right)^2 dt \\
+& = \text{argmin}_{h(t)} \int \left( \mathscr{L}(w) - \mathscr{L}_{\delta} (w) H(w) \right) ^2 dw
+\end{split}
 $$
 
 Then the function, $\ell_{\delta} (t)$, that best approximates the input signal from its samples is:
