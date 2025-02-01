@@ -355,7 +355,7 @@ In many cameras (DSLRs, mobile phones, etc.), the most commonly used sampling is
 
 ::: {.column-margin}
 **Moire patterns**, also related to aliasing, are interference patterns that appear when superposing semitransparent patterns on top of each other.  
-![](figures/upsamplig_downsampling/moire.png){width=40%}
+![](figures/upsamplig_downsampling/moire.png){width=80%}
 :::
 
 ## Concluding Remarks
