@@ -169,7 +169,7 @@ in the following sections.
 
 The extension of the Hilbert transform to images can be done in several
 ways. The most common approach in image processing is to define one
-direction in the frequency space $n$ and then the Hilbert transform is
+direction, $n$, in the frequency space and then the Hilbert transform is
 as follows: 
 
 $$
@@ -204,7 +204,7 @@ $\ell_h(x,y)$ and $\ell_q(x,y)$ be the result of convolving the signal
 $\ell(x,y)$ with $h(x,y)$ and $q(x,y)$, respectively. Then, the squared
 local amplitude is a measure of the image power within the frequency
 bandwidth of the filters in the local neighborhood of $(x,y)$:
-$$a^2(x,y) = \ell_h(x,y)^2 + \ell_q(x,y)^2$$ @fig-quad2 shows the steps
+$$a^2(x,y) = \ell_h ^2 (x,y) + \ell_q ^2 (x,y)$$ @fig-quad2 shows the steps
 to compute the local amplitude of an input image using Gabor filters.
 This is like a two-layer convolutional neural network with two channels
 in the first layer, a squaring nonlinearity and then followed by a sum
@@ -212,7 +212,7 @@ in the second layer. This very simple system can perform a number of
 interesting operations.
 
 
-![Computation of localized amplitude. The input is filtered by a pair of quadrature Gabor filters. Each filter output is squared and the result is added.](figures/spatial_filter_sets/quad2.png){#fig-quad2}
+![Computation of localized amplitude. The input is filtered by a pair of quadrature Gabor filters. Each filter output is squared and the result is added.](figures/spatial_filter_sets/quad2.png){width=50% #fig-quad2}
 
 
 To see how useful the local amplitude is, let's start by computing it
@@ -222,8 +222,8 @@ it), and the filters $h$ and $q$ are the cosine and sine phase Gabor
 filters, then, the local amplitude image is: 
 
 $$\begin{split}
-a(x,y)  & = \sqrt{\ell_h(x,y)^2 + \ell_q(x,y)^2} = \\ 
- & = \sqrt{\psi^2_r(x,y;u_0,v_0) + \psi^2_i(x,y;u_0,v_0)} = \\
+a(x,y)  & = \sqrt{\ell_h ^2 (x,y) + \ell_q ^2 (x,y)}  \\ 
+ & = \sqrt{\psi^2_r(x,y;u_0,v_0) + \psi^2_i(x,y;u_0,v_0)}  \\
  & = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{x^2 + y^2}{2 \sigma^2} \right)}
 \end{split}
 $$
@@ -238,7 +238,7 @@ The sign invariance property is especially useful when using the local amplitude
 
 One property to notice in all these examples, is that, although the
 images $\ell_h(x,y)$ and $\ell_q(x,y)$ are band-pass, the amplitude
-$a^2(x,y)$ is a low-pass image.
+$a (x,y)$ is a low-pass image.
 
 ### Local Phase
 

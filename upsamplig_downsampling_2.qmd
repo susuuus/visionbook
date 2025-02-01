@@ -150,9 +150,10 @@ $${#eq-down1}
 as before, we can define an image,
 $\ell_{\delta_k} \left[n,m\right]$, of same size as the input image,
 $N \times M$, where we set to zero the samples that will be removed in
-the decimation operation: $$\begin{aligned}
-\ell_{\delta_k} \left[n,m\right] &=& \ell\left[n,m\right] \sum_{s=0}^{N/k-1} \sum_{r=0}^{M/k-1} \delta \left[n - sk \, ,m - rk \right] \\
-&=&  \ell\left[n,m\right]  \delta_k \left[n,m\right]\end{aligned}$${#eq-down2} where $\delta_k \left[n,m\right]$ is the discrete
+the decimation operation: 
+$$\begin{aligned}
+\ell_{\delta_k} \left[n,m\right] &= \ell\left[n,m\right] \sum_{s=0}^{N/k-1} \sum_{r=0}^{M/k-1} \delta \left[n - sk \, ,m - rk \right] \\
+&=  \ell\left[n,m\right]  \delta_k \left[n,m\right]\end{aligned}$${#eq-down2} where $\delta_k \left[n,m\right]$ is the discrete
 version of the **delta train**. 
 
 Using $\ell_{\delta_k}$ we can rewrite
@@ -186,8 +187,8 @@ This is the DFT of the product of two images, equation (@eq-down2), so
 we can apply the dual of the circular convolution theorem for finite
 length discrete signals (where both signals are extended periodically):
 $$\begin{aligned}
-\mathscr{L}_{\downarrow k} \left[u,v\right] &=& \frac{1}{NM} \mathscr{L}\left[u,v\right] \circ \Delta_k \left[u,v\right] \\ \nonumber
-&=& \frac{1}{k^2} \sum_{s=0}^{k-1} \sum_{r=0}^{k-1} \mathscr{L}\left[u - s\frac{N}{k} \, ,v - r\frac{M}{k} \right]
+\mathscr{L}_{\downarrow k} \left[u,v\right] &= \frac{1}{NM} \mathscr{L}\left[u,v\right] \circ \Delta_k \left[u,v\right] \\ \nonumber
+&= \frac{1}{k^2} \sum_{s=0}^{k-1} \sum_{r=0}^{k-1} \mathscr{L}\left[u - s\frac{N}{k} \, ,v - r\frac{M}{k} \right]
 \end{aligned}$${#eq-decimationFT} 
 
 The DFT of the sampled image by a factor $k$ is the
@@ -245,9 +246,9 @@ The matrix $\mathbf{D}_2$ selects all the odd rows of the matrix
 $\mathbf{F}_{N}$ and ignores the even ones. 
 Therefore, 
 $$\begin{aligned}
-\frac{1}{N} \mathbf{F}_{N/2} \mathbf{D}_2 \mathbf{F}^{*}_{N} &=& \frac{1}{N}\mathbf{F}_{N/2}  [\mathbf{F^*}_{N/2} ~|~ \mathbf{F^*}_{N/2}] \\
-&=& \frac{1}{N} \frac{N}{2} [\mathbf{I}_{N/2} ~|~ \mathbf{I}_{N/2}] \\
-&=& \frac{1}{2} [\mathbf{I}_{N/2} ~|~ \mathbf{I}_{N/2}]
+\frac{1}{N} \mathbf{F}_{N/2} \mathbf{D}_2 \mathbf{F}^{*}_{N} &= \frac{1}{N}\mathbf{F}_{N/2}  [\mathbf{F^*}_{N/2} ~|~ \mathbf{F^*}_{N/2}] \\
+&= \frac{1}{N} \frac{N}{2} [\mathbf{I}_{N/2} ~|~ \mathbf{I}_{N/2}] \\
+&= \frac{1}{2} [\mathbf{I}_{N/2} ~|~ \mathbf{I}_{N/2}]
 \end{aligned}
 $$ 
 
