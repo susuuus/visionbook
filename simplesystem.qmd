@@ -270,7 +270,7 @@ $$\begin{aligned}
 -1 & 0 & 1 
 \end{matrix}
 \right ] \nonumber
-\end{aligned}$$ We will discuss these approximations in detail in .
+\end{aligned}$$ We will discuss these approximations in detail in @sec-image_derivatives.
 
 From the image gradient, we can extract a number of interesting
 quantities: 
@@ -467,7 +467,7 @@ than 15 degrees is labeled as 3D horizontal.
 We can now translate the inferred 3D edge orientation into linear
 constraints on the global 3D structure. We will formulate these
 constraints in terms of $Y(x,y)$. Once $Y(x,y)$ is recovered we can also
-recover $Z(x,y)$ from .
+recover $Z(x,y)$ from @eq-projection.
 
 In a 3D vertical edge, using the projection equations, the derivative of
 $Y$ along the edge will be 
