@@ -21,6 +21,13 @@ example image (@fig-data_augmentation-data_aug_examples):
 
 ![A few common types of data augmentation.](./figures/data_augmentation/data_aug_examples.png){width="100%" #fig-data_augmentation-data_aug_examples}
 
+When you do this for every image in a dataset, you are essentially
+mapping from a smaller dataset to a larger dataset. We know that more
+data is usually better, so this is a way to simulate the effect of
+adding more real data to your dataset.
+
+![](./figures/data_augmentation/arrow.png){width=70% fig-align="center"}
+
 
 :::{.column-margin}
 Data augmentation might not seem not seem very
@@ -30,13 +37,6 @@ the better. Data augmentation is like a philosopher's stone of machine
 learning: it converts lead (small data) into gold (big
 data).
 :::
-
-When you do this for every image in a dataset, you are essentially
-mapping from a smaller dataset to a larger dataset. We know that more
-data is usually better, so this is a way to simulate the effect of
-adding more real data to your dataset.
-
-![](./figures/data_augmentation/arrow.png){width="100%" #fig-data_augmentation-arrow}
 
 The way data augmentation works is that for each
 $\{\mathbf{x}^{(i)}, \mathbf{y}^{(i)}\}$ pair in your original dataset,

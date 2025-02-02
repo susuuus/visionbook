@@ -210,7 +210,7 @@ from examples*. You are given a dataset of example inputs and their
 corresponding outputs and the task is to infer the relationship that can
 explain these input-output pairs:
 
-![](./figures/transfer_learning/fig-transfer_learning-learning_from_examples.png){width="100%"}
+![](./figures/transfer_learning/fig-transfer_learning-learning_from_examples.png){width=70% fig-align="center"}
 
 This kind of learning is like having a very lazy teacher, who just gives
 you the answer key to the homework questions but does not provide any
@@ -225,7 +225,7 @@ student can learn to imitate the teacher's outputs or can learn to match
 *how the teacher processes the queries*, matching intermediate
 activations of the teacher model.
 
-![](./figures/transfer_learning/fig-transfer_learning-learning_from_teacher.png){width="100%"}
+![](./figures/transfer_learning/fig-transfer_learning-learning_from_teacher.png){width=70% fig-align="center"}
 
 :::{.column-margin}
 Learning from examples can be considered a special
@@ -248,11 +248,7 @@ tries to imitate the teacher's output pmf: for each input $x$ that the
 student sees, its goal is to output the same pmf vector as the teacher
 outputs for $x$. The full algorithm is given in the diagram below.
 
-![](./figures/transfer_learning/fig-transfer_learning-knowledge_distillation.png){width="100%"}
-
-
-![Comparing knowledge distillation to supervised learning from labels.](./figures/transfer_learning/KD_diagram.png){width="100%" #fig-transfer_learning-KD_diagram}
-
+![](./figures/transfer_learning/fig-transfer_learning-knowledge_distillation.png){width=70% fig-align="center"}
 
 :::{.column-margin}
 This section describes knowledge distillation as it was defined in @hinton2015distilling, which is the paper that introduced the term. Note that the term is now often used to refer to the whole family of algorithms that have extended this original method. See @gou2021knowledge for a survey.
@@ -268,6 +264,8 @@ the input, rather than the ground truth class of the input. These
 beliefs may assign partial credit to classes that are similar to the
 ground truth, and this can actually make the teacher *more* informative
 than learning from ground truth labels.
+
+![Comparing knowledge distillation to supervised learning from labels.](./figures/transfer_learning/KD_diagram.png){width="100%" #fig-transfer_learning-KD_diagram}
 
 Think of it this way: the ground truth label for a domestic cat is
 "domestic cat" but the pmf vector output by a teacher, looking at a
@@ -310,13 +308,13 @@ Prompting is visualized in @fig-transfer_learning-prompting, where
 $\oplus$ represents concatenation, addition, or potentially other ways
 of mixing prompts and input signals.
 
-![Prompting: a prompt $\mathbf{p](./figures/transfer_learning/prompting.png){width="35%" #fig-transfer_learning-prompting}
+![Prompting: a prompt $\mathbf{p}$ is combined with the input $x$ to change the output $y$.](./figures/transfer_learning/prompting.png){width="35%" #fig-transfer_learning-prompting}
 
 Let's now look at several concrete ways of prompting a vision system.
 One simple way is to directly edit the input pixels, and this approach
 is shown in @fig-transfer_learning-pixel_prompt:
 
-![A prompt can be made out of pixels: a prompt image (which looks like a border of noise here) is added to the input image in order to change the model's behavior. Three different prompts are shown, one that adapts the model to perform scene classification, a second for aesthetics classification, and a third for object classification. Modified from \cite{bahng2022exploring](./figures/transfer_learning/vp_hyojin.png){width="100%" #fig-transfer_learning-pixel_prompt}
+![A prompt can be made out of pixels: a prompt image (which looks like a border of noise here) is added to the input image in order to change the model's behavior. Three different prompts are shown, one that adapts the model to perform scene classification, a second for aesthetics classification, and a third for object classification. Modified from @bahng2022exploring](./figures/transfer_learning/vp_hyojin.png){width="100%" #fig-transfer_learning-pixel_prompt}
 
 Here, the prompt is an image $\mathbf{p}$ that is added to the input
 image $\mathbf{x}$. The prompt looks like noise, but it is actually an

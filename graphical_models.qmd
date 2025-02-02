@@ -157,9 +157,9 @@ The states of a hypothetical most-probable configuration of this MRF are
 shown as the color of each node in this illustration.
 
 :::{#fig-leafs layout-ncol="2"}
-![](figures/graphical_models/leaf2.jpg){width="2.3in" #fig-leafs-a}
+![](figures/graphical_models/leaf2.jpg){width=97% #fig-leafs-a}
 
-![](figures/graphical_models/leaf1.jpg){width="2.5in" #fig-leafs-b}
+![](figures/graphical_models/leaf1.jpg){width=100% #fig-leafs-b}
 
 Fig (a) Image to be segmented and a local region of (a) marked in red.  (b) Visualization of an MRF of nodes corresponding to image pixels inside the marked region, with states indicating segment membership, for a hypothetical most probable configuration.
 ::: 
@@ -532,14 +532,13 @@ vision, we will consider the stereo vision problem while considering
 only one scanline pair at a time.
 
 :::{#fig-canoe1 layout-ncol="2"}
+![](figures/graphical_models/lcanoebig.jpg){width=100% #fig-canoe1-a}
 
-![](figures/graphical_models/lcanoebig.jpg){width="40%" #fig-canoe1-a}
+![](figures/graphical_models/rcanoebig.jpg){width=100% #fig-canoe1-b}
 
-![](figures/graphical_models/rcanoebig.jpg){width="40%" #fig-canoe1-b}
+![](figures/graphical_models/lcanoe2.jpg){width=100% #fig-canoe1-c}
 
-![](figures/graphical_models/lcanoe2.jpg){width="40%" #fig-canoe1-c}
-
-![](figures/graphical_models/rcanoe2.jpg){width="40%" #fig-canoe1-d}
+![](figures/graphical_models/rcanoe2.jpg){width=100% #fig-canoe1-d}
 
 Fig. (a) Left and (b) right camera images. (c and d): insets showing areas of analysis.
 :::
@@ -577,7 +576,7 @@ camera spatial position, is displayed in @fig-canoe4 (c). The intensities
 in each column in the third-row image add up to one.
 
 
-![Belief propagation applied to graphical model, @fig-canoe3, for the stereo problem. (a) Right and (b) left camera views. The black line shows the analyzed row. (c) Local evidence for each depth disparity at left camera. (d) Final rightward and (e) leftward belief propagation messages at each position. (f) Final marginalized posterior probability at each left camera pixel accurately finds the depth discontinuity.](figures/graphical_models/bpcanoes5.png){width="80%" #fig-canoe4}
+![Belief propagation applied to graphical model, @fig-canoe3, for the stereo problem. (a) Right and (b) left camera views. The black line shows the analyzed row. (c) Local evidence for each depth disparity at left camera. (d) Final rightward and (e) leftward belief propagation messages at each position. (f) Final marginalized posterior probability at each left camera pixel accurately finds the depth discontinuity.](figures/graphical_models/bpcanoes5.png){width=100% #fig-canoe4}
 
 The prior probability of any configuration of pixel disparity states is
 described by setting the compatibility matrices,
@@ -667,25 +666,21 @@ That graphical model has three hidden variables, and one variable
 observed to be in state 0. The compatibility matrices are given in the
 arrays below (for which the state indices are 0, then 1, reading from
 left to right and top to bottom): 
-
 $$\psi_{12}(x_1, x_2) = 
 \begin{bmatrix}
 1.0 & 0.9 \\
 0.9 & 1.0 
 \end{bmatrix}$$
-
 $$\psi_{23}(x_2, x_3) = 
 \begin{bmatrix}
 0.1 & 1.0 \\
 1.0 & 0.1 
 \end{bmatrix}$$
-
 $$\psi_{42}(x_2, y_2) = 
 \begin{bmatrix}
 1.0 & 0.1 \\
 0.1 & 1.0 
 \end{bmatrix}$$
-
 Note that in defining these potential functions, we haven't taken care
 to normalize the joint probability, so we'll need to normalize each
 marginal probability at the end (remember $p(x_1,
