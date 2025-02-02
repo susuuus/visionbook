@@ -125,7 +125,7 @@ we described in the introduction, and then estimate the model
 $p_{\theta}\left(\ell[n,m] \right)$, as illustrated in
 @fig-model_training_vs_sampling.
 
-![Fitting a statistical image model to a set of training images. Once the model is learned we can use the model to sample new images.](figures/statistical_image_models/model_training_vs_sampling.png){width=".75" #fig-model_training_vs_sampling}
+![Fitting a statistical image model to a set of training images. Once the model is learned we can use the model to sample new images.](figures/statistical_image_models/model_training_vs_sampling.png){width=75% #fig-model_training_vs_sampling}
 
 In the case of discrete gray-scale images with 256 gray levels, we can
 represent the distribution $p_{\theta}$ as vector of 256 values
@@ -195,7 +195,7 @@ different sense of gloss in the sphere images. Note how by simply
 modifying the image histograms within the pixels of the sphere, the
 sphere seems to be made by a different type of material.
 
-![Perceptual importance of simple histogram manipulations. Figure from \cite{Fleming2001](figures/statistical_image_models/illuminationHistograms.png){width="100%" #fig-illumination}
+![Perceptual importance of simple histogram manipulations. Figure from @Fleming2001](figures/statistical_image_models/illuminationHistograms.png){width=100% #fig-illumination}
 
 Image histograms carry useful information, but the histogram alone fails
 in capturing what makes images unique. We will need to build a more
@@ -213,7 +213,7 @@ pixels that are farther away, the correlation value slowly decays. The
 correlation, $C$, between two pixels separated by offsets of $\Delta n$
 and $\Delta m$, is:
 $$C(\Delta n, \Delta m) = \rho \left( \ell[n+\Delta n,m+ \Delta m], \ell[n,m] \right)$${#eq-correlation_between_two_pixels} where
-$$\rho \left( a, b \right) = \frac{E \left( a-\bar{a}, b- \bar{b} \right)}{\sigma_a \sigma_b},$$where $\sigma_a$ is the standard deviation of the variable $a$, and
+$$\rho \left( a, b \right) = \frac{E \left( (a-\bar{a})( b- \bar{b}) \right)}{\sigma_a \sigma_b},$$where $\sigma_a$ is the standard deviation of the variable $a$, and
 $\bar{a}$ is the mean of $a$.
 
 ![(center) Scatter plots of pairs of pixels intensities as a function of distance and (right) cross-correlation as a function for vertical (green) and horizontal (red) displacements for the street scene image.](figures/statistical_image_models/correlation.png){width="100%" #fig-correlation}
@@ -410,15 +410,13 @@ formulated as finding the $\ell[n,m]$ that maximizes the probability of
 the uncorrupted image, $\boldsymbol\ell_g$, called the maximum a
 posteriori, or MAP, estimate:
 $$\max_{\boldsymbol\ell} p(\boldsymbol\ell\bigm | \boldsymbol\ell_g)$$
-
 In these equations we write the image as a column vector
 $\boldsymbol\ell$. This posterior density can be written as:
 $$\max_{\boldsymbol\ell} p({\boldsymbol\ell} \bigm | {\boldsymbol\ell}_g) = \max_{\boldsymbol\ell} p({\boldsymbol\ell}_g \bigm | {\boldsymbol\ell}) p({\boldsymbol\ell})$$
 where the likelihood and prior functions are: $$\begin{aligned}
-p({\boldsymbol\ell}_g \bigm | {\boldsymbol\ell}) & \propto & \exp( - \left| {\boldsymbol\ell}_g - {\boldsymbol\ell} \right| ^2 / \sigma_g^2) \\ 
-p({\boldsymbol\ell}) & \propto & \exp \left(-\frac{1}{2} {\boldsymbol\ell}^T {\bf C}^{-1} {\boldsymbol\ell} \right)
+p({\boldsymbol\ell}_g \bigm | {\boldsymbol\ell}) & \propto  \exp( - \left| {\boldsymbol\ell}_g - {\boldsymbol\ell} \right| ^2 / \sigma_g^2) \\ 
+p({\boldsymbol\ell}) & \propto  \exp \left(-\frac{1}{2} {\boldsymbol\ell}^T {\bf C}^{-1} {\boldsymbol\ell} \right)
 \end{aligned}$$
-
 The solution to this problem can be obtained in closed form:
 $${\boldsymbol\ell} = {\bf C} \left( {\bf C} + \sigma_g^2   \mathbf{I} \right)^{-1} {\boldsymbol\ell}_g$$
 This is just a linear operation. It can also be written in the Fourier
@@ -559,9 +557,9 @@ Now, we can use equation (@eq-waveletmodel) to obtain the probability of
 $\boldsymbol\ell$ as a function of $a$: 
 
 $$\begin{aligned}
-p(\boldsymbol\ell\bigm | a) &=& \prod_{n=0}^{N-1} p(\ell_0 [n]  \bigm | a) = \\ %= \prod_{n} p(y [n]) \\
-&=&\frac {\exp \left(- \left| (1-a)/s  \right|^r \right) \exp \left(- \left| a/s  \right|^r \right)}{(2s/r \Gamma(1/r))^N} =\\
-&=&\frac{1}{(2s/r \Gamma(1/r))^N} \exp - \frac{\left| 1-a \right|^r+\left| a \right|^r} {s^r}  
+p(\boldsymbol\ell\bigm | a) &= \prod_{n=0}^{N-1} p(\ell_0 [n]  \bigm | a) = \\ %= \prod_{n} p(y [n]) \\
+&= \frac {\exp \left(- \left| (1-a)/s  \right|^r \right) \exp \left(- \left| a/s  \right|^r \right)}{(2s/r \Gamma(1/r))^N} =\\
+&= \frac{1}{(2s/r \Gamma(1/r))^N} \exp - \frac{\left| 1-a \right|^r+\left| a \right|^r} {s^r}  
 \end{aligned}
 $${#eq-best_a_eqn} 
 
@@ -570,8 +568,7 @@ the signal length $N$, and the second factor depends on $r$ and the
 missing value $a$. We are interested in finding the values of $a$ that
 maximize the $p(\boldsymbol\ell\bigm | a)$ for each value of $r$.
 Therefore, only the second factor is important for this analysis.
-@fig-surface_best_a plots the value of the second factor of equation
-(@eq-best_a_eqn) as we vary $a$ and $r$. The red line represent the
+@fig-surface_best_a plots the value of the second factor of @eq-best_a_eqn as we vary $a$ and $r$. The red line represent the
 places where the function reaches a local maximum as a function of $a$
 for every value of $r$.
 

@@ -145,6 +145,14 @@ synthesis approaches.
 
 ## Heeger-Bergen Texture Analysis and Synthesis {#sec-Heeger_Bergen}
 
+
+:::{.column-margin}
+Here is a link to a Google Colab demo of the content in this section.
+
+[Colab Heeger and Bergen](https://colab.research.google.com/drive/1y-l8SEa-ALraDgbai5WavAYTDjKbg1AI?usp=sharing)
+:::
+
+
 The statistical characteristics of image subbands allow for powerful
 image synthesis and also denoising algorithms. Let's start with the
 problem of **texture synthesis**. The task is as follows: given a
@@ -291,7 +299,7 @@ capable of generating higher quality textures @Portilla2000.
 
 These models, usually called **parametric texture models**, stayed
 popular until 2000. After that, **nonparametric texture models** became
-dominant (-sec-Efros-Leung_texture) until generative models with
+dominant (@sec-Efros-Leung_texture) until generative models with
 neural networks emerged around 2014.
 
 ## Efros-Leung Texture Analysis and Synthesis Model {#sec-Efros-Leung_texture}
