@@ -4,7 +4,7 @@
 
 In @sec-linear_image_filtering we motivated translation invariant linear filters as a way of accounting for the fact that objects in images might appear at any location. Therefore, a reasonable way of processing an image is by manipulating pixel neighborhoods in the same way independently on the image location. In addition to translation invariance, scale invariance is another fundamental property of images. Due to perspective projection, objects at different distances will appear with different sizes as shown in @fig-birds_multiscale. Therefore, if we want to locate all the bird instances in this image, we will have to apply an operator that is invariant in translation and in scale. Image pyramids provide an efficient representation for space-scale invariant processing.
 
-![Objects in images appear at arbitrary locations and with arbitrary image sizes.](figures/pyramids/birds_multiscale.jpg){width=80% #fig-birds_multiscale}
+![Objects in images appear at arbitrary locations and with arbitrary image sizes.](figures/pyramids/birds_multiscale.jpg){width=90% #fig-birds_multiscale}
 
 
 
@@ -43,7 +43,7 @@ In this example, the original image has a resolution of 848 $\times$ 643 pixels.
 Downsampling is discussed in detail in @sec-downsampling_and_upsampling.
 :::
 
-![Multiscale image pyramid. Each image is 25 percent smaller than the previous one. The red box indicates the size of a template used for detecting birds. As the size of the template is fixed; it will only be able to detect the birds that tightly fit inside the box. By running the same template across many levels in this pyramid, different instances of birds are detected at different scales..](figures/pyramids/multiscale_birds_boxes.png){width=80% #fig-birds_multiscale_processing}
+![Multiscale image pyramid. Each image is 25 percent smaller than the previous one. The red box indicates the size of a template used for detecting birds. As the size of the template is fixed; it will only be able to detect the birds that tightly fit inside the box. By running the same template across many levels in this pyramid, different instances of birds are detected at different scales..](figures/pyramids/multiscale_birds_boxes.png){width=100% #fig-birds_multiscale_processing}
 
 
 Now we can use the pyramid to detect birds at different sizes using a
@@ -100,7 +100,7 @@ $\mathbf{P}^{*\mathsf{T}}$ (i.e., complex conjugate transpose).
 
 :::{.column-margin}
 The quadrature mirror filter (QMF) transform is an example of self-inverting transform @Adelson87b. For 1D signals of length 4, the QMF transform can be written as:
-\[
+$$
 \mathbf{P}=\frac{1}{\sqrt{2}}
  \begin{bmatrix}
   1 ~& 1 ~& 0 ~& 0 \\
@@ -108,11 +108,11 @@ The quadrature mirror filter (QMF) transform is an example of self-inverting tra
   0 ~& 0 ~& 1 ~& 1 \\
   0 ~& 0 ~& 1 ~& -1  
  \end{bmatrix}
-\]
+ $$
 This is equivalent to the convolution of the input signal with two orthogonal kernels, $[1,1]$ and $[1,-1]$, with a stride of 2.
 
 This transform also has a multiscale version that is also self-inverting:
-\[
+$$
 \mathbf{P}=
  \begin{bmatrix}
   \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 & 0 \\[5pt]
@@ -120,7 +120,7 @@ This transform also has a multiscale version that is also self-inverting:
   \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \\[5pt] 
   \frac{1}{2} & \frac{1}{2} & -\frac{1}{2} & -\frac{1}{2} 
  \end{bmatrix}
-\]
+$$
 You can check that in both cases $\mathbf{Q} = \left( \mathbf{P^\mathsf{T}} \right) ^{-1} = \mathbf{P^\mathsf{T}}$.
 These transforms can be extended to 2D.
 :::
@@ -353,7 +353,7 @@ $\boldsymbol\ell=\mathbf{g}_0$.
 
 
 ![The diagram shows the Gaussian pyramid (black), the Laplacian pyramid (red) and the Laplacian inversion for a three-level Laplacian pyramid (blue).
-](figures/pyramids/laplacianPyr_architecture.png){width="80%" #fig-laplacian_pyr_architecture}
+](figures/pyramids/laplacianPyr_architecture.png){width="100%" #fig-laplacian_pyr_architecture}
 
 
 
@@ -423,14 +423,14 @@ build the Laplacian pyramid for the two input images; in this example we
 use seven levels and we also keep the last low-pass residual as shown in
 @fig-blending_pyrs.
 
-![Laplacian pyramids (seven levels and Gaussian residual) for both input images.](figures/pyramids/blending_pyrs.png){width="90%" #fig-blending_pyrs}
+![Laplacian pyramids (seven levels and Gaussian residual) for both input images.](figures/pyramids/blending_pyrs.png){width="100%" #fig-blending_pyrs}
 
 
 The second step is to build the Gaussian pyramid of the mask as shown in
 @fig-blending_pyrs_mask (note that we use eight levels, one level more
 than for the Laplacian pyramid).
 
-![Gaussian pyramid of the mask.](figures/pyramids/blending_pyrs_mask.png){width="90%" #fig-blending_pyrs_mask}
+![Gaussian pyramid of the mask.](figures/pyramids/blending_pyrs_mask.png){width="100%" #fig-blending_pyrs_mask}
 
 
 
@@ -507,7 +507,7 @@ $r=\left[ b_{0,0},...,b_{0,n}, b_{1,0},...b_{1,n},...,b_{k-1,0},...b_{k-1,n} \ri
 and the low pass residual $g_{k-1}$; and (2) the synthesis network (or
 decoder) that reconstructs the input from the representation $r$.
 
-![Steerable pyramid architecture.](figures/pyramids/steerable_pyr_architecture.png){width="80%" #fig-steerable_pyr_architecture}
+![Steerable pyramid architecture.](figures/pyramids/steerable_pyr_architecture.png){width="100%" #fig-steerable_pyr_architecture}
 
 
 
