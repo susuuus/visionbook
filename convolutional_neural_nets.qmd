@@ -237,7 +237,7 @@ may pad (or crop) the input until they are.
 Strided convolution looks like this
 (@fig-convolutional_neural_networks-strided_conv_diagram):
 
-![Strided convolution.](figures/convolutional_neural_nets/strided_conv_diagram.png){width="100%" #fig-convolutional_neural_networks-strided_conv_diagram}
+![Strided convolution.](figures/convolutional_neural_nets/strided_conv_diagram.png){width="50%" #fig-convolutional_neural_networks-strided_conv_diagram}
 
 
 Strided convolutions can significantly reduce the computational cost and memory requirements when a neural network is large. However, strided
@@ -257,8 +257,8 @@ the discrete Fourier transforms (DFT).
 :::{#fig-convolutional_neural_nets-strided_conv_results}
 | Input  | Stride 1 | Stride 2 | Stride 4 |
 |--------|----------|----------|----------|
-| ![](figures/convolutional_neural_nets/aliasing_stride_0.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_1.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_2.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_4.jpg){width=100%} |
-| ![](figures/convolutional_neural_nets/aliasing_stride_0_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_1_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_2_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_4_DFT.jpg){width=100%} |
+![](figures/convolutional_neural_nets/aliasing_stride_0.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_1.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_2.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_4.jpg){width=100%} |
+![](figures/convolutional_neural_nets/aliasing_stride_0_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_1_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_2_DFT.jpg){width=100%} | ![](figures/convolutional_neural_nets/aliasing_stride_4_DFT.jpg){width=100%} |
 
 **Figure:** Strided convolution results and their Fourier transforms.
 :::
@@ -301,7 +301,7 @@ using a multichannel convolution, but this is uncommon.
 An example of a dilated filter is visually shown in
 @fig-convolutional_neural_networks-dilated_conv_diagram:
 
-![Dialated convolution. Dark gray cells have value 0.](figures/convolutional_neural_nets/dilated_conv_diagram.png){width="100%" #fig-convolutional_neural_networks-dilated_conv_diagram}
+![Dialated convolution. Dark gray cells have value 0.](figures/convolutional_neural_nets/dilated_conv_diagram.png){width="70%" #fig-convolutional_neural_networks-dilated_conv_diagram}
 
 As can be seen in the visualization, dilation is a way to achieve a
 filter with large kernel while only requiring a small number of weights. The weights are just spaced out so that a few will cover a bigger region of the image.
@@ -364,7 +364,7 @@ $d_k=1$, $d_k=2$, and $d_k=4$ together
 create a kernel that can switch during learning between high and low
 spatial frequencies and small and large kernels.
 
-![Convolving dilated filters creates a new filter that can measure effects at a mixture of frequencies.](figures/convolutional_neural_nets/dilated_conv_cascade.png){width="100%" #fig-convolutional_neural_networks-dilated_conv_cascade}
+![Convolving dilated filters creates a new filter that can measure effects at a mixture of frequencies.](figures/convolutional_neural_nets/dilated_conv_cascade.png){width="60%" #fig-convolutional_neural_networks-dilated_conv_cascade}
 
 
 This results in a kernel with a size of $9 \times 9$ (81 values) defined
@@ -399,7 +399,7 @@ Separable filters are another kind of low-rank filter that is useful in many app
 When convolving one row and one column vector, $\mathbf{w} = \mathbf{u}^\mathsf{T} \circ \mathbf{v}$, the result is the outer product: $w \left[n,m \right] = u\left[n \right] v\left[m \right]$.
 :::
 
-![Two examples of separable filters.](figures/convolutional_neural_nets/kernels_separable_aprox.png){width="100%" #fig-convolutional_neural_nets-kernels_separable_aprox}
+![Two examples of separable filters.](figures/convolutional_neural_nets/kernels_separable_aprox.png){width="70%" #fig-convolutional_neural_nets-kernels_separable_aprox}
 
 
 Some important kernels are nonseparable but can be approximated by a
@@ -408,7 +408,7 @@ the Gaussian Laplacian is nonseparable but can be approximated by a
 separable filter as shown here
 (@fig-convolutional_neural_nets-laplacian_separable_aprox):
 
-![Approximating a Gaussian Laplacian filter as the outer product of two 1D filters.](figures/convolutional_neural_nets/laplacian_separable_aprox.png){width="100%" #fig-convolutional_neural_nets-laplacian_separable_aprox}
+![Approximating a Gaussian Laplacian filter as the outer product of two 1D filters.](figures/convolutional_neural_nets/laplacian_separable_aprox.png){width="70%" #fig-convolutional_neural_nets-laplacian_separable_aprox}
 
 The diagonal Gaussian derivative is another nonseparable kernel. When
 using a $3 \times 3$ kernel to approximate it we have: 
