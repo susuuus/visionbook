@@ -29,14 +29,14 @@ coordinates of corresponding points across the two images are related by
 a **homography**.
 
 
-:::{layout_ncols="2" #fig-illustration_homography}
-
+:::{#fig-illustration_homography layout-ncol="2"}
 ![](figures/homography/IMG_7801_crop.jpg){width="45%"}
-  
-![](figures/homography/IMG_7802_crop.jpg){width="45%"}
+
+![](figures/homography/IMG_7802_crop.jpg){width="48%"}
 
 These two images are (approximately) related by an homography.
 :::
+
 
 Homographies can be used in applications such as perspective correction,
 augmented reality, image stitching, creating bird's-eye views,
@@ -102,14 +102,15 @@ between to images are related by a homography.
 Consider the following three images shown in @fig-example_three_images.
 
 :::{#fig-example_three_images layout-ncol="3"}
-![](figures/homography/3_IMG_7883_small.jpg){width="44.5%" }
- 
-![](figures/homography/2_IMG_7884_small.jpg){width="25%"}
+![](figures/homography/3_IMG_7883_small.jpg){width="52%"}
 
-![](figures/homography/1_IMG_7885_small.jpg){width="25%"}
+![](figures/homography/2_IMG_7884_small.jpg){width="30%"}
+
+![](figures/homography/1_IMG_7885_small.jpg){width="30%"}
 
 Three images taken from the same point by rotating the camera.
 :::
+
 
 
 The three images are taken from the same point by rotating the camera.

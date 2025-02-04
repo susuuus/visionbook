@@ -15,7 +15,7 @@ changes as a function of their depth, which allows us to form a 3D
 interpretation of the ship when viewing the image with the glasses
 (@fig-titanic\[b\]).
 
-![(a) Stereo anaglyph of the Titanic @McManus2022](figures/3d_scene_understanding/titanic.png){width="100%" #fig-titanic}
+![(a) Stereo anaglyph of the Titanic @McManus2022. The red image shows the right eye's view, and cyan the left eye's view.  (b) When viewed through red/cyan stereo glasses the cyan variations appear in the left eye and the red variations appear to the right eye, creating a perception of 3D.](figures/3d_scene_understanding/titanic.png){width="100%" #fig-titanic}
 
 In this chapter, we study how to compute depth from a pair of images
 from spatially offset cameras, such as those of @fig-titanic. There are

@@ -52,17 +52,18 @@ paper, but the 3D interpretation transforms the way in which we perceive
 the sketch. The influence of the 3D perceptual mechanisms is better
 appreciated when looking at visual illusions.
 
-3D visual illusions are remarkably powerful. One captivating 3D illusion
-is the **Ames room**.
-
-
-
 :::{.column-margin}
 The Ames room was invented by Adelbert Ames, director
 of research at the Dartmouth Eye Institute, in 1946. Since then,
 illusions based on Ames' ideas have been utilized by comedians to create
 amusing effects.
 :::
+
+3D visual illusions are remarkably powerful. One captivating 3D illusion
+is the **Ames room**.
+
+
+
 
 
 
@@ -75,7 +76,7 @@ appears fronto-parallel.
 :::{.column-margin}
 Geometric description of the Ames room visual illusion.
 
-![](figures/single_view_3d/ames_room_description.png){width="100%"}
+![](figures/single_view_3d/ames_room_description.png){width="80%"}
 :::
 
 The best way to understand this illusion is by building it and
@@ -98,10 +99,10 @@ should appear. @fig-ames_room_cat illustrates this phenomenon with our
 cut-out version of the Ames room.
 
 
-:::{#fig-ames_room_cat}
+:::{#fig-ames_room_cat layout-ncol="2"}
 
 ![](figures/single_view_3d/IMG_9148_small.jpeg){width="49%"}
- 
+
 ![](figures/single_view_3d/IMG_9150_large.jpeg){width="49%"}
 
 If you place an object along the back wall of the Ames room shown in @fig-ames_room, its perceived size will change. Also note that both doors appear to be similar en size despite being quite different in reality.

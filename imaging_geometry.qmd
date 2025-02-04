@@ -260,7 +260,7 @@ origin along the $Z$-axis (@fig-coordinate_systems_ray). Therefore, in
 where $f$ is the focal length, $X_c=x$, and $Y_c=y$, as illustrated in
 @fig-coordinate_systems_ray.
 
-![](figures/imaging_geometry/light_ray.png){width="75%" #fig-coordinate_systems_ray}
+![The 3D point $\mathbf{P}$ is obtained by scaling the point $\mathbf{p}=(x,y,f)$ with a scaling factor $Z/f$. The ray that passes by the point $\mathbf{p}$ is the line defined by $\lambda (x,y,f)$, with $\lambda$ being a positive real number.](figures/imaging_geometry/light_ray.png){width="75%" #fig-coordinate_systems_ray}
 
 The ray that connects the camera center and the point $\mathbf{p}$ is
 $\lambda (x,y,f)$, with $\lambda$ being a positive real number. Any 3D
@@ -332,7 +332,6 @@ The picture size is $4{,}032 \times 3{,}024$ pixels which we can use to
 get the other two parameters of the camera projection matrix:
 $c_x=3{,}024/2$ and $c_y=4{,}032/2$. Putting all together we get the
 projection matrix:
-
 $$\mathbf{K} =             
     \begin{bmatrix}
     3{,}103.1 & 0 & 1{,}512 & 0 \\
@@ -340,7 +339,6 @@ $$\mathbf{K} =
     0 & 0 & 1 & 0
     \end{bmatrix}
     $${#eq-intrinsic}
-
 Would it be possible to infer the intrisic camera matrix from the camera
 technical specifications alone? Can we directly estimate the parameter
 $a$ directly from the camera specs? The picture is taken with the
@@ -583,7 +581,7 @@ build models for different camera types such as orthographic cameras,
 weak-perspective model, affine cameras, and so on.
 @fig-summary_camera_projection summarizes this section.
 
-![Projection of a point into the image plane. This summary puts together @fig-pinholeGeometry2bis](figures/imaging_geometry/summary_camera_model.png){width="80%" #fig-summary_camera_projection}
+![Projection of a point into the image plane. This summary puts together @fig-pinholeGeometry2bis and @fig-camera_calibration. First, we change the world-coordinates system, in which the point is expressed, into the camera-coordinates system, using the extrinsic camera model, and then we project it into the camera plane using the intrinsic camera model.](figures/imaging_geometry/summary_camera_model.png){width="80%" #fig-summary_camera_projection}
 
 In the rest, we will usually refer to the camera projection matrix,
 which includes both intrinsic as extrinsic parameters as:
@@ -919,8 +917,8 @@ axis intersected the ground plane, this puts a particular restriction
 between the values of $d$, $h$, and $\theta$. Concretely, the constraint
 is, $\tan (\theta) = h/d$. Therefore,
 $d \sin(\theta) - h \cos (\theta) = 0$. In heterogeneous coordinates
-this results in: $$\begin{aligned}x &=& -a X\\
-y &=& a \cos (\theta) Y - a\sin(\theta) Z
+this results in: $$\begin{aligned}x &= -a X\\
+y &= a \cos (\theta) Y - a\sin(\theta) Z
 \end{aligned}$$ These equations are similar to equation (@eq-projection)
 from @sec-simplesystem (with $a=1$). One remaining difference
 is that $x$ has the opposite sign. This is because we are using here a
@@ -1244,9 +1242,9 @@ Another potential bug when extracting the camera orientation is to use the rotat
 The angle of
 the camera with respect to the vertically can be computed in multiple
 ways. Here is one: $$\begin{aligned}
-\arccos \left( [0,1,0] \mathbf{R}^\mathsf{T}[0,1,0]^\mathsf{T}\right) &=& \arccos (R[2,2]) \nonumber \\
-&=& \arccos (-0.9368) \nonumber \\
-&=& 20.5 \text{~degrees}
+\arccos \left( [0,1,0] \mathbf{R}^\mathsf{T}[0,1,0]^\mathsf{T}\right) &= \arccos (R[2,2]) \nonumber \\
+&= \arccos (-0.9368) \nonumber \\
+&= 20.5 \text{~degrees}
 \end{aligned}$$ Here we just computed the camera $Y$-axis and then
 computed the dot product with a unit vector along the $Y$-axis of the
 world-coordinates. This angle is also quite close to the approximate
