@@ -70,7 +70,7 @@ infer depth is in @Kaiming2009.
 :::{layout-ncol="2" #fig-aerial_perspective}
 ![](figures/learning_3d/IMG_0508.JPG){width="49%"}
 
-![](figures/learning_3d/IMG_2772_crop.jpg){width="49%"}
+![](figures/learning_3d/IMG_2772_crop.jpg){width="70%"}
 
 Fig (a) This image contains multiple 3D cues: shading effects (bump shapes), texture gradients (relative size between bumps), and linear perspective (due to the regular arrangement of the bumps). (b) Aerial perspective. Objects far in the background have lower contrast than objects closer to the camera.
 :::
@@ -114,11 +114,6 @@ intrinsic camera parameters, $\mathbf{K}$, of the sensor.
 Image and depth captured by an Azure Kinect sensor. (a) RGB image; and (b) corresponding dense depth map. Both images have the same size of $1280 \times 720$ pixels.
 :::
 
-:::{.column-margin}
-Depth maps are usually visualized using the **turbo colormap**, which is a modification of the **jet colormap** from Matlab. We will use this convention as it differentiates a depth map from a natural gray-scale image.
-![](figures/learning_3d/colorbar_transposed.png){width="100%"}
-The jet colormap can be problematic as it has a nonmonotonic intensity profile as can be seen above.
-:::
 
 @fig-kinect2 illustrates how the depth map translates into a point
 cloud where each pixel is mapped to a 3D point.
@@ -133,13 +128,20 @@ a point, $z(\mathbf{p})$ is the depth measured at that location, and
 $\mathbf{P}$ are the final 3D point coordinates. In heterogeneous
 coordinates, and making the pixel locations explicit, equation
 (@eq-3dcloudpointfromz) can be rewritten as: $$\begin{aligned}
-    X[n,m] &=& \left( n-c_x \right) \frac{z[n,m]}{a} \nonumber \\
-    Y[n,m] &=& \left( m-c_y \right) \frac{z[n,m]}{a} \nonumber \\
-    Z[n,m] &=& z[n,m] 
+    X[n,m] &= \left( n-c_x \right) \frac{z[n,m]}{a} \nonumber \\
+    Y[n,m] &= \left( m-c_y \right) \frac{z[n,m]}{a} \nonumber \\
+    Z[n,m] &= z[n,m] 
 \end{aligned}$$ where $a$, $c_x$ and $c_y$ are the intrinsic camera
 parameters (in pixel units). This writing shows that the 3D point
 coordinates are three images $X[n,m]$, $Y[n,m]$, and $Z[n,m]$ with the
 same size as the input image.
+
+:::{.column-margin}
+Depth maps are usually visualized using the **turbo colormap**, which is a modification of the **jet colormap** from Matlab. We will use this convention as it differentiates a depth map from a natural gray-scale image.
+![](figures/learning_3d/colorbar_transposed.png){width="100%"}
+The jet colormap can be problematic as it has a nonmonotonic intensity profile as can be seen above.
+:::
+
 
 In a point cloud, there is no notion of grouping of 3D points. 3D points
 are isolated and are not connected to each other. Note that translating
@@ -274,9 +276,9 @@ that are the average of the values on each side of the discontinuity.
 
 
 :::{layout-ncol="2" #fig-office_midas_point_cloud}
-![](figures/learning_3d/view1_pointcloud.png){width="44%"}
+![](figures/learning_3d/view1_pointcloud.png){width="70%"}
 
-![](figures/learning_3d/view2_pointcloud.png){width="44%"}
+![](figures/learning_3d/view2_pointcloud.png){width="30%"}
 
 Reconstructed point cloud of the office scene with two different view points. Results are good, but not great.
 :::
@@ -321,8 +323,8 @@ $\boldsymbol\ell_1$ and $\boldsymbol\ell_2$, and estimates the relative
 camera positions (the rotation and translation matrices, $\mathbf{R}$
 and $\mathbf{T}$) between the two frames, as shown in
 @fig-unsupervised_depth_system: $$\begin{aligned}
-\hat{\mathbf{z}} &=& f_1(\boldsymbol\ell) \\
-\left[ \hat{\mathbf{R}},\hat{\mathbf{T}} \right] &=& f_2(\boldsymbol\ell_1,\boldsymbol\ell_2)
+\hat{\mathbf{z}} &= f_1(\boldsymbol\ell) \\
+\left[ \hat{\mathbf{R}},\hat{\mathbf{T}} \right] &= f_2(\boldsymbol\ell_1,\boldsymbol\ell_2)
 \end{aligned}$$
 
 ![System for unsupervised learning of camera motion and depth @Tinghui2017. The goal is to learn the parameters of the functions $f_1$ and $f_2$ by minimizing the reconstruction error. The function $f_3$ is deterministic.](figures/learning_3d/unsupervised_depth.png){width="100%" #fig-unsupervised_depth_system}
