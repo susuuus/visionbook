@@ -104,7 +104,6 @@ $$\begin{pmatrix}    x \\
     1
     \end{bmatrix}
     $${#eq-3dhomo}
-
 We will refer to conventional Cartesian coordinate descriptions of a
 point in 2D, such as $(x,y)$, or 3D, such as $(x,y,z)$, as
 **heterogeneous coordinates** and write with rounded brackets in this
@@ -138,7 +137,6 @@ homogeneous coordinates), $$\begin{bmatrix}
 homogeneous coordinates back to the heterogeneous representation of the
 point, we divide all the entries of the homogeneous coordinate vector by
 their last dimension:
-
 $$\begin{bmatrix}
     x \\
     y \\
@@ -149,7 +147,6 @@ $$\begin{bmatrix}
     x/w \\
     y/w 
     \end{pmatrix}$$
-
 @fig-homogeneousAndHeteregeneous illustrates how homogeneous and
 heterogeneous coordinates relate to each other geometrically. A point in
 homogeneous coordinates is scale invariant (any point within the line

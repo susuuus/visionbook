@@ -661,8 +661,8 @@ Going back to heterogeneous coordinates we have that a 3D point at
 location $P_W=[X, Y, Z]^\mathsf{T}$ in world coordinates projects to the
 image coordinates: 
 
-$$\begin{aligned}x &=& a \frac{X}{Z} \\
-y &=& a \frac{Y-h}{Z} 
+$$\begin{aligned}x &= a \frac{X}{Z} \\
+y &= a \frac{Y-h}{Z} 
 \end{aligned}$$ 
 
 In this scenario, if you hold the camera parallel to the
@@ -693,7 +693,7 @@ $$
     \mathbf{R} & -\mathbf{R}\mathbf{T} \\
     \mathbf{0}^\mathsf{T}& 1
     \end{bmatrix}
-    &=&        
+    &=        
     \begin{bmatrix}
     1 & 0 & 0 & 0 \\
     0 & \cos (\theta) & \sin (\theta) & 0 \\
@@ -707,7 +707,7 @@ $$
     0 & 0 & 0 & 1 \\
     \end{bmatrix}
     \\
-    &=&
+    &=
     \begin{bmatrix}
     1 & 0 & 0 & 0 \\
     0 & \cos (\theta) & \sin (\theta) & -h \cos (\theta) \\
@@ -723,7 +723,7 @@ the following projection matrix:
 $$
 \begin{aligned}    
 \mathbf{M} 
-    &=& 
+    &= 
     \begin{bmatrix}
     a & 0 & 0 & 0 \\
     0 & a\cos (\theta) & a\sin (\theta) & -ah \cos (\theta) \\
@@ -734,8 +734,8 @@ $${#eq-model3b}
 
 Going back to heterogeneous coordinates we have:
 
-$$\begin{aligned}x &=& a \frac{X}{\sin( \theta ) (h-Y) + \cos ( \theta ) Z} \\
-y &=& a \frac{\cos (\theta) (Y-h) + \sin(\theta)Z}{\sin( \theta ) (h-Y) + \cos ( \theta ) Z} 
+$$\begin{aligned}x &= a \frac{X}{\sin( \theta ) (h-Y) + \cos ( \theta ) Z} \\
+y &= a \frac{\cos (\theta) (Y-h) + \sin(\theta)Z}{\sin( \theta ) (h-Y) + \cos ( \theta ) Z} 
 \end{aligned}$${#eq-model3camera}
 
 Let's look at three special cases according to the camera angle
@@ -822,7 +822,7 @@ $\theta_Y = 180$ degrees rotation.
 
 $$
 \begin{aligned}
-\mathbf{R}    &=&        
+\mathbf{R}    &=        
     \begin{bmatrix}
     1 & 0 & 0 \\
     0 & \cos (\theta_X) & \sin (\theta_X)  \\
@@ -834,7 +834,7 @@ $$
     -\sin (\theta_Y) & 0 & \cos (\theta_Y) \\
     \end{bmatrix}
     \nonumber \\
-    &=& 
+    &=
     \begin{bmatrix}
     -1 & 0 & 0 \\
     0 & \cos (\theta_X) & -\sin (\theta_X)  \\
@@ -855,7 +855,7 @@ camera parameters together, resulting in:
 $$
 \begin{aligned}
     \mathbf{M} 
-    &=& 
+    &=
     \begin{bmatrix}
     a & 0 & 0 & 0 \\
     0 & a & 0 & 0 \\
@@ -874,7 +874,7 @@ $$
     0 & 0 & 0 & 1 \\
     \end{bmatrix}
     \nonumber \\
-    &=& 
+    &= 
     \begin{bmatrix}
     -a & 0 & 0 & 0 \\
     0 & a\cos (\theta) & -a\sin (\theta) & -ah \cos (\theta) +ad \sin (\theta) \\
@@ -886,8 +886,8 @@ $${#eq-model4}
 And going back to heterogeneous coordinates we have: 
 
 $$
-\begin{aligned}x &=& -a \frac{X}{\sin( \theta ) (h-Y) + \cos ( \theta ) (d-Z)} \\
-y &=& a \frac{\cos (\theta) (Y-h) + \sin(\theta) (d-Z)}{\sin( \theta ) (h-Y) + \cos ( \theta ) (d-Z)}
+\begin{aligned}x &= -a \frac{X}{\sin( \theta ) (h-Y) + \cos ( \theta ) (d-Z)} \\
+y &= a \frac{\cos (\theta) (Y-h) + \sin(\theta) (d-Z)}{\sin( \theta ) (h-Y) + \cos ( \theta ) (d-Z)}
 \end{aligned}
 $$
 
@@ -904,7 +904,7 @@ results in:
 
 $$\begin{aligned}
     \mathbf{M} 
-    &=& 
+    &= 
     \begin{bmatrix}
     -a & 0 & 0 & 0 \\
     0 & a\cos (\theta) & -a\sin (\theta) & -ah \cos (\theta) +ad \sin (\theta) \\
@@ -972,13 +972,13 @@ write the matrix $\mathbf{M}$ in terms of its three rows using the
 vectors $\mathbf{m}_0^T$, $\mathbf{m}_1^\mathsf{T}$, and
 $\mathbf{m}_2^\mathsf{T}$. With this notation, the heterogeneous
 coordinates of $\mathbf{p}$ are: $$\begin{aligned}
-x_i &=& \frac{\mathbf{m}_0^\mathsf{T}\mathbf{P}_i}{\mathbf{m}_2^\mathsf{T}\mathbf{P}_i} \\
-y_i &=& \frac{\mathbf{m}_1^\mathsf{T}\mathbf{P}_i}{\mathbf{m}_2^\mathsf{T}\mathbf{P}_i}
+x_i &= \frac{\mathbf{m}_0^\mathsf{T}\mathbf{P}_i}{\mathbf{m}_2^\mathsf{T}\mathbf{P}_i} \\
+y_i &= \frac{\mathbf{m}_1^\mathsf{T}\mathbf{P}_i}{\mathbf{m}_2^\mathsf{T}\mathbf{P}_i}
 \end{aligned}$$ By rearranging the terms, we get the following two
 linear equations on the parameters of the matrix $\mathbf{M}$:
 $$\begin{aligned}
-\mathbf{P}_i^\mathsf{T}\mathbf{m}_0 - x_i \mathbf{P}_i^\mathsf{T}\mathbf{m}_2 &=& 0\\
-\mathbf{P}_i^\mathsf{T}\mathbf{m}_1 - y_i \mathbf{P}_i^\mathsf{T}\mathbf{m}_2 &=& 0
+\mathbf{P}_i^\mathsf{T}\mathbf{m}_0 - x_i \mathbf{P}_i^\mathsf{T}\mathbf{m}_2 &= 0\\
+\mathbf{P}_i^\mathsf{T}\mathbf{m}_1 - y_i \mathbf{P}_i^\mathsf{T}\mathbf{m}_2 &= 0
 \end{aligned}$$ The same two equations written in matrix form are:
 $$\left [
     \begin{array}{ccc}
