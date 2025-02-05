@@ -209,7 +209,7 @@ system to fit the field to a set of images.
 
 
 
-![Module for a parameterized radiance field. We use $\mathbf{R}$ to denote the vector of coordinates $L_\theta$ takes as input.](figures/nerfs/nerf_module.png){width="100%" #fig-nerfs-nerf_module}
+![Module for a parameterized radiance field. We use $\mathbf{R}$ to denote the vector of coordinates $L_\theta$ takes as input.](figures/nerfs/nerf_module.png){width="70%" #fig-nerfs-nerf_module}
 
 ### Neural Radiance Fields (NeRFs) {#sec-nerfs-nerf_section}
 
@@ -305,7 +305,7 @@ volume rendering.
 
 The volume rendering equation is: 
 $$\begin{aligned}
-    \ell(r) = \int_{t_n}^{t_f}\alpha(t) \, \overbrace{L^\sigma(r(t))}^{\text{density}} \, \overbrace{L^c(r(t),\mathbf{D})}^{\text{color}} \, dt :vol_rendering_integral\\
+    \ell(r) = \int_{t_n}^{t_f}\alpha(t) \, \overbrace{L^\sigma(r(t))}^{\text{density}} \, \overbrace{L^c(r(t),\mathbf{D})}^{\text{color}} \, dt\\
     \alpha(t) = \exp \Big(-\int_{t_n}^{t} \underbrace{L^\sigma(r(t))}_{\text{density}} dt\Big)
 \end{aligned}$${#eq-nerfs-vol_rendering_integral}  
 where $r(t)$ gives the coordinates, in the
@@ -443,7 +443,7 @@ to get the direction $\mathbf{D}$ (@fig-nerfs-pixel2ray):
 
 
 
-![Module for mapping from pixel coordinates to the world coordinates of a ray through that pixel.](figures/nerfs/pixel2ray.png){width="100%" #fig-nerfs-pixel2ray}
+![Module for mapping from pixel coordinates to the world coordinates of a ray through that pixel.](figures/nerfs/pixel2ray.png){width="50%" #fig-nerfs-pixel2ray}
 
 
 
@@ -453,14 +453,14 @@ Next we sample world coordinates along the ray, as described previously
 
 
 
-![Module for sampling coordinates along a ray.](figures/nerfs/ray2coords.png){width="100%" #fig-nerfs-ray2coords}
+![Module for sampling coordinates along a ray.](figures/nerfs/ray2coords.png){width="70%" #fig-nerfs-ray2coords}
 
 Finally, we use the volume rendering integral (using the quadrature rule
 approximation given previously) to compute the color of the pixel
 (@fig-nerfs-vrender):
 
 
-![Module for volume rendering of a single ray.](figures/nerfs/vrender.png){width="100%" #fig-nerfs-vrender}
+![Module for volume rendering of a single ray.](figures/nerfs/vrender.png){width="90%" #fig-nerfs-vrender}
 
 This pipeline gives a mapping from pixel coordinates to color values:
 $n,m \rightarrow r,g,b$. Our task in the next section will be to explain
@@ -497,7 +497,7 @@ differentiable, which will be critical for our next step, fitting the
 parameters to data.
 
 
-![Full NeRF pipeline for rendering an image.](figures/nerfs/full_nerf_pipeline.png){width="100%" #fig-nerfs-full_nerf_pipeline}
+![Full NeRF pipeline for rendering an image.](figures/nerfs/full_nerf_pipeline.png){width="90%" #fig-nerfs-full_nerf_pipeline}
 
 
 
@@ -517,7 +517,7 @@ We can phrase this procedure as a learning problem and show it as the
 diagram below:
 
 
-![](figures/nerfs/nerf_learning.png){width="100%"}
+![](figures/nerfs/nerf_learning.png){width="90%"}
 
 :::{.column-margin}
 Fitting a radiance field to volume rendered images is
