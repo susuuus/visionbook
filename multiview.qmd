@@ -441,9 +441,8 @@ better getting a sense of the context of each keypoint.
 scene. In this case the keypoint detects the same window corner across
 multiple views.
 
-:::{layout-ncol="2" #fig-sfm-palma_keypoint_matching_figure}
+:::{layout-ncol="1" #fig-sfm-palma_keypoint_matching_figure}
 ![](figures/sfm/sugar/sugar_keypoint_matching_figure.png){width="100%"}
-
 
 ![](figures/sfm/palma/palma_keypoint_matching_figure.png){width="100%"}
 
@@ -496,9 +495,9 @@ in this chapter.
 
 :::{layout-ncol="2" #fig-sfm-3dpalma}
 
-![](figures/sfm/palma/3d_palma_view2.png){width=".46"}
+![](figures/sfm/palma/3d_palma_view2.png){width=".50"}
 
-![](figures/sfm/palma/3d_palma_view1.png){width=".46"}
+![](figures/sfm/palma/3d_palma_view1.png){width=".40"}
 
 3D reconstruction of the plaza. The figure shows two different viewpoints and the recovered camera locations. (a) Bird's view.  (b) Arbitrary view.
 :::
