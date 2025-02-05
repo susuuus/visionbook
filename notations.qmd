@@ -253,12 +253,17 @@ $$\begin{aligned}
 \end{aligned}$$ If $y$ is a scalar and $\mathbf{x}$ is an
 $N$-dimensional vector, then the gradient
 $\frac{\partial y}{\partial \mathbf{x}}$ is a row vector of shape
-$[1 \times N]$: $$\begin{aligned}
+$[1 \times N]$: 
+
+$$\begin{aligned}
     \frac{\partial y}{\partial \mathbf{x}} =  
 \begin{bmatrix}
-    \frac{\partial y}{\partial x_1} & \frac{\partial y}{\partial x_2} & \cdots & \frac{\partial y}{\partial x_N} \label{backprop:scalar_vector_deriv}
+    \frac{\partial y}{\partial x_1} & \frac{\partial y}{\partial x_2} & \cdots & \frac{\partial y}{\partial x_N}
 \end{bmatrix}
-\end{aligned}$$ If $\mathbf{y}$ is an $M$-dimensional vector and
+\end{aligned}$${#eq-backprop-scalar_vector_deriv}
+
+
+If $\mathbf{y}$ is an $M$-dimensional vector and
 $\mathbf{x}$ is a $N$-dimensional vector then the gradient (also called
 the Jacobian in this case) is shaped as $[M \times N]$:
 $$\begin{aligned}
@@ -275,14 +280,15 @@ $\mathcal{L}$ is a scalar, then the gradient
 $\frac{\partial \mathcal{L}}{\mathbf{W}}$ is represented as an
 $[M \times N]$ dimensional matrix (note that the dimensions are
 transposed from what you might have expected; this makes the math
-simpler later): $$\begin{aligned}
+simpler later): 
+$$\begin{aligned}
     \frac{\partial \mathcal{L}}{\partial \mathbf{W}} &= 
         \begin{bmatrix}
             \frac{\partial \mathcal{L}}{\partial \mathbf{W}_{11}} & \ldots & \frac{\partial \mathcal{L}}{\partial \mathbf{W}_{N1}} \\
             \vdots & \ddots & \vdots \\
             \frac{\partial \mathcal{L}}{\partial \mathbf{W}_{1M}} & \ldots & \frac{\partial \mathcal{L}}{\partial \mathbf{W}_{NM}} \\
-        \end{bmatrix} \label{backprop:scalar_matrix_deriv}
-\end{aligned}$$
+        \end{bmatrix}
+\end{aligned}$${#eq-backprop-scalar_matrix_deriv}
 
 ::: {.column-margin}
 We will often draw matrices and vectors to help visualize the operations. For example, if $N=3$ and $M=4$:
