@@ -286,10 +286,10 @@ simpler later): $$\begin{aligned}
 
 ::: {.column-margin}
 We will often draw matrices and vectors to help visualize the operations. For example, if $N=3$ and $M=4$:
-![](figures/notations/w.png){width=100}
+![](figures/notations/new_w.png){width=30%}
 
 then, the gradient will have the form:
-![](figures/notations/dLdw.png){width=100}
+![](figures/notations/new_dLdw.png){width=24%}
 :::
 
 ### Conventions That Will Not Be Strictly Observed
