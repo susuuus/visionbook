@@ -68,7 +68,7 @@ scene intensities, then the geometry is as shown in @fig-amats1 (c). @fig-amats1
 reconstructions with fewer artifacts as it is less sensitive to noise.
 Note that $\mathbf{A}^{-1}$ contains lots of fast changes that will make
 the result very sensitive to noise in the observation. The regularized
-matrix, $\mathbf{B}$, shown in the bottom row of 
+matrix, $\mathbf{B}$, shown in the bottom row of @fig-amats1 (d), is better behaved.
 
 The following plot @fig-2pixelwidepinhole shows an example of an input 1D signal, ${\boldsymbol\ell_{\texttt{w}}}$, and the output of the 2-pixel wide pinhole camera, ${\boldsymbol\ell_{\texttt{s}}}$. 
 
