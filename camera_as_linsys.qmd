@@ -63,11 +63,8 @@ observations, the camera matrix is just a $13 \times 13$ identity matrix, depict
 
 Let the sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be $\boldsymbol\ell_{\texttt{w}}$. We represent the camera by matrix $\mathbf{A}$. For the case of a pinhole camera, and assuming 13 pixel sensor observations, the camera matrix is just a $13 \times 13$ identity matrix, depicted in @fig-amats1 (b), as each sensor depends only on the value of a single scene element.  
 
-Next, consider the case of a wide aperture pinhole camera, shown in . If
-ingle pixel in the sensor plane covers exactly two positions of the
-scene intensities, then the geometry is as shown in .{A}$, its inver
-e, $\mathbf{A}^{-1}$, and the regular
-zed inverse of the imaging matrix, which will usually give image
+Next, consider the case of a wide aperture pinhole camera, shown in @fig-amats1 (c). If a single pixel in the sensor plane covers exactly two positions of the
+scene intensities, then the geometry is as shown in @fig-amats1 (c). @fig-amats1 (d) also shows the imaging matrix, $\mathbf{A}$, its invere, $\mathbf{A}^{-1}$, and the regularized inverse of the imaging matrix, which will usually give image
 reconstructions with fewer artifacts as it is less sensitive to noise.
 Note that $\mathbf{A}^{-1}$ contains lots of fast changes that will make
 the result very sensitive to noise in the observation. The regularized
