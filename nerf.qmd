@@ -90,7 +90,6 @@ object's color be different depending on the angle we look at it, which
 is the case for shiny surfaces and many other materials. We will use the
 terms $L^c$ and $L^\sigma$ to denote the subcomponents of $L$ that
 output color and density values respectively: 
-
 $$\begin{aligned}
     L^c&: X,Y,Z,\psi,\phi \rightarrow r,g,b\\
     L^{\sigma}&: X,Y,Z,\psi,\phi \rightarrow\sigma
