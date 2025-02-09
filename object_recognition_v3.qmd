@@ -102,7 +102,7 @@ performing a **mental rotation** in order to compare both views. Whether
 humans actually perform mental rotations or not still remains
 controversial.
 
-![Two figures related by a 3D rotation. Modified from \cite{Shepard1971aa](figures/object_recognition/mental_rotation.png){width="60%" #fig-mental_rotation}
+![Two figures related by a 3D rotation. Modified from @Shepard1971aa](figures/object_recognition/mental_rotation.png){width="60%" #fig-mental_rotation}
 
 Michael Tarr and Steven Pinker @Tarr1989MentalRA showed that similar
 results where obtained on a learning task. When observers learn to
@@ -268,7 +268,11 @@ previously, the valid solutions for
 $\hat{\mathbf{y}}=[\hat{y}_1, \hat{y}_2, \hat{y}_3]^\mathsf{T}$ are
 constrained to lie within a **simplex**.
 
-![](figures/object_recognition/simplex_v2.png){width="30%"}
+:::{.column-margin}
+Simplex with three exclusive classes:
+
+![](figures/object_recognition/simplex_v2.png){width="90%"}
+:::
 
 
 Under this formulation, the function $f$ is a mapping
@@ -419,7 +423,7 @@ case, it seems that the classifier confuses cats as dogs the most.
 
 
 
-![](figures/object_recognition/confusion_matrix.png){width="50%" #tbl-confusion_matrix}
+![Confusion matrix for a three-way classification task. The numbers are percentages.](figures/object_recognition/confusion_matrix.png){width="50%" #tbl-confusion_matrix}
 
 The elements of the confusion matrix are: 
 
@@ -453,14 +457,18 @@ might be well defined, it is east to find images that will challenge our
 assumption, as shown in @fig-whatisacar.
 
 :::{layout-ncol="3" #fig-whatisacar}
-![](figures/object_recognition/IMG_1260.jpeg){width="32%" #fig-whatisacar}
-![](figures/object_recognition/IMG_7095.jpeg){width="32%"}
-![](figures/object_recognition/IMG_9933.jpeg){width="32%"}
+![](figures/object_recognition/IMG_1260.jpeg){width="90%"}
+
+![](figures/object_recognition/IMG_7095.jpeg){width="90%"}
+
+![](figures/object_recognition/IMG_9933.jpeg){width="90%"}
 
 
-![](figures/object_recognition/tesla.jpg){width="32%"}
-![](figures/object_recognition/IMG_4467.jpeg){width="32%"}
-![](figures/object_recognition/IMG_9325.jpeg){width="32%"}
+![](figures/object_recognition/tesla.jpg){width="90%"}
+
+![](figures/object_recognition/IMG_4467.jpeg){width="90%"}
+
+![](figures/object_recognition/IMG_9325.jpeg){width="90%"}
 
 Which of these images contains a car? This is a simple question that does not have a simple answer.
 :::
@@ -725,7 +733,7 @@ or assigned to the background class (indicated in white). Note that
 several detections can be assigned to the same ground truth bounding
 box.
 
-![(left) Detector output (using a low threshold to generate many detections). (middle) Ground truth bounding boxes (one color per instance). (right) Detector outputs that overlap with ground truth annotations, which are color coded](figures/object_recognition/detections.png){width="100%"}
+![(left) Detector output (using a low threshold to generate many detections). (middle) Ground truth bounding boxes (one color per instance). (right) Detector outputs that overlap with ground truth annotations, which are color coded](figures/object_recognition/detections.png){width="100%" #fig-detections}
 
 Now that we have assigned detections to ground truth annotations, we can
 compare them to measure the loss. For the classification loss, as each
