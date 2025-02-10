@@ -26,7 +26,8 @@ solve new instances of the problem.
 
 
 :::{.column-margin}
-Learning from examples is also called **supervised learning**.:::
+Learning from examples is also called **supervised learning**.
+:::
 
 Imagine you find an ancient mathematics text, with marvelous looking
 proofs, but there is a symbol you do not recognize, "$\star$\". You see
