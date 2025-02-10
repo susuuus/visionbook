@@ -207,7 +207,7 @@ the same spot at the wall, (c), regardless of where each ray had entered
 the lens. (c) The rays that pass outside the lens form the two line
 segments on either
 side.](figures/imaging/greenLaserBrightenedCrop2.jpg){#fig-greenLaser
-width="60%"}
+width="90%"}
 
 ## Imaging with Lenses {#sec-imagingWithLenses}
 
