@@ -29,7 +29,7 @@ prism.  The prism separates the white light into different colors by
 bending each color a different amount.  The second prism in the
 drawing demonstrates that those colors are elemental:  as an individual
 color passes through the second prism, the light doesn't break into
-other colors.](figures/color/newtonDrawing.jpg){#fig-prism}
+other colors.](figures/color/newtonDrawing.jpg){#fig-prism width="100%"}
 
 :::{.column-margin}
 Newton understood that white light could be decomposed into different colors and invented the term **spectrum**.
@@ -391,12 +391,7 @@ $$
 \mathbf{R}^{-1} \mathbf{C} \mathbf{P} \mathbf{M} \mathbf{R} \mathbf{C}_{eye} = \mathbf{C}_{eye}
 $${#eq-match2} 
 
-From @eq-match2 it follows that
-$\mathbf{C} \mathbf{P} \mathbf{M} = \mathbf{I}_3$, the $3 \times 3$
-identity matrix. These conditions on the spectral sensitivities,
-$\mathbf{C}$, the display spectra, $\mathbf{P}$ and the
-sensors-to-primaries mixing matrix, $\mathbf{M}$ for a color
-reproduction system are summarized below: 
+From @eq-match2 it follows that $\mathbf{C} \mathbf{P} \mathbf{M} = \mathbf{I}_3$, the $3 \times 3$ identity matrix. These conditions on the spectral sensitivities, $\mathbf{C}$, the display spectra, $\mathbf{P}$ and the sensors-to-primaries mixing matrix, $\mathbf{M}$ for a color reproduction system are summarized below: 
 
 $$\begin{aligned}
 \mathbf{C} &= \mathbf{R} \mathbf{C}_{\mbox{eye}} 
@@ -409,6 +404,11 @@ $$\begin{aligned}
 $${#eq-conditions} 
 
 where $\mathbf{C}_{\mbox{eye}}$ are the human photoreceptor sensitivities and $\mathbf{R}$ is a full-rank $3 \times 3$ matrix.
+
+:::{.column-margin}
+Conditions required for color matching in the color reproduction system of @fig-colorsystem.
+:::
+
 
 @fig-exampleColor displays the elements of two matrices $\mathbf{C}$
 and $\mathbf{P}$ that define a valid color matching system. For a color
