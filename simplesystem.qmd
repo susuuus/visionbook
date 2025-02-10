@@ -105,8 +105,7 @@ image is parameterized by coordinates $(x,y)$.
 ![A simple projection model. (a) World axis and camera plane. (b)
 Visualization of the world axis projected into the camera plane with
 parallel projection. The $Z$-axis is identical to the $Y$-axis up to a
-sign change and a
-scaling.](figures/simplesystem/projection2.png){#fig-projection
+sign change and a scaling.](figures/simplesystem/projection2.png){#fig-projection
 width="100%"}
 
 In this simple projection model, the origin of the world coordinates
@@ -194,8 +193,7 @@ orientation, changes in surface albedo, shadows).
 ![Edges denote image regions where there are sharp changes of the image
 intensities. Those variations can be due to a multitude of scene factors
 (e.g., occlusion boundaries, changes in surface orientation, changes in
-surface albedo, and
-shadows).](figures/simplesystem/edgeLabeling.png){#fig-edgeLabeling
+surface albedo, and shadows).](figures/simplesystem/edgeLabeling.png){#fig-edgeLabeling
 width="90%"}
 
 One of the tasks that we will solve first is to classify **image edges**
@@ -411,7 +409,7 @@ the image. Here is a list of some of those invariant properties:
 -   Smoothness: a smooth 3D curve will project into a smooth 2D curve.
 
 :::{.column-margin}
-![](figures/simplesystem/invariants2.png)
+![](figures/simplesystem/invariants.png)
 :::
 
 
@@ -529,10 +527,12 @@ regions. This problem is common in many visual domains.
 
 
 :::{.column-margin}
-As shown on the left image below, an image patch without context is not enough to infer its 3D shape.
-The same patch shown in the original image (right):
+An image patch without context is not enough to infer its 3D shape.
 
 ![](figures/simplesystem/cube_propagartion_1.png){width="44%"} 
+
+The same patch shown in the original image (right):
+
 ![](figures/simplesystem/cube_propagartion_2.png){width="44%"}
 
 Information about its 3D orientation its propagated from the surrounding edges.
