@@ -190,9 +190,13 @@ cleaned data, when combined with another apparently innocuous dataset,
 can reveal information that was desired to be private. For example, in
 1997, the medical records of the governor of Massachussetts were
 identified by matching anonymized medical data with publicly available
-voter registration records @Kearns2020, @Dwork2014. The combination of
-the two datasets allowed seemingly de-identified private data to be
-re-identified.
+voter registration records @Kearns2020, @Dwork2014. 
+
+The combination of the two datasets allowed seemingly de-identified private data to be re-identified.
+
+::: {.margin-note}
+**Differential privacy** allows extracting aggregated information about a population from a database without revealing information about any single individual.
+:::
 
 A very successful theoretical privacy framework, called differential
 privacy, addresses these issues. Following the techniques of
@@ -200,10 +204,6 @@ differential privacy @Dwork2014 researchers can guarantee to the
 participants of a study that they will not be affected by allowing their
 data to be used in a study or analysis, no matter what other studies,
 datasets, or information sources are available.
-
-::: {.margin-note}
-**Differential privacy** allows extracting aggregated information about a population from a database without revealing information about any single individual.
-:::
 
 Algorithms can be designed for which it can be shown that the guarantee
 of differential privacy is met @Kearns2020, @Dwork2014. One approach is
@@ -221,6 +221,10 @@ answer "yes" or "no" at random, by flipping the coin again and answering
 "yes" if heads and "no" if tails. The resulting responses for each
 individual are stored.
 
+::: {.column-margin}
+There are also risks associated with the wrong use of differential privacy @Dwork_Kohli_Mulligan_2019.
+:::
+
 If the stored data were hacked, or accidentally leaked, no harm would
 come to the surveyed individuals even though their data from this
 sensitive survey had been revealed. Any "yes\" answer could very
@@ -233,9 +237,7 @@ population. The price for this differential privacy is that more data
 must be collected to obtain the same accuracy guarantees in the estimate
 of the true population averages.
 
-::: {.column-margin}
-There are also risks associated with the wrong use of differential privacy @Dwork_Kohli_Mulligan_2019.
-::: 
+
 
 ## Ethics {#sect-ethics}
 
