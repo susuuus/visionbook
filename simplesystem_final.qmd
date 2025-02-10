@@ -142,7 +142,9 @@ $$
 \end{aligned}
 $$
 
-![](figures/simplesystem_revisited/projection-revisted.png){width="24%"}
+:::{.column-margin}
+![](figures/simplesystem_revisited/projection-revisted.png){width="90%"}
+:::
 
 
 In order to apply equation (@eq-recoverworldcoord), we need to define
@@ -321,4 +323,4 @@ mechanisms implemented by the human visual system.
 
 
 
-![](figures/simplesystem_revisited/gibson_bird.png){width="6%"}
+![](figures/simplesystem_revisited/gibson_bird.png){width="6%" fig-align="center"}

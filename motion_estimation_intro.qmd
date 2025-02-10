@@ -162,7 +162,7 @@ a few moving objects, as shown in @fig-two_frames_from_palma_street.
 
 Two frames of a video sequence captured from a moving car driving along a busy street in Palma de Mallorca (Spain).
 :::
-
+ 
 :::{.column-margin}
 ```{=html}
 <div style="text-align:center">
