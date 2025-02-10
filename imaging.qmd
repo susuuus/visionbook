@@ -23,8 +23,7 @@ treatment, we ignore diffraction effects.
 
 ![A light ray from the sun strikes a surface and generates outgoing rays
 of intensity and color depending on the angles of the incoming and
-outgoing rays relative to the surface
-orientation.](figures/imaging/brdf.png){#fig-lightSpray width="70%"}
+outgoing rays relative to the surface orientation.](figures/imaging/brdf.png){#fig-lightSpray width="75%"}
 
 Let an incident light ray be from direction $\mathbf{p}$ and of power,
 $\ell_{\texttt{in}}(\lambda)$, as a function of spectral wavelength $\lambda$ ().
@@ -48,7 +47,7 @@ simple BRDF, which we denote as $F_L$. The outgoing ray intensity,
 $\ell_{\texttt{out}}$, is a function only of the surface orientation relative to the
 incoming and outgoing ray directions, the wavelength, a scalar surface
 reflectance, and the incoming light power:
-$$%I_{\mbox{out}} = F_{L}(I_{\mbox{in}} (\lambda), \mathbf{n}, \mathbf{p})  = a I_{\mbox{in}}(\lambda) \cos(\mathbf{n} \cdot \mathbf{p}),
+$$
 \ell_{\texttt{out}} = F_{L} \left( \ell_{\texttt{in}} (\lambda), \mathbf{n}, \mathbf{p} \right)  = a \ell_{\texttt{in}}(\lambda) \left( \mathbf{n} \cdot \mathbf{p} \right),
 $${#eq-lambert}
 
@@ -285,9 +284,8 @@ to most lens-based cameras, and human vision as well.
 
 ![Perspective projection equations derived geometrically. From similar
 triangles, we have $x/f = X/Z$ and $y/f = Y/Z$. Similar triangles are
-indicated by the same
-color.](figures/imaging/similar_triangles2.png){#fig-pinholeGeometry2
-width="70%"}
+indicated by the same color.](figures/imaging/similar_triangles2.png){#fig-pinholeGeometry2
+width="80%"}
 
 Due to the choice of coordinate systems, the coordinates in the virtual
 camera plane have the $x$ coordinate in the opposite direction than the
@@ -319,10 +317,7 @@ alternative to perspective projection is **orthographic projection**.
 @fig-orthographics shows the geometric interpretation of orthographic (or parallel)
 projection.
 
-![Orthographic projection. Projection is done by parallel rays
-orthogonal to the projection plane. In this example, we have $x = X$ and
-$y = Y$.](figures/imaging/orthogonal_projection.png){#fig-orthographics
-width="90%"}
+![Orthographic projection. Projection is done by parallel rays orthogonal to the projection plane. In this example, we have $x = X$ and $y = Y$.](figures/imaging/orthogonal_projection.png){#fig-orthographics width="90%"}
 
 In this projection, as the rays are orthogonal to the projection plane,
 the size of objects is independent of the distance to the camera. The
