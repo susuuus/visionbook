@@ -30,7 +30,13 @@ perceive the world around you.
 Before we build systems that can see, it is good to learn to look at
 images and to pay attention to individual pixels. The image in
 @fig-pexels-retha-ferguson is a tiny image with just $32 \times 32$
-pixels. It is so small that we can actually look at each single pixel
+pixels. 
+
+:::{.column-margin}
+What is the minimum number of pixels needed to form a recognizable image? The answer depends on the image. It is possible to create visually recognizable images with very few pixels @torralba_2009
+:::
+
+It is so small that we can actually look at each single pixel
 and think about how it is that we can make sense of it. For instance,
 let's look at the pixel in row 13 counting from the bottom, and column 12
 counting from the left. That pixel corresponds to a dark gray pixel,
@@ -42,23 +48,17 @@ pixel wide. How can that provide enough information?
 ![A tiny image with 32 $\times$ 32 color pixels. Despite the very low
 resolution, we can still recognize most of its content. *Source*:
 Original image created with Dall-E, and downsampled with
-Photoshop.](figures/visionscience/DALLE_32x32.png){#fig-pexels-retha-ferguson
-width="80%"}
+Photoshop.](figures/visionscience/DALLE_32x32.png){#fig-pexels-retha-ferguson width="90%"}
 
 
 
 :::{.column-margin}
- Same image as in @fig-pexels-retha-ferguson but
-shown small.\
+Same image as in @fig-pexels-retha-ferguson but shown small and blurred to remove the artifacts due to the square pixels.
 
-![](figures/visionscience/DALLE_32x32.png){width="40%"}
+![](figures/visionscience/DALLE_32x32_blur.png){width="40%"}
 
-\
-Reducing the size helps better recognizing the objects despite
-containing the same visual information. 
+Reducing the size and blurring helps better recognizing the objects despite containing the same visual information. 
 :::
-
-
 
 Recognition of the meaning of that pixel can not come just from the
 intensity of that pixel or the few pixels nearby. There are way too many
@@ -72,10 +72,6 @@ Here we show, from left to right, the hand, the pen, and the blue mug.
 recognize image patches outside their natural context.](figures/visionscience/dalle-small.png){#fig-small-dalle}
 
 
-:::{.column-margin}
-What is the minimum number of pixels needed to form a recognizable image? The answer depends on the image. It is possible to create visually recognizable images with very few pixels @torralba_2009.
-:::
-
 ## The More You Look, the More You See
 
 Visual perception cannot be formulated as a simple input-output function
@@ -85,9 +81,7 @@ see and the better you understand the scene. Just look at the image
 shown in @fig-street_in_paris and try to write down everything you see
 down to the smallest detail.
 
-![A street in Paris. Is everything fine in this
-picture?](figures/visionscience/ADE_train_00015819_messed_small.jpg){#fig-street_in_paris
-width=".98"}
+![A street in Paris. Is everything fine in this picture?](figures/visionscience/ADE_train_00015819_messed_small.jpg){#fig-street_in_paris width=".98"}
 
 But this feeling of unlimited and effortless understanding of a picture
 is also an illusion. Do you truly understand everything you see? For
@@ -230,14 +224,14 @@ talk more about how camera motion relates to distance in .
 
 :::{.column-margin}
 Principle of continuity. In the following drawing, we
-see one wave and one line:\
+see one wave and one line:
 
-![](figures/visionscience/principle_continuity_1.png){width="60%"}
+![](figures/visionscience/principle_continuity_1.png){width="100%"}
 
-\
-Despite this, other groupings are also possible.\
 
-![](figures/visionscience/principle_continuity_2.png){width="60%"}
+Despite this, other groupings are also possible.
+
+![](figures/visionscience/principle_continuity_2.png){width="100%"}
 
 
 :::
@@ -350,6 +344,11 @@ shadow?
 
 ## Concluding Remarks
 
+:::{.column-margin}
+Your brain is like a detective looking at all the
+clues that reveal what the world is made of.
+:::
+
 This chapter was about learning to ask questions about what we see, why
 things look the way they do, and how do we recognize them. There are so
 many things that we see every day that we recognize by the way they
@@ -369,9 +368,5 @@ phenomena.
 
 
 
-:::{.column-margin}
-Your brain is like a detective looking at all the
-clues that reveal what the world is made of.
-:::
 
 
