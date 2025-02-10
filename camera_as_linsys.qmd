@@ -181,12 +181,9 @@ the scene around the corner from the vertical edge.
 
 If we sample @eq-corner1d in its continuous variables, we can write it in the form $\boldsymbol\ell_{\texttt{ground}} = \mathbf{A} \boldsymbol\ell_{\texttt{w}}$. Solving @eq-deriv2 for the multiplier to apply to $\boldsymbol\ell_{\texttt{ground}}$ to estimate $\boldsymbol\ell_{\texttt{w}}$ yields the form shown in @fig-ccmodel (b). @fig-ccmodel (b) shows the spatial mask to be multiplied by the observed reflected ground image, with the result summed over all spatial pixels in order to estimate the light coming from around the corner at one particular orientation angle relative to the corner, in this case approximately 45 degrees. We see that the way to read the 1D signal from the ground plane is to take a derivative with respect to angle. This makes intuitive sense, as the light intensities on the ground integrate all the light up to the angle of the vertical edge. To find the 1D signal at the angle of the edge, we ask, "What does one pie-shaped ray from the wall see that the pie-shaped ray next to it doesn't see?"
 
+![Outdoor corner camera experiments @Bouman17. (a) Camera recording ground plane intensities. (b) Two people walking around the corner, hidden from direct view of the camera. (c) Corner camera trace with one person moving. (d) Corner camera trace with two people moving. Angle from the corner is plotted vertically, and time is plotted horizontally.](figures/imaging/corner_camera_3D.png){#fig-cctraces width="90%"}
+
 It can be shown @Bouman17 that the image intensities from around-the-corner scenes introduce a perturbation of about $\frac{1}{1,000}$ to the light reflected from the ground from all sources. By averaging image intensities over the appropriate pie-shaped regions on the ground at the corner (@fig-ccmodel (b)), one can extract a 1D image as a function of time from the scene around the corner. @fig-cctraces shows two 1D videos reconstructed from one (@fig-cctraces (a)) and two (@fig-cctraces (b)) people walking around the corner. By processing videos of very faint intensity changes on the ground, we can infer a 1D video of the scene around the corner. The image inversion formulas were derived using inversion methods very similar to @eq-deriv2. The corner camera is just one of the many possible instantiations of a computational imaging system.
-
-![](figures/imaging/corner_camera_3D.png){#fig-cctraces width="90%"}
-
-Outdoor corner camera experiments @Bouman17. (a) Camera recording ground plane intensities. (b) Two people walking around the corner, hidden from direct view of the camera. (c) Corner camera trace with one person moving. (d) Corner camera trace with two people moving. Angle from the corner is plotted vertically, and time is plotted horizontally.
-
 
 
 ## Concluding Remarks
