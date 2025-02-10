@@ -15,19 +15,18 @@ Because learning is itself an algorithm, it can be understood as a
 meta-algorithm: an algorithm that outputs algorithms
 (@fig-learning_as_meta_algorithm).
 
-![Learning is an algorithm that outputs algorithms.](./figures/intro_to_learning/learning_as_meta_algorithm.png){#fig-learning_as_meta_algorithm}
+![Learning is an algorithm that outputs algorithms.](./figures/intro_to_learning/learning_as_meta_algorithm.png){#fig-learning_as_meta_algorithm width="75%"}
 
-Learning usually consists of two phases: the phase, where we search for
+Learning usually consists of two phases: the **training**  phase, where we search for
 an algorithm that performs well on past instances of the problem
-(training data), and the phase, where we deploy our learned algorithm to
+(training data), and the **testing** phase, where we deploy our learned algorithm to
 solve new instances of the problem.
 
 ## Learning from Examples
 
 
 :::{.column-margin}
-Learning from examples is also called **supervised learning**.
-:::
+Learning from examples is also called **supervised learning**.:::
 
 Imagine you find an ancient mathematics text, with marvelous looking
 proofs, but there is a symbol you do not recognize, "$\star$\". You see
@@ -41,20 +40,28 @@ $$\begin{aligned}
 \end{aligned}
 $$ 
 
-What do you think $\star$ represents? What function is
-it computing? Do you have it? Let's test your answer: what is the value
-of $3 \star 5$? (The answer is in the figure below.)
+What do you think $\star$ represents? What function is it computing? Do you have it? Let's test your answer: what is the value of $3 \star 5$? (The answer is in the figure below.)
 
-It may not seem like it, but you just performed learning! You *learned*
-what $\star$ does by looking at examples. In fact,
-@fig-star_symbol_learning shows what you did:
+It may not seem like it, but you just performed learning! You *learned* what $\star$ does by looking at examples. In fact, @fig-star_symbol_learning shows what you did:
 
-![How your brain may have solved the star problem.](./figures/intro_to_learning/star_symbol_learning.png){#fig-star_symbol_learning}
+![How your brain may have solved the star problem.](./figures/intro_to_learning/star_symbol_learning.png){#fig-star_symbol_learning width="75%"}
 
 Nice job!
 
-It turns out, we can learn almost anything from examples. Remember that
-we are learning an *algorithm*, i.e., a computable mapping from inputs
+It turns out, we can learn almost anything from examples. 
+
+:::{.column-margin}
+Some things are not learnable from examples, such as
+noncomputable functions. An example of a noncomputable function is a
+function that takes as input a program and outputs a 1 if the program
+will eventually finish running, and a 0 if it will run forever. It is
+noncomputable because there is no algorithm that can solve this task in
+finite time. However, it might be possible to learn a good approximation
+to it.
+:::
+
+
+Remember that we are learning an *algorithm*, i.e., a computable mapping from inputs
 to outputs. A formal definition of *example*, in this context, is an
 {`input`, `output`} pair. The examples you were given for $\star$
 consisted of four such pairs: 
@@ -74,11 +81,9 @@ Another name for this kind of learning is **fitting a model** to data.
 
 We were able to model the behavior of $\star$, on the examples we were
 given, with a simple algebraic equation. Let's try something rather more
-complicated. From the three examples in
-@fig-intro_to_learning-inpainting_example, can you figure out what the
-operator $F$ does?
+complicated. From the three examples in @fig-intro_to_learning-inpainting_example, can you figure out what the operator $F$ does?
 
-![A complicated function that could be learned from examples. This example is from @hays2007scene. ](./figures/intro_to_learning/inpainting_example.png){#fig-intro_to_learning-inpainting_example}
+![A complicated function that could be learned from examples. This example is from @hays2007scene. ](./figures/intro_to_learning/inpainting_example.png){#fig-intro_to_learning-inpainting_example width="40%"}
 
 You probably came up with something like "it fills in the missing
 pixels." That's exactly right, but it's sweeping a lot of details under
@@ -91,22 +96,14 @@ write it out by hand. This is the point of machine learning. The machine
 writes the algorithm for us, but it can only do so if we give it many
 examples, not just these three.
 
-:::{.column-margin}
-Some things are not learnable from examples, such as
-noncomputable functions. An example of a noncomputable function is a
-function that takes as input a program and outputs a 1 if the program
-will eventually finish running, and a 0 if it will run forever. It is
-noncomputable because there is no algorithm that can solve this task in
-finite time. However, it might be possible to learn a good approximation
-to it.
-:::
+
 
 ## Learning without Examples
 
 Even without examples, we can still learn. Instead of matching
 input-output examples, we can try to come up with an algorithm that
 optimizes for desirable *properties* of the input-output mapping. This
-class of learners includes and .
+class of learners includes **unsupervised learning** and **reinforcement learning**.
 
 In unsupervised learning, we are given examples of *input data*
 $\{x^{(i)}\}^N_{i=1}$ but we are not told the target outputs
@@ -118,7 +115,7 @@ preserves all information about the inputs. We will encounter this kind
 of learning in part @sec-generative_modeling_and_representation_learning of this
 book, on representation learning and generative modeling.
 
-In reinforcement learning, we suppose that we are given a that
+In reinforcement learning, we suppose that we are given a **reward function** that
 explicitly measures the quality of the learned function's output. To be
 precise, a reward function is a mapping from outputs to scores:
 $r: \mathcal{Y} \rightarrow \mathbb{R}$. The learner tries to come up
@@ -198,7 +195,9 @@ $\mathbf{y}$ from $\mathbf{x}$ given many training examples
 $\{\mathbf{x}^{(i)},\mathbf{y}^{(i)}\}^N_{i=1}$. The idea is to minimize
 the average error (i.e., risk) we incur over all the training data
 (i.e., empirical distribution). The ERM problem is stated as follows:
-$$\begin{aligned}
+
+$$
+\begin{aligned}
     \mathop{\mathrm{arg\,min}}_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N \mathcal{L}(f(\mathbf{x}^{(i)}),\mathbf{y}^{(i)}) \quad\triangleleft\quad \text{ERM}
 \end{aligned}
 $$
@@ -254,7 +253,7 @@ as $\{x^{(i)},y^{(i)}\}_{i=1}^N$. At test time, this model can be
 applied to predict the $y$ value of a new query $x'$, as shown in
 @fig-intro_to_learning-ols_train_test.
 
-![The goal of learning is to use the training data to predict the $y$ value of the test query. In our example we find that for every 1 degree increase in temperature, we can expect $\sim 10$ more people to go to the beach.](./figures/intro_to_learning/ols_train_test.png){#fig-intro_to_learning-ols_train_test}
+![The goal of learning is to use the training data to predict the $y$ value of the test query. In our example we find that for every 1 degree increase in temperature, we can expect $\sim 10$ more people to go to the beach.](./figures/intro_to_learning/ols_train_test.png){#fig-intro_to_learning-ols_train_test width="70%"}
 
 Our *hypothesis space* is linear functions, that is, the relationship
 between $x$ and our predictions $\hat{y}$ of $y$ has the form
@@ -333,11 +332,13 @@ $$\begin{aligned}
 $$ 
 
 We set this derivative to zero and solve for $\theta^*$:
-$$\begin{aligned}
+$$
+\begin{aligned}
     2(\mathbf{X}^\mathsf{T}\mathbf{X} \theta^* - \mathbf{X}^\mathsf{T}\mathbf{y}) &= 0\\
 \mathbf{X}^\mathsf{T}\mathbf{X} \theta^* &= \mathbf{X}^\mathsf{T}\mathbf{y}\\
 \theta^* &= (\mathbf{X}^\mathsf{T}\mathbf{X})^{-1}\mathbf{X}^\mathsf{T}\mathbf{y}.
-\end{aligned}$$
+\end{aligned}
+$$
 
 The $\theta^*$ defines the best fitting line to our data, and this line
 can be used to predict the $y$ value of future observations of $x$
@@ -377,7 +378,7 @@ searching over the space of all possible Python programs (within some
 max length). Clearly that's a much harder search problem than just
 finding two scalars. In chapter @sec-problem_of_generalization, we will see some pitfalls of using too powerful a hypothesis space when a simpler one will do.
 
-![Python program induction finds a Python program that predicts the training data's $y$-values from its $x$-values.](./figures/intro_to_learning/program_induction_system_diagram.png){#fig-intro_to_learning-program_induction_system_diagram}
+![Python program induction finds a Python program that predicts the training data's $y$-values from its $x$-values.](./figures/intro_to_learning/program_induction_system_diagram.png){#fig-intro_to_learning-program_induction_system_diagram width="80%"}
 
 ### Example 3: Classification and Softmax Regression {#sec-intro_to_learning-image_classification}
 
@@ -385,7 +386,7 @@ A common problem in computer vision is to recognize objects. This is a
 problem. Our input is an image $\mathbf{x}$, and our target output is a
 class label $\mathbf{y}$ (@fig-intro_to_learning-image_classification).
 
-![Image classification.](./figures/intro_to_learning/image_classification.png){#fig-intro_to_learning-image_classification}
+![Image classification.](./figures/intro_to_learning/image_classification.png){#fig-intro_to_learning-image_classification width="70%"}
 
 How should we formulate this task as a learning problem? The first
 question is how do we even represent the input and output? Representing
@@ -413,9 +414,13 @@ An example of one-hot codes for representing $K$=5 different classes:
 
 Next, we need to pick a loss function. Our first idea might be that we
 should minimize misclassifications. That would correspond to the so
-called : $$\begin{aligned}
+called **0-1 loss**: 
+
+$$
+\begin{aligned}
     \mathcal{L}(\hat{\mathbf{y}},\mathbf{y}) = \mathbb{1}(\hat{\mathbf{y}}\neq\mathbf{y}),
-\end{aligned}$$ where $\mathbb{1}$ is the indicator function that
+\end{aligned}
+$$ where $\mathbb{1}$ is the indicator function that
 evaluates to 1 if and only if its argument is true, and 0 otherwise.
 Unfortunately, minimizing this loss is a discrete optimization problem,
 and it is NP-hard. Instead, people commonly use the , which is
@@ -525,10 +530,7 @@ regression; therefore the learner can fit these examples by learning to
 perform least-squares regression.
 
 :::{.column-margin}
-Note that
-least-squares regression is not the unique solution that fits these
-examples, and the metalearner might arrive at a different solution that
-fits equally well.
+Note that least-squares regression is not the unique solution that fits these examples, and the metalearner might arrive at a different solution that fits equally well.
 :::
 
 Since least-squares regression is itself a learning algorithm, we can say that the learner learned to learn.
