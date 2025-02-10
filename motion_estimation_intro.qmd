@@ -216,7 +216,7 @@ motion at each pixel in the first frame by searching for the patch with
 the smallest distance in the second frame. We can implement this with
 the following algorithm:
 
-![Patch matching motion estimation. The algorithm starts by chopping the two frames into overlapping patches. Then, for every patch from the first frame, we compute the distance to all the nearby patches in frame 2. Finally, for each input patch we select the closest patch from frame 2 and we record the relative displacement between the two patches. The pseudocode can be rearranged to be more memory efficient.](figures/optical_flow/alg_match.png){width="100%" #alg-motion_matching_algorithm}
+![Patch matching motion estimation. The algorithm starts by chopping the two frames into overlapping patches. Then, for every patch from the first frame, we compute the distance to all the nearby patches in frame 2. Finally, for each input patch we select the closest patch from frame 2 and we record the relative displacement between the two patches. The pseudocode can be rearranged to be more memory efficient.](figures/optical_flow/algorithm_match.png){width="100%" #alg-motion_matching_algorithm}
 
 Note that padding must be applied if we want to compute the output
 optical flow near the image boundaries. Algorithm
