@@ -146,11 +146,7 @@ synthesis approaches.
 ## Heeger-Bergen Texture Analysis and Synthesis {#sec-Heeger_Bergen}
 
 
-:::{.column-margin}
-Here is a link to a Google Colab demo of the content in this section.
 
-[Colab Heeger and Bergen](https://colab.research.google.com/drive/1y-l8SEa-ALraDgbai5WavAYTDjKbg1AI?usp=sharing)
-:::
 
 
 The statistical characteristics of image subbands allow for powerful
@@ -158,7 +154,15 @@ image synthesis and also denoising algorithms. Let's start with the
 problem of **texture synthesis**. The task is as follows: given a
 reference texture we want to build a process that outputs images with
 new random samples of the same texture, as shown in
-@fig-analysis_heeger_bergen. Texture synthesis is important for many
+@fig-analysis_heeger_bergen. 
+
+:::{.column-margin .colab}
+A demo of the content in this section.
+
+[Colab Demo - Heeger and Bergen](https://colab.research.google.com/drive/1y-l8SEa-ALraDgbai5WavAYTDjKbg1AI?usp=sharing)
+:::
+
+Texture synthesis is important for many
 computer graphics applications, and also as way of studying what
 representations of a texture can be useful for visual recognition.
 
