@@ -11,11 +11,13 @@ Understanding how information is transformed when we convert a continuous signal
 - Maximize the amount of available information. This requires as many samples as possible.
 - Minimize the computational cost and memory requirements. This implies that we want to minimize the number of samples we collect.
 
-Let's consider a one-dimensional (1D) continuous time signal $\ell (t)$ and its sampled version $\ell [n] = \ell(n T_s)$, where $T_s$ is the **sampling period**. Intuitively, it is clear that in this sampling process, some information will get lost. If no information was lost, then we should be able to recover the continuous signal $\ell (t)$ from its sampled version $\ell [n]$ by doing some kind of interpolation. One way of ensuring that information is not lost is to decrease $T_s$, which will result in a more accurate approximation of the continuous signal $\ell (t)$ at the expense of the amount of memory needed to store $\ell [n]$. Decreasing $T_s$ will also result in an increase in the computational cost of processing the signal $\ell [n]$. Therefore, it is important to choose the appropriate $T_s$. Understanding the sampling process and how to reconstruct the continuous signal is necessary as it will allow us to find the optimal sampling parameters.
-
 :::{.column-margin}
 In this chapter, we will be dealing with continuous and discrete signals and their corresponding Fourier transforms.
 :::
+
+Let's consider a one-dimensional (1D) continuous time signal $\ell (t)$ and its sampled version $\ell [n] = \ell(n T_s)$, where $T_s$ is the **sampling period**. Intuitively, it is clear that in this sampling process, some information will get lost. If no information was lost, then we should be able to recover the continuous signal $\ell (t)$ from its sampled version $\ell [n]$ by doing some kind of interpolation. One way of ensuring that information is not lost is to decrease $T_s$, which will result in a more accurate approximation of the continuous signal $\ell (t)$ at the expense of the amount of memory needed to store $\ell [n]$. Decreasing $T_s$ will also result in an increase in the computational cost of processing the signal $\ell [n]$. Therefore, it is important to choose the appropriate $T_s$. Understanding the sampling process and how to reconstruct the continuous signal is necessary as it will allow us to find the optimal sampling parameters.
+
+
 
 ## Aliasing
 
@@ -51,7 +53,7 @@ A continuous image (here shown by sampling very finely). Its heavily sampled ver
 In order to store this continuous image on a computer, we need to sample it and convert it into a discrete image, $\ell [ n,m ]$. @fig-aliasing (b) shows the resulting sampled image when the sampling rate is chosen so that it results in an image size $52 \times 52$ pixels. The first thing to note is that the resulting image keeps very little similarity to the original signal. Only the bottom-left corner of the image looks anything like the continuous signal. As we move toward the right, the image changes the dominant orientation and the frequency becomes slow again.
 
 :::{.column-margin}
-Our perception seems to follow the slow and smooth assumption [@yair98]. We have a prior towards smooth and slow trajectories and textures. In the presence of noise, or missing information, our visual system will tend to follow the prior.
+Our perception seems to follow the slow and smooth assumption @yair98. We have a prior towards smooth and slow trajectories and textures. In the presence of noise, or missing information, our visual system will tend to follow the prior.
 :::
 
 ## Sampling Theorem
@@ -241,10 +243,13 @@ All of them can be written as a linear convolution with a kernel $h(t)$ as shown
 
 ![(top) Nearest interpolation. (bottom) Linear interpolation. Both interpolation methods can be modeled by a convolution with the kernel shown in the middle (a box and a triangle).](figures/Image_processing_sampling/sampling_reconstruction3.png){#fig-sampling_reconstruction3}
 
-The nearest neighbor interpolation is the result of the convolution of $\ell_\delta (t)$ with a box of width $T_s$. In the linear interpolation, the interpolation kernel $h(t)$ is a triangle of width $2T_s$.[^1] Lanczos-1 interpolation consists of using as kernel only the central lobe of the sinc function. This provides an interpolation that is smooth using only a local neighborhood. Other interpolation methods such as cubic interpolation can also be written as convolutions.
+The nearest neighbor interpolation is the result of the convolution of $\ell_\delta (t)$ with a box of width $T_s$. In the linear interpolation, the interpolation kernel $h(t)$ is a triangle of width $2T_s$.
 
-[^1]: The convolution of two box filters of width $T_s/2$ is a triangle of length $T_s$.
+:::{.column-margin}
+The convolution of two box filters of width $T_s/2$ is a triangle of length $T_s$.
+:::
 
+Lanczos-1 interpolation consists of using as kernel only the central lobe of the sinc function. This provides an interpolation that is smooth using only a local neighborhood. Other interpolation methods such as cubic interpolation can also be written as convolutions.
 ## A Family of 2D Spatial Samplings
 
 Let's now analyze what happens when sampling 2D signals to form discrete images. In 2D, things get more interesting. If we have a continuous image $\ell (x,y)$ we can sample it using a rectangular grid as $\ell_s [n,m] = \ell (nT_x, mT_y)$. We can do a very similar analysis to the one we just did for the 1D case. But in 2D, we can have more interesting sampling patterns. For instance, we could define the discrete image as:
@@ -354,7 +359,8 @@ The most common type of spatiotemporal sampling is regular sampling: here, all t
 In many cameras (DSLRs, mobile phones, etc.), the most commonly used sampling is the rolling shutter mode. Here, every row in the image is sampled simultaneously. But different rows are sampled at different instants. This sampling mode allows for a faster sampling rate with current hardware implementations, but it can create spatial distortions in the image if the camera moves or when taking pictures of moving objects.
 
 ::: {.column-margin}
-**Moire patterns**, also related to aliasing, are interference patterns that appear when superposing semitransparent patterns on top of each other.  
+**Moire patterns**, also related to aliasing, are interference patterns that appear when superposing semitransparent patterns on top of each other. 
+ 
 ![](figures/upsamplig_downsampling/moire.png){width=80%}
 :::
 
