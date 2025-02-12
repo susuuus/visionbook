@@ -61,6 +61,10 @@ $$
 \ell_{\text{out}} \left[n,m\right] = \sum_{k,l} a \text{box}_{N,M} \left[k,l \right] = a \sum_{k,l} \text{box}_{N,M} \left[k,l \right]  = a (2N+1)(2M+1)
 $$
 
+::: {.column-margin}
+Remember that the DC value of a signal is its mean value. DC is an old name derived from Direct Current.
+:::
+
 In general, the DC gain of an arbitrary filter $h [n,m]$ is the sum of its kernel values:
 
 $$
