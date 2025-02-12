@@ -202,7 +202,14 @@ $$
 $$
 The resulting representation, $\mathbf{r}$, contains the concatenation of the output of both derivative operators. $\mathbf{r}$ will have high values in the image regions that contain changes in pixel intensities and colors and will be near zero in regions with small variations. This representation can be **decoded** back into the input image by using the pseudoinverse as we did in the 1D case. The pseudoinverse can be efficiently computed in the Fourier domain @Weiss01derivingintrinsic.
 
-We can now manipulate this representation. In the example shown in @fig-edit_with_derivatives, if we set to zero the image derivatives that correspond to the word “stop,” when we decode the representation, we obtain a new image where the word “stop” has been removed. The red color fills the region with the word present in the input image. We did not have to specify what color that region had to be; that information comes from the integration process. Therefore, deleting an object using image derivatives can be achieved by setting to zero the gradients regardless of the content that will fill that region. Similarly, we could remove any object in an image or create new textures by modifying its gradient representation.
+We can now manipulate this representation. In the example shown in @fig-edit_with_derivatives, if we set to zero the image derivatives that correspond to the word “stop,” when we decode the representation, we obtain a new image where the word “stop” has been removed. The red color fills the region with the word present in the input image. 
+
+:::{.column-margin}
+**Image inpainting** consists in filling a missing region in an image.
+:::
+
+
+We did not have to specify what color that region had to be; that information comes from the integration process. Therefore, deleting an object using image derivatives can be achieved by setting to zero the gradients regardless of the content that will fill that region. Similarly, we could remove any object in an image or create new textures by modifying its gradient representation.
 
 
 ## Gaussian Derivatives
@@ -295,10 +302,11 @@ The first Hermite polynomial is $H_0(x)=1$, the second is $H_1(x) = 2x$, the thi
 $$
 H_n(x) = 2x H_{n-1}(x) - 2(n-1)H_{n-2}(x)
 $$
+
 For $n=0$ we have the original Gaussian. @fig-gaussian_gaussiander shows the 1D Gaussian derivatives.
 
 
-![Fig (a) 1D Gaussian with $\sigma=1$. (b–d) Gausian derivatives up to order 3.](figures/derivatives/gaussian_gaussiander.png){#fig-gaussian_gaussiander}
+![Fig (a) 1D Gaussian with $\sigma=1$. (b–d) Gaussian derivatives up to order 3.](figures/derivatives/gaussian_gaussiander.png){#fig-gaussian_gaussiander}
 
 In two dimensions, as the Gaussian is separable, the partial derivatives result on the product of two Hermite polynomial, one for each spatial dimension:
 
@@ -651,7 +659,6 @@ If two patches receive the same amount of light, then we will perceive as being 
 
 If our goal is to estimate the shade of gray of a piece of painted paper, then the quantity that we care about is the reflectance of the surface. But, what happens if we see two patches of unknown reflectance, and each is illuminated with two different light sources of unknown identity? How does the visual system manage to infer what the illumination and reflectances are?
 
-Visual illusions are a way of getting to feel how our own visual system processes images. To experience how this estimation process works, let's start by considering a very simple image as shown in @fig-simultaneous.
 
 :::{#fig-simultaneous}
 ![](figures/statistical_image_models/retinex.jpg){width=100%}
@@ -659,7 +666,7 @@ Visual illusions are a way of getting to feel how our own visual system processe
 Simultaneous contrast illusion. What happens if we see two patches of unknown reflectance, and each is illuminated with two different light sources of unknown identity?
 :::
 
-This image shows a very simple scene formed by a surface with a set of squares of different gray levels illuminated by a light spot oriented toward the left. Our visual system tries to estimate the two quantities: the reflectance of each square and the illumination intensity reaching each pixel.
+Visual illusions are a way of getting to feel how our own visual system processes images. To experience how this estimation process works, let's start by considering a very simple image as shown in @fig-simultaneous. This image shows a very simple scene formed by a surface with a set of squares of different gray levels illuminated by a light spot oriented toward the left. Our visual system tries to estimate the two quantities: the reflectance of each square and the illumination intensity reaching each pixel.
 
 Let's think of the image formation process. The surface is made of patches of different reflectances $r(x,y) \in (0,1)$. Each location receives an illumination $l(x,y)$. The observed brightness is the product:
 
@@ -669,13 +676,15 @@ $$
 
 Despite what reaches the eye is the signal $\ell(x,y)$, our perception is not the value of $\ell(x,y)$. In fact, the squares 1 and 2 in @fig-simultaneous have the exact same values of intensity, but we see them differently, which is generally explained by saying that we discount (at least partially) the effects of the illumination, $l(x,y)$.
 
-But how can we estimate $r(x,y)$ and $l(x,y)$ by only observing $\ell(x,y)$? One of the first solutions to this problem was the **Retinex algorithm** proposed by Land and McCann [@Land1971]. Land and McCann observed that it is possible to extract $r$ and $l$ from $\ell$ if one takes into account some constraints about the expected nature of the images $r$ and $l$. Land and McCann noted that if one considers two adjacent pixels inside one of the patches of uniform reflectance, the difference between the two pixel values will be very small as the illumination, even if it is nonuniform, will only produce a small change in the brightness of the two pixels. However, if the two adjacent pixels are on the boundary between two patches of different reflectances, then the intensities of these two pixels will be very different.
+
 
 ::: {.column-margin}
 The Retinex algorithm, by Land and McCann [@Land1971], is based on modeling images as if they were part of a Mondrian world (images that look like the paintings of Piet Mondrian). One example of a color Mondrian is:
 
-![](figures/spatial_filters/mondrian.png){width=90%}
+![](figures/spatial_filters/mondrian.png){width=100%}
 :::
+
+But how can we estimate $r(x,y)$ and $l(x,y)$ by only observing $\ell(x,y)$? One of the first solutions to this problem was the **Retinex algorithm** proposed by Land and McCann [@Land1971]. Land and McCann observed that it is possible to extract $r$ and $l$ from $\ell$ if one takes into account some constraints about the expected nature of the images $r$ and $l$. Land and McCann noted that if one considers two adjacent pixels inside one of the patches of uniform reflectance, the difference between the two pixel values will be very small as the illumination, even if it is nonuniform, will only produce a small change in the brightness of the two pixels. However, if the two adjacent pixels are on the boundary between two patches of different reflectances, then the intensities of these two pixels will be very different.
 
 The Retinex algorithm works by first extracting $x$ and $y$ spatial derivatives of the image $\ell(x,y)$ and then thresholding the gradients. First, we transform the product into a sum using the $\log$:
 
