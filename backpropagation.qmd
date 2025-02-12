@@ -115,7 +115,7 @@ see what we need in order to update its parameters
 
 
 
-![A generic layer in the computation graph. The braces represent the part of the computation graph we need to consider in order to evaluate $\mathbf{g}_{\texttt{out}}$, $\mathbf{L}$, and $\mathbf{g}in$.](figures/backpropagation/generic_layer_g_L.png){#fig-backpropagation-generic_layer_g_L width="80%"}
+![A generic layer in the computation graph. The braces represent the part of the computation graph we need to consider in order to evaluate $\mathbf{g}_{\texttt{out}}$, $\mathbf{L}$, and $\mathbf{g}in$.](figures/backpropagation/generic_layer_g_L.png){#fig-backpropagation-generic_layer_g_L width="75%"}
 
 
 Here we have introduced two new shorthands, $\mathbf{L}$ and
@@ -599,6 +599,13 @@ The full network, for a three-layer MLP, is shown in
 
 ![The computation graph for backpropagation through a three-layer MLP. It's just another neural net! Solid lines are involved in computing data/activation gradients and dotted lines are involved in computing parameter gradients.](./figures/backpropagation/backprop_as_neural_net.png){width="100%" #fig-backpropagation-backprop_as_neural_net}
 
+:::{.column-margin}
+<span style="display: inline-block; background-color: #69B0F9; height: 10px; width: 20px; position: relative; top: 1mm;"></span> `params forward`
+<span style="display: inline-block; background-color: rgb(247, 224, 89); height: 10px; width: 20px; position: relative; top: 1mm;"></span> `params backward`
+<span style="display: inline-block; background-color: #72E254; height: 10px; width: 20px; position: relative; top: 1mm;"></span> `data forward`
+<span style="display: inline-block; background-color: #D3443D; height: 10px; width: 20px; position: relative; top: 1mm;"></span> `data backward`
+:::
+
 There are a few interesting things about this forward-backward network.
 One is that *activations* from the `relu` layers get transformed to
 become *parameters* of a `linear` layer of the backward network (see
@@ -784,7 +791,7 @@ cat." Do you see cat-like stuff in the optimized image? What does this
 tell you about how the network is working?
 
 
-![Visualizing the optimal image of a cat according to a particular neural net. The net we used is called Contrastive Language-Image Pre-Training (CLIP) @radford2021learning and here we found the image that maximizes a node in CLIP's computation graph that measures how much the image matches the text ``a photo of a cat.'' In @sec-VLMs-CLIP we will cover exactly how the CLIP model works in more detail.](./figures/backpropagation/backprop_to_the_data_example.png){#fig-backpropagation-backprop_to_the_data_example width="45%"}
+![Visualizing the optimal image of a cat according to a particular neural net. The net we used is called Contrastive Language-Image Pre-Training (CLIP) @radford2021learning and here we found the image that maximizes a node in CLIP's computation graph that measures how much the image matches the text ``a photo of a cat.'' In @sec-VLMs-CLIP we will cover exactly how the CLIP model works in more detail.](./figures/backpropagation/backprop_to_the_data_example.png){#fig-backpropagation-backprop_to_the_data_example width="50%"}
 
 :::{.column-margin}
 Visualizations like this are a useful way to figure out what visual features a given neuron is sensitive to. Researchers often combine this visualization method with a natural image prior in order to find an image that not only strongly activates the neuron in question but also looks like a natural photograph (e.g., @olah2017feature).
