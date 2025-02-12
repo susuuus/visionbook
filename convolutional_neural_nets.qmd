@@ -851,8 +851,11 @@ outputs a single class probability vector for an image. What if we want
 to output a spatially varying map of predictions, like we discussed in
 the intro to this chapter? To achieve this, we can simply downsample
 less, so that the final layer of the CNN is a feature map that maintains
-higher spatial resolution. It is also important to remove any global
-pooling layers.
+higher spatial resolution. 
+
+:::{.column-margin}
+It is also important to remove any global pooling layers.
+:::
 
 An example is given below: 
 
