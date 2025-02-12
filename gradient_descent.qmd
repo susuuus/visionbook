@@ -148,7 +148,7 @@ The variant of gradient descent that uses this idea is called **stochastic gradi
 
 The full description of SGD is given in @alg-gradient_descent_SGD.
 
-![Stochastic gradient descent algorithm.](./figures/gradient_descent/alg6.png){#alg-gradient_descent_SGD}
+![Stochastic gradient descent algorithm. Stochastic gradient descent estimates the gradient from a stochastic subset (batch) of the full training data, and makes an update on that basis.](./figures/gradient_descent/alg6.png){#alg-gradient_descent_SGD}
 
 `SGD` has a number of useful properties beyond just being faster to compute than `GD`. Because each step of descent is somewhat random, $\texttt{SGD}$ can jump over small bumps in the loss landscape, as long those bumps disappear for some randomly sampled batches. Another important property is that $\texttt{SGD}$ can implicitly regularize the learning problem. For example, for linear problems (i.e., $f_\theta$ is linear), then if there are multiple parameter settings that minimize the loss, $\texttt{SGD}$ will often converge to the solution with minimum parameter norm~\cite{zhang2021understanding}.
 
