@@ -294,20 +294,12 @@ complex-value matrix for the 1D DFT, which when used as a multiplicand
 yields the Fourier transform of 1D vectors. Many Fourier transform
 properties and symmetries can be observed from inspecting that matrix.
 
-\caption{Visualization of the discrete Fourier transform as a matrix.  The signal to be
- transformed forms the entries of the column vector at right.  The
- complex values of the Fourier transform matrix are indicated by the color,
- with the key in the bottom left.  In the vector at the right, black
- values indicate zero.
-} 
-\label{fig-colorDFT}
-
 ![Visualization of the discrete Fourier transform as a matrix.  The signal to be
  transformed forms the entries of the column vector at right.  The
  complex values of the Fourier transform matrix are indicated by the color,
  with the key in the bottom left.  In the vector at the right, black
  values indicate zero.
-](figures/Image_processing_fourier/visualization_DFT_color.png){width="80%" #fig-colorDFT}
+](figures/Image_processing_fourier/visualization_DFT_color.png){width="100%" #fig-colorDFT}
 
 ### Visualizing the Fourier Transform
 
@@ -510,9 +502,7 @@ and aspect ratios.
 
 ## Discrete Fourier Transform Properties {#sec-DFTproperties}
 
-It is important to be familiar with the properties for the DFT. 
-
-@tbl-dft summarizes some important transforms and
+It is important to be familiar with the properties for the DFT. @tbl-dft summarizes some important transforms and
 properties.
 
 | $\ell[n]$ | $\mathscr{L}[u]$ |
@@ -525,7 +515,7 @@ properties.
 | $\cos \left(2 \pi u_0 \frac{n}{N}\right)$ | $\frac{1}{2}\left(\delta\left[u-u_0\right]+\delta\left[u+u_0\right]\right)$ |
 | $\sin \left(2 \pi u_0 \frac{n}{N}\right)$ | $\frac{1}{2 j}\left(\delta\left[u-u_0\right]-\delta\left[u+u_0\right]\right)$ |
 | $\operatorname{box}_L[n]$ | $\frac{\sin \pi u(2 L+1) / N}{\sin \pi u / N}$ |
-: DFT properties {#tbl-dft}
+: Table of basic DFT transforms and properties {#tbl-dft}
 
 ### Linearity
 
@@ -546,16 +536,17 @@ If an image is separable, then its Fourier transform is separable:
 $\mathscr{L}\left[u,v \right] = \mathscr{L}_1 \left[u \right] \mathscr{L}_2 \left[v \right]$
 
 :::{.column-margin}
-**Separability**. Although almost all images are not separable, some can be approximated by a separable image. Here is one example.
-We can use the SVD decomposition to find a separable approximation to the image on the left. The result is shown on the right. 
+**Separability**. 
 
-:::{layout-ncol="2"}
-![](figures/Image_processing_fourier/facade1.jpg){width="40%"}
+Although almost all images are not separable, some can be approximated by a separable image. Here is one example:
 
-![](figures/Image_processing_fourier/facade1aprox.jpg){width="40%"}
-:::
+![](figures/Image_processing_fourier/facade1.jpg){width="100%"}
 
-The right-hand image can be written as the product of two 1D signals.
+We can use the SVD decomposition to find a separable approximation to this image. The result is:
+
+![](figures/Image_processing_fourier/facade1aprox.jpg){width="100%"}
+
+This last image can be written as the product of two 1D signals.
 :::
 
 
@@ -810,17 +801,13 @@ seen in this chapter. All of them can be easily extended to 2D. There
 are more variations of the Fourier transform that we will not discuss
 here.
 
-::: {#tbl-tableFamilyFT .bordered}
-
 | Time Domain                       | FT                                                                                                 | FT$^{-1}$                                                                                          | Frequency Domain                  |
 |-----------------------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|-----------------------------------|
 | Discrete time, Finite length ($N$) | $\mathscr{L} \left[u \right] = \sum_{n=0}^{N-1} \ell \left[n \right] e^{-2 \pi j \frac{un}{N}}$  | $\ell \left[n \right] = \frac{1}{N} \sum_{u=0}^{N-1} \mathscr{L} \left[u \right] e^{2 \pi j \frac{un}{N} }$ | Discrete frequency, Finite length ($N$) |
 | Continuous time, Infinite length  | $\mathscr{L} (w) = \int_{- \infty}^{\infty} \ell (t) e^{- j w t} dt$                              | $\ell (t) = \frac{1}{2\pi} \int_{- \infty}^{\infty} \mathscr{L} (w) e^{j w t} d w$                | Continuous frequency, Infinite length    |
 | Discrete time, Infinite length    | $\mathscr{L} (w) = \sum_{n=-\infty}^{\infty} \ell \left[n \right] e^{- j w n}$                    | $\ell \left[n \right] = \frac{1}{2\pi} \int_{2 \pi} \mathscr{L} (w) e^{j w n} d w$                | Continuous frequency, Finite length ($2 \pi$) |
+: Fourier transforms. There are many variants of the Fourier transform. Here we describe the ones we will use in this book. {#tbl-tableFamilyFT .bordered}
 
-Fourier transforms. There are many variants of the Fourier transform. Here we describe the ones we will use in this book.
-
-:::
 
 ## Fourier Analysis as an Image Representation
 
@@ -928,13 +915,17 @@ not seem to make explicit any information about the image.
 ![The Fourier transform matching game: Match each image (a-h) with its corresponding Fourier transform magnitude (1-8).](figures/Image_processing_fourier/FTgame.png){width="100%" #fig-quiz}
 
 Take the following quiz: match the Fourier transform magnitudes with the
-corresponding images in @fig-quiz[^1]. Some image patterns are easily
+corresponding images in @fig-quiz. Some image patterns are easily
 visible in the Fourier domain. For instance, strong image contrasts
 produce oriented lines in the Fourier domain. Periodic patterns are also
 clearly visible in the Fourier domain. A periodic pattern in the image
 domain produces periodic impulses in the Fourier domain. The location of
 the impulses will be related to the period and orientation or the
 repetitions.
+
+:::{.column-margin}
+The correct answers to the quiz @fig-quiz are 1-h, 2-f, 3-g, 4-c, 5-b, 6-e, 7-d, and 8-a.
+:::
 
 ## Fourier Analysis of Linear Filters {#sec-transfer_function}
 
@@ -964,8 +955,7 @@ The transfer function of a filter is
 the Fourier transform of the convolution kernel.
 :::
 
- The transfer
-function will allow us interpret filters by how they modify the spectral
+The transfer function will allow us interpret filters by how they modify the spectral
 content of the input signal. As the Fourier transform of the output is
 just a product between the Fourier transform of the input and the
 transfer function, a linear filter simply reweights the spectral content
@@ -1172,5 +1162,3 @@ filters we will study provide a foundation to understand many basic
 image processing operations, and to interpret learned filters by neural
 networks.
 
-[^1]: The correct answers to the quiz @fig-quiz are 1-h, 2-f, 3-g, 4-c,
-    5-b, 6-e, 7-d, and 8-a.
