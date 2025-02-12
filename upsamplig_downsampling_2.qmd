@@ -67,7 +67,7 @@ the output at the discarded samples (pixels at an odd row or column) do
 not matter, or may even serve as extra degrees of freedom that can be
 used to make the attack less noticeable.
 
-![Analytic aliasing-based attack of a toy system that computes the horizontal image gradient @rodríguezmuñoz2022aliasing. Input image, $\ell_{\text{in}}$, and output image of $\ell_{\text{out}}=\max(0, \ell_{\text{in}} \circ_2 [1, -1])$, where $\circ_2$ denotes convolution with a stride of 2. As this simple system has aliasing, an attacker can inject a high frequency pattern, $z$, to change the output. Attacked image, $\ell_{\text{in}}+z$, and the output after attack. It doesn't even look like a derivative!](figures/upsamplig_downsampling/toy_example_book2.png){#fig-simple-network width=80%}
+![Analytic aliasing-based attack of a toy system that computes the horizontal image gradient. Input image, $\ell_{\text{in}}$, and output image of $\ell_{\text{out}}=\max(0, \ell_{\text{in}} \circ_2 [1, -1])$, where $\circ_2$ denotes convolution with a stride of 2. As this simple system has aliasing, an attacker can inject a high frequency pattern, $z$, to change the output. Attacked image, $\ell_{\text{in}}+z$, and the output after attack. It doesn't even look like a derivative!](figures/upsamplig_downsampling/toy_example_book2.png){#fig-simple-network width=80%}
 
 
 
@@ -500,10 +500,17 @@ interpolation process graphically.
 
 ### Linear and Bilinear Interpolation {#sec-bilinearinterpolation}
 
-**Linear interpolation**: For 1D signals, the value of
+For 1D signals, the value of
 $\ell_{\texttt{out}}(a)$ is a result of linear interpolation between the
 two closest input values $\ell_{\texttt{in}}[n]$ and
-$\ell_{\texttt{in}}[n+1]$, where $n<a<n+1$. For 2D signals, we have to
+$\ell_{\texttt{in}}[n+1]$, where $n<a<n+1$. 
+
+
+:::{.column-margin}
+Interpolation is also a key operation when performing image warping.
+:::
+
+For 2D signals, we have to
 interpolate the output value $\ell_{\texttt{out}}(a,b)$ using four input
 samples: $\ell_{\texttt{in}}[ n,m ]$, $\ell_{\texttt{in}}[ n+1,m ]$,
 $\ell_{\texttt{in}}[ n,m+1 ]$ and $\ell_{\texttt{in}}[ n+1,m+1 ]$, where
@@ -525,14 +532,6 @@ operator can be efficiently implemented as a sequence of two operations:
 expansion and interpolation. The interpolation operation, as it is
 linear and spatially stationary, can be efficiently implemented as a
 convolution.
-
-
-
-:::{.column-margin}
-Interpolation is also a key operation when performing
-image warping.
-:::
-
 
 
 ### Expansion
