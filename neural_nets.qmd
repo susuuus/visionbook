@@ -286,7 +286,7 @@ yields non-zero gradients over half its domain, thus being amenable to
 gradient-based learning.
 
 We visualize the values that the neurons take on as a function of $x_1$
-and $x_2$ in @fig-neural_nets-simple_MLP_network_values.
+and $x_2$ in @fig-neural_nets-simple_MLP_network_values:
 
 
 ![Values of hidden units and output unit for the MLP shown in \fig{\ref{fig-neural_nets-simple_MLP_network}}.](figures/neural_nets/simple_MLP_network_values.png){#fig-neural_nets-simple_MLP_network_values}
@@ -363,7 +363,7 @@ finally we apply a linear layer to compute the sum over these relus (a
 weighted sum with weights \[1,-1,-1,1\]). Therefore
 @eq-neural_nets_bump_as_relu_net can be implemented as a
 `linear`-`relu`-`linear` network. In @fig-neural_nets-bump_as_relus, we
-show an example of constructing a bump in this way.
+show an example of constructing a bump in this way:
 
 ![A bump can be represented as a weighted sum of shifted and scaled relu functions.](figures/neural_nets/bump_as_relus.png){#fig-neural_nets-bump_as_relus}
 
@@ -507,7 +507,7 @@ where the capital letters are the batches of datapoints and activations
 corresponding to the lowercase names of datapoints and hidden units in
 @fig-neural_nets-simple_MLP_network.
 
-![The tensors that represent one pass through the MLP in @fig-neural_nets-simple_MLP_network](figures/neural_nets/simple_MLP_network_tensors_and_batches.png){#fig-neural_nets-simple_MLP_network_tensors_and_batches width=70%}
+![The tensors that represent one pass through the MLP in @fig-neural_nets-simple_MLP_network](figures/neural_nets/simple_MLP_network_tensors_and_batches-2.png){#fig-neural_nets-simple_MLP_network_tensors_and_batches width=70%}
 
 This example shows the basic concept of working with tensors and batches
 for one-dimensional data, but, in vision, most of the time we will be
@@ -525,7 +525,7 @@ find it useful to visualize tensors in 3D, as shown in
 @fig-neural_nets-3D_tensor_example.
 
 
-![A 3D tensor that could represent an $C \times H \times W$ color image.](figures/neural_nets/3D_tensor_example.png){#fig-neural_nets-3D_tensor_example width=30%}
+![A 3D tensor that could represent an $C \times H \times W$ color image.](figures/neural_nets/3D_tensor_example.png){#fig-neural_nets-3D_tensor_example width=20%}
 
 This is closer to the actual ND tensors vision systems work with, and
 many concepts can be adequately captured just by thinking in 3D. We will
