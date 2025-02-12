@@ -13,7 +13,12 @@ Like CNNs, transformers factorize the signal processing problem into
 stages that involve independent and identically processed chunks.
 However, they also include layers that mix information across the
 chunks, called **attention layers**, so that the full pipeline can model
-dependencies between the chunks. 
+dependencies between the chunks.
+
+:::{.column-margin}
+Transformers were originally introduced in the field of natural language processing, where they were used to model language, that is, sequences of characters and words. As a result, some texts present transformers as an alternative to recurrent neural nets (RNNs) for sequence modeling, but in fact transformer layers are *parallel* processing machines, like convolutional layers, rather than sequential machines, like recurrent layers.
+:::
+
 
 ## A Limitation of CNNs: Independence between Far Apart Patches
 
@@ -101,26 +106,34 @@ safari image in this way.
 
 
 ### Data Structures and Notation for Working with Tokens
-:::{.column-margin}
-As we will see, transformers are invariant to permutations of the input sequence, so, as far as transformers are concerned, groups of tokens should be thought of a \textit{sets} rather than ordered sequences.
-:::
+
 
 A sequence of tokens will be denoted by a matrix
 $\mathbf{T} \in \mathbb{R}^{N \times d}$, in which each token in the
 sequence, $\mathbf{t}_1, \ldots, \mathbf{t}_N$, is transposed to become
-a row of the matrix: $$\mathbf{T} = 
+a row of the matrix: 
+
+$$
+\mathbf{T} = 
   \begin{bmatrix}
     \mathbf{t}_1^\mathsf{T}\\
     \vdots \\
     \mathbf{t}_N^\mathsf{T}\\
-  \end{bmatrix}$$ 
+\end{bmatrix}
+$$ 
 
-Graphically, $\mathbf{T}$ is constructed from
-$\mathbf{t}_1, \ldots, \mathbf{t}_N$ like this
+
+
+Graphically, $\mathbf{T}$ is constructed from $\mathbf{t}_1, \ldots, \mathbf{t}_N$ like this
 (@fig-transformers-T_notation):
 
-
 ![In this chapter, we will represent a set of tokens as a matrix whose rows are the token vectors.](figures/transformers/T_notation.png){#fig-transformers-T_notation}
+
+
+:::{.column-margin}
+As we will see, transformers are invariant to permutations of the input sequence, so, as far as transformers are concerned, groups of tokens should be thought of a *sets* rather than ordered sequences.
+:::
+
 
 The idea of this notation is that *tokens are to transformers as neurons
 are to neural nets*. Neural net layers operate over arrays of neurons;
@@ -366,7 +379,9 @@ The idea of queries, keys, and values comes from databases, where a database cel
 
 We define these vectors as linear transformations of the token's code
 vector, projecting to query/key/value vectors of length $m$. For a token
-$\mathbf{t}$, we have: $$\begin{aligned}
+$\mathbf{t}$, we have: 
+
+$$\begin{aligned}
     \mathbf{q} &= \mathbf{W}_q \mathbf{t} \quad\quad \triangleleft \text{ query}\\
     \mathbf{k} &= \mathbf{W}_k \mathbf{t} \quad\quad \triangleleft \text{ key}\\
     \mathbf{v} &= \mathbf{W}_v \mathbf{t} \quad\quad \triangleleft \text{ value}
@@ -375,11 +390,7 @@ $\mathbf{t}$, we have: $$\begin{aligned}
 
 
 :::{.column-margin}
-
-Here is a question to think about:
-Could you use other differentiable functions to compute the query,
-value, and key? Would that be useful?
-
+Here is a question to think about: Could you use other differentiable functions to compute the query, value, and key? Would that be useful?
 :::
 
 In transformers, all inputs to the net are tokenized, so the textual
@@ -455,6 +466,7 @@ visual image, so naturally the text gives the query and we match against
 tokens that represent the image. But can we come up with a more generic
 architecture where we don't have to hand design which tokens interact in
 which ways?
+
 
 **Self-attention** is just such an architecture. The idea is that on a
 self-attention layer, *all* tokens submit queries, and for each of these
@@ -538,7 +550,7 @@ the vector of matches for each separate query vector, like in
 the full mechanics of a self-attention layer
 (@fig-transformers-attn_arch):
 
-![Self-attention layer expanded. The nodes with the dashed outline correspond to each other; they represent one query being matched against one key to result in a scalar similarity value, in the gray box, which acts as a weight in the weighted sum computed by $\mathbf{A}$.](figures/transformers/attn_arch.png){#fig-transformers-attn_arch width="80%"}
+![Self-attention layer expanded. The nodes with the dashed outline correspond to each other; they represent one query being matched against one key to result in a scalar similarity value, in the gray box, which acts as a weight in the weighted sum computed by $\mathbf{A}$.](figures/transformers/attn_arch2.png){#fig-transformers-attn_arch width="90%"}
 
 
 This fully defines a self-attention layer, which is the kind of
@@ -569,7 +581,7 @@ an impala if it is found near giraffes and zebras, since all those
 animals tend to congregate together in the same biome).
 
 
-![One way self-attention could be used to aggregate information across all patches containing the same object, and thereby arrive at a better representation of the object in $\mathbf{t}_2$, the query patch.](figures/transformers/attention_layer_cartoon.png){#fig-attention_layer_cartoon width="70%"}
+![One way self-attention could be used to aggregate information across all patches containing the same object, and thereby arrive at a better representation of the object in $\mathbf{t}_2$, the query patch.](figures/transformers/attention_layer_cartoon.png){#fig-attention_layer_cartoon width="40%"}
 
 
 This is just one way self-attention could be used by the network. How it
@@ -671,7 +683,7 @@ from @dosovitskiy2020vit, showing where these additional pieces enter
 the picture.
 
 
-![The ViT transformer architecture~\cite{dosovitskiy2020vit}. This set of layers forms a computational block, shaded in gray, that can be repeated $L$ times for a depth $L$ ViT. To clarify where the parameters live in this architecture, we have colored all the edges with learnable parameters in blue (note that the MSA merge, \eqn{\ref{eqn:transformers:MSA_merge}}, is also learnable but not explicitly shown in this diagram).](figures/transformers/ViT_arch.png){#fig-transformers-ViT_arch width="60%"}
+![The ViT transformer architecture~\cite{dosovitskiy2020vit}. This set of layers forms a computational block, shaded in gray, that can be repeated $L$ times for a depth $L$ ViT. To clarify where the parameters live in this architecture, we have colored all the edges with learnable parameters in blue (note that the MSA merge, \eqn{\ref{eqn:transformers:MSA_merge}}, is also learnable but not explicitly shown in this diagram).](figures/transformers/ViT_arch.png){#fig-transformers-ViT_arch width="40%"}
 
 This architecture uses layer normalization (@sec-neural_nets-normalization_layers) before each attention
 layer and before each token-wise MLP layer. The normalization is done
@@ -728,10 +740,15 @@ vector into a $K$-dimensional vector (for $K$-way classification).
 An important property of transformers is that they are equivariant to
 permutations of the input token sequence. This follows from the fact
 that both tokenwise layers, $F_{\theta}$, and attention layers,
-$\texttt{attn}$, are **permutation equivariant**: $$\begin{aligned}
+$\texttt{attn}$, are **permutation equivariant**: 
+
+$$\begin{aligned}
     F_{\theta}(\texttt{permute}(\mathbf{T}_{\texttt{in}})) &= \texttt{permute}(F_{\theta}(\mathbf{T}_{\texttt{in}}))\\
     \texttt{attn}(\texttt{permute}(\mathbf{T}_{\texttt{in}})) &= \texttt{permute}(\texttt{attn}(\mathbf{T}_{\texttt{in}}))
-\end{aligned}$${#eq-transformers} where $\texttt{permute}$ is a permutation of the order
+\end{aligned}
+$${#eq-transformers}
+
+where $\texttt{permute}$ is a permutation of the order
 of tokens in $\mathbf{T}_{\texttt{in}}$ (i.e., permutes the rows of the
 matrix). This means that if you scramble (i.e. permute) the patches in
 the input image then apply attention, the output will be unchanged up to
@@ -740,7 +757,9 @@ architecture is just composition of these two types of layers (plus,
 potentially, residual connections and token normalization, which are
 also permutation equivariant), and because composing two permutation
 equivariant functions results in a permutation equivariant operation, we
-have: $$\begin{aligned}
+have: 
+
+$$\begin{aligned}
     \texttt{transformer}(\texttt{permute}(\mathbf{T}_{\texttt{in}})) &= \texttt{permute}(\texttt{transformer}(\mathbf{T}_{\texttt{in}}))
 \end{aligned}$$ This property is visualized in
 @fig-transformers-permutation_equivariance.
@@ -826,7 +845,7 @@ equivalence is visualized below
 (@fig-transformers-conv_matmul_equivalence):
 
 
-![The query, key, and value projections in transformers can be written either as a convolution or a matrix multiply.](figures/transformers/conv_matmul_equivalence.png){#fig-transformers-conv_matmul_equivalence width="100%"}
+![The query, key, and value projections in transformers can be written either as a convolution or a matrix multiply.](figures/transformers/conv_matmul_equivalence-2.png){#fig-transformers-conv_matmul_equivalence width="80%"}
 
 Therefore, the query, key, and value projections are all multichannel
 convolutions with kernels of size 1.
@@ -954,7 +973,7 @@ During training, we will give examples like this: $$\begin{aligned}
 with a single matrix multiply
 (@fig-transformers-masked_attn_one_matmul):
 
-![Masked attention to make multiple causal predictions at once. Black cells are masked; they are filled with zeros.](figures/transformers/masked_attn_one_matmul.png){width="100%" #fig-transformers-masked_attn_one_matmul}
+![Masked attention to make multiple causal predictions at once. Black cells are masked; they are filled with zeros.](figures/transformers/masked_attn_one_matmul.png){width="70%" #fig-transformers-masked_attn_one_matmul}
 
 This way, one forward pass makes $N$ predictions rather than one
 prediction. This is equivalent to doing a single next token prediction
@@ -976,7 +995,7 @@ masking strategy looks like shown in
 @fig-transformers-multilayer_masked_attention.
 
 
-![Multilayer masked attention achieves causal prediction with a deep net.](figures/transformers/multilayer_masked_attention.png){width="100%" #fig-transformers-multilayer_masked_attention}
+![Multilayer masked attention achieves causal prediction with a deep net.](figures/transformers/multilayer_masked_attention.png){width="70%" #fig-transformers-multilayer_masked_attention}
 
 Notice that the output tokens on every layer $l$ have the property that
 $\mathbf{t}^l_n$ only depends on $\mathbf{T}^0_{1:n-1}$, where
