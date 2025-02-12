@@ -215,9 +215,8 @@ confused on when an operation can be or not represented by a linear
 function. Let's first check your intuition about what operations are
 linear and which ones are not. Which ones of the image transformations
 shown in @fig-transformationsquizz can be written as linear systems?
-[^1]
 
-![{Which one of these four image transformations (rotation by 30 degrees, scaling by 1/2, color to grayscale, and defocusing) can be written as linear functions?](figures/linear_image_filtering/whichoneislinear.png){width="100%" #fig-transformationsquizz}
+![{Which one of these four image transformations (rotation by 30 degrees, scaling by 1/2, color to grayscale, and defocusing) can be written as linear functions? Answer: all of them!](figures/linear_image_filtering/whichoneislinear.png){width="100%" #fig-transformationsquizz}
 
 To make things more concrete, lets assume the input is a 1D signal with
 length $N$ that we will write as $\ell_{\texttt{in}}\left[n \right]$,
@@ -287,7 +286,7 @@ smaller family of systems: **linear translation invariant** (LTI)
 **systems**.
 
 :::{.column-margin}
-![](figures/linear_image_filtering/space_of_functions.png){width="80%"}
+![](figures/linear_image_filtering/space_of_functions.png){width="100%"}
 :::
 
 
@@ -395,7 +394,7 @@ $$\begin{bmatrix}
  \end{bmatrix}$$
 
 This operation is much easier to understand if we draw it as a
-**convolutional layer** of a neural network as shown in @fig-conv_filter2_nn.
+**convolutional layer** of a neural network as shown in @fig-conv_filter2_nn:
 
 ![ convolution represented as a layer in a neural network. Each output unit $i$, $\ell_{\text {out }}[i]$, is a linear combination of the input signal values around location $i$ always using the same set of weights given by $\mathbf{h}$.](figures/linear_image_filtering/conv_filter2.png){width="50%" #fig-conv_filter2_nn}
 
@@ -421,7 +420,12 @@ results.
 Let's revisit the four image transformation examples from
 @fig-transformationsquizz and ask a new question. Which ones of the
 image transformations shown in @fig-transformationsquizz can be written
-as a convolution? [^2]
+as a convolution?
+
+:::{.column-margin}
+Only C and D from @fig-transformationsquizz can be implemented by
+    convolutions.
+:::
 
 As shown in @fig-transformationsquizz2 (a), in the defocusing
 transformation each output pixel at location $n,m$ is the local average
@@ -502,7 +506,7 @@ The signal $\ell \left[n - n_0\right]$ is a shifted version of $\ell \left[n\rig
 
 
 :::{.column-margin}
-The impulse function is:
+The impulse function is
 
 ![](figures/linear_image_filtering/mn3.png){width="80%"}
 
@@ -543,7 +547,7 @@ image missing.
 :::{.column-margin}
 Only the green region contains values that can be computed, the rest will be affected by how we decide to handle the boundaries:
 
-![](figures/linear_image_filtering/regions_convolution.png){width="80%"}
+![](figures/linear_image_filtering/regions_convolution.png){width="90%"}
 :::
 
 The most general approach consists in extending the input image by
@@ -590,7 +594,7 @@ darkening appear on the boundary of the image. This is not very
 desirable in general. The other padding methods seem to produce better
 visual results.
 
-![Each row shows: (a) Different types of boundary extension. The last image shows the ground truth. (b) The output of convolving the image with a uniform kernel of size $11 \times 11$ with all the values equal to $1/121$. The output only shows the central region that corresponds to the input image without boundary extension. (c) The difference between each output and the ground truth output; see last column of (b). Note that the ground truth will not be available in practice.](figures/linear_image_filtering/boundary.png){#fig-boundaries width="100%"}
+
 
 But which one is the best boundary extension? Ideally, we would to get a
 result that is a close as possible to the output we would get if we had
@@ -604,7 +608,14 @@ For the example of @fig-boundaries, the error seems to be smaller when
 extending the image using mirror padding. On the other extreme, zero
 padding seems to be the worst.
 
+![Each row shows: (a) Different types of boundary extension. The last image shows the ground truth. (b) The output of convolving the image with a uniform kernel of size $11 \times 11$ with all the values equal to $1/121$. The output only shows the central region that corresponds to the input image without boundary extension. (c) The difference between each output and the ground truth output; see last column of (b). Note that the ground truth will not be available in practice.](figures/linear_image_filtering/boundary.png){#fig-boundaries width="100%"}
+
 ### Circular Convolution
+
+:::{.column-margin}
+Writing the circular convolution in matrix form will look like:
+![](figures/linear_image_filtering/circ_conv.png){width="80%"}
+:::
 
 When convolving a finite length signal with a kernel, we have seen that
 it can be convenient to extend the signal beyond its boundary to reduce
@@ -625,10 +636,6 @@ $\ell_{\texttt{out}}\left[n \right] = \ell_{\texttt{out}}\left[(n)_N \right]$.
 The circular convolution has the same properties than the convolution
 (e.g., is commutative.)
 
-:::{.column-margin}
-Writing the circular convolution in matrix form will look like:
-![](figures/linear_image_filtering/circ_conv.png){width="80%"}
-:::
 
 
 ### Convolution in the Continuous Domain
@@ -850,8 +857,3 @@ now allow you go deeper by consulting other specialized books.
 But we are not done yet. In the next chapter we will study the Fourier
 transform, which will provide a useful characterization of signals and
 images.
-
-[^1]: Answer: All of them!
-
-[^2]: Only C and D from @fig-transformationsquizz can be implemented by
-    convolutions.
