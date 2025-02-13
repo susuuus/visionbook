@@ -109,7 +109,7 @@ optical flow $(\hat{u}[n,m],\hat{v}[n,m])$.
 
 
 :::{.column-margin}
-![](figures/optical_flow/endpoint_error.png){width="80%"}
+![](figures/optical_flow/endpoint_error.png){width="100%"}
 :::
 
 #### Handling occlusions

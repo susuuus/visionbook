@@ -138,7 +138,9 @@ same size as the input image.
 
 :::{.column-margin}
 Depth maps are usually visualized using the **turbo colormap**, which is a modification of the **jet colormap** from Matlab. We will use this convention as it differentiates a depth map from a natural gray-scale image.
-![](figures/learning_3d/colorbar_transposed.png){width="100%"}
+
+![](figures/learning_3d/colorbar.png){width="70%"}
+
 The jet colormap can be problematic as it has a nonmonotonic intensity profile as can be seen above.
 :::
 

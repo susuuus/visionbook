@@ -28,7 +28,7 @@ $\mathbf{x} \in \mathcal{X}$, to abstract representations,
 $\mathbf{z} \in \mathcal{Z}$, as schematized in
 @fig-representation_learning-rep_learning_schematic:
 
-![The goal in this chapter is to learn to map from datapoints to abstract representations, which are typically simpler and more useful than the raw data.](figures/representation_learning/rep_learning_schematic.png){width="52%" #fig-representation_learning-rep_learning_schematic}
+![The goal in this chapter is to learn to map from datapoints to abstract representations, which are typically simpler and more useful than the raw data.](figures/representation_learning/rep_learning_schematic.png){width="55%" #fig-representation_learning-rep_learning_schematic}
 
 We call this mapping an **encoding** and learn an function
 $f: \mathcal{X} \rightarrow \mathcal{Z}$. Typically both $\mathbf{x}$
@@ -210,7 +210,13 @@ and other perceptual structures beyond just pixels @snell2017learning.
 
 The learning diagram for the basic $L_2$ autoencoder looks like this:
 
-![](figures/representation_learning/autoencoder_learning_diagram.png){width="100%"}
+
+![](figures/representation_learning/autoencoder_learning_diagram.png){width="70%" #fig-representation_learning-autoencoder_learning_diagram}
+
+
+:::{.column-margin}
+Autoencoders may not seem like much at first glance, but they actually appear all over the place, and many methods in this book can be considered to be special kinds of autoencoders, if you squint. Two examples: the steerable pyramid from @sec-image_pyramids is an autoencoder, and the CycleGAN algorithm from @sec-generative_models is also an autoencoder. See if you can find more examples.
+:::
 
 The optimizer is arbitrary but a typical choice would be gradient
 descent. The functional form of $f$ and $g$ are typically deep neural
@@ -226,9 +232,7 @@ learns an $M$-dimensional embedding that spans the same subspace as a
 PCA projection to $M$-dimensions @bourlard1988auto.
 
 
-:::{.column-margin}
-Autoencoders may not seem like much at first glance, but they actually appear all over the place, and many methods in this book can be considered to be special kinds of autoencoders, if you squint. Two examples: the steerable pyramid from @sec-image_pyramids is an autoencoder, and the CycleGAN algorithm from @sec-generative_models is also an autoencoder. See if you can find more examples.
-:::
+
 
 ### Experiment: Do Autoencoders Learn Useful Representations?
 
@@ -268,11 +272,11 @@ these analyses.
 
 
 :::{#fig-representation_learning-AE_results_shapes_dataset layout-ncol=2}
-![](figures/representation_learning/AE_NN_viz.png){ #fig-representation_learning-AE_results_shapes_dataset-a}
+![](figures/representation_learning/AE_NN_viz.png){ #fig-representation_learning-AE_results_shapes_dataset-a width=76%"}
 
-![](figures/representation_learning/AE_NN_probe.png){ #fig-representation_learning-AE_results_shapes_dataset-b}
+![](figures/representation_learning/AE_NN_probe.png){ #fig-representation_learning-AE_results_shapes_dataset-b width="92%"}
 
-Fig (a) Nearest neighbors, in autoencoder embedding space, to a set of query images. (b) Classification accurracy of a one-nearest-neighbor classifier of color and shape using the embeddings at each layer of the autoencoder's encoder.
+Fig (a) Nearest neighbors, in autoencoder embedding space, to a set of query images. (b) Classification accuracy of a one-nearest-neighbor classifier of color and shape using the embeddings at each layer of the autoencoder's encoder.
 :::
 
 Recall that every layer of a neural net can be considered as an
@@ -352,7 +356,7 @@ Let us now describe the predictive learning problem more formally. Let
 $\mathbf{y}$ be the prediction target. Then predictive representation
 learning looks like this:
 
-![](figures/representation_learning/predictive_learning_diagram.png){width="100%"}
+![](figures/representation_learning/predictive_learning_diagram.png){width="70%"}
 
 where $D$ is some distance function, for example, $L_2$. Just like with
 the autoencoder, $f$ and $g$ are usually neural nets but may be any
@@ -389,7 +393,7 @@ response; the highlighted regions indicate where the feature map for
 that filter exceeds a threshold.
 
 
-![Visualizing two neural receptive fields in a scene classifier neural net.](figures/representation_learning/obj_detectors_emerge1.png){width="100%" #fig-representation_learning-obj_detectors_emerge}
+![Visualizing two neural receptive fields in a scene classifier neural net. Images taken from @zhou2014object](figures/representation_learning/obj_detectors_emerge1.png){width="70%" #fig-representation_learning-obj_detectors_emerge}
 
 What this shows is that *object* detectors, that is, neurons that
 selectively fire when they see a particular object class, emerge in the
@@ -409,7 +413,7 @@ data itself; for example, we could decide that the top right pixel's
 color will be the "label" of the image. This idea is called
 **self-supervision**. It looks like this:
 
-![](figures/representation_learning/self_supervised_learning_diagram.png){width="100%"}
+![](figures/representation_learning/self_supervised_learning_diagram.png){width="80%"}
 
 where $V_1$ and $V_2$ are two different functions of the *full data
 tensor* $\mathbf{X}$. For example, $V_1$ might be the left side of the
@@ -449,7 +453,7 @@ again! This certainly surprised us when we saw the results in
 @fig-representation_learning-obj_detectors_in_colorization, which are
 taken from @zhang2016colorful.
 
-![Visualizing two neural receptive fields in the colorization model from \cite{zhang2016colorful}. Images generated by Andrew Owens and Richard Zhang.](figures/representation_learning/obj_detectors_in_colorization1.png){width="100%" #fig-representation_learning-obj_detectors_in_colorization}
+![Visualizing two neural receptive fields in the colorization model from @zhang2016colorful. Images generated by Andrew Owens and Richard Zhang.](figures/representation_learning/obj_detectors_in_colorization1.png){width="100%" #fig-representation_learning-obj_detectors_in_colorization}
 
 In fact, object detectors emerge in CNNs for just about any reasonable
 pretext task: scene recognition, colorization, inpainting missing
@@ -532,9 +536,13 @@ datapoint $\mathbf{x}^{(i)}$ is assigned to a cluster indexed by an
 integer $a_i \in \{1, \ldots, k\}$. Each cluster is given a code vector
 $\mathbf{z} \in \mathbb{R}^M$. The $k$-means objective is to minimize
 the distance between each datapoint and the code vector of the cluster
-it is assigned to: $$\begin{aligned}
+it is assigned to: 
+
+$$
+\begin{aligned}
     J_{\texttt{kmeans}} &= \sum_{i=1}^N \left\lVert\mathbf{z}_{a_i} - \mathbf{x}^{(i)}\right\rVert^2_2 \quad\quad \triangleleft \quad\text{$k$-means objective}
-\end{aligned}$$ This way, the code vector assigned to each datapoint
+\end{aligned}
+$$ This way, the code vector assigned to each datapoint
 will be a good approximation to the value of that datapoint, and we will
 have a faithful, but compressed, representation of the dataset.
 
@@ -559,7 +567,7 @@ bottleneck is discrete integers rather than continuous vectors, and (2)
 the optimizer is slightly different (we will delve into it
 subsequently).
 
-![](figures/representation_learning/kmeans_learning_diagram.png){width="100%"}
+![](figures/representation_learning/kmeans_learning_diagram.png){width="70%"}
 
 
 To recap, there are two functions we are optimizing over: the encoder
@@ -769,9 +777,9 @@ underlying world.
 Nonetheless, it is often easiest to conceptualize these two approaches
 separately, and next we give learning diagrams for each:
 
-![](figures/representation_learning/contrastive_learning_transformations.png){width="100%"}
+![](figures/representation_learning/contrastive_learning_transformations.png){width="70%"}
 
-![](figures/representation_learning/contrastive_learning_cooccurrence_diagram.png){width="100%"}
+![](figures/representation_learning/contrastive_learning_cooccurrence_diagram.png){width="75%"}
 
 In these diagrams, $D$ is a distance function. Above we give just one
 simple form for the contrastive objective; many variations have been

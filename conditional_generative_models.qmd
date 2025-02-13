@@ -657,23 +657,39 @@ then translate back (from $Y$ to $X$) we should arrive where we started.
 Think about translating from English to French, for example. If we
 translate "apple" to French, "apple"$\rightarrow$"pomme," and then
 translate back, "pomme"$\rightarrow$"apple," we arrive where we
-started.[^1] We can check the quality of a translation system, for a
+started.
+
+:::{.column-margin}
+In natural language processing, the idea of cycle-consistency is known as **backtranslation**.
+:::
+
+
+We can check the quality of a translation system, for a
 language we are unfamiliar with, by using this trick. If translating
 back does not return the word we started with then something went wrong
 with the translation model. This is because we expect language
 translation to be roughly one-to-one: for each word in English there is
 usually an equivalent word in French. Cycle-consistency losses are
 regularizers that encourage a learned mapping to be roughly one-to-one.
-The cycle-consistency losses from CycleGAN are simply: $$\begin{aligned}
+The cycle-consistency losses from CycleGAN are simply: 
+
+$$
+\begin{aligned}
     \mathcal{L}_{\texttt{cyc}}(\mathbf{x};g_{\theta},f_{\psi}) &= \left\lVert\mathbf{x} - f_{\psi}(g_{\theta}(\mathbf{x}))\right\rVert_1\\
     \mathcal{L}_{\texttt{cyc}}(\mathbf{y};g_{\theta},f_{\psi}) &= \left\lVert\mathbf{y} - g_{\theta}(f_{\psi}(\mathbf{y}))\right\rVert_1
-\end{aligned}$$ Adding this loss to
-@eq-conditional_generative_models-x_to_y_GAN_learning_problem yields
-the complete CycleGAN objective: $$\begin{aligned}
+\end{aligned}
+$$ 
+
+Adding this loss to
+@eq-conditional_generative_models-x_to_y_GAN_learning_problem yields the complete CycleGAN objective: 
+$$
+\begin{aligned}
     \arg\min_{\theta,\psi}\max_{\phi} \mathbb{E}_{\mathbf{x},\mathbf{y}} \big[ \log d_{\phi}^{Y}(g_{\theta}(\mathbf{x})) + \log (1 - d_{\phi}^{Y}(\mathbf{y})) + \left\lVert\mathbf{x} - f_{\psi}(g_{\theta}(\mathbf{x}))\right\rVert_1 + \\
     \log d_{\phi}^{X}(f_{\psi}(\mathbf{y})) + \log (1 - d_{\phi}^{X}(\mathbf{x})) + \left\lVert\mathbf{y} - g_{\theta}(f_{\psi}(\mathbf{y}))\right\rVert_1 \big]
-\end{aligned}$$ This model translates from domain $X$ to domain $Y$ and
-back, such that the outputs in domain $Y$ look realistic according to a
+\end{aligned}
+$$ 
+
+This model translates from domain $X$ to domain $Y$ and back, such that the outputs in domain $Y$ look realistic according to a
 domain $Y$ discriminator, and vice versa for domain $X$, *and* the
 mappings are cycle-consistent: one complete cycle from $X$ to $Y$ and
 back should arrive where it started (and, again, vice versa). A diagram
@@ -703,5 +719,3 @@ so on---with general-purpose conditional generative models. This is one
 reason why this book does not focus much on special-purpose systems that
 solve specific problems in vision---because the trend is toward
 general-purpose modeling tools.
-
-[^1]: In natural language processing, the idea of cycle-consistency is known as **backtranslation**.

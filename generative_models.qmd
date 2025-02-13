@@ -166,7 +166,13 @@ statistics as a real training example. This approach works well when we
 only want to match certain properties of the training data. The second
 approach, which is the main focus of this chapter, is better when we
 want to produce synthetic data that matches *all* statistics of the
-training examples.[^1]
+training examples.
+
+:::
+In practice, we may not be able to match all statistics, due to
+    limits of the model's capacity.
+:::
+
 
 To be precise, the goal of the deep generative models we consider in
 this chapter is to produce synthetic data that is *identically
@@ -242,9 +248,18 @@ $$\mathop{\mathrm{arg\,min}}_{p_\theta} D(p_{\theta}, p_{\texttt{data}})$$
 The problem is that we do not actually have the function
 $p_{\texttt{data}}$, we only have samples from this function,
 $\mathbf{x} \sim p_{\texttt{data}}$. Therefore, we need a divergence $D$
-that measures the distance[^2] between $p_{\theta}$ and
+that measures the distance between $p_{\theta}$ and
 $p_{\texttt{data}}$ while only accessing samples from
 $p_{\texttt{data}}$. 
+
+:::{.column-margin}
+The divergence need not be a proper distance *metric*, and often
+    is not; it can be nonsymmetric, where $D(p,q) \neq D(q,p)$, and need
+    not satisfy the triangle-inequality. In fact, a divergence is
+    defined by just two properties: nonnegativity and
+    $D(p,q) = 0 \iff p=q$.
+:::
+
 
 A common choice is to use the **Kullback-Leibler (KL) divergence**, which is defined as
 follows: 
@@ -470,12 +485,12 @@ a variational autoencoder (VAE) or diffusion model.
 
 | Method | Latents? | Density/Energy? | Generator? |
 | :---: | :---: | :---: | :---: |
-| Energy-based models | $x$ | $\checkmark$ (energy only) | $x$ |
-| Gaussian | $x$ | $\checkmark$ | $x$ |
-| Autoregressive models | $x$ | $\checkmark$ | $\checkmark$ (slow) |
-| Diffusion models | $\checkmark$ (high-dimensional) | $x$ | $\checkmark$ (slow) |
-| GANs | $\checkmark$ | $x$ | $\checkmark$ |
-| VAEs | $\checkmark$ | $x$ | $\checkmark$ |
+| Energy-based models | ❌ | ✅ (energy only) | ❌|
+| Gaussian | ❌ | ✅ | ❌|
+| Autoregressive models | ❌ | ✅ | ✅ (slow) |
+| Diffusion models | ✅ (high-dimensional) | ❌ | ✅ (slow) |
+| GANs | ✅ | ❌ | ✅ |
+| VAEs | ✅ | ❌ | ✅ |
 
 : Three desirable properties in a generative model. No method achieves all three (without caveats). VAEs (see @sec-generative_modeling_and_representation_learning) and GANs are good at representation learning (i.e., at finding a low-dimensional latent space). Autoregressive models are great if you want to estimate the likelihood of your data points. Energy-based models can be an especially efficient way to model an unnormalized density. {#tbl-generative_models-types_of_gen_model .bordered}
 
@@ -943,17 +958,15 @@ on---but also are useful for much more. In the next chapters we will see
 that generative models also learn good *image representations*, and
 conditional generative models can be viewed as a general framework for
 answering questions and making predictions. As Richard Feynman famously
-wrote, "What I cannot create, I do not understand."[^3] By modeling
+wrote, "What I cannot create, I do not understand." By modeling
 creation, generative models also help us understand the visual world
 around us.
 
-[^1]: In practice, we may not be able to match all statistics, due to
-    limits of the model's capacity.
+:::{.column-margin}
+https://en.wikiquote.org/wiki/Richard_Feynman
+:::
 
-[^2]: The divergence need not be a proper distance *metric*, and often
-    is not; it can be nonsymmetric, where $D(p,q) \neq D(q,p)$, and need
-    not satisfy the triangle-inequality. In fact, a divergence is
-    defined by just two properties: nonnegativity and
-    $D(p,q) = 0 \iff p=q$.
 
-[^3]: https://en.wikiquote.org/wiki/Richard_Feynman
+
+
+

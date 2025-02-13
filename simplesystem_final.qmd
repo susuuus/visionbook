@@ -127,6 +127,11 @@ a & 0 & n_0\\
 \end{aligned}
 $$
 
+
+:::{.column-margin}
+![](figures/simplesystem_revisited/projection-revisted.png){width="100%"}
+:::
+
 The extrinsic camera parameters will model the 3D rotation, which is
 mainly around the $X$-axis (we will ignore the translation of the
 origin): 
@@ -142,12 +147,10 @@ $$
 \end{aligned}
 $$
 
-:::{.column-margin}
-![](figures/simplesystem_revisited/projection-revisted.png){width="90%"}
-:::
 
 
-In order to apply equation (@eq-recoverworldcoord), we need to define
+
+In order to apply @eq-recoverworldcoord, we need to define
 certain parameters: $d_0$, $n_0$, $m_0$, $a$, and $\theta$. Although we
 could determine these parameters using a calibration image, in this
 case, we'll opt for a simpler heuristic approach:
@@ -168,7 +171,7 @@ case, we'll opt for a simpler heuristic approach:
     simply set it to $\theta = \pi / 4$, as this is approximately the
     angle at which the pictures were taken.
 
-Now we are ready to use equation (@eq-recoverworldcoord) and the output
+Now we are ready to use @eq-recoverworldcoord and the output
 of the system.
 
 ## From 2D Images to 3D
@@ -300,7 +303,7 @@ exactly? Has it learned some of the heuristics we introduced by hand, or
 is it using other ones?
 
 :::{.column-margin}
-![](figures/simplesystem_revisited/conclusion_by_gpt4v.png){width="80%"}
+![](figures/simplesystem_revisited/conclusion_by_gpt4v.png){width="100%"}
 :::
 
 GPT4-v seems to be capable of recognizing the geometric figures and

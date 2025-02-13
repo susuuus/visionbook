@@ -647,7 +647,13 @@ $\mathbf{E}$ and $\mathbf{E}^\mathsf{T}$.
 In order to build an intuition of how epipolar lines work we propose to
 play a game. @fig-epipolarlinesgame shows a set of camera pairs and a
 set of epipolar lines. Can you guess what camera pair goes with what set
-of epipolar lines? [^1]
+of epipolar lines?
+
+
+:::{.column-margin}
+Answer for the game in @fig-epipolarlinesgame: A-2, B-5, C-4,
+    D-6, E-3, F-1.
+:::
 
 ![Epipolar game. The figure shows six camera pair arrangements, and six sets of epipolar lines. Can you identify which camera pairs correspond to each set of epipolar lines?](figures/3d_scene_understanding/epipolar_game_play.png){width="100%" #fig-epipolarlinesgame}
 
@@ -836,5 +842,3 @@ We have only provided a short introduction to stereo vision, for an in
 depth study of the geometry of stereo pairs the reader can consult
 specialized books such as @Hartley2004 and @Faugeras93.
 
-[^1]: Answer for the game in @fig-epipolarlinesgame: A-2, B-5, C-4,
-    D-6, E-3, F-1.

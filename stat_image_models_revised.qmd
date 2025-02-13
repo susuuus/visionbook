@@ -23,7 +23,7 @@ on typical example from the set of all images. A typical sample from the
 set of all images is $32\times32$ pixels independently sampled from a
 uniform distribution.
 
-![The space of natural images is just very small part of the space of all possible images. In the case of color images with $32\times32$ pixels, most of the space is filled with images that look like noise.](figures/statistical_image_models/spaces_real_images.png){width="80%" #fig-spaces_real_images}
+![The space of natural images is just very small part of the space of all possible images. In the case of color images with $32\times32$ pixels, most of the space is filled with images that look like noise.](figures/statistical_image_models/spaces_real_images.png){width="100%" #fig-spaces_real_images}
 
 As natural images are quite complex, researchers have used simple visual
 worlds that retain some of the important properties of natural images
@@ -62,13 +62,21 @@ top of the image, the other image contains one object textured with a
 pattern that looks like noise. Can you tell which one is which? Where is
 the noise? Is it in the image or in the world?
 
-Stationary image noise[^1] is independent of the content of the scene,
+Stationary image noise is independent of the content of the scene,
 it is not affected by the object boundaries, it does not deform
 following the three-dimensional (3D) orientation of the surfaces, and it
 does not change frequency with distance between the camera and the
 scene. If the noise was really in the world, stationary noise would
 require a special noise distribution that conspires with the observer
 viewpoint to appear stationary.
+
+
+:::{.column-margin}
+Additive stationary noise is noise with statistical properties
+    independent of location that is added to an observation. Check
+    @sec-image_denoising_gaussian_model for a more precise
+    definition.
+:::
 
 Noise is an independent process from the image content, and our visual
 system does not perceive noise as a strange form of paint. One important
@@ -726,11 +734,7 @@ model that can be used to sample new images. As illustrated in
 @fig-spaces_real_images_final the sequence of models we have studied in
 this chapter, only help in reducing a bit the space of possible images.
 
-![The space of natural images is just very small part of the space of all possible images. In the case of color images with $32\times32$ pixels, most of the space is filled with images that look like noise.](figures/statistical_image_models/spaces_real_images_and_models_final.png){width="100%" #fig-spaces_real_images_final}
+![The space of natural images is just very small part of the space of all possible images. In the case of color images with $32 \times 32$ pixels, most of the space is filled with images that look like noise.](figures/statistical_image_models/spaces_real_images_and_models_final.png){width="100%" #fig-spaces_real_images_final}
 
 We will see stronger generative image models in @sec-generative_models.
 
-[^1]: Additive stationary noise is noise with statistical properties
-    independent of location that is added to an observation. Check
-    @sec-image_denoising_gaussian_model for a more precise
-    definition.

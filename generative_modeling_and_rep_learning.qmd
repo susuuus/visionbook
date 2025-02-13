@@ -378,8 +378,17 @@ p_{\theta}(\mathbf{x}) &= \mathbb{E}_{\mathbf{z}\sim p_{\mathbf{z}}}\Big[p_{\the
 distribution $q$ we would really like to sample from is the one whose
 samples maximize $p_{\theta}(\mathbf{x} \bigm | \mathbf{z})$. It turns
 out that the optimal distribution is
-$q^* = p_{\theta}(Z \bigm | \mathbf{x})$.[^1] This distribution
-minimizes the expected error between a Monte Carlo estimate of the
+$q^* = p_{\theta}(Z \bigm | \mathbf{x})$. 
+
+:::{.column-margin}
+See chapter 9, section 1 of @mcbook for a proof that
+    $q^*(\mathbf{z}) \propto \lvert p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) \rvert p_{\mathbf{z}}(\mathbf{z})$,
+    from which it then follows that
+    $q^*(\mathbf{z}) \propto p_{\theta}(\mathbf{x} \bigm | \mathbf{z})p_{\mathbf{z}}(\mathbf{z}) = p_{\theta}(\mathbf{x}, \mathbf{z}) \propto p_{\theta}(\mathbf{z} \bigm | \mathbf{x})$,
+    yielding our result.
+:::
+
+This distribution minimizes the expected error between a Monte Carlo estimate of the
 expectation and its true value (i.e., minimizes the variance of our
 Monte Carlo estimator). The intuition is that
 $p_{\theta}(Z \bigm | \mathbf{x})$ is precisely a prediction of which
@@ -800,8 +809,3 @@ knobs randomly to get a random image, or they can tune the knobs
 navigate the natural image manifold in a systematic way, and arrive at
 the image they want.
 
-[^1]: See chapter 9, setion 1 of @mcbook for a proof that
-    $q^*(\mathbf{z}) \propto \lvert p_{\theta}(\mathbf{x} \bigm | \mathbf{z}) \rvert p_{\mathbf{z}}(\mathbf{z})$,
-    from which it then follows that
-    $q^*(\mathbf{z}) \propto p_{\theta}(\mathbf{x} \bigm | \mathbf{z})p_{\mathbf{z}}(\mathbf{z}) = p_{\theta}(\mathbf{x}, \mathbf{z}) \propto p_{\theta}(\mathbf{z} \bigm | \mathbf{x})$,
-    yielding our result.

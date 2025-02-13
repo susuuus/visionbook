@@ -7,7 +7,7 @@ recovering three-dimensional (3D) information about the scene from a
 single image like the picture of the office we used before
 (@fig-finding_depth_office).
 
-![Is it possible to recover three-dimensional (3D) scene information from a single two-dimensional (2D) image? How tall is the desk? How wide is the bookshelf? What do we need to know about the scene in order to be able to answer those questions?](figures/single_view_3d/inverse_office_measurements.jpg){width="80%" #fig-finding_depth_office}
+![Is it possible to recover three-dimensional (3D) scene information from a single two-dimensional (2D) image? How tall is the desk? How wide is the bookshelf? What do we need to know about the scene in order to be able to answer those questions?](figures/single_view_3d/inverse_office_measurements.jpg){width="100%" #fig-finding_depth_office}
 
 Single view metrology relies on understanding the geometry of the image
 formation process, the rules of perspective, and other visual cues
@@ -42,7 +42,7 @@ in the street, the sky between the structures, and even what appears to
 be the entrance to a movie theater on the left sidewalk. Yet, the
 sidewalk is simply one line!
 
-![The image shows how scene understanding is possible from simple 3D cues and context. This sketch is a recreation of a real photograph shown in @Biederman1976](figures/single_view_3d/streetgeons.png){width="80%" #fig-streetgeons}
+![The image shows how scene understanding is possible from simple 3D cues and context. This sketch is a recreation of a real photograph shown in @Biederman1976](figures/single_view_3d/streetgeons.png){width="100%" #fig-streetgeons}
 
 We perceive everything we see in the sketch as 3D, even when we know
 that it's merely a 2D image. Our 3D processing is ingrained that we
@@ -76,7 +76,7 @@ appears fronto-parallel.
 :::{.column-margin}
 Geometric description of the Ames room visual illusion.
 
-![](figures/single_view_3d/ames_room_description.png){width="80%"}
+![](figures/single_view_3d/ames_room_description.png){width="100%"}
 :::
 
 The best way to understand this illusion is by building it and
@@ -513,6 +513,7 @@ $\mathbf{a}= [4{,}471~~2{,}486]^\mathsf{T}$
 and
 $\mathbf{b}= [2{,}237~~2{,}765]^\mathsf{T}$ 
 as described in the text.](figures/single_view_3d/office_measuring_desk.png){width="85%" #fig-office_measuring_desk}
+
 
 In the image plane, we have the four image points $\mathbf{t}_b$,
 $\mathbf{b}$, $\mathbf{g}_b$ and $\mathbf{v}_3$. Those four 2D image

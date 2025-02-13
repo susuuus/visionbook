@@ -428,7 +428,7 @@ be optimized with backpropagation.
 Our task is to compute the image $\boldsymbol\ell$ that will be seen by
 a specified camera viewing the scene. We need to find the color of each
 pixel in this image. To find the color of a pixel,
-$\boldsymbol\ell[n,m,:]$[^1], at camera coordinate $n,m$, the first step
+$\boldsymbol\ell[n,m,:]$, at camera coordinate $n,m$, the first step
 is to find the ray (origin $\mathbf{O}$ and direction $\mathbf{D}$) that
 passes through this pixel. This can be done using the methods we have
 encountered in this book for modeling camera optics and geometry, which
@@ -444,7 +444,10 @@ to get the direction $\mathbf{D}$ (@fig-nerfs-pixel2ray):
 
 ![Module for mapping from pixel coordinates to the world coordinates of a ray through that pixel.](figures/nerfs/pixel2ray.png){width="50%" #fig-nerfs-pixel2ray}
 
-
+:::{.column-margin}
+In this chapter, we represent RGB images as $N \times M \times 3$
+    dimensional arrays.
+:::
 
 
 Next we sample world coordinates along the ray, as described previously
@@ -552,7 +555,7 @@ about what is where in the scene. For example, the density of this
 radiance field can tell us the geometry of the scene, as we will see in
 the following example of fitting a radiance field to our Flatland scene.
 
-![Iterations of fitting a radiance field to Flatland. All of these are top-down views of the world (we are looking at Flatland from above, which is a view the inhabitants cannot see). (a) The radiance field visualized as an image with color equal to the color of the field at each position and transparency proportional to the density of the field at each position. (b and c) The volume rendering process for two different cameras looking at the radiance field. The circle colors and transparencies again show the color and density of the field, and the circle size shows the $\alpha$ value as we walk along each camera ray. Small circles mean those points are more occluded; i.e. there is a low probability of the ray reaching them and they contribute very little to the volume rendering integral.](figures/nerfs/flatland_training.jpg){width="90%" #fig-nerfs-flatland_training}
+![Iterations of fitting a radiance field to Flatland. All of these are top-down views of the world (we are looking at Flatland from above, which is a view the inhabitants cannot see). (a) The radiance field visualized as an image with color equal to the color of the field at each position and transparency proportional to the density of the field at each position. (b and c) The volume rendering process for two different cameras looking at the radiance field. The circle colors and transparencies again show the color and density of the field, and the circle size shows the $\alpha$ value as we walk along each camera ray. Small circles mean those points are more occluded; i.e. there is a low probability of the ray reaching them and they contribute very little to the volume rendering integral.](figures/nerfs/flatland_training.jpg){width="100%" #fig-nerfs-flatland_training}
 
 In @fig-nerfs-flatland_training, we show several iterations of the
 fitting process. The top row shows the radiance field as seen from
@@ -661,5 +664,3 @@ multiview geometry, signal processing, and neural networks. They appear
 near the end of this book because they rest upon almost all the
 foundations we have by now built up.
 
-[^1]: In this chapter, we represent RGB images as $N \times M \times 3$
-    dimensional arrays.

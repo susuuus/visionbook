@@ -119,7 +119,7 @@ structure in language, and the simplest way to do this is to train a
 vision system that associates images with free-form natural language.
 
 This is the idea of the highly popular CLIP
-system @radford2021learning.[^1] CLIP is a contrastive method (see
+system @radford2021learning. CLIP is a contrastive method (see
 @sec-representation_learning-contrastive_learning) in which
 one data view is the image and the other is a caption describing the
 image. Specifically, CLIP is a form of contrastive learning from
@@ -141,6 +141,11 @@ $L_2$-normalization before computing the objective); this ensures that
 the denominator cannot dominate by pushing negative pairs infinitely far
 apart.
 
+:::{.column-margin}
+The idea of visual learning by image captioning actually has a
+    long history before CLIP. One important early paper on this topic is
+    @ordonez2011im2text.
+:::
 @fig-vision_and_language-clip_training visually depicts how CLIP is
 trained. First we sample a batch of $N$ language-image pairs,
 $\{\mathbf{t}^{(i)}, \boldsymbol\ell^{(i)}\}_{i=1}^N$ ($N=6$ in the
@@ -501,7 +506,7 @@ transformers, see @li2023blip2.
 ## Concluding Remarks
 
 From the perspective of vision, language is a perceptual representation.
-It is a way of describing "what is where"[^2] and much more in a
+It is a way of describing "what is where" and much more in a
 low-dimensional and abstracted format that interfaces well with other
 domains of human knowledge. There are many theories of how human
 language evolved, and what it is useful for: communication, reasoning,
@@ -509,14 +514,17 @@ abstract thought. In this chapter, we have suggested another: language
 is, perhaps, the result of perceptual representation learning over the
 course of human evolution and cultural development. It's one of the main
 formats brains have arrived at as the best way to represent the
-"blooming, buzzing"[^3] sensory array around us.
+"blooming, buzzing" sensory array around us.
 
-[^1]: The idea of visual learning by image captioning actually has a
-    long history before CLIP. One important early paper on this topic is
-    @ordonez2011im2text.
 
-[^2]: "To know what is where by looking" is how David Marr defined the
+
+:::{.column-margin}
+"To know what is where by looking" is how David Marr defined the
     vision in his seminal book on the subject @Marr82.
+:::
 
-[^3]: This phrasing is from a quote by William James
+:::{.column-margin}
+This phrasing is from a quote by William James
     (https://en.wikiquote.org/wiki/William_James).
+:::
+

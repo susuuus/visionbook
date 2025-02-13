@@ -14,7 +14,7 @@ belong to it. In other cases, identifying what a chair is might be
 difficult, requiring understanding of its context and social conventions
 (@fig-what_is_a_chair_with_text).
 
-![What is a chair? The definition is based on affordances (i.e., something you can sit on) and on social conventions (i.e., some surfaces you can sit on are meant to be used to support other objects than yourself). Affordances are likely to be directly accessible through vision, while social conventions might not be.](figures/object_recognition/what_is_a_chair_with_text.jpg){width="50%" #fig-what_is_a_chair_with_text}
+![What is a chair? The definition is based on affordances (i.e., something you can sit on) and on social conventions (i.e., some surfaces you can sit on are meant to be used to support other objects than yourself). Affordances are likely to be directly accessible through vision, while social conventions might not be.](figures/object_recognition/what_is_a_chair_with_text.jpg){width="70%" #fig-what_is_a_chair_with_text}
 
 In this chapter we will study three tasks related to the recognition of
 objects in images (classification, localization, and segmentation). We
@@ -49,7 +49,7 @@ breaking the object in "regions of sharp concavity". And the third
 observation is that the object resembles other known objects. Does it
 look like an ice cream or hot-dog cart to you?
 
-![What is this? This drawing from Biederman @Biederman1987, shows a novel object. After looking at this drawing we can conclude the following: (1) we have never seen this object before, (2) it can be decomposed into parts that most people will agree with, and (3) it resembles some familiar objects. Maybe it looks like an ice cream or hot-dog cart.](figures/object_recognition/do_it_yourself.png){width="50%" #fig-do_it_yourself}
+![What is this? This drawing from Biederman @Biederman1987, shows a novel object. After looking at this drawing we can conclude the following: (1) we have never seen this object before, (2) it can be decomposed into parts that most people will agree with, and (3) it resembles some familiar objects. Maybe it looks like an ice cream or hot-dog cart.](figures/object_recognition/do_it_yourself.png){width="60%" #fig-do_it_yourself}
 
 Biederman postulated that objects are represented by decomposing the
 object into a small set of geometric components (e.g., blocks,
@@ -271,7 +271,7 @@ constrained to lie within a **simplex**.
 :::{.column-margin}
 Simplex with three exclusive classes:
 
-![](figures/object_recognition/simplex_v2.png){width="90%"}
+![](figures/object_recognition/simplex_v2.png){width="100%"}
 :::
 
 
@@ -491,7 +491,7 @@ plays a big role in object classification. The objects in
 ask the question \"Is there a fruit in this picture?,\" the answer is a
 bit more complex than it might appear at first glance.
 
-![A pepper is a fruit according to botanics, and it is a vegetable according to the culinary classification.](figures/object_recognition/pepper.jpg){width="32%" #fig-object_recognition_pepper}
+![A pepper is a fruit according to botanics, and it is a vegetable according to the culinary classification.](figures/object_recognition/pepper.jpg){width="36%" #fig-object_recognition_pepper}
 
 What if the object is present in the scene but invisible in the image?
 What if there are infinite classes? In our formulation, $\hat {\bf y}$
@@ -542,7 +542,7 @@ image ${\bf x}$ into a list of bounding boxes $\hat {\bf b}_i$ and the
 associated classes to each bounding box encoded by a vector
 $\hat {\bf y}_i$, as illustrated in @fig-object_detection_bb.
 
-![Car localization using bounding boxes. Each instance is shown with a different color.](figures/object_recognition/object_detection_bb.png){width="40%" #fig-object_detection_bb}
+![Car localization using bounding boxes. Each instance is shown with a different color.](figures/object_recognition/object_detection_bb.png){width="50%" #fig-object_detection_bb}
 
 The class vector, $\hat {\bf y}_i$, has the same structure as in the
 image classification task but now it is applied to describe each
@@ -568,9 +568,9 @@ binary classification task, namely distinguishing between a single
 object class and background class. Such a classification task can be
 turned into a detector by sliding it across the image (or image
 pyramid), and classifying each local window as shown in
-@fig-scanningWindow2.
+@alg-scanningWindow2.
 
-![Window scanning approach using a multiscale image pyramid.](figures/object_recognition/scanningWindow2.png){width="100%" #fig-scanningWindow2}
+![Window scanning approach using a multiscale image pyramid.](figures/object_recognition/scanningWindow2.png){width="100%" #alg-scanningWindow2}
 
 The window scanning algorithm is the following:
 

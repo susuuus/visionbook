@@ -150,7 +150,7 @@ product is over all nodes $i$.
 
 An example of how Markov random field models are applied to images is
 depicted in @fig-leafs, which show a small image region and its context
-in the image (@fig-leafs\[a\]). @fig-leafs(b) shows an MRF with each
+in the image (@fig-leafs [a]). @fig-leafs [b] shows an MRF with each
 node corresponding to a pixel of the image region. The states of an MRF
 can be indicator variables of image segment membership for each pixel.
 The states of a hypothetical most-probable configuration of this MRF are
@@ -360,7 +360,7 @@ factorization above with an automatic procedure for identifying the
 computations needed for marginalizations and to cache them efficiently.
 BP does that by identifying those reusable sums, that is, the messages.
 
-![Summary of the messages (partial sums) for a simple belief propagation example.](figures/graphical_models/3bpc2.png){width="50%" #fig-3bpc}
+![Summary of the messages (partial sums) for a simple belief propagation example.](figures/graphical_models/3bpc2.png){width="55%" #fig-3bpc}
 
 ### Derivation of Message-Passing Rule {#sec-bpRules}
 
@@ -576,7 +576,7 @@ camera spatial position, is displayed in @fig-canoe4 (c). The intensities
 in each column in the third-row image add up to one.
 
 
-![Belief propagation applied to graphical model, @fig-canoe3, for the stereo problem. (a) Right and (b) left camera views. The black line shows the analyzed row. (c) Local evidence for each depth disparity at left camera. (d) Final rightward and (e) leftward belief propagation messages at each position. (f) Final marginalized posterior probability at each left camera pixel accurately finds the depth discontinuity.](figures/graphical_models/bpcanoes5.png){width=100% #fig-canoe4}
+![Belief propagation applied to graphical model, @fig-canoe3, for the stereo problem. (a) Right and (b) left camera views. The black line shows the analyzed row. (c) Local evidence for each depth disparity at left camera. (d) Final rightward and (e) leftward belief propagation messages at each position. (f) Final marginalized posterior probability at each left camera pixel accurately finds the depth discontinuity.](figures/graphical_models/bpcanoes5.png){width=80% #fig-canoe4}
 
 The prior probability of any configuration of pixel disparity states is
 described by setting the compatibility matrices,

@@ -532,7 +532,7 @@ in the orthogonal direction to the vector that connects that point with
 the origin (@fig-motion_wz). The motion field does not depend on the
 focal length, $f$.
 
-![Motion field for a rotating camera around the optical axis, $W_X=W_Y=0$.](figures/optical_flow/motion_wz.png){width="40%" #fig-motion_wz}
+![Motion field for a rotating camera around the optical axis, $W_X=W_Y=0$.](figures/optical_flow/motion_wz.png){width="50%" #fig-motion_wz}
 
 If $W_Z=0$, then the rotation along $W_X$ or $W_Y$ will produce similar
 2D motion fields, so let's consider $W_X=0$. We have: 

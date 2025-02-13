@@ -12,7 +12,7 @@ coordinates system on the ground, away from the camera. What formulation
 of the image formation process will allow us changing coordinate systems
 easily? This is what we will study in this chapter.
 
-In the sketch shown below (@fig-world_and_camera_coordinates), a
+In the sketch shown below, a
 standing person is holding a camera and taking a picture with it of
 someone sitting at a table (sorry for our drawing skills but hopefully
 this description compensates for our poor artistry). We will be
@@ -41,7 +41,7 @@ But before we move into the material, we are sure you would like to see
 the picture that the standing character from the previous sketch took.
 Here it is:
 
-![The picture taken by the standing character from @fig-world_and_camera_coordinates](figures/imaging_geometry/the_picture.png){width="25%" #fig-world_and_camera_coordinates}
+![The picture taken by the standing character from @fig-world_and_camera_coordinates](figures/imaging_geometry/the_picture.png){width="30%" #fig-world_and_camera_coordinates}
 
 ## 3D Camera Projections in Homogeneous Coordinates
 
@@ -389,7 +389,7 @@ finally translating it by $\mathbf{T}$ (the order of these two
 operations matters). We use the inverse of $\mathbf{R}$ (equal to its
 transpose) to simplify the derivations later.
 
-![World- and camera-coordinate systems. A 3D point expressed in world coordinates, $\mathbf{P}_W$, can be expressed in the camera-coordinate frame, $\mathbf{P}_c$, by applying the translation, $\mathbf{T}$, and rotation, $\mathbf{R}$, to the point coordinates.](figures/imaging_geometry/world_and_camera_coordinates_2.png){width="70%" #fig-camera_calibration}
+![World- and camera-coordinate systems. A 3D point expressed in world coordinates, $\mathbf{P}_W$, can be expressed in the camera-coordinate frame, $\mathbf{P}_c$, by applying the translation, $\mathbf{T}$, and rotation, $\mathbf{R}$, to the point coordinates.](figures/imaging_geometry/world_and_camera_coordinates_2.png){width="80%" #fig-camera_calibration}
 
 We are now given a point in the world $\mathbf{P}_W$, with its
 coordinates are described in terms of the world-coordinate system. Our
