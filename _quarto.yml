@@ -166,9 +166,9 @@ format:
           reference-prefix: Algorithm
     grid:
       gutter-width: 2em
-    google-analytics: "G-R5H3L9EGXX"
+
     # include-before-body: sectionstat.js
-    # include-in-header: title-block.html
+    include-in-header: sectionstat.html
 
   # pdf:
   # see https://pandoc.org/MANUAL.html for all options
