@@ -205,6 +205,5 @@ resources:
   - demos/
 filters:
   - pseudocode
-  - tikz
-tikz:
-  cache: true
+  - imagify
+# tikz:
