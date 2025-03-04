@@ -349,7 +349,7 @@ $$\begin{aligned}
 &\approx \\
 &\texttt{relu}\bigg(\frac{x-(\alpha-\gamma)}{\gamma}\bigg) - \texttt{relu}\bigg(\frac{x-\alpha}{\gamma}\bigg) - \texttt{relu}\bigg(\frac{x-(\beta-\gamma)}{\gamma}\bigg) + \texttt{relu}\bigg(\frac{x-\beta}{\gamma}\bigg)
 \end{aligned}
-$${#eq-neural_nets-bump_as_relu_net}
+$${#eq-neural_nets_bump_as_relu_net}
 
 :::{.column-margin}
 Here we show how a neural net can represent a function as a sum of basis functions. This idea is also foundational in signal processing, where signals are often represented as a sum of sine waves @sec-fourier_analysis, boxes @fig-upsampling_and_downsampling-nn_interp, or trapezoids @fig-bilinear_interp.
