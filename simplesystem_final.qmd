@@ -15,7 +15,7 @@ with datasets that cover a wide set of diverse of domains that improve
 their generalizations and require massive amounts of computation. They
 can be used as is, with little to no fine tuning, or as components of
 more complex systems. Researchers have shown many creative ways of
-connecting these building blocks to produce astonishing results. However,
+connecting these building blocs to produce astonishing results. However,
 a close analysis shows that there is still an important gap to bridge in
 order to build reliable and robust systems. Is the field of computer
 vision in the 2020s naively optimistic like in the 1960s? It does not
@@ -202,7 +202,7 @@ instead of flat.
 We can compare this result with the 3D images recovered using the
 algorithm we defined in @sec-simplesystem:
 
-![3D reconstruction using the simple visual system from @sec-simplesystem](figures/simplesystem/views.png){width="100%" #fig-chatgpt_blockskworld}
+![3D reconstruction using the simple visual system from @sec-simplesystem](figures/simplesystem/views.png){width="100%" #fig-chatgpt_blockworld}
 
 However, while the learned-based model may have lost accuracy in this
 example that fits our simple world assumptions, it has gained in
@@ -225,7 +225,7 @@ such as changing the ground plane from white to black.
 
 Another option is to use GPT4-v @openai2023gpt4v to interpret the scene.
 GPT4-v can take as inputs images, and it allows asking questions about
-images. @fig-chatgpt_blockskworld shows the result of asking GPT4-v to
+images. @fig-chatgpt_blockworld shows the result of asking GPT4-v to
 describe a simple world image.
 
 This method is remarkably accurate, and now you know how it works. At
@@ -237,16 +237,16 @@ space, and it reasons about perspective geometry to find vanishing
 points and estimate shape (as we have discussed along many chapters in
 this book).
 
-![(a) Input image and text prompt to ChatGPT. (b) Output by ChatGPT (Gpt4-v, version from Nov 21, 2023) when asked to describe the image from the simple world.](figures/simplesystem_revisited/chatgpt_blockskworld.png){width="100%" #fig-chatgpt_blockskworld}
+![(a) Input image and text prompt to ChatGPT. (b) Output by ChatGPT (Gpt4-v, version from Nov 21, 2023) when asked to describe the image from the simple world.](figures/simplesystem_revisited/chatgpt_blockworld.png){width="100%" #fig-chatgpt_blockworld}
 
 But it's not all solved. Because if we reconstruct the image from this
-text, it looks not quite right: @fig-chatgpt_blockskworld2. What is
+text, it looks not quite right: @fig-chatgpt_blockworld2. What is
 missing? How would you improve it. As the field moves forward quickly,
 it is likely that this particular example will be fixed, but there will
 be other failures. And some of those failures will give clues to what is
 the next fundamental question that will need to be addressed.
 
-![Output by ChatGPT when asked to render a new image with the same elements as in @fig-chatgpt_blockskworld This conversation is a continuation of the same chat from @fig-chatgpt_blockskworld](figures/simplesystem_revisited/chatgpt_blockskworld_2.png){width="50%" #fig-chatgpt_blockskworld2}
+![Output by ChatGPT when asked to render a new image with the same elements as in @fig-chatgpt_blockworld This conversation is a continuation of the same chat from @fig-chatgpt_blockworld](figures/simplesystem_revisited/chatgpt_blockworld_2.png){width="50%" #fig-chatgpt_blockworld2}
 
 ## Unsolved Solved Computer Vision Problems
 
