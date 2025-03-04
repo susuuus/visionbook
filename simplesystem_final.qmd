@@ -15,7 +15,7 @@ with datasets that cover a wide set of diverse of domains that improve
 their generalizations and require massive amounts of computation. They
 can be used as is, with little to no fine tuning, or as components of
 more complex systems. Researchers have shown many creative ways of
-connecting these building blocs to produce astonishing results. However,
+connecting these building blocks to produce astonishing results. However,
 a close analysis shows that there is still an important gap to bridge in
 order to build reliable and robust systems. Is the field of computer
 vision in the 2020s naively optimistic like in the 1960s? It does not
