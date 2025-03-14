@@ -120,6 +120,7 @@ book:
     collapse-level: 2
     border: true
     search: true
+
   page-footer:
     left: "All content licensed under [CC-BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)"
 
@@ -135,7 +136,7 @@ bibliography:
 format:
   html:
     citation-style: elsevier-with-titles.csl
-    css: colors.css
+    css: visionbook.css
     anchor-sections: true
     fontsize: "16px"
     linestretch: 1.6
@@ -169,7 +170,10 @@ format:
 
     # include-before-body: sectionstat.js
     include-in-header: sectionstat.html
-
+    other-links:
+      - text: Accessibility
+        href: https://accessibility.mit.edu/
+        icon: universal-access
   # pdf:
   # see https://pandoc.org/MANUAL.html for all options
   # documentclass: src/DL_class

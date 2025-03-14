@@ -1,3 +1,8 @@
+/* Hide h2 tag under the quarto-other-links class */
+.quarto-other-links h2 {
+  display: none;
+}
+
 .colab{
   align-items: center;
   gap: 0.5em;
