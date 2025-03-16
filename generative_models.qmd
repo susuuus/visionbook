@@ -460,6 +460,26 @@ Some generative models give density or energy functions, others give
 generator functions, and still others give both. We can summarize all
 these kinds of models with the following learning diagram:
 
+
+:::{.imagify}
+\begin{tikzpicture}
+    \draw (0,1.2) rectangle (4.2,2.4); % outer box
+    \fill[black!20] (0.1,1.3) rectangle (4.1,2.3); % gray box
+    \node[] at (2.0,1.8) {{\bf Generative modeling}};
+    \node[] at (-1.5,2.4) {Data};
+    \node[] at (-1.5,1.8) {$\{x^{(i)}\}_{i=1}^N$};
+    \node[] at (-0.5,1.8) {{\Large  $ \rightarrow$}};
+    \node[] at (6.4,2.9) {Density function};
+    \node[] at (6.4,2.3) {$p_{\theta}: \mathcal{X} \rightarrow [0,\infty)$};
+    \node[] at (9.4,2.9) {Energy function};
+    \node[] at (9.4,2.3) {$E_{\theta}: \mathcal{X} \rightarrow \mathbb{R}$};
+    \node[] at (6.4,1.5) {Generator};
+    \node[] at (6.4,0.9) {$g_{\theta}: \mathcal{Z} \rightarrow \mathcal{X}$};
+    \node[] at (4.7,1.7) {{\Large $ \rightarrow$}};
+\end{tikzpicture}
+:::
+
+
 Each of these families of model has its own advantages and
 disadvantages. Generators have latent variables $\mathbf{z}$ that
 control the properties of the generated image. Changing these variables
