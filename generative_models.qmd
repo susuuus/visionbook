@@ -38,9 +38,11 @@ setting of $\mathbf{z}$. The generative process is as follows. First
 sample $\mathbf{z}$ from a prior $p(Z)$, then deterministically generate
 an image based on $\mathbf{z}$ and $\mathbf{y}$: 
 
-$$\begin{aligned}    \mathbf{z} \sim p(Z)\\
+$$
+\begin{aligned}    \mathbf{z} \sim p(Z)\\
     \mathbf{x} = g(\mathbf{z},\mathbf{y})
-\end{aligned}$$  
+\end{aligned}
+$$  
 
 
 :::{.column-margin}
@@ -54,13 +56,9 @@ This procedure is shown in
 
 ![Making a generator stochastic by conditioning on a random variable.](./figures/generative_models/image_generation_with_z_birds.png){width="70%" #fig-generative_models-image_generation_with_z}
 
-Usually we draw $\mathbf{z}$ from a simple distribution such as Gaussian
-noise, that is, $p(Z) = \mathcal{N}(\mathbf{0},\mathbf{1})$. The way to
-think of $\mathbf{z}$ is that it is a vector of **latent variables**,
-which specify all the attributes of the images other than those
-determined by the label. These variables are called latent because they
-are not directly observed in the training data (it just consists of
-images $\mathbf{x}$ and their labels $\mathbf{y}$). In our example,
+Usually we draw $\mathbf{z}$ from a simple distribution such as Gaussian noise, that is, $p(Z) = \mathcal{N}(\mathbf{0},\mathbf{1})$. The way to
+think of $\mathbf{z}$ is that it is a vector of **latent variables**, which specify all the attributes of the images other than those determined by the label. These variables are called latent because they
+are not directly observed in the training data (it just consists of images $\mathbf{x}$ and their labels $\mathbf{y}$). In our example,
 $\mathbf{y}$ tells $g$ to make a bird but the $\mathbf{z}$-vector is
 what specifies exactly which bird. Different dimensions of $\mathbf{z}$
 specify different attributes, such as the size, color, pose, background,
@@ -88,7 +86,7 @@ Graphical model for an unconditional generative model.
 We call this an **unconditional generative model** because it is model of the unconditional distribution $p(X)$. Generally we will refer to unconditional generative models simply as
 generative models and use the term **conditional generative model** for
 a model of any conditional distribution $p(X \bigm | Y)$. Conditional
-generative models will be the focus of sec-conditional_generative_models; 
+generative models will be the focus of @sec-conditional_generative_models; 
 in the present chapter we will restrict our attention, from this point on, to
 unconditional models.
 
