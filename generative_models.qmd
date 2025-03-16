@@ -82,7 +82,7 @@ $$\begin{aligned}
 
 :::{.column-margin}
 Graphical model for an unconditional generative model.
-![](./figures/generative_models/graphical_model_z_to_x_white.png){width="30%"}
+![](./figures/generative_models/graphical_model_z_to_x_white.png){width="10%"}
 :::
 
 We call this an **unconditional generative model** because it is model of the unconditional distribution $p(X)$. Generally we will refer to unconditional generative models simply as
@@ -168,7 +168,7 @@ approach, which is the main focus of this chapter, is better when we
 want to produce synthetic data that matches *all* statistics of the
 training examples.
 
-:::
+:::{.column-margin}
 In practice, we may not be able to match all statistics, due to
     limits of the model's capacity.
 :::
