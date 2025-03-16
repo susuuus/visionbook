@@ -311,7 +311,7 @@ unnormalized function $E_{\theta}$, then convert it to the normalized
 density $p_{\theta} = \frac{e^{-E_{\theta}}}{Z(\theta)}$, where
 $Z(\theta) = \int_{\mathbf{x}} e^{-E_{\theta}(\mathbf{x})}d\mathbf{x}$
 is the normalizing constant. The $Z(\theta)$ can be very expensive to
-compute and often can only be approximated.:
+compute and often can only be approximated.
 
 
 :::{.column-margin}
@@ -386,7 +386,7 @@ assigned to samples from the model (i.e., samples from the energy
 function itself; negative term), as shown in
 @fig-generative_models-contrastive_divergence:
 
-![Fitting a max likelihood energy function to data, using contrastive divergence~ @hinton2002training](./figures/generative_models/contrastive_divergence.png){width="100%" #fig-generative_models-contrastive_divergence}
+![Fitting a max likelihood energy function to data, using contrastive divergence. @hinton2002training](./figures/generative_models/contrastive_divergence.png){width="100%" #fig-generative_models-contrastive_divergence}
 
 Once the energy function perfectly adheres to the data, samples from the
 model are identical to samples from the data and the positive and
@@ -475,8 +475,8 @@ Some of the generative models we will describe in this chapter and the
 next are categorized along these dimensions in @tbl-generative_models-types_of_gen_model. 
 
 Note that this is a rough categorization, meant to reflect the most straightforward usage
-of these models. With additional effort some of the 's can be converted
-to 's; for example, one can do additional inference to sample from a
+of these models. With additional effort some of the ❌s can be converted
+to ✅s; for example, one can do additional inference to sample from a
 density model, or one can extract a lower-bound estimate of density from
 a variational autoencoder (VAE) or diffusion model.
 
@@ -816,10 +816,9 @@ that has been corrupted by our noise (if $t$ is large this is likely) or
 a scene where the actual physical structure is full of chaotic, rough
 textures that happen to look like noise (if $t$ is small this is more
 likely, because for small $t$ we haven't added much noise to the scene
-yet). Algorithm @alg-generative_models-diffusion_model presents these steps
-in more formal detail.
+yet). @alg-generative_models-diffusion_model presents these steps in more formal detail.
 
-![Training a diffusion model consists of first producing training pairs of the form $\{noisy image, less noisy image\}$. Then do supervised learning on these pairs.](./figures/generative_models/diffusion_model.png){width="100%" #alg-generative_models-diffusion_model}
+![Training a diffusion model consists of first producing training pairs of the form {noisy image, less noisy image}. Then do supervised learning on these pairs.](./figures/generative_models/diffusion_model.png){width="100%" #alg-generative_models-diffusion_model}
 
 In @alg-generative_models-diffusion_model we train the denoiser
 using a loss $\mathcal{L}$, which could be the $L_2$ distance. In many
