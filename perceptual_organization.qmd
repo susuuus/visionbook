@@ -163,7 +163,7 @@ clustering (@sec-probabilistic_graphical_models).
 We do not have time to cover all these methods and in fact they are no
 longer commonly used. Instead we will focus on a method you have seen
 earlier in the book that actually is in common use: contrastive learning
-(which was covered in @sec-representation_learning-contrastive_learning.
+(which was covered in @sec-representation_learning-contrastive_learning).
 Contrastive learning is a perfect fit for affinity-based segmentation
 because contrastive methods learn from similarities (positive pairs) and
 differences (negative pairs), and this is what an affinity metric gives
