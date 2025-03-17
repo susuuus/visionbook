@@ -171,7 +171,7 @@ model is commonly used. **Directed graphical models** @Koller2009
 describe factorizations of the joint probability into products of
 conditional probability distributions. Each node in a directed graph
 contributes a well-specified factor in the joint probability: the
-probability of its variable, conditioned all the variables originating
+probability of its variable, conditioned on all the variables originating
 arrows pointing into it. So this graph
 
 ![A directed graphical model with three variables.](figures/graphical_models/directed.png){width="20%" #eq-directedjoint}
@@ -240,7 +240,7 @@ minimum for this convex function, we find
 $$\hat{\mathbf{x}}_{MMSE} = \int_{\mathbf{x}} \mathbf{x} p(\mathbf{x} \bigm | \mathbf{y})  d\mathbf{x}.$$
 
 
-Thus, the minimum mean square error estimate, $\hat{\mathbf{x}}_{MMSE}$,
+Thus, the minimum mean squared error estimate, $\hat{\mathbf{x}}_{MMSE}$,
 is the mean of the posterior distribution. If $\mathbf{x}$ represents a
 discretized space, then the marginalization integrals over $d\mathbf{x}$
 become sums over the corresponding discrete states of $\mathbf{x}$.
@@ -358,7 +358,7 @@ messages, which the belief propagation algorithm does in an optimal way.
 For more complicated graphical models, we want to replace the manual
 factorization above with an automatic procedure for identifying the
 computations needed for marginalizations and to cache them efficiently.
-BP does that by identifying those reusable sums, that is, the messages.
+Belief Propagation (BP) does that by identifying those reusable sums, that is, the messages.
 
 ![Summary of the messages (partial sums) for a simple belief propagation example.](figures/graphical_models/3bpc2.png){width="55%" #fig-3bpc}
 
