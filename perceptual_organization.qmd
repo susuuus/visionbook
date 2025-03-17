@@ -133,7 +133,7 @@ color of all pixels assigned to that cluster
 
 Naturally, $k$-means on $ab$-values finds segments that correspond to
 regions of roughly a constant color. This simple approach can be
-surprisingly effective. notice how it segments a zebra from the
+surprisingly effective. Notice how it segments a zebra from the
 background in @fig-perceptual_organization-kmeans_ab_zebra_and_beach
 (because the black and white stripes have roughly the same $ab$-values).
 However, it fails to group more complex patterns that are not defined by
