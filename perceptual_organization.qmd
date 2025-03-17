@@ -158,7 +158,7 @@ affinity should belong to the same group and pixels with low affinity
 should belong to two different groups. Methods that use this idea
 include those based on graph cuts @shi2000normalized, spectral
 clustering @arbelaez2010contour, and Markov random field (MRF)-based
-clustering @sec-probabilistic_graphical_models.
+clustering (@sec-probabilistic_graphical_models).
 
 We do not have time to cover all these methods and in fact they are no
 longer commonly used. Instead we will focus on a method you have seen
