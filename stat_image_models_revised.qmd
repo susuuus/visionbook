@@ -80,7 +80,7 @@ Additive stationary noise is noise with statistical properties
 
 Noise is an independent process from the image content, and our visual
 system does not perceive noise as a strange form of paint. One important
-task is image processing it image denoising. Image denoising consists in
+task in image processing is image denoising. Image denoising consists in
 removing the noise from an image automatically. This is equivalent to
 being able to separate the image into two components, one looking like a
 clean uncorrupted picture and the second image containing only noise.
@@ -124,7 +124,7 @@ be fitted to data using maximum likelihood or other loss functions. We
 will see many variants of this probability model here and in the
 following chapters.
 
-One way of assessing the accuracy a statistical image model is to sample
+One way of assessing the accuracy of a statistical image model is to sample
 from the model and view the images it produces. This will require
 knowing the distribution $p_{\theta}\left(\ell[n,m] \right)$.
 
