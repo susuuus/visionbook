@@ -553,8 +553,8 @@ Only the green region contains values that can be computed, the rest will be aff
 The most general approach consists in extending the input image by
 adding additional pixels so that the output can have the same size as
 the input. So, for a kernel with support
-$\left[ -N, N \right] \times \left[-M, M\right]$, one has to add $N/2$
-additional pixels left and right of the image and $M/2$ pixels at the
+$\left[ -N, N \right] \times \left[-M, M\right]$, one has to add $N$
+additional pixels left and right of the image and $M$ pixels at the
 top and bottom. Then, the output will have the same size as the original
 input image.
 
