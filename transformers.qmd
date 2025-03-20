@@ -714,7 +714,7 @@ for l in range(L):
     # attention layer
     Q, K, V = nn.matmul(nn.layernorm(T),[W_q_T[l], W_k_T[l], W_v_T[l]]) 
     # nn.matmul does matrix multiplication
-    A = nn.softmax(nn.matmul(Q,K.transpose()), dim=0)/sqrt(d)
+    A = nn.softmax(nn.matmul(Q,K.transpose())/sqrt(d), dim=0)
     T = nn.matmul(A,V) + T # note residual connection
 
     # tokenwise mlp
