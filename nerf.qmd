@@ -241,7 +241,7 @@ range $[0,1]$).
 
 NeRF also includes a positional encoding layer to transform the raw
 coordinates into a Fourier representation. In fact, we use the same
-positional encoding scheme as is used in transformers (see @sec-transformers-positional_encodings.
+positional encoding scheme as is used in transformers (see @sec-transformers-positional_encodings).
 @fig-nerfs-flatland_positional_encoding shows how this scheme
 translates the $XY$-coordinate field of Flatland to positional
 encodings:
