@@ -421,7 +421,7 @@ Now we will run a similar experiment to look at the effect of priors. In
 this experiment we will use a slightly different hypothesis space and
 objective function, namely $$\begin{aligned}
     J(\theta; \{x^{(i)}, y^{(i)}\}^N_{i=1}) &= \frac{1}{N}\sum_i \left\lVert f_{\theta}(x^{(i)}) - y^{(i)}\right\rVert_2^2 + \lambda \left\lVert\theta\right\rVert_2^2 \quad\quad \triangleleft \quad\text{objective}\\
-    f_{\theta}(x) &= \theta_0 x + \theta_1 x \quad\quad \triangleleft \quad\text{hypothesis space}
+    f_{\theta}(x) &= \theta_0 + \theta_1 x \quad\quad \triangleleft \quad\text{hypothesis space}
 \end{aligned}$$ 
 
 We will look at the effect of the ridge regularizer
