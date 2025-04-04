@@ -27,7 +27,7 @@ Let the light intensities in the world be represented by a column vector, $\bold
 In this chapter we will approximate the input light by a discrete and finite set of light rays instead of a continuous wave. This approximation allow us to use linear algebra to describe the imaging process.
 :::
 
-## Cameras as Linear Systems {#cameras-as-linear-systems}
+## Cameras as Linear Systems 
 As shown in @fig-amats1 (a), the sensor is 1D and the scene lives in flatland. Let the sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be $\boldsymbol\ell_{\texttt{w}}$. If the camera sensors respond linearly to the light intensity at each sensor, their measurements, $\boldsymbol\ell_{\texttt{s}}$, will be some linear combination, given by the matrix, $\mathbf{A}$, of the light intensities:
 $$
 \boldsymbol\ell_{\texttt{s}} = \mathbf{A} \boldsymbol\ell_{\texttt{w}} 
@@ -57,12 +57,7 @@ $$\boldsymbol\ell_{\texttt{w}}= (\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{
 $$ {#eq-deriv2} 
 
 Where the matrix $\mathbf{B}=(\mathbf{A}^T \mathbf{A} + \lambda \mathbf{I})^{-1} \mathbf{A}^T$ is the regularized inverse of the imaging matrix $\mathbf{A}$.
-
-1D and the scene lives in flatland. Let the sensor measurements be ${\boldsymbol\ell_{\texttt{s}}}$ and the unknown scene be ${\boldsymbol\ell_{\texttt{w}}}$.  We represent the camera by matrix $\mathbf{A}$.  For the case of a pinhole camera, and assuming 13 pixel sensor
-observations, the camera matrix is just a $13 \times 13$ identity matrix, depicted in @fig-amats1 (b), as each sensor depends only on the value of a single scene element.  
-
-Let the sensor measurements be $\boldsymbol\ell_{\texttt{s}}$ and the unknown scene be $\boldsymbol\ell_{\texttt{w}}$. We represent the camera by matrix $\mathbf{A}$. For the case of a pinhole camera, and assuming 13 pixel sensor observations, the camera matrix is just a $13 \times 13$ identity matrix, depicted in @fig-amats1 (b), as each sensor depends only on the value of a single scene element.  
-
+ 
 Next, consider the case of a wide aperture pinhole camera, shown in @fig-amats1 (c). If a single pixel in the sensor plane covers exactly two positions of the
 scene intensities, then the geometry is as shown in @fig-amats1 (c). @fig-amats1 (d) also shows the imaging matrix, $\mathbf{A}$, its invere, $\mathbf{A}^{-1}$, and the regularized inverse of the imaging matrix, which will usually give image
 reconstructions with fewer artifacts as it is less sensitive to noise.
