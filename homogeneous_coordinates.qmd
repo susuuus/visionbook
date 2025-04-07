@@ -55,7 +55,7 @@ encoding. We will discuss homogeneous coordinates in this chapter.
 The previous two representations are not the only ways in which we can
 represent images. Another option is to represent an image as a
 continuous function whose input is a location $(x, y)$ and it output is
-an intensity, or a color, $\ell$: $$\ell(x,y) = f_{\theta}(x,y)$$ Thisimage representation is commonly used when we want to make image priors
+an intensity, or a color, $\ell$: $$\ell(x,y) = f_{\theta}(x,y)$$ This image representation is commonly used when we want to make image priors
 more explicit. The function $f_{\theta}$ is parameterized by the
 coefficients $\theta$. This function becomes especially interesting when
 the parameters $\theta$ are different than the original pixel values.
