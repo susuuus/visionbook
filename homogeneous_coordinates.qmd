@@ -346,7 +346,7 @@ $$\mathbf{R} \simeq
     \end{bmatrix}$$
 
 :::{.column-margin}
-for small $x$, $\sin(x) \approx x$ and $\cos(x) \approx 1$)
+for small $x$, $\sin(x) \approx x$ and $\cos(x) \approx 1$
 :::
 
 For small angles a rotation becomes a shear, which we will discuss next.
