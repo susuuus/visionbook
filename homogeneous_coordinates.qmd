@@ -617,7 +617,7 @@ The best approach is to use what is called **backward mapping** which
 consists of looping over all the pixels of the target image and applying
 the inverse geometric transform, $\mathbf{M}^{-1}$; we then use
 interpolation (as described in @sec-interpolation in chapter
-@-downsampling_and_upsampling) to get the correct color
+@sec-downsampling_and_upsampling) to get the correct color
 value (@fig-warping_sketch). This process guarantees that there will be
 no missing values (unless the coordinates go outside the frame of the
 input image) and there will be no aliasing if the interpolation is done
