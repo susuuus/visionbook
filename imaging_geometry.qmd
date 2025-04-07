@@ -345,7 +345,7 @@ $a$ directly from the camera specs? The picture is taken with the
 wide-angle lens of an iPhone 13 pro. The focal length is 5.7 mm, the
 sensor size is $7.6 \times 5.7$ mm, and the image size is
 $4{,}032 \times 3{,}024$ pixels. This gives as an intrinsic parameter
-of: $$a = \frac{4{,}032 \times 5.7}{7.6} = 3{,}024.$$ It works! (Doesit?) Or at least it is close. But a lot of things happen inside a camera
+of: $$a = \frac{4{,}032 \times 5.7}{7.6} = 3{,}024.$$ It works! (Does it?) Or at least it is close. But a lot of things happen inside a camera
 and estimating these values from hardware specs might be difficult.
 
 But is this quality for the calibration enough?
