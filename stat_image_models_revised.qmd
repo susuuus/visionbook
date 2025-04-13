@@ -703,10 +703,9 @@ and b) the sampling at image regions with similar local structure as the
 image position to be denoised.
 
 
-:::{#fig-nlm1 layout-ncol="2"}
-![](figures/statistical_image_models/nlm1a.jpg){}
+:::{#fig-nlm1}
+![](figures/statistical_image_models/nlm1.jpg){}
 
-![](figures/statistical_image_models/nlm1b.jpg){}
 
 Regions of support for the nonlocal means denoising algorithm. *Source:* Image from @Baudes2005
 :::
