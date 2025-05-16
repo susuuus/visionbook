@@ -646,10 +646,10 @@ You may also try the interactive demo below to see the 3D structure. (The demo s
 
 ## Generalization
 
-One desired property of any vision system is it ability to
+One desired property of any vision system is its ability to
 **generalize** outside of the domain for which it was designed to
 operate. In the approach presented in this chapter, the domain of images
-the algorithm is expected to work is defined by the assumptions
+the algorithm is expected to work on is defined by the assumptions
 described in . Later in the book, when we describe learning-based
 approaches, the training dataset will specify the domain. What happens
 when assumptions are violated? Or when the images contain configurations
