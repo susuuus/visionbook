@@ -167,7 +167,7 @@ correlations in the testing dataset. (See also related work in
 counterfactual reasoning by @Denton2019.) shows several **transects**
 from @Balakrishnan2020, paths through the GAN's latent space where only
 one face variable is modified. The variation in an algorithm's
-classification results along the images of the transect to provide a
+classification results along the images of the transect provides a
 clean assessment of any bias related to the variable being modified.
 
 
