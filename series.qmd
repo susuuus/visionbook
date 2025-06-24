@@ -1,0 +1,112 @@
+---
+toc-title: Book in the Series 
+---
+
+## Adaptive Computation and Machine Learning Series {.unnumbered}
+
+Francis Bach, editor
+
+- *Bioinformatics: The Machine Learning Approach*  
+  Pierre Baldi and Søren Brunak, 1998
+
+- *Reinforcement Learning: An Introduction*  
+  Richard S. Sutton and Andrew G. Barto, 1998
+
+- *Graphical Models for Machine Learning and Digital Communication*  
+  Brendan J. Frey, 1998
+
+- *Learning in Graphical Models*  
+  Edited by Michael I. Jordan, 1999
+
+- *Causation, Prediction, and Search*, second edition  
+  Peter Spirtes, Clark Glymour, and Richard Scheines, 2000
+
+- *Principles of Data Mining*  
+  David J. Hand, Heikki Mannila, and Padhraic Smyth, 2000
+
+- *Bioinformatics: The Machine Learning Approach*, second edition  
+  Pierre Baldi and Søren Brunak, 2001
+
+- *Learning Kernel Classifiers: Theory and Algorithms*  
+  Ralf Herbrich, 2002
+
+- *Learning with Kernels: Support Vector Machines, Regularization, Optimization, and Beyond*  
+  Bernhard Schölkopf and Alexander J. Smola, 2002
+
+- *Introduction to Machine Learning*  
+  Ethem Alpaydın, 2004
+
+- *Gaussian Processes for Machine Learning*  
+  Carl Edward Rasmussen and Christopher K. I. Williams, 2006
+
+- *Semi-Supervised Learning*  
+  Edited by Olivier Chapelle, Bernhard Schölkopf, and Alexander Zien, 2006
+
+- *The Minimum Description Length Principle*  
+  Peter D. Grünwald, 2007
+
+- *Introduction to Statistical Relational Learning*  
+  Edited by Lise Getoor and Ben Taskar, 2007
+
+- *Probabilistic Graphical Models: Principles and Techniques*  
+  Daphne Koller and Nir Friedman, 2009
+
+- *Introduction to Machine Learning*, second edition  
+  Ethem Alpaydın, 2010
+
+- *Machine Learning in Non-Stationary Environments: Introduction to Covariate Shift Adaptation*  
+  Masashi Sugiyama and Motoaki Kawanabe, 2012
+
+- *Boosting: Foundations and Algorithms*  
+  Robert E. Schapire and Yoav Freund, 2012
+
+- *Foundations of Machine Learning*  
+  Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalker, 2012
+
+- *Machine Learning: A Probabilistic Perspective*  
+  Kevin P. Murphy, 2012
+
+- *Introduction to Machine Learning*, third edition  
+  Ethem Alpaydın, 2014
+
+- *Deep Learning*  
+  Ian Goodfellow, Yoshua Bengio, and Aaron Courville, 2017
+
+- *Elements of Causal Inference: Foundations and Learning Algorithms*  
+  Jonas Peters, Dominik Janzing, and Bernhard Schölkopf, 2017
+
+- *Machine Learning for Data Streams, with Practical Examples in MOA*  
+  Albert Bifet, Ricard Gavaldà, Geoffrey Holmes, Bernhard Pfahringer, 2018
+
+- *Reinforcement Learning: An Introduction*, second edition  
+  Richard S. Sutton and Andrew G. Barto, 2018
+
+- *Foundations of Machine Learning*, second edition  
+  Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalker, 2019
+
+- *Introduction to Natural Language Processing*  
+  Jacob Eisenstein, 2019
+
+- *Introduction to Machine Learning*, fourth edition  
+  Ethem Alpaydın, 2020
+
+- *Knowledge Graphs: Fundamentals, Techniques, and Applications*  
+  Mayank Kejriwal, Craig A. Knoblock, and Pedro Szekely, 2021
+
+- *Probabilistic Machine Learning: An Introduction*  
+  Kevin P. Murphy, 2022
+
+- *Machine Learning from Weak Supervision: An Empirical Risk Minimization Approach*  
+  Masashi Sugiyama, Han Bao, Takashi Ishida, Nan Lu, Tomoya Sakai, and Gang Niu, 2022
+
+- *Introduction to Online Convex Optimization*, second edition  
+  Elad Hazan, 2022
+
+- *Distributional Reinforcement Learning*  
+  Marc G. Bellemare, Will Dabney, and Mark Rowland, 2023
+
+- *Probabilistic Machine Learning: Advanced Topics*  
+  Kevin P. Murphy, 2023
+
+- *Foundations of Computer Vision*  
+  Antonio Torralba, Phillip Isola, and William T. Freeman, 2024

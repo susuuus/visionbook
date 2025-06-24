@@ -1,0 +1,11 @@
+# Probabilistic Models of Images {#sec-probabilistic-models-of-images}
+
+These chapters will provide some insights about how simple image models can capture useful properties of natural images. The ideas described here will help us build some intuitions about how the generative models presented in the next part are so successful in modeling images.
+
+## Outline
+
+- **Chapter @sec-stat_image_models** presents a sequence of probabilistic models describing images, and a noise removal algorithm corresponding to each model.
+
+- **Chapter @sec-textures** introduces the problem of texture analysis and synthesis, and describes two approaches that will be the basic building blocks to understand other generative models of images.
+
+- **Chapter @sec-probabilistic_graphical_models** presents a representation and inference algorithm appropriate for statistical relationships with a modular structure, as is common for many computer vision problems.

@@ -1,0 +1,20 @@
+# Copyright  {.unnumbered}
+
+© 2024 Antonio Torralba, Phillip Isola, and William T. Freeman
+
+This work is subject to a Creative Commons CC-BY-ND-NC license.
+
+This license applies only to the work in full and not to any components included with permission. Subject to such license, all rights are reserved.
+
+![Creative Commons License](figures/by-nc-nd.png){width=30%}
+
+The open access edition of this book was made possible by generous funding and support from MIT Libraries.
+
+The MIT Press would like to thank the anonymous peer reviewers who provided comments on drafts of this book. The generous work of academic experts is essential for establishing the authority and quality of our publications. We acknowledge with gratitude the contributions of these otherwise uncredited readers.
+
+This book was set in Times New Roman by the authors. Printed and bound in the United States of America.
+
+Library of Congress Cataloging-in-Publication Data is available.
+
+ISBN: 978-0-262-04897-2
+

@@ -1,0 +1,6 @@
+# Challenges in Learning-Based Vision 
+
+The purpose of this book was to cover foundational concepts that, in many cases, have already passed the test of time, and others that we believe are likely to pass it in the future. These concepts should help the reader to understand future advancements beyond what has been covered here. 
+
+With all the material presented in this book, we have now the tools to revisit the simple visual system we explored in @sec-simplesystem and try to solve it in a different way to what we proposed earlier, which will conclude this book. 
+

@@ -1,0 +1,118 @@
+#!/bin/bash
+
+# Traverse to the grandparent directory
+cd ../..
+
+# Find all .qmd files and apply the sed replacements
+find . -type f -name "*.qmd" | while read input_file; do
+  sed -i '' -e 's/\\img/\\ell/g' \
+    -e 's/\\imgin/\\ell\\_{\\texttt{in}}/g' \
+    -e 's/\\imgout/\\ell_{\\texttt{out}}/g' \
+    -e 's/\\boldimg/\\boldsymbol\\ell/g' \
+    -e 's/\\boldimgin/\\boldsymbol\\ell_{\\texttt{in}}/g' \
+    -e 's/\\boldimgout/\\boldsymbol\\ell_{\\texttt{out}}/g' \
+    -e 's/\\capitalimg/\\mathscr{L}/g' \
+    -e 's/\\boldcapitalimg/\\mathscr{L}/g' \
+    -e 's/\\capitalimgin/\\mathscr{L}_{\\texttt{in}}/g' \
+    -e 's/\\capitalimgout/\\mathscr{L}_{\\texttt{out}}/g' \
+    -e 's/\\lightfield/L/g' \
+    -e 's/\\ff/\\mathbf{f}/g' \
+    -e 's/\\billf{[^{]*}/{{\\tt\\bf  [Billf::~#1~]}}/g' \
+    -e 's/\\reviewcomment{[^{]*}/{{}}/g' \
+    -e 's/\\norm{[^{]*}/{{\\left\\lVert#1\\right\\rVert}}/g' \
+    -e 's/\\KLdiv/\\texttt{KL}\\KLdivx/g' \
+    -e 's/\\chap{[^{]*}/chapter #1/g' \
+    -e 's/\\chaps{[^{]*}/chapters #1/g' \
+    -e 's/\\Chap{[^{]*}/Chapter #1/g' \
+    -e 's/\\eqn{[^{]*}/equation (#1)/g' \
+    -e 's/\\Eqn{[^{]*}/Equation (#1)/g' \
+    -e 's/\\Eqns{[^{]*}/Equations (#1)/g' \
+    -e 's/\\eqns/equations /g' \
+    -e 's/\\tab{[^{]*}/table #1/g' \
+    -e 's/\\Tab{[^{]*}/Table #1/g' \
+    -e 's/\\sect{[^{]*}/section #1/g' \
+    -e 's/\\Sect{[^{]*}/Section #1/g' \
+    -e 's/\\partref{[^{]*}/part #1/g' \
+    -e 's/\\partsref/parts /g' \
+    -e 's/\\Partref{[^{]*}/Part #1/g' \
+    -e 's/\\algref{[^{]*}/algorithm #1/g' \
+    -e 's/\\Algref{[^{]*}/Algorithm #1/g' \
+    -e 's/\\transpose/\\mathsf{T}/g' \
+    -e 's/\\hadamard/\\odot/g' \
+    -e 's/\\booktitle{[^{]*}/\\textit{#1}/g' \
+    -e 's/\\faketablecaption/\\vskip0.5\\baselineskip\\refstepcounter{table}/g' \
+    -e 's/\\fakealgorithmcaption/\\vskip0.5\\baselineskip\\refstepcounter{algorithm}/g' \
+    -e 's/\\GD/\\texttt{GD}/g' \
+    -e 's/\\SGD/\\texttt{SGD}/g' \
+    -e 's/\\ES/\\texttt{ES}/g' \
+    -e 's/\\xin/\\mathbf{x}_{\\texttt{in}}/g' \
+    -e 's/\\xout/\\mathbf{x}_{\\texttt{out}}/g' \
+    -e 's/\\xinnonbold/\\x_{\\texttt{in}}/g' \
+    -e 's/\\xoutnonbold/\\x_{\\texttt{out}}/g' \
+    -e 's/\\xini/\\x_{\\texttt{in}}[i]/g' \
+    -e 's/\\xinj/\\x_{\\texttt{in}}[j]/g' \
+    -e 's/\\xouti/\\x_{\\texttt{out}}[i]/g' \
+    -e 's/\\xink/\\x_{\\texttt{in}}[k]/g' \
+    -e 's/\\xoutk/\\x_{\\texttt{out}}[k]/g' \
+    -e 's/\\xinindexed/\\x_{\\texttt{in}}/g' \
+    -e 's/\\xoutindexed/\\x_{\\texttt{out}}/g' \
+    -e 's/\\xint/\\mathbf{x}_{\\texttt{in}}[t]/g' \
+    -e 's/\\xoutt/\\mathbf{x}_{\\texttt{out}}[t]/g' \
+    -e 's/\\localgrad/\\mathbf{L}/g' \
+    -e 's/\\localgradx/\\mathbf{L}^{\\mathbf{x}}/g' \
+    -e 's/\\localgradtheta/\\mathbf{L}^{\\theta}/g' \
+    -e 's/\\costgrad/\\mathbf{g}/g' \
+    -e 's/\\costgradxin/\\mathbf{g}^{\\xin}/g' \
+    -e 's/\\costgradxout/\\mathbf{g}^{\\xout}/g' \
+    -e 's/\\costgradin/\\mathbf{g}_{\\texttt{in}}/g' \
+    -e 's/\\costgradout/\\mathbf{g}_{\\texttt{out}}/g' \
+    -e 's/\\costgradtheta/\\mathbf{g}^{\\theta}/g' \
+    -e 's/\\costgradl/\\mathbf{g}_l/g' \
+    -e 's/\\pdata/p_{\\texttt{data}}/g' \
+    -e 's/\\pin/p_{\\texttt{in}}/g' \
+    -e 's/\\pout/p_{\\texttt{out}}/g' \
+    -e 's/\\xinpatch/\\tilde{x}_{\\texttt{in}}/g' \
+    -e 's/\\xoutpatch/\\tilde{x}_{\\texttt{out}}/g' \
+    -e 's/\\Cin/C_{\\texttt{in}}/g' \
+    -e 's/\\cin/c_{\\texttt{1}}/g' \
+    -e 's/\\Cout/C_{\\texttt{out}}/g' \
+    -e 's/\\cout/c_{\\texttt{2}}/g' \
+    -e 's/\\xoutj/\\x_{\\texttt{out}}[j]/g' \
+    -e 's/\\xinOne/\\x_{\\texttt{in}}[0]/g' \
+    -e 's/\\xinN/\\x_{\\texttt{in}}[N-1]/g' \
+    -e 's/\\Xin/\\mathbf{X}_{\\texttt{in}}/g' \
+    -e 's/\\Xini/\\mathbf{X}_{\\texttt{in}}[i]/g' \
+    -e 's/\\Xout/\\mathbf{X}_{\\texttt{out}}/g' \
+    -e 's/\\Xoutj/\\mathbf{X}_{\\texttt{out}}[j]/g' \
+    -e 's/\\XinOne/\\mathbf{X}_{\\texttt{in}}[0]/g' \
+    -e 's/\\XinN/\\mathbf{X}_{\\texttt{in}}[N-1]/g' \
+    -e 's/\\Xoutjk/\\X_{\\texttt{out}}[j,k]/g' \
+    -e 's/\\Xinik/\\X_{\\texttt{out}}[i,k]/g' \
+    -e 's/\\tin/\\mathbf{T}_{\\texttt{in}}/g' \
+    -e 's/\\tini/\\mathbf{T}_{\\texttt{in}}[i,:]/g' \
+    -e 's/\\tinj/\\mathbf{T}_{\\texttt{in}}[j,:]/g' \
+    -e 's/\\tout/\\mathbf{T}_{\\texttt{out}}/g' \
+    -e 's/\\touti/\\mathbf{T}_{\\texttt{out}}[i,:]/g' \
+    -e 's/\\tinOne/\\mathbf{T}_{\\texttt{in}}[0,:]/g' \
+    -e 's/\\tinN/\\mathbf{T}_{\\texttt{in}}[N-1,:]/g' \
+    -e 's/\\toutOne/\\mathbf{T}_{\\texttt{out}}[0,:]/g' \
+    -e 's/\\toutN/\\mathbf{T}_{\\texttt{out}}[N-1,:]/g' \
+    -e 's/\\qin/\\mathbf{q}_{\\texttt{in}}/g' \
+    -e 's/\\qni/\\q_{\\texttt{in}}[i,:]/g' \
+    -e 's/\\qinOne/\\q_{\\texttt{in}}[1]/g' \
+    -e 's/\\qinN/\\q_{\\texttt{in}}[N]/g' \
+    -e 's/\\kin/\\mathbf{k}_{\\texttt{in}}/g' \
+    -e 's/\\kni/\\k_{\\texttt{in}}[i,:]/g' \
+    -e 's/\\kinOne/\\k_{\\texttt{in}}[0]/g' \
+    -e 's/\\kinN/\\k_{\\texttt{in}}[N-1]/g' \
+    -e 's/\\vin/\\mathbf{v}_{\\texttt{in}}/g' \
+    -e 's/\\vni/\\v_{\\texttt{in}}[i,:]/g' \
+    -e 's/\\vinOne/\\v_{\\texttt{in}}[0]/g' \
+    -e 's/\\vinN/\\v_{\\texttt{in}}[N-1]/g' \
+    -e 's/\\Zin/\\mathbf{Z}_{\\texttt{in}}/g' \
+    -e 's/\\Zout/\\mathbf{Z}_{\\texttt{out}}/g' \
+    -e 's/\\Qin/\\mathbf{Q}_{\\texttt{in}}/g' \
+    -e 's/\\Kin/\\mathbf{K}_{\\texttt{in}}/g' \
+    -e 's/\\Vin/\\mathbf{V}_{\\texttt{in}}/g' \
+    -e 's/\\xmark/\\ding{55}/g' "$input_file"
+done

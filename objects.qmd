@@ -1,0 +1,32 @@
+# Objects
+
+## A Few Notes About the History of Object Recognition Models
+
+representations
+
+geometry-based models
+
+bag of words
+
+part based models
+
+appearance based models
+
+methods
+
+Indexing, nearest neighbors
+
+prototypes
+
+classifiers (matched-filters, SVMs, boosting, neural networks)
+
+## A Few Notes About Object Recognition in Humans
+
+Object perception is very rich and diverse area of interdisciplinary
+research. Many of the approached in computer vision are rooted on
+hypothesis formulated in trying to model the mechanism used by the human
+visual system. It is useful to be familiar with the literature in
+cognitive science and neuroscience to understand the origin of existing
+approaches and to gain insights on how to build new models. Here we will
+review only a few findings, and we leave the reader with the task of
+going deeper into the field.

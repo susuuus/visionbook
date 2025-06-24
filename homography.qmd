@@ -1,0 +1,494 @@
+# Homographies {#sec-homography}
+
+## Introduction
+
+In @sec-geometry_homogeneous we discussed several types of
+geometric transformations of two-dimensional (2D) images: translations,
+rotations, skewing, scalings, and we saw that all could be modeled as
+the product between the coordinates of a point in the input image
+described using homogeneous coordinates and a $3 \times 3$ matrix. Now
+that we have discussed camera models, we are well equipped to present a
+more general geometric image transformation that opens the door to many
+applications: the homography.
+
+As we discussed in the previous @sec-stereo_vision, if we capture a scene with two cameras
+from different viewpoints, corresponding points across both images are
+constrained by the epipolar constrain. In general, there is not a simple
+geometric transformation that maps pixels from one image into the pixels
+of the other image. To find that mapping we will need to know the
+three-dimensional (3D) location of each point as well as the relative
+camera translation and rotation between both images.
+
+However, there are a few scenarios where we can find a simple
+transformation that allows warping one image into another image
+corresponding to a new camera location without requiring knowing the 3D
+scene structure: this will happen when the scene is planar (as in
+@fig-illustration_homography) or when the two cameras are related just
+by a rotation (@fig-rotation_homography). In those two cases the
+coordinates of corresponding points across the two images are related by
+a **homography**.
+
+
+:::{#fig-illustration_homography layout-ncol="2"}
+![](figures/homography/IMG_7801_crop.jpg){width="45%"}
+
+![](figures/homography/IMG_7802_crop.jpg){width="48%"}
+
+These two images are (approximately) related by an homography.
+:::
+
+
+Homographies can be used in applications such as perspective correction,
+augmented reality, image stitching, creating bird's-eye views,
+correcting keystone distortions for projected images, and many others.
+
+## Homography
+
+Let's start with a formal definition of the homography. A homography (or
+projective transformation) is a geometric transformation that preserves
+straight lines. The homography is a function $h$ that maps points into
+points, $\mathbf{p}' = h(\mathbf{p})$, with the property that if points
+$\mathbf{p}_1$, $\mathbf{p}_2$, and $\mathbf{p}_3$ are colinear, then
+the transformed points $h(\mathbf{p}_1)$, $h(\mathbf{p}_2)$, and
+$h(\mathbf{p}_3)$ are also colinear. Such a function,
+$\mathbf{p}' = h(\mathbf{p})$, can be written in homogeneous coordinates
+as a product with a matrix:
+
+$$\begin{bmatrix}    x' \\
+    y' \\
+    w' 
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a & b & c \\
+    d & e & f \\
+    g & h & i
+    \end{bmatrix}
+    \begin{bmatrix}
+    x \\
+    y \\
+    1 
+    \end{bmatrix}
+    $${#eq-homography}
+
+This can be written in the short form:
+$$\mathbf{p}' = \mathbf{H} \mathbf{p}    $${#eq-homography_generic} where $\mathbf{p}$ and $\mathbf{p}'$
+correspond to 2D points in homogeneous coordinates, and $\mathbf{H}$ is
+a $3 \times 3$ matrix.
+
+To prove that colinear points remain colinear after the homography we
+can use the equation of a line in homogeneous coordinates,
+$\boldsymbol{l}^\mathsf{T}\mathbf{p}=0$. From equation
+(@eq-homography_generic), we have that
+$\mathbf{p} = \mathbf{H}^{-1} \mathbf{p}'$. Replacing the last equality
+into the equation of the line gives
+$(\mathbf{H} ^{-\mathsf{T}}\boldsymbol{l})^\mathsf{T}\mathbf{p'}=0$,
+which corresponds to the equation of the line for the projected points
+$\mathbf{p}'$.
+
+In a general homography, angles and lengths are not preserved.
+Therefore, parallel lines might not remain parallel, and lines of
+identical length might have different lengths after a homography.
+@fig-illustration_homography2 shows how a planar grid gets transformed
+after applying a homography.
+
+![Homography. Colinear points remain colinear after transformation. Angles between lines are not preserved.](figures/homography/example_homography.png){width="70%" #fig-illustration_homography2}
+
+Let's start discussing in which scenarios the coordinates of points
+between to images are related by a homography.
+
+### Camera Rotation
+
+Consider the following three images shown in @fig-example_three_images.
+
+:::{#fig-example_three_images layout-ncol="3"}
+![](figures/homography/3_IMG_7883_small.jpg){width="52%"}
+
+![](figures/homography/2_IMG_7884_small.jpg){width="30%"}
+
+![](figures/homography/1_IMG_7885_small.jpg){width="30%"}
+
+Three images taken from the same point by rotating the camera.
+:::
+
+
+
+The three images are taken from the same point by rotating the camera.
+There is no translation between the three camera positions as the
+photographer took the three images by keeping the camera origin static
+when moving the camera. Under this condition, the coordinates of the
+corresponding points across each pair of images are related by a
+homography independently of how far they are from the camera.
+
+Here, we show that the mapping between feature point locations in two
+cameras differing only in their 3D orientation, as shown in
+@fig-rotation_homography, is a $3\times3$ matrix transformation of
+their 2D positions written in homogeneous coordinates, that is, a
+homography.
+
+![Camera rotation generates two images related by a homography.](figures/homography/rotation_homography_vs3.png){width="100%" #fig-rotation_homography}
+
+We start by setting the world coordinate system aligned with the
+coordinate system of camera 1, as shown in @fig-rotation_homography.
+Therefore, the projection of a 3D point,
+$\mathbf{P}=[X,Y,Z]^\mathsf{T}$, into the camera 1 plane gives, setting
+the translation vector to be zero: $$\lambda_1    \begin{bmatrix}
+    x \\
+    y \\
+    1
+    \end{bmatrix}
+    =
+    \mathbf{K}  
+    \begin{bmatrix}
+    \mathbf{I} & \mathbf{0} 
+    \end{bmatrix}
+    \begin{bmatrix}
+    X \\
+    Y \\
+    Z \\
+    1
+    \end{bmatrix} 
+    = 
+    \mathbf{K} 
+    \begin{bmatrix}
+    X \\
+    Y \\
+    Z 
+    \end{bmatrix} 
+    $${#eq-projectionintofirstcamera}
+
+We can now project the same 3D point into camera 2. Setting the
+translation vector to be zero in equation (@eq-combinedexpandedsmaller),
+and writing the $3\times3$ rotation matrices for camera 2 as
+$\mathbf{R}$, we have for the observed position of a common 3D point
+observed from camera 2:
+
+$$\lambda_2    \begin{bmatrix}
+    x' \\
+    y' \\
+    1
+    \end{bmatrix}
+    =
+    \mathbf{K} 
+    \begin{bmatrix}
+    \mathbf{R} & \mathbf{0} 
+    \end{bmatrix}
+    \begin{bmatrix}
+    X \\
+    Y \\
+    Z \\
+    1
+    \end{bmatrix}
+    = 
+    \mathbf{K}  \mathbf{R} 
+    \begin{bmatrix}
+    X \\
+    Y \\
+    Z
+    \end{bmatrix}
+    $${#eq-projectionintosecondcamera}
+
+As both cameras see the same 3D point, $\mathbf{P}=[X,Y,Z]^\mathsf{T}$,
+we can invert the two projection equations
+(@eq-projectionintofirstcamera) and (@eq-projectionintosecondcamera) to
+get the following relationship:
+
+$$\begin{bmatrix}    X \\
+    Y \\
+    Z
+    \end{bmatrix}
+    = 
+    \lambda_1 \mathbf{K}^{-1}
+    \begin{bmatrix}
+    x \\
+    y \\
+    1
+    \end{bmatrix}
+    =
+    \lambda_2 \mathbf{R}^{-1} \mathbf{K}^{-1}
+    \begin{bmatrix}
+    x' \\
+    y' \\
+    1
+    \end{bmatrix}
+    $${#eq-inverted_projectionintofirstcamera}
+
+Using the last equality, we can establish the following relationship
+between the corresponding image points, in homogeneous coordinates:
+
+$$\lambda_2 / \lambda_1    \begin{bmatrix}
+    x' \\
+    y' \\
+    1
+    \end{bmatrix}
+    =
+    \mathbf{K} \mathbf{R} \mathbf{K}^{-1} 
+    \begin{bmatrix}
+    x' \\
+    y' \\
+    1
+    \end{bmatrix}
+    $${#eq-homo3}
+
+We can write the relationship between corresponding points as $$\lambda    \begin{bmatrix}
+    x' \\
+    y' \\
+    1
+    \end{bmatrix}
+    =
+    \mathbf{H} 
+    \begin{bmatrix}
+    x \\
+    y \\
+    1
+    \end{bmatrix}$$ where $\mathbf{H}$ is a $3\times3$ matrix. Thus,
+camera rotation modifies the locations of the image points by a
+homography. The relationship also holds if the two cameras have
+different intrinsic camera parameters. This concludes the proof.
+
+Under certain conditions, a homography predicts the position of points
+when viewed with another camera from another position. We just discussed
+one condition, when the two cameras differ in their position by a
+rotation about a common center of projection. We will now consider
+another case.
+
+### Planar Surface
+
+A second case is when two cameras observe a 2D plane @Hartley2004. In
+that case, the coordinates of corresponding points across the two camera
+views, for points inside the plane, are related by a homography
+(@fig-example_two_images_facade).
+
+:::{#fig-example_two_images_facade layout-ncol="2"}
+![](figures/homography/IMG_7127_crop.jpg){width="45%"}
+
+![](figures/homography/IMG_7126.jpg){width="45%"}
+
+Two pictures of a building facade taken from different positions. The coordinates of corresponding points on the planar facade are related by a homography.
+:::
+
+To prove this, we can first show that the coordinates inside a plane
+relate to the coordinates in the image plane by a homography
+independently of relative position between the plane and the camera.
+Therefore, the relationship between points across two images will also
+be related by a homography.
+
+We start by placing the world-coordinate system on the plane so that the
+plane is defined by $Z=0$ as shown in the
+@fig-homography_plane_geometry. Note that the origin can be placed at
+any arbitrary location in the world.
+
+![Geometry of a the projection of a planar scene. The origin of the world-coordinates system is placed inside the plane and the $Z$-axis is perpendicular to it.](figures/homography/homography_plane_geometry2.png){width="70%" #fig-homography_plane_geometry}
+
+The proof is similar to what we did in the previous section. We start
+writing the projection equation $$\lambda 
+    \begin{bmatrix}
+    x \\
+    y \\
+    1
+    \end{bmatrix}
+    =
+    \mathbf{K}  
+    \begin{bmatrix}
+    \mathbf{R} & \mathbf{t} 
+    \end{bmatrix}
+    \begin{bmatrix}
+    X \\
+    Y \\
+    Z \\
+    1
+    \end{bmatrix}$$
+
+Note that we are not using the same notation for the translation vector
+as we used in equation (@eq-extrinsic). You can obtain the same by
+setting $\mathbf{t}= -\mathbf{R} \mathbf{T}$, where $\mathbf{R}$ and
+$\mathbf{T}$ are the translation and rotation of the camera with respect
+to the world-coordinate system. As we can put the world-coordinate
+system in any arbitrary location, we chose the world-coordinates system
+to be so that points in the plane have coordinates $Z=0$ as shown in
+@fig-homography_plane_geometry. Therefore, we can write: $$\lambda 
+    \begin{bmatrix}
+    x \\
+    y \\
+    1
+    \end{bmatrix}
+    =
+    \mathbf{K}  
+    \begin{bmatrix}
+    \mathbf{R} & \mathbf{t} 
+    \end{bmatrix}
+    \begin{bmatrix}
+    X \\
+    Y \\
+    0 \\
+    1
+    \end{bmatrix} 
+    =
+    \mathbf{K}  
+    \begin{bmatrix}
+    \mathbf{c}_1 & \mathbf{c}_2 &\mathbf{t} 
+    \end{bmatrix}
+    \begin{bmatrix}
+    X_1 \\
+    Y_1 \\
+    1
+    \end{bmatrix}$$ Where $c_i$ is the column $i$ of the rotation matrix
+$\mathbf{R}$. As the last expression contains the product of two
+$3 \times 3$ matrices, we can write $$\lambda 
+    \begin{bmatrix}
+    x \\
+    y \\
+    1
+    \end{bmatrix}
+    =
+    \mathbf{H}  
+    \begin{bmatrix}
+    X \\
+    Y \\
+    1
+    \end{bmatrix} 
+    $${#eq-projectionintofirstcamera} This last result shows that the
+coordinates of points on the plane are related to the corresponding
+points in the image plane by a homography.
+
+As @eq-projectionintofirstcamera is true for any camera, the
+relationship between corresponding points in the two cameras will also be related by a homography when the points correspond to points in a plane in the 3D space. 
+
+:::{.column-margin}
+A homography is a stronger constraint than the epipolar constraint between corresponding points across two camera views. However, the homography only applies under
+certain conditions as we have seen, while the epipolar constraint always holds. 
+:::
+
+## Creating Image Panoramas
+
+Let's now study a popular application of the homography: stitching
+images to create large panoramas. To create a large panorama from
+multiple pictures, the images need to be taken by a rotating camera
+without translation.
+
+To stitch together images, one needs to estimate the homography relating
+the images to be stitched together. While one could estimate the
+rotation and intrinsic camera matrices within equation (@eq-homo3) to
+compute the homography, it is usually simpler to follow the procedure
+below.
+
+We will start assuming we have some initial correspondences between each
+pair of images as shown in @fig-fig_matching_two_images. The
+correspondences in this example are computer using **speeded up robust
+features** (SURF) @Bay2008346.
+
+![Two overlapping images and some found correspondences using SURF descriptors. A random set of four correspondences are highlighted.](figures/homography/fig_matching_two_images3.png){width="100%" #fig-fig_matching_two_images}
+
+### Direct Linear Transform Algorithm
+
+Given a set of point locations, and their correspondences across the two
+cameras, we can compute the homography relating the locations of imaged
+points within the two cameras. To estimate the homography we can use the
+direct linear transform (DLT) algorithm, as we did for the camera
+calibration problem in @sec-camera_calibration. This will give us a linear set of
+equations for the parameters of the homography matrix with the form:
+$$\mathbf{A} \mathbf{h} = \mathbf{0}$$ where $\mathbf{A}$ is a$2N \times 9$ matrix, when given $N$ corresponding pairs. The vector
+$\mathbf{h}$ contains all the elements of the matrix $\mathbf{H}$
+stacked as a column vector of length 9. Note that $\mathbf{h}$ only has
+8 degrees of freedom as the results do not change for a global scaling
+of all the values. Therefore we will need at least four correspondences
+to estimate the homography between two sets of corresponding points, as
+the ones shown in @fig-fig_matching_two_images. As before, the solution
+is the vector that minimizes the residual
+$\|\mathbf{A} \mathbf{h} \|^2$. The result is given by the eigenvector
+of the matrix $\mathbf{A}^\mathsf{T}\mathbf{A}$ with the smallest
+eigenvalue.
+
+In practice, to get accurate results, it is useful to also minimize the
+reprojection error after you initialize with the DLT solution since
+$\|\mathbf{A} \mathbf{h} \|^2$ is meaningless geometrically.
+
+### Robust Model Fitting: Random Sampling with Consensus {#sec-RANSAC}
+
+To perform the image stitching in the section above, we had to find the
+homography parameters that best described the transformation from one
+image to another. Because the detection of the feature points can be
+noisy, the homography fitting needs to be robust against inevitable
+feature mismatches between images. A good algorithm to fit models to
+data robustly is RANSAC @Fischler1981, which stands for **random
+sampling with concensus**.
+
+The procedure for RANSAC is simple, and the name contains most of the
+steps of the algorithm. First, randomly select a sufficient set of
+datapoints to fit the parameters of some model. The could be the
+parameters that define a line, some other structure, or a homography.
+Then, compute the model parameters from the randomly sampled set of
+points. Compute the inliers in the dataset, that is, the datapoints that
+fit the model (or achieve consensus) to within some tolerance. Repeat
+that procedure some number of times, $N$. Compute a final model from the
+set of inlier points corresponding to the largest number of inlier
+datapoints.
+
+@fig-ransac shows a simple instantiation of this algorithm for the case
+of robustly fitting a straight line model to a collection of datapoints
+(@fig-ransac\[a\]). First, a number of datapoints, sufficient to
+uniquely specify the model parameters, are drawn from the dataset. For
+this problem, that is two points. Two randomly selected points are
+marked in green in @fig-ransac (b). After finding the line that passes
+through those two points, the number of **inliers** (datapoints within
+$\epsilon$ of the model) are determined. For the line in @fig-ransac (b),
+the number of inliers is three. This process is repeated until some
+desired number of samplings, $S$, have been drawn. The output model is
+fitted from all the inlier datapoints corresponding to the model that
+led to the most inlier datapoints.
+
+![RANSAC applied to robust estimation of line parameters. (a) Datapoints for which robust line estimation is sought. (b) Two points (in blue) are selected at random, sufficient to estimate line model parameters. The number of inliers is computed for this model. (c - e) Repeat $k$ times. (f) Finally, select the model with the maximum number of inliers.](figures/homography/ransac_algo.png){width="100%" #fig-ransac}
+
+The paper @Fischler1981 derives a heuristic for the number of samples,
+$S$, required to be assured a good model fit. Let $n$ be the number of
+datapoints required to specify the model, and let $w$ be (an estimate
+of) the probability that any selected datapoint is within the error
+tolerance of the model. For @fig-ransac (f), there are $2$ outliers out of
+11 points, so $w = 0.18$ (in general, this value needs to be estimated).
+The $w^n$ is the probability that all the selected points are inliers,
+and $1 -  w^n$ is the probability that at least one selected point is an
+outlier. The probability that in $k$ trials only bad models are selected
+is then $(1 -  w^n)^k$. If $p$ is the probability of selecting the
+correct model, we have $$1-p = (1 -  w^n)^k$$ Taking the logarithm of
+both sides lets us solve for $k$, the number of RANSAC iterations
+required to find a good fit, with probability $p$:
+$$k = \frac{\log(1-p)}{\log(1-w^n)}
+        $${#eq-k} For the example of @fig-ransac, for 95 percent
+accuracy,
+$k = \frac{\log(-05)}{\log(1-0.18^2)} = \frac{-1.3}{-0.0143} = 91$ So
+with 91 trials, we would have 95 percent confidence of finding the
+correct model through RANSAC. Note that in practice you should select
+points without replacement to avoid degenerate fits, but the previous
+analysis assumed that points are selected with replacement. This is all
+legitimate when the number of points selected is small relative to the
+set of available points.
+
+In the case of the homography estimation, we need eight equations to use
+the DLT algorithm to estimate $\mathbf{H}$. As each point contributes
+two equations, we need four corresponding points. We can sample multiple
+randomly selected sets of four points and use RANSAC to estimate the
+homography between two images.
+
+### Image Stitching
+
+Using DLT and RANSAC with can compute the homography between each pair
+of images in figure and align them with respect to a reference image (in
+this example we pick the middle image as a reference). We can use the
+estimated homographies to warp all of the images into a single camera
+view as shown in @fig-panorama.
+
+![Panoramic image composed by the three overlapping images from @fig-example_three_images](figures/homography/panorama.jpg){width="100%" #fig-panorama}
+
+## Concluding Remarks
+
+Homographies are an important class of geometric transforms between
+images and they have lots of applications. Homographies can be used to
+take measures on a plane given a reference measure. Although we have
+focused on computing homographies between images using correspondences,
+one can compute homographies in other ways. For instance, to produce a
+bird's-eye view of a plane one can compute the needed homography using
+the horizon line to get the camera rotation and, for an uncalibrated
+camera, we can use vanishing points to get the intrinsic camera
+parameters. The homography can also be extracted using a neural networks
+trained to regress the homography given two input images
+@abbas2019geometric.

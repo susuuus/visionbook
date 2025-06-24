@@ -1,0 +1,72 @@
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{xfrac}
+\usepackage{epsfig}
+\usepackage{bm}
+\usepackage{pgfplots,pgfplotstable}
+\usepgfplotslibrary{patchplots}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+%\usepackage{algorithm,algorithmic}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{marginnote}
+\usepackage{verbatim}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=5cm, heightrounded,  marginparwidth=4cm, marginparsep=5mm]{geometry}
+%\usepackage[right=5cm, left=2.5cm, marginparwidth=4cm, marginparsep=5mm]{geometry}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{hyperref}
+
+\usepackage{minted}
+\usepackage{bbm}
+
+\pgfplotsset{compat=1.16}
+
+% Bibliography format:
+\usepackage{natbib}
+\bibpunct{(}{)}{,}{a}{}{;}
+\bibliographystyle{abbrvnat}
+\renewcommand{\cite}[1]{[\citealp{#1}]}
+
+
+
+\usepackage{xpatch}
+\usepackage{blindtext}
+\makeatletter
+\xpatchcmd{\@endpart}{\vfil\newpage}{}{}{}
+\xpatchcmd{\@endpart}{\newpage}{}{}{}
+\makeatother
+
+
+% LIST OF VARIABLES
+% image
+%\newcommand{\img}{{\bf I}}
+%\newcommand{\imgfft}{{\bf \widetilde{I}}}
+%% $\boldsymbol\ell~\ell[n,m]~\ell(x,y)$
+\newcommand{\img}{\ell}
+\newcommand{\boldimg}{\boldsymbol\ell}
+\newcommand{\capitalimg}{\mathcal{L}}
+
+
+% Location vector
+%\newcommand{\xx}{{\bf x}}
+%%% Macro for vertically aligning a subfigure and its label.
+%%% Example usage: \sublabel{a}{\psfig{ ... }}
+\def\sublabel#1#2{ \begin{tabular}{c} #2 \\  (#1) \end{tabular}}
+  %%{\vbox{#2 \hbox{\hfil (#1) \hfil}}}
+%% same as sublabel, except parens not automatically added.
+\def\sublabelnp#1#2{ \begin{tabular}{c} #2 \\  #1 \end{tabular}}
+  %%{\vbox{#2 \hbox{\hfil #1 \hfil}}}
+\newcommand{\ff}{\mathbf{f}}  % IMAGE FEATURES  \ff
+%\newenvironment{comment}{\begingroup\sffamily\color{red}}{\endgroup}
+\newcommand{\billf}[1]{{\tt\bf  [Billf::~#1~]}}
+
+\newcommand{\reviewcomment}[1]{{\bf\color{red}Note: #1}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
