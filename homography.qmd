@@ -278,7 +278,14 @@ plane is defined by $Z=0$ as shown in the
 @fig-homography_plane_geometry. Note that the origin can be placed at
 any arbitrary location in the world.
 
+<!--
 ![Geometry of a the projection of a planar scene. The origin of the world-coordinates system is placed inside the plane and the $Z$-axis is perpendicular to it.](figures/homography/homography_plane_geometry2.png){width="70%" #fig-homography_plane_geometry}
+-->
+
+::: {#fig-homography_plane_geometry .quarto-figure}
+<iframe src="demos/simple_sys/homographies.html" width="100%" height="500px" style="border:none;"></iframe>
+Figure: Geometry of a projection of a planar scene. The origin of the world-coordinate system is placed inside the plane and the Z-axis is perpendicular to it.
+:::
 
 The proof is similar to what we did in the previous section. We start
 writing the projection equation $$\lambda 
