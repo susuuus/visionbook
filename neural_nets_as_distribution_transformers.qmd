@@ -38,7 +38,6 @@ A nice property of this way of plotting is that it also extends to visualizing t
 
 ![2D mapping diagrams for several neural layers. The `linear` layer mapping will shift, stretch, and rotate depending on its weights and biases.](figures/neural_nets_as_data_transformations/2D_mapping_diagrams.png){#fig-neural_nets_as_data_transformations-2D_mapping_diagrams width=100%}
 
-
 One interesting thing to notice here is that the relu layer maps many points to the axes of the positive quadrant. In general, with relu-nets, a lot of data density will build up along these axes, because any point \textit{not} in the positive quadrant snaps to an axis. This effect becomes exaggerated in real networks with high-dimensional embeddings. In particular, for a width-$N$ layer, the region that is strictly positive occupies only $\frac{1}{2^N}$ proportion of the embedding space, so almost the entire space gets mapped to the axes after a relu layer. The geometry of high-dimensional neural representations may become very sparse because of this, where most of the volume of representational space is not occupied by any datapoints.
 
 

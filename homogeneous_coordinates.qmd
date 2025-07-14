@@ -154,7 +154,17 @@ that passes through the origin translates into the same point in
 heterogeneous coordinates). We can already see that this is closely
 related to the operation performed by perspective projection.
 
+::: {#fig-homogeneousAndHeteregeneous .quarto-figure}
+<iframe 
+  src="demos/simple_sys/homogeneous_heterogeneous.html" 
+  width="100%" 
+  height="350px" 
+  style="border:none;">
+</iframe>
+
+<!--
 ![Transformation rule between heterogeneous and homogeneous coordinates in 2D. All the points along the dotted line correspond to the same point in heterogeneous coordinates. Note that the points $(x,y)$ and $(x,y,1)$ live in different spaces.](figures/imaging_geometry/homogeneousAndHeteregeneous_VS3.png){width="70%" #fig-homogeneousAndHeteregeneous}
+-->
 
 It is important to mention that while you can add two points in
 heterogeneous coordinates, you can not do the same in homogeneous

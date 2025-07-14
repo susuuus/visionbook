@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.7.32" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+
+<title>44  Multiview Geometry and Structure from Motion – Foundations of Computer Vision</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<!-- htmldependencies:E3FAD763 -->
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5H3L9EGXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R5H3L9EGXX');
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="visionbook.css" />
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn"
+      data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" 
+      aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
+      onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <h1 class="quarto-secondary-nav-title no-breadcrumbs"></h1>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" role="link"
+        aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
+        onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="/">
+      Foundations of Computer Vision
+      </a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/Foundations-of-Computer-Vision/visionbook"  title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/copyright.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Copyright</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/notations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/taxonomy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>1</span>  <span class='chapter-title'>The Challenge of Vision</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/simplesystem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>2</span>  <span class='chapter-title'>A Simple Vision System</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/visionscience.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>Looking at Images</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fairness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>4</span>  <span class='chapter-title'>Computer Vision and Society</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_image_formation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Image Formation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/imaging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>Imaging</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/lenses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>6</span>  <span class='chapter-title'>Lenses</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/camera_as_linsys.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>Cameras as Linear Systems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/color.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>8</span>  <span class='chapter-title'>Color</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_foundation_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations of Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/intro_to_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>9</span>  <span class='chapter-title'>Introduction to Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/gradient_descent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>10</span>  <span class='chapter-title'>Gradient-Based Learning Algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/problem_of_generalization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>11</span>  <span class='chapter-title'>The Problem of Generalization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/neural_nets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>12</span>  <span class='chapter-title'>Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/neural_nets_as_distribution_transformers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>13</span>  <span class='chapter-title'>Neural Networks as Distribution Transformers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/backpropagation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>14</span>  <span class='chapter-title'>Backpropagation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_foundation_image_processing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations of Image Processing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/linear_image_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>15</span>  <span class='chapter-title'>Linear Image Filtering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/image_processing_fourier.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>16</span>  <span class='chapter-title'>Fourier Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_linear_filters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Filters</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/blurring_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>17</span>  <span class='chapter-title'>Blur Filters</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/derivatives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>18</span>  <span class='chapter-title'>Image Derivatives</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/temporal_filters_v2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>19</span>  <span class='chapter-title'>Temporal filters</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_sampling_and_multiscale.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling and Multiscale Image Representations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/sampling_and_aliasing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>20</span>  <span class='chapter-title'>Image Sampling and Aliasing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/upsamplig_downsampling_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>21</span>  <span class='chapter-title'>Downsampling and Upsampling Images</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/spatial_filter_sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>22</span>  <span class='chapter-title'>Filter Banks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/pyramids_new_notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>23</span>  <span class='chapter-title'>Image Pyramids</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_neural_architectures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Neural Architectures for Vision</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/convolutional_neural_nets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>24</span>  <span class='chapter-title'>Convolutional Neural Nets</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/recurrent_neural_nets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>25</span>  <span class='chapter-title'>Recurrent Neural Nets</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/transformers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>26</span>  <span class='chapter-title'>Transformers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_statistical_image_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probabilistic Models of Images</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/stat_image_models_revised.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>27</span>  <span class='chapter-title'>Statistical Image Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/textures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>28</span>  <span class='chapter-title'>Textures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/graphical_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>29</span>  <span class='chapter-title'>Probabilistic Graphical Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_generative_models_and_representation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generative Image Models and Representation Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/representation_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>30</span>  <span class='chapter-title'>Representation Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/perceptual_organization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>31</span>  <span class='chapter-title'>Perceptual Grouping</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/generative_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>32</span>  <span class='chapter-title'>Generative Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/generative_modeling_and_rep_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>33</span>  <span class='chapter-title'>Generative Modeling Meets Representation Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/conditional_generative_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>34</span>  <span class='chapter-title'>Conditional Generative Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_challenges_in_learning_based_vision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenges in Learning-Based Vision</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/bias_and_shift.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>35</span>  <span class='chapter-title'>Data Bias and Shift</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/data_augmentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>36</span>  <span class='chapter-title'>Training for Robustness and Generality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/transfer_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>37</span>  <span class='chapter-title'>Transfer Learning and Adaptation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_understanding_geometry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding Geometry</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/homogeneous_coordinates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>38</span>  <span class='chapter-title'>Representing Images and Geometry</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/imaging_geometry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>39</span>  <span class='chapter-title'>Camera Modeling and Calibration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/3d_scene_understanding_stereo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>40</span>  <span class='chapter-title'>Stereo Vision</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/homography.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>41</span>  <span class='chapter-title'>Homographies</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/3d_scene_understanding_single_view.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>42</span>  <span class='chapter-title'>Single View Metrology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/3d_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>43</span>  <span class='chapter-title'>Learning to Estimate Depth from a Single Image</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/multiview.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class='chapter-number'>44</span>  <span class='chapter-title'>Multiview Geometry and Structure from Motion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/nerf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>45</span>  <span class='chapter-title'>Radiance Fields</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_understanding_motion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding Motion</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/motion_estimation_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>46</span>  <span class='chapter-title'>Motion Estimation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/2d_motion_from_3d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>47</span>  <span class='chapter-title'>3D Motion and Its 2D Projection</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/optical_flow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>48</span>  <span class='chapter-title'>Optical Flow Estimation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/motion_estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>49</span>  <span class='chapter-title'>Learning to Estimate Motion</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_scene_understanding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding Vision with Language</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/object_recognition_v3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>50</span>  <span class='chapter-title'>Object Recognition</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/VLMs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>51</span>  <span class='chapter-title'>Vision and Language</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_on_research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">On Research, Writing and Speaking</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/how_to_do_research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>52</span>  <span class='chapter-title'>How to Do Research</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/how_to_write_papers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>53</span>  <span class='chapter-title'>How to Write Papers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/how_to_give_talks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>54</span>  <span class='chapter-title'>How to Give Talks</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/part_closing_remarks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenges in Learning-Based Vision</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/simplesystem_final.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>55</span>  <span class='chapter-title'>A Simple Vision System---Revisited</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Adaptive Computation and Machine Learning Series</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" ></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <div id="quarto-toc-target"></div>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<script id = "quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-3D_multiview" class="quarto-section-identifier"><span class="chapter-number">44</span>  <span class="chapter-title">Multiview Geometry and Structure from Motion</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction"><span class="header-section-number">44.1</span> Introduction</a></li>
+  <li><a href="#structure-from-motion" id="toc-structure-from-motion"><span class="header-section-number">44.2</span> Structure from Motion</a></li>
+  <li><a href="#sparse-sfm" id="toc-sparse-sfm"><span class="header-section-number">44.3</span> Sparse SFM</a>
+  <ul>
+  <li><a href="#problem-formulation" id="toc-problem-formulation"><span class="header-section-number">44.3.1</span> Problem Formulation</a></li>
+  <li><a href="#reprojection-error" id="toc-reprojection-error"><span class="header-section-number">44.3.2</span> Reprojection Error</a></li>
+  <li><a href="#finding-matches-across-images" id="toc-finding-matches-across-images"><span class="header-section-number">44.3.3</span> Finding Matches across Images</a></li>
+  <li><a href="#optimization" id="toc-optimization"><span class="header-section-number">44.3.4</span> Optimization</a></li>
+  </ul></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks"><span class="header-section-number">44.4</span> Concluding Remarks</a></li>
+  </ul>
+</nav>
+<section id="introduction" class="level2" data-number="44.1">
+<h2 data-number="44.1"><span class="header-section-number">44.1</span> Introduction</h2>
+<p>As humans, we know how it feels to look at the world with one eye. We can easily experience this by closing one eye, or when looking at a picture. The world clearly appears to us as three-dimensional (3D), but there is something that still feels somewhat flat. We also know what it is to look at the world with two eyes. Objects and scenes appear and feel 3D. We sense the volume of the space. In fact, even when we look with both of our eyes at a flat surface we feel it is 3D as we can feel how far the surface is and what is its orientation. But we do not know what it is to look at the world with three or more eyes. We can try to make guesses about what new sensations we might feel, but we are likely to fall short in truly understanding how it feels to see world through many eyes. It’s like someone with one eye trying to envision seeing the world with two; we can make guesses, but our comprehension will be limited.</p>
+<p>Looking at an object simultaneously with many eyes surrounding the object, we will not only feel its 3D but also its wholeness in a way hard to imagine with only two eyes. For us, only one side of the object is visible at any given time. We can turn around an object to see all of its sides, but that will not compare with the simultaneous perception of all its sides.</p>
+<p>Multiview geometry studies the 3D reconstruction of an object or a scene when captured from <span class="math inline">\(N\)</span> cameras (with <span class="math inline">\(N&gt;2\)</span>).</p>
+</section>
+<section id="structure-from-motion" class="level2" data-number="44.2">
+<h2 data-number="44.2"><span class="header-section-number">44.2</span> Structure from Motion</h2>
+<p>In 1971, Gunnar Johansson created a series of beautiful videos by recording the movements of a person with a set of lights attached to few of the body joints (e.g., elbows, knees, feet, head, and hands as illustrated in <a href="#fig-demos_motivation_sfm" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-demos_motivation_sfm</span></a>[b]).</p>
+<div class="column-margin">
+<p>Gunnaar Johansson was a Swedish psychologist working on gestalt laws of motion perception. He introduced the term of <strong>biological motion</strong> to describe the typical motion of biological organisms.</p>
+</div>
+<p>Johansson <span class="citation" data-cites="Johansson1973">[<a href="#ref-Johansson1973" role="doc-biblioref">1</a>]</span> demonstrated that by watching the motion of only a few of those points, no more than 12, it was possible to clearly recognize the person actions. By showing only moving points, Johansson dissociated the perception of form/shape from the motion pattern. Johansson’s videos were very surprising at the time and researchers were stunned by how easy was to recognize many types of actions from just a few moving points. Since then, Johansson’s early demonstrations have been used to argue about the importance of reliably tracking a few points over time.</p>
+<p>One major advance that allowed writing a mathematical formulation of the problem of structure from motion (SFM) was the <strong>rigidity assumption</strong> introduced by Shimon Ullman in 1979 <span class="citation" data-cites="Ullman1979">[<a href="#ref-Ullman1979" role="doc-biblioref">2</a>]</span> where he writes: “Any set of elements undergoing a two dimensional transformation which has a unique interpretation as a rigid body moving in space should be interpreted as such a body in motion.” Since then, the 3D reconstruction of rigid objects from camera motion has been a rich area of work. Most of the works start by representing the sequence using as input the temporal trajectories of a sparse set of points (<strong>sparse SFM</strong>). <a href="#fig-demos_motivation_sfm" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-demos_motivation_sfm</span></a> [a] shows one frame from the nested cylinders sequence. In this sequence, there are a set of points placed on the surface of two nested cylinders. The cylinders are rotating. When viewing the sequence it is easy to see both cylinders, even though when seeing any single frame (as shown in <a href="#fig-demos_motivation_sfm" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-demos_motivation_sfm</span></a>[a]) it is hard to see the cylinders or even to say which points are attached to the same surface.</p>
+<div id="fig-demos_motivation_sfm" class="margin-caption quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-demos_motivation_sfm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figures/sfm/demos_motivation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure 44.1: Early illustrations on the perceptual power of motion. (a) Nested cylinders by Shimon Ullman, 1979, illustrated how rigid motion elicits a strong 3D interpretation. (b) One frame from the point-light walker by Gunnar Johansson, as an early illustration of biological motion perception from few moving keypoints."><img src="figures/sfm/demos_motivation.png" class="img-fluid" style="width:70.0%" /></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig" id="fig-demos_motivation_sfm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 44.1: Early illustrations on the perceptual power of motion. (a) Nested cylinders by Shimon Ullman, 1979, illustrated how rigid motion elicits a strong 3D interpretation. (b) One frame from the point-light walker by Gunnar Johansson, as an early illustration of biological motion perception from few moving keypoints.
+</figcaption>
+</figure>
+</div>
+<p>One of the first algorithms for structure from motion for rigid bodies was introduced by Tomasi and Kanade <span class="citation" data-cites="Tomasi92">[<a href="#ref-Tomasi92" role="doc-biblioref">3</a>]</span>. For simplicity, their approach assumed parallel projection (orthographic camera) instead of perspective projection. The algorithm took as input a video sequence captured by a moving camera looking at a static scene. The video was first processed by extracting keypoints and tracking them over time. The input to the reconstruction algorithm was the keypoint trajectories and the output was the 3D locations of those points with respect to a reference world-coordinate system (usually defined by the first frame in the video). The model introduced by Tomasi and Kanade was later extended by Sturm and Triggs <span class="citation" data-cites="Sturm1996">[<a href="#ref-Sturm1996" role="doc-biblioref">4</a>]</span> to handle perspective projection.</p>
+<p>One of the key problems in SFM is to find correspondences across multiple images. Finding image correspondences is a topic that we have already mentioned in multiple places (e.g., <a href="#sec-stereo_vision" class="quarto-xref"><span class="quarto-unresolved-ref">sec-stereo_vision</span></a> and <a href="#sec-homography" class="quarto-xref"><span class="quarto-unresolved-ref">sec-homography</span></a> and that will be mentioned again (chapter <a href="#sec-optical_flow_estimation" class="quarto-xref"><span class="quarto-unresolved-ref">sec-optical_flow_estimation</span></a>).</p>
+<p>SIFT <span class="citation" data-cites="Lowe04">[<a href="#ref-Lowe04" role="doc-biblioref">5</a>]</span> made image matching more reliable and structure from motion started to work much better under difficult conditions such as where views are captured by cameras at very different locations, which is a more difficult image matching than when the views are frames from one sequence.</p>
+<p>The task of SFM became more general, and instead of focusing on one moving camera, SFM was applied to the problem of reconstructing the 3D scene even from multiple images taken by different cameras and making no assumption about the placement of the cameras. The work by Snavely et al. <span class="citation" data-cites="Snavely2006">[<a href="#ref-Snavely2006" role="doc-biblioref">6</a>]</span> was one of the first to produce spectacular registrations and camera pose estimates of images taken with many different cameras. They showed how one could reconstruct famous buildings from pictures taken by tourists.</p>
+<p>In the last decade, deep learning now provides a more robust set of features for finding image correspondences, which is one of the key elements of the SFM algorithms.</p>
+</section>
+<section id="sparse-sfm" class="level2" data-number="44.3">
+<h2 data-number="44.3"><span class="header-section-number">44.3</span> Sparse SFM</h2>
+<p>Let’s start defining the notation and the formulation of the problem we want to solve; given a set of <span class="math inline">\(M\)</span> images with overlapping content, we want to recover the 3D structure of the scene and the location of the camera for each image. Figures <a href="#fig-sfm-sugar" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-sugar</span></a> and <a href="#fig-sfm-palma" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-palma</span></a> show two examples of sets of images. <a href="#fig-sfm-sugar" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-sugar</span></a> shows 12 images of an object taken by a camera moving around the object. <a href="#fig-sfm-palma" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-palma</span></a> shows eight images taken inside a plaza. Both sets of images represent very different scenarios that will be reconstructed with the same set of techniques.</p>
+<div id="fig-sfm-sugar" class="quarto-layout-panel margin-caption">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-sfm-sugar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1489.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1489.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1490.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1490.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1491.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1491.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1492.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1492.jpeg" class="img-fluid" /></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1493.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1493.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1494.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1494.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1495.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1495.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1496.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1496.jpeg" class="img-fluid" /></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1497.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1497.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1498.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1498.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1499.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1499.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/IMG_1500.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/sugar/IMG_1500.jpeg" class="img-fluid" /></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig" id="fig-sfm-sugar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 44.2: Twelve viewpoints of a sugar bowl we had at home. Although it is not a fancy object, it is useful to start with a simple shape to check what happens on every step. The bowl has a rough texture that might also allow for enough keypoints to be present along its surface. The images have <span class="math inline">\(3,024 \times 4,032\)</span> pixels.
+</figcaption>
+</figure>
+</div>
+<div id="fig-sfm-palma" class="quarto-layout-panel margin-caption">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-sfm-palma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/palma/IMG_1643.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure 44.3: Eight pictures taken in a plaza in Palma de Mallorca, Spain. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/palma/IMG_1643.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/palma/IMG_1644.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure 44.3: Eight pictures taken in a plaza in Palma de Mallorca, Spain. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/palma/IMG_1644.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/palma/IMG_1646.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure 44.3: Eight pictures taken in a plaza in Palma de Mallorca, Spain. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/palma/IMG_1646.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/palma/IMG_1647.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure 44.3: Eight pictures taken in a plaza in Palma de Mallorca, Spain. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/palma/IMG_1647.jpeg" class="img-fluid" /></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/palma/IMG_1648.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure 44.3: Eight pictures taken in a plaza in Palma de Mallorca, Spain. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/palma/IMG_1648.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/palma/IMG_1649.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure 44.3: Eight pictures taken in a plaza in Palma de Mallorca, Spain. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/palma/IMG_1649.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/palma/IMG_1651.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="Figure 44.3: Eight pictures taken in a plaza in Palma de Mallorca, Spain. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/palma/IMG_1651.jpeg" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><a href="figures/sfm/palma/IMG_1652.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Figure 44.3: Eight pictures taken in a plaza in Palma de Mallorca, Spain. The images have 3,024 \times 4,032 pixels."><img src="figures/sfm/palma/IMG_1652.jpeg" class="img-fluid" /></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig" id="fig-sfm-palma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 44.3: Eight pictures taken in a plaza in Palma de Mallorca, Spain. The images have <span class="math inline">\(3,024 \times 4,032\)</span> pixels.
+</figcaption>
+</figure>
+</div>
+<section id="problem-formulation" class="level3" data-number="44.3.1">
+<h3 data-number="44.3.1"><span class="header-section-number">44.3.1</span> Problem Formulation</h3>
+<p>In the sparse SFM problem, we consider that in the scene there are <span class="math inline">\(N\)</span> distinct points (with <span class="math inline">\(N\)</span> smaller than the number of pixels on each image) that are matched across <span class="math inline">\(M\)</span> different views (we will consider later that not all points may be visible across all images). We denote the <span class="math inline">\(N\)</span> 3D points as <span class="math inline">\(\mathbf{P}_i\)</span>.</p>
+<div class="column-margin">
+<p>Notation reminder: we use capital letters for quantities measured in 3D world coordinates and lowercase for image coordinates.</p>
+</div>
+<p>For each of the <span class="math inline">\(M\)</span> views (it could be different cameras or different pictures taking by a moving camera), we denote the projection of point <span class="math inline">\(\mathbf{P}_i\)</span> as seen by camera <span class="math inline">\(j\)</span> by <span class="math inline">\(\mathbf{p}^{(j)}_i\)</span>. Each view has camera parameters <span class="math inline">\({\mathbf K}^{(j)}\)</span>, <span class="math inline">\({\mathbf R}^{(j)}\)</span>, and <span class="math inline">\({\mathbf T}^{(j)}\)</span>. If all the images are captured by the same camera, then the matrices <span class="math inline">\({\mathbf K}^{(j)}\)</span> will be the same. In general it is not necessary to make that assumption.</p>
+<p>The goal of the SFM problem is, given the set of corresponding 2D points <span class="math inline">\(\mathbf{p}^{(j)}_i\)</span>, recover 3D points <span class="math inline">\(\mathbf{P}_i\)</span>, the intrinsic camera parameters, <span class="math inline">\({\mathbf K}^{(j)}\)</span>, and the extrinsic camera parameters <span class="math inline">\({\mathbf R}^{(j)}\)</span> and <span class="math inline">\({\mathbf T}^{(j)}\)</span>, for each camera <span class="math inline">\(j\)</span>.</p>
+<p>We will next study what is the minimal number of observations that we need to have any hope of being able to solve the problem. Let’s assume that we have calibrated cameras, that is, we know the intrinsic camera parameters for each image, <span class="math inline">\({\mathbf K}^{(j)}\)</span>. We will first count the number of unknowns that we have. We have two sets of unknowns: the 3D coordinates of the <span class="math inline">\(N\)</span> points and the extrinsic camera parameters for the <span class="math inline">\(M\)</span> images.</p>
+<p>This results in 3<span class="math inline">\(N\)</span> unknowns for the <span class="math inline">\(N\)</span> 3D points. For the camera parameters, we assume that the first camera is at the origin. Therefore, we need to figure out the camera matrices for <span class="math inline">\(M-1\)</span> cameras. The rotations can be specified with three numbers, which results in <span class="math inline">\(3(M-1)\)</span> unknowns. The translations (up to a scale factor) result in <span class="math inline">\(3(M-1)-1\)</span> unknowns. This gives a total of <span class="math inline">\(3N + 6(M-1)-1\)</span> unknowns.</p>
+<p>If we have the image coordinates of the <span class="math inline">\(N\)</span> points across the <span class="math inline">\(M\)</span> images, we would have <span class="math inline">\(2NM\)</span> observations (in reality we will have less as some points will only be visible in a subset of the images). So, there is a solution when, <span class="math display">\[2NM \geq 3N + 6(M-1)-1\]</span> Note that if <span class="math inline">\(M=1\)</span>,only points captured by one camera are available, then we can not solve the problem. If cameras are uncalibrated, this will add <span class="math inline">\(3M\)</span> additional unknowns (the exact number of additional unknowns will depend on the camera type).</p>
+<p>In the previous description, we are making the assumption that every point is visible in every view (so one can run fundamental matrix estimation, triangulation, and other tasks of each of the <span class="math inline">\(M-1\)</span> cameras with respect to the first view). However, if the visibility criteria isn’t met, for each new image we are adding in to SFM, we will need to triangulate it with respect to its closest image – when doing so, we may have a slight numerical error, and this new frame may end up having an ever-so-slightly different scale factor with respect to the reconstruction. This accumulates over time, causing <strong>scale drift</strong>.</p>
+</section>
+<section id="reprojection-error" class="level3" data-number="44.3.2">
+<h3 data-number="44.3.2"><span class="header-section-number">44.3.2</span> Reprojection Error</h3>
+<p>We already introduced the <strong>reprojection error</strong> in section <a href="#sec-cam_cal_minimizing_reprojection_error" class="quarto-xref"><span class="quarto-unresolved-ref">sec-cam_cal_minimizing_reprojection_error</span></a> when talking about camera calibration. Here the formulation is similar but we optimize over a different set of unknowns. The reprojection error is the sum of euclidean distances (in heteregenous coordinates) between the observed image points <span class="math inline">\(\mathbf{p}^{(j)}_i\)</span> and the estimated projected points <span class="math inline">\(\hat{\mathbf{p}}^{(j)}_i\)</span></p>
+<p><span class="math display">\[\sum_{j=1}^M \sum_{i=1}^N
+\left\lVert
+\mathbf{p}^{(j)}_i - \hat{\mathbf{p}}^{(j)}_i
+\right\rVert
+^2\]</span> The estimated projected points are obtained using the estimated 3D points locations <span class="math inline">\(\mathbf{P}^{(j)}_i\)</span> and the estimated camera matrices <span class="math inline">\(\mathbf{M}^{(j)}\)</span>, <span id="eq-sfm-rep_error"><span class="math display">\[\sum_{j=1}^M \sum_{i=1}^N
+\left\lVert
+\mathbf{p}^{(j)}_i -
+\pi \left(
+\mathbf{M}^{(j)} \mathbf{P}^{(j)}_i
+\right)  
+\right\rVert ^2
+\tag{44.1}\]</span></span> where <span class="math inline">\(\pi()\)</span> is the function that transforms a vector described with homogeneous coordinates into the corresponding vector in heterogeneous ones.</p>
+<p>We can make the camera model explicit in equation (<a href="#eq-sfm-rep_error" class="quarto-xref">Equation <span class="quarto-unresolved-ref">eq-sfm-rep_error</span></a>) by replacing the camera matrix, <span class="math inline">\(\mathbf{M}^{(j)}\)</span>. By using the intrinsic and extrinsic camera matrices we get:</p>
+<p><span class="math display">\[\sum_{j=1}^M \sum_{i=1}^N\left\lVert \mathbf{p}^{(j)}_i - \pi \left( \mathbf{K}^{(j)}
+\begin{bmatrix}
+\mathbf{R}^{(j)} ~ \mid ~ -\mathbf{R}^{(j)}\mathbf{T}^{(j)}
+\end{bmatrix}
+\mathbf{P}^{(j)}_i \right)
+\right\rVert ^2
+\]</span></p>
+<p>To have the final error we still need to add one more factor. We add a <strong>visibility</strong> term, <span class="math inline">\(v_i^{(j)}\)</span>, to account for 3D points that are only be visible in a subset of the views. We will use the binary variable <span class="math inline">\(v_i^{(j)}\)</span> to indicate if point <span class="math inline">\(i\)</span> is seeing from camera <span class="math inline">\(j\)</span>. For all the points that are not visible in a view we set <span class="math inline">\(v_i^{(j)}=0\)</span>, that is, their reprojection error is ignored. This can be written as: <span id="eq-final_reprojection_error"><span class="math display">\[\sum_{j=1}^M \sum_{i=1}^N
+v_i^{(j)}
+\left\lVert
+\mathbf{p}^{(j)}_i - \pi \left( \mathbf{K}^{(j)}
+\begin{bmatrix}
+\mathbf{R}^{(j)} ~ \mid ~ -\mathbf{R}^{(j)}\mathbf{T}^{(j)}
+\end{bmatrix}
+\mathbf{P}^{(j)}_i \right)
+\right\rVert ^2
+\tag{44.2}\]</span></span> and this gives us the final reprojection error equation. One common simplification is to assume that all the cameras have the same intrinsic parameters, which means that <span class="math inline">\(\mathbf{K}^{(j)}=\mathbf{K}\)</span>. This is the case when the views have been captured by a moving camera with a fixed focal length. The optimization of the reprojection error is also called <strong>bundle adjustment</strong>.</p>
+<div class="column-margin">
+<p>The term <strong>bundle adjustment</strong> refers to the process of optimizing the “bundle of rays” connecting the camera centers and the coordinates of the 3D points.</p>
+</div>
+<p>When optimizing equation (<a href="#eq-final_reprojection_error" class="quarto-xref">Equation <span class="quarto-unresolved-ref">eq-final_reprojection_error</span></a>) there are a number of ambiguities that cannot be recovered. Those include a global translation and rotation of the world-coordinate system, the global scale, and a projective ambiguity when <span class="math inline">\(\mathbf{K}\)</span> is unknown.</p>
+<p>There are two main challenges in SFM. The first challenge is that we need reliable matching points, and the second challenge is optimizing equation (<a href="#eq-final_reprojection_error" class="quarto-xref">Equation <span class="quarto-unresolved-ref">eq-final_reprojection_error</span></a>), which is difficult due to local minima and to noisy matches.</p>
+</section>
+<section id="finding-matches-across-images" class="level3" data-number="44.3.3">
+<h3 data-number="44.3.3"><span class="header-section-number">44.3.3</span> Finding Matches across Images</h3>
+<p>When describing stereo vision in <a href="#sec-stereo_vision" class="quarto-xref"><span class="quarto-unresolved-ref">sec-stereo_vision</span></a> we had to find matching points across two views in order to recover depth, but we did not spend much time on the problem of matching points across images. Matching features across views in a stereo pair is challenging, but it is easy in comparison with the challenge of matching points in a multiview setting. Now we will have to match points across views that might be very different, with little overlap and with dramatic camera motions. Therefore, we will need a more robust way to match points.</p>
+<section id="interest-point-detector" class="level4" data-number="44.3.3.1">
+<h4 data-number="44.3.3.1"><span class="header-section-number">44.3.3.1</span> Interest point detector</h4>
+<p>The goal of finding image features is to locate image locations that are likely to be stable under different sets of geometric transformations (translation, scaling, rotation, skew, and projective), and illumination changes. These stable regions are called <strong>interest points</strong>.</p>
+<div class="column-margin">
+<p>Initially, <strong>interest points</strong> were called moving elements. A <strong>moving element</strong> was any image point that could be identified and followed over time such as a corner, a line termination point, or a texture element <span class="citation" data-cites="Ullman1979">[<a href="#ref-Ullman1979" role="doc-biblioref">2</a>]</span>.</p>
+</div>
+<p>When talking about stereo matching we described a simple procedure to detect interest points: the Harris corner detector <span class="citation" data-cites="Harris88">[<a href="#ref-Harris88" role="doc-biblioref">7</a>]</span>. Corners are examples of image regions that are likely to be distinct from the image surroundings and also be stable under geometric transformations (i.e., corners remain corners under a number of transformations). There are a number of other important detectors of regions of interest, in addition to the Harris corner detector, such as local extrema of the Laplacian pyramid across space and scale <span class="citation" data-cites="Mikolajczyk2002">[<a href="#ref-Mikolajczyk2002" role="doc-biblioref">8</a>]</span>, <span class="citation" data-cites="Lowe04">[<a href="#ref-Lowe04" role="doc-biblioref">5</a>]</span>, Harris-Laplace <span class="citation" data-cites="Mikolajczyk2001">[<a href="#ref-Mikolajczyk2001" role="doc-biblioref">9</a>]</span>, and maximally stable regions <span class="citation" data-cites="Matas2004">[<a href="#ref-Matas2004" role="doc-biblioref">10</a>]</span>. For an in depth description of interest point detectors and their evaluation we refer the reader to the work of Cordelia Schmid et al. <span class="citation" data-cites="Schmid2000">[<a href="#ref-Schmid2000" role="doc-biblioref">11</a>]</span> and Mikolajczyk <span class="citation" data-cites="Mikolajczyk2002">[<a href="#ref-Mikolajczyk2002" role="doc-biblioref">8</a>]</span>.</p>
+<p>More recently, the problem of detecting points of interest has been formulated as a learning problem. Given a set of examples of points of interest manually annotated on images, we can train a classifier to automatically label image patches as being centered on a keypoint or not. Some examples of learning-based approaches are Quad-Networks <span class="citation" data-cites="Savinov2017">[<a href="#ref-Savinov2017" role="doc-biblioref">12</a>]</span>, and SuperPoint <span class="citation" data-cites="DeTone2018">[<a href="#ref-DeTone2018" role="doc-biblioref">13</a>]</span>.</p>
+<p><a href="#fig-sfm-toy_keypoint_detector" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-toy_keypoint_detector</span></a> illustrates a general formulation for detecting keypoints using a classifier. We start by training a classifier using hand-annotated images with keypoints. This can be done by generating simple synthetic images were keypoints are unambiguously defined. The training set can be extended by running an initial keypoint detector on images and then augmenting the images with random geometric transformations. Then we can use the transformed keypoint coordinates together with the transformed images as new ground truth to train a more robust classifier. This is the approach proposed by SuperPoint <span class="citation" data-cites="DeTone2018">[<a href="#ref-DeTone2018" role="doc-biblioref">13</a>]</span>.</p>
+<div id="fig-sfm-toy_keypoint_detector" class="margin-caption quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-sfm-toy_keypoint_detector-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figures/sfm/toy_keypoint_detector.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Figure 44.4: Keypoint detector formulated as a patch classification problem. The classifier labels the patch as containing a keypoint in the center or not."><img src="figures/sfm/toy_keypoint_detector.png" class="img-fluid" style="width:100.0%" /></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig" id="fig-sfm-toy_keypoint_detector-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 44.4: Keypoint detector formulated as a patch classification problem. The classifier labels the patch as containing a keypoint in the center or not.
+</figcaption>
+</figure>
+</div>
+<div id="fig-sfm-keypoints_sugar" class="margin-caption quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-sfm-keypoints_sugar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figures/sfm/sugar/keypoints_8_3_examples.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23" title="Figure 44.5: All the detected keypoints in three views from the sugar bowl. But the images look rather textureless; what is the keypoint detector finding interesting in these images?"><img src="figures/sfm/sugar/keypoints_8_3_examples.png" class="img-fluid" style="width:100.0%" /></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig" id="fig-sfm-keypoints_sugar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 44.5: All the detected keypoints in three views from the sugar bowl. But the images look rather textureless; what is the keypoint detector finding interesting in these images?
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-sfm-keypoints_sugar" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-keypoints_sugar</span></a> shows the resulting detected keypoints by SuperPoint on three viewpoints of the sugar bowl. The images shown in <a href="#fig-sfm-sugar" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-sugar</span></a> seem to lack texture. Interestingly, when we zoom into the images (which are very high-resolution) we can see that the surface contains many irregularities that are detected by the keypoints classifier (<a href="#fig-sfm-sugar_keypoints_examples_many" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-sugar_keypoints_examples_many</span></a> [a]). If the surface of the bowl was smooth and textureless, the method would fail to detect any interesting points, and the whole pipeline for 3D reconstruction would fail.</p>
+<p>The keypoints detected on the plaza scene, shown in <a href="#fig-sfm-sugar_keypoints_examples_many" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-sugar_keypoints_examples_many</span></a> (b), correspond to more obvious keypoints, such as window corners, bricks, and other building details, than the ones detected on the sugar bowl.</p>
+<div id="fig-sfm-sugar_keypoints_examples_many" class="quarto-layout-panel margin-caption">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-sfm-sugar_keypoints_examples_many-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/sugar_keypoints_examples_many.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24" title="Figure 44.6: Each patch shows a 65 \times 65 image crop centered on a detected keypoint. The keypoint detector finds image regions with strong spatial changes. Those regions are also likely to be found on images of the same object but under different viewpoints. (a) Sugar bowl, Figure fig-sfm-sugar. (b) Plaza, Figure fig-sfm-palma}}."><img src="figures/sfm/sugar/sugar_keypoints_examples_many.png" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figures/sfm/palma/palma_keypoints_examples_many.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25" title="Figure 44.6: Each patch shows a 65 \times 65 image crop centered on a detected keypoint. The keypoint detector finds image regions with strong spatial changes. Those regions are also likely to be found on images of the same object but under different viewpoints. (a) Sugar bowl, Figure fig-sfm-sugar. (b) Plaza, Figure fig-sfm-palma}}."><img src="figures/sfm/palma/palma_keypoints_examples_many.png" class="img-fluid" /></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig" id="fig-sfm-sugar_keypoints_examples_many-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 44.6: Each patch shows a <span class="math inline">\(65 \times 65\)</span> image crop centered on a detected keypoint. The keypoint detector finds image regions with strong spatial changes. Those regions are also likely to be found on images of the same object but under different viewpoints. (a) Sugar bowl, <a href="#fig-sfm-sugar" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-sugar</span></a>. (b) Plaza, <a href="#fig-sfm-palma" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-palma</span></a>}}.
+</figcaption>
+</figure>
+</div>
+<p>The advantage of hand-engineered detectors is that they are derived from first principles and do not require any training data. However, learning-based detectors can leverage unsupervised learning to achieve state of the art performance.</p>
+</section>
+<section id="local-image-descriptors" class="level4" data-number="44.3.3.2">
+<h4 data-number="44.3.3.2"><span class="header-section-number">44.3.3.2</span> Local image descriptors</h4>
+<p>Once we have trained a keypoint detector that finds image regions that are distinct and likely to be stable under geometric transformations, we run the detector in the set of images we want to match. We need now to extract at each location a descriptor that will allow finding the same keypoint across the different images.</p>
+<p>In <a href="#sec-stereo_vision" class="quarto-xref"><span class="quarto-unresolved-ref">sec-stereo_vision</span></a> we described SIFT <span class="citation" data-cites="Lowe04">[<a href="#ref-Lowe04" role="doc-biblioref">5</a>]</span> as a local image descriptor. Other classical descriptors are SURF <span class="citation" data-cites="Bay2008346">[<a href="#ref-Bay2008346" role="doc-biblioref">14</a>]</span>, and ORB <span class="citation" data-cites="Rublee2011">[<a href="#ref-Rublee2011" role="doc-biblioref">15</a>]</span>. For a review of several hand-engineered descriptors and their evaluation, we refer the reader to the work of Krystian Mikolajczyk and Cordelia Schmid <span class="citation" data-cites="Mikolajczyk2005">[<a href="#ref-Mikolajczyk2005" role="doc-biblioref">16</a>]</span>. <a href="#fig-sfm-descriptors_sugar" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-descriptors_sugar</span></a> shows three interest points in the suggar bowl and the three associated descriptors. In this example, each descriptor is a vector of length 256.</p>
+<div id="fig-sfm-descriptors_sugar" class="margin-caption quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-sfm-descriptors_sugar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figures/sfm/sugar/point_cloud_key_points_figure.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26" title="Figure 44.7: Examples of descriptors for three keypoints. For each keypoint, the figure shows the corresponding image patch and the computed descriptor. Each descriptor has a length of 256 values."><img src="figures/sfm/sugar/point_cloud_key_points_figure.png" class="img-fluid" style="width:100.0%" /></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig" id="fig-sfm-descriptors_sugar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 44.7: Examples of descriptors for three keypoints. For each keypoint, the figure shows the corresponding image patch and the computed descriptor. Each descriptor has a length of 256 values.
+</figcaption>
+</figure>
+</div>
+<p>As shown in <a href="#fig-sfm-palma_keypoint_matching_figure" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-palma_keypoint_matching_figure</span></a>, the keypoint detector and descriptor finds image regions and its matches even under different viewpoints and illumination conditions. The top row of <a href="#fig-sfm-palma_keypoint_matching_figure" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-palma_keypoint_matching_figure</span></a> [a] shows the location of a matching keypoint across six views of the sugar bowl (this keypoint was not detected in the remaining six images). The bottom row shows crops of size <span class="math inline">\(129 \times 129\)</span> pixels around the keypoint. The larger crops allow better getting a sense of the context of each keypoint. <a href="#fig-sfm-palma_keypoint_matching_figure" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-palma_keypoint_matching_figure</span></a> [b] shows the same for the plaza scene. In this case the keypoint detects the same window corner across multiple views.</p>
+<div id="fig-sfm-palma_keypoint_matching_figure" class="quarto-layout-panel margin-caption">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-sfm-palma_keypoint_matching_figure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/sugar_keypoint_matching_figure.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27" title="Figure 44.8: Matching keypoints across different viewpoints. For each subfigure, the top row shows the location of a matching keypoint across several views. The bottom row shows crops of size 129 \times 129 pixels around each the keypoint."><img src="figures/sfm/sugar/sugar_keypoint_matching_figure.png" class="img-fluid" /></a></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><a href="figures/sfm/palma/palma_keypoint_matching_figure.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28" title="Figure 44.8: Matching keypoints across different viewpoints. For each subfigure, the top row shows the location of a matching keypoint across several views. The bottom row shows crops of size 129 \times 129 pixels around each the keypoint."><img src="figures/sfm/palma/palma_keypoint_matching_figure.png" class="img-fluid" /></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig" id="fig-sfm-palma_keypoint_matching_figure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 44.8: Matching keypoints across different viewpoints. For each subfigure, the top row shows the location of a matching keypoint across several views. The bottom row shows crops of size <span class="math inline">\(129 \times 129\)</span> pixels around each the keypoint.
+</figcaption>
+</figure>
+</div>
+<p>We perform brute-force matching, that is, match features from one image with features from every other image because we have a small number of images. For the actual matching shown in this section, we use SuperGlue, another graph network-based matcher.</p>
+</section>
+</section>
+<section id="optimization" class="level3" data-number="44.3.4">
+<h3 data-number="44.3.4"><span class="header-section-number">44.3.4</span> Optimization</h3>
+<p>The matching procedure should have given as a set of image points <span class="math inline">\(\mathbf{p}^{(j)}_i\)</span> and visibility indicators <span class="math inline">\(v_i^{(j)}\)</span>. Each location will also have a feature, <span class="math inline">\(\mathbf{f}^{(j)}_i\)</span>, associated to it.</p>
+<p>There are many different ways in which one can attempt to minimize the loss from equation (<a href="#eq-final_reprojection_error" class="quarto-xref">Equation <span class="quarto-unresolved-ref">eq-final_reprojection_error</span></a>). One standard approach is to do it incrementally starting with only a pair of images. We use the matches between those two images to compute the fundamental and essential matrices, while accounting for outliers using RANSAC. We can then compute an initial 3D reconstruction of the matched points using triangulation as we have already discussed in <a href="#sec-stereo_vision" class="quarto-xref"><span class="quarto-unresolved-ref">sec-stereo_vision</span></a>. Then, we add another image and we repeat the same process until we have incorporated all the images. This process will result in a first set of approximated camera poses and 3D locations for a subset of the detected keypoints.</p>
+<p>To find the final set of 3D points, the camera poses and the 3D locations of the keypoints are then further refined by bundle adjustment (camera intrinsics are refined too, if needed). The reprojection error loss is usually rewritten using a robust cost function (typically the Huber kernel).</p>
+<p><a href="#fig-sfm-3dsugar" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-3dsugar</span></a> and <a href="#fig-sfm-3dpalma" class="quarto-xref">Figure <span class="quarto-unresolved-ref">fig-sfm-3dpalma</span></a> show the final 3D reconstructions and recovered camera locations for the two sets of images that we have used in this chapter.</p>
+<div id="fig-sfm-3dsugar" class="quarto-layout-panel margin-caption">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-sfm-3dsugar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/point_cloud_sugar_view1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29" title="Figure 44.9: 3D reconstruction of the sugar bowl. The figure shows two different viewpoints and the recovered camera locations. (a) Bird’s view. (b) Side view."><img src="figures/sfm/sugar/point_cloud_sugar_view1.png" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><a href="figures/sfm/sugar/point_cloud_sugar_view2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="Figure 44.9: 3D reconstruction of the sugar bowl. The figure shows two different viewpoints and the recovered camera locations. (a) Bird’s view. (b) Side view."><img src="figures/sfm/sugar/point_cloud_sugar_view2.png" class="img-fluid" /></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig" id="fig-sfm-3dsugar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 44.9: 3D reconstruction of the sugar bowl. The figure shows two different viewpoints and the recovered camera locations. (a) Bird’s view. (b) Side view.
+</figcaption>
+</figure>
+</div>
+<div id="fig-sfm-3dpalma" class="quarto-layout-panel margin-caption">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-sfm-3dpalma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 55.6%;justify-content: center;">
+<p><a href="figures/sfm/palma/3d_palma_view2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31" title="Figure 44.10: 3D reconstruction of the plaza. The figure shows two different viewpoints and the recovered camera locations. (a) Bird’s view. (b) Arbitrary view."><img src="figures/sfm/palma/3d_palma_view2.png" class="img-fluid" /></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 44.4%;justify-content: center;">
+<p><a href="figures/sfm/palma/3d_palma_view1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32" title="Figure 44.10: 3D reconstruction of the plaza. The figure shows two different viewpoints and the recovered camera locations. (a) Bird’s view. (b) Arbitrary view."><img src="figures/sfm/palma/3d_palma_view1.png" class="img-fluid" /></a></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig" id="fig-sfm-3dpalma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 44.10: 3D reconstruction of the plaza. The figure shows two different viewpoints and the recovered camera locations. (a) Bird’s view. (b) Arbitrary view.
+</figcaption>
+</figure>
+</div>
+<p>SFM is predominantly performed in one of two modes: the incremental mode; and the batch model offline or batch-mode SFM approaches, which compute the scene structure after processing all input images. In this mode, bundle adjustment will only need to be run once, albeit across a potentially large number of cameras and 3D points. This mode allows leverages images from all available viewpoints right from the outset. However, if new images are added the entire SFM pipeline needs to be rerun.</p>
+<p>Online, or incremental-mode SFM approaches attempt to estimate scene structure and camera parameters as and when a new image arrives. In this mode, bundle adjustment is run periodically, whenever a sufficient number of points have been newly added. Incremental-mode SFM is often used in applications where all images are not available a priori, or where real-time performance is desired.</p>
+</section>
+</section>
+<section id="concluding-remarks" class="level2" data-number="44.4">
+<h2 data-number="44.4"><span class="header-section-number">44.4</span> Concluding Remarks</h2>
+<p>Multiview reconstruction is an active field of research with a wide range of applications in vision, graphics and healthcare. While a sparse SFM pipeline results in accurate 3D reconstruction, several applications (such as robotics and computer graphics) require dense 3D scene representations. The goal of dense SFM, not covered here, is to reconstruct every pixel from every image, as opposed to the sparse SFM systems described previously that only reconstruct a subset of pixels.</p>
+<p>In this chapter, we focused on the most popular variant of SFM used today — feature-based, or sparse, SFM. In sparse SFM, the 3D reconstruction is computed only for a small subset of the image pixels — distinct points that may be detected reliably and repeatably across camera pose variations. SFM approaches have also attempted to leverage other kinds of features, such as lines, planes, or objects. Point-based features remain the most popular choice due to their geometric simplicity, and the availability of a wide range of point feature detectors and descriptors.</p>
+<p>In dense SFM, the 3D reconstruction is computed for every (or most) of the image pixels. The resulting 3D reconstructions are rich and visually informative, and are useful in applications like robot navigation or mixed reality. Dense SFM approaches usually optimize photometric error, that is, the difference in grayscale or red-green-blue (RGB) intensities of corresponding pixels across images. This is in contrast to the point feature-based methods we looked at in this chapter that minimize a 3D reprojection error. However, these dense SFM techniques tend to be much slower than the sparse SFM methods, and often require more assumptions about the scene or the images, such as the scene being Lambertian (i.e., the grayscale or RGB intensity of a 3D point is invariant to the viewing direction) or the images having a substantially smaller baseline motion compared to the range of motions a point feature-based SFM approach can handle. We will talk about dense optimization of the photometric error when discussing motion estimation in <a href="./part_understanding_motion.html">Part Understanding Motion</a>.</p>
+<div id="quarto-navigation-envelope" class="hidden">
+<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyLXRpdGxl">Foundations of Computer Vision</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXItdGl0bGU=">Foundations of Computer Vision</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uZXh0"><span class="chapter-number">45</span>  <span class="chapter-title">Radiance Fields</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1wcmV2"><span class="chapter-number">43</span>  <span class="chapter-title">Learning to Estimate Depth from a Single Image</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbmRleC5odG1sUHJlZmFjZQ==">Preface</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jb3B5cmlnaHQuaHRtbENvcHlyaWdodA==">Copyright</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9ub3RhdGlvbnMuaHRtbE5vdGF0aW9u">Notation</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi90YXhvbm9teS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlRoZS1DaGFsbGVuZ2Utb2YtVmlzaW9uPC9zcGFuPg=="><span class="chapter-number">1</span>  <span class="chapter-title">The Challenge of Vision</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMQ==">Foundations</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zaW1wbGVzeXN0ZW0uaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Mjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5BLVNpbXBsZS1WaXNpb24tU3lzdGVtPC9zcGFuPg=="><span class="chapter-number">2</span>  <span class="chapter-title">A Simple Vision System</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi92aXNpb25zY2llbmNlLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjM8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+TG9va2luZy1hdC1JbWFnZXM8L3NwYW4+"><span class="chapter-number">3</span>  <span class="chapter-title">Looking at Images</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9mYWlybmVzcy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkNvbXB1dGVyLVZpc2lvbi1hbmQtU29jaWV0eTwvc3Bhbj4="><span class="chapter-number">4</span>  <span class="chapter-title">Computer Vision and Society</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMg==">Image Formation</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbWFnaW5nLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjU8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+SW1hZ2luZzwvc3Bhbj4="><span class="chapter-number">5</span>  <span class="chapter-title">Imaging</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9sZW5zZXMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Njwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5MZW5zZXM8L3NwYW4+"><span class="chapter-number">6</span>  <span class="chapter-title">Lenses</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYW1lcmFfYXNfbGluc3lzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjc8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+Q2FtZXJhcy1hcy1MaW5lYXItU3lzdGVtczwvc3Bhbj4="><span class="chapter-number">7</span>  <span class="chapter-title">Cameras as Linear Systems</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jb2xvci5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz44PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkNvbG9yPC9zcGFuPg=="><span class="chapter-number">8</span>  <span class="chapter-title">Color</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMw==">Foundations of Learning</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbnRyb190b19sZWFybmluZy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz45PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkludHJvZHVjdGlvbi10by1MZWFybmluZzwvc3Bhbj4="><span class="chapter-number">9</span>  <span class="chapter-title">Introduction to Learning</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9ncmFkaWVudF9kZXNjZW50Lmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjEwPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkdyYWRpZW50LUJhc2VkLUxlYXJuaW5nLUFsZ29yaXRobXM8L3NwYW4+"><span class="chapter-number">10</span>  <span class="chapter-title">Gradient-Based Learning Algorithms</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9wcm9ibGVtX29mX2dlbmVyYWxpemF0aW9uLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjExPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlRoZS1Qcm9ibGVtLW9mLUdlbmVyYWxpemF0aW9uPC9zcGFuPg=="><span class="chapter-number">11</span>  <span class="chapter-title">The Problem of Generalization</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9uZXVyYWxfbmV0cy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xMjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5OZXVyYWwtTmV0d29ya3M8L3NwYW4+"><span class="chapter-number">12</span>  <span class="chapter-title">Neural Networks</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9uZXVyYWxfbmV0c19hc19kaXN0cmlidXRpb25fdHJhbnNmb3JtZXJzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjEzPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPk5ldXJhbC1OZXR3b3Jrcy1hcy1EaXN0cmlidXRpb24tVHJhbnNmb3JtZXJzPC9zcGFuPg=="><span class="chapter-number">13</span>  <span class="chapter-title">Neural Networks as Distribution Transformers</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9iYWNrcHJvcGFnYXRpb24uaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTQ8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+QmFja3Byb3BhZ2F0aW9uPC9zcGFuPg=="><span class="chapter-number">14</span>  <span class="chapter-title">Backpropagation</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tNA==">Foundations of Image Processing</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9saW5lYXJfaW1hZ2VfZmlsdGVyaW5nLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjE1PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkxpbmVhci1JbWFnZS1GaWx0ZXJpbmc8L3NwYW4+"><span class="chapter-number">15</span>  <span class="chapter-title">Linear Image Filtering</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbWFnZV9wcm9jZXNzaW5nX2ZvdXJpZXIuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTY8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+Rm91cmllci1BbmFseXNpczwvc3Bhbj4="><span class="chapter-number">16</span>  <span class="chapter-title">Fourier Analysis</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tNQ==">Linear Filters</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9ibHVycmluZ18yLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjE3PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkJsdXItRmlsdGVyczwvc3Bhbj4="><span class="chapter-number">17</span>  <span class="chapter-title">Blur Filters</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kZXJpdmF0aXZlcy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xODwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5JbWFnZS1EZXJpdmF0aXZlczwvc3Bhbj4="><span class="chapter-number">18</span>  <span class="chapter-title">Image Derivatives</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi90ZW1wb3JhbF9maWx0ZXJzX3YyLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjE5PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlRlbXBvcmFsLWZpbHRlcnM8L3NwYW4+"><span class="chapter-number">19</span>  <span class="chapter-title">Temporal filters</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tNg==">Sampling and Multiscale Image Representations</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zYW1wbGluZ19hbmRfYWxpYXNpbmcuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MjA8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+SW1hZ2UtU2FtcGxpbmctYW5kLUFsaWFzaW5nPC9zcGFuPg=="><span class="chapter-number">20</span>  <span class="chapter-title">Image Sampling and Aliasing</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi91cHNhbXBsaWdfZG93bnNhbXBsaW5nXzIuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MjE8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+RG93bnNhbXBsaW5nLWFuZC1VcHNhbXBsaW5nLUltYWdlczwvc3Bhbj4="><span class="chapter-number">21</span>  <span class="chapter-title">Downsampling and Upsampling Images</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zcGF0aWFsX2ZpbHRlcl9zZXRzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjIyPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkZpbHRlci1CYW5rczwvc3Bhbj4="><span class="chapter-number">22</span>  <span class="chapter-title">Filter Banks</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXJhbWlkc19uZXdfbm90YXRpb24uaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MjM8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+SW1hZ2UtUHlyYW1pZHM8L3NwYW4+"><span class="chapter-number">23</span>  <span class="chapter-title">Image Pyramids</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tNw==">Neural Architectures for Vision</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jb252b2x1dGlvbmFsX25ldXJhbF9uZXRzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjI0PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkNvbnZvbHV0aW9uYWwtTmV1cmFsLU5ldHM8L3NwYW4+"><span class="chapter-number">24</span>  <span class="chapter-title">Convolutional Neural Nets</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9yZWN1cnJlbnRfbmV1cmFsX25ldHMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MjU8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+UmVjdXJyZW50LU5ldXJhbC1OZXRzPC9zcGFuPg=="><span class="chapter-number">25</span>  <span class="chapter-title">Recurrent Neural Nets</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi90cmFuc2Zvcm1lcnMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MjY8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+VHJhbnNmb3JtZXJzPC9zcGFuPg=="><span class="chapter-number">26</span>  <span class="chapter-title">Transformers</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tOA==">Probabilistic Models of Images</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zdGF0X2ltYWdlX21vZGVsc19yZXZpc2VkLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjI3PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlN0YXRpc3RpY2FsLUltYWdlLU1vZGVsczwvc3Bhbj4="><span class="chapter-number">27</span>  <span class="chapter-title">Statistical Image Models</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi90ZXh0dXJlcy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4yODwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5UZXh0dXJlczwvc3Bhbj4="><span class="chapter-number">28</span>  <span class="chapter-title">Textures</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9ncmFwaGljYWxfbW9kZWxzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjI5PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlByb2JhYmlsaXN0aWMtR3JhcGhpY2FsLU1vZGVsczwvc3Bhbj4="><span class="chapter-number">29</span>  <span class="chapter-title">Probabilistic Graphical Models</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tOQ==">Generative Image Models and Representation Learning</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9yZXByZXNlbnRhdGlvbl9sZWFybmluZy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zMDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5SZXByZXNlbnRhdGlvbi1MZWFybmluZzwvc3Bhbj4="><span class="chapter-number">30</span>  <span class="chapter-title">Representation Learning</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9wZXJjZXB0dWFsX29yZ2FuaXphdGlvbi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zMTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5QZXJjZXB0dWFsLUdyb3VwaW5nPC9zcGFuPg=="><span class="chapter-number">31</span>  <span class="chapter-title">Perceptual Grouping</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9nZW5lcmF0aXZlX21vZGVscy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zMjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5HZW5lcmF0aXZlLU1vZGVsczwvc3Bhbj4="><span class="chapter-number">32</span>  <span class="chapter-title">Generative Models</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9nZW5lcmF0aXZlX21vZGVsaW5nX2FuZF9yZXBfbGVhcm5pbmcuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MzM8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+R2VuZXJhdGl2ZS1Nb2RlbGluZy1NZWV0cy1SZXByZXNlbnRhdGlvbi1MZWFybmluZzwvc3Bhbj4="><span class="chapter-number">33</span>  <span class="chapter-title">Generative Modeling Meets Representation Learning</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jb25kaXRpb25hbF9nZW5lcmF0aXZlX21vZGVscy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zNDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Db25kaXRpb25hbC1HZW5lcmF0aXZlLU1vZGVsczwvc3Bhbj4="><span class="chapter-number">34</span>  <span class="chapter-title">Conditional Generative Models</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMTA=">Challenges in Learning-Based Vision</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9iaWFzX2FuZF9zaGlmdC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zNTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5EYXRhLUJpYXMtYW5kLVNoaWZ0PC9zcGFuPg=="><span class="chapter-number">35</span>  <span class="chapter-title">Data Bias and Shift</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXRhX2F1Z21lbnRhdGlvbi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zNjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5UcmFpbmluZy1mb3ItUm9idXN0bmVzcy1hbmQtR2VuZXJhbGl0eTwvc3Bhbj4="><span class="chapter-number">36</span>  <span class="chapter-title">Training for Robustness and Generality</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi90cmFuc2Zlcl9sZWFybmluZy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zNzwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5UcmFuc2Zlci1MZWFybmluZy1hbmQtQWRhcHRhdGlvbjwvc3Bhbj4="><span class="chapter-number">37</span>  <span class="chapter-title">Transfer Learning and Adaptation</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMTE=">Understanding Geometry</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9ob21vZ2VuZW91c19jb29yZGluYXRlcy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zODwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5SZXByZXNlbnRpbmctSW1hZ2VzLWFuZC1HZW9tZXRyeTwvc3Bhbj4="><span class="chapter-number">38</span>  <span class="chapter-title">Representing Images and Geometry</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbWFnaW5nX2dlb21ldHJ5Lmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjM5PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkNhbWVyYS1Nb2RlbGluZy1hbmQtQ2FsaWJyYXRpb248L3NwYW4+"><span class="chapter-number">39</span>  <span class="chapter-title">Camera Modeling and Calibration</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi8zZF9zY2VuZV91bmRlcnN0YW5kaW5nX3N0ZXJlby5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40MDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5TdGVyZW8tVmlzaW9uPC9zcGFuPg=="><span class="chapter-number">40</span>  <span class="chapter-title">Stereo Vision</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9ob21vZ3JhcGh5Lmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjQxPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkhvbW9ncmFwaGllczwvc3Bhbj4="><span class="chapter-number">41</span>  <span class="chapter-title">Homographies</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi8zZF9zY2VuZV91bmRlcnN0YW5kaW5nX3NpbmdsZV92aWV3Lmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjQyPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlNpbmdsZS1WaWV3LU1ldHJvbG9neTwvc3Bhbj4="><span class="chapter-number">42</span>  <span class="chapter-title">Single View Metrology</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi8zZF9sZWFybmluZy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40Mzwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5MZWFybmluZy10by1Fc3RpbWF0ZS1EZXB0aC1mcm9tLWEtU2luZ2xlLUltYWdlPC9zcGFuPg=="><span class="chapter-number">43</span>  <span class="chapter-title">Learning to Estimate Depth from a Single Image</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9tdWx0aXZpZXcuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NDQ8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+TXVsdGl2aWV3LUdlb21ldHJ5LWFuZC1TdHJ1Y3R1cmUtZnJvbS1Nb3Rpb248L3NwYW4+"><span class="chapter-number">44</span>  <span class="chapter-title">Multiview Geometry and Structure from Motion</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9uZXJmLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjQ1PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlJhZGlhbmNlLUZpZWxkczwvc3Bhbj4="><span class="chapter-number">45</span>  <span class="chapter-title">Radiance Fields</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMTI=">Understanding Motion</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9tb3Rpb25fZXN0aW1hdGlvbl9pbnRyby5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40Njwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Nb3Rpb24tRXN0aW1hdGlvbjwvc3Bhbj4="><span class="chapter-number">46</span>  <span class="chapter-title">Motion Estimation</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi8yZF9tb3Rpb25fZnJvbV8zZC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40Nzwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz4zRC1Nb3Rpb24tYW5kLUl0cy0yRC1Qcm9qZWN0aW9uPC9zcGFuPg=="><span class="chapter-number">47</span>  <span class="chapter-title">3D Motion and Its 2D Projection</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9vcHRpY2FsX2Zsb3cuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NDg8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+T3B0aWNhbC1GbG93LUVzdGltYXRpb248L3NwYW4+"><span class="chapter-number">48</span>  <span class="chapter-title">Optical Flow Estimation</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9tb3Rpb25fZXN0aW1hdGlvbi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40OTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5MZWFybmluZy10by1Fc3RpbWF0ZS1Nb3Rpb248L3NwYW4+"><span class="chapter-number">49</span>  <span class="chapter-title">Learning to Estimate Motion</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMTM=">Understanding Vision with Language</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9vYmplY3RfcmVjb2duaXRpb25fdjMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NTA8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+T2JqZWN0LVJlY29nbml0aW9uPC9zcGFuPg=="><span class="chapter-number">50</span>  <span class="chapter-title">Object Recognition</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9WTE1zLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjUxPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlZpc2lvbi1hbmQtTGFuZ3VhZ2U8L3NwYW4+"><span class="chapter-number">51</span>  <span class="chapter-title">Vision and Language</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMTQ=">On Research, Writing and Speaking</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9ob3dfdG9fZG9fcmVzZWFyY2guaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NTI8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+SG93LXRvLURvLVJlc2VhcmNoPC9zcGFuPg=="><span class="chapter-number">52</span>  <span class="chapter-title">How to Do Research</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9ob3dfdG9fd3JpdGVfcGFwZXJzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjUzPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkhvdy10by1Xcml0ZS1QYXBlcnM8L3NwYW4+"><span class="chapter-number">53</span>  <span class="chapter-title">How to Write Papers</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9ob3dfdG9fZ2l2ZV90YWxrcy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz41NDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Ib3ctdG8tR2l2ZS1UYWxrczwvc3Bhbj4="><span class="chapter-number">54</span>  <span class="chapter-title">How to Give Talks</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMTU=">Challenges in Learning-Based Vision</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zaW1wbGVzeXN0ZW1fZmluYWwuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NTU8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+QS1TaW1wbGUtVmlzaW9uLVN5c3RlbS0tLVJldmlzaXRlZDwvc3Bhbj4="><span class="chapter-number">55</span>  <span class="chapter-title">A Simple Vision System—Revisited</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9yZWZlcmVuY2VzLmh0bWxSZWZlcmVuY2Vz">References</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zZXJpZXMuaHRtbEFkYXB0aXZlLUNvbXB1dGF0aW9uLWFuZC1NYWNoaW5lLUxlYXJuaW5nLVNlcmllcw==">Adaptive Computation and Machine Learning Series</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWJyZWFkY3J1bWJzLVVuZGVyc3RhbmRpbmctR2VvbWV0cnk=">Understanding Geometry</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWJyZWFkY3J1bWJzLTxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NDQ8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+TXVsdGl2aWV3LUdlb21ldHJ5LWFuZC1TdHJ1Y3R1cmUtZnJvbS1Nb3Rpb248L3NwYW4+"><span class="chapter-number">44</span>  <span class="chapter-title">Multiview Geometry and Structure from Motion</span></span></p>
+<div class="hidden quarto-markdown-envelope-contents" data-render-id="Zm9vdGVyLWxlZnQ=">
+<p>All content licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC-BY-NC-ND</a></p>
+</div>
+<div class="hidden quarto-markdown-envelope-contents" data-render-id="Zm9vdGVyLWNlbnRlcg==">
+<p>© <a href="https://groups.csail.mit.edu/vision/torralbalab/">Antonio Torralba</a>, <a href="https://web.mit.edu/phillipi/">Phillip Isola</a>, and <a href="https://billf.mit.edu/">William Freeman</a></p>
+</div>
+<div class="hidden quarto-markdown-envelope-contents" data-render-id="Zm9vdGVyLXJpZ2h0">
+<p>Translation to web format by <a href="https://shenshen.mit.edu">Shen Shen</a> and <a href="https://github.com/Foundations-of-Computer-Vision/visionbook/graphs/contributors">Contributors</a> with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+</div>
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGF0aXRsZQ=="><span id="sec-3D_multiview" class="quarto-section-identifier"><span class="chapter-number">44</span>  <span class="chapter-title">Multiview Geometry and Structure from Motion</span></span> – Foundations of Computer Vision</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkdGl0bGU="><span id="sec-3D_multiview" class="quarto-section-identifier"><span class="chapter-number">44</span>  <span class="chapter-title">Multiview Geometry and Structure from Motion</span></span> – Foundations of Computer Vision</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZHRpdGxl"><span id="sec-3D_multiview" class="quarto-section-identifier"><span class="chapter-number">44</span>  <span class="chapter-title">Multiview Geometry and Structure from Motion</span></span> – Foundations of Computer Vision</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGFzaXRlbmFtZQ==">Foundations of Computer Vision</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkZGVzYw=="></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZGRkZXNj"></span></p>
+</div>
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-Johansson1973" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">G. Johansson, Visual perception of biological motion and a model for its analysis., Perception &amp; Psychophysics 14 (1973) 201–211.</div>
+</div>
+<div id="ref-Ullman1979" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">S. Ullman, S. Brenner, The interpretation of structure from motion., Proceedings of the Royal Society of London. Series B. Biological Sciences 203 (1979) 405–426.</div>
+</div>
+<div id="ref-Tomasi92" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">C. Tomasi, T. Kanade, Shape and motion from image streams under orthography: A factorization method., International Journal of Computer Vision 9 (1992) 137–154.</div>
+</div>
+<div id="ref-Sturm1996" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">P. Sturm, B. Triggs, A factorization based algorithm for multi-image projective structure and motion., in: Eccv, 1996: pp. 709–720.</div>
+</div>
+<div id="ref-Lowe04" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">D.G. Lowe, Distinctive image features from scale-invariant keypoints., International Journal of Computer Vision 60 (2004) 91–110.</div>
+</div>
+<div id="ref-Snavely2006" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">N. Snavely, S.M. Seitz, R. Szeliski, Photo tourism: Exploring photo collections in 3D., in: Siggraph, 2006: pp. 835–846.</div>
+</div>
+<div id="ref-Harris88" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">C. Harris, M. Stephens, A combined corner and edge detector., in: Proc. Of Fourth Alvey Vision Conference, 1988: pp. 147–151.</div>
+</div>
+<div id="ref-Mikolajczyk2002" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">K. Mikolajczyk, C. Schmid, An affine invariant interest point detector., in: A. Heyden, G. Sparr, M. Nielsen, P. Johansen (Eds.), Eccv, 2002: pp. 128–142.</div>
+</div>
+<div id="ref-Mikolajczyk2001" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">K. Mikolajczyk, C. Schmid, Indexing based on scale invariant interest points., in: Iccv, 2001: p. 525.</div>
+</div>
+<div id="ref-Matas2004" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">J. Matas, O. Chum, M. Urban, T. Pajdla, Robust wide baseline stereo from maximally stable extremal regions., Image and Vision Computing 22 (2004) 761–767.</div>
+</div>
+<div id="ref-Schmid2000" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">C. Schmid, R. Mohr, C. Bauckhage, Evaluation of interest point detectors., Ijcv 37 (2000) 151–172.</div>
+</div>
+<div id="ref-Savinov2017" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">N. Savinov, A. Seki, L. Ladicky, T. Sattler, M. Pollefeys, Quad-networks: Unsupervised learning to rank for interest point detection., in: Cvpr, 2017: pp. 3929–3937.</div>
+</div>
+<div id="ref-DeTone2018" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline">D. DeTone, T. Malisiewicz, A. Rabinovich, SuperPoint: Self-supervised interest point detection and description., in: 2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW), 2018: pp. 337–33712.</div>
+</div>
+<div id="ref-Bay2008346" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[14] </div><div class="csl-right-inline">H. Bay, T. Tuytelaars, L. Van Gool, SURF: Speeded up robust features., in: Eccv, 2006: pp. 404–417.</div>
+</div>
+<div id="ref-Rublee2011" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[15] </div><div class="csl-right-inline">E. Rublee, V. Rabaud, K. Konolige, G. Bradski, ORB: An efficient alternative to SIFT or SURF., in: Iccv, 2011: pp. 2564–2571.</div>
+</div>
+<div id="ref-Mikolajczyk2005" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[16] </div><div class="csl-right-inline">K. Mikolajczyk, C. Schmid, A performance evaluation of local descriptors., Pami 27 (2005) 1615–1630.</div>
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id = "quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/visionbook\.mit\.edu");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a  href="/3d_learning.html" class="pagination-link" aria-label="Learning to Estimate Depth from a Single Image">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class='chapter-number'>43</span>  <span class='chapter-title'>Learning to Estimate Depth from a Single Image</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a  href="/nerf.html" class="pagination-link" aria-label="Radiance Fields">
+        <span class="nav-page-text"><span class='chapter-number'>45</span>  <span class='chapter-title'>Radiance Fields</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <div class='footer-contents'>All content licensed under [CC-BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)</div>  
+    </div>   
+    <div class="nav-footer-center">
+      <div class='footer-contents'>© [Antonio Torralba](https://groups.csail.mit.edu/vision/torralbalab/), [Phillip Isola](https://web.mit.edu/phillipi/), and [William Freeman](https://billf.mit.edu/)</div>  
+    </div>
+    <div class="nav-footer-right">
+      <div class='footer-contents'>Translation to web format by [Shen Shen](https://shenshen.mit.edu) and [Contributors](https://github.com/Foundations-of-Computer-Vision/visionbook/graphs/contributors) with [Quarto](https://quarto.org/)</div>  
+    </div>
+  </div>
+</footer>
+    <script type="text/javascript">
+    (function(d) {
+      d.querySelectorAll(".pseudocode-container").forEach(function(el) {
+        let pseudocodeOptions = {
+          indentSize: el.dataset.indentSize || "1.2em",
+          commentDelimiter: el.dataset.commentDelimiter || "//",
+          lineNumber: el.dataset.lineNumber === "true" ? true : false,
+          lineNumberPunc: el.dataset.lineNumberPunc || ":",
+          noEnd: el.dataset.noEnd === "true" ? true : false,
+          titlePrefix: el.dataset.captionPrefix || "Algorithm"
+        };
+        pseudocode.renderElement(el.querySelector(".pseudocode"), pseudocodeOptions);
+      });
+    })(document);
+    (function(d) {
+      d.querySelectorAll(".pseudocode-container").forEach(function(el) {
+        let captionSpan = el.querySelector(".ps-root > .ps-algorithm > .ps-line > .ps-keyword")
+        if (captionSpan !== null) {
+          let captionPrefix = el.dataset.captionPrefix + " ";
+          let captionNumber = "";
+          if (el.dataset.pseudocodeNumber) {
+            captionNumber = el.dataset.pseudocodeNumber + " ";
+            if (el.dataset.chapterLevel) {
+              captionNumber = el.dataset.chapterLevel + "." + captionNumber;
+            }
+          }
+          captionSpan.innerHTML = captionPrefix + captionNumber;
+        }
+      });
+    })(document);
+    </script>
+  
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+</body>
+
+</html>
