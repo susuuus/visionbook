@@ -1,0 +1,349 @@
+# Integration Snippets for representation_learning.qmd
+
+Replace the original ![...](figures/...) with these iframe embeds:
+
+### fig-representation_learning-rep_learning_schematic
+
+```markdown
+::{#fig-representation_learning-rep_learning_schematic}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-rep_learning_schematic.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+The goal in this chapter is to learn to map from datapoints to abstract representations, which are typically simpler and more useful than the raw data.
+:::
+```
+
+### fig-representation_learning-autoencoder_diagram
+
+```markdown
+::{#fig-representation_learning-autoencoder_diagram}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-autoencoder_diagram.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+{\small (left) An autoencoder maps from points in data space, to points in representation space, and back. (right) An example of running an autoencoder on an input image of a bird.
+:::
+```
+
+### fig-representation_learning-autoencoder_learning_diagram
+
+```markdown
+::{#fig-representation_learning-autoencoder_learning_diagram}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-autoencoder_learning_diagram.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-shapes_dataset_random_samples
+
+```markdown
+::{#fig-representation_learning-shapes_dataset_random_samples}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-shapes_dataset_random_samples.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+A sample from the toy dataset we will work with in this chapter.
+:::
+```
+
+### fig-representation_learning-AE_results_shapes_dataset-a
+
+```markdown
+::{#fig-representation_learning-AE_results_shapes_dataset-a}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-AE_results_shapes_dataset-a.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-AE_results_shapes_dataset-b
+
+```markdown
+::{#fig-representation_learning-AE_results_shapes_dataset-b}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-AE_results_shapes_dataset-b.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-predictive_learning_examples
+
+```markdown
+::{#fig-representation_learning-predictive_learning_examples}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-predictive_learning_examples.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+Examples of different pretext tasks.
+:::
+```
+
+### predictive_learning_diagram.png
+
+```markdown
+::{#None}
+<iframe
+  src="interactive_representation_learning/fig_predictive_learning_diagram.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-obj_detectors_emerge
+
+```markdown
+::{#fig-representation_learning-obj_detectors_emerge}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-obj_detectors_emerge.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+Visualizing two neural receptive fields in a scene classifier neural net. Images taken from @zhou2014object
+:::
+```
+
+### self_supervised_learning_diagram.png
+
+```markdown
+::{#None}
+<iframe
+  src="interactive_representation_learning/fig_self_supervised_learning_diagram.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-imputation_examples
+
+```markdown
+::{#fig-representation_learning-imputation_examples}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-imputation_examples.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+Many common pretext tasks are special cases of imputation on missing values in the data tensor.
+:::
+```
+
+### fig-representation_learning-obj_detectors_in_colorization
+
+```markdown
+::{#fig-representation_learning-obj_detectors_in_colorization}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-obj_detectors_in_colorization.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+Visualizing two neural receptive fields in the colorization model from @zhang2016colorful. Images generated by Andrew Owens and Richard Zhang.
+:::
+```
+
+### fig-representation_learning-clustering_f_diagram
+
+```markdown
+::{#fig-representation_learning-clustering_f_diagram}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-clustering_f_diagram.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+You can think of clustering as being just like image labeling, except that that labels are self-discovered rather than being predefined.
+:::
+```
+
+### kmeans_learning_diagram.png
+
+```markdown
+::{#None}
+<iframe
+  src="interactive_representation_learning/fig_kmeans_learning_diagram.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-kmeans_ex_step1
+
+```markdown
+::{#fig-representation_learning-kmeans_ex_step1}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-kmeans_ex_step1.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-kmeans_ex_step2
+
+```markdown
+::{#fig-representation_learning-kmeans_ex_step2}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-kmeans_ex_step2.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-kmeans_ex_step3
+
+```markdown
+::{#fig-representation_learning-kmeans_ex_step3}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-kmeans_ex_step3.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-kmeans_ex_step4
+
+```markdown
+::{#fig-representation_learning-kmeans_ex_step4}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-kmeans_ex_step4.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-contrastive_learning_diagram
+
+```markdown
+::{#fig-representation_learning-contrastive_learning_diagram}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-contrastive_learning_diagram.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+Contrastive learning.
+:::
+```
+
+### fig-representation_learning-contrastive_learning_colorization
+
+```markdown
+::{#fig-representation_learning-contrastive_learning_colorization}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-contrastive_learning_colorization.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+Contrastive learning from multiple views of the data. Figure inspired by \cite{tian2020contrastive
+:::
+```
+
+### contrastive_learning_transformations.png
+
+```markdown
+::{#None}
+<iframe
+  src="interactive_representation_learning/fig_contrastive_learning_transformations.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### contrastive_learning_cooccurrence_diagram.png
+
+```markdown
+::{#None}
+<iframe
+  src="interactive_representation_learning/fig_contrastive_learning_cooccurrence_diagram.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+
+:::
+```
+
+### fig-representation_learning-align_unif_results_shapes_dataset
+
+```markdown
+::{#fig-representation_learning-align_unif_results_shapes_dataset}
+<iframe
+  src="interactive_representation_learning/fig-representation_learning-align_unif_results_shapes_dataset.html"
+  width="100%"
+  height="700"
+  style="border: 1px solid #ddd; border-radius: 4px;">
+</iframe>
+
+Contrastive learning on colored shapes using two different transformations for creating positive pairs. The choice of transformation controls which features the embedding becomes sensitive to and which it becomes invariant to.
+:::
+```
+

@@ -82,6 +82,12 @@ In @fig-neural_nets-nn_training_viz, we plot this as a 3D visualization of $\mat
 
 ![How a deep net remaps input data layer by layer. The target output is to move all the red points to $(0,1)$ and all the blue points to $(1,0)$ (one-hot codes for the two classes). As training progresses the network gradually achieves this separation.](figures/neural_nets_as_data_transformations/nn_training_viz.png){#fig-neural_nets-nn_training_viz width=100%}
 
+<video controls width="100%">
+    <source src="figures/neural_nets_as_data_transformations/linear_demo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+
 Of course, ``stretched, rotated, or squished'' is just an intuitive way to think about it, but we can be more precise. The linear layers perform an affine transformation of the space, while the relus project all negative values to the boundaries of the cone whose dimensions are strictly positive. Layer by layer, over the course of training, the net learns to disentangle these two classes and pull the points toward vertices of the one-simplex, achieving a correct classification of the points!
 
 ## How High-Dimensional Datapoints Get Remapped by Deep Net

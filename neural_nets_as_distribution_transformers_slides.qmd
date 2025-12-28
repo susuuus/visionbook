@@ -1,0 +1,151 @@
+---
+title: Neural Networks as Distribution Transformers
+subtitle: How Deep Nets Remap Data Geometrically
+author: Foundations of Computer Vision
+bibliography:
+  - all.bib
+  - visionbib.bib
+format:
+  revealjs:
+    width: 1280
+    height: 720
+    margin: 0.1
+    center: false
+    navigationMode: linear
+    controlsLayout: edges
+    controlsTutorial: false
+    hash: true
+    history: true
+    transition: slide
+    backgroundTransition: none
+    slideNumber: true
+    chalkboard: true
+    previewLinks: true
+    reference-location: document
+---
+
+## Introduction
+
+So far we have seen that deep nets are stacks of simple functions, which compose to achieve interesting mappings from inputs to outputs.
+
+**A different way of thinking about deep nets:**
+- Each layer is a *geometric transformation of a data distribution*
+- We can visualize this by plotting the mapping in 2D space
+
+## A Different Way of Plotting Functions
+
+Each layer in a deep net is a mapping: $f: \mathbf{x}_{\text{in}} \rightarrow \mathbf{x}_{\text{out}}$
+
+**Traditional plot:** $\mathbf{x}_{\text{in}}$ on x-axis, $\mathbf{x}_{\text{out}}$ on y-axis
+
+**Alternative plot:** Rotate the y-axis to be horizontal
+- Input space on left (bottom plane)
+- Output space on right (top plane)
+- Lines connect corresponding points
+
+![The identity function shown in the new plotting style.](figures/neural_nets_as_data_transformations/new_way_plot.png){width=80%}
+
+## Simple Layer Examples
+
+![Mapping plots for several simple functions (linear, relu, sigmoid).](figures/neural_nets_as_data_transformations/new_way_plot_examples.png){width=100%}
+
+- **Linear layers:** stretch, squash, and rotate the data distribution
+- **ReLU:** maps all negative data to 0, applies identity to nonnegative data
+- **Sigmoid:** pulls negative data to 0, positive data to 1
+
+## How Deep Nets Remap a Data Distribution
+
+An incoming data distribution can be reshaped layer by layer into a desired configuration.
+
+**Example:** Binary softmax classifier goal
+- Move class 0 points to $(1,0)$ (one-hot code)
+- Move class 1 points to $(0,1)$ (one-hot code)
+
+![Mapping plot for a linear-relu stack showing how the space transforms.](figures/neural_nets_as_data_transformations/new_way_plot_two_layer.png){width=60%}
+
+## Data Distribution Through the Network
+
+Think of a deep net as transforming an input data distribution $p_{\text{data}}$ through successive layers:
+
+$$p_{\text{data}} \to p_1 \to p_2 \to \cdots \to p_{\text{out}}$$
+
+- Each layer $\ell$ produces an activation distribution $p_\ell$ (a different representation/embedding of the data)
+- Most loss functions penalize divergence between $p_{\text{out}}$ and target $p_{\text{target}}$
+
+## 2D-to-2D Mappings (Visualizable)
+
+Real deep nets perform $N$-to-$N$ mappings, but 2D-to-2D visualizations give great insight.
+
+![2D mapping diagrams for linear, relu, and sigmoid layers on a Gaussian blob of data.](figures/neural_nets_as_data_transformations/2D_mapping_diagrams.png){width=100%}
+
+**Note on ReLU:** Maps many points to the axes of the positive quadrant. In high-dimensional spaces, most data density builds up on the axes because almost the entire space is outside the positive cone.
+
+## How Layers Transform Grid Points
+
+A clear way to visualize geometric transformations is to track how a square grid of input points gets transformed.
+
+![How a deep net remaps input data layer by layer through the network.](figures/neural_nets_as_data_transformations/nn_training_viz.png){width=90%}
+
+## 3D Linear Transformation
+
+How a linear transformation maps points from input space (bottom plane) to output space (top plane):
+
+<video autoplay muted loop playsinline style="width: 100%; border: none;">
+  <source src="figures/neural_nets_as_data_transformations/linear_demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+The transformation combines rotation and scaling in different directions.
+
+Watch how the red points and transformation lines update as the linear layer transforms the input distribution to the output plane!
+
+## Binary Classifier Example
+
+Consider a 2-input, 2-output MLP for binary classification:
+
+$$\begin{align}
+    \mathbf{z}_1 &= \mathbf{W}_1\mathbf{x} + \mathbf{b}_1 & \text{(linear)}\\
+    \mathbf{h}_1 &= \text{relu}(\mathbf{z}_1) & \text{(relu)}\\
+    \mathbf{z}_2 &= \mathbf{W}_2\mathbf{h}_1 + \mathbf{b}_2 & \text{(linear)}\\
+    \mathbf{h}_2 &= \text{relu}(\mathbf{z}_2) & \text{(relu)}\\
+    \mathbf{z}_3 &= \mathbf{W}_3\mathbf{h}_2 + \mathbf{b}_3 & \text{(linear)}\\
+    \mathbf{y} &= \text{softmax}(\mathbf{z}_3) & \text{(softmax)}
+\end{align}$$
+
+## Classifier Training Goal
+
+The goal of training is to find geometric transformations that rearrange the input distribution to match the target distribution:
+
+![Goal of a neural net classifier: move red dots to (0,1) and blue dots to (1,0).](figures/neural_nets_as_data_transformations/goal_of_classifier.png){width=100%}
+
+- **Left:** Input dataset with two classes (red and blue)
+- **Right:** Target output (one-hot codes for the two classes)
+
+## Training Progression
+
+During training, the network learns a series of geometric transformations that gradually rearrange the input distribution to separate the classes.
+
+**Checkpoints:** We visualize the network at different stages of training to see how the data distribution evolves layer by layer.
+
+The network learns to "disentangle" the classes, moving them toward their target positions through successive geometric transformations.
+
+## High-Dimensional Representations
+
+What if our data and activations are high-dimensional?
+
+We use **dimensionality reduction** techniques (like t-SNE) to project high-dimensional data to 2D for visualization:
+
+![How a Vision Transformer maps image embeddings across layers, color-coded by semantic class.](figures/neural_nets_as_data_transformations/vit_mapping_plot.png){width=60%}
+
+**Key observation:** Earlier layers don't separate semantic classes well, but later layers (near the output) show clean separation—classes have been "disentangled."
+
+## Concluding Remarks
+
+**Key takeaway:** Deep nets transform data layer by layer from raw input to abstracted, useful representations.
+
+- Think of each layer as a **geometric transformation of a data distribution**
+- Linear layers stretch, rotate, and squash the space
+- Nonlinearities (ReLU, sigmoid) reshape the space in more complex ways
+- Training finds the right sequence of transformations to separate classes and achieve the goal
+
+This perspective helps us understand **what deep nets are doing** at a high level: progressively remapping and disentangling data to solve the given task.
