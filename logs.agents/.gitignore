@@ -4,3 +4,6 @@
 # Ignore outputs
 tmp/
 outputs/
+
+# Ignore scene.py
+scene.py
