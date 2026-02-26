@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Pinhole Camera Projection Geometry</title>
+<style>
+    body { margin: 0; overflow: hidden; font-family: sans-serif; }
+    .label {
+      position: absolute;
+      font-size: 13px;
+      color: black;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+</style>
+</head>
+<body>
+<div style="position: absolute; top: 10px; left: 10px; background: #eee; padding: 10px; z-index: 10;">
+<label for="distSlider">Focal length f: </label>
+<input id="distSlider" max="2.5" min="0.5" step="0.1" type="range" value="1.0"/><br/>
+<label for="zSlider">Object distance Z: </label>
+<input id="zSlider" max="5" min="2" step="0.2" type="range" value="3.0"/>
+</div>
+
+<script type="module">
+import * as THREE from 'https://esm.sh/three';
+import { OrbitControls } from 'https://esm.sh/three/examples/jsm/controls/OrbitControls';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xffffff);
+
+const aspect = window.innerWidth / window.innerHeight;
+const d = 5;
+const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 0.1, 100);
+camera.position.set(5, 5, 5);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+// Camera center at origin
+const camCenter = new THREE.Mesh(
+  new THREE.SphereGeometry(0.1, 16, 16),
+  new THREE.MeshBasicMaterial({ color: 0x000000 })
+);
+scene.add(camCenter);
+
+// Virtual image plane
+let f = 1.0;
+let Z = 3.0;
+const imagePlaneWidth = 3;
+const imagePlaneHeight = 2;
+
+const imagePlaneGeometry = new THREE.PlaneGeometry(imagePlaneWidth, imagePlaneHeight);
+const imagePlaneMaterial = new THREE.MeshBasicMaterial({ 
+  color: 0xffffff, 
+  side: THREE.DoubleSide, 
+  transparent: true, 
+  opacity: 0.5 
+});
+const imagePlane = new THREE.Mesh(imagePlaneGeometry, imagePlaneMaterial);
+
+const frameGeometry = new THREE.EdgesGeometry(imagePlaneGeometry);
+const frameMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+const frame = new THREE.LineSegments(frameGeometry, frameMaterial);
+imagePlane.add(frame);
+
+imagePlane.rotation.y = -Math.PI / 2;
+scene.add(imagePlane);
+
+// 3D Point P
+const pointP = new THREE.Mesh(
+  new THREE.SphereGeometry(0.1, 16, 16),
+  new THREE.MeshBasicMaterial({ color: 0xff0000 })
+);
+scene.add(pointP);
+
+// Projected point p
+const pointp = new THREE.Mesh(
+  new THREE.SphereGeometry(0.08, 16, 16),
+  new THREE.MeshBasicMaterial({ color: 0x0000ff })
+);
+scene.add(pointp);
+
+// Projection ray
+const rayGeometry = new THREE.BufferGeometry();
+const rayMaterial = new THREE.LineDashedMaterial({ 
+  color: 0x0000ff, 
+  dashSize: 0.1, 
+  gapSize: 0.1 
+});
+const projectionRay = new THREE.Line(rayGeometry, rayMaterial);
+scene.add(projectionRay);
+
+// Axes at image plane
+const imagePlanePos = new THREE.Vector3(f, -imagePlaneHeight/2, imagePlaneWidth/2);
+const xArrow = new THREE.ArrowHelper(
+  new THREE.Vector3(0, 1, 0), imagePlanePos, 1, 0x00aa00
+);
+const yArrow = new THREE.ArrowHelper(
+  new THREE.Vector3(0, 0, -1), imagePlanePos, 1, 0x00aa00
+);
+scene.add(xArrow, yArrow);
+
+// Labels
+const labels = [];
+const vector = new THREE.Vector3();
+
+function createLabel(text, pos) {
+  const div = document.createElement('div');
+  div.className = 'label';
+  div.innerHTML = text;
+  document.body.appendChild(div);
+  return { div, pos };
+}
+
+labels.push(createLabel('<b>P(X,Y,Z)</b>', new THREE.Vector3(Z, 1, 0.5)));
+labels.push(createLabel('<b>p(x,y)</b>', new THREE.Vector3(f, 0.33, 0.17)));
+labels.push(createLabel('x', new THREE.Vector3(f, -0.4, 1.6)));
+labels.push(createLabel('y', new THREE.Vector3(f, -1.1, 1.5)));
+labels.push(createLabel('Virtual Image Plane', new THREE.Vector3(f, 1.3, 0)));
+
+function updateScene() {
+  f = parseFloat(document.getElementById('distSlider').value);
+  Z = parseFloat(document.getElementById('zSlider').value);
+  
+  // Update image plane position
+  imagePlane.position.x = f;
+  
+  // Update 3D point P
+  const X = 1.0;
+  const Y = 0.5;
+  pointP.position.set(Z, Y, X);
+  
+  // Calculate projection: x = f * X/Z, y = f * Y/Z
+  const x = f * X / Z;
+  const y = f * Y / Z;
+  pointp.position.set(f, y, x);
+  
+  // Update projection ray
+  rayGeometry.setFromPoints([
+    camCenter.position.clone(),
+    pointP.position.clone()
+  ]);
+  projectionRay.computeLineDistances();
+  
+  // Update axes
+  xArrow.position.set(f, -imagePlaneHeight/2, imagePlaneWidth/2);
+  yArrow.position.copy(xArrow.position);
+  
+  // Update labels
+  labels[0].pos.copy(pointP.position).add(new THREE.Vector3(0.3, 0, 0));
+  labels[1].pos.copy(pointp.position).add(new THREE.Vector3(0, 0.2, 0));
+  labels[2].pos.set(f, -0.4, 1.6);
+  labels[3].pos.set(f, -1.1, 1.5);
+  labels[4].pos.set(f, 1.3, 0);
+}
+
+function updateLabels() {
+  labels.forEach(({ div, pos }) => {
+    vector.copy(pos).project(camera);
+    const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+    const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
+    div.style.left = `${x}px`;
+    div.style.top = `${y}px`;
+  });
+}
+
+document.getElementById('distSlider').addEventListener('input', updateScene);
+document.getElementById('zSlider').addEventListener('input', updateScene);
+
+updateScene();
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  updateLabels();
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  const aspect = window.innerWidth / window.innerHeight;
+  camera.left = -d * aspect;
+  camera.right = d * aspect;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>

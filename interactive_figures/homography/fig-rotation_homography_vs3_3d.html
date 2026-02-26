@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Vision: Homography and Rotation</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100%;
+            color: white;
+            font-family: Monospace;
+            font-size: 13px;
+            text-align: left;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <p>3D Vision: Homography and Rotation</p>
+        <p>Use mouse to rotate, zoom, and pan the scene.</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Orbit controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.minDistance = 5;
+        controls.maxDistance = 20;
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040, 1.5);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 10, 7.5).normalize();
+        scene.add(directionalLight);
+
+        // Create world origin group
+        const worldOrigin = new THREE.Group();
+        scene.add(worldOrigin);
+
+        // Add 3D objects (boxes) to the scene
+        const boxMaterial = new THREE.MeshPhongMaterial({ color: 0x808080 });
+        for (let i = 1; i <= 9; i++) {
+            const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+            const box = new THREE.Mesh(boxGeometry, boxMaterial);
+            box.position.set(i, 0, 0);
+            worldOrigin.add(box);
+        }
+
+        // Add cameras and planes
+        const cameraMaterial1 = new THREE.LineBasicMaterial({ color: 0x00FF00 });
+        const cameraMaterial2 = new THREE.LineBasicMaterial({ color: 0xFF0000 });
+        const planeMaterial1 = new THREE.MeshBasicMaterial({ color: 0x00FF00, side: THREE.DoubleSide, transparent: true, opacity: 0.5 });
+        const planeMaterial2 = new THREE.MeshBasicMaterial({ color: 0xFF0000, side: THREE.DoubleSide, transparent: true, opacity: 0.5 });
+
+        // Camera 1
+        const camera1 = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 1)]), cameraMaterial1);
+        scene.add(camera1);
+
+        // Plane 1
+        const planeGeometry1 = new THREE.PlaneGeometry(1, 1);
+        const plane1 = new THREE.Mesh(planeGeometry1, planeMaterial1);
+        plane1.position.set(0, 0, 1);
+        scene.add(plane1);
+
+        // Camera 2
+        const camera2 = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(1, 0, 0), new THREE.Vector3(1, 0, 1)]), cameraMaterial2);
+        scene.add(camera2);
+
+        // Plane 2
+        const planeGeometry2 = new THREE.PlaneGeometry(1, 1);
+        const plane2 = new THREE.Mesh(planeGeometry2, planeMaterial2);
+        plane2.position.set(1, 0, 1);
+        scene.add(plane2);
+
+        // Points
+        const pointMaterial = new THREE.MeshBasicMaterial({ color: 0x00FFFF });
+        const pointGeometry = new THREE.SphereGeometry(0.05, 32, 32);
+
+        const point1 = new THREE.Mesh(pointGeometry, pointMaterial);
+        point1.position.set(0.5, 0.5, 1);
+        scene.add(point1);
+
+        const point2 = new THREE.Mesh(pointGeometry, pointMaterial);
+        point2.position.set(1.5, 0.5, 1);
+        scene.add(point2);
+
+        const point3 = new THREE.Mesh(pointGeometry, pointMaterial);
+        point3.position.set(2, 1, 1);
+        scene.add(point3);
+
+        // Rays
+        const rayMaterial = new THREE.LineDashedMaterial({ color: 0x000000, dashSize: 0.1, gapSize: 0.1 });
+
+        const ray1Geometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0.5, 0.5, 1)]);
+        const ray1 = new THREE.Line(ray1Geometry, rayMaterial);
+        ray1.computeLineDistances();
+        scene.add(ray1);
+
+        const ray2Geometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(1, 0, 0), new THREE.Vector3(1.5, 0.5, 1)]);
+        const ray2 = new THREE.Line(ray2Geometry, rayMaterial);
+        ray2.computeLineDistances();
+        scene.add(ray2);
+
+        // Annotation
+        const spriteMaterial = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(generateTextCanvas("R")), transparent: true });
+        const sprite = new THREE.Sprite(spriteMaterial);
+        sprite.position.set(0.5, 0, 1.5);
+        sprite.scale.set(0.5, 0.25, 1);
+        scene.add(sprite);
+
+        // Camera setup
+        camera.position.set(10, 10, 10);
+        camera.lookAt(0, 0, 0);
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+            worldOrigin.rotation.y += 0.001; // Rotate the world origin to show projection
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsive design
+        window.addEventListener('resize', onWindowResize, false);
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Helper function to generate text canvas for annotations
+        function generateTextCanvas(text) {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            context.font = 'Bold 20px Arial';
+            context.fillStyle = 'rgba(255, 255, 255, 1)';
+            context.fillText(text, 0, 20);
+            return canvas;
+        }
+    </script>
+</body>
+</html>

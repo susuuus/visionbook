@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Orthographic Projection</title>
+<style>
+    body { margin: 0; overflow: hidden; font-family: sans-serif; }
+    .label {
+      position: absolute;
+      font-size: 14px;
+      color: black;
+      font-weight: bold;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+</style>
+</head>
+<body>
+
+<script type="module">
+import * as THREE from 'https://esm.sh/three';
+import { OrbitControls } from 'https://esm.sh/three/examples/jsm/controls/OrbitControls';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xffffff);
+
+const aspect = window.innerWidth / window.innerHeight;
+const d = 4;
+const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 0.1, 100);
+camera.position.set(4, 3, 4);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+// Projection plane at x=0
+const planeGeo = new THREE.PlaneGeometry(3, 3);
+const planeMat = new THREE.MeshBasicMaterial({ 
+  color: 0xffffff, 
+  side: THREE.DoubleSide, 
+  transparent: true, 
+  opacity: 0.5 
+});
+const projPlane = new THREE.Mesh(planeGeo, planeMat);
+projPlane.rotation.y = -Math.PI / 2;
+scene.add(projPlane);
+
+const edges = new THREE.EdgesGeometry(planeGeo);
+const edgeLine = new THREE.LineSegments(edges, 
+  new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 2 }));
+edgeLine.rotation.copy(projPlane.rotation);
+scene.add(edgeLine);
+
+// 3D object (cube) at x=2
+const cubeGeo = new THREE.BoxGeometry(0.6, 0.8, 0.5);
+const cubeMat = new THREE.MeshStandardMaterial({ color: 0x4488ff });
+const cube = new THREE.Mesh(cubeGeo, cubeMat);
+cube.position.set(2, 0, 0);
+scene.add(cube);
+
+const cubeEdges = new THREE.EdgesGeometry(cubeGeo);
+const cubeEdgeLine = new THREE.LineSegments(cubeEdges,
+  new THREE.LineBasicMaterial({ color: 0x000000 }));
+cubeEdgeLine.position.copy(cube.position);
+scene.add(cubeEdgeLine);
+
+// Parallel rays from cube vertices to projection plane
+const cubeVertices = [
+  new THREE.Vector3(-0.3, -0.4, -0.25),
+  new THREE.Vector3(0.3, -0.4, -0.25),
+  new THREE.Vector3(0.3, 0.4, -0.25),
+  new THREE.Vector3(-0.3, 0.4, -0.25),
+  new THREE.Vector3(-0.3, -0.4, 0.25),
+  new THREE.Vector3(0.3, -0.4, 0.25),
+  new THREE.Vector3(0.3, 0.4, 0.25),
+  new THREE.Vector3(-0.3, 0.4, 0.25)
+];
+
+cubeVertices.forEach(v => {
+  const worldV = v.clone().add(cube.position);
+  const projV = worldV.clone();
+  projV.x = 0; // Project onto x=0 plane
+  
+  // Dashed line from vertex to projection
+  const rayGeo = new THREE.BufferGeometry().setFromPoints([worldV, projV]);
+  const rayLine = new THREE.Line(rayGeo,
+    new THREE.LineDashedMaterial({ color: 0x00aa00, dashSize: 0.1, gapSize: 0.1 }));
+  rayLine.computeLineDistances();
+  scene.add(rayLine);
+  
+  // Point on projection plane
+  const projPoint = new THREE.Mesh(
+    new THREE.SphereGeometry(0.04, 8, 8),
+    new THREE.MeshBasicMaterial({ color: 0x0000ff })
+  );
+  projPoint.position.copy(projV);
+  scene.add(projPoint);
+});
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambientLight);
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+dirLight.position.set(5, 5, 5);
+scene.add(dirLight);
+
+// Labels
+const labels = [];
+const vector = new THREE.Vector3();
+
+function createLabel(text, pos) {
+  const div = document.createElement('div');
+  div.className = 'label';
+  div.innerHTML = text;
+  document.body.appendChild(div);
+  return { div, pos };
+}
+
+labels.push(createLabel('Projection Plane', new THREE.Vector3(0, 1.7, 0)));
+labels.push(createLabel('x = X, y = Y', new THREE.Vector3(0, -1.7, 0)));
+labels.push(createLabel('Object', cube.position.clone().add(new THREE.Vector3(0, 1, 0))));
+
+function updateLabels() {
+  labels.forEach(({ div, pos }) => {
+    vector.copy(pos).project(camera);
+    const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+    const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
+    div.style.left = `${x}px`;
+    div.style.top = `${y}px`;
+  });
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  updateLabels();
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  const aspect = window.innerWidth / window.innerHeight;
+  camera.left = -d * aspect;
+  camera.right = d * aspect;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>

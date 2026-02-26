@@ -1,0 +1,28 @@
+---
+title: "Manim Animation Test"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    width: 1280
+    height: 720
+---
+
+## Static Image
+
+![](figures/backpropagation/simple_MLP.png){height="400px"}
+
+## Animated Video
+
+<video width="1000" height="562" controls autoplay loop>
+  <source src="figures/animations/visionbook_test.mp4" type="video/mp4">
+</video>
+
+## Alternative: HTML5 video
+
+::: {style="text-align: center;"}
+<video width="900" autoplay loop muted>
+  <source src="figures/animations/visionbook_test.mp4" type="video/mp4">
+</video>
+:::
+
+Embedded Manim animation in Quarto Reveal.js slide

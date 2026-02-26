@@ -1,0 +1,12 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/122916032_1782224244_223132457.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/3288007914_4017318758_3558523817.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/3288007914_2196216867_3855502587.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/3288007914_3549023040_2779707090.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/3288007914_3327824076_2763474305.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/3288007914_1111973961_1986873245.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/3288007914_2880174112_1885519821.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/3288007914_2428390267_4207806523.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/3288007914_715359921_899176894.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/3288007914_2028465824_3168450159.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_example_from_spec/720p30/partial_movie_files/SlideExampleHomographyFromSpec/3288007914_795953607_554207670.mp4'

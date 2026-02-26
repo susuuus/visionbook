@@ -1,0 +1,10 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_slide_scenes/720p30/partial_movie_files/SlideExampleHomography/122916032_1595815771_223132457.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_slide_scenes/720p30/partial_movie_files/SlideExampleHomography/3288007914_4117480338_1175380511.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_slide_scenes/720p30/partial_movie_files/SlideExampleHomography/3288007914_101965687_1695621440.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_slide_scenes/720p30/partial_movie_files/SlideExampleHomography/3288007914_1389967066_2597870809.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_slide_scenes/720p30/partial_movie_files/SlideExampleHomography/3288007914_317111337_2699270429.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_slide_scenes/720p30/partial_movie_files/SlideExampleHomography/3288007914_3778757968_948202532.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_slide_scenes/720p30/partial_movie_files/SlideExampleHomography/3288007914_2031124053_622850545.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_slide_scenes/720p30/partial_movie_files/SlideExampleHomography/3288007914_1995651868_2977650077.mp4'
+file 'file:/Users/su/Documents/su/visionbook/slide_animations/homography/videos/homography_slide_scenes/720p30/partial_movie_files/SlideExampleHomography/3288007914_580190400_1112331926.mp4'

@@ -1,0 +1,318 @@
+---
+title: "역전파 (Backpropagation)"
+subtitle: "신경망 학습의 핵심 원리"
+author: "컴퓨터 비전의 기초"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slideNumber: true
+    width: 1280
+    height: 720
+    margin: 0.05
+    center: true
+    navigationMode: linear
+    controlsLayout: edges
+    controlsTutorial: false
+    hash: true
+    history: true
+    hashOneBasedIndex: false
+    fragmentInURL: false
+    transition: slide
+    backgroundTransition: none
+    pdfSeparateFragments: false
+    auto-stretch: false
+bibliography:
+  - all.bib
+  - visionbib.bib
+---
+
+# 문제 상황
+
+## 신경망은 어떻게 학습할까?
+
+::: {style="text-align: center; margin-top: 0.5em;"}
+![](figures/backpropagation/simple_MLP.png){height="250px"}
+:::
+
+::: {style="margin-top: 0.8em;"}
+수백만 개의 가중치 $w_1, w_2, \ldots, w_n$
+
+**각 가중치를 어느 방향으로, 얼마나 바꿔야 할까?**
+:::
+
+## 핵심 아이디어: 그래디언트
+
+::: {style="margin-top: 0.8em;"}
+손실 함수 $J$가 있을 때:
+:::
+
+::: {style="margin-top: 0.8em;"}
+$$\frac{\partial J}{\partial w_i} > 0 \implies w_i\text{를 줄이면 손실 감소}$$
+
+$$\frac{\partial J}{\partial w_i} < 0 \implies w_i\text{를 늘리면 손실 감소}$$
+:::
+
+::: {style="margin-top: 0.8em;"}
+**문제**: 수백만 개 가중치의 그래디언트를 어떻게 효율적으로 계산?
+:::
+
+# 간단한 예시부터
+
+## 2층 네트워크
+
+::: {style="margin-top: 0.8em;"}
+가장 간단한 경우: 마지막 층만 보자
+:::
+
+::: {style="margin-top: 0.8em;"}
+$$z = w \cdot a_{\text{prev}} + b$$
+$$a = \sigma(z)$$
+$$C = (a - y)^2$$
+:::
+
+::: {style="margin-top: 0.8em;"}
+$w$를 조금 바꾸면 $C$가 얼마나 바뀔까?
+:::
+
+## 연쇄 반응
+
+::: {style="margin-top: 0.6em;"}
+$w$ 변화의 연쇄 효과:
+:::
+
+::: {style="margin-top: 0.6em;"}
+$$w \xrightarrow{\text{영향}} z \xrightarrow{\text{영향}} a \xrightarrow{\text{영향}} C$$
+:::
+
+::: {style="margin-top: 0.6em;"}
+**연쇄 법칙 (Chain Rule)**:
+$$\frac{\partial C}{\partial w} = \frac{\partial C}{\partial a} \cdot \frac{\partial a}{\partial z} \cdot \frac{\partial z}{\partial w}$$
+:::
+
+::: {style="margin-top: 0.6em;"}
+각 단계의 영향을 곱하면 전체 영향!
+:::
+
+## 각 항의 의미
+
+::: {style="margin-top: 0.4em;"}
+$$\frac{\partial C}{\partial a} = 2(a - y)$$
+예측이 정답과 멀수록 큰 영향
+:::
+
+::: {style="margin-top: 0.4em;"}
+$$\frac{\partial a}{\partial z} = \sigma'(z)$$
+활성화 함수가 얼마나 민감한지
+:::
+
+::: {style="margin-top: 0.4em;"}
+$$\frac{\partial z}{\partial w} = a_{\text{prev}}$$
+이전 층 출력이 클수록 큰 영향
+:::
+
+# 문제: 층이 많아지면?
+
+## L개 층의 네트워크
+
+::: {style="text-align: center; margin-top: 0.5em;"}
+![](figures/backpropagation/mod_block_forward.png){height="220px"}
+:::
+
+::: {style="margin-top: 0.5em;"}
+각 층마다 파라미터 $\theta_1, \theta_2, \ldots, \theta_L$
+
+모든 $\frac{\partial J}{\partial \theta_i}$를 계산해야 함
+:::
+
+## 단순한 방법: 비효율적
+
+::: {style="margin-top: 0.5em;"}
+$$\frac{\partial J}{\partial \theta_1} = \frac{\partial J}{\partial \mathbf{x}_L}\frac{\partial \mathbf{x}_L}{\partial \mathbf{x}_{L-1}} \cdots \frac{\partial \mathbf{x}_2}{\partial \theta_1}$$
+:::
+
+::: {style="margin-top: 0.5em;"}
+$$\frac{\partial J}{\partial \theta_2} = \frac{\partial J}{\partial \mathbf{x}_L}\frac{\partial \mathbf{x}_L}{\partial \mathbf{x}_{L-1}} \cdots \frac{\partial \mathbf{x}_2}{\partial \theta_2}$$
+:::
+
+::: {style="margin-top: 0.8em; color: #d9534f;"}
+**문제**: 빨간 부분이 매번 반복! → $O(L^2)$ 복잡도
+:::
+
+## 역전파의 핵심 통찰
+
+::: {style="margin-top: 0.8em;"}
+**반복되는 계산을 한 번만 하자!**
+:::
+
+::: {style="text-align: center; margin-top: 0.8em;"}
+![](figures/backpropagation/composed_modulesL.png){height="250px"}
+:::
+
+::: {style="margin-top: 0.8em;"}
+동적 프로그래밍으로 $O(L^2) \rightarrow O(L)$
+:::
+
+# 역전파 알고리즘
+
+## Step 1: Forward Pass
+
+::: {style="margin-top: 0.2em;"}
+입력부터 출력까지 순서대로 계산
+:::
+
+::: {style="text-align: center; margin-top: 0.2em;"}
+![](figures/backpropagation/forward_pass.png){height="280px"}
+:::
+
+::: {style="margin-top: 0.2em;"}
+**핵심**: 각 층의 중간 결과를 저장해둔다 (나중에 사용)
+:::
+
+## Step 2: Backward Pass
+
+::: {style="margin-top: 0.2em;"}
+출력부터 입력까지 그래디언트 전파
+:::
+
+::: {style="text-align: center; margin-top: 0.2em;"}
+![](figures/backpropagation/backward_pass.png){height="280px"}
+:::
+
+::: {style="margin-top: 0.2em;"}
+**핵심**: 뒤에서 계산한 그래디언트를 앞으로 재사용
+:::
+
+# 층별 계산
+
+## 선형 층: Forward
+
+$$\mathbf{x}_{\text{out}} = \mathbf{W}\mathbf{x}_{\text{in}} + \mathbf{b}$$
+
+::: {style="text-align: center;"}
+![](figures/backpropagation/linear_layer_backprop.png){height="180px"}
+:::
+
+## 선형 층: Backward
+
+::: {style="margin-top: 0.8em;"}
+뒤에서 $\mathbf{g}_{\text{out}}$이 들어오면:
+:::
+
+::: {style="margin-top: 0.8em;"}
+**입력으로 전달**: $\mathbf{g}_{\text{in}} = \mathbf{g}_{\text{out}}\mathbf{W}^\mathsf{T}$
+
+(Forward와 대칭 - 가중치만 전치!)
+:::
+
+::: {style="margin-top: 0.8em;"}
+**가중치 업데이트**: $\frac{\partial J}{\partial \mathbf{W}} = \mathbf{x}_{\text{in}}\mathbf{g}_{\text{out}}$
+:::
+
+## 가중치 그래디언트 시각화
+
+::: {style="margin-top: 0.3em;"}
+외적(outer product)으로 계산:
+:::
+
+::: {style="text-align: center; margin-top: 0.3em;"}
+![](figures/backpropagation/parameter_grad_linear_matrices.png){height="200px"}
+:::
+
+::: {style="margin-top: 0.3em;"}
+**경사하강**: $\mathbf{W} \leftarrow \mathbf{W} - \eta \frac{\partial J}{\partial \mathbf{W}}$
+:::
+
+## ReLU 층
+
+::: {style="margin-top: 0.4em;"}
+**Forward**: $\text{ReLU}(x) = \max(0, x)$ — 음수를 0으로
+:::
+
+::: {style="text-align: center; margin-top: 0.3em;"}
+![](figures/backpropagation/pointwise_layer_backprop.png){height="220px"}
+:::
+
+::: {style="margin-top: 0.3em;"}
+**Backward**: Forward에서 양수였던 위치만 그래디언트 통과
+
+(나머지는 0 — "죽은 뉴런")
+:::
+
+# 전체 그림
+
+## Forward: 예측 계산
+
+::: {style="text-align: center; margin-top: 0.2em;"}
+![](figures/backpropagation/forward_pass_MLP.png){width="95%"}
+:::
+
+::: {style="margin-top: 0.2em;"}
+입력 → 선형 → ReLU → 선형 → ReLU → 선형 → 손실
+:::
+
+## Backward: 학습 신호 전파
+
+::: {style="text-align: center; margin-top: 0.2em;"}
+![](figures/backpropagation/backward_pass_MLP.png){width="95%"}
+:::
+
+::: {style="margin-top: 0.2em; text-align: center;"}
+🔴 그래디언트 역전파 &nbsp;&nbsp; 🟡 가중치 업데이트
+:::
+
+# 왜 중요한가?
+
+## 역전파가 가져온 혁명
+
+::: {style="margin-top: 0.8em;"}
+**효율성**: $O(L^2) \rightarrow O(L)$
+
+100층 네트워크: 10,000배 → 100배 계산
+:::
+
+::: {style="margin-top: 0.8em;"}
+**모듈화**: 각 층이 독립적
+
+새로운 층 추가 = Forward + Backward 정의만 하면 됨
+:::
+
+::: {style="margin-top: 0.8em;"}
+**범용성**: 미분 가능한 모든 연산에 적용
+
+CNN, RNN, Transformer... 모두 역전파로 학습
+:::
+
+## 실전에서는?
+
+::: {style="margin-top: 0.8em;"}
+**자동 미분 (Autograd)**
+
+PyTorch, TensorFlow가 자동으로 처리
+:::
+
+```python
+# Forward만 정의하면 Backward는 자동!
+y = model(x)
+loss = criterion(y, target)
+loss.backward()  # 역전파 자동 계산
+```
+
+::: {style="margin-top: 0.8em;"}
+내부적으로 역전파 알고리즘 사용
+:::
+
+## 핵심 정리
+
+::: {style="margin-top: 0.6em;"}
+**역전파 = 연쇄 법칙 + 동적 프로그래밍**
+:::
+
+::: {style="margin-top: 0.6em;"}
+1. **Forward**: 예측 계산, 중간값 저장
+2. **Backward**: 그래디언트를 뒤에서 앞으로 전파
+3. **핵심**: 중복 계산 제거로 효율적
+:::
+
+::: {style="margin-top: 0.6em;"}
+**다음 주제**: 그래디언트 소실/폭발, 배치 정규화
+:::

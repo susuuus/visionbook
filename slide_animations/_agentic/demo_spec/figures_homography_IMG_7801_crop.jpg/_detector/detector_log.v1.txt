@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/su/Documents/su/visionbook/tools/analyze_homography_example.py", line 546, in <module>
+    main()
+    ~~~~^^
+  File "/Users/su/Documents/su/visionbook/tools/analyze_homography_example.py", line 508, in main
+    src, dst = choose_two_quads(quads)
+               ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/su/Documents/su/visionbook/tools/analyze_homography_example.py", line 297, in choose_two_quads
+    raise RuntimeError(f"Expected at least 2 quads; found {len(quads)}")
+RuntimeError: Expected at least 2 quads; found 0

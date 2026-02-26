@@ -1,0 +1,239 @@
+{
+  "chapter": "homography",
+  "total_figures": 13,
+  "llm_used": false,
+  "categories": {
+    "photographs": [
+      {
+        "filename": "IMG_7801_crop.jpg",
+        "category": "photographs",
+        "confidence": 0.9,
+        "reasoning": "Photographic image",
+        "caption": "",
+        "visual_properties": {
+          "width": 3585,
+          "height": 2880,
+          "colors": 230343,
+          "variance": 6413.408415600458,
+          "aspect_ratio": 1.2447916666666667,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      },
+      {
+        "filename": "IMG_7802_crop.jpg",
+        "category": "photographs",
+        "confidence": 0.9,
+        "reasoning": "Photographic image",
+        "caption": "",
+        "visual_properties": {
+          "width": 4032,
+          "height": 3024,
+          "colors": 260661,
+          "variance": 6339.166451136766,
+          "aspect_ratio": 1.3333333333333333,
+          "is_composite": false,
+          "has_perspective": false
+        }
+      },
+      {
+        "filename": "3_IMG_7883_small.jpg",
+        "category": "photographs",
+        "confidence": 0.9,
+        "reasoning": "Photographic image",
+        "caption": "",
+        "visual_properties": {
+          "width": 1008,
+          "height": 756,
+          "colors": 115869,
+          "variance": 3655.7930256784716,
+          "aspect_ratio": 1.3333333333333333,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      },
+      {
+        "filename": "2_IMG_7884_small.jpg",
+        "category": "photographs",
+        "confidence": 0.9,
+        "reasoning": "Photographic image",
+        "caption": "",
+        "visual_properties": {
+          "width": 756,
+          "height": 1008,
+          "colors": 81563,
+          "variance": 3728.8766964306824,
+          "aspect_ratio": 0.75,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      },
+      {
+        "filename": "1_IMG_7885_small.jpg",
+        "category": "photographs",
+        "confidence": 0.9,
+        "reasoning": "Photographic image",
+        "caption": "",
+        "visual_properties": {
+          "width": 1512,
+          "height": 2016,
+          "colors": 178293,
+          "variance": 4274.92568878641,
+          "aspect_ratio": 0.75,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      },
+      {
+        "filename": "IMG_7127_crop.jpg",
+        "category": "photographs",
+        "confidence": 0.9,
+        "reasoning": "Photographic image",
+        "caption": "",
+        "visual_properties": {
+          "width": 2193,
+          "height": 1653,
+          "colors": 100529,
+          "variance": 3146.0000906723603,
+          "aspect_ratio": 1.3266787658802177,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      },
+      {
+        "filename": "IMG_7126.jpg",
+        "category": "photographs",
+        "confidence": 0.9,
+        "reasoning": "Photographic image",
+        "caption": "",
+        "visual_properties": {
+          "width": 4032,
+          "height": 3024,
+          "colors": 275633,
+          "variance": 3653.932961052166,
+          "aspect_ratio": 1.3333333333333333,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      },
+      {
+        "filename": "fig_matching_two_images3.png",
+        "category": "photographs",
+        "confidence": 0.9,
+        "reasoning": "Photographic image",
+        "caption": "Two overlapping images and some found correspondences using SURF descriptors. A random set of four correspondences are highlighted.",
+        "visual_properties": {
+          "width": 4663,
+          "height": 2552,
+          "colors": 346025,
+          "variance": 7845.643564171355,
+          "aspect_ratio": 1.827194357366771,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      },
+      {
+        "filename": "panorama.jpg",
+        "category": "photographs",
+        "confidence": 0.9,
+        "reasoning": "Photographic image",
+        "caption": "Panoramic image composed by the three overlapping images from @fig-example_three_images",
+        "visual_properties": {
+          "width": 4984,
+          "height": 3073,
+          "colors": 227089,
+          "variance": 7753.008315551205,
+          "aspect_ratio": 1.6218678815489749,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      }
+    ],
+    "diagrams_2d": [
+      {
+        "filename": "ransac_algo.png",
+        "category": "diagrams_2d",
+        "confidence": 0.85,
+        "reasoning": "2D diagram/plot (algorithm/graph)",
+        "caption": "RANSAC applied to robust estimation of line parameters. (a) Datapoints for which robust line estimation is sought. (b) Two points (in blue) are selected at random, sufficient to estimate line model parameters. The number of inliers is computed for this model. (c - e) Repeat $k$ times. (f) Finally, select the model with the maximum number of inliers.",
+        "visual_properties": {
+          "width": 4868,
+          "height": 2624,
+          "colors": 257,
+          "variance": 1928.464603980637,
+          "aspect_ratio": 1.8551829268292683,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      }
+    ],
+    "diagrams_3d_candidates": [
+      {
+        "filename": "example_homography.png",
+        "category": "diagrams_3d_candidates",
+        "confidence": 0.9,
+        "reasoning": "3D perspective (trapezoid/converging lines)",
+        "caption": "Homography. Colinear points remain colinear after transformation. Angles between lines are not preserved.",
+        "visual_properties": {
+          "width": 2941,
+          "height": 1476,
+          "colors": 38,
+          "variance": 2740.570588483663,
+          "aspect_ratio": 1.9925474254742548,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      },
+      {
+        "filename": "rotation_homography_vs3.png",
+        "category": "diagrams_3d_candidates",
+        "confidence": 0.9,
+        "reasoning": "3D perspective (trapezoid/converging lines) (multi-panel)",
+        "caption": "Camera rotation generates two images related by a homography.",
+        "visual_properties": {
+          "width": 3734,
+          "height": 1385,
+          "colors": 746,
+          "variance": 4703.547633018958,
+          "aspect_ratio": 2.696028880866426,
+          "is_composite": true,
+          "has_perspective": true
+        }
+      },
+      {
+        "filename": "homography_plane_geometry2.png",
+        "category": "diagrams_3d_candidates",
+        "confidence": 0.9,
+        "reasoning": "3D perspective (trapezoid/converging lines)",
+        "caption": "Geometry of a the projection of a planar scene. The origin of the world-coordinates system is placed inside the plane and the $Z$-axis is perpendicular to it.",
+        "visual_properties": {
+          "width": 2434,
+          "height": 1481,
+          "colors": 394,
+          "variance": 1996.636925955322,
+          "aspect_ratio": 1.6434841323430114,
+          "is_composite": false,
+          "has_perspective": true
+        }
+      }
+    ],
+    "unknown": []
+  },
+  "summary": {
+    "photographs": 9,
+    "diagrams_2d": 1,
+    "diagrams_3d_candidates": 3,
+    "unknown": 0
+  },
+  "3d_conversion_ready": [
+    "example_homography.png",
+    "rotation_homography_vs3.png",
+    "homography_plane_geometry2.png"
+  ],
+  "review": {
+    "issues_found": false,
+    "issues": [],
+    "total_checked": 13,
+    "all_accounted": true
+  }
+}

@@ -1,0 +1,3 @@
+# Example prompt file
+
+This is an example prompt file for the `prompts/` directory.

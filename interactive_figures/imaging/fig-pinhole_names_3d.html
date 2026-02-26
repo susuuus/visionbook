@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Camera Coordinate Systems</title>
+<style>
+    body { margin: 0; overflow: hidden; font-family: sans-serif; }
+    .label {
+      position: absolute;
+      font-size: 16px;
+      color: black;
+      font-weight: bold;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+</style>
+</head>
+<body>
+
+<script type="module">
+import * as THREE from 'https://esm.sh/three';
+import { OrbitControls } from 'https://esm.sh/three/examples/jsm/controls/OrbitControls';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xffffff);
+
+const aspect = window.innerWidth / window.innerHeight;
+const d = 5;
+const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 0.1, 100);
+camera.position.set(4, 4, 4);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+// Pinhole at origin
+const pinhole = new THREE.Mesh(
+  new THREE.SphereGeometry(0.1, 16, 16),
+  new THREE.MeshBasicMaterial({ color: 0x000000 })
+);
+scene.add(pinhole);
+
+// Virtual camera plane at distance f=1
+const f = 1.0;
+const planeGeo = new THREE.PlaneGeometry(3, 2);
+const planeMat = new THREE.MeshBasicMaterial({ 
+  color: 0xe8f4f8, 
+  side: THREE.DoubleSide, 
+  transparent: true, 
+  opacity: 0.6 
+});
+const virtualPlane = new THREE.Mesh(planeGeo, planeMat);
+virtualPlane.rotation.y = -Math.PI / 2;
+virtualPlane.position.set(f, 0, 0);
+scene.add(virtualPlane);
+
+const edges = new THREE.EdgesGeometry(planeGeo);
+const edgeLine = new THREE.LineSegments(edges, 
+  new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 2 }));
+edgeLine.rotation.copy(virtualPlane.rotation);
+edgeLine.position.copy(virtualPlane.position);
+scene.add(edgeLine);
+
+// World coordinate axes (X, Y, Z) - RED
+const axisLength = 2.5;
+const xAxisWorld = new THREE.ArrowHelper(
+  new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 0), 
+  axisLength, 0xff0000, 0.2, 0.15
+);
+const yAxisWorld = new THREE.ArrowHelper(
+  new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 
+  axisLength, 0xff0000, 0.2, 0.15
+);
+const zAxisWorld = new THREE.ArrowHelper(
+  new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 
+  axisLength, 0xff0000, 0.2, 0.15
+);
+scene.add(xAxisWorld, yAxisWorld, zAxisWorld);
+
+// Camera/Image plane axes (x, y) - GREEN
+const imagePlaneOrigin = new THREE.Vector3(f, -1, 1.5);
+const xAxisImage = new THREE.ArrowHelper(
+  new THREE.Vector3(0, 1, 0), imagePlaneOrigin, 
+  1, 0x00aa00, 0.15, 0.1
+);
+const yAxisImage = new THREE.ArrowHelper(
+  new THREE.Vector3(0, 0, -1), imagePlaneOrigin, 
+  1, 0x00aa00, 0.15, 0.1
+);
+scene.add(xAxisImage, yAxisImage);
+
+// Labels
+const labels = [];
+const vector = new THREE.Vector3();
+
+function createLabel(text, pos) {
+  const div = document.createElement('div');
+  div.className = 'label';
+  div.innerHTML = text;
+  document.body.appendChild(div);
+  return { div, pos };
+}
+
+labels.push(createLabel('<b>X</b>', new THREE.Vector3(axisLength + 0.3, 0, 0)));
+labels.push(createLabel('<b>Y</b>', new THREE.Vector3(0, axisLength + 0.3, 0)));
+labels.push(createLabel('<b>Z</b>', new THREE.Vector3(0, 0, axisLength + 0.3)));
+labels.push(createLabel('<b>x</b>', imagePlaneOrigin.clone().add(new THREE.Vector3(0, 1.3, 0))));
+labels.push(createLabel('<b>y</b>', imagePlaneOrigin.clone().add(new THREE.Vector3(0, 0, -1.3))));
+labels.push(createLabel('Virtual Camera Plane', new THREE.Vector3(f, 1.3, 0)));
+labels.push(createLabel('f', new THREE.Vector3(f/2, -0.3, 0)));
+
+// Dashed line showing focal length
+const fLine = new THREE.BufferGeometry().setFromPoints([
+  new THREE.Vector3(0, 0, 0),
+  new THREE.Vector3(f, 0, 0)
+]);
+const fDashed = new THREE.Line(fLine,
+  new THREE.LineDashedMaterial({ color: 0x888888, dashSize: 0.1, gapSize: 0.1 }));
+fDashed.computeLineDistances();
+scene.add(fDashed);
+
+function updateLabels() {
+  labels.forEach(({ div, pos }) => {
+    vector.copy(pos).project(camera);
+    const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+    const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
+    div.style.left = `${x}px`;
+    div.style.top = `${y}px`;
+  });
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  updateLabels();
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  const aspect = window.innerWidth / window.innerHeight;
+  camera.left = -d * aspect;
+  camera.right = d * aspect;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>

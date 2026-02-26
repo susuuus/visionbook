@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Minimal Three.js Scaffold</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #0b1020;
+        color: #e7eaf3;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      }
+      #hud {
+        position: fixed;
+        left: 12px;
+        top: 10px;
+        padding: 8px 10px;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        user-select: none;
+        line-height: 1.2;
+        font-size: 13px;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="hud">
+      <div><strong>Three.js</strong> minimal scaffold</div>
+      <div>Drag: rotate • Wheel: zoom • Right-drag: pan</div>
+    </div>
+
+    <script type="module">
+      import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js";
+      import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/controls/OrbitControls.js";
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x0b1020, 1);
+      document.body.appendChild(renderer.domElement);
+
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.01, 200);
+      camera.position.set(1.8, 1.2, 2.4);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.07;
+      controls.target.set(0, 0.2, 0);
+
+      // Lights
+      scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+      const key = new THREE.DirectionalLight(0xffffff, 1.2);
+      key.position.set(2.5, 3.5, 1.5);
+      scene.add(key);
+
+      // A simple object
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const material = new THREE.MeshStandardMaterial({ color: 0x5b8cff, roughness: 0.35, metalness: 0.08 });
+      const cube = new THREE.Mesh(geometry, material);
+      cube.position.y = 0.5;
+      scene.add(cube);
+
+      // Ground
+      const ground = new THREE.Mesh(
+        new THREE.PlaneGeometry(20, 20),
+        new THREE.MeshStandardMaterial({ color: 0x0f1733, roughness: 1.0, metalness: 0.0 })
+      );
+      ground.rotation.x = -Math.PI / 2;
+      scene.add(ground);
+
+      // Helpers
+      const grid = new THREE.GridHelper(20, 20, 0x2b3766, 0x1a2346);
+      grid.position.y = 0.0001;
+      scene.add(grid);
+      scene.add(new THREE.AxesHelper(0.8));
+
+      function onResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      }
+      window.addEventListener("resize", onResize);
+
+      const clock = new THREE.Clock();
+
+      function animate() {
+        const dt = clock.getDelta();
+        cube.rotation.y += dt * 0.7;
+        cube.rotation.x += dt * 0.25;
+
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+
+      onResize();
+      animate();
+    </script>
+  </body>
+</html>
