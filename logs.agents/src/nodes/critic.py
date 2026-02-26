@@ -1,81 +1,86 @@
-"""Critic node: compare a rendered video against a reference.
+# src/nodes/critic.py
 
-This is a pragmatic critic for the current workflow:
-
-detector.json -> plan.json -> manim script -> rendered mp4
-
-The critic compares a candidate MP4 against a reference MP4 by sampling frames,
-computing edge-overlap scores, and writing a small report with recommendations.
-
-It does NOT auto-edit code. Instead it produces parameter-oriented suggestions
-that you can wire into a driver loop (safe) or apply manually.
-
-
-Edit:: the critic should take look at the primi
-"""
-
-from __future__ import annotations
-
-import argparse
-import base64
-import importlib.util
+import sys
 import json
-import mimetypes
-import os
-from dataclasses import dataclass
+import base64
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 
-import cv2
-import numpy as np
+from openai import OpenAI
+from src.config import OPENAI_API_KEY, PROMPTS_DIR
 
+client = OpenAI(api_key=OPENAI_API_KEY)
+SYSTEM = (PROMPTS_DIR / "critic_system.txt").read_text()
 
-@dataclass
-class CriticConfig:
-    sample_times: Tuple[float, ...] = (0.1, 0.5, 0.9)
-    resize_long_side: int = 900
-    canny_low: int = 50
-    canny_high: int = 150
-    edge_dilate: int = 1
-    missing_line_threshold: int = 60
-    missing_line_min_length: int = 80
-    missing_line_max_gap: int = 12
+def critique(reference_img: str | Path, rendered_img: str | Path) -> dict:
+    ref_b64   = base64.b64encode(Path(reference_img).read_bytes()).decode()
+    rend_b64  = base64.b64encode(Path(rendered_img).read_bytes()).decode()
 
+    resp = client.chat.completions.create(
+        model="gpt-4o",
+        max_tokens=2048,
+        messages=[
+            {"role": "system", "content": SYSTEM},
+            {"role": "user", "content": [
+                {
+                    "type": "text",
+                    "text": "REFERENCE image (ground truth):"
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {"url": f"data:image/png;base64,{ref_b64}"}
+                },
+                {
+                    "type": "text",
+                    "text": "RENDERED image (current animation output):"
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {"url": f"data:image/png;base64,{rend_b64}"}
+                },
+                {
+                    "type": "text",
+                    "text": "Compare these two images and return your analysis as JSON."
+                }
+            ]}
+        ]
+    )
 
-def _read_frame_at_fraction(video_path: str, fraction: float) -> Optional[np.ndarray]:
-    cap = cv2.VideoCapture(video_path)
-    if not cap.isOpened():
-        return None
+    raw = resp.choices[0].message.content.strip()
 
-    total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
-    if total <= 0:
-        # Try time-based seek as fallback
-        fps = float(cap.get(cv2.CAP_PROP_FPS) or 0.0)
-        duration = float(cap.get(cv2.CAP_PROP_POS_MSEC) or 0.0)
-        _ = fps, duration
-        cap.release()
-        return None
+    # strip markdown fences if model adds them
+    if raw.startswith("```"):
+        lines = raw.split("\n")
+        raw   = "\n".join(lines[1:])
+        raw   = raw[:raw.rfind("```")]
+    raw = raw.strip()
 
-    idx = int(np.clip(round(fraction * (total - 1)), 0, total - 1))
-    cap.set(cv2.CAP_PROP_POS_FRAMES, float(idx))
-    ok, frame = cap.read()
-    cap.release()
-    return frame if ok else None
+    result = json.loads(raw)
 
+    # save critique next to rendered image
+    out_path = Path(rendered_img).with_suffix(".critique.json")
+    out_path.write_text(json.dumps(result, indent=2))
+    print(f"[critic] Saved critique → {out_path}")
+    print(f"[critic] Pass: {result.get('pass')}")
 
-def _resize_to_long_side(bgr: np.ndarray, long_side: int) -> np.ndarray:
-    h, w = bgr.shape[:2]
-    if max(h, w) <= long_side:
-        """Critic node (placeholder).
+    return result
 
-        Original implementation removed. Restore desired implementation as needed.
-        """
+if __name__ == "__main__":
+    try:
+        reference = Path('/Users/su/Documents/su/visionbook/logs.agents/src/figures/example_homography.png')
+        rendered  = Path('/Users/su/Documents/su/visionbook/logs.agents/outputs/media/videos/example_homography/480p15/AnimatedFigure.mp4')
 
-        # Placeholder to keep module importable; replace with real code.
-        __all__ = []
+        # extract a frame from the mp4 to compare as image
+        import subprocess
+        frame_path = rendered.with_suffix(".png")
+        subprocess.run([
+            "ffmpeg", "-i", str(rendered),
+            "-vf", "select=eq(n\\,0)",  # extract first frame
+            "-vframes", "1",
+            str(frame_path), "-y"
+        ], check=True)
 
-
-        def placeholder():
-            """No-op placeholder for critic node."""
-            return None
-        ker = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k))
+        result = critique(reference, frame_path)
+        print(json.dumps(result, indent=2))
+    except Exception as e:
+        print(f"Error: {e}")
